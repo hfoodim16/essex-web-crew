@@ -45,22 +45,29 @@ Good reviews are a **bonus** (higher score), not a requirement.
 
 ## Pipeline stages & ownership
 
-| Stage | Owner | Output |
-|---|---|---|
-| 1. Scout candidates (10–15) | `scout` | `pipeline/candidates.md` |
-| 2. Score + research finalists | `analyst` | `prospects/<slug>/dossier.md` + shortlist message to lead |
-| 3. **Approval pause** | lead ↔ Harry | Harry confirms/swaps the 3 |
-| 4. Build mockups (1 per prospect) | `builder` ×3 | `prospects/<slug>/mockup/` |
-| 5. Outreach email + one-pager | `copywriter` | `prospects/<slug>/outreach-email.md` |
-| 6. Critique loop | `critic` | scored audit + fix messages, sign-off to lead |
+| Stage | Owner | Model | Output |
+|---|---|---|---|
+| 1. Scout candidates (10–15) | `scout` | Sonnet | `pipeline/candidates.md` |
+| 2. Score + research finalists | `analyst` | Opus | `prospects/<slug>/dossier.md` + shortlist message to lead |
+| 3. **Approval pause** | lead ↔ Harry | — | Harry confirms/swaps the 3 |
+| 4. Website plan (1 per prospect) | `planner` | Fable | `prospects/<slug>/website-plan.md` |
+| 5. Build mockups (1 per prospect) | `builder` ×3 | Opus | `prospects/<slug>/mockup/` |
+| 6. Outreach email + one-pager | `copywriter` | Sonnet | `prospects/<slug>/outreach-email.md` |
+| 7. Critique loop | `critic` | Sonnet | scored audit + fix messages, sign-off to lead |
 
 `<slug>` = kebab-case business name, e.g. `montclair-stone-masonry`.
+
+**Division of design labor:** the `planner` (Fable) makes ALL the design decisions —
+art direction, fonts, palette, page map, per-section layout — and writes them to
+`website-plan.md`. The `builder` (Opus) IMPLEMENTS that plan and does not re-decide the
+design. Copywriter can run in parallel with planner/builders once prospects are approved.
 
 ## Per-prospect output contract
 
 Each approved prospect gets a folder `prospects/<slug>/` containing:
 
 - `dossier.md` — research + a page map + a "why this client is winnable" pitch.
+- `website-plan.md` — the Planner's design brief the Builder implements.
 - `mockup/` — `index.html`, `style.css`, `main.js` (+ extra `.html` pages if the
   page map calls for them). Static only. Opens by double-click, no build step.
 - `screenshots/` — desktop + mobile captures proving the QA passes ran.

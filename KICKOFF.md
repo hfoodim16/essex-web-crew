@@ -39,24 +39,33 @@ Paste this to the lead:
 
 ```
 Read CLAUDE.md and all files in .claude/agents/. Run the full Essex Web Crew
-pipeline. Use Sonnet for all teammates. Free tools only.
+pipeline. Each teammate uses the model in its agent definition's frontmatter —
+do NOT force a single model. The intended lineup is: scout=Sonnet,
+analyst=Opus, planner=Fable (claude-fable-5), builder=Opus, copywriter=Sonnet,
+critic=Sonnet. Free tools only.
 
 1. Spawn 'scout' (scout agent type): find 10–15 qualifying Essex County, NJ
    businesses → pipeline/candidates.md.
 2. Spawn 'analyst' (analyst agent type): score them against pipeline/rubric.md,
    research the top 3, write prospects/<slug>/dossier.md for each, then send me
    the shortlist with a winnability pitch per business.
-3. STOP and wait for my approval of the 3 finalists. Do NOT spawn builders until
-   I confirm or swap them.
-4. After I approve: spawn three 'builder' teammates (builder agent type), one per
-   approved prospect, each owning only its own prospects/<slug>/mockup/ folder.
-   Spawn 'copywriter' (copywriter agent type) for the outreach emails, and
-   'critic' (critic agent type) as the quality gate. Builders and copywriter loop
-   directly with the critic until every package passes the $10K Checklist and the
-   package checklist.
-5. When all three packages are signed off, give me a summary. Do not contact any
+3. STOP and wait for my approval of the 3 finalists. Do NOT spawn the planner or
+   builders until I confirm or swap them.
+4. After I approve: spawn 'planner' (planner agent type) to write
+   prospects/<slug>/website-plan.md for each approved prospect (art direction,
+   fonts, palette, page map, per-section layout, image placeholders).
+5. Once a prospect's plan is ready, spawn its 'builder' (builder agent type) —
+   one per prospect, each owning ONLY its own prospects/<slug>/mockup/ folder —
+   to IMPLEMENT that plan. Also spawn 'copywriter' (copywriter agent type) for
+   the outreach emails and 'critic' (critic agent type) as the quality gate.
+   Builders and copywriter loop directly with the critic until every package
+   passes the $10K Checklist and the package checklist.
+6. When all three packages are signed off, give me a summary. Do not contact any
    business — everything is a draft on disk for me to review.
 ```
+
+If a teammate can't be spawned on Fable by the `planner` frontmatter alone, spawn it
+explicitly with the model id `claude-fable-5`.
 
 ## After the run
 
