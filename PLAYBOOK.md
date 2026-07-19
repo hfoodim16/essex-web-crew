@@ -1,289 +1,242 @@
-# PLAYBOOK — Harry's Post-Run Script
+# Harry's Playbook
 
-> The team's job ends when 3 packages are on disk. **This is your script from that
-> moment until the pitch is sent and tracked.** Start at Step 1 and go in order.
-> Every step ends with outcomes — each outcome tells you exactly where to go next.
-> Lettered steps (2b, 3b, …) are rework branches; they tell you where to rejoin.
+Two scripts live in this file:
 
-All paste-able prompts below work in a **fresh session** — start one with
-`~/Projects/essex-web-crew/run.sh` and paste. You don't need the original team
-session to still be alive.
+- **Script 1 — The Whole Run, In Plain English.** Read this top to bottom. It walks you
+  from literally summoning the team to the absolute end — sent email, follow-up, closed
+  prospect. No jargon.
+- **Script 2 — The Same Run, With the "What If It's Not Perfect" Branches.** Exact same
+  nine steps as Script 1, in the same order. The difference: at every step where things
+  can go imperfect, it splits into simple lettered branches (Step 6A, 6B…) that tell you
+  what to do — including the exact prompt to paste when something needs fixing.
 
-## Quick reference
+### Quick reference — "something's off, where do I go?"
 
-| You're thinking… | Go to |
+| Scenario | Go to |
 |---|---|
-| "Did the run even finish?" | Step 1 |
-| "Is this client actually worth pitching?" | Step 2 |
-| "This client is bad / facts are wrong" | Step 2b |
-| "I need a replacement prospect" | Step 2b (swap) / 2c (re-scout) |
-| "Is the website good?" | Step 3 |
-| "Website is close but has problems" | Step 3b |
-| "Website is the wrong vibe entirely" | Step 3c |
-| "Is the email good?" | Step 4 |
-| "Email sounds like AI / is generic" | Step 4b |
-| "Time to add real images" | Step 5 |
-| "Ready to send" | Step 6 |
-| "Sent — now what?" | Step 7 |
-| "They replied!" | Step 7b |
-| "No reply yet" | Step 7c |
-| "All 3 flopped" | Step 7e |
+| I don't like one of the top 3 businesses | Script 2, Step 4B |
+| Website is close but needs fixes | Script 2, Step 6B |
+| Website direction is totally wrong | Script 2, Step 6C |
+| An AI image won't come out right | Script 2, Step 7B |
+| Email needs small tweaks | Script 2, Step 8B |
+| Email is generic / wrong voice / inaccurate | Script 2, Step 8C |
+| Client replied — interested | Script 2, Step 9A |
+| No reply after a week | Script 2, Step 9B |
+| Client said no | Script 2, Step 9C |
+| All three pitches flopped | Script 2, Step 9D |
 
 ---
 
-## Step 1 — Confirm the run finished (2 min)
+# Script 1 — The Whole Run, In Plain English
 
-Check that each of the 3 `prospects/<slug>/` folders has all 6 artifacts:
+Read this once, start to finish, before your first run. It's the map. The detailed
+"what if it's not good" branches live in Script 2, which uses these same nine steps.
 
-```
-dossier.md   website-plan.md   mockup/   screenshots/   outreach-email.md   audit.md
-```
+**Step 1 — Summon the team.**
+Open Terminal and run `~/Projects/essex-web-crew/run.sh`. That starts Claude Code inside
+the project with agent teams turned on. You'll see a normal Claude prompt — nothing has
+started yet. You're just sitting at the controls.
 
-One command:
+**Step 2 — Give the kickoff order.**
+Open `KICKOFF.md`, copy the **Full run** prompt, and paste it in. The lead now starts
+building the team: first a scout that searches Essex County for businesses with weak or
+missing websites, then an analyst that scores them and researches the best few.
 
-```bash
-ls prospects/*/
-```
+**Step 3 — Wait and watch.**
+Press `Ctrl+T` to see the task list, and use the arrow keys to peek at what each
+teammate is doing. Scouting plus scoring usually takes 15–30 minutes together. You don't
+have to do anything during this stretch — let it cook.
 
-**Outcome A — everything's there** → continue to **Step 2**.
+**Step 4 — Approve the shortlist (the team stops here for you).**
+The analyst presents 3 businesses, each with a short pitch: why they're winnable, what
+the pitch would lead with, and how many pages the site needs. Read them. Reply to
+approve all 3, or tell it to swap any you don't like. **Nothing gets built until you
+say go.**
 
-**Outcome B — something's missing** → the pipeline didn't finish. Paste this in a
-fresh session, then return to **Step 1** when it's done:
+**Step 5 — The team builds.**
+Once you approve: the planner (Fable) designs each website, three builders each build
+one, the copywriter drafts your outreach emails, and the critic audits everything and
+keeps sending fixes back until it's genuinely good. This is the longest stage — often
+30+ minutes. When every package passes, the lead gives you a summary and the run is done.
 
-```
-Read CLAUDE.md and the relevant files in .claude/agents/. The pipeline run left
-prospects/<slug>/ incomplete: it is missing <list what's missing>. Spawn only the
-teammates needed to finish those artifacts (planner for website-plan, builder for
-mockup+screenshots, copywriter for the email, critic for the audit), following the
-per-prospect output contract in CLAUDE.md. Do not redo work that already exists.
-```
+**Step 6 — Review the websites.**
+Each business now has a folder `prospects/<name>/`. Open its `mockup/index.html`
+(double-click) and click through every page. This is where you decide if the site is
+good enough to pitch.
 
----
+**Step 7 — Add the real images.**
+The mockups use labeled placeholder boxes instead of real pictures (the team never
+generates images). Each box contains a ready-to-use image prompt. Generate the images
+with your tool of choice, drop them in, and check the site still looks right.
 
-## Step 2 — Vet the client (per prospect, ~5 min each)
+**Step 8 — Check the emails and send the pitches yourself.**
+The team never contacts anyone — the emails are drafts for you. Read each one, fill in
+the blanks, attach mockup screenshots (or host the site so they can click a live link),
+and send from your own account.
 
-Do this step for **each prospect** before touching any websites. Read
-`prospects/<slug>/dossier.md`, then spot-check the AI's claims yourself:
+**Step 9 — Follow up and close out.**
+Log each email you send, follow up once after about a week of silence, and stop after
+two touches. Interested replies turn into real client conversations; everything else
+becomes portfolio material for the next pitch.
 
-- Look up their Google Business / Facebook page. Real? Still operating?
-- Open their current website (if the dossier says they have one). Is it really as
-  weak as claimed?
-- Is the phone/email in the dossier findable and plausible?
-- Gut check: established business, obvious web gap, could actually pay for a site?
-
-**Outcome A — good client** (facts check out, gap is real, they're reachable) →
-continue to **Step 3** for this prospect.
-
-**Outcome B — bad client** → go to **Step 2b**.
-
-### Step 2b — Discard and swap a bad prospect
-
-This covers both flavors of bad:
-- **The AI got facts wrong** — business closed, site is actually fine, wrong
-  contact info.
-- **Facts are right but it's not winnable** — too small, brand new, wrong trade,
-  clearly wouldn't pay.
-
-Do both of these:
-
-1. **If it was a judgment miss (not a fact error):** add one line to
-   `pipeline/rubric.md` describing the disqualifying trait (e.g. "disqualify:
-   businesses under 2 years old") so future runs filter it automatically.
-2. **Swap in a replacement.** Paste this in a fresh session:
-
-```
-Read CLAUDE.md, .claude/agents/analyst.md, and pipeline/candidates.md. I rejected
-the prospect "<slug>" because: <your reason>. Spawn an analyst (Opus) to: verify
-that my reason is reflected accurately, delete prospects/<slug>/, pick the
-next-highest-scoring candidate from the "## Scoring" section of
-pipeline/candidates.md, re-verify it still qualifies, research it, and write
-prospects/<new-slug>/dossier.md per the dossier spec. Then present it to me with
-a winnability pitch and STOP — do not spawn a planner or builder until I approve.
-```
-
-**Outcome A — replacement approved** → run the rest of the pipeline for it (paste
-below), then return to **Step 2** to vet nothing further — you already vetted it —
-and go to **Step 3** when its package lands:
-
-```
-Read CLAUDE.md and all files in .claude/agents/. Prospect <new-slug> is approved
-and has a dossier. Run stages 4–7 of the pipeline for it only: planner (Fable)
-writes website-plan.md, builder (Opus) implements the mockup with screenshots,
-copywriter (Sonnet) drafts outreach-email.md, critic (Opus) audits until sign-off.
-```
-
-**Outcome B — no good candidates left in the list** → go to **Step 2c**.
-
-### Step 2c — Re-scout (candidate list exhausted)
-
-Paste this in a fresh session, then return to **Step 2** when the new shortlist
-arrives:
-
-```
-Read CLAUDE.md and .claude/agents/scout.md. The previous candidate list
-(pipeline/candidates.md) is exhausted. Spawn a scout (Sonnet) to find 10–15 NEW
-qualifying Essex County businesses — exclude every business already listed in
-pipeline/candidates.md and prospects/. Adjust focus: <e.g. "try different towns"
-or "try gutter cleaning and power washing">. Then spawn an analyst (Opus) to
-score, research the top <N needed>, write dossiers, and present the shortlist.
-STOP for my approval before any planner or builder is spawned.
-```
+That's the entire lifecycle. Every "what if" is handled in Script 2 below, step for step.
 
 ---
 
-## Step 3 — Review the website (per prospect, ~10 min each)
+# Script 2 — The Same Run, With the Branches
 
-Open the mockup and actually use it:
+Same nine steps as Script 1, same order. Steps 1, 2, 3, and 5 can't really go wrong, so
+they're single. Steps 4, 6, 7, 8, 9 split into lettered branches — read the one that
+matches your situation, do it, and it tells you the next step. No dead ends.
 
-```bash
-open prospects/<slug>/mockup/index.html
-```
-
-- Click **every** nav link and page.
-- Narrow the browser window to phone width (or open the screenshots in
-  `prospects/<slug>/screenshots/`) — does mobile look *designed*, not shrunk?
-- Skim `prospects/<slug>/audit.md` — did the critic pass it 8/8? Any noted exceptions?
-- Check honesty: is the content **their real content** (from the dossier)? Any
-  invented facts, fake reviews, made-up years in business? That's an automatic fix.
-- Are all image slots labeled `AI-IMAGE` placeholder blocks (no stock photos)?
-
-**Outcome A — love it** → continue to **Step 4** for this prospect.
-
-**Outcome B — right direction, but has problems** (typos, a broken section, bad
-spacing, one weak page, mobile issue) → go to **Step 3b**.
-
-**Outcome C — wrong direction entirely** (fonts, colors, or overall vibe miss the
-business) → go to **Step 3c**.
-
-### Step 3b — Fix list (keep the design, fix the flaws)
-
-Write your complaints as a numbered list, then paste this in a fresh session.
-When the builder reports done, **return to Step 3** and re-review:
-
-```
-Read CLAUDE.md, prospects/<slug>/website-plan.md, and .claude/agents/builder.md.
-Spawn one builder (Opus) scoped ONLY to prospects/<slug>/mockup/. Keep the
-existing design direction — do NOT redesign. Fix exactly this list:
-1. <problem 1>
-2. <problem 2>
-3. <problem 3>
-Re-run the desktop and mobile QA loops from the Mockup Recipe, update the
-screenshots in prospects/<slug>/screenshots/, then spawn a critic (Opus) to
-re-audit against the $10K Checklist and update prospects/<slug>/audit.md.
-```
-
-### Step 3c — Wrong direction (redesign via the planner)
-
-Design decisions belong to the **planner**, not the builder — never ask a builder
-to re-decide the vibe. Describe what's wrong and what you want instead, paste this
-in a fresh session, and when done **return to Step 3** to re-review:
-
-```
-Read CLAUDE.md, prospects/<slug>/dossier.md, and prospects/<slug>/website-plan.md.
-The current design direction is wrong for this business. My notes: <what feels
-wrong, and any direction you'd rather see — e.g. "too dark and luxury; this is a
-friendly family lawn crew, should feel warm and approachable">. Spawn the planner
-(Fable, claude-fable-5) to REVISE website-plan.md per my notes — new art
-direction, fonts, palette as needed, keeping the page map unless my notes say
-otherwise. Then spawn a builder (Opus) to re-implement prospects/<slug>/mockup/
-from the revised plan with full desktop+mobile QA and fresh screenshots, and a
-critic (Opus) to audit until sign-off.
-```
+Every paste-able prompt works in a **fresh session**: run
+`~/Projects/essex-web-crew/run.sh` and paste it. (If the original team session is still
+open, you can paste there instead.)
 
 ---
 
-## Step 4 — Review the email (per prospect, ~3 min each)
+### Step 1 — Summon the team
 
-Read `prospects/<slug>/outreach-email.md`. Check:
+Open Terminal, run `~/Projects/essex-web-crew/run.sh`. → continue to **Step 2**.
 
-- Does it open with a **real, specific observation** about *their* business?
-- Is everything it claims actually in the dossier (no invented compliments/stats)?
-- Does it mention the mockup and the Cecere Brothers portfolio piece?
-- Would *you* say it out loud? Does it sound like a person, not a bot?
+### Step 2 — Give the kickoff order
 
-**Outcome A — good** → continue to **Step 5**.
+Copy the **Full run** prompt from `KICKOFF.md`, paste it to the lead. → continue to
+**Step 3**.
 
-**Outcome B — minor tweaks** (a phrase you'd change, a detail to add) → just edit
-`outreach-email.md` yourself; it's faster than an agent round-trip. Then continue
-to **Step 5**.
+### Step 3 — Wait and watch
 
-**Outcome C — wrong voice / generic / inaccurate** → go to **Step 4b**.
-
-### Step 4b — Copywriter re-run
-
-Paste this in a fresh session; when the redraft lands, **return to Step 4**:
-
-```
-Read CLAUDE.md, templates/email-voice.md, prospects/<slug>/dossier.md, and the
-current prospects/<slug>/outreach-email.md. Spawn a copywriter (Sonnet) to
-rewrite it. My notes: <what's wrong — e.g. "sounds like AI", "too salesy",
-"the observation about their site is generic — use the specific detail about X
-from the dossier">. The copywriter must invoke the humanizer skill before
-finalizing, then a critic must check it against templates/package-checklist.md.
-```
+`Ctrl+T` for the task list; arrow keys to peek at each teammate. Scout + analyst take
+15–30 min. → continue to **Step 4**.
 
 ---
 
-## Step 5 — Generate the real images (per prospect)
+### Step 4 — Approve the shortlist
 
-The mockup ships with labeled `AI-IMAGE` placeholders. List every prompt:
+The analyst gives you 3 businesses with a pitch each. Read them and decide.
+
+- **Step 4A — you like all 3.** Reply to approve them. → continue to **Step 5**.
+- **Step 4B — you don't like one (or more).** Paste this to swap the weak one out:
+
+  ```
+  Read CLAUDE.md, .claude/agents/analyst.md, and pipeline/candidates.md. I don't
+  want the prospect "<slug>" because: <your reason>. Spawn an analyst (Opus) to:
+  delete prospects/<slug>/, pick the next-highest-scoring candidate in the
+  "## Scoring" section of pipeline/candidates.md that isn't already in prospects/,
+  re-verify it qualifies, research it, and write prospects/<new-slug>/dossier.md.
+  If my reason is a targeting gap, add one line to pipeline/rubric.md so future
+  runs filter it. Then present the replacement with a pitch and STOP for my OK.
+  ```
+
+  If the candidate list is empty, add this line to the prompt: *"If no good candidate
+  remains, spawn a scout (Sonnet) to find new ones first."* Approve the replacement,
+  then → continue to **Step 5**.
+
+---
+
+### Step 5 — The team builds (you trust the plan)
+
+You approved the businesses, so let the team run: planner (Fable) designs, builders
+(Opus) build, copywriter (Sonnet) drafts emails, critic (Opus) audits until it passes.
+You don't second-guess the design plan here — you listen to Fable. Just wait for the
+lead's "all packages signed off" summary. → continue to **Step 6**.
+
+---
+
+### Step 6 — Review the websites (repeat per business)
+
+Open `prospects/<slug>/mockup/index.html`, click every page, narrow the window to phone
+width, and skim `audit.md`. Check it uses the client's real content and invents no facts.
+Gut check: **would you pay for this site?**
+
+- **Step 6A — you love it.** → continue to **Step 7**.
+- **Step 6B — right direction, but has problems** (typos, a broken/ugly section, weak
+  page, mobile issue). Write your complaints as a numbered list and paste:
+
+  ```
+  Read CLAUDE.md, prospects/<slug>/website-plan.md, and .claude/agents/builder.md.
+  Spawn ONE builder (Opus) scoped ONLY to prospects/<slug>/mockup/. Keep the
+  existing design — do NOT redesign. Fix exactly this list:
+  1. <problem>
+  2. <problem>
+  Re-run the desktop and mobile QA loops, update prospects/<slug>/screenshots/,
+  then a critic (Opus) re-audits and updates prospects/<slug>/audit.md.
+  ```
+
+  When it's done, re-review. → then continue to **Step 7**.
+- **Step 6C — wrong vibe entirely** (fonts/colors/whole feel miss the business). Design
+  belongs to the planner, so fix the plan first. Paste:
+
+  ```
+  Read CLAUDE.md, prospects/<slug>/dossier.md, and prospects/<slug>/website-plan.md.
+  The design direction is wrong for this business. My notes: <what's wrong + what
+  you'd rather see, e.g. "too dark and moody for a friendly family lawn crew;
+  should feel bright and trustworthy">. Spawn the planner (Fable, claude-fable-5)
+  to REVISE website-plan.md, show me the new plan, and wait for my OK. After my OK:
+  spawn a builder (Opus) to rebuild prospects/<slug>/mockup/ from it with full QA
+  and fresh screenshots, then a critic (Opus) audits.
+  ```
+
+  When it's done, re-review. → then continue to **Step 7**.
+
+---
+
+### Step 7 — Add the real images (repeat per business)
+
+List every image prompt in the mockup:
 
 ```bash
 grep -rn "AI-IMAGE" prospects/<slug>/mockup/
 ```
 
-1. Generate each image with your image tool of choice, following the prompt in
-   the comment (they're written to match the art direction).
-2. Save them to `prospects/<slug>/mockup/images/` with readable names.
-3. Swap the placeholders for real `<img>` tags — easiest is to paste this in a
-   session:
+Generate each image with your tool of choice, save them to
+`prospects/<slug>/mockup/images/`, then paste this to swap them in:
 
 ```
-In prospects/<slug>/mockup/, I've added real images to the images/ folder.
-Replace each AI-IMAGE placeholder div with an <img> tag pointing at the matching
-file (keep the aria-labels as alt text, add loading="lazy", keep sizing/aspect
-ratios consistent with the layout). Then open it in the browser pane and verify
-every section still looks right on desktop and mobile, and update the screenshots
-in prospects/<slug>/screenshots/.
+In prospects/<slug>/mockup/, I've added real images to the images/ folder. Replace
+each AI-IMAGE placeholder div with an <img> tag pointing at the matching file (keep
+the aria-labels as alt text, add loading="lazy", keep aspect ratios consistent).
+Then open it in the browser pane, verify every section still looks right on desktop
+and at 375px wide, and update prospects/<slug>/screenshots/.
 ```
 
-4. Re-open `index.html` yourself and confirm it looks right.
+Re-open `index.html` yourself to confirm.
 
-**Outcome A — all images in, looks great** → continue to **Step 6**.
-
-**Outcome B — one or two images won't come out right** → that's fine for a pitch:
-either leave those as styled placeholders (they're designed to look intentional)
-or ask for that section to be reframed around no image. Then continue to **Step 6**.
+- **Step 7A — all images look good.** → continue to **Step 8**.
+- **Step 7B — one or two won't come out right.** Fine for a pitch: leave those as the
+  styled placeholders (they're designed to look intentional), or ask a builder to reframe
+  that section so it doesn't need the image. → continue to **Step 8**.
 
 ---
 
-## Step 6 — Send the pitch (per prospect)
+### Step 8 — Check the email and send (repeat per business)
 
-**You** send it — the team never contacts anyone.
+Read `prospects/<slug>/outreach-email.md`. Does it open with a real, specific observation
+about THEIR business? Is every claim true (matches the dossier)? Does it mention the
+mockup and the Cecere Brothers reference? Does it sound like you?
 
-Pre-send checklist:
+- **Step 8A — it's good.** Run the pre-send checklist below, send it, → continue to
+  **Step 9**.
+- **Step 8B — small tweaks** (a word, a sentence). Just edit the file yourself — faster
+  than an agent. Then pre-send checklist, send, → continue to **Step 9**.
+- **Step 8C — off** (generic, AI-sounding, or a claim that's not in the dossier). Paste:
 
-- [ ] Contact (email/phone) matches the dossier and you've double-checked it.
-- [ ] Owner/business name spelled correctly everywhere.
-- [ ] Every `[placeholder]` in the email is filled in (your name, phone, etc.).
-- [ ] You have the one-pager from `outreach-email.md` handy for a reply or call.
-- [ ] The mockup is shareable — pick one:
-  - **Screenshots attached** (default, zero setup) — use the best desktop + mobile
-    shots from `screenshots/`.
-  - **Screen-recorded scroll-through** (30s phone-and-desktop video, feels premium).
-  - **Live link** — a `file://` path won't work for them; host it free instead
-    (e.g. drag the `mockup/` folder onto Netlify Drop at app.netlify.com/drop)
-    and send that URL.
+  ```
+  Read CLAUDE.md, templates/email-voice.md, prospects/<slug>/dossier.md, and the
+  current prospects/<slug>/outreach-email.md. Spawn a copywriter (Sonnet) to
+  rewrite it. My notes: <what's wrong — e.g. "sounds like AI", "opener is generic,
+  use the specific detail about X">. It must invoke the humanizer skill before
+  finalizing, then a critic checks it against templates/package-checklist.md.
+  ```
 
-Copy the email text into Gmail, attach/link the mockup, send.
+  Re-read it, then pre-send checklist, send, → continue to **Step 9**.
 
-**Outcome — sent** → continue to **Step 7**.
+**Pre-send checklist** (before any send): contact matches the dossier and is spelled
+right · every `[placeholder]` filled in · mockup proof attached or linked (screenshots
+are the easy default; for a live link, drag the `mockup/` folder onto Netlify Drop at
+app.netlify.com/drop — a `file://` path won't work for them) · you read it once out loud.
 
----
-
-## Step 7 — Track and follow up
-
-Log every send in `pipeline/outreach-log.md` (create it the first time):
+Then log the send in `pipeline/outreach-log.md`:
 
 ```markdown
 | Prospect | Sent | Channel | Status | Next action |
@@ -291,69 +244,45 @@ Log every send in `pipeline/outreach-log.md` (create it the first time):
 | anthonys-landscaping | 2026-07-20 | email | waiting | follow up 7/27 |
 ```
 
-Then watch for replies:
+---
 
-**Outcome A — they're interested** → go to **Step 7b**.
+### Step 9 — Follow up and close out (repeat per business)
 
-**Outcome B — no reply yet** → go to **Step 7c**.
+- **Step 9A — they're interested.** This is a sales conversation now. Get them on a
+  call, walk them through the mockup, anchor credibility on the Cecere Brothers site.
+  Selling points: built custom for them, almost zero maintenance (static — no monthly
+  fees), fast, looks expensive. On a verbal yes, turn the mockup into the real thing:
 
-**Outcome C — not interested** → go to **Step 7d**.
+  ```
+  Read CLAUDE.md. <slug> said yes and is becoming a real client. Help me turn
+  prospects/<slug>/mockup/ into a production site: final content pass with their
+  confirmed info, real images everywhere, contact details wired in, favicon and
+  meta checked, and a deployment plan (static hosting + their domain). List
+  everything I still need from the client.
+  ```
 
-**Outcome D — all 3 prospects flopped** (2 touches each, no bites) → go to **Step 7e**.
+  Update the log to `won`. **This business is done.**
+- **Step 9B — no reply after 5–7 days.** Send ONE short follow-up:
 
-### Step 7b — Interested!
+  > Hi <name> — just floating this back up. The mockup I built for <business> is
+  > still yours to look at whenever: <link/screenshots>. If now's not the right
+  > time, no worries at all. — Harry
 
-1. Get them on a call. Use the one-pager bullets; anchor credibility on the
-   Cecere Brothers site.
-2. Selling points for this kind of site: built custom for them, almost zero
-   maintenance (static site — no monthly platform fees), fast, looks expensive.
-3. Once there's a verbal yes, turn the mockup into the real deliverable — paste:
+  Update the log to `followed up`. If they reply → **Step 9A** or **9C**. Still silent
+  after another week → **Step 9C**. Never more than 2 touches.
+- **Step 9C — not interested / closed.** Reply politely if they said no, update the log
+  to `closed` (note the reason), and keep the mockup — it's portfolio material for the
+  next pitch. If the reason is worth learning from ("we just paid for a site"), add a
+  line to `pipeline/rubric.md`. **This business is done.**
+- **Step 9D — all three flopped** (2 touches each, no bites). Tune the machine before
+  the next run. Paste:
 
-```
-Read CLAUDE.md. <slug> said yes and is becoming a real client. Help me turn
-prospects/<slug>/mockup/ into a production site: final content pass with the
-client's confirmed info, real images everywhere, contact details wired in, favicon
-and meta double-checked, and a deployment plan (static hosting options + connecting
-their domain). List everything I still need to collect from the client.
-```
+  ```
+  Read CLAUDE.md, pipeline/rubric.md, templates/email-voice.md, and
+  pipeline/outreach-log.md. All 3 pitches got no traction. What I observed: <no
+  opens / "we're happy with Facebook" / wrong trade / etc.>. Propose concrete
+  edits to the rubric (who we target) and the email voice guide (how we pitch),
+  plus 2–3 alternative niches or towns. Wait for my approval, then apply them.
+  ```
 
-Update the log. **Done — this one's a client.**
-
-### Step 7c — No reply
-
-Wait **5–7 days**, then send ONE short follow-up. Template:
-
-```
-Hi <name> — just floating this back up. The mockup I built for <business name>
-is still yours to look at whenever: <link/screenshots attached>. If now's not
-the right time, no worries at all. — Harry
-```
-
-**Outcome A — they reply** → **Step 7b** (interested) or **Step 7d** (pass).
-
-**Outcome B — still nothing after the follow-up** → stop at 2 touches. Mark the
-log `closed — no response` and go to **Step 7d**'s note about the portfolio.
-
-### Step 7d — Not interested / closed
-
-- Mark the log entry `closed`, with the reason if they gave one.
-- **Keep the mockup** — it's now a portfolio piece. A closed pitch for a
-  landscaper still proves what you can do for the next landscaper.
-- If they gave a reason worth learning from ("we just paid for a site", "too
-  busy"), add a line to `pipeline/rubric.md` so scouting improves.
-
-### Step 7e — All 3 flopped: retro and rerun
-
-Before burning another run, make the next one smarter. Paste:
-
-```
-Read CLAUDE.md, pipeline/rubric.md, templates/email-voice.md, and
-pipeline/outreach-log.md. All three outreach attempts failed: <what happened —
-no responses / "already have a site" / wrong trade>. Help me run a retro:
-propose concrete edits to the rubric (better targeting) and the email voice
-guide (better hook), and suggest 2–3 alternative niches or towns. Don't spawn
-any teammates yet — we'll adjust first, then kick off a fresh run.
-```
-
-Apply the edits, then start a fresh run from `KICKOFF.md` → you're back at
-**Step 1** when it finishes.
+  Apply the edits, then start a fresh run → back to **Step 1**. **End.**

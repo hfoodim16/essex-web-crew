@@ -71,9 +71,8 @@ explicitly with the model id `claude-fable-5`.
 
 ## After the run
 
-Follow **`PLAYBOOK.md`** — the step-by-step post-run script. It walks you from
-"did the run finish?" through vetting each client, reviewing and (if needed)
-sending back each website and email, generating the real images, sending the pitch
-yourself, and tracking follow-ups. Every decision point branches to a labeled next
-step, so there's a defined path for every outcome (bad client, wrong-vibe mockup,
-off-voice email, no reply, etc.).
+Follow **`PLAYBOOK.md`**. It has two scripts: **Script 1** is a plain-English
+walkthrough of the whole run (summon the team → send → follow-up), and **Script 2**
+is a detailed review decision tree where every decision point branches to a labeled
+next step with a paste-able prompt — so there's a defined path for every outcome
+(bad client, wrong-vibe mockup, off-voice email, no reply, all three flopped, etc.).
