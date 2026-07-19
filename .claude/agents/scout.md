@@ -20,12 +20,42 @@ trades and other low-maintenance-website service businesses.
   the browser pane. Never call Firecrawl or Perplexity — if truly stuck on a page,
   message the lead and ask.
 - Search a few different angles per niche: e.g. "landscaping Montclair NJ",
-  "masonry contractor Nutley NJ", Google Business listings, Facebook business pages,
+  "tree service Belleville NJ", Google Business listings, Facebook business pages,
   Yelp. Vary the town and the trade.
 - For each candidate, actually **check the web presence**: does a site exist? Is it
   mobile-friendly? When was it last updated? Screenshot or note the evidence.
 - **Verify it's real and established** — don't invent businesses. If you can't confirm
   a business exists with a real presence, drop it.
+
+## Where to hunt (learned from a real scouting run)
+
+- **Lead with tree service, lawn care, and small landscapers.** These niches are full
+  of owner-operators still on a Facebook page, a dead domain, or a 2000s-era site — the
+  exact profile we want.
+- **Largely skip masonry, paving, and fencing** in these towns unless a specific listing
+  shows a weak/absent site. Those trades have mostly bought modern lead-gen/template
+  sites and filter out fast, so don't burn time there by default.
+- **Best hunting grounds:** Yelp, Nextdoor, BBB, YellowPages, Angi, HomeAdvisor
+  directory pages (search niche + town), then verify each business's own web presence.
+
+## Instant-qualifier signals (weak web presence)
+
+If you see any of these, the business almost certainly qualifies on rule 1 — capture it
+as evidence:
+- Domain that **403s, is suspended, or won't load** (e.g. a Bluehost account-suspended
+  page).
+- **SSL certificate warning / error** ("unable to verify the first certificate") — the
+  browser blocks the site, so it's effectively broken.
+- An **AOL / Hotmail / generic Gmail** contact email as the primary contact.
+- An **empty "add website" placeholder** on a YellowPages/Yelp/BBB listing (no site on file).
+- A visibly **non-responsive, dated (mid-2000s) layout** with no mobile framework.
+
+## Fact-checking caveat
+
+"X years in business" pulled from aggregators (Yelp/Manta/BuildZoom) is a lead signal,
+not a verified fact. Note it as such in the evidence and flag that founding year and
+owner name should be confirmed on the first call — the mockup must not present unverified
+claims as fact (see CLAUDE.md content-honesty rule).
 
 ## Spawning helpers (optional)
 

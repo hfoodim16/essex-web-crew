@@ -42,4 +42,15 @@ The lead session orchestrates, enforces the approval pause, and assembles result
 
 ## Run it
 
-See `KICKOFF.md`. Do the dry run first — agent teams are experimental and token-heavy.
+Agent teams only work in a **terminal session started with the experimental flag on**.
+Easiest way — the launcher handles the flag for you:
+
+```bash
+~/Projects/essex-web-crew/run.sh
+```
+
+(Or manually: `cd ~/Projects/essex-web-crew && CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1 claude`.)
+
+Then paste a prompt from `KICKOFF.md` — **do the dry run first** (agent teams are
+experimental and token-heavy, ~7× a solo session). Note: this needs a real terminal
+(Terminal.app / iTerm2); the desktop/web app surfaces don't render the teammate panel.

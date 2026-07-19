@@ -21,11 +21,14 @@ Harry generates the real images and sends the outreach himself.
 
 - **Where:** Essex County, NJ (Newark, Montclair, Bloomfield, Nutley, Belleville,
   West Orange, Livingston, Cedar Grove, Verona, Caldwell, the Oranges, etc.).
-- **Niches:** landscaping and trades first (lawn care, masonry, hardscaping/pavers,
-  tree service, fencing, concrete, snow removal), plus any local service business
-  whose website is naturally **low-maintenance / static** — no weekly menus, no
-  e-commerce, no booking engine required. These are "build once, barely touch it"
-  sites, which is the kind we want to sell.
+- **Niches:** **lead with tree service, lawn care, and small landscapers** — a real
+  scouting run showed these are full of owner-operators on a Facebook page, a dead
+  domain, or a 2000s-era site (exactly our target). **Largely skip masonry, paving, and
+  fencing** unless a specific listing shows a weak/absent site — those trades here have
+  mostly bought modern template sites and filter out fast. Also fair game: any local
+  service business whose website is naturally **low-maintenance / static** — no weekly
+  menus, no e-commerce, no booking engine required. "Build once, barely touch it" sites
+  are the kind we want to sell.
 - **Portfolio anchor:** Cecere Brothers Landscaping (Harry's existing client) — use
   it as the credibility reference in pitches.
 
