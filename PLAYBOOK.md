@@ -24,6 +24,10 @@ Two scripts live in this file:
 | No reply after a week | Script 2, Step 9B |
 | Client said no | Script 2, Step 9C |
 | All three pitches flopped | Script 2, Step 9D |
+| How do I generate & place the images? | Part 3, Reference A |
+| The client gave me info — where do I put it? | Part 3, Reference B |
+| How do I make a small edit to a site? | Part 3, Reference C |
+| How do I connect the contact form / booking? | Part 3, Reference D |
 
 ---
 
@@ -183,6 +187,8 @@ Gut check: **would you pay for this site?**
 
 ### Step 7 — Add the real images (repeat per business)
 
+*(Full how-to, including how to generate the images: **Part 3, Reference A**.)*
+
 List every image prompt in the mockup:
 
 ```bash
@@ -232,9 +238,14 @@ mockup and the Cecere Brothers reference? Does it sound like you?
   Re-read it, then pre-send checklist, send, → continue to **Step 9**.
 
 **Pre-send checklist** (before any send): contact matches the dossier and is spelled
-right · every `[placeholder]` filled in · mockup proof attached or linked (screenshots
-are the easy default; for a live link, drag the `mockup/` folder onto Netlify Drop at
-app.netlify.com/drop — a `file://` path won't work for them) · you read it once out loud.
+right · every `[placeholder]` *in the email* filled in · mockup proof attached or linked
+(screenshots are the easy default; for a live link, drag the `mockup/` folder onto Netlify
+Drop at app.netlify.com/drop — a `file://` path won't work for them) · you read it once
+out loud.
+
+*(Leftover `[placeholder]` gaps inside the **website** — hours, exact towns, the owner's
+story — are fine to pitch with; you fill those after the client answers. See **Part 3,
+Reference B**.)*
 
 Then log the send in `pipeline/outreach-log.md`:
 
@@ -261,6 +272,10 @@ Then log the send in `pipeline/outreach-log.md`:
   everything I still need from the client.
   ```
 
+  Two things that production pass will need their own how-tos: **filling in the client's
+  real info** (hours, towns, their story) → **Part 3, Reference B**; and **connecting the
+  contact form / booking** → **Part 3, Reference D**.
+
   Update the log to `won`. **This business is done.**
 - **Step 9B — no reply after 5–7 days.** Send ONE short follow-up:
 
@@ -286,3 +301,143 @@ Then log the send in `pipeline/outreach-log.md`:
   ```
 
   Apply the edits, then start a fresh run → back to **Step 1**. **End.**
+
+---
+
+# Part 3 — Reference: The Hands-On Parts
+
+The four things you actually do with your hands after a run. The golden rule for all of
+them: **you never edit code — you tell Claude what you want in plain English and it edits
+the files.** Every how-to below ends with a prompt you can copy, paste, and fill in.
+
+For a small one-off edit you don't even need the agent team — just open a normal Claude
+Code session inside the project (`cd ~/Projects/essex-web-crew && claude`) and talk to it.
+
+---
+
+### Reference A — Adding the real pictures
+
+Every picture slot in a mockup is a labeled placeholder box with a written image prompt
+baked in (e.g. "wide drone shot of a finished bluestone paver patio at golden hour").
+List them all for a site:
+
+```bash
+grep -rn "AI-IMAGE" prospects/<slug>/mockup/
+```
+
+**Generate the images** — two ways:
+
+1. **Have Claude make them for you.** In a session, paste:
+   ```
+   Read prospects/<slug>/mockup/index.html and pull out every AI-IMAGE prompt.
+   Use the ai-multimodal skill to generate each image from its prompt, sized for
+   where it sits on the page, and save them into prospects/<slug>/mockup/images/
+   with clear filenames.
+   ```
+   (This uses Google's image generation under the hood — it may ask for a Gemini API
+   key and can cost a little. If it can't run, use option 2.)
+2. **Make them in your own tool** — ChatGPT/DALL·E, Midjourney, whatever you like. Copy
+   each AI-IMAGE prompt in, download the result, and drop the files into
+   `prospects/<slug>/mockup/images/`.
+
+**Place them** — paste this and Claude swaps every placeholder for a real image:
+
+```
+In prospects/<slug>/mockup/, I've added real images to the images/ folder. Replace
+each AI-IMAGE placeholder div with an <img> tag pointing at the matching file (keep
+the aria-labels as alt text, add loading="lazy", keep aspect ratios consistent),
+then open it and confirm every section still looks right on desktop and mobile.
+```
+
+(This is the deep version of Script 2, Step 7.)
+
+---
+
+### Reference B — Getting info from the client into the site
+
+When the builders didn't know a real fact, they left a **bracketed gap** right in the
+page — like `[Hours — placeholder]`, `[towns — placeholder]`, `[Insured — confirm]`, or
+`[the family's story — collect from the owner]`. **Those brackets are your list of
+questions to ask the client.** Here's the loop:
+
+**1. Turn the gaps into a question sheet.** Paste:
+
+```
+Read prospects/<slug>/mockup/index.html and prospects/<slug>/dossier.md. List every
+bracketed placeholder or "confirm" gap as a plain-English question I can ask the
+client, and write them to prospects/<slug>/client-intake.md with a blank line under
+each one for the answer.
+```
+
+**2. Ask the client and type the answers.** Call/text/email them, then open
+`prospects/<slug>/client-intake.md` and type each answer under its question. **That file
+is "where you type it."** No formatting needed — just plain answers.
+
+**3. Have Claude put the answers into the site.** Paste:
+
+```
+Read prospects/<slug>/client-intake.md — I've filled in the client's real answers.
+Put them into prospects/<slug>/mockup/index.html, replacing the matching bracketed
+placeholders. Don't invent anything: if an answer is still blank, leave the
+placeholder as-is. Then open the site and confirm it reads right.
+```
+
+Only real answers go in; anything the client didn't give you stays a placeholder. That
+keeps the site honest (same rule the team follows).
+
+---
+
+### Reference C — Fixing or changing the site
+
+You describe the change like you'd tell a designer; Claude makes it. Two sizes:
+
+- **Small change** (reword the hero, darken a button, tighten spacing, reorder a
+  section) — you don't need the whole team. Open a plain session in the folder and say it:
+  ```
+  In prospects/<slug>/mockup/, change the hero headline to "<new headline>" and make
+  the primary buttons a darker green. Then show me how it looks.
+  ```
+- **Bigger change**:
+  - A section is broken or looks cheap, but the overall design is right → use **Script 2,
+    Step 6B** (fix list — keeps the design, builder repairs it).
+  - The whole vibe/fonts/colors are wrong for the business → use **Script 2, Step 6C**
+    (the planner redesigns first, then a builder rebuilds).
+
+Rule of thumb: if you can describe it in one or two sentences, just ask a normal session
+(the small-change path). If it needs real design judgment or a QA pass, use the Step 6
+branches so the critic re-checks it.
+
+---
+
+### Reference D — The backend: contact form, quotes, reservations, map
+
+**Do this only after a client says yes (Script 2, Step 9A).** While a site is still a
+pitch, the contact form stays a harmless stub — no point paying for services for someone
+who hasn't signed. The mockups are already built to plug into these; the form is disabled
+on purpose until you wire it.
+
+**Keep everything static + third-party.** These sites have no server of their own — that's
+what makes them "build once, barely touch it." You never run a backend; you point the
+site at services that handle it for you.
+
+- **Contact form / "request a quote"** (what a landscaper or tree service actually needs):
+  sign up for a no-server form service — **Formspree**, **Web3Forms**, or **Netlify
+  Forms** (all have free tiers). Each gives you an endpoint; form submissions get emailed
+  straight to the client. Then paste:
+  ```
+  In prospects/<slug>/mockup/, wire the contact form to my Formspree endpoint
+  <paste URL>: set the form's action and method=POST, remove the disabled/"return
+  false" demo stub, add whatever hidden fields the service needs, and show a
+  thank-you message after submit. Then test that it validates required fields.
+  ```
+- **Simplest option of all:** if the client just wants the phone to ring, skip the form —
+  a big "Call or text us" button (`tel:`) plus their number is genuinely zero-maintenance.
+- **Reservations / booking:** trades rarely need true scheduling — "book us" is usually
+  just "request an estimate," which is the contact form above. If a client genuinely takes
+  appointments, embed **Calendly** or **Cal.com** (paste their embed snippet into the
+  page). Still no server you maintain.
+- **Map:** a Google Maps **embed** iframe (the basic embed needs no API key), or a static
+  map image that links to directions.
+
+The umbrella action is the Step 9A "turn the mockup into a production site" prompt — this
+reference is the detail for the form/booking piece of it.
