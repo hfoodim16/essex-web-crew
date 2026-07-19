@@ -30,14 +30,14 @@ prospects/
 
 ## The team
 
-| Role | Model | Does |
-|------|-------|------|
-| **scout** | Sonnet | Finds 10–15 qualifying businesses (free web tools). |
-| **analyst** | Opus | Scores them, researches the top 3, writes dossiers, pitches the shortlist. |
-| **planner** | Fable | Turns each approved dossier into a `website-plan.md` — art direction, fonts, palette, page map, layout. |
-| **builder** ×3 | Opus | Each *implements* one prospect's plan into a mockup (Corey Blake recipe); owns its own folder. |
-| **copywriter** | Sonnet | Writes the personalized outreach email + one-pager. |
-| **critic** | Sonnet | Audits every mockup against the $10K Checklist and every email; loops until sign-off. |
+| Role | Model | Skills | Does |
+|------|-------|--------|------|
+| **scout** | Sonnet | — | Finds 10–15 qualifying businesses (free web tools). |
+| **analyst** | Opus | — | Scores them, captures each finalist's real site content, writes dossiers, pitches the shortlist. |
+| **planner** | Fable | `ui-ux-pro-max`, `frontend-design` | Turns each approved dossier into a `website-plan.md` — art direction, fonts, palette, page map, layout. |
+| **builder** ×3 | Opus | `ui-ux-pro-max`, `frontend-design` | Each *implements* one prospect's plan into a mockup (Corey Blake recipe); owns its own folder. |
+| **copywriter** | Sonnet | `humanizer` | Writes the personalized outreach email + one-pager. |
+| **critic** | Opus | `ui-ux-pro-max` | Audits every mockup against the $10K Checklist and every email; loops until sign-off. |
 
 The lead session orchestrates, enforces the approval pause, and assembles results.
 Design decisions live with the **planner** (Fable); the **builder** (Opus) implements

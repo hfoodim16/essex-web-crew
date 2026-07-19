@@ -157,6 +157,31 @@ business, made-up review counts, or fictional staff. If a detail isn't in the do
 write around it or use an obvious placeholder (`[years in business]`). The mockup is a
 design demonstration, not a claim of fact.
 
+## Use the client's real content (hard rule)
+
+Most prospects already have a website — that's what we're improving on. When they do,
+**reuse their real content, don't invent new content.** The Analyst captures the existing
+site's actual services, descriptions, service area, hours, contact info, tagline, about
+text, and testimonials into the dossier; the Planner structures that real material and
+the Builder renders it. We are upgrading the **design and structure**, not rewriting the
+business. Only use `[placeholder]` text where information genuinely doesn't exist. This
+also keeps the pitch honest and makes the mockup feel like *their* site, done right.
+
+## Skills each agent uses
+
+Skills are NOT auto-loaded for teammates (the agent-teams runtime doesn't apply the
+`skills` frontmatter field) — each agent must invoke them itself via the Skill tool, and
+each agent's `tools` list includes `Skill`.
+
+| Agent | Skills to invoke | Why |
+|---|---|---|
+| `scout` | — | Uses free web tools (WebSearch/WebFetch) only. |
+| `analyst` | — | Research + scoring; no skill required. |
+| `planner` | `ui-ux-pro-max`, `frontend-design` | Ground art direction, palette, and type choices in real design systems. |
+| `builder` | `ui-ux-pro-max`, `frontend-design` | Execute the plan as distinctive, production-grade, non-generic frontend. |
+| `copywriter` | `humanizer` | Make the outreach email read human, not AI-generated. |
+| `critic` | `ui-ux-pro-max` | Audit each mockup with a rigorous professional design lens. |
+
 ## Tooling rules
 
 - **Free tools first.** Use built-in `WebSearch` / `WebFetch` and the browser pane for

@@ -38,11 +38,22 @@ For each of the top 3, research (free tools only — no Firecrawl/Perplexity):
 If authorized by the lead, you may use the `Task` tool to run one research subagent
 per finalist in parallel. Otherwise research inline. Never spawn teammates.
 
+## Capture the client's real content (critical)
+
+If a finalist already has a website (even a bad one), **extract its real content** into
+the dossier so the Planner and Builder reuse it instead of inventing: exact service
+names + descriptions, service area/towns, hours, phone/email/address, tagline, about
+text, and any real testimonials. Use `WebFetch` on their current site (and their Google
+Business / Facebook / Yelp) to pull this. We are upgrading the design, not rewriting the
+business — so the facts must come from them. Flag anything you could NOT find as a gap.
+
 ## Output — `prospects/<slug>/dossier.md`
 
-Include: business summary, services (grouped), **recommended page map** (list the
-pages and why), service area, reputation notes, competitor references, current-presence
-critique, suggested art-direction hints, and a list of needed image placeholders.
+Include: business summary, **existing-site content captured verbatim/near-verbatim**
+(services, copy, contact, hours, testimonials — with source), services (grouped),
+**recommended page map** (list the pages and why), service area, reputation notes,
+competitor references, current-presence critique, suggested art-direction hints, and a
+list of needed image placeholders. Mark any missing info as a `[placeholder]` gap.
 
 ## The shortlist message (the approval gate)
 

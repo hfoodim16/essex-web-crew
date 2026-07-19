@@ -20,6 +20,9 @@ records the mockup result in `prospects/<slug>/audit.md`.
 
 - [ ] No real, stock, or hotlinked images anywhere — placeholders only.
 - [ ] No fabricated facts about the business.
+- [ ] **Uses the client's real content** — if they had an existing site, its actual
+      services/copy/contact/hours/testimonials were reused (not invented); only genuinely
+      missing info is a `[placeholder]`.
 - [ ] No outbound contact of any kind was performed.
 
 ## Email

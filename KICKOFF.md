@@ -42,7 +42,9 @@ Read CLAUDE.md and all files in .claude/agents/. Run the full Essex Web Crew
 pipeline. Each teammate uses the model in its agent definition's frontmatter —
 do NOT force a single model. The intended lineup is: scout=Sonnet,
 analyst=Opus, planner=Fable (claude-fable-5), builder=Opus, copywriter=Sonnet,
-critic=Sonnet. Free tools only.
+critic=Opus. Free tools only. Teammates must invoke their skills themselves via
+the Skill tool (see the "Skills each agent uses" table in CLAUDE.md) — skills are
+not auto-loaded for teammates.
 
 1. Spawn 'scout' (scout agent type): find 10–15 qualifying Essex County, NJ
    businesses → pipeline/candidates.md.
