@@ -1,0 +1,12 @@
+# OS / editor
+.DS_Store
+
+# Local dev servers, logs
+*.log
+
+# Keep the prospects scaffold but ignore heavy generated image assets if any land here
+prospects/**/*.png
+prospects/**/*.jpg
+prospects/**/*.jpeg
+prospects/**/*.webp
+!prospects/**/screenshots/*
