@@ -14,6 +14,7 @@ Harry generates the real images and sends outreach himself.
 ```
 CLAUDE.md                 Shared playbook (all teammates read this)
 KICKOFF.md                How to run — dry run + full run prompts
+PLAYBOOK.md               Harry's post-run script — review, fix loops, images, send, follow-up
 .claude/
   settings.local.json     Enables agent teams (experimental flag)
   agents/                 Teammate roles: scout, analyst, builder, copywriter, critic

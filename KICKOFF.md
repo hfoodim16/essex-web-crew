@@ -71,6 +71,9 @@ explicitly with the model id `claude-fable-5`.
 
 ## After the run
 
-For each `prospects/<slug>/`: review the dossier, open `mockup/index.html` in the
-browser, read the email, then generate the real images from the `AI-IMAGE:` prompts and
-send the outreach yourself.
+Follow **`PLAYBOOK.md`** — the step-by-step post-run script. It walks you from
+"did the run finish?" through vetting each client, reviewing and (if needed)
+sending back each website and email, generating the real images, sending the pitch
+yourself, and tracking follow-ups. Every decision point branches to a labeled next
+step, so there's a defined path for every outcome (bad client, wrong-vibe mockup,
+off-voice email, no reply, etc.).
