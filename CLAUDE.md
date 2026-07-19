@@ -53,7 +53,7 @@ Good reviews are a **bonus** (higher score), not a requirement.
 | 4. Website plan (1 per prospect) | `planner` | Fable | `prospects/<slug>/website-plan.md` |
 | 5. Build mockups (1 per prospect) | `builder` ×3 | Opus | `prospects/<slug>/mockup/` |
 | 6. Outreach email + one-pager | `copywriter` | Sonnet | `prospects/<slug>/outreach-email.md` |
-| 7. Critique loop | `critic` | Sonnet | scored audit + fix messages, sign-off to lead |
+| 7. Critique loop | `critic` | Opus | `prospects/<slug>/audit.md` (written every round) + fix messages, sign-off to lead |
 
 `<slug>` = kebab-case business name, e.g. `montclair-stone-masonry`.
 
@@ -120,6 +120,13 @@ aspect ratios, hamburger menu. Save proof screenshots.
 
 ### Step 5 — The $10K Checklist audit (Critic runs this; Builder self-checks first)
 Score all 8, fix gaps, re-verify. Source: Metics Media Field Guide No. 01.
+
+The critic writes `prospects/<slug>/audit.md` after **every** review round (NEEDS-WORK
+versions included, with a `Review round: N` line), not only at sign-off. Anything below
+8/8 (barring a documented exception) goes back to the builder and the loop repeats. After
+the first full audit, re-reviews are **incremental** — the critic re-checks only the
+failed items and the sections the builder's change report says changed (plus a spot-check
+if a fix could ripple), not the whole site again.
 
 1. **Point of view, not a template** — commits to a specific direction with taste.
 2. **Typography that does work** — paired display + body, not defaulted, not Inter/Roboto.

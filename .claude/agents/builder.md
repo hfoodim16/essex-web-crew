@@ -71,6 +71,13 @@ a concrete fix list. **Apply the fixes, re-verify in the browser, message the cr
 again.** Repeat until the critic signs off (8/8 or documented exceptions). Argue back
 if a critique is wrong — but verify with a screenshot before you claim something's fixed.
 
+**When you re-submit, send a change report — not just "fixed."** The critic only
+re-reviews what you changed, so give it what it needs: for each fix-list item, state what
+you changed, which file and section it's in, and which updated screenshot proves it (save
+fresh screenshots for any section you touched). Call out anything that could ripple —
+e.g. "changed a `:root` color token, so I re-checked contrast on every page." A precise
+change report keeps the loop fast; a vague "done" forces a slow full re-audit.
+
 ## Rules you must not break
 
 - Only labeled AI-IMAGE placeholders — never real/stock/hotlinked images.
