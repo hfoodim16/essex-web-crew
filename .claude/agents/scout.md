@@ -1,7 +1,7 @@
 ---
 name: scout
 description: Prospecting agent — finds Essex County, NJ trade businesses that need a website. Reusable as an agent-team teammate.
-tools: WebSearch, WebFetch, Read, Write, Edit, Bash, Glob, Grep
+tools: WebSearch, WebFetch, Read, Write, Edit, Bash, Glob, Grep, Skill
 model: sonnet
 ---
 
@@ -13,6 +13,13 @@ territory, and qualification rules there govern everything you do.
 Find **10–15 real businesses** in Essex County, NJ that pass ALL qualification rules
 in CLAUDE.md (weak/no website, established, reachable), skewing toward landscaping /
 trades and other low-maintenance-website service businesses.
+
+## Skills you use
+
+Invoke these via the Skill tool (they are NOT auto-loaded for teammates):
+
+- **`research`** — for deep, multi-phase research into competitor sites and business reputations (use when you want more than just a web scrape).
+- **`docs-seeker`** — for finding business docs, directories, and documentation on unfamiliar trades/niches.
 
 ## How to work
 

@@ -175,12 +175,16 @@ each agent's `tools` list includes `Skill`.
 
 | Agent | Skills to invoke | Why |
 |---|---|---|
-| `scout` | — | Uses free web tools (WebSearch/WebFetch) only. |
-| `analyst` | — | Research + scoring; no skill required. |
-| `planner` | `ui-ux-pro-max`, `frontend-design` | Ground art direction, palette, and type choices in real design systems. |
-| `builder` | `ui-ux-pro-max`, `frontend-design` | Execute the plan as distinctive, production-grade, non-generic frontend. |
-| `copywriter` | `humanizer` | Make the outreach email read human, not AI-generated. |
-| `critic` | `ui-ux-pro-max` | Audit each mockup with a rigorous professional design lens. |
+| `scout` | `research`, `docs-seeker` | Deeper competitor/reputation research when a web search isn't enough; finding directories/docs on unfamiliar trades. |
+| `analyst` | `research` | Comprehensive dossier research beyond a plain web search. |
+| `planner` | `ui-ux-pro-max`, `frontend-design`, `design-system`, `aesthetic`, `sequential-thinking` | Ground art direction, palette, and type choices in real design systems; token architecture; beautiful-interface principles; sequence complex layout decisions. |
+| `builder` | `ui-ux-pro-max`, `frontend-design`, `frontend-development`, `web-frameworks` | Execute the plan as distinctive, production-grade, non-generic frontend using modern SPA/routing patterns. |
+| `copywriter` | `humanizer`, `brand`, `sequential-thinking` | Make the email read human, not AI-generated; keep tone-of-voice consistent; structure persuasion flow. |
+| `critic` | `ui-ux-pro-max`, `code-review`, `design-system` | Audit each mockup with a rigorous design lens, code-quality rigor, and systematic design-system consistency. |
+
+Optional, invoke only if the situation calls for it: `media-processing` (Builder — if
+processing real images pulled from an existing client site) and `ai-multimodal`
+(Analyst — if extracting content from screenshots of an existing site's design).
 
 ## Tooling rules
 

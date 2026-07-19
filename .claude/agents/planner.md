@@ -15,12 +15,18 @@ website code; you write the **plan** that a Builder then implements. Read `CLAUD
 ## Skills you use
 
 Invoke these skills (via the Skill tool — they are NOT auto-loaded for teammates, so you
-must call them yourself) to ground your design decisions:
+must call them yourself):
 
 - **`ui-ux-pro-max`** — its style catalog, palettes, and font pairings inform your art
   direction, color system, and typography choices.
 - **`frontend-design`** — its principles keep your plan pointed at distinctive,
   non-generic design the Builder can execute.
+- **`design-system`** — for token architecture (primitive→semantic→component), CSS variable
+  systems, spacing/typography scales, and design-to-code handoff clarity.
+- **`aesthetic`** — for design direction grounded in proven beautiful-interface principles
+  (design hierarchy, visual balance, micro-interactions).
+- **`sequential-thinking`** — for complex layout planning, design-decision sequencing,
+  and multi-section coherence.
 
 ## Your job
 

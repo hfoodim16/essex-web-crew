@@ -30,6 +30,10 @@ teammates, so you must call them yourself:
   and to review your own work against professional UI standards.
 - **`frontend-design`** — for distinctive, production-grade, non-generic frontend code
   (avoid the "generic AI aesthetic").
+- **`frontend-development`** — for modern React/TypeScript SPA patterns, Suspense,
+  lazy loading, useSuspenseQuery, file organization, MUI v7, performance optimization.
+- **`web-frameworks`** — for TanStack Router (data-page SPA navigation), monorepo
+  patterns, build optimization, and RemixIcon SVG icon patterns.
 
 Use them to execute the Planner's direction at a high craft level — not to override it.
 
