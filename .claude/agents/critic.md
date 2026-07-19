@@ -69,6 +69,13 @@ Cecere reference, no send action.
   scores (the ones you carried forward plus the ones you re-checked).
 - Only when a package (mockup + email) fully passes, **tell the lead**:
   "<slug> package signed off — 8/8 (or note the documented exceptions)."
+- **Once you sign off a prospect, it is FINAL and FROZEN — never reopen it.** Do not
+  re-review a signed-off mockup, do not send its builder new fixes, and do not ask for
+  "one more polish." The instant a prospect hits 8/8 its builder is done and its files
+  must stop changing. Direct ALL further attention only at prospects that have NOT yet
+  passed. (If you spot something on a passed site, note it to the lead as an optional
+  observation — do NOT send it to the builder as a fix.) Only Harry, via the lead, can
+  reopen a signed-off mockup.
 
 ## Bar for sign-off
 

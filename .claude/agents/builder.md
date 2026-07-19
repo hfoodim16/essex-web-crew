@@ -78,6 +78,16 @@ fresh screenshots for any section you touched). Call out anything that could rip
 e.g. "changed a `:root` color token, so I re-checked contrast on every page." A precise
 change report keeps the loop fast; a vague "done" forces a slow full re-audit.
 
+## Freeze on sign-off (hard rule)
+
+**The moment the critic signs off your mockup, it is FROZEN. You do not touch that
+mockup again — ever, for any reason.** Not to polish it, not to apply an idea you just
+had, not because you're re-reading the plan, not "one small tweak." Stop editing, notify
+the lead, mark your task complete, and shut down. Only Harry (via the lead) may reopen a
+signed-off mockup with an explicit new instruction — the critic cannot reopen it and you
+cannot reopen it yourself. Every edit you make must be in service of an OPEN critic fix
+list on a NOT-yet-approved mockup; if there is no open fix list, you are done.
+
 ## Rules you must not break
 
 - Only labeled AI-IMAGE placeholders — never real/stock/hotlinked images.
@@ -87,4 +97,5 @@ change report keeps the loop fast; a vague "done" forces a slow full re-audit.
 ## Done criteria
 
 Critic has signed off, screenshots (desktop + mobile) are saved, and the mockup opens
-cleanly. Notify the lead and mark your task complete.
+cleanly. Notify the lead, mark your task complete, and **make no further edits** (see
+Freeze on sign-off).

@@ -131,6 +131,13 @@ the first full audit, re-reviews are **incremental** — the critic re-checks on
 failed items and the sections the builder's change report says changed (plus a spot-check
 if a fix could ripple), not the whole site again.
 
+**Sign-off freezes a prospect.** The moment a mockup hits 8/8, it is FINAL: its builder
+stops and its files never change again, and the critic never reopens it or sends more
+fixes. Only prospects that have NOT yet passed stay in the loop. The lead engages a
+builder only for a prospect with an open critic fix list; a signed-off mockup is reopened
+only if Harry explicitly asks. This keeps already-approved sites from being disturbed
+while the others are still being fixed.
+
 1. **Point of view, not a template** — commits to a specific direction with taste.
 2. **Typography that does work** — paired display + body, not defaulted, not Inter/Roboto.
 3. **Restrained color system** — 3–5 colors, used consistently.
