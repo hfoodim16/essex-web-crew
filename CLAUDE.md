@@ -52,7 +52,7 @@ Good reviews are a **bonus** (higher score), not a requirement.
 | 3. **Approval pause** | lead ↔ Harry | — | Harry confirms/swaps the 3 |
 | 4. Website plan (1 per prospect) | `planner` | Fable | `prospects/<slug>/website-plan.md` |
 | 5. Build mockups (1 per prospect) | `builder` ×3 | Opus | `prospects/<slug>/mockup/` |
-| 6. Outreach email + one-pager | `copywriter` | Sonnet | `prospects/<slug>/outreach-email.md` |
+| 6. Outreach (email or call script) | `copywriter` | Sonnet | `prospects/<slug>/outreach-email.md` (email found) or `outreach-call.md` (no email) |
 | 7. Critique loop | `critic` | Opus | `prospects/<slug>/audit.md` (written every round) + fix messages, sign-off to lead |
 
 `<slug>` = kebab-case business name, e.g. `montclair-stone-masonry`.
@@ -71,7 +71,10 @@ Each approved prospect gets a folder `prospects/<slug>/` containing:
 - `mockup/` — `index.html`, `style.css`, `main.js` (+ extra `.html` pages if the
   page map calls for them). Static only. Opens by double-click, no build step.
 - `screenshots/` — desktop + mobile captures proving the QA passes ran.
-- `outreach-email.md` — the personalized email draft + a short pitch one-pager.
+- `outreach-email.md` — the personalized email draft (with `To:`/`mailto:` link) + a
+  short pitch one-pager. Written **only when the dossier has a real email address**.
+- `outreach-call.md` — written **instead** when no email was found: the phone number
+  (`tel:` link) + a spoken call script + prepared responses so Harry is ready to call.
 - `audit.md` — the Critic's scored $10K Checklist result (8/8 or documented exceptions).
 
 ## The Mockup Recipe (the "Corey Blake workflow")

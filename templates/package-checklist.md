@@ -25,18 +25,31 @@ records the mockup result in `prospects/<slug>/audit.md`.
       missing info is a `[placeholder]`.
 - [ ] No outbound contact of any kind was performed.
 
-## Email
+## Outreach (email OR call script)
 
+The copywriter writes ONE of these per prospect, decided by whether the dossier has a
+real email address.
+
+**Both paths must pass:**
 - [ ] Personalized — opens with a specific, real observation about this business.
 - [ ] Accurate — every claim traces to the dossier.
 - [ ] References the mockup (link/path) and the Cecere Brothers portfolio piece.
 - [ ] Right voice — short, no hard sell, one soft CTA, kills the maintenance objection.
-- [ ] Is a draft only — no send action; personalization placeholders left for Harry.
+- [ ] Draft only — no send/call action was performed; placeholders left for Harry.
+
+**If `outreach-email.md` (email found):**
+- [ ] `To:` line with a real address that traces to the dossier (not a guessed/invented one).
+- [ ] A working `mailto:` link at the top.
+
+**If `outreach-call.md` (no email):**
+- [ ] Phone number at the top matches the dossier (as a `tel:` link).
+- [ ] Script is natural spoken language — lines Harry can actually say, not an essay.
+- [ ] Includes the "if they say…" prepared responses (busy / cost / don't need one / yes).
 
 ## Package folder complete
 
 - [ ] `dossier.md` (with page map + winnability pitch)
 - [ ] `mockup/` (pages per the page map, opens cleanly)
 - [ ] `screenshots/` (desktop + mobile)
-- [ ] `outreach-email.md` (email + one-pager)
+- [ ] `outreach-email.md` (email + one-pager) OR `outreach-call.md` (phone + call script)
 - [ ] `audit.md` (scored $10K result)

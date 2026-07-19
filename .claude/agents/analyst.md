@@ -54,6 +54,13 @@ text, and any real testimonials. Use `WebFetch` on their current site (and their
 Business / Facebook / Yelp) to pull this. We are upgrading the design, not rewriting the
 business — so the facts must come from them. Flag anything you could NOT find as a gap.
 
+**Hunt hard for a real email address** (site contact page, Facebook "About", Google
+Business / Yelp listing) and record it explicitly in the dossier — it decides the
+outreach channel: the copywriter drafts an email when one exists, and falls back to a
+phone call script when it doesn't. If you find none, write "**No email published**" in
+the contact section (don't leave it ambiguous); always capture the phone number as the
+fallback.
+
 ## Output — `prospects/<slug>/dossier.md`
 
 Include: business summary, **existing-site content captured verbatim/near-verbatim**

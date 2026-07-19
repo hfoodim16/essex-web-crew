@@ -20,6 +20,7 @@ Two scripts live in this file:
 | An AI image won't come out right | Script 2, Step 7B |
 | Email needs small tweaks | Script 2, Step 8B |
 | Email is generic / wrong voice / inaccurate | Script 2, Step 8C |
+| No email — I have to call instead | Script 2, Step 8D |
 | Client replied — interested | Script 2, Step 9A |
 | No reply after a week | Script 2, Step 9B |
 | Client said no | Script 2, Step 9C |
@@ -73,10 +74,12 @@ The mockups use labeled placeholder boxes instead of real pictures (the team nev
 generates images). Each box contains a ready-to-use image prompt. Generate the images
 with your tool of choice, drop them in, and check the site still looks right.
 
-**Step 8 — Check the emails and send the pitches yourself.**
-The team never contacts anyone — the emails are drafts for you. Read each one, fill in
-the blanks, attach mockup screenshots (or host the site so they can click a live link),
-and send from your own account.
+**Step 8 — Reach out yourself (email or phone).**
+The team never contacts anyone — it just preps you. For each prospect you'll get ONE of
+two files: an `outreach-email.md` (when it found the client's email — you fill the blanks,
+attach the mockup screenshots, and send it), or an `outreach-call.md` (when there's no
+email — it hands you the phone number, a call script, and prepared answers so you can just
+dial and talk).
 
 **Step 9 — Follow up and close out.**
 Log each email you send, follow up once after about a week of silence, and stop after
@@ -215,11 +218,17 @@ Re-open `index.html` yourself to confirm.
 
 ---
 
-### Step 8 — Check the email and send (repeat per business)
+### Step 8 — Reach out (repeat per business)
 
-Read `prospects/<slug>/outreach-email.md`. Does it open with a real, specific observation
-about THEIR business? Is every claim true (matches the dossier)? Does it mention the
-mockup and the Cecere Brothers reference? Does it sound like you?
+**First, see which file this prospect got.** The copywriter wrote ONE of two, depending
+on whether it found a real email in the dossier:
+- `prospects/<slug>/outreach-email.md` → an email to send. Use **Steps 8A–8C**.
+- `prospects/<slug>/outreach-call.md` → no email was found, so it's a phone script. Skip
+  to **Step 8D**.
+
+For an email: read it. Does it open with a real, specific observation about THEIR
+business? Is every claim true (matches the dossier)? Does it mention the mockup and the
+Cecere Brothers reference? Does it sound like you?
 
 - **Step 8A — it's good.** Run the pre-send checklist below, send it, → continue to
   **Step 9**.
@@ -255,6 +264,28 @@ Then log the send in `pipeline/outreach-log.md`:
 | anthonys-landscaping | 2026-07-20 | email | waiting | follow up 7/27 |
 ```
 
+- **Step 8D — it's a call script** (`outreach-call.md`, no email was found). Read it once
+  so it feels natural, fill in any `[blanks]`, and call at a sensible time (for trades,
+  early morning before crews head out). Keep the "if they say…" responses in front of you.
+  Two ways it can go:
+  - **They want the mockup** → get their cell or email on the call, then send it — that's
+    an email (fill in `outreach-email.md`-style) or a text with the screenshots / live
+    link. Log it and → continue to **Step 9**.
+  - **Not now / no** → thank them, don't push. Log it and → continue to **Step 9**
+    (that's Step 9C, closed).
+
+  If the script itself is off (stiff, generic, or a claim not in the dossier), fix it the
+  same way as an email — paste:
+
+  ```
+  Read CLAUDE.md, templates/email-voice.md, prospects/<slug>/dossier.md, and the current
+  prospects/<slug>/outreach-call.md. Spawn a copywriter (Sonnet) to rewrite the call
+  script. My notes: <what's wrong>. It must invoke the humanizer skill so it sounds like
+  a real person talking, then a critic checks it against templates/package-checklist.md.
+  ```
+
+  Log the call in `pipeline/outreach-log.md` with **Channel = phone**.
+
 ---
 
 ### Step 9 — Follow up and close out (repeat per business)
@@ -284,7 +315,8 @@ Then log the send in `pipeline/outreach-log.md`:
   > time, no worries at all. — Harry
 
   Update the log to `followed up`. If they reply → **Step 9A** or **9C**. Still silent
-  after another week → **Step 9C**. Never more than 2 touches.
+  after another week → **Step 9C**. Never more than 2 touches. (If you reached them by
+  phone, the second touch is a quick follow-up call or a text — same rule, max 2.)
 - **Step 9C — not interested / closed.** Reply politely if they said no, update the log
   to `closed` (note the reason), and keep the mockup — it's portfolio material for the
   next pitch. If the reason is worth learning from ("we just paid for a site"), add a
