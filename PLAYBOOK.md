@@ -1,5 +1,10 @@
 # Harry's Playbook
 
+> This playbook covers the **pitch phase** — from summoning the team to a client saying
+> yes. For what happens *after* a yes (real content + photos, production build, buying the
+> domain, going live, and maintenance), see **`FULL-PROCESS.md`**, which continues these
+> same steps through Step 15.
+
 Two scripts live in this file:
 
 - **Script 1 — The Whole Run, In Plain English.** Read this top to bottom. It walks you
@@ -307,7 +312,9 @@ Then log the send in `pipeline/outreach-log.md`:
   real info** (hours, towns, their story) → **Part 3, Reference B**; and **connecting the
   contact form / booking** → **Part 3, Reference D**.
 
-  Update the log to `won`. **This business is done.**
+  Update the log to `won`. **The pitch phase is done — the client phase begins:
+  continue to Step 10 in `FULL-PROCESS.md`** (real content + photos, production build,
+  domain, go-live, handoff, maintenance).
 - **Step 9B — no reply after 5–7 days.** Send ONE short follow-up:
 
   > Hi <name> — just floating this back up. The mockup I built for <business> is

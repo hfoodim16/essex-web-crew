@@ -14,7 +14,8 @@ Harry generates the real images and sends outreach himself.
 ```
 CLAUDE.md                 Shared playbook (all teammates read this)
 KICKOFF.md                How to run — dry run + full run prompts
-PLAYBOOK.md               Harry's two scripts — plain-English whole-run walkthrough + review decision tree
+PLAYBOOK.md               Harry's pitch-phase scripts — whole-run walkthrough + review decision tree
+FULL-PROCESS.md           The whole journey (Steps 1–15): pitch phase + client phase — real content/photos, production build, domain, go-live, maintenance
 .claude/
   settings.local.json     Enables agent teams (experimental flag)
   agents/                 Teammate roles: scout, analyst, builder, copywriter, critic
