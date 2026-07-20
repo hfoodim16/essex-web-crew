@@ -46,18 +46,32 @@ testimonials. We are upgrading the *design and structure*, not rewriting their b
 Only use `[placeholder]` text for information that genuinely doesn't exist anywhere.
 Never fabricate services, awards, stats, or history (see CLAUDE.md content honesty).
 
+**Reflect the CURRENT facts.** Use the dossier's current-state facts, including any
+business-announced change the Analyst recorded (new owner, name, address). Render the
+current version honestly (e.g. "founded 30+ years ago by X, now owned by Y") — never the
+stale version an old directory shows.
+
 ## Build it the house way (Mockup Recipe in CLAUDE.md)
 
 1. **Set up from the plan** — put the plan's palette into `:root` tokens, wire the Google
    Font pairing, and write the plan's art-direction rationale at the top of `style.css`.
-2. **Build** the static SPA: `index.html` + `style.css` + `main.js`, design tokens in
+2. **Use the client's real logo.** If the dossier has a `**Logo:**` line with a real URL,
+   download that exact file into `prospects/<slug>/mockup/assets/` via Bash
+   (`curl -L -o assets/logo.<ext> "<url>"`) and reference it **locally** in the
+   header/nav (top-left) — `<img src="assets/logo.png" alt="<Business Name> logo">` — and
+   in the footer if it fits. Never hotlink the remote URL, never redraw it. If the
+   download fails, tell the lead — do NOT substitute a fake logo or a text wordmark.
+   Only when the dossier says `**Logo:** No logo found` do you use a text wordmark in the
+   display font instead.
+3. **Build** the static SPA: `index.html` + `style.css` + `main.js`, design tokens in
    `:root`, semantic HTML, full meta/OG/Twitter + inline SVG favicon, reveal
    animations, custom cursor, magnetic buttons, subtle tilt — all gated behind
-   `prefers-reduced-motion`. Pages per the dossier's page map. Embeds and images are
-   labeled placeholders (see CLAUDE.md — `<!-- AI-IMAGE: … -->` + `.img-placeholder`).
-3. **Desktop QA** in the browser pane, section by section — fix as you go.
-4. **Mobile pass** at 375×812 — make real phone-layout decisions, not a shrunk desktop.
-5. **Self-audit** against the $10K Checklist before you hand off. Save desktop + mobile
+   `prefers-reduced-motion`. Pages per the dossier's page map. Embeds and non-logo images
+   are labeled placeholders (see CLAUDE.md — `<!-- AI-IMAGE: … -->` + `.img-placeholder`).
+4. **Desktop QA** in the browser pane, section by section — fix as you go. Confirm the
+   real logo renders in the header.
+5. **Mobile pass** at 375×812 — make real phone-layout decisions, not a shrunk desktop.
+6. **Self-audit** against the $10K Checklist before you hand off. Save desktop + mobile
    screenshots to `prospects/<slug>/screenshots/`.
 
 Preview: open the mockup with the browser pane (`preview_start` with a `url` pointing

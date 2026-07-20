@@ -30,6 +30,14 @@ For `prospects/<slug>/mockup/`, do a real audit:
 - **Read the code** — check tokens, semantic HTML, meta/OG tags, reduced-motion gating,
   that every image is a labeled AI-IMAGE placeholder (no stock/hotlinked images), and
   that no fabricated business facts appear.
+- **Real logo present.** If the dossier has a `**Logo:**` line with a real URL, verify
+  the actual logo file exists in `prospects/<slug>/mockup/assets/` and renders in the
+  header/nav (a local `src`, not a hotlinked remote URL, and not a text wordmark standing
+  in for a logo that exists). Missing, hotlinked, or substituted logo → fail.
+- **Current facts, not stale.** Verify the mockup reflects the dossier's current-state
+  facts (owner, business name, address) — including any business-announced change the
+  Analyst recorded. A mockup showing the outdated version (e.g. an old owner after an
+  announced transfer) → fail.
 - **Look at the screenshots** in `prospects/<slug>/screenshots/` (desktop + mobile).
   If a mobile pass isn't proven by screenshots, that's an automatic fail on item 7.
 - **Score all 8 items** of the $10K Checklist. Write the result to

@@ -10,3 +10,6 @@ prospects/**/*.jpg
 prospects/**/*.jpeg
 prospects/**/*.webp
 !prospects/**/screenshots/*
+# ...but DO track real client logos the builder downloads into a mockup's assets/ —
+# these are functional (the site references them), not throwaway generated images.
+!prospects/**/mockup/assets/*

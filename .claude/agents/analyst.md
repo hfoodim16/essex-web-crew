@@ -54,6 +54,25 @@ text, and any real testimonials. Use `WebFetch` on their current site (and their
 Business / Facebook / Yelp) to pull this. We are upgrading the design, not rewriting the
 business — so the facts must come from them. Flag anything you could NOT find as a gap.
 
+**Capture the logo (critical).** Find the business's logo — check the existing site's
+header/nav (view the page source or fetch the referenced image), Facebook profile
+picture, and Google Business profile. Record its **direct image URL** plus a one-line
+description in the dossier as a `**Logo:**` line (e.g.
+`**Logo:** https://site.com/images/logo.png — green script wordmark with a tree mark`).
+The Builder downloads and uses that exact file. If you truly can't find one anywhere,
+write `**Logo:** No logo found` explicitly — never leave it ambiguous, so downstream
+agents don't guess or invent one.
+
+**Currency rule — record the CURRENT state, not the stalest source.** When facts
+conflict across sources, the business's **own most recent statement** is the fact: its
+current website or a Google Business post outranks LinkedIn, Yelp, Manta, or other
+directories. If the business itself has announced a change (new owner, new name, moved
+address, dropped/added service), capture it as **current fact with the history noted**
+(e.g. "founded by X 30+ years ago; ownership transferred to Y in 2025 per their About
+page") — do NOT downgrade a business-announced change to a `[verify]` placeholder just
+because stale directories still show the old version. Reserve `[verify]` for genuinely
+unresolved facts the business hasn't stated anywhere.
+
 **Hunt hard for a real email address** (site contact page, Facebook "About", Google
 Business / Yelp listing) and record it explicitly in the dossier — it decides the
 outreach channel: the copywriter drafts an email when one exists, and falls back to a

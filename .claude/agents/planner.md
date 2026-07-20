@@ -40,6 +40,18 @@ plan reorganizes and elevates that real material into a better structure — it 
 invent a new business. Note where real content exists vs. where a `[placeholder]` is
 needed. We upgrade the design; we don't rewrite the company.
 
+**Use the dossier's real logo.** If the dossier has a `**Logo:**` line with a real URL,
+your plan MUST place that exact logo in the header/nav (top-left) and, where it fits, the
+footer — cite the dossier's logo line so the Builder knows which file to download. Never
+spec a placeholder, a redrawn logo, or a text wordmark when a real logo exists. Only when
+the dossier says `**Logo:** No logo found` do you spec a tasteful text wordmark in the
+display font instead.
+
+**Plan to the CURRENT facts.** Use the dossier's current-state facts (owner, name,
+address, services) — including any business-announced change the Analyst recorded. Don't
+plan around an outdated version of the business; if the dossier says ownership
+transferred, the About/contact copy reflects that honestly.
+
 ## What every website-plan.md must contain
 
 1. **Art direction** — a named direction that fits THIS trade and business (e.g.

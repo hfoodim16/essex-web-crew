@@ -167,12 +167,31 @@ Style `.img-placeholder` as a labeled block in the art direction's colors so the
 mockup still reads well. Harry generates the real images from these prompts before
 anything goes to a client. Never use Unsplash/Google image URLs or copyrighted photos.
 
+**The ONE exception — the client's own logo.** If the business's existing site (or
+Facebook / Google Business profile) shows a logo, the mockup must use **that exact
+logo** — it's their brand, and the whole pitch is "your site, done right." The Analyst
+records the logo's direct image URL in the dossier; the Builder downloads the actual
+file into `prospects/<slug>/mockup/assets/` and places it in the header/nav (top-left,
+where a logo belongs) with proper alt text (`alt="<Business Name> logo"`). Serve it as a
+**local file — never hotlink it**, never redraw or "improve" it, and never substitute a
+styled text wordmark when a real logo exists. Only if no logo exists anywhere is a
+tasteful text wordmark in the display font the right call.
+
 ## Content honesty (hard rule)
 
 Do not fabricate facts about a real business — no invented awards, fake years in
 business, made-up review counts, or fictional staff. If a detail isn't in the dossier,
 write around it or use an obvious placeholder (`[years in business]`). The mockup is a
 design demonstration, not a claim of fact.
+
+**Information currency (hard rule).** The mockup must reflect the business **as it is
+today**, not as an old source describes it. When sources conflict, the business's own
+most recent statement wins — its current website or a Google Business post outranks stale
+directory listings, LinkedIn, or aggregators. A change the business itself has announced
+(new ownership, a new name, a moved address, a dropped service) is a **current fact**, not
+a "discrepancy" to hedge around: put it on the site honestly (e.g. "founded 30+ years ago
+by X, now owned by Y"), don't render the outdated version as if nothing changed. Only fall
+back to `[verify]` when the business itself hasn't made the current state clear anywhere.
 
 ## Use the client's real content (hard rule)
 
