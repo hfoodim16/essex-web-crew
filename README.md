@@ -1,5 +1,7 @@
 # Essex Web Crew
 
+**Setting this up on a new machine? Start with [SETUP-COREY.md](SETUP-COREY.md).**
+
 A Claude Code **agent team** that runs like a mini web agency. Each run it scouts
 Essex County, NJ businesses whose websites are naturally static/low-maintenance
 (leading with trades, but any industry that fits), scores them, pauses for Harry's
