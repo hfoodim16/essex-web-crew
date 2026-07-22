@@ -7,7 +7,7 @@ approval, then builds a full review-ready pitch package for the top 3: a researc
 dossier, a working website mockup (built the "Corey Blake workflow" way), and a
 personalized outreach email.
 
-Each mockup ships with **3 real AI-generated images** (hero + two priority slots) and
+Each mockup ships with **2 real AI-generated images** (hero + one priority slot) and
 labeled placeholders for the rest, run through the `web-design-ultra` design pipeline.
 
 **The team never contacts anyone.** Everything lands on disk for Harry to review;
@@ -41,7 +41,7 @@ prospects/
 | **scout** | Sonnet | `research`, `docs-seeker` | Finds 10–15 qualifying businesses — any industry with a naturally static site, leading with trades (free web tools). |
 | **analyst** | Opus | `research` | Scores them, captures each finalist's real site content + real reviews, writes dossiers, pitches the shortlist. |
 | **planner** | Fable | **`web-design-ultra`**, `ui-ux-pro-max`, `frontend-design`, `design-system`, `aesthetic`, `sequential-thinking` | Runs the web-design-ultra pipeline (Stages 1–5) → `website-plan.md`: art direction, fonts, palette, page map, three divergent directions. |
-| **builder** ×3 | Opus | **`web-design-ultra`**, `ai-multimodal`, `ui-ux-pro-max`, `frontend-design`, `frontend-development`, `web-frameworks` | Each *implements* one prospect's chosen direction (Stage 7) into a mockup with 3 real AI images (hero + 2) + placeholders beyond; owns its own folder. |
+| **builder** ×3 | Opus | **`web-design-ultra`**, `ai-multimodal`, `ui-ux-pro-max`, `frontend-design`, `frontend-development`, `web-frameworks` | Each *implements* one prospect's chosen direction (Stage 7) into a mockup with 2 real AI images (hero + 1) + placeholders beyond; owns its own folder. |
 | **copywriter** | Sonnet | `humanizer`, `brand`, `sequential-thinking` | Writes the personalized outreach email + one-pager if the dossier has an email; otherwise a phone number + call script. |
 | **critic** | Opus | **`web-design-ultra`**, `ui-ux-pro-max`, `code-review`, `design-system` | Audits every mockup against the Stage 8 rubric + the $10K Checklist; enforces real-reviews-only; loops until sign-off. |
 

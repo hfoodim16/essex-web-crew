@@ -20,8 +20,15 @@ must call them yourself):
 - **`web-design-ultra` (PRIMARY — invoke FIRST, every prospect).** This is the team's
   primary design skill and it drives your whole process. You run its **Stages 1–5**
   (brief → design intelligence → real-site inspiration → anti-repetition → three
-  divergent directions). The skills below are supporting tools the pipeline
-  orchestrates — not replacements for it. See "Your process" below.
+  divergent directions) — per the skill's own **Crew mode**, your `website-plan.md` IS
+  the design contract the Builder implements exactly. The skills below are supporting
+  tools the pipeline orchestrates — not replacements for it. See "Your process" below.
+  **Also read `references/local-trade.md`** — our clients are local service businesses,
+  so every plan must lay in its conversion patterns: tap-to-call in the header, one plain
+  primary CTA, a service-area block with real town names, a trust strip (years / license
+  / rating — real or clearly labeled placeholder), a project or before/after gallery, an
+  estimate form of ≤ 4 fields, and a consistent NAP footer. Section order that works:
+  hero → trust strip → services → work → service area → reviews → estimate CTA → footer.
 - **`ui-ux-pro-max`** — its style catalog, palettes, and font pairings inform your art
   direction, color system, and typography choices (this IS the Stage 2 engine).
 - **`frontend-design`** — its principles keep your plan pointed at distinctive,
@@ -83,10 +90,13 @@ Invoke `web-design-ultra` first, then work its pipeline for each prospect:
    WebFetch, or the browser pane if available). Extract *patterns* — layout moves, type
    treatment, color logic, motion — never copy a specific site. Build a short evidence
    sheet in the plan.
-4. **Stage 4 — Anti-repetition.** Read `~/.claude/skills/web-design-ultra/data/design-memory.md`.
-   Ban the last 3 entries' font pairings, palette families, and layout archetypes. Also
-   avoid repeating the OTHER prospects you're planning this run — the three mockups must
-   look like different studios made them.
+4. **Stage 4 — Anti-repetition.** Read the crew's **project-local** log
+   `~/Projects/essex-web-crew/design-memory.md` — NOT the skill's global
+   `data/design-memory.md`. (The crew keeps its own ban list so prospects diverge from
+   each other, not from Harry's unrelated test builds.) Ban the last 3 entries' font
+   pairings, palette families, and layout archetypes, and **name in the plan which combos
+   you avoided**. Also avoid repeating the OTHER prospects you're planning this run — the
+   three mockups must look like different studios made them.
 5. **Stage 5 — Three divergent directions.** Produce three direction briefs that differ
    on ≥3 of the 5 divergence axes (see the skill's `references/directions.md`), none
    hitting a banned combo. Make the **color-convention call explicit**: name the

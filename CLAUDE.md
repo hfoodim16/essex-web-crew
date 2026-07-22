@@ -115,11 +115,25 @@ the team:
   discipline: distinctive type (never the generic four), whole palette as CSS
   variables, deliberate spatial composition (asymmetry, overlap, scale contrast),
   motion via CSS/anime.js.
-- **Stage 8 → Builder self-check, then Critic.** Screenshot desktop + mobile, score the
-  10-dimension rubric in the skill's `references/critique.md`. Gate: **no dimension
-  below 7, boldness ≥ 8** — enforced by the Critic alongside the $10K Checklist.
+- **Stage 8 → Builder self-check, then Critic (Critic OWNS this stage).** Screenshot
+  desktop + mobile, score the 10-dimension rubric in the skill's `references/critique.md`.
+  Gate: **no dimension below 7, boldness ≥ 8** — enforced by the Critic alongside the
+  $10K Checklist.
+- **Local-service conversion patterns are house standard.** Our clients are local service
+  businesses, so every plan and build applies the skill's `references/local-trade.md`:
+  tap-to-call `tel:` link visible in the mobile header (CTA repeated top/mid/footer), one
+  plain primary action, a service-area block with real town names, a trust strip
+  (years / license / rating — real or clearly labeled placeholder), a project or
+  before/after gallery, an estimate form of ≤ 4 fields, and a consistent NAP footer.
+  A beautiful hero with no visible phone number is a failed build.
+- **Imagery realism is judged, not assumed.** Generated images must pass the two-way test
+  in the skill's `references/imagery.md`: *would the business proudly post this — and
+  would a visitor believe they took it themselves?* Both the stock-ad "too perfect" look
+  and the shabby/messy look FAIL. **No readable business names, lettering, or signage
+  inside a generated image** (the model invents fake ones) — the client's real logo is
+  composited into the markup instead. One imagery register per site.
 - **Anti-repetition:** consecutive prospects must not share a font pairing, palette
-  family, or layout archetype. After a prospect's sign-off, its builder appends the
+  family, or layout archetype. After a prospect's sign-off, **the Critic** appends the
   choices (font pairing, palette, layout archetype, background system) to this project's
   `./design-memory.md` (repo root — the crew's own log, not the skill's global file) so the
   next prospect diverges.

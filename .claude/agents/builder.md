@@ -35,6 +35,11 @@ teammates, so you must call them yourself:
   rays, shimmer, motes). Then self-score its **Stage 8** rubric before handoff (see
   below). **Stage 6 for us: generate the 2 `GENERATE`-marked images (hard cap 2), rest
   placeholders** — see `ai-multimodal` below and the CLAUDE.md image policy.
+  **Also apply `references/local-trade.md`** — our clients are local service businesses:
+  tap-to-call `tel:` link visible in the mobile header (CTA repeated top/mid/footer), one
+  plain primary action, service-area block with real town names, trust strip (real values
+  or labeled placeholders), project/before-after gallery, estimate form ≤ 4 fields, and a
+  consistent NAP footer. A beautiful hero with no visible phone number is a failed build.
 - **`ai-multimodal`.** Generate the **2** images the Planner marked `GENERATE` (hero +
   one priority slot) with Gemini `gemini-3-pro-image` — follow the photorealism kit in
   `~/.claude/skills/web-design-ultra/references/imagery.md`, make them maximally
@@ -44,6 +49,26 @@ teammates, so you must call them yourself:
   width**, save into `prospects/<slug>/mockup/assets/`, reference locally. **HARD CAP 2
   per mockup** — never generate a 3rd; every slot past the 2 stays a labeled AI-IMAGE
   placeholder. (Cost is pre-approved only at this cap; more than 2 → ask the lead.)
+  **Craft rules that decide whether the image passes the critic:**
+  - **One register per site** (set by the Planner) — default **proud contractor**: phone
+    photo, natural pleasant light, honest level framing. Flawless work + attractive
+    property + casual believable photography. Never mix registers across slots.
+  - **No readable branding.** No business name, lettering, signage, or logo in a
+    generated image — the model invents fake/garbled names. Keep trucks and signs
+    unbranded, angled away, or out of frame; append
+    `no branding, no lettering on vehicles, no signage, no logos, plain unmarked truck`.
+  - **Distinct property per project photo** — never the same house twice in a gallery.
+  - With phone-camera language, always append the UI-chrome negatives
+    (`no phone UI, no on-screen icons, no status bar, no timestamp overlay`), plus the
+    full negative list from imagery.md.
+  - **Realism QA after EVERY generation** — open the image full size and hunt the tells:
+    warped lines, melted details, repeating texture; the **"too perfect"** stock-ad look
+    (the #1 AI tell — fails even if flawless); the **"too shabby"** look (run-down
+    setting, mess implying sloppy work, dreary light, crooked framing). **ONE**
+    regeneration max with a tightened prompt, then stop and report — don't burn paid calls.
+  - **Billing gate:** a `429` with `limit: 0` means image generation isn't enabled — do
+    NOT retry. Fall back to the backgrounds.md CSS treatment plus elegant labeled slots,
+    and tell the lead what unlocks it.
 - **`ui-ux-pro-max`** — for concrete color/typography/spacing/layout/component decisions
   and to review your own work against professional UI standards.
 - **`frontend-design`** — for distinctive, production-grade, non-generic frontend code
@@ -137,15 +162,17 @@ signed-off mockup with an explicit new instruction — the critic cannot reopen 
 cannot reopen it yourself. Every edit you make must be in service of an OPEN critic fix
 list on a NOT-yet-approved mockup; if there is no open fix list, you are done.
 
-**One last step at sign-off (not a mockup edit).** Right after sign-off, append your
-project's design choices — font pairing, palette family, layout archetype, background
-system — to `~/.claude/skills/web-design-ultra/data/design-memory.md`. This is the
-anti-repetition log so the next prospect/run diverges; it touches the skill's memory
-file, NOT your frozen mockup, so it doesn't violate the freeze. Then shut down.
+At sign-off you are done — just notify the lead and shut down. (The **Critic** owns
+Stage 8, including appending the design-choices row to the crew's `design-memory.md`;
+that is not your job.)
 
 ## Rules you must not break
 
-- Only labeled AI-IMAGE placeholders — never real/stock/hotlinked images.
+- Images: exactly the 2 `GENERATE` slots are real generated WebP files in `assets/`;
+  every other slot is a labeled AI-IMAGE placeholder. Never stock/hotlinked images.
+- **No readable branding in a generated image** — no business name, lettering, signage,
+  or logo. Trucks and signs stay unbranded, angled away, or out of frame; the client's
+  real logo is composited into the markup, never generated.
 - No fabricated facts about the business (see CLAUDE.md).
 - Free tools only; never contact anyone.
 
