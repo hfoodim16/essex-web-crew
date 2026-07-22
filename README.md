@@ -35,11 +35,11 @@ prospects/
 | Role | Model | Skills | Does |
 |------|-------|--------|------|
 | **scout** | Sonnet | `research`, `docs-seeker` | Finds 10–15 qualifying businesses (free web tools). |
-| **analyst** | Opus | `research` | Scores them, captures each finalist's real site content, writes dossiers, pitches the shortlist. |
-| **planner** | Fable | `ui-ux-pro-max`, `frontend-design`, `design-system`, `aesthetic`, `sequential-thinking` | Turns each approved dossier into a `website-plan.md` — art direction, fonts, palette, page map, layout. |
-| **builder** ×3 | Opus | `ui-ux-pro-max`, `frontend-design`, `frontend-development`, `web-frameworks` | Each *implements* one prospect's plan into a mockup (Corey Blake recipe); owns its own folder. |
+| **analyst** | Opus | `research` | Scores them, captures each finalist's real site content + real reviews, writes dossiers, pitches the shortlist. |
+| **planner** | Fable | **`web-design-ultra`**, `ui-ux-pro-max`, `frontend-design`, `design-system`, `aesthetic`, `sequential-thinking` | Runs the web-design-ultra pipeline (Stages 1–5) → `website-plan.md`: art direction, fonts, palette, page map, three divergent directions. |
+| **builder** ×3 | Opus | **`web-design-ultra`**, `ui-ux-pro-max`, `frontend-design`, `frontend-development`, `web-frameworks` | Each *implements* one prospect's chosen direction (Stage 7) into a mockup; owns its own folder. |
 | **copywriter** | Sonnet | `humanizer`, `brand`, `sequential-thinking` | Writes the personalized outreach email + one-pager if the dossier has an email; otherwise a phone number + call script. |
-| **critic** | Opus | `ui-ux-pro-max`, `code-review`, `design-system` | Audits every mockup against the $10K Checklist and every email; loops until sign-off. |
+| **critic** | Opus | **`web-design-ultra`**, `ui-ux-pro-max`, `code-review`, `design-system` | Audits every mockup against the Stage 8 rubric + the $10K Checklist; enforces real-reviews-only; loops until sign-off. |
 
 The lead session orchestrates, enforces the approval pause, and assembles results.
 Design decisions live with the **planner** (Fable); the **builder** (Opus) implements

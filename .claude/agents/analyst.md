@@ -73,6 +73,17 @@ page") — do NOT downgrade a business-announced change to a `[verify]` placehol
 because stale directories still show the old version. Reserve `[verify]` for genuinely
 unresolved facts the business hasn't stated anywhere.
 
+**Capture REAL reviews (critical — these are the only testimonials allowed).** Pull the
+2–4 best **actual** reviews of the business from Google, Yelp, Facebook, or Angi.
+Record each in a dedicated **"Real reviews"** section of the dossier: the **verbatim
+quote**, the **reviewer's first name** (as shown publicly), and the **source platform**
+— e.g. `"They transformed our whole backyard…" — Maria R., Google`. These are the ONLY
+testimonials the Planner and Builder may put on the mockup. **Do not paraphrase a review
+into something nicer, do not stitch fragments together, do not invent a reviewer.** If
+you cannot find any usable public reviews, write "**No usable reviews found**" explicitly
+so the mockup ships with no testimonial section rather than fabricated praise. (This is
+the review case of the project-wide rule: never make up any information — see CLAUDE.md.)
+
 **Hunt hard for a real email address** (site contact page, Facebook "About", Google
 Business / Yelp listing) and record it explicitly in the dossier — it decides the
 outreach channel: the copywriter drafts an email when one exists, and falls back to a
@@ -83,8 +94,10 @@ fallback.
 ## Output — `prospects/<slug>/dossier.md`
 
 Include: business summary, **existing-site content captured verbatim/near-verbatim**
-(services, copy, contact, hours, testimonials — with source), services (grouped),
-**recommended page map** (list the pages and why), service area, reputation notes,
+(services, copy, contact, hours — with source), a **"Real reviews"** section (verbatim
+quotes + reviewer first name + platform, or "No usable reviews found"), the **Logo:**
+line, services (grouped), **recommended page map** (list the pages and why), service
+area, reputation notes,
 competitor references, current-presence critique, suggested art-direction hints, and a
 list of needed image placeholders. Mark any missing info as a `[placeholder]` gap.
 

@@ -26,6 +26,16 @@ unclear, message the Planner before building.
 Invoke these skills (via the Skill tool) as you build — they are NOT auto-loaded for
 teammates, so you must call them yourself:
 
+- **`web-design-ultra` (PRIMARY).** The team's primary design skill. The Planner ran its
+  Stages 1–5; you execute **Stage 7 (build)** with its craft discipline — distinctive
+  type (never the generic four), the whole palette as CSS variables, deliberate spatial
+  composition (asymmetry, overlap, scale contrast), motion via CSS/anime.js v4 — and its
+  **free depth recipes**: `~/.claude/skills/web-design-ultra/references/backgrounds.md`
+  (layered background/texture/depth) and `references/atmosphere.md` (animated fog, god
+  rays, shimmer, motes). Then self-score its **Stage 8** rubric before handoff (see
+  below). **Stage 6 is adapted for us: never generate images** (that costs money and our
+  image policy stands — labeled AI-IMAGE placeholders; Harry generates). The
+  backgrounds/atmosphere CSS is our free substitute for visual depth.
 - **`ui-ux-pro-max`** — for concrete color/typography/spacing/layout/component decisions
   and to review your own work against professional UI standards.
 - **`frontend-design`** — for distinctive, production-grade, non-generic frontend code
@@ -51,6 +61,14 @@ business-announced change the Analyst recorded (new owner, name, address). Rende
 current version honestly (e.g. "founded 30+ years ago by X, now owned by Y") — never the
 stale version an old directory shows.
 
+**Real reviews only.** Put a testimonial on the mockup ONLY if it comes from the
+dossier's "Real reviews" section — the exact quote, reviewer first name, and platform
+the Analyst captured. **Never write a testimonial for the demo, never improve a real
+quote, never invent a reviewer.** If the dossier has no real reviews (or the plan specs a
+`[Real review goes here — none captured yet]` placeholder), render that placeholder or
+omit the section — do not fill it with fabricated praise. (CLAUDE.md — Real reviews
+only.)
+
 ## Build it the house way (Mockup Recipe in CLAUDE.md)
 
 1. **Set up from the plan** — put the plan's palette into `:root` tokens, wire the Google
@@ -71,8 +89,12 @@ stale version an old directory shows.
 4. **Desktop QA** in the browser pane, section by section — fix as you go. Confirm the
    real logo renders in the header.
 5. **Mobile pass** at 375×812 — make real phone-layout decisions, not a shrunk desktop.
-6. **Self-audit** against the $10K Checklist before you hand off. Save desktop + mobile
-   screenshots to `prospects/<slug>/screenshots/`.
+6. **Self-audit** before you hand off. Save desktop + mobile screenshots to
+   `prospects/<slug>/screenshots/`, then score BOTH scoreboards from those screenshots:
+   the $10K Checklist AND the `web-design-ultra` 10-dimension rubric
+   (`~/.claude/skills/web-design-ultra/references/critique.md`). Fix anything with a
+   dimension below 7 or boldness below 8 before you message the critic — don't hand off a
+   mockup you already know fails the gate.
 
 Preview: open the mockup with the browser pane (`preview_start` with a `url` pointing
 at the local file, or run a tiny static server via Bash and point the pane at it).
@@ -101,6 +123,12 @@ the lead, mark your task complete, and shut down. Only Harry (via the lead) may 
 signed-off mockup with an explicit new instruction — the critic cannot reopen it and you
 cannot reopen it yourself. Every edit you make must be in service of an OPEN critic fix
 list on a NOT-yet-approved mockup; if there is no open fix list, you are done.
+
+**One last step at sign-off (not a mockup edit).** Right after sign-off, append your
+project's design choices — font pairing, palette family, layout archetype, background
+system — to `~/.claude/skills/web-design-ultra/data/design-memory.md`. This is the
+anti-repetition log so the next prospect/run diverges; it touches the skill's memory
+file, NOT your frozen mockup, so it doesn't violate the freeze. Then shut down.
 
 ## Rules you must not break
 

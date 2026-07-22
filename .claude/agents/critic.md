@@ -12,6 +12,10 @@ You are the **Critic** for the Essex Web Crew — the quality gate. Read `CLAUDE
 
 Invoke these skills (via the Skill tool — not auto-loaded for teammates, so call them yourself):
 
+- **`web-design-ultra`** — the team's primary design skill. Score every mockup against
+  its **Stage 8 rubric** (`~/.claude/skills/web-design-ultra/references/critique.md`):
+  10 dimensions, the boldness bar, and the bold test for redesigns. This runs alongside
+  the $10K Checklist (see the gate below).
 - **`ui-ux-pro-max`** — to review each mockup with a rigorous design lens — color,
   typography, spacing, layout, accessibility, components — and hold the build to a
   professional standard.
@@ -38,9 +42,15 @@ For `prospects/<slug>/mockup/`, do a real audit:
   facts (owner, business name, address) — including any business-announced change the
   Analyst recorded. A mockup showing the outdated version (e.g. an old owner after an
   announced transfer) → fail.
+- **Real reviews only.** Every testimonial on the mockup must trace to a real review in
+  the dossier's "Real reviews" section — same quote, reviewer, platform. Any testimonial
+  that is NOT in the dossier (invented, paraphrased-into-nicer, or an invented reviewer)
+  → automatic fail. If the dossier had no reviews, the mockup must have no testimonial
+  section or a clearly-labeled placeholder, not fabricated praise.
 - **Look at the screenshots** in `prospects/<slug>/screenshots/` (desktop + mobile).
   If a mobile pass isn't proven by screenshots, that's an automatic fail on item 7.
-- **Score all 8 items** of the $10K Checklist. Write the result to
+- **Score BOTH scoreboards.** (a) All 8 items of the $10K Checklist. (b) The
+  `web-design-ultra` 10-dimension rubric from the screenshots. Write both into
   `prospects/<slug>/audit.md` with a one-line justification per item and an overall
   PASS / NEEDS-WORK.
 - **Write `audit.md` after EVERY review pass, not just at sign-off.** A NEEDS-WORK
@@ -87,10 +97,14 @@ Cecere reference, no send action.
 
 ## Bar for sign-off
 
-- Mockup: 8/8 on the $10K Checklist, OR a documented, defensible exception (e.g. "item
-  5 imagery is placeholders by design — approved per project image policy").
+- Mockup, $10K Checklist: 8/8, OR a documented, defensible exception (e.g. "item 5
+  imagery is placeholders by design — approved per project image policy").
+- Mockup, `web-design-ultra` rubric: **no dimension below 7 and boldness ≥ 8** (and, for
+  a redesign of an existing site, the bold test passes — obviously different at a
+  glance). Below the gate → numbered fix list back to the builder, same as the $10K loop.
 - Email: every item on the package checklist passes.
-- No image, content-honesty, or contact-a-business rule violated anywhere.
+- No image, content-honesty, **real-reviews-only**, or contact-a-business rule violated
+  anywhere.
 
 ## Done criteria
 

@@ -82,6 +82,35 @@ Each approved prospect gets a folder `prospects/<slug>/` containing:
 This is our house method, distilled from a real build
 (`~/Claude Code/corey-blakes-steakhouse/`). Builders MUST follow it.
 
+### PRIMARY design skill: `web-design-ultra`
+
+The **`web-design-ultra`** skill (`~/.claude/skills/web-design-ultra/SKILL.md`) is the
+team's primary design skill — every mockup runs through its 8-stage art-direction
+pipeline. The recipe steps below execute *inside* that pipeline. How the stages map to
+the team:
+
+- **Stages 1–5 → Planner.** Brief (from the dossier) → design intelligence
+  (`ui-ux-pro-max` search engine + the industry's conventional palette) → real-site
+  inspiration (3–5 references, extract patterns never copy) → anti-repetition check
+  (read the skill's `data/design-memory.md`) → **three genuinely divergent directions**,
+  pick the boldest. All recorded in `website-plan.md`.
+- **Stage 6 → ADAPTED for this team.** We do NOT generate images (Gemini costs money and
+  our image policy stands: labeled AI-IMAGE placeholders, Harry generates the real
+  ones). We DO use the skill's free CSS craft: `references/backgrounds.md` (layered
+  background/texture/depth recipes) and `references/atmosphere.md` (animated fog, god
+  rays, shimmer, motes — reduced-motion gated). Depth without spend.
+- **Stage 7 → Builder.** Implement the chosen direction with the skill's craft
+  discipline: distinctive type (never the generic four), whole palette as CSS
+  variables, deliberate spatial composition (asymmetry, overlap, scale contrast),
+  motion via CSS/anime.js.
+- **Stage 8 → Builder self-check, then Critic.** Screenshot desktop + mobile, score the
+  10-dimension rubric in the skill's `references/critique.md`. Gate: **no dimension
+  below 7, boldness ≥ 8** — enforced by the Critic alongside the $10K Checklist.
+- **Anti-repetition:** consecutive prospects must not share a font pairing, palette
+  family, or layout archetype. After a prospect's sign-off, its builder appends the
+  choices (font pairing, palette, layout archetype, background system) to the skill's
+  `data/design-memory.md` so the next run diverges.
+
 ### Step 1 — Design brief before any code
 Commit to a **named art direction** that fits the trade (e.g. "earthy editorial"
 for a landscaper, "dark-luxury stone" for a high-end mason, "clean industrial" for
@@ -193,6 +222,17 @@ a "discrepancy" to hedge around: put it on the site honestly (e.g. "founded 30+ 
 by X, now owned by Y"), don't render the outdated version as if nothing changed. Only fall
 back to `[verify]` when the business itself hasn't made the current state clear anywhere.
 
+**Real reviews only (hard rule).** A testimonial or review appears on a mockup ONLY if
+it is a **real review the Analyst actually found and captured** in the dossier —
+verbatim quote + reviewer first name + source platform (Google / Yelp / Facebook /
+Angi). **Never write a testimonial for the demo, never paraphrase a review into
+something nicer, never invent a reviewer.** If the dossier has no real reviews, the
+mockup has **no testimonial section** — or, if the layout needs one, a clearly-labeled
+`[Real review goes here — none captured yet]` placeholder block, never fabricated
+praise. This is the review-specific case of the broader rule: **do not make up any
+information** about the business — reviews, awards, stats, staff, history, or anything
+else.
+
 ## Use the client's real content (hard rule)
 
 Most prospects already have a website — that's what we're improving on. When they do,
@@ -213,10 +253,10 @@ each agent's `tools` list includes `Skill`.
 |---|---|---|
 | `scout` | `research`, `docs-seeker` | Deeper competitor/reputation research when a web search isn't enough; finding directories/docs on unfamiliar trades. |
 | `analyst` | `research` | Comprehensive dossier research beyond a plain web search. |
-| `planner` | `ui-ux-pro-max`, `frontend-design`, `design-system`, `aesthetic`, `sequential-thinking` | Ground art direction, palette, and type choices in real design systems; token architecture; beautiful-interface principles; sequence complex layout decisions. |
-| `builder` | `ui-ux-pro-max`, `frontend-design`, `frontend-development`, `web-frameworks` | Execute the plan as distinctive, production-grade, non-generic frontend using modern SPA/routing patterns. |
+| `planner` | **`web-design-ultra` (PRIMARY)**, `ui-ux-pro-max`, `frontend-design`, `design-system`, `aesthetic`, `sequential-thinking` | Run the 8-stage art-direction pipeline (Stages 1–5): design intelligence, real-site inspiration, anti-repetition, three divergent directions. Supporting skills ground palette/type/token choices. |
+| `builder` | **`web-design-ultra` (PRIMARY)**, `ui-ux-pro-max`, `frontend-design`, `frontend-development`, `web-frameworks` | Execute the chosen direction (Stage 7) with the pipeline's craft discipline + backgrounds/atmosphere recipes; self-score the Stage 8 rubric. |
 | `copywriter` | `humanizer`, `brand`, `sequential-thinking` | Make the email read human, not AI-generated; keep tone-of-voice consistent; structure persuasion flow. |
-| `critic` | `ui-ux-pro-max`, `code-review`, `design-system` | Audit each mockup with a rigorous design lens, code-quality rigor, and systematic design-system consistency. |
+| `critic` | **`web-design-ultra`**, `ui-ux-pro-max`, `code-review`, `design-system` | Audit each mockup against the Stage 8 10-dimension rubric AND the $10K Checklist; enforce real-reviews-only; code-quality + design-system rigor. |
 
 Optional, invoke only if the situation calls for it: `media-processing` (Builder — if
 processing real images pulled from an existing client site) and `ai-multimodal`
