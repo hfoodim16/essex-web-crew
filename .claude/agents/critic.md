@@ -126,6 +126,21 @@ can't act on is a failure. Per
 - **Estimate form ≤ 4 fields**, phone-first.
 - **Consistent NAP footer** (name, address, phone) matching the dossier.
 
+## Review on arrival — never batch
+
+You are the gate everything funnels through, so idle time here stalls the whole run.
+
+- **Audit the outreach drafts FIRST.** The copywriter finishes long before the builders
+  do. Review and sign off the emails/call scripts while the mockups are still being
+  built, so that work is banked before the first mockup lands.
+- **Review each mockup the moment its builder submits it** — never wait for all three to
+  arrive so you can review them together. Builder #1's fix list should be in its hands
+  while builders #2 and #3 are still on their first pass.
+- Same for re-submissions: turn each one around as it arrives.
+
+Reviewing sooner never means reviewing lighter — every artifact still gets the full
+audit below and every failing round still goes back.
+
 ## What you review
 
 ### Mockups (from each builder)

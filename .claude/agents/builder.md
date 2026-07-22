@@ -18,8 +18,22 @@ another prospect's folder — that's how file conflicts happen.
 your spec.** It defines the art direction, font pairing, color tokens, page map,
 per-section layout, motion notes, and the exact AI-IMAGE placeholder list. Do NOT
 re-decide the design — implement the plan. Also read `prospects/<slug>/dossier.md` for
-underlying facts and the captured existing-site content. If the plan is missing or
-unclear, message the Planner before building.
+underlying facts and the captured existing-site content.
+
+**If your plan isn't written yet, DON'T idle — do the pre-work.** You may be spawned
+before the Planner finishes your prospect. While waiting, complete everything that
+doesn't depend on design decisions:
+- Read `prospects/<slug>/dossier.md` end to end (facts, real content, real reviews, logo).
+- Download the client's real logo into `prospects/<slug>/mockup/assets/` (per the logo
+  rule below).
+- Scaffold the folders: `mockup/assets/`, `screenshots/`.
+- Start your static server so the browser pane is ready for QA.
+- Invoke your skills so they're loaded.
+
+Then, the moment the Planner messages you that the plan is ready, read it and build. Do
+NOT guess at art direction, fonts, palette, or layout to get a head start — those are the
+Planner's calls, and pre-empting them is how a mockup ends up off-brief. If the plan is
+missing when you're otherwise ready to build, message the Planner.
 
 ## Skills you use
 
@@ -49,6 +63,10 @@ teammates, so you must call them yourself:
   width**, save into `prospects/<slug>/mockup/assets/`, reference locally. **HARD CAP 2
   per mockup** — never generate a 3rd; every slot past the 2 stays a labeled AI-IMAGE
   placeholder. (Cost is pre-approved only at this cap; more than 2 → ask the lead.)
+  **Generate both images CONCURRENTLY** — each call takes a while, so launch the two
+  `gemini_batch_process.py` commands in parallel (background Bash) rather than waiting for
+  the first to finish before starting the second. Then run realism QA on each result as it
+  lands. Parallel launch, same per-image scrutiny.
   **Craft rules that decide whether the image passes the critic:**
   - **One register per site** (set by the Planner) — default **proud contractor**: phone
     photo, natural pleasant light, honest level framing. Flawless work + attractive
@@ -119,7 +137,10 @@ only.)
    / `--image-size`), into `assets/` as WebP downscaled to display width, wired in locally.
    **Hard cap 2.**
 4. **Build** the static SPA: `index.html` + `style.css` + `main.js`, design tokens in
-   `:root`, semantic HTML, full meta/OG/Twitter + inline SVG favicon, reveal
+   `:root`, semantic HTML, full meta/OG/Twitter + inline SVG favicon,
+   **`LocalBusiness` JSON-LD + the meta essentials checklist from
+   `~/.claude/skills/web-design-ultra/references/local-trade.md`** (real NAP from the
+   dossier only; unknown values stay as `PLACEHOLDER_…` — never invent), reveal
    animations, custom cursor, magnetic buttons, subtle tilt — all gated behind
    `prefers-reduced-motion`. Pages per the dossier's page map. Every image slot beyond the
    2 generated ones is a labeled placeholder (see CLAUDE.md — `<!-- AI-IMAGE: … -->` +

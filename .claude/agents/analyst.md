@@ -30,6 +30,11 @@ table into `pipeline/candidates.md` (append a "## Scoring" section) so the ranki
 auditable. Break ties toward businesses where the website gap is most dramatic and the
 business is most clearly established.
 
+**Score incrementally as the scout streams batches.** The scout messages you when the
+first 5–6 candidates land and again per batch — start scoring immediately rather than
+waiting for the full list, and add scores as more arrive. Only pick the top 3 once the
+scout signals all candidates are in.
+
 ## Researching finalists
 
 For each of the top 3, research (free tools only — no Firecrawl/Perplexity):
@@ -42,8 +47,12 @@ For each of the top 3, research (free tools only — no Firecrawl/Perplexity):
 - 1–2 competitor websites for design reference.
 - A specific critique of their current web presence (what's missing/broken).
 
-If authorized by the lead, you may use the `Task` tool to run one research subagent
-per finalist in parallel. Otherwise research inline. Never spawn teammates.
+**Research the three finalists IN PARALLEL — this is the default, not an upgrade.** Use
+the `Task` tool to run **one research subagent per finalist, all launched in a single
+message** so they run concurrently, then write the three dossiers from their results.
+Three finalists researched in the time of one. Each subagent gets the SAME research spec
+above — parallelism buys speed, it does not reduce depth. (If subagent spawning isn't
+available to you, research inline.) Never spawn teammates.
 
 ## Capture the client's real content (critical)
 

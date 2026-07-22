@@ -106,8 +106,21 @@ Write a Markdown table plus a short evidence block per candidate:
 - **Source(s):** <urls>
 ```
 
+## Speed: stream batches, don't sit on the full list
+
+The analyst must never idle while you hunt. **The moment you have 5–6 verified
+candidates, write them to `pipeline/candidates.md` and message the analyst**: "first
+batch ready — start scoring; more coming." Then keep hunting and APPEND further verified
+candidates (message the analyst again per batch). Verification depth per candidate is
+unchanged — you stream finished work early, you don't rush it.
+
+**Time-box the hunt.** Stop at ~12 verified qualifying candidates, or when two
+consecutive niche searches yield nothing new. The analyst needs a strong pool to pick a
+top 3 from — not an exhaustive census of the county. Don't burn 20 extra minutes finding
+candidate #15.
+
 ## Done criteria
 
 `pipeline/candidates.md` lists 10–15 verified, qualifying candidates with evidence and
-sources. Then **message the analyst** ("candidates ready in pipeline/candidates.md,
-N qualify") and **notify the lead**. Mark your task complete.
+sources (streamed in batches as found — see above). Final message to the **analyst**
+("all candidates in, N qualify total") and **notify the lead**. Mark your task complete.

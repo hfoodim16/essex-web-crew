@@ -70,6 +70,31 @@ art direction, fonts, palette, page map, per-section layout — and writes them 
 `website-plan.md`. The `builder` (Opus) IMPLEMENTS that plan and does not re-decide the
 design. Copywriter can run in parallel with planner/builders once prospects are approved.
 
+## Speed rules — overlap the work, never lower the bar
+
+Runs are slow because teammates WAIT on each other, not because the work is slow. Every
+teammate follows these; none of them touch a quality gate.
+
+1. **Stream your output downstream as soon as a unit is usable.** Don't sit on a finished
+   batch waiting for the whole set — the scout messages the analyst every 5–6 verified
+   candidates; the planner hands off each completed plan immediately rather than
+   delivering all three at once.
+2. **Parallelize independent work.** The analyst researches all three finalists at once
+   (one subagent each); the builder launches both image generations concurrently.
+3. **Do prep work while blocked.** A builder waiting on its plan still reads the dossier,
+   downloads the real logo, scaffolds folders, and starts its server — everything that
+   doesn't depend on a design decision it isn't allowed to make.
+4. **Review on arrival, never in batches.** The critic audits each artifact as it lands
+   (emails first, then each mockup as submitted) so fix lists reach builders while the
+   others are still on their first pass.
+5. **Don't gold-plate the search.** Time-box discovery work (the scout stops at ~12 solid
+   candidates); depth per item stays the same.
+
+**The hard limit:** speed comes ONLY from removing waiting and duplicate work. Never skip
+a checklist item, shorten a review round, drop a QA pass, weaken the two-way imagery test,
+or hand off something you know is failing. If a shortcut would change what ships, it isn't
+one of these rules.
+
 ## Per-prospect output contract
 
 Each approved prospect gets a folder `prospects/<slug>/` containing:
@@ -204,6 +229,10 @@ while the others are still being fixed.
 7. **Mobile that's designed, not shrunk** — distinct phone layout decisions.
 8. **The invisible expensive stuff** — sub-2s load (compress/omit heavy assets),
    WCAG AA contrast, keyboard navigation, semantic HTML, real meta tags.
+   **Local SEO:** `LocalBusiness` JSON-LD present (correct schema subtype), meta
+   title/description naming the service + towns, OG image, canonical, favicon. The
+   footer NAP must match the JSON-LD exactly. Unknown values stay as visible
+   `PLACEHOLDER_…` tokens — **fabricated NAP/license/hours is an automatic fail.**
 
 ### Step 6 — Proof
 Save desktop + mobile screenshots to `prospects/<slug>/screenshots/`.

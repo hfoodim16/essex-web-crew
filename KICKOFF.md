@@ -46,22 +46,34 @@ critic=Opus. Free tools only. Teammates must invoke their skills themselves via
 the Skill tool (see the "Skills each agent uses" table in CLAUDE.md) — skills are
 not auto-loaded for teammates.
 
-1. Spawn 'scout' (scout agent type): find 10–15 qualifying Essex County, NJ
-   businesses → pipeline/candidates.md.
-2. Spawn 'analyst' (analyst agent type): score them against pipeline/rubric.md,
-   research the top 3, write prospects/<slug>/dossier.md for each, then send me
-   the shortlist with a winnability pitch per business.
+Run stages OVERLAPPED, not strictly sequentially — teammates stream work to
+each other as described in their agent files. Never weaken a quality gate to
+save time.
+
+1. Spawn 'scout' and 'analyst' (scout + analyst agent types) TOGETHER. The scout
+   streams candidates to pipeline/candidates.md in batches of 5–6 and messages
+   the analyst as each batch lands; the analyst scores incrementally instead of
+   waiting for the full list.
+2. The analyst researches the top 3 finalists IN PARALLEL (one research subagent
+   each), writes prospects/<slug>/dossier.md for each, then sends me the
+   shortlist with a winnability pitch per business.
 3. STOP and wait for my approval of the 3 finalists. Do NOT spawn the planner or
    builders until I confirm or swap them.
-4. After I approve: spawn 'planner' (planner agent type) to write
-   prospects/<slug>/website-plan.md for each approved prospect (art direction,
-   fonts, palette, page map, per-section layout, image placeholders).
-5. Once a prospect's plan is ready, spawn its 'builder' (builder agent type) —
-   one per prospect, each owning ONLY its own prospects/<slug>/mockup/ folder —
-   to IMPLEMENT that plan. Also spawn 'copywriter' (copywriter agent type) for
-   the outreach emails and 'critic' (critic agent type) as the quality gate.
-   Builders and copywriter loop directly with the critic until every package
-   passes the $10K Checklist and the package checklist.
+4. After I approve, spawn the whole next wave AT ONCE: 'planner', all three
+   'builder' teammates (one per prospect, each owning ONLY its own
+   prospects/<slug>/mockup/ folder), 'copywriter', and 'critic'.
+   - The planner batches its shared research once per trade, then finishes and
+     hands off ONE complete plan at a time (prospect #1 first) so builders start
+     staggered rather than all waiting for all three plans.
+   - Builders do their pre-work while waiting for their plan (read dossier,
+     download the real logo, scaffold folders, start their static server) and
+     build the moment their plan arrives. They do NOT guess at the design.
+   - The copywriter starts from the dossiers immediately.
+   - The critic audits the outreach drafts FIRST, then each mockup the moment
+     its builder submits — never batching all three together.
+5. Builders and copywriter loop directly with the critic until every package
+   passes the $10K Checklist, the web-design-ultra rubric, and the package
+   checklist. All gates stay fully enforced.
 6. When all three packages are signed off, give me a summary. Do not contact any
    business — everything is a draft on disk for me to review.
 ```

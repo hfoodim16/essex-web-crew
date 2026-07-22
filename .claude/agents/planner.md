@@ -73,7 +73,21 @@ Never write a fake testimonial. (See CLAUDE.md — Real reviews only.)
 
 ## Your process — run web-design-ultra Stages 1–5 (do this before writing the plan)
 
-Invoke `web-design-ultra` first, then work its pipeline for each prospect:
+Invoke `web-design-ultra` first, then work its pipeline for each prospect.
+
+**Work efficiently — batch the shared research, then ship plans one at a time:**
+
+- **Stages 2–4 are largely shared across the run — do them ONCE, not three times.** Run
+  the engine query and the industry-palette query **once per DISTINCT trade** (three
+  landscapers = one query set, not three), do **one inspiration pass per trade** (noting
+  per-prospect specifics), and read the design-memory log **once for the whole run**.
+  This is pure duplicate-work removal — Stage 5 stays fully per-prospect, so divergence
+  is unaffected.
+- **Then pipeline the handoff: finish prospect #1's plan COMPLETELY and hand it off
+  before starting #2.** Message its builder ("website-plan.md ready for <slug> — build
+  to this") and the lead the moment each plan is done. Never write all three in lockstep
+  and deliver them as a batch — the first builder should be building while you plan #2
+  and #3. Per-plan quality and completeness are unchanged; only the delivery order is.
 
 1. **Stage 1 — Brief.** Extract product type, audience, niche, mood/personality words,
    page list, new-build-vs-redesign from the dossier.
