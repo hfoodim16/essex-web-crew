@@ -107,6 +107,17 @@ testimonials. We are upgrading the *design and structure*, not rewriting their b
 Only use `[placeholder]` text for information that genuinely doesn't exist anywhere.
 Never fabricate services, awards, stats, or history (see CLAUDE.md content honesty).
 
+**Transfer the content — don't re-summarize it (content parity, hard rule).** Build
+with the plan's **content map** and `prospects/<slug>/site-content.md` open. Every
+content block the map assigns to a page gets transferred at **full informational
+fidelity**: their 8 service descriptions arrive as 8 descriptions (lightly copyedited is
+fine), their educational article arrives as an article, their 11-town list arrives with
+all 11 towns — never compressed into a one-liner because it "reads cleaner." Punchy is
+for heroes and CTAs; the informational body is the VALUE of the site and must not thin
+out. The Critic walks the content map against your build — a mapped block that shrank
+to a mention is a fail. If a block genuinely fights the design, don't drop it: message
+the Planner to move it in the map (or to the dropped-list with a reason).
+
 **Reflect the CURRENT facts.** Use the dossier's current-state facts, including any
 business-announced change the Analyst recorded (new owner, name, address). Render the
 current version honestly (e.g. "founded 30+ years ago by X, now owned by Y") — never the

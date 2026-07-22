@@ -84,6 +84,18 @@ text, and any real testimonials. Use `WebFetch` on their current site (and their
 Business / Facebook / Yelp) to pull this. We are upgrading the design, not rewriting the
 business — so the facts must come from them. Flag anything you could NOT find as a gap.
 
+**Full site capture → `prospects/<slug>/site-content.md` (content-parity artifact).**
+The dossier is a SUMMARY; this file is the PRESERVATION copy — the downstream contract
+is that the new site carries ALL of the old site's information, and nobody can transfer
+what wasn't captured. When the prospect has an existing site: WebFetch **every page in
+its navigation** (and visible sub-pages), and write each page's **complete text
+content** — every service description paragraph, educational article, town list,
+guarantee, advisory, promo, FAQ — under a `## Page: <nav name> (<url>)` heading,
+verbatim or near-verbatim. Do NOT editorialize or trim; long boring blocks are exactly
+what gets lost otherwise. A page you can't fetch gets an explicit
+`FETCH FAILED — builder must capture` line. The Planner maps every block in this file
+into the new site; the Critic fails a mockup whose content isn't accounted for.
+
 **Capture the logo (critical).** Find the business's logo — check the existing site's
 header/nav (view the page source or fetch the referenced image), Facebook profile
 picture, and Google Business profile. Record its **direct image URL** plus a one-line

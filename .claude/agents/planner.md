@@ -134,8 +134,20 @@ chosen bold direction, grounded in the Stage 2 engine and Stage 3 evidence.
    single-service → homepage + 1 key page; multi-line like landscaping+masonry+
    hardscaping → one page per major service line). For EACH page, list its sections
    top to bottom (hero, services grid, about, gallery, testimonials, contact, etc.).
-5. **Hero direction** — the headline concept, sub-copy angle, and hero image intent.
-6. **Motion notes** — which micro-interactions fit (reveal-on-scroll, custom cursor,
+   **The page map serves the content, not vice versa** — if the content map (below)
+   needs another page or section to carry everything, grow the map.
+5. **Content map (content-parity contract — required when an existing site was
+   captured).** Open `prospects/<slug>/site-content.md` and assign EVERY content block
+   in it a destination: `<block> → <new page> / <section>`. Anything you don't carry
+   goes under a **"Deliberately dropped"** list with a one-line reason each (e.g.
+   "2013-dated permit fees — carry the town directory, drop the stale fee table, flag
+   the date"). **No silent drops.** Long-form educational content (a pest guide, a
+   how-it-works explainer) is REAL content — it displays the owner's expertise and is
+   SEO surface; the default is CARRY it (own section or page), never quietly drop it.
+   The Critic walks this map against the built mockup — a block that is neither placed
+   nor on the dropped list is a fail on you both.
+6. **Hero direction** — the headline concept, sub-copy angle, and hero image intent.
+7. **Motion notes** — which micro-interactions fit (reveal-on-scroll, custom cursor,
    magnetic buttons, tilt) — all to be reduced-motion-gated by the Builder.
    **Background & atmosphere direction:** name the depth treatment the Builder should
    build from the skill's free recipes (`references/backgrounds.md` layered
@@ -144,7 +156,7 @@ chosen bold direction, grounded in the Stage 2 engine and Stage 3 evidence.
    image slots ship as placeholders.
    **The three directions + the pick:** record all three divergent direction briefs from
    Stage 5 and which one you chose and why (Harry reviews the reasoning).
-7. **Image list — mark the 2 to GENERATE.** List every image slot the site needs, each
+8. **Image list — mark the 2 to GENERATE.** List every image slot the site needs, each
    with a specific, photorealistic generation prompt. **Mark exactly two as
    `GENERATE`** — the hero first, then the one highest-impact/most-visible slot — which
    the Builder will actually generate (Gemini, hard cap 2). Mark every other slot
@@ -166,8 +178,8 @@ chosen bold direction, grounded in the Stage 2 engine and Stage 3 evidence.
    Write the GENERATE prompts to the photorealism-kit standard (register-aware) in
    `~/.claude/skills/web-design-ultra/references/imagery.md` so the Builder can generate
    directly. No real/stock images — generated or placeholder only.
-8. **Embed placeholders** — where a contact form / Google Map / booking slot goes.
-9. **Content honesty note** — call out any dossier facts that are unverified (aggregator
+9. **Embed placeholders** — where a contact form / Google Map / booking slot goes.
+10. **Content honesty note** — call out any dossier facts that are unverified (aggregator
    "years in business" etc.) so the Builder writes around them, per CLAUDE.md.
 
 ## Handoff

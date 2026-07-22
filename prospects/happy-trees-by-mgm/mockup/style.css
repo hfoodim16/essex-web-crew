@@ -1180,3 +1180,36 @@ p { max-width: 62ch; }
 @media (max-width: 420px) {
   .brand img { height: 32px; }
 }
+
+/* ---- Content-parity retrofit: real service descriptions, EAB article, permits ---- */
+.svc-defs { margin-top: 1.4rem; display: grid; gap: 0.9rem; }
+.svc-defs > div {
+  padding: 0.85rem 1rem;
+  background: #fff;
+  border: 1px solid var(--hairline);
+  border-left: 3px solid var(--canopy, var(--moss-ink));
+  border-radius: var(--radius);
+}
+.svc-defs dt { font-weight: 700; color: var(--moss-ink); margin-bottom: 0.2rem; }
+.svc-defs dd { margin: 0; font-size: 0.95rem; line-height: 1.55; color: inherit; }
+.eab-cols { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.4rem, 3vw, 2.6rem); margin-top: 1.6rem; }
+.eab-cols h3 { font-size: 1.05rem; margin-bottom: 0.7rem; }
+.eab-cols ul { display: grid; gap: 0.55rem; padding-left: 1.1rem; }
+.eab-cols li { font-size: 0.95rem; line-height: 1.5; }
+.advisory {
+  margin-top: clamp(2rem, 4vw, 3rem);
+  padding: 1.1rem 1.3rem;
+  border: 1px solid var(--hairline);
+  border-left: 3px solid var(--hivis);
+  border-radius: var(--radius);
+  background: #fff;
+  font-size: 0.93rem;
+  line-height: 1.6;
+}
+.permit-towns { margin-top: 1.4rem; display: flex; flex-wrap: wrap; gap: 0.55rem; }
+.permit-towns li {
+  font-size: 0.88rem; font-weight: 500;
+  padding: 0.4rem 0.9rem; background: #fff;
+  border: 1px solid var(--hairline); border-radius: var(--radius);
+}
+@media (max-width: 760px) { .eab-cols { grid-template-columns: 1fr; } }

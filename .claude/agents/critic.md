@@ -162,6 +162,17 @@ For `prospects/<slug>/mockup/`, do a real audit:
   that is NOT in the dossier (invented, paraphrased-into-nicer, or an invented reviewer)
   → automatic fail. If the dossier had no reviews, the mockup must have no testimonial
   section or a clearly-labeled placeholder, not fabricated praise.
+- **CONTENT PARITY (hard gate).** *The new site must never know less than the old site.
+  Richer design AND richer information — that's the pitch.* When
+  `prospects/<slug>/site-content.md` exists, walk it block by block against the built
+  mockup: every content block must be either (a) present at full informational fidelity
+  (their service descriptions as descriptions, their educational article as an article,
+  their full town list — not thinned to a mention), or (b) on the plan's **"Deliberately
+  dropped"** list with a reason. A block that is neither placed nor accounted for →
+  numbered fail item to the builder listing exactly which content is missing or thinned
+  and where the plan's content map says it belongs. A beautiful mockup that carries a
+  fraction of the original's information is a FAILED mockup — the client notices their
+  missing content before they notice our typography.
 - **Look at the screenshots** in `prospects/<slug>/screenshots/` (desktop + mobile).
   If a mobile pass isn't proven by screenshots, that's an automatic fail on item 7.
 - **Score BOTH scoreboards.** (a) All 8 items of the $10K Checklist. (b) The

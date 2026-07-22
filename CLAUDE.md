@@ -107,7 +107,11 @@ one of these rules.
 Each approved prospect gets a folder `prospects/<slug>/` containing:
 
 - `dossier.md` — research + a page map + a "why this client is winnable" pitch.
-- `website-plan.md` — the Planner's design brief the Builder implements.
+- `site-content.md` — the Analyst's page-by-page FULL-TEXT capture of the existing site
+  (required whenever the prospect has one) — the content-parity source of truth.
+- `website-plan.md` — the Planner's design brief the Builder implements, including the
+  **content map** that places every site-content.md block (or lists it as deliberately
+  dropped, with a reason).
 - `mockup/` — `index.html`, `style.css`, `main.js` (+ extra `.html` pages if the
   page map calls for them). Static only. Opens by double-click, no build step.
 - `screenshots/` — desktop + mobile captures proving the QA passes ran.
@@ -387,6 +391,27 @@ text, and testimonials into the dossier; the Planner structures that real materi
 the Builder renders it. We are upgrading the **design and structure**, not rewriting the
 business. Only use `[placeholder]` text where information genuinely doesn't exist. This
 also keeps the pitch honest and makes the mockup feel like *their* site, done right.
+
+## Content parity (hard rule)
+
+**The new site must never know less than the old site. Richer design AND richer
+information — that's the pitch.** A beautiful mockup that carries a fraction of the
+original's information is a failed mockup: the owner notices their missing content
+before they notice our typography. The pipeline summarizes at every hop (site → dossier
+→ plan → build), so parity is enforced with an explicit artifact chain:
+
+1. **Analyst** captures the existing site page-by-page, FULL TEXT, into
+   `prospects/<slug>/site-content.md` (the dossier summarizes; this file preserves).
+2. **Planner** writes a **content map** in `website-plan.md`: every site-content.md
+   block gets a destination page/section, or goes on a **"Deliberately dropped"** list
+   with a one-line reason. No silent drops. Long-form educational content (pest guides,
+   how-it-works explainers, permit directories) is real content — default is CARRY it;
+   the page map grows to fit the content, not the other way around.
+3. **Builder** transfers mapped blocks at full informational fidelity — their service
+   descriptions stay descriptions, their articles stay articles, their town lists stay
+   complete. Punchy is for heroes and CTAs, not for the informational body.
+4. **Critic** walks site-content.md against the mockup: every block present or
+   accounted for on the dropped list, else a numbered fail list. This is a hard gate.
 
 ## Skills each agent uses
 

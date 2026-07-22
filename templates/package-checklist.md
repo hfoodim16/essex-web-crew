@@ -63,6 +63,11 @@ they took it themselves?* Both halves must hold. Open each generated image full 
 - [ ] **Uses the client's real content** — if they had an existing site, its actual
       services/copy/contact/hours/testimonials were reused (not invented); only genuinely
       missing info is a `[placeholder]`.
+- [ ] **CONTENT PARITY** — *the new site never knows less than the old site.* Walk
+      `site-content.md` block by block against the mockup: every block is present at full
+      informational fidelity (descriptions as descriptions, articles as articles, full
+      town lists) or on the plan's "Deliberately dropped" list with a reason. Missing or
+      thinned-to-a-mention content = numbered fail list to the builder.
 - [ ] No outbound contact of any kind was performed.
 
 ## Outreach (email OR call script)
@@ -89,7 +94,9 @@ real email address.
 ## Package folder complete
 
 - [ ] `dossier.md` (with page map + winnability pitch)
-- [ ] `website-plan.md` (the Planner's design contract)
+- [ ] `site-content.md` (full-text capture of the existing site — required whenever the
+      prospect had one)
+- [ ] `website-plan.md` (the Planner's design contract, incl. the content map)
 - [ ] `mockup/` (pages per the **plan's** page map, opens cleanly) incl. `assets/` (logo + 2 generated images)
 - [ ] `screenshots/` (desktop + mobile)
 - [ ] `outreach-email.md` (email + one-pager) OR `outreach-call.md` (phone + call script)
