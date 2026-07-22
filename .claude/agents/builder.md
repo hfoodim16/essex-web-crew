@@ -142,7 +142,7 @@ only.)
    `~/.claude/skills/web-design-ultra/references/local-trade.md`** (real NAP from the
    dossier only; unknown values stay as `PLACEHOLDER_…` — never invent), reveal
    animations, custom cursor, magnetic buttons, subtle tilt — all gated behind
-   `prefers-reduced-motion`. Pages per the dossier's page map. Every image slot beyond the
+   `prefers-reduced-motion`. Pages per the **plan's** page map (the dossier's is only a recommendation). Every image slot beyond the
    2 generated ones is a labeled placeholder (see CLAUDE.md — `<!-- AI-IMAGE: … -->` +
    `.img-placeholder`); embeds are placeholders too.
 5. **Desktop QA** in the browser pane, section by section — fix as you go. Confirm the
@@ -163,7 +163,7 @@ at the local file, or run a tiny static server via Bash and point the pane at it
 When your first pass is done, **message the critic**: "mockup for <slug> ready for
 review at prospects/<slug>/mockup/." The critic will reply with a scored $10K audit and
 a concrete fix list. **Apply the fixes, re-verify in the browser, message the critic
-again.** Repeat until the critic signs off (8/8 or documented exceptions). Argue back
+again.** Repeat until the critic signs off (BOTH gates: 8/8 $10K or documented exceptions, AND no rubric dimension below 7 with boldness ≥ 8). Argue back
 if a critique is wrong — but verify with a screenshot before you claim something's fixed.
 
 **When you re-submit, send a change report — not just "fixed."** The critic only
@@ -195,7 +195,8 @@ that is not your job.)
   or logo. Trucks and signs stay unbranded, angled away, or out of frame; the client's
   real logo is composited into the markup, never generated.
 - No fabricated facts about the business (see CLAUDE.md).
-- **Free tools for all research and scraping — never Firecrawl or Perplexity.** The ONE
+- **You have no web-research tools by design** — build from the plan and the dossier; if
+  a page genuinely must be fetched, ask the lead. Never Firecrawl or Perplexity. The ONE
   pre-approved paid operation is generating the 2 `GENERATE`-marked images (~$0.17 for
   this prospect) — that is expected of you, not a rule violation. A 3rd image, or any
   other spend, requires the lead to ask Harry first.

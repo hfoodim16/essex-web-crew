@@ -13,7 +13,9 @@ can go more than one way, and a paste-able prompt anywhere you'd otherwise touch
 
 **Golden rules the whole way:** you never hand-edit code (you paste prompts and Claude
 does it) · the team never contacts a business (every send/call is you) · nothing about a
-business gets invented — only real facts they give you.
+business gets invented — only real facts they give you (that includes reviews: every
+testimonial must be a real one with a source, and if something changed, like ownership,
+the site says so).
 
 ### Quick reference — jump to your step
 
@@ -70,15 +72,21 @@ Open `prospects/<slug>/mockup/index.html`, click every page, check phone width a
 - **6C — wrong vibe** (redesign). Paste the planner-redesign prompt (PLAYBOOK Step 6C),
   re-review. → **Step 7**.
 
-### Step 7 — Add the real images (per business)
-List them: `grep -rn "AI-IMAGE" prospects/<slug>/mockup/`. Generate and place — full
-how-to in **PLAYBOOK Part 3, Reference A**.
+### Step 7 — Add the remaining images (per business)
+The hero and one priority slot already hold real AI-generated images (in
+`mockup/assets/`). List what's still a placeholder:
+`grep -rn "AI-IMAGE" prospects/<slug>/mockup/`. Generate and place — full how-to in
+**PLAYBOOK Part 3, Reference A** (match the register the plan set; no business names or
+signage in generated images).
 - **7A — all good.** → **Step 8**.
-- **7B — one won't come out right.** Leave the styled placeholder or reframe the section.
+- **7B — one won't come out right.** For a SECONDARY slot, leave the styled placeholder or
+  reframe the section. The hero and the other priority slot must stay real images — send
+  those back for one regeneration instead.
   → **Step 8**.
 
-*(For the pitch mockup, a couple of AI images or leftover `[placeholder]` gaps are fine —
-you finalize everything properly in Steps 11–12 once they're a paying client.)*
+*(The pitch mockup ships with exactly 2 real AI images plus labeled placeholders beyond —
+that's the standard, not a shortfall. Leftover `[placeholder]` TEXT gaps are fine; you
+finalize everything properly in Steps 11–12 once they're a paying client.)*
 
 ### Step 8 — Reach out (per business)
 Check which file the copywriter wrote:
@@ -156,8 +164,11 @@ patios, clean lawns, crew shots). Then:
   the `production/` copy in Step 12) and have Claude place + tidy them — paste:
   ```
   I've added the client's real photos to prospects/<slug>/production/images/. Crop and
-  compress them for the web (use the media-processing skill), then replace the AI-IMAGE
-  placeholders with the best-fitting real photo in each slot, keeping alt text and
+  compress them for the web (use the media-processing skill), then place them: replace
+  the AI-IMAGE placeholders with the best-fitting real photo in each slot, AND swap out
+  the two AI-generated images in assets/ (hero + priority slot) wherever a client photo
+  of their own work is genuinely better — real job photos beat AI on a live site. Keep
+  alt text and
   aspect ratios. Show me before/after.
   ```
 - **11B — they have no usable photos.** Generate final AI images the **Reference A** way
@@ -186,7 +197,11 @@ production copy for a real launch:
   (see below), or remove the block cleanly if we're not using it.
 - Do a full desktop + mobile QA pass and save fresh screenshots to
   prospects/<slug>/production-screenshots/.
-Then have a critic (Opus) audit the production site against the $10K Checklist and write
+Then have a critic (Opus) audit the production site against BOTH scoreboards — the $10K
+Checklist (8/8) AND the web-design-ultra 10-dimension rubric (no dimension below 7,
+boldness >= 8) — plus the hard rules: real reviews only (every testimonial traces to a
+real captured review), the client's real logo in place, current business facts, and
+generated imagery passing the two-way realism test. Write it to
 prospects/<slug>/production-audit.md. List anything still needed from the client.
 ```
 

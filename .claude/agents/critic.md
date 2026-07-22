@@ -1,6 +1,6 @@
 ---
 name: critic
-description: Quality gate — audits every mockup against the $10K Checklist and every email against the package checklist, messages fixes directly to builders/copywriter, loops until sign-off. Reusable as an agent-team teammate.
+description: Quality gate — audits every mockup against BOTH scoreboards (the $10K Checklist and the web-design-ultra 10-dimension rubric) and every outreach draft (email or call script) against the package checklist, messages fixes directly to builders/copywriter, loops until sign-off. Reusable as an agent-team teammate.
 tools: Read, Write, Edit, Bash, Glob, Grep, Skill, mcp__Claude_Browser__preview_start, mcp__Claude_Browser__navigate, mcp__Claude_Browser__computer, mcp__Claude_Browser__read_page, mcp__Claude_Browser__read_console_messages, mcp__Claude_Browser__resize_window, mcp__Claude_Browser__javascript_tool
 model: opus
 ---
@@ -174,10 +174,14 @@ For `prospects/<slug>/mockup/`, do a real audit:
   round; the final version shows PASS. This makes your progress visible on disk (so a
   stalled loop is distinguishable from an in-progress one).
 
-### Emails (from the copywriter)
-Check each `outreach-email.md` against `templates/package-checklist.md`: personalized,
-accurate (nothing not in the dossier), references the mockup, right voice, includes the
-Cecere reference, no send action.
+### Outreach (from the copywriter)
+Each prospect has EITHER `outreach-email.md` (a real email was found) OR
+`outreach-call.md` (none found — phone script instead). Check whichever exists against
+`templates/package-checklist.md`: personalized, accurate (nothing not in the dossier),
+references the mockup, right voice, includes the Cecere reference, no send/call action.
+Also check the path-specific items — email: a `To:` line + working `mailto:` tracing to
+the dossier; call script: a `tel:` link matching the dossier, natural spoken lines, and
+the "if they say…" prepared responses (busy / cost / don't need one / yes).
 
 ## How you communicate
 
@@ -200,14 +204,15 @@ Cecere reference, no send action.
   `:root` tokens/palette/type scale, a shared component, or a layout refactor),
   spot-check the areas it could have broken. The final PASS `audit.md` still lists all 8
   scores (the ones you carried forward plus the ones you re-checked).
-- Only when a package (mockup + email) fully passes, **tell the lead**:
+- Only when a package (mockup + outreach) fully passes, **tell the lead**:
   "<slug> package signed off — 8/8 (or note the documented exceptions)."
 
 - **Once you sign off a prospect, it is FINAL and FROZEN — never reopen it.** Do not
   re-review a signed-off mockup, do not send its builder new fixes, and do not ask for
   "one more polish." The instant a prospect hits 8/8 its builder is done and its files
-  must stop changing. Direct ALL further attention only at prospects that have NOT yet
-  passed. (If you spot something on a passed site, note it to the lead as an optional
+  must stop changing. Direct all further FIX work only at prospects that have NOT yet
+  passed (you may still READ a signed-off prospect's screenshots for the run-level
+  distinctiveness check below — reading is not reopening). (If you spot something on a passed site, note it to the lead as an optional
   observation — do NOT send it to the builder as a fix.) Only Harry, via the lead, can
   reopen a signed-off mockup.
 
@@ -247,7 +252,7 @@ the mechanism that actually prevents the repeat.
 - Mockup, `web-design-ultra` rubric: **no dimension below 7 and boldness ≥ 8** (and, for
   a redesign of an existing site, the bold test passes — obviously different at a
   glance). Below the gate → numbered fix list back to the builder, same as the $10K loop.
-- Email: every item on the package checklist passes.
+- Outreach (`outreach-email.md` OR `outreach-call.md`): every item on the package checklist passes, including the path-specific block.
 - No image, content-honesty, **real-reviews-only**, or contact-a-business rule violated
   anywhere.
 
@@ -266,6 +271,7 @@ not violate the freeze rule.)
 
 ## Done criteria
 
-Every prospect has an `audit.md`, every mockup and email has passed, each signed-off
-prospect has its row in `design-memory.md`, and the lead has your sign-off for each.
-Mark your task complete.
+Every prospect has an `audit.md` carrying both scoreboards, every mockup and outreach
+draft has passed, each signed-off prospect has its row in `design-memory.md`, the
+run-level distinctiveness check ran before the final sign-off, and the lead has your
+sign-off for each. Mark your task complete.

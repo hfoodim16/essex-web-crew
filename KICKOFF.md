@@ -63,7 +63,8 @@ save time.
    builders until I confirm or swap them.
 4. After I approve, spawn the whole next wave AT ONCE: 'planner', all three
    'builder' teammates (one per prospect, each owning ONLY its own
-   prospects/<slug>/mockup/ folder), 'copywriter', and 'critic'.
+   prospects/<slug>/mockup/ and prospects/<slug>/screenshots/ folders),
+   'copywriter', and 'critic'.
    - The planner batches its shared research once per trade, then finishes and
      hands off ONE complete plan at a time (prospect #1 first) so builders start
      staggered rather than all waiting for all three plans.
@@ -74,8 +75,10 @@ save time.
    - The critic audits the outreach drafts FIRST, then each mockup the moment
      its builder submits — never batching all three together.
 5. Builders and copywriter loop directly with the critic until every package
-   passes the $10K Checklist, the web-design-ultra rubric, and the package
-   checklist. All gates stay fully enforced.
+   passes the $10K Checklist (8/8), the web-design-ultra rubric (no dimension
+   below 7, boldness >= 8), and the package checklist. Before the FINAL sign-off
+   the critic runs the run-level distinctiveness check across all three mockups.
+   All gates stay fully enforced.
 6. When all three packages are signed off, give me a summary. Do not contact any
    business — everything is a draft on disk for me to review.
 ```

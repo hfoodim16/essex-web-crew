@@ -74,10 +74,11 @@ Each business now has a folder `prospects/<name>/`. Open its `mockup/index.html`
 (double-click) and click through every page. This is where you decide if the site is
 good enough to pitch.
 
-**Step 7 — Add the real images.**
-The mockups use labeled placeholder boxes instead of real pictures (the team never
-generates images). Each box contains a ready-to-use image prompt. Generate the images
-with your tool of choice, drop them in, and check the site still looks right.
+**Step 7 — Add the remaining images.**
+The hero and one priority slot already hold **real AI-generated images** the builder made
+(they're in `prospects/<slug>/mockup/assets/`). Every OTHER picture slot is a labeled
+placeholder box with a ready-to-use image prompt baked in. Generate those remaining
+images, drop them in, and check the site still looks right.
 
 **Step 8 — Reach out yourself (email or phone).**
 The team never contacts anyone — it just preps you. For each prospect you'll get ONE of
@@ -158,7 +159,17 @@ lead's "all packages signed off" summary. → continue to **Step 6**.
 ### Step 6 — Review the websites (repeat per business)
 
 Open `prospects/<slug>/mockup/index.html`, click every page, narrow the window to phone
-width, and skim `audit.md`. Check it uses the client's real content and invents no facts.
+width, and skim `audit.md` (it now carries TWO scoreboards — the $10K Checklist 8/8 AND
+the 10-dimension rubric with no dimension below 7 and boldness ≥ 8). Check that it uses
+the client's real content and invents no facts, and specifically:
+- **Testimonials are real** — every quote traces to an actual review in the dossier's
+  "Real reviews" section, with a real reviewer name and platform. No dossier reviews
+  should mean no testimonial section, never invented praise.
+- **Their real logo is there** — if the business has one, it should be the actual logo in
+  the header, not a text wordmark.
+- **The facts are current** — e.g. if ownership changed, the site says so rather than
+  repeating a stale directory listing.
+- **The hero and one other image are real photos**, not placeholder boxes.
 Gut check: **would you pay for this site?**
 
 - **Step 6A — you love it.** → continue to **Step 7**.
@@ -167,8 +178,11 @@ Gut check: **would you pay for this site?**
 
   ```
   Read CLAUDE.md, prospects/<slug>/website-plan.md, and .claude/agents/builder.md.
-  Spawn ONE builder (Opus) scoped ONLY to prospects/<slug>/mockup/. Keep the
-  existing design — do NOT redesign. Fix exactly this list:
+  Harry is explicitly reopening this signed-off mockup — the freeze rule permits
+  this only on his say-so, so treat the fix list below as authorized.
+  Spawn ONE builder (Opus) scoped ONLY to prospects/<slug>/mockup/ and
+  prospects/<slug>/screenshots/. Keep the existing design — do NOT redesign.
+  Fix exactly this list:
   1. <problem>
   2. <problem>
   Re-run the desktop and mobile QA loops, update prospects/<slug>/screenshots/,
@@ -183,7 +197,9 @@ Gut check: **would you pay for this site?**
   Read CLAUDE.md, prospects/<slug>/dossier.md, and prospects/<slug>/website-plan.md.
   The design direction is wrong for this business. My notes: <what's wrong + what
   you'd rather see, e.g. "too dark and moody for a friendly family lawn crew;
-  should feel bright and trustworthy">. Spawn the planner (Fable, claude-fable-5)
+  should feel bright and trustworthy">. Harry is explicitly reopening this
+  signed-off prospect — the freeze rule permits this only on his say-so.
+  Spawn the planner (Fable, claude-fable-5)
   to REVISE website-plan.md, show me the new plan, and wait for my OK. After my OK:
   spawn a builder (Opus) to rebuild prospects/<slug>/mockup/ from it with full QA
   and fresh screenshots, then a critic (Opus) audits.
@@ -204,10 +220,10 @@ grep -rn "AI-IMAGE" prospects/<slug>/mockup/
 ```
 
 Generate each image with your tool of choice, save them to
-`prospects/<slug>/mockup/images/`, then paste this to swap them in:
+`prospects/<slug>/mockup/assets/`, then paste this to swap them in:
 
 ```
-In prospects/<slug>/mockup/, I've added real images to the images/ folder. Replace
+In prospects/<slug>/mockup/, I've added real images to the assets/ folder. Replace
 each AI-IMAGE placeholder div with an <img> tag pointing at the matching file (keep
 the aria-labels as alt text, add loading="lazy", keep aspect ratios consistent).
 Then open it in the browser pane, verify every section still looks right on desktop
@@ -217,9 +233,13 @@ and at 375px wide, and update prospects/<slug>/screenshots/.
 Re-open `index.html` yourself to confirm.
 
 - **Step 7A — all images look good.** → continue to **Step 8**.
-- **Step 7B — one or two won't come out right.** Fine for a pitch: leave those as the
-  styled placeholders (they're designed to look intentional), or ask a builder to reframe
-  that section so it doesn't need the image. → continue to **Step 8**.
+- **Step 7B — one or two won't come out right.** Fine for a pitch **for the secondary
+  slots only**: leave those as the styled placeholders (they're designed to look
+  intentional), or ask a builder to reframe that section so it doesn't need the image.
+  **Not fine for the hero or the other priority slot** — those two must hold real images
+  that pass the realism test (the critic already enforced this). If one of those looks
+  wrong, send it back for ONE regeneration naming the flaw; if it fails again, escalate
+  rather than shipping a placeholder there. → continue to **Step 8**.
 
 ---
 
@@ -356,9 +376,10 @@ Code session inside the project (`cd ~/Projects/essex-web-crew && claude`) and t
 
 ### Reference A — Adding the real pictures
 
-Every picture slot in a mockup is a labeled placeholder box with a written image prompt
-baked in (e.g. "wide drone shot of a finished bluestone paver patio at golden hour").
-List them all for a site:
+The hero and one priority slot already contain **real AI-generated images** (the builder
+made them, ~$0.17/prospect — they live in `mockup/assets/`). Every picture slot *beyond
+those two* is a labeled placeholder box with a written image prompt baked in (e.g. "wide
+drone shot of a finished bluestone paver patio at golden hour"). List the remaining ones:
 
 ```bash
 grep -rn "AI-IMAGE" prospects/<slug>/mockup/
@@ -368,16 +389,22 @@ grep -rn "AI-IMAGE" prospects/<slug>/mockup/
 
 1. **Have Claude make them for you.** In a session, paste:
    ```
-   Read prospects/<slug>/mockup/index.html and pull out every AI-IMAGE prompt.
-   Use the ai-multimodal skill to generate each image from its prompt, sized for
-   where it sits on the page, and save them into prospects/<slug>/mockup/images/
-   with clear filenames.
+   Read prospects/<slug>/website-plan.md and note the imagery REGISTER it set
+   (usually "proud contractor" — casual phone photo, natural light, honest framing).
+   Then read prospects/<slug>/mockup/index.html, pull out every AI-IMAGE prompt, and
+   use the ai-multimodal skill to generate each image in that SAME register so they
+   match the two the builder already made. Rules: no readable business name,
+   lettering, signage, or logo in any image; a different property in each project
+   photo; sized for where it sits on the page. Save into
+   prospects/<slug>/mockup/assets/ with clear filenames, then check each one for AI
+   tells (warped lines, stock-ad staging, shabby setting) before placing it.
    ```
    (This uses Google's image generation under the hood — it may ask for a Gemini API
    key and can cost a little. If it can't run, use option 2.)
 2. **Make them in your own tool** — ChatGPT/DALL·E, Midjourney, whatever you like. Copy
    each AI-IMAGE prompt in, download the result, and drop the files into
-   `prospects/<slug>/mockup/images/`.
+   `prospects/<slug>/mockup/assets/`. Match the register of the two existing images and
+   keep business names/signage out of them.
 
 **Place them** — paste this and Claude swaps every placeholder for a real image:
 

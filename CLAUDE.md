@@ -15,7 +15,7 @@ We are a mini web agency run as a Claude Code **agent team**. Each run we:
    a research dossier, a working website mockup, and a personalized outreach email.
 
 Everything lands on disk for Harry to review. **We never contact a business.**
-Harry generates the real images and sends the outreach himself.
+Harry generates the remaining images and sends the outreach himself.
 
 ## Territory & target
 
@@ -55,7 +55,7 @@ Good reviews are a **bonus** (higher score), not a requirement.
 
 | Stage | Owner | Model | Output |
 |---|---|---|---|
-| 1. Scout candidates (10–15) | `scout` | Sonnet | `pipeline/candidates.md` |
+| 1. Scout candidates (10–12) | `scout` | Sonnet | `pipeline/candidates.md` |
 | 2. Score + research finalists | `analyst` | Opus | `prospects/<slug>/dossier.md` + shortlist message to lead |
 | 3. **Approval pause** | lead ↔ Harry | — | Harry confirms/swaps the 3 |
 | 4. Website plan (1 per prospect) | `planner` | Fable | `prospects/<slug>/website-plan.md` |
@@ -115,7 +115,9 @@ Each approved prospect gets a folder `prospects/<slug>/` containing:
   short pitch one-pager. Written **only when the dossier has a real email address**.
 - `outreach-call.md` — written **instead** when no email was found: the phone number
   (`tel:` link) + a spoken call script + prepared responses so Harry is ready to call.
-- `audit.md` — the Critic's scored $10K Checklist result (8/8 or documented exceptions).
+- `audit.md` — the Critic's scored result for BOTH scoreboards ($10K Checklist 8/8 or
+  documented exceptions, plus the 10-dimension rubric), rewritten every review round with
+  a `Review round: N` line.
 
 ## The Mockup Recipe (the "Corey Blake workflow")
 
@@ -132,7 +134,7 @@ the team:
 - **Stages 1–5 → Planner.** Brief (from the dossier) → design intelligence
   (`ui-ux-pro-max` search engine + the industry's conventional palette) → real-site
   inspiration (3–5 references, extract patterns never copy) → anti-repetition check
-  (read this project's own `./design-memory.md` at the repo root, NOT the skill's global
+  (read this project's own `~/Projects/essex-web-crew/design-memory.md`, NOT the skill's global
   `data/design-memory.md` — the crew keeps its own ban list so prospects diverge from each
   other) → **three genuinely divergent directions**, pick the boldest. All recorded in
   `website-plan.md`.
@@ -164,19 +166,29 @@ the team:
   and the shabby/messy look FAIL. **No readable business names, lettering, or signage
   inside a generated image** (the model invents fake ones) — the client's real logo is
   composited into the markup instead. One imagery register per site.
+- **Run-level distinctiveness check (Critic, before the FINAL sign-off of a run).** With
+  the last mockup still unsigned, the Critic puts the three heroes side by side and asks
+  whether a stranger would believe three different studios made them — hunting the softer
+  sameness the ban list misses (section rhythm, imagery register, motion vocabulary). If
+  two read as siblings, the still-unsigned one goes back. This never reopens a frozen
+  prospect, which is exactly why it runs before the last sign-off.
 - **Anti-repetition:** consecutive prospects must not share a font pairing, palette
   family, or layout archetype. After a prospect's sign-off, **the Critic** appends the
   choices (font pairing, palette, layout archetype, background system) to this project's
-  `./design-memory.md` (repo root — the crew's own log, not the skill's global file) so the
+  `~/Projects/essex-web-crew/design-memory.md` (the crew's own log, not the skill's global file) so the
   next prospect diverges.
 
-### Step 1 — Design brief before any code
-Commit to a **named art direction** that fits the trade (e.g. "earthy editorial"
-for a landscaper, "dark-luxury stone" for a high-end mason, "clean industrial" for
-concrete/fencing). Write 2–3 sentences of rationale at the top of `style.css`.
-Then lock:
+### Step 1 — Design brief before any code (**the PLANNER's step**)
+> The Planner makes these calls in `website-plan.md` (web-design-ultra Stages 1–5). The
+> Builder implements them and does **not** re-decide them — see "Division of design
+> labor" above.
+
+The plan commits to a **named art direction** that fits the business (e.g. "earthy
+editorial" for a landscaper, "dark-luxury stone" for a high-end mason, "clean industrial"
+for concrete/fencing). The Builder writes those 2–3 sentences of rationale at the top of
+`style.css`. The plan locks:
 - **Font pairing** — a display face + a body face from Google Fonts.
-  **Never Inter or Roboto.** (Corey Blake used Cormorant + Montserrat.)
+  **Never Inter, Roboto, Arial, or Helvetica.** (Corey Blake used Cormorant + Montserrat.)
 - **Palette** — 3 to 5 colors as CSS custom properties in `:root`. Restraint signals
   premium. (See the token block pattern below.)
 
@@ -213,13 +225,16 @@ aspect ratios, hamburger menu. Save proof screenshots.
 Score all 8, fix gaps, re-verify. Source: Metics Media Field Guide No. 01.
 
 The critic writes `prospects/<slug>/audit.md` after **every** review round (NEEDS-WORK
-versions included, with a `Review round: N` line), not only at sign-off. Anything below
-8/8 (barring a documented exception) goes back to the builder and the loop repeats. After
+versions included, with a `Review round: N` line), not only at sign-off, recording BOTH
+scoreboards. **The gate is both:** below 8/8 on the $10K Checklist (barring a documented
+exception) OR any rubric dimension below 7 / boldness below 8 sends it back to the builder
+and the loop repeats. After
 the first full audit, re-reviews are **incremental** — the critic re-checks only the
 failed items and the sections the builder's change report says changed (plus a spot-check
 if a fix could ripple), not the whole site again.
 
-**Sign-off freezes a prospect.** The moment a mockup hits 8/8, it is FINAL: its builder
+**Sign-off freezes a prospect.** The moment a mockup clears BOTH gates (8/8 $10K **and**
+no rubric dimension below 7 with boldness ≥ 8), it is FINAL: its builder
 stops and its files never change again, and the critic never reopens it or sends more
 fixes. Only prospects that have NOT yet passed stay in the loop. The lead engages a
 builder only for a prospect with an open critic fix list; a signed-off mockup is reopened
@@ -230,8 +245,11 @@ while the others are still being fixed.
 2. **Typography that does work** — paired display + body, not defaulted, not Inter/Roboto.
 3. **Restrained color system** — 3–5 colors, used consistently.
 4. **Hierarchy that breathes** — whitespace, scale, contrast guide the eye.
-5. **Imagery with intent** — here: every image slot is a deliberate, labeled
-   AI-IMAGE placeholder matching the art direction (see below). No stock defaults.
+5. **Imagery with intent** — the 2 Planner-marked `GENERATE` slots (hero + one priority
+   slot) hold REAL generated images passing the two-way realism test; every other slot is
+   a deliberate, labeled AI-IMAGE placeholder matching the art direction (see the Image
+   policy below). A placeholder in either priority slot is never an acceptable exception.
+   No stock defaults.
 6. **Motion that whispers** — hand-crafted micro-interactions, reduced-motion-safe.
 7. **Mobile that's designed, not shrunk** — distinct phone layout decisions.
 8. **The invisible expensive stuff** — sub-2s load (compress/omit heavy assets),

@@ -1,7 +1,7 @@
 ---
 name: analyst
 description: Scoring + research agent — ranks scouted businesses, researches finalists, writes dossiers, and presents a shortlist for Harry's approval. Reusable as an agent-team teammate.
-tools: WebSearch, WebFetch, Read, Write, Edit, Bash, Glob, Grep, Skill
+tools: Task, WebSearch, WebFetch, Read, Write, Edit, Bash, Glob, Grep, Skill
 model: opus
 ---
 
