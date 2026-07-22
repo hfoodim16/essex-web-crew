@@ -33,9 +33,15 @@ teammates, so you must call them yourself:
   **free depth recipes**: `~/.claude/skills/web-design-ultra/references/backgrounds.md`
   (layered background/texture/depth) and `references/atmosphere.md` (animated fog, god
   rays, shimmer, motes). Then self-score its **Stage 8** rubric before handoff (see
-  below). **Stage 6 is adapted for us: never generate images** (that costs money and our
-  image policy stands — labeled AI-IMAGE placeholders; Harry generates). The
-  backgrounds/atmosphere CSS is our free substitute for visual depth.
+  below). **Stage 6 for us: generate the 3 `GENERATE`-marked images (hard cap 3), rest
+  placeholders** — see `ai-multimodal` below and the CLAUDE.md image policy.
+- **`ai-multimodal`.** Generate the **3** images the Planner marked `GENERATE` (hero +
+  two priority slots) with Gemini — follow the photorealism kit in
+  `~/.claude/skills/web-design-ultra/references/imagery.md`, make them maximally
+  photorealistic and on-art-direction, optimize to WebP, save into
+  `prospects/<slug>/mockup/assets/`, reference locally. **HARD CAP 3 per mockup** — never
+  generate a 4th; every slot past the 3 stays a labeled AI-IMAGE placeholder. (Cost is
+  pre-approved only at this cap; more than 3 → ask the lead.)
 - **`ui-ux-pro-max`** — for concrete color/typography/spacing/layout/component decisions
   and to review your own work against professional UI standards.
 - **`frontend-design`** — for distinctive, production-grade, non-generic frontend code
@@ -81,15 +87,19 @@ only.)
    download fails, tell the lead — do NOT substitute a fake logo or a text wordmark.
    Only when the dossier says `**Logo:** No logo found` do you use a text wordmark in the
    display font instead.
-3. **Build** the static SPA: `index.html` + `style.css` + `main.js`, design tokens in
+3. **Generate the 3 priority images** (`ai-multimodal`) the Planner marked `GENERATE` —
+   hero + two priority slots — into `assets/` as WebP, and wire them in locally. **Hard
+   cap 3.**
+4. **Build** the static SPA: `index.html` + `style.css` + `main.js`, design tokens in
    `:root`, semantic HTML, full meta/OG/Twitter + inline SVG favicon, reveal
    animations, custom cursor, magnetic buttons, subtle tilt — all gated behind
-   `prefers-reduced-motion`. Pages per the dossier's page map. Embeds and non-logo images
-   are labeled placeholders (see CLAUDE.md — `<!-- AI-IMAGE: … -->` + `.img-placeholder`).
-4. **Desktop QA** in the browser pane, section by section — fix as you go. Confirm the
-   real logo renders in the header.
-5. **Mobile pass** at 375×812 — make real phone-layout decisions, not a shrunk desktop.
-6. **Self-audit** before you hand off. Save desktop + mobile screenshots to
+   `prefers-reduced-motion`. Pages per the dossier's page map. Every image slot beyond the
+   3 generated ones is a labeled placeholder (see CLAUDE.md — `<!-- AI-IMAGE: … -->` +
+   `.img-placeholder`); embeds are placeholders too.
+5. **Desktop QA** in the browser pane, section by section — fix as you go. Confirm the
+   real logo renders in the header and the 3 generated images look photorealistic.
+6. **Mobile pass** at 375×812 — make real phone-layout decisions, not a shrunk desktop.
+7. **Self-audit** before you hand off. Save desktop + mobile screenshots to
    `prospects/<slug>/screenshots/`, then score BOTH scoreboards from those screenshots:
    the $10K Checklist AND the `web-design-ultra` 10-dimension rubric
    (`~/.claude/skills/web-design-ultra/references/critique.md`). Fix anything with a

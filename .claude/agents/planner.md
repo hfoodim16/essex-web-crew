@@ -119,9 +119,14 @@ chosen bold direction, grounded in the Stage 2 engine and Stage 3 evidence.
    this is how we get visual richness without paid image generation.
    **The three directions + the pick:** record all three divergent direction briefs from
    Stage 5 and which one you chose and why (Harry reviews the reasoning).
-7. **Image placeholder list** — every `AI-IMAGE` slot the site needs, each with a
-   specific generation prompt Harry can use later (e.g. "wide drone shot of a finished
-   bluestone paver patio at golden hour"). No real/stock images.
+7. **Image list — mark the 3 to GENERATE.** List every image slot the site needs, each
+   with a specific, photorealistic generation prompt. **Mark exactly three as
+   `GENERATE`** — the hero first, then the two highest-impact/most-visible slots — which
+   the Builder will actually generate (Gemini, hard cap 3). Mark every other slot
+   `PLACEHOLDER` (labeled AI-IMAGE box; Harry generates later). Write the GENERATE
+   prompts to the photorealism-kit standard in
+   `~/.claude/skills/web-design-ultra/references/imagery.md` so the Builder can generate
+   directly. No real/stock images — generated or placeholder only.
 8. **Embed placeholders** — where a contact form / Google Map / booking slot goes.
 9. **Content honesty note** — call out any dossier facts that are unverified (aggregator
    "years in business" etc.) so the Builder writes around them, per CLAUDE.md.

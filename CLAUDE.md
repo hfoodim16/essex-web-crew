@@ -94,11 +94,13 @@ the team:
   inspiration (3–5 references, extract patterns never copy) → anti-repetition check
   (read the skill's `data/design-memory.md`) → **three genuinely divergent directions**,
   pick the boldest. All recorded in `website-plan.md`.
-- **Stage 6 → ADAPTED for this team.** We do NOT generate images (Gemini costs money and
-  our image policy stands: labeled AI-IMAGE placeholders, Harry generates the real
-  ones). We DO use the skill's free CSS craft: `references/backgrounds.md` (layered
-  background/texture/depth recipes) and `references/atmosphere.md` (animated fog, god
-  rays, shimmer, motes — reduced-motion gated). Depth without spend.
+- **Stage 6 → runs, capped.** Builders generate **up to 3 real AI images per mockup**
+  (hero + the two highest-impact slots the Planner marked `GENERATE`) via `ai-multimodal`
+  + the skill's `references/imagery.md` photorealism kit; every slot beyond 3 stays a
+  labeled AI-IMAGE placeholder (see Image policy). ALSO layer the skill's free CSS craft:
+  `references/backgrounds.md` (background/texture/depth) and `references/atmosphere.md`
+  (animated fog, god rays, shimmer, motes — reduced-motion gated). Real imagery + real
+  depth.
 - **Stage 7 → Builder.** Implement the chosen direction with the skill's craft
   discipline: distinctive type (never the generic four), whole palette as CSS
   variables, deliberate spatial composition (asymmetry, overlap, scale contrast),
@@ -183,7 +185,18 @@ Save desktop + mobile screenshots to `prospects/<slug>/screenshots/`.
 
 ## Image policy (hard rule)
 
-The team **never generates or hotlinks images**. Every image slot is a placeholder:
+**Tiered: 3 real AI images per mockup, placeholders beyond.**
+
+- **Builders generate up to 3 AI images per mockup — HARD CAP.** Use the
+  `ai-multimodal` skill (Gemini, ~$0.04/image ≈ $0.12/prospect — pre-approved by Harry
+  at this cap; NEVER exceed 3 without the lead asking Harry first).
+- **Priority order: the hero first**, then the two next most visible slots — the
+  Planner marks these three as `GENERATE` in the plan's image list.
+- **Quality bar:** follow the photorealism kit in
+  `~/.claude/skills/web-design-ultra/references/imagery.md` — maximally photorealistic,
+  on-art-direction, no obvious AI tells. Optimize to WebP at correct display size,
+  store in `prospects/<slug>/mockup/assets/`, reference locally (never hotlink).
+- **Every slot beyond the 3 stays a labeled AI-IMAGE placeholder:**
 
 ```html
 <!-- AI-IMAGE: wide drone shot of a finished bluestone paver patio at golden hour -->
@@ -193,8 +206,9 @@ The team **never generates or hotlinks images**. Every image slot is a placehold
 ```
 
 Style `.img-placeholder` as a labeled block in the art direction's colors so the
-mockup still reads well. Harry generates the real images from these prompts before
-anything goes to a client. Never use Unsplash/Google image URLs or copyrighted photos.
+mockup still reads well. Harry generates the remaining images from these prompts before
+anything goes to a client (PLAYBOOK Part 3 Reference A). Still banned always: stock
+photos, Unsplash/Google image URLs, hotlinked or copyrighted images.
 
 **The ONE exception — the client's own logo.** If the business's existing site (or
 Facebook / Google Business profile) shows a logo, the mockup must use **that exact
@@ -254,7 +268,7 @@ each agent's `tools` list includes `Skill`.
 | `scout` | `research`, `docs-seeker` | Deeper competitor/reputation research when a web search isn't enough; finding directories/docs on unfamiliar trades. |
 | `analyst` | `research` | Comprehensive dossier research beyond a plain web search. |
 | `planner` | **`web-design-ultra` (PRIMARY)**, `ui-ux-pro-max`, `frontend-design`, `design-system`, `aesthetic`, `sequential-thinking` | Run the 8-stage art-direction pipeline (Stages 1–5): design intelligence, real-site inspiration, anti-repetition, three divergent directions. Supporting skills ground palette/type/token choices. |
-| `builder` | **`web-design-ultra` (PRIMARY)**, `ui-ux-pro-max`, `frontend-design`, `frontend-development`, `web-frameworks` | Execute the chosen direction (Stage 7) with the pipeline's craft discipline + backgrounds/atmosphere recipes; self-score the Stage 8 rubric. |
+| `builder` | **`web-design-ultra` (PRIMARY)**, `ai-multimodal`, `ui-ux-pro-max`, `frontend-design`, `frontend-development`, `web-frameworks` | Execute the chosen direction (Stage 7): generate the 3 real hero/priority images (`ai-multimodal`), craft discipline + backgrounds/atmosphere recipes; self-score the Stage 8 rubric. |
 | `copywriter` | `humanizer`, `brand`, `sequential-thinking` | Make the email read human, not AI-generated; keep tone-of-voice consistent; structure persuasion flow. |
 | `critic` | **`web-design-ultra`**, `ui-ux-pro-max`, `code-review`, `design-system` | Audit each mockup against the Stage 8 10-dimension rubric AND the $10K Checklist; enforce real-reviews-only; code-quality + design-system rigor. |
 

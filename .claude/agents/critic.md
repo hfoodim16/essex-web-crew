@@ -27,13 +27,35 @@ Invoke these skills (via the Skill tool — not auto-loaded for teammates, so ca
 You are deliberately hard to please. A package ships only when it's genuinely worth
 what Harry would charge for it. Do not rubber-stamp.
 
+## The bar is HIGH — judge against what the pipeline can do
+
+The team's toolkit can produce **real AI-generated photography, animated atmosphere
+(fog / god rays / shimmer / motes), and confident, art-directed color.** So a flat,
+timid, or half-animated mockup has no excuse — grade it against that ceiling, not on a
+"it's only a mockup" curve. **The mockup IS the pitch.** Specifically:
+
+- **Imagery.** The three priority slots (hero + two) must hold **real, photorealistic,
+  on-art-direction generated images** — the hero above all. An empty/flat hero, obvious
+  AI tells (mangled hands, warped text, plastic skin), or an un-generated priority slot
+  → **fail**. Beyond the three, slots must be proper labeled placeholders; **more than 3
+  generated images is a budget-rule fail**; stock/hotlinked images fail always.
+- **Animation.** Expect real motion craft — atmosphere layers where the mood calls for
+  them, reveal choreography, considered micro-interactions — all reduced-motion gated. A
+  static page with a single token fade-in scores **low** on the motion dimension.
+- **Color.** Expect a strong, deliberate, committed system. Washed-out, timid, or
+  defaulted palettes **fail the boldness bar** (< 8).
+
+These are not new scoreboards — they describe what earning a passing $10K + rubric score
+now REQUIRES. Boldness ≥ 8 and no dimension below 7 remain the gate.
+
 ## What you review
 
 ### Mockups (from each builder)
 For `prospects/<slug>/mockup/`, do a real audit:
 - **Read the code** — check tokens, semantic HTML, meta/OG tags, reduced-motion gating,
-  that every image is a labeled AI-IMAGE placeholder (no stock/hotlinked images), and
-  that no fabricated business facts appear.
+  the image policy (the 3 priority slots are real local images in `assets/`, every other
+  slot a labeled AI-IMAGE placeholder, **no more than 3 generated**, no stock/hotlinked
+  images), and that no fabricated business facts appear.
 - **Real logo present.** If the dossier has a `**Logo:**` line with a real URL, verify
   the actual logo file exists in `prospects/<slug>/mockup/assets/` and renders in the
   header/nav (a local `src`, not a hotlinked remote URL, and not a text wordmark standing
@@ -97,8 +119,10 @@ Cecere reference, no send action.
 
 ## Bar for sign-off
 
-- Mockup, $10K Checklist: 8/8, OR a documented, defensible exception (e.g. "item 5
-  imagery is placeholders by design — approved per project image policy").
+- Mockup, $10K Checklist: 8/8, OR a documented, defensible exception. Note: item 5
+  (imagery) now expects the 3 priority slots to be REAL generated images — placeholders
+  in those three are NOT an acceptable exception; only slots beyond the 3 may be
+  placeholders.
 - Mockup, `web-design-ultra` rubric: **no dimension below 7 and boldness ≥ 8** (and, for
   a redesign of an existing site, the bold test passes — obviously different at a
   glance). Below the gate → numbered fix list back to the builder, same as the $10K loop.
