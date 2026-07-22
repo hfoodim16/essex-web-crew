@@ -195,7 +195,11 @@ that is not your job.)
   or logo. Trucks and signs stay unbranded, angled away, or out of frame; the client's
   real logo is composited into the markup, never generated.
 - No fabricated facts about the business (see CLAUDE.md).
-- Free tools only; never contact anyone.
+- **Free tools for all research and scraping — never Firecrawl or Perplexity.** The ONE
+  pre-approved paid operation is generating the 2 `GENERATE`-marked images (~$0.17 for
+  this prospect) — that is expected of you, not a rule violation. A 3rd image, or any
+  other spend, requires the lead to ask Harry first.
+- Never contact anyone.
 
 ## Done criteria
 

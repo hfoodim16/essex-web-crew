@@ -361,6 +361,12 @@ processing real images pulled from an existing client site) and `ai-multimodal`
   all research and scraping. **Do NOT call Firecrawl or Perplexity** (they cost Harry
   money) — if a page genuinely can't be reached any other way, stop and ask the lead,
   who asks Harry.
+- **The one sanctioned paid operation: the builder's 2 AI images per mockup.** Image
+  generation costs real money (~$0.04 at 1K / ~$0.13 at 2K ≈ $0.17 per prospect) and is
+  **pre-approved at that cap** — a builder generating its 2 `GENERATE`-marked images is
+  following the rules, not breaking them. Everything beyond 2 images, and every other
+  paid call, needs the lead to ask Harry first. "Free tools only" elsewhere in these docs
+  means *no Firecrawl/Perplexity*; it never meant skipping the sanctioned images.
 - **Never contact a business.** No emails, no form submissions, no DMs, no calls.
   Drafts only.
 

@@ -15,7 +15,9 @@
 ```
 Read CLAUDE.md and all files in .claude/agents/. Run the full Essex Web Crew
 pipeline per KICKOFF.md. Each teammate uses the model and skills in its own
-agent definition. Free tools only. Spawn scout, then analyst, then STOP and
+agent definition. Free tools only — no Firecrawl/Perplexity; the one
+pre-approved paid step is each builder's 2 AI images (~$0.17/prospect).
+Spawn scout, then analyst, then STOP and
 show me the top-3 shortlist for approval before spawning the planner and
 builders. After I approve, run planner → builders + copywriter → critic until
 every package passes. Don't contact any business.

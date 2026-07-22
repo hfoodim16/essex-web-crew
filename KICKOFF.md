@@ -42,7 +42,9 @@ Read CLAUDE.md and all files in .claude/agents/. Run the full Essex Web Crew
 pipeline. Each teammate uses the model in its agent definition's frontmatter —
 do NOT force a single model. The intended lineup is: scout=Sonnet,
 analyst=Opus, planner=Fable (claude-fable-5), builder=Opus, copywriter=Sonnet,
-critic=Opus. Free tools only. Teammates must invoke their skills themselves via
+critic=Opus. Free tools only — no Firecrawl/Perplexity. The one pre-approved
+paid step is each builder generating its 2 AI images (~$0.17/prospect);
+anything beyond that asks me first. Teammates must invoke their skills themselves via
 the Skill tool (see the "Skills each agent uses" table in CLAUDE.md) — skills are
 not auto-loaded for teammates.
 

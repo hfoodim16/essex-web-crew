@@ -140,7 +140,8 @@ chosen bold direction, grounded in the Stage 2 engine and Stage 3 evidence.
    **Background & atmosphere direction:** name the depth treatment the Builder should
    build from the skill's free recipes (`references/backgrounds.md` layered
    gradients/textures + `references/atmosphere.md` fog / god rays / shimmer / motes) —
-   this is how we get visual richness without paid image generation.
+   this is how the pages stay rich in depth BEYOND the 2 generated images, since most
+   image slots ship as placeholders.
    **The three directions + the pick:** record all three divergent direction briefs from
    Stage 5 and which one you chose and why (Harry reviews the reasoning).
 7. **Image list — mark the 2 to GENERATE.** List every image slot the site needs, each
@@ -178,5 +179,10 @@ are ready. Do all approved prospects, then mark your task complete.
 ## Rules
 
 - You plan; you do not build. Do not write HTML/CSS/JS.
-- Only labeled AI-IMAGE placeholders — never specify real/stock images.
-- Free tools only; never contact anyone.
+- Mark exactly **2 slots `GENERATE`** (hero + one priority slot, each with register,
+  aspect ratio, and resolution tier); every other slot is a labeled AI-IMAGE
+  `PLACEHOLDER`. Never specify real or stock images.
+- **Free tools for your own research — never Firecrawl or Perplexity.** (The
+  `search.py` engine is local and free.) The 2 images you mark `GENERATE` are a
+  pre-approved cost the Builder incurs, not a rule violation.
+- Never contact anyone.
