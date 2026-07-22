@@ -48,6 +48,24 @@ Each `prospects/<slug>/` has `dossier.md`, `website-plan.md`, `mockup/` (incl. `
 
 **9. Shut down** when done: `Ask all teammates to shut down.` — or just `/exit`.
 
+**10. Delivery to Corey — automatic.** When the critic signs a prospect off, the lead
+packages the site and drafts the Gmail to Corey (cbrapkin@gmail.com) for you. Check your
+Gmail drafts, glance at it, hit send. Nothing is ever sent without you.
+
+Zips over 200 KB can't be attached automatically — those drafts open with an
+`ATTACH BEFORE SENDING:` line naming the file, so drag it in before you send.
+
+To package or re-deliver a site by hand:
+```bash
+pipeline/package-site.sh <prospect-slug>
+```
+Writes `prospects/<slug>/<slug>-site.zip` from the best available version (`deploy-ready/`,
+else `deliverable/`, else `mockup/`), with all assets included and dev scratch files stripped.
+Or just say `deliver <slug>` and the lead does both steps. See `COREY-DEPLOY.md` for Corey's side.
+
+Always the zip, never a bare `index.html`: re-downloading an emailed HTML file makes the browser
+rename it (`index-4.html`), and hosts only serve an exactly-named `index.html` as the homepage.
+
 ---
 
 ## If something goes wrong

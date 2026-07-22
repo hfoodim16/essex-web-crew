@@ -79,8 +79,13 @@ save time.
    below 7, boldness >= 8), and the package checklist. Before the FINAL sign-off
    the critic runs the run-level distinctiveness check across all three mockups.
    All gates stay fully enforced.
-6. When all three packages are signed off, give me a summary. Do not contact any
-   business — everything is a draft on disk for me to review.
+6. As EACH prospect is signed off, deliver it per the "Delivery to Corey" section
+   of CLAUDE.md: run pipeline/package-site.sh <slug>, then create a Gmail draft to
+   cbrapkin@gmail.com with the zip attached (or, if the zip is over 200 KB, with an
+   ATTACH BEFORE SENDING line naming the zip path). Draft only — never send.
+7. When all three packages are signed off, give me a summary that lists, per
+   prospect, the draft ID and whether the zip is attached or I need to attach it.
+   Do not contact any business — everything is a draft for me to review.
 ```
 
 If a teammate can't be spawned on Fable by the `planner` frontmatter alone, spawn it

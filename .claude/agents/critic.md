@@ -205,7 +205,10 @@ the "if they say…" prepared responses (busy / cost / don't need one / yes).
   spot-check the areas it could have broken. The final PASS `audit.md` still lists all 8
   scores (the ones you carried forward plus the ones you re-checked).
 - Only when a package (mockup + outreach) fully passes, **tell the lead**:
-  "<slug> package signed off — 8/8 (or note the documented exceptions)."
+  "<slug> package signed off — 8/8 (or note the documented exceptions). Ready for
+  delivery: package the site and draft the Corey email."
+  You do not do the delivery yourself — you have no Gmail tools. The lead runs the
+  "Delivery to Corey" procedure in CLAUDE.md. Your job ends at the signal.
 
 - **Once you sign off a prospect, it is FINAL and FROZEN — never reopen it.** Do not
   re-review a signed-off mockup, do not send its builder new fixes, and do not ask for

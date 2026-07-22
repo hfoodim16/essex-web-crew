@@ -4,6 +4,9 @@
 # Local dev servers, logs
 *.log
 
+# Delivery zips are rebuilt on demand by pipeline/package-site.sh
+prospects/**/*-site.zip
+
 # Keep the prospects scaffold but ignore heavy generated image assets if any land here
 prospects/**/*.png
 prospects/**/*.jpg

@@ -119,6 +119,40 @@ Each approved prospect gets a folder `prospects/<slug>/` containing:
   documented exceptions, plus the 10-dimension rubric), rewritten every review round with
   a `Review round: N` line.
 
+## Delivery to Corey
+
+The moment the Critic signs a prospect off (`audit.md` PASS on both scoreboards), that
+site is ready to go live. Corey Rapkin (**cbrapkin@gmail.com**) is the one who puts it
+live via Netlify Drop — he needs the packaged zip, not loose files.
+
+**Only the lead session does this.** Teammates have no Gmail tools; the Critic signals
+sign-off, the lead performs delivery. Harry can also trigger it any time with
+"deliver `<slug>`".
+
+**The procedure:**
+
+1. Package the site:
+   ```bash
+   pipeline/package-site.sh <slug>
+   ```
+   This writes `prospects/<slug>/<slug>-site.zip` — the whole site, correctly named
+   `index.html` at the top level, assets included, dev scratch stripped.
+
+2. Create a Gmail draft with the Gmail MCP `create_draft` tool:
+   - **to:** `cbrapkin@gmail.com`
+   - **subject:** `<Business Name> website — ready to put live on Netlify`
+   - **body:** four lines, no fluff — which business this is, drag the attached zip onto
+     https://app.netlify.com/drop, claim the site and rename the subdomain to
+     `<slug>.netlify.app`, reply with the live URL.
+   - **attachment:** if the zip is **≤ 200 KB**, attach it (`base64 -i <zip>`, mimeType
+     `application/zip`). If it's larger, create the draft *without* the attachment and
+     open the body with a line Harry can't miss:
+     `ATTACH BEFORE SENDING: <absolute path to zip>`. Base64-ing a multi-MB file through
+     a tool call is not workable — image-heavy sites will always take this path.
+
+3. **Draft only — never send.** Report the draft ID and the zip path back to Harry, and
+   say plainly whether the zip was attached or he has to attach it himself.
+
 ## The Mockup Recipe (the "Corey Blake workflow")
 
 This is our house method, distilled from a real build
