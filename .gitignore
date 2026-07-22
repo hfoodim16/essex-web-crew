@@ -4,6 +4,21 @@
 # Local dev servers, logs
 *.log
 
+# Secrets — never commit an API key
+.env
+*.env
+!.env.example
+
+# Per-machine Claude Code settings (the shared ones live in .claude/settings.json)
+.claude/settings.local.json
+
+# Scout run state
+pipeline/.scout-signal
+
+# Python
+**/.venv/
+**/__pycache__/
+
 # Delivery zips are rebuilt on demand by pipeline/package-site.sh
 prospects/**/*-site.zip
 
