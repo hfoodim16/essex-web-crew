@@ -1,7 +1,7 @@
 ---
 name: critic
 description: Quality gate — audits every mockup against the $10K Checklist and every email against the package checklist, messages fixes directly to builders/copywriter, loops until sign-off. Reusable as an agent-team teammate.
-tools: Read, Write, Edit, Bash, Glob, Grep, Skill
+tools: Read, Write, Edit, Bash, Glob, Grep, Skill, mcp__Claude_Browser__preview_start, mcp__Claude_Browser__navigate, mcp__Claude_Browser__computer, mcp__Claude_Browser__read_page, mcp__Claude_Browser__read_console_messages, mcp__Claude_Browser__resize_window, mcp__Claude_Browser__javascript_tool
 model: opus
 ---
 

@@ -21,14 +21,22 @@ Harry generates the real images and sends the outreach himself.
 
 - **Where:** Essex County, NJ (Newark, Montclair, Bloomfield, Nutley, Belleville,
   West Orange, Livingston, Cedar Grove, Verona, Caldwell, the Oranges, etc.).
-- **Niches:** **lead with tree service, lawn care, and small landscapers** — a real
+- **The real filter — a naturally static website, NOT an industry.** We target businesses
+  whose site is **low-maintenance / static**: a brochure, not an app. "Build once, barely
+  touch it" — no weekly menus, no e-commerce catalog, no booking engine, no
+  constantly-changing content. **We are not limited to blue-collar trades.**
+- **Lead niche (proven):** tree service, lawn care, and small landscapers — a real
   scouting run showed these are full of owner-operators on a Facebook page, a dead
   domain, or a 2000s-era site (exactly our target). **Largely skip masonry, paving, and
   fencing** unless a specific listing shows a weak/absent site — those trades here have
-  mostly bought modern template sites and filter out fast. Also fair game: any local
-  service business whose website is naturally **low-maintenance / static** — no weekly
-  menus, no e-commerce, no booking engine required. "Build once, barely touch it" sites
-  are the kind we want to sell.
+  mostly bought modern template sites and filter out fast.
+- **Equally fair game beyond the trades:** accountants/CPAs, law offices, insurance
+  agents, auto repair, cleaning services, pest control, movers, home inspectors,
+  chiropractors/dentists, tutors/music teachers, photographers, funeral homes, vets.
+  Professional offices often sit on a neglected 2000s-era site — prime targets.
+- **Skip industries needing constant updates** (the opposite of what we sell):
+  restaurants/cafés (menus), e-commerce/boutiques (inventory), event venues and gyms
+  (schedules), news/blog-driven businesses.
 - **Portfolio anchor:** Cecere Brothers Landscaping (Harry's existing client) — use
   it as the credibility reference in pitches.
 
@@ -92,11 +100,13 @@ the team:
 - **Stages 1–5 → Planner.** Brief (from the dossier) → design intelligence
   (`ui-ux-pro-max` search engine + the industry's conventional palette) → real-site
   inspiration (3–5 references, extract patterns never copy) → anti-repetition check
-  (read the skill's `data/design-memory.md`) → **three genuinely divergent directions**,
-  pick the boldest. All recorded in `website-plan.md`.
-- **Stage 6 → runs, capped.** Builders generate **up to 3 real AI images per mockup**
-  (hero + the two highest-impact slots the Planner marked `GENERATE`) via `ai-multimodal`
-  + the skill's `references/imagery.md` photorealism kit; every slot beyond 3 stays a
+  (read this project's own `./design-memory.md` at the repo root, NOT the skill's global
+  `data/design-memory.md` — the crew keeps its own ban list so prospects diverge from each
+  other) → **three genuinely divergent directions**, pick the boldest. All recorded in
+  `website-plan.md`.
+- **Stage 6 → runs, capped.** Builders generate **up to 2 real AI images per mockup**
+  (hero + the one highest-impact slot the Planner marked `GENERATE`) via `ai-multimodal`
+  + the skill's `references/imagery.md` photorealism kit; every slot beyond 2 stays a
   labeled AI-IMAGE placeholder (see Image policy). ALSO layer the skill's free CSS craft:
   `references/backgrounds.md` (background/texture/depth) and `references/atmosphere.md`
   (animated fog, god rays, shimmer, motes — reduced-motion gated). Real imagery + real
@@ -110,8 +120,9 @@ the team:
   below 7, boldness ≥ 8** — enforced by the Critic alongside the $10K Checklist.
 - **Anti-repetition:** consecutive prospects must not share a font pairing, palette
   family, or layout archetype. After a prospect's sign-off, its builder appends the
-  choices (font pairing, palette, layout archetype, background system) to the skill's
-  `data/design-memory.md` so the next run diverges.
+  choices (font pairing, palette, layout archetype, background system) to this project's
+  `./design-memory.md` (repo root — the crew's own log, not the skill's global file) so the
+  next prospect diverges.
 
 ### Step 1 — Design brief before any code
 Commit to a **named art direction** that fits the trade (e.g. "earthy editorial"
@@ -185,18 +196,36 @@ Save desktop + mobile screenshots to `prospects/<slug>/screenshots/`.
 
 ## Image policy (hard rule)
 
-**Tiered: 3 real AI images per mockup, placeholders beyond.**
+**Tiered: 2 real AI images per mockup, placeholders beyond.**
 
-- **Builders generate up to 3 AI images per mockup — HARD CAP.** Use the
-  `ai-multimodal` skill (Gemini, ~$0.04/image ≈ $0.12/prospect — pre-approved by Harry
-  at this cap; NEVER exceed 3 without the lead asking Harry first).
-- **Priority order: the hero first**, then the two next most visible slots — the
-  Planner marks these three as `GENERATE` in the plan's image list.
-- **Quality bar:** follow the photorealism kit in
-  `~/.claude/skills/web-design-ultra/references/imagery.md` — maximally photorealistic,
-  on-art-direction, no obvious AI tells. Optimize to WebP at correct display size,
+- **Builders generate up to 2 AI images per mockup — HARD CAP.** Use the
+  `ai-multimodal` skill (Gemini `gemini-3-pro-image` / Nano Banana Pro). Priced by
+  resolution: **~$0.04 at 1K, ~$0.13 at 2K.** Per-prospect ≈ $0.08 (both 1K) to $0.27
+  (both 2K); typical one-2K-hero-plus-one-1K ≈ $0.17. Pre-approved by Harry at the
+  2-image cap; NEVER exceed 2 without the lead asking Harry first.
+- **Priority order: the hero first**, then the one next most visible slot — the
+  Planner marks these two as `GENERATE` in the plan's image list.
+- **The Planner sizes each GENERATE slot** (see the plan-spec below): aspect ratio +
+  resolution tier + where it renders. Rule of thumb: **full-bleed / background hero → `2K`;
+  contained cards, plates, split-hero, OG → `1K`** (see the "Fit the slot" section of
+  `imagery.md`). The Builder passes `--aspect-ratio` and `--image-size` accordingly.
+- **Quality bar — "proud contractor" register is the DEFAULT for trades.** Follow the
+  photorealism kit in `~/.claude/skills/web-design-ultra/references/imagery.md`. The bar is
+  the **best photo on the business's Google Business profile**: **flawless finished work**
+  (crisp stripes, clean edges, spotless install — nothing sloppy, no clippings/tools left
+  out) at an **attractive property** (good curb appeal, nice home), shot **casually but
+  flatteringly** in pleasant natural light. Two-way test: *would they proudly post it, AND
+  would a visitor believe they took it?* **Both fail modes are rejects** — "too perfect /
+  stock-ad" (reads fake) AND "too shabby / mediocre" (believable but not worth showing).
+  **One register across the whole mockup** (hero + all slots), set by the Planner — never
+  mix. Editorial (pro-shoot look) is opt-in with the Planner's justification.
+  **No fabricated branding:** generated images must show no readable business name/logo —
+  the model invents fake or competitor names (a truck lettered with the wrong brand). Keep
+  vehicles/signs unbranded, angled, or out of frame; composite the prospect's REAL name/logo
+  in the build if a branded truck or sign is wanted. Optimize to
+  WebP, **downscaling to the real display width** (never ship a 2K file into a small slot),
   store in `prospects/<slug>/mockup/assets/`, reference locally (never hotlink).
-- **Every slot beyond the 3 stays a labeled AI-IMAGE placeholder:**
+- **Every slot beyond the 2 stays a labeled AI-IMAGE placeholder** (this is the norm — most image slots ship as marked placeholders for the client to fill with real job photos)**:**
 
 ```html
 <!-- AI-IMAGE: wide drone shot of a finished bluestone paver patio at golden hour -->
@@ -268,7 +297,7 @@ each agent's `tools` list includes `Skill`.
 | `scout` | `research`, `docs-seeker` | Deeper competitor/reputation research when a web search isn't enough; finding directories/docs on unfamiliar trades. |
 | `analyst` | `research` | Comprehensive dossier research beyond a plain web search. |
 | `planner` | **`web-design-ultra` (PRIMARY)**, `ui-ux-pro-max`, `frontend-design`, `design-system`, `aesthetic`, `sequential-thinking` | Run the 8-stage art-direction pipeline (Stages 1–5): design intelligence, real-site inspiration, anti-repetition, three divergent directions. Supporting skills ground palette/type/token choices. |
-| `builder` | **`web-design-ultra` (PRIMARY)**, `ai-multimodal`, `ui-ux-pro-max`, `frontend-design`, `frontend-development`, `web-frameworks` | Execute the chosen direction (Stage 7): generate the 3 real hero/priority images (`ai-multimodal`), craft discipline + backgrounds/atmosphere recipes; self-score the Stage 8 rubric. |
+| `builder` | **`web-design-ultra` (PRIMARY)**, `ai-multimodal`, `ui-ux-pro-max`, `frontend-design`, `frontend-development`, `web-frameworks` | Execute the chosen direction (Stage 7): generate the 2 real hero/priority images (`ai-multimodal`), craft discipline + backgrounds/atmosphere recipes; self-score the Stage 8 rubric. |
 | `copywriter` | `humanizer`, `brand`, `sequential-thinking` | Make the email read human, not AI-generated; keep tone-of-voice consistent; structure persuasion flow. |
 | `critic` | **`web-design-ultra`**, `ui-ux-pro-max`, `code-review`, `design-system` | Audit each mockup against the Stage 8 10-dimension rubric AND the $10K Checklist; enforce real-reviews-only; code-quality + design-system rigor. |
 

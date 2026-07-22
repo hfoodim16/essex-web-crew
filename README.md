@@ -1,7 +1,8 @@
 # Essex Web Crew
 
 A Claude Code **agent team** that runs like a mini web agency. Each run it scouts
-Essex County, NJ trade businesses that need a website, scores them, pauses for Harry's
+Essex County, NJ businesses whose websites are naturally static/low-maintenance
+(leading with trades, but any industry that fits), scores them, pauses for Harry's
 approval, then builds a full review-ready pitch package for the top 3: a research
 dossier, a working website mockup (built the "Corey Blake workflow" way), and a
 personalized outreach email.
@@ -37,7 +38,7 @@ prospects/
 
 | Role | Model | Skills | Does |
 |------|-------|--------|------|
-| **scout** | Sonnet | `research`, `docs-seeker` | Finds 10–15 qualifying businesses (free web tools). |
+| **scout** | Sonnet | `research`, `docs-seeker` | Finds 10–15 qualifying businesses — any industry with a naturally static site, leading with trades (free web tools). |
 | **analyst** | Opus | `research` | Scores them, captures each finalist's real site content + real reviews, writes dossiers, pitches the shortlist. |
 | **planner** | Fable | **`web-design-ultra`**, `ui-ux-pro-max`, `frontend-design`, `design-system`, `aesthetic`, `sequential-thinking` | Runs the web-design-ultra pipeline (Stages 1–5) → `website-plan.md`: art direction, fonts, palette, page map, three divergent directions. |
 | **builder** ×3 | Opus | **`web-design-ultra`**, `ai-multimodal`, `ui-ux-pro-max`, `frontend-design`, `frontend-development`, `web-frameworks` | Each *implements* one prospect's chosen direction (Stage 7) into a mockup with 3 real AI images (hero + 2) + placeholders beyond; owns its own folder. |

@@ -119,12 +119,26 @@ chosen bold direction, grounded in the Stage 2 engine and Stage 3 evidence.
    this is how we get visual richness without paid image generation.
    **The three directions + the pick:** record all three divergent direction briefs from
    Stage 5 and which one you chose and why (Harry reviews the reasoning).
-7. **Image list — mark the 3 to GENERATE.** List every image slot the site needs, each
-   with a specific, photorealistic generation prompt. **Mark exactly three as
-   `GENERATE`** — the hero first, then the two highest-impact/most-visible slots — which
-   the Builder will actually generate (Gemini, hard cap 3). Mark every other slot
-   `PLACEHOLDER` (labeled AI-IMAGE box; Harry generates later). Write the GENERATE
-   prompts to the photorealism-kit standard in
+7. **Image list — mark the 2 to GENERATE.** List every image slot the site needs, each
+   with a specific, photorealistic generation prompt. **Mark exactly two as
+   `GENERATE`** — the hero first, then the one highest-impact/most-visible slot — which
+   the Builder will actually generate (Gemini, hard cap 2). Mark every other slot
+   `PLACEHOLDER` (labeled AI-IMAGE box; Harry/the client fills later). For **each
+   GENERATE slot, specify: register + size**:
+   - **Register — pick ONCE per prospect, apply to the hero + every GENERATE slot (never
+     mix).** `proud-contractor` (DEFAULT for trades: **flawless finished work at an
+     attractive home, shot casually but flatteringly in pleasant natural light** — like the
+     best photo on their Google Business profile; rejected if too-perfect/stock-ad OR
+     too-shabby) or `editorial` (pro-shoot look; only with a one-line justification that a
+     commissioned shoot fits the brand's positioning).
+   - **Distinct property** — if two+ GENERATE slots are job/project photos, give each a
+     DIFFERENT house (vary architecture, siding color, street) so the gallery looks like
+     real jobs at different homes, not the same AI house twice.
+   - **Size** — aspect ratio (`16:9 · 3:4 · 4:3 · 9:16 · 1:1`), resolution tier (`1K`/`2K`),
+     and where it renders — e.g. "full-bleed hero → `16:9`, `2K`, authentic" vs "service
+     card → `4:3`, `1K`, authentic". Rule: full-bleed/background → 2K, contained → 1K.
+
+   Write the GENERATE prompts to the photorealism-kit standard (register-aware) in
    `~/.claude/skills/web-design-ultra/references/imagery.md` so the Builder can generate
    directly. No real/stock images — generated or placeholder only.
 8. **Embed placeholders** — where a contact form / Google Map / booking slot goes.
