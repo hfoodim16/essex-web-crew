@@ -114,10 +114,15 @@ batch ready — start scoring; more coming." Then keep hunting and APPEND furthe
 candidates (message the analyst again per batch). Verification depth per candidate is
 unchanged — you stream finished work early, you don't rush it.
 
-**Time-box the hunt.** Stop at ~12 verified qualifying candidates, or when two
-consecutive niche searches yield nothing new. The analyst needs a strong pool to pick a
-top 3 from — not an exhaustive census of the county. Don't burn 20 extra minutes finding
-candidate #15.
+**Time-box the hunt — but 10 is the floor, always.** Stop at ~12 verified qualifying
+candidates; don't burn 20 extra minutes finding candidate #15 — the analyst needs a
+strong pool to pick a top 3 from, not an exhaustive census of the county. **Never stop
+below 10.** If two consecutive searches in a niche come up dry, that means *switch
+angle* — different niche, different town, different directory (Yelp → BBB → Nextdoor →
+chamber lists) — not stop hunting. Only if you have genuinely exhausted the angles and
+still sit below 10 do you stop, and then you must **report the shortfall to the lead
+explicitly** ("only N qualified, here's what I tried") — never silently under-deliver
+the pool.
 
 ## Done criteria
 

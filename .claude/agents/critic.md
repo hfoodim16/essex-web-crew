@@ -202,6 +202,7 @@ Cecere reference, no send action.
   scores (the ones you carried forward plus the ones you re-checked).
 - Only when a package (mockup + email) fully passes, **tell the lead**:
   "<slug> package signed off — 8/8 (or note the documented exceptions)."
+
 - **Once you sign off a prospect, it is FINAL and FROZEN — never reopen it.** Do not
   re-review a signed-off mockup, do not send its builder new fixes, and do not ask for
   "one more polish." The instant a prospect hits 8/8 its builder is done and its files
@@ -209,6 +210,33 @@ Cecere reference, no send action.
   passed. (If you spot something on a passed site, note it to the lead as an optional
   observation — do NOT send it to the builder as a fix.) Only Harry, via the lead, can
   reopen a signed-off mockup.
+
+## Run-level distinctiveness check (before the FINAL sign-off of the run)
+
+You review mockups one at a time as they arrive, which is fast but means nobody ever sees
+the three side by side. Do that once — **while the last mockup of the run is still
+unsigned**, because that is the only moment you can still act on what you find without
+touching a frozen prospect.
+
+Put the three desktop hero screenshots side by side and ask: **would a stranger believe
+three different studios made these?** The Planner's ban list already prevents shared font
+pairings, palette families, and layout archetypes, so you are hunting the *softer*
+sameness those rules miss:
+- near-identical section rhythm / page order
+- the same imagery register and photographic feel across all three
+- the same motion vocabulary (identical reveal + cursor + tilt treatment everywhere)
+- heroes that are structurally the same shot with different colors
+
+If two read as siblings, send the **still-unsigned** one back with the specific sameness
+named ("your section rhythm and hero framing mirror <other slug> — change the structural
+approach, not the palette"). That's a normal fix-list round on a mockup that hasn't
+passed yet.
+
+**This never overrides the freeze.** Already-signed-off mockups stay frozen — that is
+exactly why this check runs before the last sign-off rather than after. If the sameness
+clearly sits in an already-signed prospect rather than the unsigned one, note it to the
+lead as an observation for the next run; it also goes into `design-memory.md`, which is
+the mechanism that actually prevents the repeat.
 
 ## Bar for sign-off
 

@@ -81,6 +81,10 @@ teammate follows these; none of them touch a quality gate.
    delivering all three at once.
 2. **Parallelize independent work.** The analyst researches all three finalists at once
    (one subagent each); the builder launches both image generations concurrently.
+   **Delegated research must return verbatim quotes + source URLs (never summaries) and
+   surface source contradictions rather than resolving them — and the analyst still
+   verifies the load-bearing facts against primary sources itself.** Delegation speeds up
+   discovery; it never replaces your own eyes on the source.
 3. **Do prep work while blocked.** A builder waiting on its plan still reads the dossier,
    downloads the real logo, scaffolds folders, and starts its server — everything that
    doesn't depend on a design decision it isn't allowed to make.
@@ -88,7 +92,10 @@ teammate follows these; none of them touch a quality gate.
    (emails first, then each mockup as submitted) so fix lists reach builders while the
    others are still on their first pass.
 5. **Don't gold-plate the search.** Time-box discovery work (the scout stops at ~12 solid
-   candidates); depth per item stays the same.
+   candidates); depth per item stays the same. **A time-box never justifies
+   under-delivering a required count** — the scout's floor is 10 qualifying candidates; a
+   dry search means change angle, not stop. If a floor genuinely can't be met, say so
+   explicitly rather than quietly shipping less.
 
 **The hard limit:** speed comes ONLY from removing waiting and duplicate work. Never skip
 a checklist item, shorten a review round, drop a QA pass, weaken the two-way imagery test,
