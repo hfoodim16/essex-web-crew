@@ -1,5 +1,19 @@
 # Harry's Playbook
 
+> **⚠️ The business model changed — read this first.** We now work **ask-first**: find a
+> business that could use a site → send them the **10-question questionnaire** → build
+> FROM their answers → keep refining it with them. We do **not** build a site
+> speculatively and pitch it.
+>
+> In practice: **Run A** (scout → analyst → questionnaire + first-contact outreach, *no
+> mockup*) → you send it and collect answers → **Run B** (the "skip to planner" prompt in
+> `KICKOFF.md`: plan from their answers → build → critic → iterate with the client).
+> Both prompts are in `KICKOFF.md`.
+>
+> The steps below still describe the run's shape correctly, but anywhere they say you're
+> sending a finished mockup as first contact, you're now sending the **questionnaire**
+> instead — the mockup comes after their answers.
+
 > This playbook covers the **pitch phase** — from summoning the team to a client saying
 > yes. For what happens *after* a yes (real content + photos, production build, buying the
 > domain, going live, and maintenance), see **`FULL-PROCESS.md`**, which continues these

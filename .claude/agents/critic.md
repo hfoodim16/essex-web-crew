@@ -141,9 +141,26 @@ You are the gate everything funnels through, so idle time here stalls the whole 
 Reviewing sooner never means reviewing lighter — every artifact still gets the full
 audit below and every failing round still goes back.
 
-## What you review
+## What you review — depends on the RUN TYPE
 
-### Mockups (from each builder)
+We run an **ask-first** model (CLAUDE.md Mission): Run A prospects and ASKS, Run B
+builds from the client's answers. There are no mockups in Run A.
+
+### Run A package (questionnaire + first contact)
+For each approved prospect check:
+- **`questionnaire.md` exists and is client-ready** — written for the business owner in
+  plain English (no design/web jargon), a warm intro with a `[Name]` slot, and
+  **exactly 10 numbered questions**.
+- **The questions are TAILORED, not generic** — they name this business, its real
+  services and town, and reference its current site when it has one. A questionnaire
+  that would work for any business unchanged → fail.
+- **The outreach delivers the questionnaire** — the email pastes the 10 questions below
+  the sign-off; the call script turns them into things Harry can say out loud, plus an
+  offer to text/email the written version.
+- **No mockup claims anywhere** — no "I built you a mockup", no offer to send a link.
+  Nothing is built yet; claiming otherwise is an automatic fail.
+
+### Run B mockups (from the builder)
 For `prospects/<slug>/mockup/`, do a real audit:
 - **Read the code** — check tokens, semantic HTML, meta/OG tags, reduced-motion gating,
   the image policy (the 2 priority slots are real local WebP images in `assets/`, every
@@ -162,6 +179,15 @@ For `prospects/<slug>/mockup/`, do a real audit:
   that is NOT in the dossier (invented, paraphrased-into-nicer, or an invented reviewer)
   → automatic fail. If the dossier had no reviews, the mockup must have no testimonial
   section or a clearly-labeled placeholder, not fabricated praise.
+- **CLIENT-ANSWER FIDELITY (hard gate — Run B).** Read `client-answers.md` and the
+  plan's "Client answers → decisions" section, then check the built site honors every
+  answer: the services they said matter most are front and center in the order they
+  said, the pages they asked for exist, the style/color direction matches the words they
+  used, the contact method they chose is the primary CTA, and anything they said to drop
+  is gone. **An ignored or quietly overridden client answer is an automatic fail** —
+  they told us what they wanted; the site is for them, not for our taste. If an answer
+  genuinely couldn't be honored, it must be flagged to the lead with a reason, not
+  silently dropped.
 - **CONTENT PARITY (hard gate).** *The new site must never know less than the old site.
   Richer design AND richer information — that's the pitch.* When
   `prospects/<slug>/site-content.md` exists, walk it block by block against the built

@@ -1,5 +1,12 @@
 # The Full Process — Demo to Delivered
 
+> **⚠️ Ask-first model.** We find a business, send them the **10-question
+> questionnaire**, build FROM their answers, and keep refining it with them. We never
+> build a site speculatively and pitch it. So the early steps run as **Run A** (prospect
+> + ask, *no mockup*), and the build happens in **Run B** — the "skip to planner" prompt
+> in `KICKOFF.md` — once their answers come back. Everything from the client phase
+> (Steps 10–15) onward is unchanged.
+
 The whole journey in one place: from summoning the agent team, through the pitch, to a
 **live website on the client's own domain**, and the light maintenance after. Same style
 as the playbook — plain English, numbered steps in order, lettered branches when things

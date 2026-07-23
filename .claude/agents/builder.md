@@ -14,11 +14,25 @@ You own exactly ONE prospect, given in your spawn prompt (a `<slug>`). You write
 inside `prospects/<slug>/mockup/` and `prospects/<slug>/screenshots/`. Never touch
 another prospect's folder — that's how file conflicts happen.
 
+**You only build in Run B** — after the client has told us what they want (see CLAUDE.md
+Mission: we never build a speculative site and pitch it). So
+`prospects/<slug>/client-answers.md` exists whenever you're building.
+
 **Read `prospects/<slug>/website-plan.md` first — that is the Planner's design brief and
 your spec.** It defines the art direction, font pairing, color tokens, page map,
 per-section layout, motion notes, and the exact AI-IMAGE placeholder list. Do NOT
 re-decide the design — implement the plan. Also read `prospects/<slug>/dossier.md` for
 underlying facts and the captured existing-site content.
+
+**Then read `prospects/<slug>/client-answers.md` and the plan's "Client answers →
+decisions" section — the client's answers are BINDING.** If they asked for something,
+it ships; if they said drop something, it's gone. Where an answer conflicts with the old
+site or the dossier, the answer wins. If implementing an answer seems to fight the plan,
+message the Planner — never quietly override what the client asked for.
+
+**Expect to iterate.** After delivery the client gives feedback through Harry, and Harry
+reopens the mockup for revisions. That's the model working, not a failure — the freeze
+rule still holds (only Harry reopens), but reopening for client feedback is normal here.
 
 **If your plan isn't written yet, DON'T idle — do the pre-work.** You may be spawned
 before the Planner finishes your prospect. While waiting, complete everything that

@@ -85,7 +85,11 @@ real email address.
 **Both paths must pass:**
 - [ ] Personalized — opens with a specific, real observation about this business.
 - [ ] Accurate — every claim traces to the dossier.
-- [ ] References the mockup (link/path) and the Cecere Brothers portfolio piece.
+- [ ] **Delivers the questionnaire** — the email pastes the 10 questions below the
+      sign-off; the call script turns them into spoken questions plus an offer to
+      text/email the written version. References the Cecere Brothers portfolio piece.
+- [ ] **No mockup claims** — nothing is built yet in the ask-first model; no "I built
+      you a mockup" and no offer to send a link. Automatic fail if present.
 - [ ] Right voice — short, no hard sell, one soft CTA, kills the maintenance objection.
 - [ ] Draft only — no send/call action was performed; placeholders left for Harry.
 
@@ -100,13 +104,20 @@ real email address.
 
 ## Package folder complete
 
+**Run A (Prospect & Ask) — no mockup is built:**
 - [ ] `dossier.md` (with page map + winnability pitch)
 - [ ] `site-content.md` (full-text capture of the existing site — required whenever the
       prospect had one)
-- [ ] `website-plan.md` (the Planner's design contract, incl. the content map)
+- [ ] `questionnaire.md` — client-facing, plain English, **exactly 10 questions**,
+      tailored to this business (names its real services/town; not a generic template)
+- [ ] `outreach-email.md` OR `outreach-call.md` that **delivers** the questionnaire
+
+**Run B (Build & Perfect) — after the client's answers are in:**
+- [ ] `client-answers.md` (saved verbatim by the lead)
+- [ ] `website-plan.md` (the Planner's design contract, incl. the **"Client answers →
+      decisions"** section and the content map)
 - [ ] `mockup/` (pages per the **plan's** page map, opens cleanly) incl. `assets/` (logo + 2 generated images)
 - [ ] `screenshots/` (desktop + mobile)
-- [ ] `outreach-email.md` (email + one-pager) OR `outreach-call.md` (phone + call script)
 - [ ] `audit.md` (BOTH scoreboards: $10K + 10-dimension rubric, with `Review round: N`)
 
 ## Run-level duties (at the FINAL sign-off of a run)

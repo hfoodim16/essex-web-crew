@@ -2,18 +2,28 @@
 
 **Setting this up on a new machine? Start with [SETUP-COREY.md](SETUP-COREY.md).**
 
-A Claude Code **agent team** that runs like a mini web agency. Each run it scouts
-Essex County, NJ businesses whose websites are naturally static/low-maintenance
-(leading with trades, but any industry that fits), scores them, pauses for Harry's
-approval, then builds a full review-ready pitch package for the top 3: a research
-dossier, a working website mockup (built the "Corey Blake workflow" way), and personalized
-outreach — an email when a real address was found, otherwise a phone number + call script.
+A Claude Code **agent team** that runs like a mini web agency on an **ask-first** model:
+find a business that could use a website → **ask what they want** → build from their
+answers → keep refining it with them. We never build a site speculatively and pitch it.
 
-Each mockup ships with **2 real AI-generated images** (hero + one priority slot) and
+Work happens in two runs (both prompts in [KICKOFF.md](KICKOFF.md)):
+
+- **Run A — Prospect & Ask.** Scouts Essex County, NJ businesses whose websites are
+  naturally static/low-maintenance (leading with trades, but any industry that fits),
+  scores them, pauses for Harry's approval, then produces per prospect: a research
+  dossier, a full capture of their existing site, a **tailored 10-question
+  questionnaire**, and first-contact outreach that delivers it — an email when a real
+  address was found, otherwise a phone number + call script. **No mockups.**
+- **Run B — Build & Perfect.** Once the client answers, Harry pastes their answers into
+  the "skip to planner" prompt. The planner plans from the answers (they outrank the old
+  site and the dossier), one builder builds it the "Corey Blake workflow" way, the critic
+  gates it, and the site goes back to the client for feedback and iteration.
+
+Each built site ships with **2 real AI-generated images** (hero + one priority slot) and
 labeled placeholders for the rest, run through the `web-design-ultra` design pipeline.
 
 **The team never contacts anyone.** Everything lands on disk for Harry to review;
-Harry generates the remaining images and sends outreach himself.
+Harry sends the questionnaire and outreach himself and relays the client's answers back.
 
 ## Layout
 

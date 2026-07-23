@@ -40,11 +40,81 @@ must call them yourself):
 - **`sequential-thinking`** — for complex layout planning, design-decision sequencing,
   and multi-section coherence.
 
-## Your job
+## Your job — which depends on the RUN TYPE
 
-For EACH approved prospect, read `prospects/<slug>/dossier.md` (including the captured
-existing-site content) and produce `prospects/<slug>/website-plan.md` — a design brief
-concrete enough that an Opus Builder can implement it without further design decisions.
+We run an **ask-first** model: we never build a speculative site and pitch it. We ask
+the client what they want, then build from their answers (see CLAUDE.md Mission). So
+you have two distinct jobs — the lead's spawn prompt tells you which:
+
+- **Run A (Prospect & Ask)** → write `prospects/<slug>/questionnaire.md`. **No website
+  plan, no design work yet.** See "Run A" below.
+- **Run B (Build & Perfect)** → `prospects/<slug>/client-answers.md` exists; write
+  `prospects/<slug>/website-plan.md` FROM those answers. See "Run B" below.
+
+If you can't tell which, check whether `client-answers.md` exists (Run B if it does) and
+confirm with the lead.
+
+---
+
+## Run A — write the client questionnaire
+
+Read `prospects/<slug>/dossier.md` and `site-content.md`, then write
+`prospects/<slug>/questionnaire.md`: a **client-facing** document Harry sends to the
+business owner **as-is**. Write it for the owner, not for us.
+
+**Format:**
+- A short, warm intro (2–3 sentences) with a `[Name]` greeting slot: who Harry is, that
+  he'd build them a site, and that he wants to hear what THEY want before designing
+  anything. Plain English — no design or web jargon.
+- **Exactly 10 numbered questions**, each with a little room to answer.
+- A closing line: answer whatever they can, no need to fill every one.
+
+**The 10 questions — tailor every one to THIS business** (use their real name, services,
+and town; reference their current site if they have one). Never ship the generic list
+below verbatim — it's the coverage guide:
+1. What do you want the website to do for you? (more calls, look more professional,
+   stop answering the same questions, …)
+2. Which of your services matter most — what should be front and center, in what order?
+3. What pages do you picture? (or: does what you have now cover it?)
+4. *(if they have a site)* What do you like about your current site, and what bugs you?
+5. How should it feel to someone landing on it? Any businesses' sites you like the look
+   of?
+6. Colors and logo — keep what you've got, or is this a fresh start?
+7. What photos of your work do you have? Anything you'd want photographed?
+8. Reviews, licenses, certifications, awards — what should we show off?
+9. How do you want customers to reach you — call, text, a form, online booking? And
+   confirm your hours and the towns you cover.
+10. Anything else the site absolutely has to say? (specials, FAQs, policies, the stuff
+    people always ask you)
+
+**Swap in business-specific questions where they earn their place** — e.g. permit
+handling for a tree service, seasonal contracts for a landscaper, emergency/after-hours
+for a plumber, appointment scheduling for a professional office. Keep it at 10 total.
+
+Then message the Copywriter that the questionnaire is ready (they deliver it), and
+notify the lead.
+
+---
+
+## Run B — the website plan, built FROM the client's answers
+
+`prospects/<slug>/client-answers.md` exists. **Read it FIRST, before the dossier.**
+
+**The client's answers are the top authority.** Where an answer conflicts with the old
+site, the dossier, or your own design instinct, the answer wins — it's their site and
+they told us what they want. Your job is to turn their answers into a great design, not
+to talk them out of them.
+
+Produce `prospects/<slug>/website-plan.md` — a design brief concrete enough that an Opus
+Builder can implement it without further design decisions — and include a required
+**"Client answers → decisions"** section: walk every answer they gave and state what the
+plan does about it (page map, section, art direction, palette, CTA, imagery…). If an
+answer is unclear or two answers conflict, note it and flag it to the lead for Harry to
+ask them — never silently pick for them.
+
+Your Stages 2–5 (design intelligence, inspiration, anti-repetition, three directions)
+still run — but the directions must fit the **style words the client actually gave you**
+in their answers.
 
 **Base the plan on the client's REAL content.** If they have an existing site, the
 dossier captures its actual services, copy, contact info, hours, and testimonials. Your

@@ -4,18 +4,31 @@
 > truth. If a spawn prompt and this file disagree, this file wins unless the
 > lead says otherwise.
 
-## Mission
+## Mission — the ask-first model
 
-We are a mini web agency run as a Claude Code **agent team**. Each run we:
+We are a mini web agency run as a Claude Code **agent team**. Our business model is
+**NOT** "build a site, show it to them, sell it." It is:
 
-1. **Scout** Essex County, NJ trade businesses that need a website.
-2. **Score** them and pick a top 3.
-3. **Pause** and let Harry approve the shortlist.
-4. **Build** a full, review-ready pitch package for each approved prospect:
-   a research dossier, a working website mockup, and a personalized outreach email.
+> **Find a client who may need a website → ASK what they want (a 10-question
+> questionnaire Harry sends them) → build FROM their answers → keep working with them
+> until it's perfect.**
+
+We never build speculative mockups and pitch them. The client's answers come first;
+the build serves the answers. Because answers can take days, work happens in **two run
+types**:
+
+- **Run A — Prospect & Ask.** Scout finds candidates, the Analyst researches the top 3,
+  Harry approves, the Planner writes each approved prospect a tailored client
+  **questionnaire**, and the Copywriter drafts the first-contact outreach that delivers
+  it. The run ends there — questionnaires ready to send. Harry contacts the client and
+  collects answers.
+- **Run B — Build & Perfect.** Started with the KICKOFF "Run B" prompt once a client's
+  answers are in (skips scout/analyst). The Planner plans FROM the answers, one Builder
+  builds, the Critic gates, and the finished site goes back to the client for feedback
+  — then we iterate with them.
 
 Everything lands on disk for Harry to review. **We never contact a business.**
-Harry generates the remaining images and sends the outreach himself.
+Harry sends the questionnaire and outreach himself and relays the client's answers.
 
 ## Territory & target
 
@@ -53,15 +66,34 @@ Good reviews are a **bonus** (higher score), not a requirement.
 
 ## Pipeline stages & ownership
 
+### Run A — Prospect & Ask (no mockups built)
+
 | Stage | Owner | Model | Output |
 |---|---|---|---|
-| 1. Scout candidates (10–12) | `scout` | Sonnet | `pipeline/candidates.md` |
-| 2. Score + research finalists | `analyst` | Opus | `prospects/<slug>/dossier.md` + shortlist message to lead |
-| 3. **Approval pause** | lead ↔ Harry | — | Harry confirms/swaps the 3 |
-| 4. Website plan (1 per prospect) | `planner` | Fable | `prospects/<slug>/website-plan.md` |
-| 5. Build mockups (1 per prospect) | `builder` ×3 | Opus | `prospects/<slug>/mockup/` |
-| 6. Outreach (email or call script) | `copywriter` | Sonnet | `prospects/<slug>/outreach-email.md` (email found) or `outreach-call.md` (no email) |
-| 7. Critique loop | `critic` | Opus | `prospects/<slug>/audit.md` (written every round) + fix messages, sign-off to lead |
+| A1. Scout candidates (10–12) | `scout` | Sonnet | `pipeline/candidates.md` |
+| A2. Score + research finalists | `analyst` | Opus | `prospects/<slug>/dossier.md` + `site-content.md` + shortlist message to lead |
+| A3. **Approval pause** | lead ↔ Harry | — | Harry confirms/swaps the 3 |
+| A4. Client questionnaire (1 per prospect) | `planner` | Fable | `prospects/<slug>/questionnaire.md` — 10 tailored questions |
+| A5. First-contact outreach | `copywriter` | Sonnet | `outreach-email.md` (email found) or `outreach-call.md` (no email) — **delivers the questionnaire** |
+| A6. Review | `critic` | Opus | `outreach-audit.md` + sign-off |
+
+**Run A ends here.** Harry sends the questionnaire, the client answers, Harry relays
+the answers back → Run B.
+
+### Run B — Build & Perfect (skips scout & analyst)
+
+| Stage | Owner | Model | Output |
+|---|---|---|---|
+| B0. Save the client's answers | lead | — | `prospects/<slug>/client-answers.md` |
+| B1. Plan FROM the answers | `planner` | Fable | `prospects/<slug>/website-plan.md` incl. "Client answers → decisions" |
+| B2. Build | `builder` ×1 | Opus | `prospects/<slug>/mockup/` + `screenshots/` |
+| B3. Critique loop | `critic` | Opus | `prospects/<slug>/audit.md` (every round) + fix messages, sign-off |
+| B4. **Iterate with the client** | Harry ↔ client | — | Feedback → Harry reopens → builder revises |
+
+**Client answers are the top authority.** When the answers conflict with the old site's
+content or anything the Analyst inferred, **the answers win** — it's their site. Content
+parity still applies to real content the answers didn't override (the questionnaire asks
+what they want kept, changed, or dropped).
 
 `<slug>` = kebab-case business name, e.g. `montclair-stone-masonry`.
 
@@ -106,12 +138,19 @@ one of these rules.
 
 Each approved prospect gets a folder `prospects/<slug>/` containing:
 
+**Run A artifacts:**
 - `dossier.md` — research + a page map + a "why this client is winnable" pitch.
 - `site-content.md` — the Analyst's page-by-page FULL-TEXT capture of the existing site
   (required whenever the prospect has one) — the content-parity source of truth.
+- `questionnaire.md` — the Planner's **client-facing** 10-question document, tailored to
+  this business, that Harry sends as-is.
+
+**Run B artifacts (only after the client's answers are in):**
+- `client-answers.md` — the client's answers, saved verbatim by the lead from Harry's
+  paste. The top authority for everything downstream.
 - `website-plan.md` — the Planner's design brief the Builder implements, including the
-  **content map** that places every site-content.md block (or lists it as deliberately
-  dropped, with a reason).
+  **"Client answers → decisions"** section and the **content map** that places every
+  site-content.md block (or lists it as deliberately dropped, with a reason).
 - `mockup/` — `index.html`, `style.css`, `main.js` (+ extra `.html` pages if the
   page map calls for them). Static only. Opens by double-click, no build step.
 - `screenshots/` — desktop + mobile captures proving the QA passes ran.
