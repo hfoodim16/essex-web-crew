@@ -37,6 +37,12 @@ is weak, refine `.claude/agents/scout.md` before the full run.
 
 This run does NOT build any mockups. We ask first, then build from the answers.
 
+> **Don't want to wait for the team?** `templates/questionnaire-master.md` is a
+> standing, client-ready 30-question questionnaire you can send to ANY business right
+> now — no run required. Its answers plug straight into **Run B** below. Run A's value
+> is that the planner tailors a shorter ~10-question version per prospect (higher
+> response rate); the master is the always-available shortcut.
+
 Paste this to the lead:
 
 ```
@@ -84,6 +90,9 @@ Then: send the questionnaires, collect the client's answers, and start **Run B**
 ## Run B — Build & Perfect (skips scout & analyst)
 
 Use this once a client has answered the questions. It goes straight to the planner.
+Their answers can come from **either** the planner's tailored `questionnaire.md` (Run A)
+**or** the standing `templates/questionnaire-master.md` you sent yourself — or just notes
+from a phone call. Paste whatever you got; skipped questions are fine.
 
 Paste this to the lead, filling in the two slots:
 

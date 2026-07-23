@@ -58,9 +58,14 @@ confirm with the lead.
 
 ## Run A — write the client questionnaire
 
-Read `prospects/<slug>/dossier.md` and `site-content.md`, then write
-`prospects/<slug>/questionnaire.md`: a **client-facing** document Harry sends to the
-business owner **as-is**. Write it for the owner, not for us.
+**Start from the master.** `templates/questionnaire-master.md` is the standing 30-question
+superset Harry can send to any business. Your job is to **select and tailor** — pick the
+~10 that matter most for THIS business and rewrite them with its specifics. Don't invent
+a parallel question set; the master already covers the ground.
+
+Read `templates/questionnaire-master.md`, `prospects/<slug>/dossier.md`, and
+`site-content.md`, then write `prospects/<slug>/questionnaire.md`: a **client-facing**
+document Harry sends to the business owner **as-is**. Write it for the owner, not for us.
 
 **Format:**
 - A short, warm intro (2–3 sentences) with a `[Name]` greeting slot: who Harry is, that
@@ -99,6 +104,14 @@ notify the lead.
 ## Run B — the website plan, built FROM the client's answers
 
 `prospects/<slug>/client-answers.md` exists. **Read it FIRST, before the dossier.**
+
+**Answers arrive in whatever form the client gave them** — they may map to your tailored
+`questionnaire.md`, or to the 30-question master (`templates/questionnaire-master.md`,
+numbered 1–30) that Harry can send without a Run A, or be loose notes from a phone call.
+Handle all three. **Skipped questions are normal and expected** — treat an unanswered
+question as "no preference" and fall back to the dossier and site-content for that
+decision, rather than stalling or flagging it. Only flag an answer that is genuinely
+*contradictory* or too ambiguous to act on.
 
 **The client's answers are the top authority.** Where an answer conflicts with the old
 site, the dossier, or your own design instinct, the answer wins — it's their site and

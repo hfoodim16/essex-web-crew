@@ -19,6 +19,10 @@ Work happens in two runs (both prompts in [KICKOFF.md](KICKOFF.md)):
   site and the dossier), one builder builds it the "Corey Blake workflow" way, the critic
   gates it, and the site goes back to the client for feedback and iteration.
 
+**No run required to start asking:** [`templates/questionnaire-master.md`](templates/questionnaire-master.md)
+is a standing, client-ready 30-question questionnaire that can go to any business
+immediately — its answers feed Run B directly.
+
 Each built site ships with **2 real AI-generated images** (hero + one priority slot) and
 labeled placeholders for the rest, run through the `web-design-ultra` design pipeline.
 

@@ -80,6 +80,12 @@ Good reviews are a **bonus** (higher score), not a requirement.
 **Run A ends here.** Harry sends the questionnaire, the client answers, Harry relays
 the answers back → Run B.
 
+**The shortcut:** `templates/questionnaire-master.md` is a standing, client-ready
+30-question questionnaire covering everything a build needs. Harry can send it to any
+business at any time **without running the team**, and its answers feed Run B directly.
+Run A's tailored 10-question version is the higher-response-rate refinement of it — the
+Planner selects and tailors FROM the master, never inventing a separate question set.
+
 ### Run B — Build & Perfect (skips scout & analyst)
 
 | Stage | Owner | Model | Output |
@@ -335,6 +341,10 @@ while the others are still being fixed.
    policy below). A placeholder in either priority slot is never an acceptable exception.
    No stock defaults.
 6. **Motion that whispers** — hand-crafted micro-interactions, reduced-motion-safe.
+   **Signature move required:** one entrance family + one hover personality picked from
+   the skill's `references/motion.md`, and **distinct from the last 3 prospects** in
+   `./design-memory.md`. The default trio (fade-up everywhere + staggered text delay +
+   number count-up) fails this item unless explicitly justified.
 7. **Mobile that's designed, not shrunk** — distinct phone layout decisions.
 8. **The invisible expensive stuff** — sub-2s load (compress/omit heavy assets),
    WCAG AA contrast, keyboard navigation, semantic HTML, real meta tags.
