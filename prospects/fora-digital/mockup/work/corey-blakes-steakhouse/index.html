@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Corey Blake's Steakhouse — Seattle's premier destination for hand-selected USDA Prime cuts, curated wine pairings, and an unforgettable dining experience." />
+  <title>Corey Blake's Steakhouse | Seattle, Washington</title>
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="restaurant" />
+  <meta property="og:title" content="Corey Blake's Steakhouse | Seattle, WA" />
+  <meta property="og:description" content="Hand-selected USDA Prime cuts, aged to perfection. Seattle's finest steakhouse since 2010." />
+  <meta property="og:image" content="hero-steak.jpg" />
+  <meta property="og:url" content="https://coreyblakessteakhouse.com" />
+  <meta property="og:site_name" content="Corey Blake's Steakhouse" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Corey Blake's Steakhouse | Seattle, WA" />
+  <meta name="twitter:description" content="Hand-selected USDA Prime cuts, aged to perfection. Seattle's finest steakhouse since 2010." />
+  <meta name="twitter:image" content="hero-steak.jpg" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%230D0D0D'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-size='20' fill='%23C4973A'>C</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Montserrat:wght@200;300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Custom Cursor -->
+  <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+  <div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
+
+  <!-- Page Transition Overlay -->
+  <div class="page-transition" id="pageTransition" aria-hidden="true"></div>
+
+  <!-- ── NAVIGATION ── -->
+  <header class="site-header" id="siteHeader">
+    <nav class="nav-inner" aria-label="Main navigation">
+      <a href="#" class="nav-logo" data-page="home" aria-label="Corey Blake's Steakhouse — Home">
+        <span class="logo-main">Corey Blake's</span>
+        <span class="logo-sub">Steakhouse</span>
+      </a>
+
+      <ul class="nav-links" role="list">
+        <li><a href="#" class="nav-link active" data-page="home">Home</a></li>
+        <li><a href="#" class="nav-link" data-page="menu">Menu</a></li>
+        <li><a href="#" class="nav-link" data-page="reservations">Reservations</a></li>
+        <li><a href="#" class="nav-link" data-page="about">Our Story</a></li>
+        <li><a href="#" class="nav-link" data-page="contact">Contact</a></li>
+      </ul>
+
+      <a href="#" class="nav-cta btn-ghost" data-page="reservations">Reserve</a>
+
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- ── MOBILE MENU ── -->
+  <div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Navigation menu" aria-hidden="true">
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <ul class="mobile-links" role="list">
+      <li><a href="#" class="mobile-link" data-page="home">Home</a></li>
+      <li><a href="#" class="mobile-link" data-page="menu">Menu</a></li>
+      <li><a href="#" class="mobile-link" data-page="reservations">Reservations</a></li>
+      <li><a href="#" class="mobile-link" data-page="about">Our Story</a></li>
+      <li><a href="#" class="mobile-link" data-page="contact">Contact</a></li>
+    </ul>
+    <div class="mobile-meta">
+      <p>2104 4th Ave, Seattle, WA 98121</p>
+      <p>(206) 555-0174</p>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       PAGE: HOME
+  ══════════════════════════════════════ -->
+  <main class="page active" id="page-home" aria-label="Home">
+
+    <!-- Hero -->
+    <section class="hero" aria-label="Hero">
+      <div class="hero-bg">
+        <div class="hero-bg-img" aria-hidden="true"></div>
+        <div class="hero-grain" aria-hidden="true"></div>
+        <div class="hero-overlay" aria-hidden="true"></div>
+        <div class="hero-embers" aria-hidden="true" id="embersCanvas"></div>
+      </div>
+      <div class="hero-content">
+        <p class="hero-eyebrow reveal-word">Seattle, Washington</p>
+        <h1 class="hero-heading">
+          <span class="reveal-line">Where Fire</span>
+          <span class="reveal-line italic-serif">Meets Craft</span>
+        </h1>
+        <p class="hero-sub reveal-word">Hand-selected USDA Prime cuts, aged to perfection.<br>An evening you won't soon forget.</p>
+        <div class="hero-actions reveal-fade">
+          <a href="#" class="btn-primary" data-page="reservations">Reserve a Table</a>
+          <a href="#" class="btn-outline" data-page="menu">Explore the Menu</a>
+        </div>
+      </div>
+      <div class="hero-scroll-hint" aria-hidden="true">
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- Philosophy -->
+    <section class="philosophy section-pad reveal-section">
+      <div class="container">
+        <div class="philosophy-intro">
+          <p class="section-label">Our Philosophy</p>
+          <h2 class="section-heading">We don't just cook steak.<br><em>We honor it.</em></h2>
+        </div>
+        <div class="philosophy-pillars">
+          <div class="pillar reveal-up" style="--delay:0ms">
+            <div class="pillar-number">01</div>
+            <h3>Prime Selection</h3>
+            <p>Every cut is hand-sourced from boutique ranches across the Pacific Northwest and Midwest, chosen for marbling, texture, and provenance.</p>
+          </div>
+          <div class="pillar reveal-up" style="--delay:120ms">
+            <div class="pillar-number">02</div>
+            <h3>Dry-Age Mastery</h3>
+            <p>Our in-house dry-aging program runs 28 to 60 days in a custom Himalayan salt-lined chamber — developing depth no commercial cut can match.</p>
+          </div>
+          <div class="pillar reveal-up" style="--delay:240ms">
+            <div class="pillar-number">03</div>
+            <h3>The Fire</h3>
+            <p>We cook exclusively over a custom wood-fired grill using Pacific alder and applewood — delivering a crust and char that gas simply cannot replicate.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Signature Cuts -->
+    <section class="cuts section-pad reveal-section">
+      <div class="container">
+        <div class="section-header-row">
+          <div>
+            <p class="section-label">Signature Cuts</p>
+            <h2 class="section-heading">The cuts that define us</h2>
+          </div>
+          <a href="#" class="btn-text" data-page="menu">Full Menu →</a>
+        </div>
+        <div class="cuts-grid">
+          <article class="cut-card reveal-up" style="--delay:0ms">
+            <div class="cut-img-wrap">
+              <div class="cut-img cut-img-1" role="img" aria-label="Wagyu Ribeye"></div>
+            </div>
+            <div class="cut-info">
+              <h3>A5 Wagyu Ribeye</h3>
+              <p>12 oz · Japanese A5 · 45-day dry aged</p>
+              <span class="cut-price">$185</span>
+            </div>
+          </article>
+          <article class="cut-card reveal-up" style="--delay:100ms">
+            <div class="cut-img-wrap">
+              <div class="cut-img cut-img-2" role="img" aria-label="Bone-In Tomahawk"></div>
+            </div>
+            <div class="cut-info">
+              <h3>Tomahawk Ribeye</h3>
+              <p>40 oz · USDA Prime · 60-day dry aged</p>
+              <span class="cut-price">$195</span>
+            </div>
+          </article>
+          <article class="cut-card reveal-up" style="--delay:200ms">
+            <div class="cut-img-wrap">
+              <div class="cut-img cut-img-3" role="img" aria-label="Filet Mignon"></div>
+            </div>
+            <div class="cut-info">
+              <h3>Filet Mignon</h3>
+              <p>8 oz · Snake River Farms · Center-cut</p>
+              <span class="cut-price">$72</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Atmospheric Banner -->
+    <section class="atmo-banner reveal-section" aria-label="The space">
+      <div class="atmo-overlay" aria-hidden="true"></div>
+      <div class="atmo-content">
+        <blockquote>
+          <p>"The best steakhouse experience I've had anywhere in the Pacific Northwest."</p>
+          <footer>— <cite>Seattle Magazine, Best of Seattle 2024</cite></footer>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats section-pad reveal-section">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat reveal-up" style="--delay:0ms">
+            <span class="stat-number" data-count="14">0</span>
+            <span class="stat-label">Years in Seattle</span>
+          </div>
+          <div class="stat reveal-up" style="--delay:100ms">
+            <span class="stat-number" data-count="28">0</span>
+            <span class="stat-label">Cuts on the Menu</span>
+          </div>
+          <div class="stat reveal-up" style="--delay:200ms">
+            <span class="stat-number" data-count="400">0</span>
+            <span class="stat-label">Wine Labels</span>
+          </div>
+          <div class="stat reveal-up" style="--delay:300ms">
+            <span class="stat-number" data-count="3">0</span>
+            <span class="stat-label">James Beard Nods</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Accolades -->
+    <section class="accolades section-pad reveal-section">
+      <div class="container">
+        <p class="section-label text-center">As Seen In</p>
+        <div class="accolades-row">
+          <span class="accolade-logo reveal-up" style="--delay:0ms">Seattle<br>Magazine</span>
+          <span class="accolade-logo reveal-up" style="--delay:80ms">The<br>Stranger</span>
+          <span class="accolade-logo reveal-up" style="--delay:160ms">Eater<br>Seattle</span>
+          <span class="accolade-logo reveal-up" style="--delay:240ms">Food &<br>Wine</span>
+          <span class="accolade-logo reveal-up" style="--delay:320ms">Zagat</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reserve CTA Banner -->
+    <section class="reserve-banner section-pad reveal-section">
+      <div class="container text-center">
+        <p class="section-label">Reservations</p>
+        <h2 class="section-heading">An evening awaits.</h2>
+        <p class="reserve-sub">We recommend booking 2–3 weeks in advance, especially on weekends.</p>
+        <a href="#" class="btn-primary btn-large" data-page="reservations">Reserve Your Table</a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer reveal-section">
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <p class="logo-main">Corey Blake's</p>
+          <p class="logo-sub">Steakhouse</p>
+          <p class="footer-tagline">Seattle's finest since 2010</p>
+        </div>
+        <div class="footer-links">
+          <h4>Navigate</h4>
+          <ul role="list">
+            <li><a href="#" data-page="home">Home</a></li>
+            <li><a href="#" data-page="menu">Menu</a></li>
+            <li><a href="#" data-page="reservations">Reservations</a></li>
+            <li><a href="#" data-page="about">Our Story</a></li>
+            <li><a href="#" data-page="contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h4>Find Us</h4>
+          <address>
+            2104 4th Ave<br>
+            Seattle, WA 98121<br><br>
+            <a href="tel:+12065550174">(206) 555-0174</a><br>
+            <a href="mailto:reservations@coreyblakeys.com">reservations@coreyblakes.com</a>
+          </address>
+        </div>
+        <div class="footer-hours">
+          <h4>Hours</h4>
+          <dl>
+            <dt>Mon – Thu</dt><dd>5:00 – 10:00 pm</dd>
+            <dt>Fri – Sat</dt><dd>5:00 – 11:00 pm</dd>
+            <dt>Sunday</dt><dd>4:00 – 9:00 pm</dd>
+          </dl>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Corey Blake's Steakhouse. All rights reserved.</p>
+      </div>
+    </footer>
+  </main>
+
+  <!-- ══════════════════════════════════════
+       PAGE: MENU
+  ══════════════════════════════════════ -->
+  <main class="page" id="page-menu" aria-label="Menu" hidden>
+    <section class="page-hero slim-hero">
+      <div class="page-hero-overlay" aria-hidden="true"></div>
+      <div class="container page-hero-content">
+        <p class="section-label">The Menu</p>
+        <h1 class="page-hero-heading">Every bite, <em>deliberate.</em></h1>
+      </div>
+    </section>
+
+    <section class="menu-section section-pad">
+      <div class="container">
+        <!-- Filter -->
+        <div class="menu-filters" role="tablist" aria-label="Menu categories">
+          <button class="filter-btn active" role="tab" aria-selected="true" data-filter="all">All</button>
+          <button class="filter-btn" role="tab" aria-selected="false" data-filter="starters">Starters</button>
+          <button class="filter-btn" role="tab" aria-selected="false" data-filter="cuts">Signature Cuts</button>
+          <button class="filter-btn" role="tab" aria-selected="false" data-filter="sides">Sides</button>
+          <button class="filter-btn" role="tab" aria-selected="false" data-filter="desserts">Desserts</button>
+          <button class="filter-btn" role="tab" aria-selected="false" data-filter="wine">Wine & Spirits</button>
+        </div>
+
+        <!-- Menu Items -->
+        <div class="menu-grid" id="menuGrid">
+
+          <!-- Starters -->
+          <article class="menu-item reveal-up" data-category="starters">
+            <div class="menu-item-top">
+              <h3>Bone Marrow Crostini</h3>
+              <span class="menu-price">$22</span>
+            </div>
+            <p>Roasted veal marrow, shallot gremolata, micro arugula, toasted sourdough</p>
+            <span class="menu-tag">Starters</span>
+          </article>
+
+          <article class="menu-item reveal-up" data-category="starters">
+            <div class="menu-item-top">
+              <h3>Wagyu Beef Tartare</h3>
+              <span class="menu-price">$28</span>
+            </div>
+            <p>Hand-cut A5 Wagyu, capers, cornichon, dijon, quail egg, brioche crisps</p>
+            <span class="menu-tag">Starters</span>
+          </article>
+
+          <article class="menu-item reveal-up" data-category="starters">
+            <div class="menu-item-top">
+              <h3>Dungeness Crab Bisque</h3>
+              <span class="menu-price">$18</span>
+            </div>
+            <p>Local Dungeness, cream sherry, tarragon crème fraîche, chives</p>
+            <span class="menu-tag">Starters</span>
+          </article>
+
+          <article class="menu-item reveal-up" data-category="starters">
+            <div class="menu-item-top">
+              <h3>Oysters on the Half Shell</h3>
+              <span class="menu-price">$4 ea</span>
+            </div>
+            <p>Kusshi or Shigoku, mignonette, horseradish, lemon — 6 or 12</p>
+            <span class="menu-tag">Starters</span>
+          </article>
+
+          <!-- Cuts -->
+          <article class="menu-item menu-item-featured reveal-up" data-category="cuts">
+            <div class="menu-item-top">
+              <h3>A5 Wagyu Ribeye <span class="badge">Chef's Choice</span></h3>
+              <span class="menu-price">$185</span>
+            </div>
+            <p>12 oz Japanese A5 Miyazaki, 45-day dry aged, alder-smoked butter, sea salt</p>
+            <span class="menu-tag">Signature Cuts</span>
+          </article>
+
+          <article class="menu-item reveal-up" data-category="cuts">
+            <div class="menu-item-top">
+              <h3>Tomahawk Ribeye</h3>
+              <span class="menu-price">$195</span>
+            </div>
+            <p>40 oz USDA Prime, 60-day dry aged, bone-in, natural jus, compound butter</p>
+            <span class="menu-tag">Signature Cuts</span>
+          </article>
+
+          <article class="menu-item reveal-up" data-category="cuts">
+            <div class="menu-item-top">
+              <h3>New York Strip</h3>
+              <span class="menu-price">$68</span>
+            </div>
+            <p>16 oz Snake River Farms Prime, 28-day aged, roasted garlic, thyme jus</p>
+            <span class="menu-tag">Signature Cuts</span>
+          </article>
+
+          <article class="menu-item reveal-up" data-category="cuts">
+            <div class="menu-item-top">
+              <h3>Filet Mignon</h3>
+              <span class="menu-price">$72</span>
+            </div>
+            <p>8 oz Snake River Farms center-cut, bordelaise, micro herbs</p>
+            <span class="menu-tag">Signature Cuts</span>
+          </article>
+
+          <article class="menu-item reveal-up" data-category="cuts">
+            <div class="menu-item-top">
+              <h3>Porterhouse for Two</h3>
+              <span class="menu-price">$160</span>
+            </div>
+            <p>38 oz USDA Prime, tableside service, shallot-red wine reduction</p>
+            <span class="menu-tag">Signature Cuts</span>
+          </article>
+
+          <article class="menu-item reveal-up" data-category="cuts">
+            <div class="menu-item-top">
+              <h3>Hanger Steak</h3>
+              <span class="menu-price">$48</span>
+            </div>
+            <p>12 oz dry-aged, chimichurri, roasted fingerlings</p>
+            <span class="menu-tag">Signature Cuts</span>
+          </article>
+
+          <!-- Sides -->
+          <article class="menu-item reveal-up" data-category="sides">
+            <div class="menu-item-top">
+              <h3>Truffle Mac &amp; Cheese</h3>
+              <span class="menu-price">$18</span>
+            </div>
+            <p>Black truffle, gruyère, aged cheddar, toasted panko</p>
+            <span class="menu-tag">Sides</span>
+          </article>
+
+          <article class="menu-item reveal-up" data-category="sides">
+            <div class="menu-item-top">
+              <h3>Creamed Spinach</h3>
+              <span class="menu-price">$14</span>
+            </div>
+            <p>Wilted baby spinach, béchamel, nutmeg, parmesan</p>
+            <span class="menu-tag">Sides</span>
+          </article>
+
+          <article class="menu-item reveal-up" data-category="sides">
+            <div class="menu-item-top">
+              <h3>Duck Fat Fries</h3>
+              <span class="menu-price">$12</span>
+            </div>
+            <p>Double-fried, fleur de sel, garlic aioli, fresh rosemary</p>
+            <span class="menu-tag">Sides</span>
+          </article>
+
+          <article class="menu-item reveal-up" data-category="sides">
+            <div class="menu-item-top">
+              <h3>Asparagus Grill</h3>
+              <span class="menu-price">$14</span>
+            </div>
+            <p>Wood-grilled, hollandaise, lemon zest, crispy capers</p>
+            <span class="menu-tag">Sides</span>
+          </article>
+
+          <!-- Desserts -->
+          <article class="menu-item reveal-up" data-category="desserts">
+            <div class="menu-item-top">
+              <h3>Chocolate Lava Cake</h3>
+              <span class="menu-price">$16</span>
+            </div>
+            <p>Valrhona 72%, Tahitian vanilla ice cream, cocoa tuile</p>
+            <span class="menu-tag">Desserts</span>
+          </article>
+
+          <article class="menu-item reveal-up" data-category="desserts">
+            <div class="menu-item-top">
+              <h3>Crème Brûlée</h3>
+              <span class="menu-price">$14</span>
+            </div>
+            <p>Madagascan vanilla bean, seasonal fruit compote, spun sugar</p>
+            <span class="menu-tag">Desserts</span>
+          </article>
+
+          <article class="menu-item reveal-up" data-category="desserts">
+            <div class="menu-item-top">
+              <h3>Cheese Board</h3>
+              <span class="menu-price">$26</span>
+            </div>
+            <p>Selection of 5 artisan cheeses, honeycomb, marcona almonds, house jam</p>
+            <span class="menu-tag">Desserts</span>
+          </article>
+
+          <!-- Wine -->
+          <article class="menu-item reveal-up" data-category="wine">
+            <div class="menu-item-top">
+              <h3>Caymus Cabernet, Napa</h3>
+              <span class="menu-price">$180 / btl</span>
+            </div>
+            <p>2021 · Full-bodied, dark fruit, velvet tannins</p>
+            <span class="menu-tag">Wine &amp; Spirits</span>
+          </article>
+
+          <article class="menu-item reveal-up" data-category="wine">
+            <div class="menu-item-top">
+              <h3>Quilceda Creek, Columbia Valley</h3>
+              <span class="menu-price">$240 / btl</span>
+            </div>
+            <p>2019 · Washington icon, cedar, blackcurrant, structured elegance</p>
+            <span class="menu-tag">Wine &amp; Spirits</span>
+          </article>
+
+          <article class="menu-item reveal-up" data-category="wine">
+            <div class="menu-item-top">
+              <h3>Old Fashioned</h3>
+              <span class="menu-price">$18</span>
+            </div>
+            <p>Woodford Reserve, house-made demerara, Angostura, orange peel</p>
+            <span class="menu-tag">Wine &amp; Spirits</span>
+          </article>
+
+          <article class="menu-item reveal-up" data-category="wine">
+            <div class="menu-item-top">
+              <h3>Blake's Negroni</h3>
+              <span class="menu-price">$16</span>
+            </div>
+            <p>Hendrick's Gin, Campari, sweet vermouth, smoked orange twist</p>
+            <span class="menu-tag">Wine &amp; Spirits</span>
+          </article>
+
+        </div>
+
+        <div class="menu-note">
+          <p>Consuming raw or undercooked meats may increase your risk of foodborne illness. Please inform your server of any dietary restrictions or allergies.</p>
+          <p>Menu and pricing subject to change. A 20% gratuity is added to parties of 6 or more.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="reserve-banner section-pad reveal-section">
+      <div class="container text-center">
+        <p class="section-label">Ready to dine?</p>
+        <h2 class="section-heading">Reserve your table tonight.</h2>
+        <a href="#" class="btn-primary btn-large" data-page="reservations">Make a Reservation</a>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <p class="logo-main">Corey Blake's</p>
+          <p class="logo-sub">Steakhouse</p>
+          <p class="footer-tagline">Seattle's finest since 2010</p>
+        </div>
+        <div class="footer-links">
+          <h4>Navigate</h4>
+          <ul role="list">
+            <li><a href="#" data-page="home">Home</a></li>
+            <li><a href="#" data-page="menu">Menu</a></li>
+            <li><a href="#" data-page="reservations">Reservations</a></li>
+            <li><a href="#" data-page="about">Our Story</a></li>
+            <li><a href="#" data-page="contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h4>Find Us</h4>
+          <address>2104 4th Ave, Seattle, WA 98121<br><a href="tel:+12065550174">(206) 555-0174</a></address>
+        </div>
+        <div class="footer-hours">
+          <h4>Hours</h4>
+          <dl>
+            <dt>Mon – Thu</dt><dd>5:00 – 10:00 pm</dd>
+            <dt>Fri – Sat</dt><dd>5:00 – 11:00 pm</dd>
+            <dt>Sunday</dt><dd>4:00 – 9:00 pm</dd>
+          </dl>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Corey Blake's Steakhouse. All rights reserved.</p>
+      </div>
+    </footer>
+  </main>
+
+  <!-- ══════════════════════════════════════
+       PAGE: RESERVATIONS
+  ══════════════════════════════════════ -->
+  <main class="page" id="page-reservations" aria-label="Reservations" hidden>
+    <section class="page-hero slim-hero">
+      <div class="page-hero-overlay" aria-hidden="true"></div>
+      <div class="container page-hero-content">
+        <p class="section-label">Join Us</p>
+        <h1 class="page-hero-heading">Reserve your <em>evening.</em></h1>
+      </div>
+    </section>
+
+    <section class="reservations-section section-pad">
+      <div class="container reservations-layout">
+        <div class="res-info reveal-up">
+          <h2>Before You Book</h2>
+          <ul class="res-details">
+            <li>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              <div>
+                <strong>Hours</strong>
+                <p>Mon–Thu 5–10pm · Fri–Sat 5–11pm · Sun 4–9pm</p>
+              </div>
+            </li>
+            <li>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              <div>
+                <strong>Party Size</strong>
+                <p>We accommodate parties from 1 to 12. For groups over 12, please call us directly.</p>
+              </div>
+            </li>
+            <li>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <div>
+                <strong>Advance Booking</strong>
+                <p>We recommend booking 2–3 weeks ahead, especially Friday and Saturday evenings.</p>
+              </div>
+            </li>
+            <li>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <div>
+                <strong>Location</strong>
+                <p>2104 4th Ave, Seattle, WA 98121 (Belltown)</p>
+              </div>
+            </li>
+            <li>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.25h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <div>
+                <strong>Questions?</strong>
+                <p><a href="tel:+12065550174">(206) 555-0174</a></p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="res-widget reveal-up" style="--delay:150ms">
+          <div class="opentable-wrap">
+            <!-- OpenTable Widget: Replace with your actual embed code -->
+            <div class="opentable-placeholder">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <h3>OpenTable Reservations</h3>
+              <p>Replace this block with your OpenTable embed code:</p>
+              <code>&lt;script type='text/javascript' src='//www.opentable.com/widget/reservation/loader?rid=YOUR_RID&domain=com&type=standard&theme=standard&lang=en-US&overlay=false&iframe=true'&gt;&lt;/script&gt;</code>
+              <a href="https://www.opentable.com" target="_blank" rel="noopener noreferrer" class="btn-primary" style="margin-top:1.5rem; display:inline-block;">Find us on OpenTable ↗</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="private-dining section-pad reveal-section">
+      <div class="container private-dining-inner">
+        <div class="private-img" role="img" aria-label="Private dining room" aria-hidden="true"></div>
+        <div class="private-content reveal-up">
+          <p class="section-label">Private Events</p>
+          <h2>Host your next event <em>in style.</em></h2>
+          <p>Our private dining room accommodates up to 30 guests for corporate dinners, celebrations, and special occasions. Bespoke menus, sommelier-led pairings, and dedicated service throughout.</p>
+          <a href="#" class="btn-outline" data-page="contact">Inquire About Private Dining</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <p class="logo-main">Corey Blake's</p>
+          <p class="logo-sub">Steakhouse</p>
+          <p class="footer-tagline">Seattle's finest since 2010</p>
+        </div>
+        <div class="footer-links">
+          <h4>Navigate</h4>
+          <ul role="list">
+            <li><a href="#" data-page="home">Home</a></li>
+            <li><a href="#" data-page="menu">Menu</a></li>
+            <li><a href="#" data-page="reservations">Reservations</a></li>
+            <li><a href="#" data-page="about">Our Story</a></li>
+            <li><a href="#" data-page="contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h4>Find Us</h4>
+          <address>2104 4th Ave, Seattle, WA 98121<br><a href="tel:+12065550174">(206) 555-0174</a></address>
+        </div>
+        <div class="footer-hours">
+          <h4>Hours</h4>
+          <dl>
+            <dt>Mon – Thu</dt><dd>5:00 – 10:00 pm</dd>
+            <dt>Fri – Sat</dt><dd>5:00 – 11:00 pm</dd>
+            <dt>Sunday</dt><dd>4:00 – 9:00 pm</dd>
+          </dl>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Corey Blake's Steakhouse. All rights reserved.</p>
+      </div>
+    </footer>
+  </main>
+
+  <!-- ══════════════════════════════════════
+       PAGE: ABOUT
+  ══════════════════════════════════════ -->
+  <main class="page" id="page-about" aria-label="Our Story" hidden>
+    <section class="page-hero slim-hero">
+      <div class="page-hero-overlay" aria-hidden="true"></div>
+      <div class="container page-hero-content">
+        <p class="section-label">Our Story</p>
+        <h1 class="page-hero-heading">Born from <em>obsession.</em></h1>
+      </div>
+    </section>
+
+    <section class="story-section section-pad">
+      <div class="container story-layout">
+        <div class="story-img-col">
+          <div class="story-img" role="img" aria-label="Chef Corey Blake" aria-hidden="true"></div>
+        </div>
+        <div class="story-text-col reveal-up">
+          <p class="section-label">The Founder</p>
+          <h2>Corey Blake</h2>
+          <p class="story-lead">I grew up watching my father tend a backyard grill with the same reverence most people reserve for fine art. That obsession never left me.</p>
+          <p>After training at the Culinary Institute of America and spending a decade in New York's Michelin-starred kitchens, I returned to the Pacific Northwest with one mission: to open a steakhouse that treated beef as the nuanced, complex ingredient it truly is.</p>
+          <p>We opened in Belltown in 2010 with 42 seats and a single wood-fired grill. Fourteen years later, the grill is still the center of everything we do.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Timeline -->
+    <section class="timeline-section section-pad reveal-section">
+      <div class="container">
+        <p class="section-label text-center">The Journey</p>
+        <h2 class="section-heading text-center">14 years of pursuit</h2>
+        <div class="timeline">
+          <div class="timeline-item reveal-up" style="--delay:0ms">
+            <div class="timeline-year">2010</div>
+            <div class="timeline-content">
+              <h3>The Beginning</h3>
+              <p>Corey Blake's opens in Belltown with 42 seats and a singular focus on wood-fired perfection.</p>
+            </div>
+          </div>
+          <div class="timeline-item reveal-up" style="--delay:100ms">
+            <div class="timeline-year">2012</div>
+            <div class="timeline-content">
+              <h3>James Beard Nomination</h3>
+              <p>Named a semifinalist for Best New Restaurant, bringing national attention to Seattle's dining scene.</p>
+            </div>
+          </div>
+          <div class="timeline-item reveal-up" style="--delay:200ms">
+            <div class="timeline-year">2015</div>
+            <div class="timeline-content">
+              <h3>Dry-Age Program Launched</h3>
+              <p>Installation of our Himalayan salt-lined aging chamber — the first of its kind in Seattle.</p>
+            </div>
+          </div>
+          <div class="timeline-item reveal-up" style="--delay:300ms">
+            <div class="timeline-year">2018</div>
+            <div class="timeline-content">
+              <h3>Private Dining Addition</h3>
+              <p>Expansion of the space adds a 30-seat private room and a dedicated sommelier program.</p>
+            </div>
+          </div>
+          <div class="timeline-item reveal-up" style="--delay:400ms">
+            <div class="timeline-year">2022</div>
+            <div class="timeline-content">
+              <h3>A5 Wagyu Program</h3>
+              <p>Partnership with Miyazaki Prefecture producers brings Japan's finest beef to Seattle's table.</p>
+            </div>
+          </div>
+          <div class="timeline-item reveal-up" style="--delay:500ms">
+            <div class="timeline-year">2024</div>
+            <div class="timeline-content">
+              <h3>Best Steakhouse in Seattle</h3>
+              <p>Named Seattle Magazine's #1 steakhouse for the fourth consecutive year.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Team -->
+    <section class="team-section section-pad reveal-section">
+      <div class="container">
+        <p class="section-label text-center">The Team</p>
+        <h2 class="section-heading text-center">The people behind the plate</h2>
+        <div class="team-grid">
+          <div class="team-member reveal-up" style="--delay:0ms">
+            <div class="team-photo team-photo-1" role="img" aria-label="Corey Blake, Founder & Executive Chef"></div>
+            <h3>Corey Blake</h3>
+            <p class="team-role">Founder &amp; Executive Chef</p>
+          </div>
+          <div class="team-member reveal-up" style="--delay:120ms">
+            <div class="team-photo team-photo-2" role="img" aria-label="Natalie Pham, Head Sommelier"></div>
+            <h3>Natalie Pham</h3>
+            <p class="team-role">Head Sommelier</p>
+          </div>
+          <div class="team-member reveal-up" style="--delay:240ms">
+            <div class="team-photo team-photo-3" role="img" aria-label="Marcus Delgado, Chef de Cuisine"></div>
+            <h3>Marcus Delgado</h3>
+            <p class="team-role">Chef de Cuisine</p>
+          </div>
+          <div class="team-member reveal-up" style="--delay:360ms">
+            <div class="team-photo team-photo-4" role="img" aria-label="Jordan Wei, Pastry Chef"></div>
+            <h3>Jordan Wei</h3>
+            <p class="team-role">Pastry Chef</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="reserve-banner section-pad reveal-section">
+      <div class="container text-center">
+        <p class="section-label">Come see us</p>
+        <h2 class="section-heading">Be part of the story.</h2>
+        <a href="#" class="btn-primary btn-large" data-page="reservations">Reserve a Table</a>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <p class="logo-main">Corey Blake's</p>
+          <p class="logo-sub">Steakhouse</p>
+          <p class="footer-tagline">Seattle's finest since 2010</p>
+        </div>
+        <div class="footer-links">
+          <h4>Navigate</h4>
+          <ul role="list">
+            <li><a href="#" data-page="home">Home</a></li>
+            <li><a href="#" data-page="menu">Menu</a></li>
+            <li><a href="#" data-page="reservations">Reservations</a></li>
+            <li><a href="#" data-page="about">Our Story</a></li>
+            <li><a href="#" data-page="contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h4>Find Us</h4>
+          <address>2104 4th Ave, Seattle, WA 98121<br><a href="tel:+12065550174">(206) 555-0174</a></address>
+        </div>
+        <div class="footer-hours">
+          <h4>Hours</h4>
+          <dl>
+            <dt>Mon – Thu</dt><dd>5:00 – 10:00 pm</dd>
+            <dt>Fri – Sat</dt><dd>5:00 – 11:00 pm</dd>
+            <dt>Sunday</dt><dd>4:00 – 9:00 pm</dd>
+          </dl>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Corey Blake's Steakhouse. All rights reserved.</p>
+      </div>
+    </footer>
+  </main>
+
+  <!-- ══════════════════════════════════════
+       PAGE: CONTACT
+  ══════════════════════════════════════ -->
+  <main class="page" id="page-contact" aria-label="Contact" hidden>
+    <section class="page-hero slim-hero">
+      <div class="page-hero-overlay" aria-hidden="true"></div>
+      <div class="container page-hero-content">
+        <p class="section-label">Get In Touch</p>
+        <h1 class="page-hero-heading">We'd love to <em>hear from you.</em></h1>
+      </div>
+    </section>
+
+    <section class="contact-section section-pad">
+      <div class="container contact-layout">
+
+        <div class="contact-info reveal-up">
+          <div class="contact-block">
+            <h3>Location</h3>
+            <address>
+              2104 4th Ave<br>
+              Seattle, WA 98121<br>
+              (Belltown Neighborhood)
+            </address>
+          </div>
+          <div class="contact-block">
+            <h3>Hours</h3>
+            <dl class="hours-list">
+              <dt>Monday – Thursday</dt><dd>5:00 pm – 10:00 pm</dd>
+              <dt>Friday – Saturday</dt><dd>5:00 pm – 11:00 pm</dd>
+              <dt>Sunday</dt><dd>4:00 pm – 9:00 pm</dd>
+            </dl>
+          </div>
+          <div class="contact-block">
+            <h3>Contact</h3>
+            <p><a href="tel:+12065550174">(206) 555-0174</a></p>
+            <p><a href="mailto:reservations@coreyblakes.com">reservations@coreyblakes.com</a></p>
+          </div>
+          <div class="contact-block">
+            <h3>Parking</h3>
+            <p>Street parking and the Vine Street Garage (0.1 mi) are available. Valet available Fri–Sat from 6 pm.</p>
+          </div>
+        </div>
+
+        <div class="contact-form-wrap reveal-up" style="--delay:150ms">
+          <h2>Send a Message</h2>
+          <form class="contact-form" id="contactForm" novalidate>
+            <div class="form-row">
+              <div class="form-field">
+                <label for="contactName">Name <span aria-hidden="true">*</span></label>
+                <input type="text" id="contactName" name="name" autocomplete="name" required placeholder="Your full name" />
+                <span class="field-error" aria-live="polite"></span>
+              </div>
+              <div class="form-field">
+                <label for="contactEmail">Email <span aria-hidden="true">*</span></label>
+                <input type="email" id="contactEmail" name="email" autocomplete="email" required placeholder="your@email.com" />
+                <span class="field-error" aria-live="polite"></span>
+              </div>
+            </div>
+            <div class="form-field">
+              <label for="contactSubject">Subject</label>
+              <select id="contactSubject" name="subject" autocomplete="off">
+                <option value="">Select a topic</option>
+                <option value="reservation">Reservation inquiry</option>
+                <option value="private">Private dining / events</option>
+                <option value="gift">Gift certificates</option>
+                <option value="press">Press &amp; media</option>
+                <option value="other">General inquiry</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label for="contactMessage">Message <span aria-hidden="true">*</span></label>
+              <textarea id="contactMessage" name="message" rows="5" required placeholder="How can we help you?"></textarea>
+              <span class="field-error" aria-live="polite"></span>
+            </div>
+            <button type="submit" class="btn-primary form-submit">
+              <span class="btn-text">Send Message</span>
+              <span class="btn-loading" aria-hidden="true">Sending…</span>
+            </button>
+            <div class="form-success" role="alert" aria-live="polite" hidden>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              Message sent! We'll get back to you within 24 hours.
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Map -->
+    <section class="map-section reveal-section">
+      <iframe
+        title="Corey Blake's Steakhouse Location — 2104 4th Ave, Seattle, WA"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2689.8!2d-122.3438!3d47.6152!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDfCsDM2JzU0LjciTiAxMjLCsDIwJzM3LjciVw!5e0!3m2!1sen!2sus!4v1"
+        width="100%" height="480" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </section>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <p class="logo-main">Corey Blake's</p>
+          <p class="logo-sub">Steakhouse</p>
+          <p class="footer-tagline">Seattle's finest since 2010</p>
+        </div>
+        <div class="footer-links">
+          <h4>Navigate</h4>
+          <ul role="list">
+            <li><a href="#" data-page="home">Home</a></li>
+            <li><a href="#" data-page="menu">Menu</a></li>
+            <li><a href="#" data-page="reservations">Reservations</a></li>
+            <li><a href="#" data-page="about">Our Story</a></li>
+            <li><a href="#" data-page="contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h4>Find Us</h4>
+          <address>2104 4th Ave, Seattle, WA 98121<br><a href="tel:+12065550174">(206) 555-0174</a></address>
+        </div>
+        <div class="footer-hours">
+          <h4>Hours</h4>
+          <dl>
+            <dt>Mon – Thu</dt><dd>5:00 – 10:00 pm</dd>
+            <dt>Fri – Sat</dt><dd>5:00 – 11:00 pm</dd>
+            <dt>Sunday</dt><dd>4:00 – 9:00 pm</dd>
+          </dl>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Corey Blake's Steakhouse. All rights reserved.</p>
+      </div>
+    </footer>
+  </main>
+
+  <script src="main.js"></script>
+</body>
+</html>

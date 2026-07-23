@@ -91,10 +91,13 @@ they took it themselves?* Both halves must hold. Open each generated image full 
 - [ ] `screenshots/` (desktop + mobile)
 - [ ] `audit.md` (BOTH scoreboards: $10K + 10-dimension rubric, with `Review round: N`)
 
-## Run-level duties (at the FINAL sign-off of a run)
+## Before sign-off
 
-- [ ] **Distinctiveness check** — the three heroes side by side: would a stranger believe
-      three different studios made these? Send back the **still-unsigned** one if two read
-      as siblings. Never reopens a frozen prospect.
-- [ ] **`design-memory.md` row appended** for each signed-off prospect (date · slug · font
-      pairing · palette family · layout archetype · background system).
+- [ ] **Distinctiveness check vs. our recent work** — compare this mockup against the
+      **last 3 `design-memory.md` rows** (and the most recent signed prospect's hero
+      screenshot if it's on disk). Hunting the softer sameness the ban list misses:
+      section rhythm, imagery register, motion vocabulary, a hero that's the same shot in
+      different colors. Reads like a sibling of a recent build → back to the builder while
+      it's still unsigned. Reading a frozen prospect's files is research, not a reopening.
+- [ ] **`design-memory.md` row appended** on sign-off (date · slug · font pairing ·
+      palette family · layout archetype · background system · signature motion).

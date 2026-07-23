@@ -35,19 +35,23 @@ client contact is Harry personally, and he relays the client's answers back.
 ## Layout
 
 ```
+SETUP-COREY.md            First-time setup on a new machine (start here)
+install.sh                One-shot installer used by SETUP-COREY
 CLAUDE.md                 Shared playbook (all teammates read this)
 design-memory.md          Anti-repetition log — planner reads, critic appends per sign-off
 HOW-TO-RUN.md             Quick start (terminal steps + paste prompts)
 run.sh                    Launcher (sets the agent-teams flag)
-KICKOFF.md                How to run — dry run + full run prompts
+KICKOFF.md                How to run — dry run + Prospecting + Build run prompts
 PLAYBOOK.md               Harry's pitch-phase scripts — whole-run walkthrough + review decision tree
 FULL-PROCESS.md           The whole journey (Steps 1–15): pitch phase + client phase — real content/photos, production build, domain, go-live, maintenance
+COREY-DEPLOY.md           Deploying a signed-off site
 .claude/
   settings.local.json     Enables agent teams (experimental flag)
   agents/                 Teammate roles: scout, analyst, planner, builder, critic
 pipeline/
   rubric.md               Candidate scoring rubric
   candidates.md           Scout output → Analyst scoring (regenerated each run)
+  package-site.sh         Packages a signed-off site for delivery
 templates/
   questionnaire-master.md Standing client questionnaire — sent as-is to anyone who says yes
   package-checklist.md    Critic's sign-off gate (both scoreboards + imagery realism +

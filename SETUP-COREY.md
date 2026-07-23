@@ -42,7 +42,8 @@ work from. `ui-ux-pro-max` ships a `search.py` the Planner calls directly.
 
 ## 3. Add a Gemini API key
 
-Each mockup ships with 2 real AI-generated hero images, generated through Google Gemini.
+Each site ships with 2 real AI-generated images (the hero + one priority slot),
+generated through Google Gemini.
 That's the one thing that costs money, and it's billed to whoever's key is in the file.
 
 1. Get a key at https://aistudio.google.com/apikey
@@ -68,8 +69,8 @@ That sets `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` and launches Claude Code. The
 
 - Set your fallback teammate model to Sonnet (`/config` → Default teammate model). Each
   agent overrides this with its own; it's just a backup.
-- Paste a prompt from **`KICKOFF.md`**. Do the dry run first — it's a single-prospect pass
-  that proves the whole pipeline before you spend a full run.
+- Paste a prompt from **`KICKOFF.md`**. Do the dry run first — it's a cheap scout-only
+  pass (5 candidates) that proves the scout works before you spend a real Prospecting run.
 - `HOW-TO-RUN.md` walks through what happens at each stage. `PLAYBOOK.md` and
   `FULL-PROCESS.md` go deeper.
 

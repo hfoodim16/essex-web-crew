@@ -35,7 +35,8 @@ save time:
    list. Scout floor: 10 qualifying candidates, stop around 12.
 2. The analyst researches the top 3 finalists IN PARALLEL (one research subagent
    each, verbatim quotes + source URLs, and it verifies the load-bearing facts
-   itself), then writes prospects/<slug>/dossier.md and site-content.md for each.
+   itself), then writes prospects/<slug>/dossier.md for each (plus site-content.md
+   for any that already has a website).
 3. The analyst delivers the shortlist to me as the run's FINAL output. For each
    of the 3 I need: how to reach them (phone, email if found, owner's name), why
    they're winnable, the angle to lead with, and the recommended scope.
@@ -85,8 +86,10 @@ Do this:
    client's answers as binding.
 5. Spawn 'critic': enforce client-answer fidelity (an ignored answer is a fail),
    content parity, the $10K Checklist (8/8), the web-design-ultra rubric (no
-   dimension below 7, boldness >= 8), the interactive click-test, and the
-   package checklist. Loop until it passes.
+   dimension below 7, boldness >= 8), the imagery two-way realism test,
+   real-reviews-only, the interactive click-test, the distinctiveness check
+   against our last 3 design-memory.md rows, and the package checklist. Loop
+   until it passes.
 6. When signed off, summarize what was built and call out anything I should
    confirm with the client. Expect to iterate: I'll bring their feedback back.
 ```

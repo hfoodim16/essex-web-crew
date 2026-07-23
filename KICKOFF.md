@@ -3,7 +3,7 @@
 ## Before you start
 
 1. Agent teams are **experimental** and **token-heavy** (each teammate is a full Claude
-   instance, ~7× a solo session). A full run spins up several teammates plus subagents.
+   instance, ~7× a solo session). A run spins up its teammates plus subagents.
    Do the **dry run** first.
 2. Agent teams must be enabled. This project ships `.claude/settings.local.json` with
    `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS: "1"`. Start Claude Code from THIS folder
@@ -21,7 +21,8 @@ Paste this to the lead:
 ```
 Read CLAUDE.md and .claude/agents/scout.md. Spawn ONE teammate named 'scout'
 using the scout agent type. Task it to find just 5 qualifying Essex County, NJ
-trade businesses (per the qualification rules in CLAUDE.md) and write them to
+businesses — any industry with a naturally static site, leading with trades
+(per the qualification rules in CLAUDE.md) and write them to
 pipeline/candidates.md with evidence and sources. Use Sonnet. Free tools only —
 no Firecrawl/Perplexity. When scout is done, review pipeline/candidates.md with
 me. Do not proceed past the scout.
@@ -29,7 +30,7 @@ me. Do not proceed past the scout.
 
 Check: `pipeline/candidates.md` has 5 real, verified, qualifying businesses with
 evidence and source links, and the agent panel showed the scout working. If the output
-is weak, refine `.claude/agents/scout.md` before the full run.
+is weak, refine `.claude/agents/scout.md` before a real Prospecting run.
 
 ---
 
@@ -59,7 +60,8 @@ save time:
    list. Scout floor: 10 qualifying candidates, stop around 12.
 2. The analyst researches the top 3 finalists IN PARALLEL (one research subagent
    each, verbatim quotes + source URLs, and it verifies the load-bearing facts
-   itself), then writes prospects/<slug>/dossier.md and site-content.md for each.
+   itself), then writes prospects/<slug>/dossier.md for each (plus site-content.md
+   for any that already has a website).
 3. The analyst delivers the shortlist to me as the run's FINAL output. For each
    of the 3 I need: how to reach them (phone, email if found, owner's name), why
    they're winnable, the angle to lead with, and the recommended scope.
@@ -114,8 +116,10 @@ Do this:
    client's answers as binding.
 5. Spawn 'critic': enforce client-answer fidelity (an ignored answer is a fail),
    content parity, the $10K Checklist (8/8), the web-design-ultra rubric (no
-   dimension below 7, boldness >= 8), the interactive click-test, and the
-   package checklist. Loop until it passes.
+   dimension below 7, boldness >= 8), the imagery two-way realism test,
+   real-reviews-only, the interactive click-test, the distinctiveness check
+   against our last 3 design-memory.md rows, and the package checklist. Loop
+   until it passes.
 6. When signed off, summarize what was built and call out anything I should
    confirm with the client. Expect to iterate: I'll bring their feedback back.
 ```

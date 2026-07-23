@@ -346,7 +346,8 @@ keep it. One row per prospect, updated as it moves:
 ```
 
 Statuses worth using, in order: `waiting` → `followed up` → `questionnaire sent` →
-`answers in` → `building` → `won` / `closed`.
+`answers in` → `building` → `won` / `closed`. Once you're into the client phase
+(FULL-PROCESS Steps 10–15) add `launched` when the real site goes live.
 
 ---
 
@@ -448,7 +449,7 @@ grep -rn "AI-IMAGE" prospects/<slug>/mockup/
 **Place them** — paste this and Claude swaps every placeholder for a real image:
 
 ```
-In prospects/<slug>/mockup/, I've added real images to the images/ folder. Replace
+In prospects/<slug>/mockup/, I've added real images to the assets/ folder. Replace
 each AI-IMAGE placeholder div with an <img> tag pointing at the matching file (keep
 the aria-labels as alt text, add loading="lazy", keep aspect ratios consistent),
 then open it and confirm every section still looks right on desktop and mobile.

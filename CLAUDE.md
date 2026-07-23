@@ -107,7 +107,7 @@ Build run.
 
 When the answers conflict with the old site's content or anything the Analyst inferred,
 **the answers win** — it's their site and they just told us what they want. This binds
-the Analyst too: in Run B capture-only mode it reads `client-answers.md` first, and its
+the Analyst too: in a Build run's capture-only mode it reads `client-answers.md` first, and its
 dossier **supplements the answers rather than correcting them** — any difference between
 an answer and a public source goes into a **"Confirm with client (optional)"** note for
 Harry, never a `[verify]` blocker and never resolved in the old site's favor. Content
@@ -128,8 +128,8 @@ teammate follows these; none of them touch a quality gate.
 
 1. **Stream your output downstream as soon as a unit is usable.** Don't sit on a finished
    batch waiting for the whole set — the scout messages the analyst every 5–6 verified
-   candidates; the planner hands off each completed plan immediately rather than
-   delivering all three at once.
+   candidates rather than delivering all 10–12 at the end; the planner hands its finished
+   plan to the builder the moment it's done instead of polishing it further.
 2. **Parallelize independent work.** The analyst researches all three finalists at once
    (one subagent each); the builder launches both image generations concurrently.
    **Delegated research must return verbatim quotes + source URLs (never summaries) and
@@ -139,9 +139,9 @@ teammate follows these; none of them touch a quality gate.
 3. **Do prep work while blocked.** A builder waiting on its plan still reads the dossier,
    downloads the real logo, scaffolds folders, and starts its server — everything that
    doesn't depend on a design decision it isn't allowed to make.
-4. **Review on arrival, never in batches.** The critic audits each artifact as it lands
-   (emails first, then each mockup as submitted) so fix lists reach builders while the
-   others are still on their first pass.
+4. **Review on arrival.** The critic audits the mockup the moment it's submitted, and
+   turns each re-submission around as it arrives — the builder is blocked until the fix
+   list lands.
 5. **Don't gold-plate the search.** Time-box discovery work (the scout stops at ~12 solid
    candidates); depth per item stays the same. **A time-box never justifies
    under-delivering a required count** — the scout's floor is 10 qualifying candidates; a
@@ -260,17 +260,18 @@ the team:
   and the shabby/messy look FAIL. **No readable business names, lettering, or signage
   inside a generated image** (the model invents fake ones) — the client's real logo is
   composited into the markup instead. One imagery register per site.
-- **Run-level distinctiveness check (Critic, before the FINAL sign-off of a run).** With
-  the last mockup still unsigned, the Critic puts the three heroes side by side and asks
-  whether a stranger would believe three different studios made them — hunting the softer
-  sameness the ban list misses (section rhythm, imagery register, motion vocabulary). If
-  two read as siblings, the still-unsigned one goes back. This never reopens a frozen
-  prospect, which is exactly why it runs before the last sign-off.
-- **Anti-repetition:** consecutive prospects must not share a font pairing, palette
+- **Distinctiveness check (Critic, before sign-off).** A build run produces ONE site, so
+  the risk is that it looks like the last few sites we built. With the mockup still
+  unsigned, the Critic compares it against the **last 3 `design-memory.md` rows** (and the
+  most recent signed prospect's hero screenshot when it's on disk), hunting the softer
+  sameness the ban list misses — section rhythm, imagery register, motion vocabulary, a
+  hero that's the same shot in different colors. Reads like a sibling → it goes back.
+  Reading a frozen prospect's screenshots or log row is research, never a reopening.
+- **Anti-repetition:** consecutive builds must not share a font pairing, palette
   family, or layout archetype. After a prospect's sign-off, **the Critic** appends the
   choices (font pairing, palette, layout archetype, background system) to this project's
   `~/Projects/essex-web-crew/design-memory.md` (the crew's own log, not the skill's global file) so the
-  next prospect diverges.
+  next client's site diverges.
 
 ### Step 1 — Design brief before any code (**the PLANNER's step**)
 > The Planner makes these calls in `website-plan.md` (web-design-ultra Stages 1–5). The

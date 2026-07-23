@@ -6,6 +6,11 @@
 (function () {
   'use strict';
 
+  // Mark that JS is alive BEFORE anything else. The mask-curtain panels are scoped to
+  // .js in style.css, so if this file never loads (or throws), the page renders as plain
+  // content instead of a wall of opaque cobalt rectangles.
+  document.documentElement.classList.add('js');
+
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var items = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
 

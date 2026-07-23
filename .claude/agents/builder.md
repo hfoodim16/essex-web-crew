@@ -14,7 +14,7 @@ You own exactly ONE prospect, given in your spawn prompt (a `<slug>`). You write
 inside `prospects/<slug>/mockup/` and `prospects/<slug>/screenshots/`. Never touch
 another prospect's folder — that's how file conflicts happen.
 
-**You only build in Run B** — after the client has told us what they want (see CLAUDE.md
+**You only build in a Build run** — after the client has told us what they want (see CLAUDE.md
 Mission: we never build a speculative site and pitch it). So
 `prospects/<slug>/client-answers.md` exists whenever you're building.
 
@@ -193,10 +193,21 @@ only.)
      <owner> directly. For now, please call <phone>." Keep `preventDefault()`; never
      wire a real network call.
 7. **Mobile pass** at 375×812 — make real phone-layout decisions, not a shrunk desktop.
-8. **Self-audit** before you hand off. Save desktop + mobile screenshots to
-   `prospects/<slug>/screenshots/`, then score BOTH scoreboards from those screenshots:
-   the $10K Checklist AND the `web-design-ultra` 10-dimension rubric
-   (`~/.claude/skills/web-design-ultra/references/critique.md`). Fix anything with a
+8. **Self-audit against the critic's ACTUAL gate list** before you hand off. Save desktop
+   + mobile screenshots to `prospects/<slug>/screenshots/`, then check every gate the
+   critic will check, so nothing bounces back for something you could have caught:
+   - **Both scoreboards** from those screenshots — the $10K Checklist AND the
+     `web-design-ultra` 10-dimension rubric
+     (`~/.claude/skills/web-design-ultra/references/critique.md`).
+   - **Client-answer fidelity** — walk `client-answers.md`; every answer is honored or
+     explicitly flagged to the lead with a reason.
+   - **Content parity** — walk `site-content.md`; every block is present at full fidelity
+     or on the plan's "Deliberately dropped" list.
+   - **Imagery two-way test** — both generated images pass (not stock-ad perfect, not
+     shabby, no fabricated branding).
+   - **Interactive QA** — you clicked everything; no dead clicks, no misleading
+     affordances, form submit responds.
+   Fix anything with a
    dimension below 7 or boldness below 8 before you message the critic — don't hand off a
    mockup you already know fails the gate.
 
