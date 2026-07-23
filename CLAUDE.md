@@ -96,8 +96,18 @@ Planner selects and tailors FROM the master, never inventing a separate question
 | B3. Critique loop | `critic` | Opus | `prospects/<slug>/audit.md` (every round) + fix messages, sign-off |
 | B4. **Iterate with the client** | Harry ↔ client | — | Feedback → Harry reopens → builder revises |
 
-**Client answers are the top authority.** When the answers conflict with the old site's
-content or anything the Analyst inferred, **the answers win** — it's their site. Content
+**Client answers are the top authority.** The hierarchy, highest first:
+
+1. **The client's questionnaire answers** (`client-answers.md`) — controlling.
+2. The business's own current statements (their website, a Google Business post).
+3. Directories and aggregators (Yelp, Manta, LinkedIn, YellowPages).
+
+When the answers conflict with the old site's content or anything the Analyst inferred,
+**the answers win** — it's their site and they just told us what they want. This binds
+the Analyst too: in Run B capture-only mode it reads `client-answers.md` first, and its
+dossier **supplements the answers rather than correcting them** — any difference between
+an answer and a public source goes into a **"Confirm with client (optional)"** note for
+Harry, never a `[verify]` blocker and never resolved in the old site's favor. Content
 parity still applies to real content the answers didn't override (the questionnaire asks
 what they want kept, changed, or dropped).
 

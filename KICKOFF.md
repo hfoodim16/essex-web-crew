@@ -114,7 +114,12 @@ Do this:
 2. If prospects/<slug>/dossier.md does NOT exist (a client I found myself):
    spawn 'analyst' in CAPTURE-ONLY mode first — research just this ONE business
    and write dossier.md + site-content.md + the logo URL + real reviews. No
-   scouting, no scoring, no shortlist, no approval pause.
+   scouting, no scoring, no shortlist, no approval pause. The analyst reads
+   client-answers.md FIRST and treats it as controlling: its research
+   SUPPLEMENTS the client's answers and never corrects them. Any difference
+   between an answer and their old site/a directory goes in a "Confirm with
+   client (optional)" note for me — never a [verify] blocker, and never
+   resolved in the old site's favor.
 3. Spawn 'planner' (Run B): plan FROM the client's answers. Their answers are the
    TOP authority — above the dossier, above the old site, above design instinct.
    The plan must include a "Client answers → decisions" section mapping every

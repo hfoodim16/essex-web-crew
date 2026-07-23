@@ -23,6 +23,32 @@ Invoke via the Skill tool (not auto-loaded for teammates, so call it yourself):
 4. **Present the shortlist to the lead** with a persuasive pitch per business, then
    **wait for Harry's approval** before anyone builds.
 
+## Capture-only mode (Run B — the client is ALREADY engaged)
+
+Sometimes the lead spawns you for **one** business that Harry already has as a client —
+they've answered the questionnaire and we're about to build. In that mode: **no
+scouting, no scoring, no shortlist, no approval pause.** Just research this one
+business and write its `dossier.md` + `site-content.md` (logo URL, real reviews,
+existing-site capture).
+
+**Read `prospects/<slug>/client-answers.md` FIRST — before you touch the web.**
+
+- **Their answers are CONTROLLING. Your research SUPPLEMENTS them; it never corrects
+  them.** The client told us about their own business. Your job is to gather what the
+  answers don't cover — the logo file, the existing site's content for parity, real
+  review quotes, and anything they skipped.
+- **Never "fix" a client answer with a public source.** If their website or a directory
+  contradicts an answer — a different town list, a service they told us to drop,
+  different hours, an old owner name — the dossier records **the answer as the fact**
+  and puts the difference in a **"Confirm with client (optional)"** section, written so
+  Harry can casually check it ("their site still lists X; they answered Y — worth a
+  quick confirm"). Never resolve it in the website's favor, and never present it as a
+  blocker.
+- **No `[verify]` flags against a client answer.** For our purposes a client's statement
+  about their own business is a fact. Reserve `[verify]` for things nobody has stated.
+- If two of *their own* answers contradict each other, note it in the same
+  confirm-with-client section — don't pick one for them.
+
 ## Scoring
 
 Apply the rubric weights, produce a numeric score per candidate, and write the scored
@@ -105,10 +131,17 @@ The Builder downloads and uses that exact file. If you truly can't find one anyw
 write `**Logo:** No logo found` explicitly — never leave it ambiguous, so downstream
 agents don't guess or invent one.
 
-**Currency rule — record the CURRENT state, not the stalest source.** When facts
-conflict across sources, the business's **own most recent statement** is the fact: its
-current website or a Google Business post outranks LinkedIn, Yelp, Manta, or other
-directories. If the business itself has announced a change (new owner, new name, moved
+**Currency rule — record the CURRENT state, not the stalest source.** The authority
+hierarchy, highest first:
+
+1. **The client's questionnaire answers** (`prospects/<slug>/client-answers.md`, when it
+   exists) — CONTROLLING. They told us about their own business; nothing outranks it.
+2. **The business's own current statements** — its website, a Google Business post.
+3. **Directories and aggregators** — LinkedIn, Yelp, Manta, YellowPages.
+
+When facts conflict across sources at levels 2 and 3, the business's **own most recent
+statement** is the fact: its current website or a Google Business post outranks LinkedIn,
+Yelp, Manta, or other directories. If the business itself has announced a change (new owner, new name, moved
 address, dropped/added service), capture it as **current fact with the history noted**
 (e.g. "founded by X 30+ years ago; ownership transferred to Y in 2025 per their About
 page") — do NOT downgrade a business-announced change to a `[verify]` placeholder just

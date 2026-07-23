@@ -188,6 +188,12 @@ For `prospects/<slug>/mockup/`, do a real audit:
   they told us what they wanted; the site is for them, not for our taste. If an answer
   genuinely couldn't be honored, it must be flagged to the lead with a reason, not
   silently dropped.
+  **When the dossier and `client-answers.md` disagree, the build must follow the
+  ANSWERS.** The dossier captures what their old site and the directories say; the
+  client's answers are newer and outrank it. A mockup that used the dossier's version
+  over the client's stated answer (old town list, a service they said to drop, outdated
+  hours) → fail, even though the dossier "supports" it. The discrepancy belongs in the
+  dossier's "Confirm with client (optional)" note, not in the built site.
 - **CONTENT PARITY (hard gate).** *The new site must never know less than the old site.
   Richer design AND richer information — that's the pitch.* When
   `prospects/<slug>/site-content.md` exists, walk it block by block against the built
