@@ -173,6 +173,18 @@ For `prospects/<slug>/mockup/`, do a real audit:
   and where the plan's content map says it belongs. A beautiful mockup that carries a
   fraction of the original's information is a FAILED mockup — the client notices their
   missing content before they notice our typography.
+- **CLICK-TEST the interactive surface (hard gate).** Don't infer from code — open the
+  mockup in the browser pane and actually click: the hamburger (open AND close, on a
+  multi-page site check a non-index page too), nav links, every card / CTA / footer
+  link, each `#fragment` anchor, and the form submit. Fail on either of these:
+  - **A dead click** — an element that does nothing when clicked.
+  - **A misleading affordance** — anything that *looks* clickable (hover lift, pointer
+    cursor, custom-cursor label, arrow/chevron, card styling) where only a small inner
+    link actually works, or nothing does. The whole element must work, or the
+    affordance must go.
+  Placeholder forms must show an inline demo confirmation on submit (never a disabled
+  grey button, never a silent click). Report failures as numbered fixes naming the exact
+  element and page.
 - **Look at the screenshots** in `prospects/<slug>/screenshots/` (desktop + mobile).
   If a mobile pass isn't proven by screenshots, that's an automatic fail on item 7.
 - **Score BOTH scoreboards.** (a) All 8 items of the $10K Checklist. (b) The

@@ -94,4 +94,18 @@
       btn.addEventListener('pointerleave', function () { btn.style.transform = ''; });
     });
   }
+
+  /* ---- Estimate form (demo — no real submit) ---------------------------- */
+  var estForm = document.querySelector('form[aria-label="Free estimate request"]');
+  if (estForm) {
+    estForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var note = estForm.querySelector('.form-result');
+      if (note) {
+        note.textContent = 'Thanks — this is a demo form. On the live site this goes straight to Marvin. For now, please call (973) 338-0506.';
+        note.hidden = false;
+      }
+    });
+  }
+
 })();

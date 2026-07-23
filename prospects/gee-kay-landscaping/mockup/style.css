@@ -522,6 +522,7 @@ img, svg { max-width: 100%; display: block; }
   padding: 1.25rem 1.25rem 1.5rem;
   display: flex;
   flex-direction: column;
+  cursor: pointer;
   transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out), border-color 0.4s var(--ease);
 }
 .svc-card:hover {
@@ -958,3 +959,17 @@ img, svg { max-width: 100%; display: block; }
   .est-badge { width: 104px; height: 104px; }
   .est-badge-year { font-size: 2rem; }
 }
+
+/* Demo-form confirmation (placeholder form still gives feedback on click) */
+.form-result {
+  margin-top: 0.9rem;
+  padding: 0.8rem 1rem;
+  border: 1px solid color-mix(in srgb, var(--brass-clay) 30%, transparent);
+  border-left: 3px solid var(--brass-clay);
+  border-radius: var(--radius);
+  background: var(--parchment-panel);
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--ink);
+}
+.form-result[hidden] { display: none; }

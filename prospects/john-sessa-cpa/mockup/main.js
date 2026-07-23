@@ -49,4 +49,18 @@
     }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
     reveals.forEach(function (el) { io.observe(el); });
   }
+
+  /* ---- Contact form (demo - no real submit) ----------------------------- */
+  var msgForm = document.querySelector('.form-ph');
+  if (msgForm) {
+    msgForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var note = msgForm.querySelector('.form-result');
+      if (note) {
+        note.textContent = 'Thanks \u2014 this is a demo form. On the live site this reaches John directly. For now, please call (973) 748-5710.';
+        note.hidden = false;
+      }
+    });
+  }
+
 })();

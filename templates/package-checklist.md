@@ -68,6 +68,13 @@ they took it themselves?* Both halves must hold. Open each generated image full 
       informational fidelity (descriptions as descriptions, articles as articles, full
       town lists) or on the plan's "Deliberately dropped" list with a reason. Missing or
       thinned-to-a-mention content = numbered fail list to the builder.
+- [ ] **Every clickable works (click-tested in the browser, not inferred from code)** —
+      hamburger opens AND closes (checked on a non-index page too for multi-page sites),
+      every nav / card / CTA / footer link navigates, every `#fragment` target exists,
+      and the form submit shows its inline demo confirmation. **No dead clicks and no
+      misleading affordances** — if it looks clickable (hover lift, pointer cursor,
+      cursor label, arrow, card styling), the whole element must work, not just a small
+      inner link. Disabled grey submit buttons and silent dead clicks both fail.
 - [ ] No outbound contact of any kind was performed.
 
 ## Outreach (email OR call script)

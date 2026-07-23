@@ -184,4 +184,18 @@
       card.addEventListener("mouseleave", function () { card.style.transform = ""; });
     });
   }
+
+  /* ---- Estimate form (demo - no real submit) ---------------------------- */
+  var estForm = document.querySelector('.form-shell');
+  if (estForm) {
+    estForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var note = estForm.querySelector('.form-result');
+      if (note) {
+        note.textContent = 'Thanks \u2014 this is a demo form. On the live site this reaches the office directly. For now, please call (973) 763-6566.';
+        note.hidden = false;
+      }
+    });
+  }
+
 })();

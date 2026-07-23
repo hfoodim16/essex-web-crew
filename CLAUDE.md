@@ -253,6 +253,13 @@ for concrete/fencing). The Builder writes those 2–3 sentences of rationale at 
 Open in the browser pane. Go section by section: `read_page` / screenshot, fix what
 looks wrong, re-check. Don't move on from a broken section.
 
+**Then click every interactive element** (hamburger open+close, every nav/card/CTA/
+footer link on every page, every `#fragment`, the form submit). A **dead click** or a
+**misleading affordance** — anything that looks clickable where only a small inner link
+works — is a QA failure, and placeholder forms must show an inline demo confirmation
+rather than a silent click or a disabled button. See "Interactive QA" in
+`.claude/agents/builder.md`; the Critic click-tests this independently.
+
 ### Step 4 — Mobile pass (this is where cheap sites die)
 Resize to iPhone (375×812). Audit **every** section. Make real phone-layout
 DECISIONS, not a shrunk desktop: stacked full-width CTAs, tightened hero that fits

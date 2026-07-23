@@ -494,11 +494,12 @@
         <!-- EMBED: contact form service goes here (replaces old contact.php form) -->
         <form class="form-shell" aria-label="Project inquiry (placeholder)">
           <p class="form-note">Estimate request — form placeholder</p>
-          <label>Name<input type="text" name="name" placeholder="Your name" disabled /></label>
-          <label>Phone<input type="tel" name="phone" placeholder="(   )   -" disabled /></label>
-          <label>Email<input type="email" name="email" placeholder="you@example.com" disabled /></label>
-          <label>Tell us about your project<textarea name="project" rows="3" placeholder="Patio, plantings, weekly service…" disabled></textarea></label>
-          <button type="button" class="btn btn-primary" disabled data-cursor="Estimate">Request estimate</button>
+          <label>Name<input type="text" name="name" placeholder="Your name" /></label>
+          <label>Phone<input type="tel" name="phone" placeholder="(   )   -" /></label>
+          <label>Email<input type="email" name="email" placeholder="you@example.com" /></label>
+          <label>Tell us about your project<textarea name="project" rows="3" placeholder="Patio, plantings, weekly service…"></textarea></label>
+          <button type="submit" class="btn btn-primary" data-cursor="Estimate">Request estimate</button>
+          <p class="form-result" role="status" hidden></p>
         </form>
       </div>
     </section>

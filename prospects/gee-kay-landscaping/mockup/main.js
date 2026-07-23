@@ -43,9 +43,21 @@
       var name = link.getAttribute("data-page");
       if (!name) return;
       e.preventDefault();
+      e.stopPropagation();
       setPage(name);
       closeNav();
     });
+    // Non-anchor triggers (e.g. a whole service card) need keyboard activation
+    if (link.tagName !== "A" && link.tagName !== "BUTTON") {
+      link.addEventListener("keydown", function (e) {
+        if (e.key !== "Enter" && e.key !== " " && e.key !== "Spacebar") return;
+        var name = link.getAttribute("data-page");
+        if (!name) return;
+        e.preventDefault();
+        setPage(name);
+        closeNav();
+      });
+    }
   });
 
   /* ---------------- Mobile nav ---------------- */
@@ -216,4 +228,18 @@
 
   initMagnetic();
   initCursor();
+
+  /* ---- Estimate form (demo - no real submit) ---------------------------- */
+  var estForm = document.querySelector('.contact-form, form[aria-label]');
+  if (estForm) {
+    estForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var note = estForm.querySelector('.form-result');
+      if (note) {
+        note.textContent = 'Thanks \u2014 this is a demo form. On the live site this reaches Gee-Kay directly. For now, please call (973) 992-6687.';
+        note.hidden = false;
+      }
+    });
+  }
+
 })();

@@ -158,8 +158,28 @@ only.)
    `.img-placeholder`); embeds are placeholders too.
 5. **Desktop QA** in the browser pane, section by section — fix as you go. Confirm the
    real logo renders in the header and the 2 generated images look photorealistic.
-6. **Mobile pass** at 375×812 — make real phone-layout decisions, not a shrunk desktop.
-7. **Self-audit** before you hand off. Save desktop + mobile screenshots to
+6. **Interactive QA — CLICK EVERYTHING (hard rule).** Actually click every interactive
+   element in the browser pane and confirm it does what it looks like it does:
+   - The hamburger — **open AND close** it; check `aria-expanded` flips both ways.
+   - Every nav link **from every page** (multi-page sites: main.js must be loaded and
+     the ids must match on each page, not just index).
+   - Every SPA `data-page` / card / CTA / footer link, and every `#fragment` anchor
+     (confirm the target element actually exists).
+   - The form submit button.
+   Two rules this exists to enforce:
+   - **No misleading affordances.** If it *looks* clickable — a card with a hover lift,
+     a pointer cursor, a custom-cursor label, an arrow/chevron — then clicking it must
+     do something. Make the whole element work (`data-page` + `role="link"` +
+     `tabindex="0"` + keyboard Enter/Space) or remove the affordance. A card where only
+     a tiny inner link works is a defect.
+   - **Placeholder forms must respond.** Never a disabled grey button, never a silent
+     dead click. The submit shows an inline demo confirmation — the house pattern is a
+     hidden `<p class="form-result" role="status" hidden>` that the submit handler fills
+     and unhides, e.g. "Thanks — this is a demo form. On the live site this reaches
+     <owner> directly. For now, please call <phone>." Keep `preventDefault()`; never
+     wire a real network call.
+7. **Mobile pass** at 375×812 — make real phone-layout decisions, not a shrunk desktop.
+8. **Self-audit** before you hand off. Save desktop + mobile screenshots to
    `prospects/<slug>/screenshots/`, then score BOTH scoreboards from those screenshots:
    the $10K Checklist AND the `web-design-ultra` 10-dimension rubric
    (`~/.claude/skills/web-design-ultra/references/critique.md`). Fix anything with a

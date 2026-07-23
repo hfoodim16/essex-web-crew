@@ -125,32 +125,32 @@
             <div class="ledger-double" aria-hidden="true"><span></span><span></span></div>
           </div>
           <ul class="card-grid" role="list">
-            <li class="svc-card reveal" data-cursor="View">
+            <li class="svc-card reveal" data-cursor="View" data-page="services" role="link" tabindex="0">
               <!-- AI-IMAGE: Landscaping crew member edging a crisp lawn border along a slate walkway, green residential yard, midday, shallow depth of field -->
               <div class="img-placeholder card-img" role="img" aria-label="Crew edging a crisp lawn border">
                 <span>AI-IMAGE — lawn edging</span>
               </div>
               <h3>Lawn &amp; Grounds Maintenance</h3>
               <p>Weekly and seasonal lawn care with steady, general property upkeep. The dependable rhythm that keeps a Livingston yard looking kept, all season long.</p>
-              <a href="#" data-page="services" class="text-link">See services &rarr;</a>
+              <a href="#" data-page="services" class="text-link" tabindex="-1">See services &rarr;</a>
             </li>
-            <li class="svc-card reveal" data-cursor="View">
+            <li class="svc-card reveal" data-cursor="View" data-page="services" role="link" tabindex="0">
               <!-- AI-IMAGE: Freshly planted landscape bed with layered shrubs, perennials and dark brown mulch, curved stone edging, suburban front yard, soft morning light -->
               <div class="img-placeholder card-img" role="img" aria-label="Freshly planted landscape bed">
                 <span>AI-IMAGE — new plantings</span>
               </div>
               <h3>Landscape Design &amp; Installation</h3>
               <p>Design and installation of new landscapes, from planting plans to finished beds. We also upgrade and refresh landscapes that have been in the ground for years.</p>
-              <a href="#" data-page="services" class="text-link">See services &rarr;</a>
+              <a href="#" data-page="services" class="text-link" tabindex="-1">See services &rarr;</a>
             </li>
-            <li class="svc-card reveal" data-cursor="View">
+            <li class="svc-card reveal" data-cursor="View" data-page="services" role="link" tabindex="0">
               <!-- AI-IMAGE: Newly laid bluestone paver walkway curving to a front porch through a green lawn, warm evening light, no people -->
               <div class="img-placeholder card-img" role="img" aria-label="Newly laid paver walkway">
                 <span>AI-IMAGE — paver walkway</span>
               </div>
               <h3>Hardscapes</h3>
               <p>Design and installation of walkways, patios, and the stonework that gives a property its structure — plus upgrades to existing hardscape that has seen better seasons.</p>
-              <a href="#" data-page="services" class="text-link">See services &rarr;</a>
+              <a href="#" data-page="services" class="text-link" tabindex="-1">See services &rarr;</a>
             </li>
           </ul>
         </div>
@@ -360,21 +360,22 @@
                 <p class="form-note">Form is a placeholder — not yet connected.</p>
                 <label class="field">
                   <span>Name</span>
-                  <input type="text" name="name" placeholder="Your name" disabled />
+                  <input type="text" name="name" placeholder="Your name" />
                 </label>
                 <label class="field">
                   <span>Phone</span>
-                  <input type="tel" name="phone" placeholder="(973) 000-0000" disabled />
+                  <input type="tel" name="phone" placeholder="(973) 000-0000" />
                 </label>
                 <label class="field">
                   <span>Email</span>
-                  <input type="email" name="email" placeholder="you@email.com" disabled />
+                  <input type="email" name="email" placeholder="you@email.com" />
                 </label>
                 <label class="field">
                   <span>What do you need done?</span>
-                  <textarea name="message" rows="3" placeholder="Lawn maintenance, a new bed, a patio&hellip;" disabled></textarea>
+                  <textarea name="message" rows="3" placeholder="Lawn maintenance, a new bed, a patio&hellip;"></textarea>
                 </label>
-                <button type="submit" class="btn btn-pine" disabled>Request an estimate</button>
+                <button type="submit" class="btn btn-pine">Request an estimate</button>
+                <p class="form-result" role="status" hidden></p>
               </form>
             </div>
           </div>

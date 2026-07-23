@@ -220,4 +220,18 @@
     });
   }
 
+
+  /* ---- Contact form (demo — no real submit) ----------------------------- */
+  var inqForm = document.querySelector('.contact-form-card');
+  if (inqForm) {
+    inqForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var note = inqForm.querySelector('.form-result');
+      if (note) {
+        note.textContent = 'Thanks — this is a demo form. On the live site this reaches Duran & Son directly. For now, please call (862) 252-7030.';
+        note.hidden = false;
+      }
+    });
+  }
+
 })();

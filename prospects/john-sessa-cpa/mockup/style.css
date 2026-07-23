@@ -812,3 +812,17 @@ ul { margin: 0; padding: 0; list-style: none; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .reveal { opacity: 1; transform: none; }
 }
+
+/* Demo-form confirmation (placeholder form still gives feedback on click) */
+.form-result {
+  margin-top: 0.9rem;
+  padding: 0.8rem 1rem;
+  border: 1px solid rgba(0,0,0,0.10);
+  border-left: 3px solid var(--verdigris);
+  border-radius: 4px;
+  background: var(--porcelain);
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--ink);
+}
+.form-result[hidden] { display: none; }
