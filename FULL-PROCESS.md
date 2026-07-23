@@ -1,11 +1,15 @@
 # The Full Process — Demo to Delivered
 
-> **⚠️ Ask-first model.** We find a business, send them the **10-question
-> questionnaire**, build FROM their answers, and keep refining it with them. We never
-> build a site speculatively and pitch it. So the early steps run as **Run A** (prospect
-> + ask, *no mockup*), and the build happens in **Run B** — the "skip to planner" prompt
-> in `KICKOFF.md` — once their answers come back. Everything from the client phase
-> (Steps 10–15) onward is unchanged.
+> **⚠️ Ask-first model, two independent teams.** We find a business, **you** reach out
+> personally, whoever's interested gets the master questionnaire
+> (`templates/questionnaire-master.md`), and we build FROM their answers and keep refining
+> it with them. We never build a site speculatively and pitch it. So Steps 1–4 are the
+> **Team 1 — Prospecting run** (`scout` + `analyst`, ends at a shortlist with contact info,
+> nothing built), Step 8 is **you** — no agents, your own words, and the questionnaire on a
+> yes — and Steps 5–7 are the **Team 2 — Build run** (`planner` + `builder` + `critic`)
+> once their answers come back. Both prompts are in `KICKOFF.md`. The steps keep their
+> numbers, so the real order is **1 → 2 → 3 → 4 → 8 → 5 → 6 → 7 → 9 → 10…**. Everything
+> from the client phase (Steps 10–15) onward is unchanged.
 
 The whole journey in one place: from summoning the agent team, through the pitch, to a
 **live website on the client's own domain**, and the light maintenance after. Same style
@@ -32,11 +36,13 @@ the site says so).
 | Don't like one of the top 3 | Step 4B |
 | Website needs fixes / wrong vibe | Step 6B / 6C |
 | Adding the images | Step 7 (how-to: PLAYBOOK Part 3, Ref A) |
-| Sending the email | Step 8A–8C |
-| No email — I have to call | Step 8D |
-| They're interested | Step 9A → **Step 10** |
-| No reply / they said no / all flopped | Step 9B / 9C / 9D |
-| **Client said yes — now what?** | **Step 10** |
+| Reaching out to a prospect | Step 8 |
+| They're interested — what do I send? | Step 8A |
+| Their answers are in — start the build | Step 8B |
+| Showing the client the built site | Step 8C |
+| They're happy with it | Step 9A → **Step 10** |
+| No reply / they said no / all flopped | Step 8D → Step 9B / 9C / 9D |
+| **Client approved the site — now what?** | **Step 10** |
 | Getting their info & photos | Step 11 (info how-to: PLAYBOOK Part 3, Ref B) |
 | Building the real site | Step 12 |
 | Buying the domain & going live | Step 13 |
@@ -55,22 +61,26 @@ playbook has the full versions.)*
 Open Terminal, run `~/Projects/essex-web-crew/run.sh`. → **Step 2**.
 
 ### Step 2 — Give the kickoff order
-Copy the **Full run** prompt from `KICKOFF.md`, paste it to the lead. → **Step 3**.
+Copy the **Team 1 — Prospecting run** prompt from `KICKOFF.md`, paste it to the lead.
+→ **Step 3**.
 
 ### Step 3 — Wait and watch
 `Ctrl+T` for the task list. Scout + analyst take 15–30 min. → **Step 4**.
 
-### Step 4 — Approve the shortlist
-The analyst gives you 3 businesses with a pitch each.
-- **4A — you like all 3.** Approve. → **Step 5**.
+### Step 4 — Read the shortlist (the Prospecting run's final output)
+The analyst gives you 3 businesses with a pitch and contact info each, then the run ends.
+Nothing is built, so there's nothing to approve.
+- **4A — you'd contact all 3.** → **Step 8**.
 - **4B — you don't like one.** Paste the swap prompt (see PLAYBOOK Step 4B) to promote the
-  next candidate, approve the replacement. → **Step 5**.
+  next candidate. → **Step 8**.
 
 ### Step 5 — The team builds (trust the plan)
-Planner designs, builders build, copywriter drafts outreach, critic audits until it
-passes. Wait for "all packages signed off." → **Step 6**.
+*(You get here from Step 8B, once a client has answered the questionnaire.)* You paste the
+**Team 2 — Build run** prompt from `KICKOFF.md` with their answers in it: planner designs
+from those answers, one builder builds, critic audits until it passes. Wait for the
+sign-off summary. → **Step 6**.
 
-### Step 6 — Review the websites (per business)
+### Step 6 — Review the website (your own pass, before the client sees it)
 Open `prospects/<slug>/mockup/index.html`, click every page, check phone width and
 `audit.md`. Gut check: **would you pay for this?**
 - **6A — you love it.** → **Step 7**.
@@ -79,38 +89,47 @@ Open `prospects/<slug>/mockup/index.html`, click every page, check phone width a
 - **6C — wrong vibe** (redesign). Paste the planner-redesign prompt (PLAYBOOK Step 6C),
   re-review. → **Step 7**.
 
-### Step 7 — Add the remaining images (per business)
+### Step 7 — Add the remaining images
 The hero and one priority slot already hold real AI-generated images (in
 `mockup/assets/`). List what's still a placeholder:
 `grep -rn "AI-IMAGE" prospects/<slug>/mockup/`. Generate and place — full how-to in
 **PLAYBOOK Part 3, Reference A** (match the register the plan set; no business names or
 signage in generated images).
-- **7A — all good.** → **Step 8**.
+- **7A — all good.** → back to **Step 8C** (show the client).
 - **7B — one won't come out right.** For a SECONDARY slot, leave the styled placeholder or
   reframe the section. The hero and the other priority slot must stay real images — send
   those back for one regeneration instead.
-  → **Step 8**.
+  → back to **Step 8C**.
 
-*(The pitch mockup ships with exactly 2 real AI images plus labeled placeholders beyond —
-that's the standard, not a shortfall. Leftover `[placeholder]` TEXT gaps are fine; you
-finalize everything properly in Steps 11–12 once they're a paying client.)*
+*(The first build ships with exactly 2 real AI images plus labeled placeholders beyond —
+that's the standard, not a shortfall. Leftover `[placeholder]` TEXT gaps are fine, and the
+client's own job photos replace AI images anyway; you finalize everything properly in
+Steps 11–12 once they're a paying client.)*
 
-### Step 8 — Reach out (per business)
-Check which file the copywriter wrote:
-- `outreach-email.md` → an email. **8A** send as-is · **8B** small edits yourself ·
-  **8C** off → rewrite prompt (PLAYBOOK Step 8C). Then send, log it. → **Step 9**.
-- `outreach-call.md` → **8D**: no email was found, so it's a phone script. Read it, fill
-  blanks, call at a smart time, use the "if they say…" answers. Log the call
-  (Channel = phone). → **Step 9**.
+### Step 8 — Reach out yourself, then run the build (per business)
+**No agents here.** Nothing is drafted for you — you take the contact info and the angle
+out of `prospects/<slug>/dossier.md` and reach out in your own words, by call or email,
+whichever suits that business. Full version: **PLAYBOOK Step 8**.
+- **8A — they're interested.** Send **`templates/questionnaire-master.md`** as-is (or walk
+  the questions on the phone and type their answers). Skipped questions are fine. → **8B**
+  when the answers come back.
+- **8B — their answers are in.** Paste the **Team 2 — Build run** prompt from `KICKOFF.md`
+  with the slug and their answers verbatim; the lead saves them to
+  `prospects/<slug>/client-answers.md`. → **Step 5**, then **6** and **7**, then back
+  here at **8C**.
+- **8C — show the client the built site.** Screen share, or drag `mockup/` onto Netlify
+  Drop for a phone-friendly link. Changes they want → the fix-list prompt (PLAYBOOK Step
+  6B) with their feedback as the list, re-review, show again. Happy → **Step 9A**.
+- **8D — no reply, or a no.** Log it. Silent after 5–7 days → **9B**; a clear no → **9C**.
 
 ### Step 9 — Follow up and close out (per business)
-- **9A — they're interested.** Get them on a call, walk the mockup, anchor on Cecere
-  Brothers. **This is where the pitch phase ends and the real work begins → continue to
-  Step 10.**
-- **9B — no reply after 5–7 days.** One short follow-up (call or text if you phoned). Reply
-  → 9A/9C; still silent → 9C. Max 2 touches.
-- **9C — not interested.** Log `closed`, keep the mockup as portfolio. Done.
-- **9D — all three flopped.** Tune the rubric + voice (PLAYBOOK Step 9D), start fresh →
+- **9A — they're happy with the site.** Now agree terms and money. **This is where the
+  pitch phase ends and the real work begins → continue to Step 10.**
+- **9B — no reply after 5–7 days.** One short follow-up in your own words (call or text if
+  you phoned). Reply → **8A**/9C; still silent → 9C. Max 2 touches.
+- **9C — not interested.** Log `closed`; keep the dossier (reusable research) and anything
+  built (portfolio). Done.
+- **9D — all three flopped.** Tune the targeting rubric (PLAYBOOK Step 9D), start fresh →
   **Step 1**.
 
 ---

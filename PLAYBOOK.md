@@ -1,18 +1,28 @@
 # Harry's Playbook
 
-> **⚠️ The business model changed — read this first.** We now work **ask-first**: find a
-> business that could use a site → send them the **10-question questionnaire** → build
-> FROM their answers → keep refining it with them. We do **not** build a site
-> speculatively and pitch it.
+> **⚠️ The business model changed — read this first.** We work **ask-first**: find a
+> business that could use a site → **you** reach out personally → anyone who says yes gets
+> the master questionnaire → build FROM their answers → keep refining it with them. We do
+> **not** build a site speculatively and pitch it.
 >
-> In practice: **Run A** (scout → analyst → questionnaire + first-contact outreach, *no
-> mockup*) → you send it and collect answers → **Run B** (the "skip to planner" prompt in
-> `KICKOFF.md`: plan from their answers → build → critic → iterate with the client).
-> Both prompts are in `KICKOFF.md`.
+> In practice there are **two independent teams with you in the middle**, and both prompts
+> live in `KICKOFF.md`:
 >
-> The steps below still describe the run's shape correctly, but anywhere they say you're
-> sending a finished mockup as first contact, you're now sending the **questionnaire**
-> instead — the mockup comes after their answers.
+> 1. **Team 1 — Prospecting run** (`scout` + `analyst`). Ends at a shortlist of 3 real
+>    businesses **with their contact info**. Nothing is built, and there's no approval
+>    pause — the shortlist *is* the output.
+> 2. **You, between the teams — no agents at all.** You call or email them yourself, in
+>    your own words. There are no drafted emails and no call scripts. Whoever's interested
+>    gets **`templates/questionnaire-master.md`** — a standing, ready-to-send questionnaire
+>    that already sits in the repo. You collect their answers.
+> 3. **Team 2 — Build run** (`planner` + `builder` + `critic`). You paste their answers in;
+>    the team plans from them, builds, and audits. Then you review the finished site
+>    **with the client** and iterate on their feedback.
+>
+> The nine steps below keep their original numbers, but since your outreach now happens
+> *before* anything is built, the real order you walk them in is
+> **1 → 2 → 3 → 4 → 8 → 5 → 6 → 7 → 9**. **Step 8 is the hinge:** it's where you make
+> contact, send the questionnaire, kick off the Build run, and show the client the result.
 
 > This playbook covers the **pitch phase** — from summoning the team to a client saying
 > yes. For what happens *after* a yes (real content + photos, production build, buying the
@@ -22,8 +32,8 @@
 Two scripts live in this file:
 
 - **Script 1 — The Whole Run, In Plain English.** Read this top to bottom. It walks you
-  from literally summoning the team to the absolute end — sent email, follow-up, closed
-  prospect. No jargon.
+  from literally summoning the team to the absolute end — your outreach, the build,
+  follow-up, closed prospect. No jargon.
 - **Script 2 — The Same Run, With the "What If It's Not Perfect" Branches.** Exact same
   nine steps as Script 1, in the same order. The difference: at every step where things
   can go imperfect, it splits into simple lettered branches (Step 6A, 6B…) that tell you
@@ -37,13 +47,14 @@ Two scripts live in this file:
 | Website is close but needs fixes | Script 2, Step 6B |
 | Website direction is totally wrong | Script 2, Step 6C |
 | An AI image won't come out right | Script 2, Step 7B |
-| Email needs small tweaks | Script 2, Step 8B |
-| Email is generic / wrong voice / inaccurate | Script 2, Step 8C |
-| No email — I have to call instead | Script 2, Step 8D |
-| Client replied — interested | Script 2, Step 9A |
+| They're interested — what do I send them? | Script 2, Step 8A |
+| Their questionnaire answers are in — now what? | Script 2, Step 8B |
+| The client wants changes to the built site | Script 2, Step 8C |
+| No reply / they said no | Script 2, Step 8D |
+| Client's happy with the site | Script 2, Step 9A |
 | No reply after a week | Script 2, Step 9B |
 | Client said no | Script 2, Step 9C |
-| All three pitches flopped | Script 2, Step 9D |
+| All three prospects flopped | Script 2, Step 9D |
 | How do I generate & place the images? | Part 3, Reference A |
 | The client gave me info — where do I put it? | Part 3, Reference B |
 | How do I make a small edit to a site? | Part 3, Reference C |
@@ -55,6 +66,7 @@ Two scripts live in this file:
 
 Read this once, start to finish, before your first run. It's the map. The detailed
 "what if it's not good" branches live in Script 2, which uses these same nine steps.
+Remember the real-time order: **1 → 2 → 3 → 4 → 8 → 5 → 6 → 7 → 9.**
 
 **Step 1 — Summon the team.**
 Open Terminal and run `~/Projects/essex-web-crew/run.sh`. That starts Claude Code inside
@@ -62,49 +74,56 @@ the project with agent teams turned on. You'll see a normal Claude prompt — no
 started yet. You're just sitting at the controls.
 
 **Step 2 — Give the kickoff order.**
-Open `KICKOFF.md`, copy the **Full run** prompt, and paste it in. The lead now starts
-building the team: first a scout that searches Essex County for businesses with weak or
-missing websites, then an analyst that scores them and researches the best few.
+Open `KICKOFF.md`, copy the **Team 1 — Prospecting run** prompt, and paste it in. The lead
+now builds the team: a scout that searches Essex County for businesses with weak or
+missing websites, then an analyst that scores them and researches the best few. Only those
+two run — nothing gets built in this run.
 
 **Step 3 — Wait and watch.**
 Press `Ctrl+T` to see the task list, and use the arrow keys to peek at what each
 teammate is doing. Scouting plus scoring usually takes 15–30 minutes together. You don't
 have to do anything during this stretch — let it cook.
 
-**Step 4 — Approve the shortlist (the team stops here for you).**
-The analyst presents 3 businesses, each with a short pitch: why they're winnable, what
-the pitch would lead with, and how many pages the site needs. Read them. Reply to
-approve all 3, or tell it to swap any you don't like. **Nothing gets built until you
-say go.**
+**Step 4 — Read the shortlist (this is the run's final output).**
+The analyst presents 3 businesses, each with how to reach them (phone, email, owner's
+name), why they're winnable, the angle to lead with, and the recommended scope. Then the
+run ends — there's nothing to approve, because nothing is being built yet. Pick who you're
+going to contact and go to **Step 8**. (Don't like one of the three? Script 2, Step 4B
+swaps it.)
 
-**Step 5 — The team builds.**
-Once you approve: the planner (Fable) designs each website, three builders each build
-one, the copywriter drafts your outreach emails, and the critic audits everything and
-keeps sending fixes back until it's genuinely good. This is the longest stage — often
-30+ minutes. When every package passes, the lead gives you a summary and the run is done.
+**Step 5 — The team builds (this happens after Step 8).**
+Once a client has answered the questionnaire, you paste the **Team 2 — Build run** prompt
+from `KICKOFF.md` with their answers in it. The lead saves the answers to
+`prospects/<slug>/client-answers.md`, the planner (Fable) designs the site **from those
+answers**, one builder builds it, and the critic audits and keeps sending fixes back until
+it's genuinely good. This is the longest stage — often 30+ minutes. When it passes, the
+lead gives you a summary and the run is done.
 
-**Step 6 — Review the websites.**
-Each business now has a folder `prospects/<name>/`. Open its `mockup/index.html`
-(double-click) and click through every page. This is where you decide if the site is
-good enough to pitch.
+**Step 6 — Review the website.**
+The client now has a folder `prospects/<name>/`. Open its `mockup/index.html`
+(double-click) and click through every page. This is your own pass before the client sees
+it — you're checking it's good enough to put in front of them.
 
 **Step 7 — Add the remaining images.**
 The hero and one priority slot already hold **real AI-generated images** the builder made
 (they're in `prospects/<slug>/mockup/assets/`). Every OTHER picture slot is a labeled
 placeholder box with a ready-to-use image prompt baked in. Generate those remaining
-images, drop them in, and check the site still looks right.
+images, drop them in, and check the site still looks right. Then show it to the client
+(back at **Step 8C**).
 
-**Step 8 — Reach out yourself (email or phone).**
-The team never contacts anyone — it just preps you. For each prospect you'll get ONE of
-two files: an `outreach-email.md` (when it found the client's email — you fill the blanks,
-attach the mockup screenshots, and send it), or an `outreach-call.md` (when there's no
-email — it hands you the phone number, a call script, and prepared answers so you can just
-dial and talk).
+**Step 8 — Reach out yourself, then run the build (the hinge — comes right after Step 4).**
+The team never contacts anyone, and it no longer writes you anything to send. You take the
+contact info from `prospects/<slug>/dossier.md` and reach out **in your own words** —
+call or email, whichever suits that business. Anyone who's interested gets
+**`templates/questionnaire-master.md`** exactly as it is; it's already written and sitting
+in the repo. When their answers come back you paste them into the **Team 2 — Build run**
+prompt (that's **Step 5**), review the result yourself (**Steps 6–7**), then walk the
+client through it and fix whatever they want changed.
 
 **Step 9 — Follow up and close out.**
-Log each email you send, follow up once after about a week of silence, and stop after
-two touches. Interested replies turn into real client conversations; everything else
-becomes portfolio material for the next pitch.
+Log every call and email you send, follow up once after about a week of silence, and stop
+after two touches. A client who's happy with their site becomes a real, paying client;
+everything else you close out and learn from.
 
 That's the entire lifecycle. Every "what if" is handled in Script 2 below, step for step.
 
@@ -112,7 +131,8 @@ That's the entire lifecycle. Every "what if" is handled in Script 2 below, step 
 
 # Script 2 — The Same Run, With the Branches
 
-Same nine steps as Script 1, same order. Steps 1, 2, 3, and 5 can't really go wrong, so
+Same nine steps as Script 1, same numbers, walked in the same real-time order
+(**1 → 2 → 3 → 4 → 8 → 5 → 6 → 7 → 9**). Steps 1, 2, 3, and 5 can't really go wrong, so
 they're single. Steps 4, 6, 7, 8, 9 split into lettered branches — read the one that
 matches your situation, do it, and it tells you the next step. No dead ends.
 
@@ -128,8 +148,8 @@ Open Terminal, run `~/Projects/essex-web-crew/run.sh`. → continue to **Step 2*
 
 ### Step 2 — Give the kickoff order
 
-Copy the **Full run** prompt from `KICKOFF.md`, paste it to the lead. → continue to
-**Step 3**.
+Copy the **Team 1 — Prospecting run** prompt from `KICKOFF.md`, paste it to the lead.
+→ continue to **Step 3**.
 
 ### Step 3 — Wait and watch
 
@@ -138,11 +158,12 @@ Copy the **Full run** prompt from `KICKOFF.md`, paste it to the lead. → contin
 
 ---
 
-### Step 4 — Approve the shortlist
+### Step 4 — Read the shortlist (the Prospecting run's final output)
 
-The analyst gives you 3 businesses with a pitch each. Read them and decide.
+The analyst gives you 3 businesses with a pitch and contact info each, then the run ends.
+Nothing is built, so there's nothing to approve — you're just deciding who to call.
 
-- **Step 4A — you like all 3.** Reply to approve them. → continue to **Step 5**.
+- **Step 4A — you'd contact all 3.** → continue to **Step 8** (reach out).
 - **Step 4B — you don't like one (or more).** Paste this to swap the weak one out:
 
   ```
@@ -156,21 +177,24 @@ The analyst gives you 3 businesses with a pitch each. Read them and decide.
   ```
 
   If the candidate list is empty, add this line to the prompt: *"If no good candidate
-  remains, spawn a scout (Sonnet) to find new ones first."* Approve the replacement,
-  then → continue to **Step 5**.
+  remains, spawn a scout (Sonnet) to find new ones first."* Once you're happy with the
+  replacement, → continue to **Step 8**.
 
 ---
 
 ### Step 5 — The team builds (you trust the plan)
 
-You approved the businesses, so let the team run: planner (Fable) designs, builders
-(Opus) build, copywriter (Sonnet) drafts emails, critic (Opus) audits until it passes.
-You don't second-guess the design plan here — you listen to Fable. Just wait for the
-lead's "all packages signed off" summary. → continue to **Step 6**.
+*(You arrive here from **Step 8B**, once a client has answered the questionnaire.)*
+
+You've pasted the **Team 2 — Build run** prompt from `KICKOFF.md` with their answers in
+it, so let the team run: planner (Fable) designs **from the client's answers**, ONE builder
+(Opus) builds, critic (Opus) audits until it passes. You don't second-guess the design plan
+here — you listen to Fable. Just wait for the lead's "signed off" summary. → continue to
+**Step 6**.
 
 ---
 
-### Step 6 — Review the websites (repeat per business)
+### Step 6 — Review the website (your own pass, before the client sees it)
 
 Open `prospects/<slug>/mockup/index.html`, click every page, narrow the window to phone
 width, and skim `audit.md` (it now carries TWO scoreboards — the $10K Checklist 8/8 AND
@@ -184,7 +208,14 @@ the client's real content and invents no facts, and specifically:
 - **The facts are current** — e.g. if ownership changed, the site says so rather than
   repeating a stale directory listing.
 - **The hero and one other image are real photos**, not placeholder boxes.
+- **It matches what the client actually told you** — skim
+  `prospects/<slug>/client-answers.md` against the site. Their answers outrank the dossier,
+  their old site, and design instinct; an ignored answer is a fix-list item.
 Gut check: **would you pay for this site?**
+
+*(Leftover `[placeholder]` gaps — hours, exact towns, the owner's story — are fine at this
+stage if the client skipped those questions. You fill them in as they come back to you;
+see **Part 3, Reference B**.)*
 
 - **Step 6A — you love it.** → continue to **Step 7**.
 - **Step 6B — right direction, but has problems** (typos, a broken/ugly section, weak
@@ -223,7 +254,7 @@ Gut check: **would you pay for this site?**
 
 ---
 
-### Step 7 — Add the real images (repeat per business)
+### Step 7 — Add the real images
 
 *(Full how-to, including how to generate the images: **Part 3, Reference A**.)*
 
@@ -246,93 +277,86 @@ and at 375px wide, and update prospects/<slug>/screenshots/.
 
 Re-open `index.html` yourself to confirm.
 
-- **Step 7A — all images look good.** → continue to **Step 8**.
-- **Step 7B — one or two won't come out right.** Fine for a pitch **for the secondary
-  slots only**: leave those as the styled placeholders (they're designed to look
+- **Step 7A — all images look good.** → go back to **Step 8C** and show the client.
+- **Step 7B — one or two won't come out right.** Fine **for the secondary slots only**:
+  leave those as the styled placeholders (they're designed to look
   intentional), or ask a builder to reframe that section so it doesn't need the image.
   **Not fine for the hero or the other priority slot** — those two must hold real images
   that pass the realism test (the critic already enforced this). If one of those looks
   wrong, send it back for ONE regeneration naming the flaw; if it fails again, escalate
-  rather than shipping a placeholder there. → continue to **Step 8**.
+  rather than shipping a placeholder there. → go back to **Step 8C**.
+
+  *(The client's own job photos beat AI images anyway — question 19 of the questionnaire
+  asks for them. Once they send some, swap them in: **FULL-PROCESS Step 11**.)*
 
 ---
 
-### Step 8 — Reach out (repeat per business)
+### Step 8 — Reach out yourself, then run the build (the hinge — you get here from Step 4)
 
-**First, see which file this prospect got.** The copywriter wrote ONE of two, depending
-on whether it found a real email in the dossier:
-- `prospects/<slug>/outreach-email.md` → an email to send. Use **Steps 8A–8C**.
-- `prospects/<slug>/outreach-call.md` → no email was found, so it's a phone script. Skip
-  to **Step 8D**.
+**No agent is involved in this step, and there is nothing waiting for you to send.** There
+are no drafted emails and no call scripts anymore — you reach out in your own words.
 
-For an email: read it. Does it open with a real, specific observation about THEIR
-business? Is every claim true (matches the dossier)? Does it mention the mockup and the
-Cecere Brothers reference? Does it sound like you?
+**Before you dial or type:** open `prospects/<slug>/dossier.md` and take the contact block
+(owner's name, phone, email) plus the one or two specifics that make this business winnable
+— the angle the analyst wrote is there so you have something real to open with, not so you
+can read it aloud. Then pick the channel that suits them: for trades, a call early in the
+morning before the crews head out usually beats an email; for a professional office, email.
+Things worth having in front of you either way: what's actually wrong with their current
+site, that Cecere Brothers Landscaping is your reference, and that you want to hear what
+*they* want before designing anything.
 
-- **Step 8A — it's good.** Run the pre-send checklist below, send it, → continue to
-  **Step 9**.
-- **Step 8B — small tweaks** (a word, a sentence). Just edit the file yourself — faster
-  than an agent. Then pre-send checklist, send, → continue to **Step 9**.
-- **Step 8C — off** (generic, AI-sounding, or a claim that's not in the dossier). Paste:
+**Pre-contact checklist:** the name and number match the dossier and are spelled right ·
+you can say in one sentence why you're calling THIS business · you're not promising a
+finished site, you're offering to build one from their answers · you know where you'll log
+it (below).
 
-  ```
-  Read CLAUDE.md, templates/email-voice.md, prospects/<slug>/dossier.md, and the
-  current prospects/<slug>/outreach-email.md. Spawn a copywriter (Sonnet) to
-  rewrite it. My notes: <what's wrong — e.g. "sounds like AI", "opener is generic,
-  use the specific detail about X">. It must invoke the humanizer skill before
-  finalizing, then a critic checks it against templates/package-checklist.md.
-  ```
+- **Step 8A — they're interested.** Send them **`templates/questionnaire-master.md`** —
+  as-is, no run needed, it's already written and sitting in the repo. Paste it into an
+  email or text them the questions; if you're on the phone with a talker, just walk the
+  questions yourself and type their answers as they go. Skipped questions are fine. Then
+  wait for the answers. → **Step 8B** when they come back.
+- **Step 8B — their answers are in.** Open `KICKOFF.md`, copy the **Team 2 — Build run**
+  prompt, fill in the `CLIENT:` slug and paste their answers verbatim into the
+  `THEIR ANSWERS TO THE QUESTIONNAIRE:` slot, however they gave them to you (email reply,
+  your phone notes, a photo you typed up). The lead saves them to
+  `prospects/<slug>/client-answers.md`, and from then on their answers outrank everything
+  else. Update the log to `building`. → continue to **Step 5**, then **Step 6** and
+  **Step 7**, then come back here at **8C**.
+- **Step 8C — the site's built; show it to the client.** Walk them through it — screen
+  share on a call is best, or drag `prospects/<slug>/mockup/` onto Netlify Drop
+  (app.netlify.com/drop) for a link they can open on their phone (a `file://` path won't
+  work for them). Write down every change they ask for, in their words. Then:
+  - **They want changes** → paste the **Step 6B** fix-list prompt with their feedback as
+    the numbered list (it's the authorized-reopen prompt — that's exactly what this is).
+    Re-review at **Step 6**, then show them again. Repeat until they're happy; 1–2 rounds
+    is normal.
+  - **They're happy with it** → continue to **Step 9** (that's **Step 9A**).
+- **Step 8D — no reply, or a no.** Nothing was built, so there's nothing to salvage —
+  just log it. Silent after 5–7 days → **Step 9B** (one follow-up, max two touches).
+  A clear no → **Step 9C** (closed).
 
-  Re-read it, then pre-send checklist, send, → continue to **Step 9**.
-
-**Pre-send checklist** (before any send): contact matches the dossier and is spelled
-right · every `[placeholder]` *in the email* filled in · mockup proof attached or linked
-(screenshots are the easy default; for a live link, drag the `mockup/` folder onto Netlify
-Drop at app.netlify.com/drop — a `file://` path won't work for them) · you read it once
-out loud.
-
-*(Leftover `[placeholder]` gaps inside the **website** — hours, exact towns, the owner's
-story — are fine to pitch with; you fill those after the client answers. See **Part 3,
-Reference B**.)*
-
-Then log the send in `pipeline/outreach-log.md`:
+**Log every touch in `pipeline/outreach-log.md`** — that file is yours, not the team's; you
+keep it. One row per prospect, updated as it moves:
 
 ```markdown
-| Prospect | Sent | Channel | Status | Next action |
+| Prospect | Contacted | Channel | Status | Next action |
 |---|---|---|---|---|
-| anthonys-landscaping | 2026-07-20 | email | waiting | follow up 7/27 |
+| anthonys-landscaping | 2026-07-20 | call (owner, Tony) | questionnaire sent | chase 7/27 |
+| john-sessa-cpa | 2026-07-20 | email | waiting | follow up 7/27 |
 ```
 
-- **Step 8D — it's a call script** (`outreach-call.md`, no email was found). Read it once
-  so it feels natural, fill in any `[blanks]`, and call at a sensible time (for trades,
-  early morning before crews head out). Keep the "if they say…" responses in front of you.
-  Two ways it can go:
-  - **They want the mockup** → get their cell or email on the call, then send it — that's
-    an email (fill in `outreach-email.md`-style) or a text with the screenshots / live
-    link. Log it and → continue to **Step 9**.
-  - **Not now / no** → thank them, don't push. Log it and → continue to **Step 9**
-    (that's Step 9C, closed).
-
-  If the script itself is off (stiff, generic, or a claim not in the dossier), fix it the
-  same way as an email — paste:
-
-  ```
-  Read CLAUDE.md, templates/email-voice.md, prospects/<slug>/dossier.md, and the current
-  prospects/<slug>/outreach-call.md. Spawn a copywriter (Sonnet) to rewrite the call
-  script. My notes: <what's wrong>. It must invoke the humanizer skill so it sounds like
-  a real person talking, then a critic checks it against templates/package-checklist.md.
-  ```
-
-  Log the call in `pipeline/outreach-log.md` with **Channel = phone**.
+Statuses worth using, in order: `waiting` → `followed up` → `questionnaire sent` →
+`answers in` → `building` → `won` / `closed`.
 
 ---
 
 ### Step 9 — Follow up and close out (repeat per business)
 
-- **Step 9A — they're interested.** This is a sales conversation now. Get them on a
-  call, walk them through the mockup, anchor credibility on the Cecere Brothers site.
-  Selling points: built custom for them, almost zero maintenance (static — no monthly
-  fees), fast, looks expensive. On a verbal yes, turn the mockup into the real thing:
+- **Step 9A — the client's happy with their site** (you got here from **Step 8C**). This
+  is a sales conversation now. Selling points: built from their own answers, almost zero
+  maintenance (static — no monthly fees), fast, looks expensive; Cecere Brothers
+  Landscaping is your credibility anchor. On a verbal yes, turn the mockup into the real
+  thing:
 
   ```
   Read CLAUDE.md. <slug> said yes and is becoming a real client. Help me turn
@@ -349,28 +373,29 @@ Then log the send in `pipeline/outreach-log.md`:
   Update the log to `won`. **The pitch phase is done — the client phase begins:
   continue to Step 10 in `FULL-PROCESS.md`** (real content + photos, production build,
   domain, go-live, handoff, maintenance).
-- **Step 9B — no reply after 5–7 days.** Send ONE short follow-up:
+- **Step 9B — no reply 5–7 days after you reached out.** ONE short follow-up, in your own
+  words — same channel or a step down (called first? a text is fine). Something like:
 
-  > Hi <name> — just floating this back up. The mockup I built for <business> is
-  > still yours to look at whenever: <link/screenshots>. If now's not the right
-  > time, no worries at all. — Harry
+  > Hi <name> — just floating this back up. Happy to put together a website for
+  > <business> whenever you've got ten minutes to tell me what you'd want on it. If now's
+  > not the right time, no worries at all. — Harry
 
-  Update the log to `followed up`. If they reply → **Step 9A** or **9C**. Still silent
-  after another week → **Step 9C**. Never more than 2 touches. (If you reached them by
-  phone, the second touch is a quick follow-up call or a text — same rule, max 2.)
+  Update the log to `followed up`. If they reply → **Step 8A** (send the questionnaire) or
+  **9C**. Still silent after another week → **Step 9C**. Never more than 2 touches.
 - **Step 9C — not interested / closed.** Reply politely if they said no, update the log
-  to `closed` (note the reason), and keep the mockup — it's portfolio material for the
-  next pitch. If the reason is worth learning from ("we just paid for a site"), add a
-  line to `pipeline/rubric.md`. **This business is done.**
+  to `closed` (note the reason), and keep whatever exists — a dossier is reusable research,
+  and a built site is portfolio material. If the reason is worth learning from ("we just
+  paid for a site"), add a line to `pipeline/rubric.md`. **This business is done.**
 - **Step 9D — all three flopped** (2 touches each, no bites). Tune the machine before
   the next run. Paste:
 
   ```
-  Read CLAUDE.md, pipeline/rubric.md, templates/email-voice.md, and
-  pipeline/outreach-log.md. All 3 pitches got no traction. What I observed: <no
-  opens / "we're happy with Facebook" / wrong trade / etc.>. Propose concrete
-  edits to the rubric (who we target) and the email voice guide (how we pitch),
-  plus 2–3 alternative niches or towns. Wait for my approval, then apply them.
+  Read CLAUDE.md, pipeline/rubric.md, pipeline/candidates.md, and
+  pipeline/outreach-log.md. All 3 prospects got no traction when I reached out.
+  What I observed: <no answer / "we're happy with Facebook" / wrong trade / etc.>.
+  Propose concrete edits to the rubric (who we target and why they'd say yes),
+  plus 2-3 alternative niches or towns to scout next. Wait for my approval, then
+  apply them.
   ```
 
   Apply the edits, then start a fresh run → back to **Step 1**. **End.**

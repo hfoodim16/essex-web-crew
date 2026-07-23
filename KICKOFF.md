@@ -33,72 +33,57 @@ is weak, refine `.claude/agents/scout.md` before the full run.
 
 ---
 
-## Run A — Prospect & Ask (find clients + get questionnaires ready)
+## Team 1 — Prospecting run (find me clients)
 
-This run does NOT build any mockups. We ask first, then build from the answers.
-
-> **Don't want to wait for the team?** `templates/questionnaire-master.md` is a
-> standing, client-ready 30-question questionnaire you can send to ANY business right
-> now — no run required. Its answers plug straight into **Run B** below. Run A's value
-> is that the planner tailors a shorter ~10-question version per prospect (higher
-> response rate); the master is the always-available shortcut.
+**Who runs:** `scout` + `analyst` only. Nothing is built. The run ends when you have a
+shortlist of 3 real prospects with their contact info.
 
 Paste this to the lead:
 
 ```
-Read CLAUDE.md and all files in .claude/agents/. Run the Essex Web Crew
-"Run A — Prospect & Ask" pipeline. Each teammate uses the model in its agent
-definition's frontmatter — do NOT force a single model. The lineup for this run
-is: scout=Sonnet, analyst=Opus, planner=Fable (claude-fable-5),
-copywriter=Sonnet, critic=Opus. Free tools only — no Firecrawl/Perplexity, and
-no paid image generation in this run (nothing is built). Teammates must invoke
-their skills themselves via the Skill tool.
+Read CLAUDE.md, .claude/agents/scout.md and .claude/agents/analyst.md. Run the
+Essex Web Crew PROSPECTING pipeline. Lineup: scout=Sonnet, analyst=Opus — each
+teammate uses the model in its own frontmatter. Free tools only — no
+Firecrawl/Perplexity, no paid image generation (nothing is built in this run).
+Teammates invoke their own skills via the Skill tool.
 
-We use the ASK-FIRST model: we do NOT build a speculative site and pitch it. This
-run ends with a tailored client questionnaire + first-contact outreach per
-prospect, ready for me to send. Do NOT spawn any builders.
+This is the Prospecting team ONLY. Do NOT spawn a planner, builder, or critic —
+there is nothing to build yet. I contact the prospects myself afterwards.
 
-Run stages OVERLAPPED, not strictly sequentially. Never weaken a quality gate to
-save time.
+Run it overlapped, not strictly sequentially, and never weaken a quality gate to
+save time:
 
-1. Spawn 'scout' and 'analyst' TOGETHER. The scout streams candidates to
-   pipeline/candidates.md in batches of 5–6 and messages the analyst as each
-   batch lands; the analyst scores incrementally.
+1. Spawn 'scout' and 'analyst' TOGETHER. The scout streams verified candidates
+   to pipeline/candidates.md in batches of 5-6 and messages the analyst as each
+   batch lands; the analyst scores incrementally instead of waiting for the full
+   list. Scout floor: 10 qualifying candidates, stop around 12.
 2. The analyst researches the top 3 finalists IN PARALLEL (one research subagent
-   each), writes prospects/<slug>/dossier.md and site-content.md for each, then
-   sends me the shortlist with a winnability pitch per business.
-3. STOP and wait for my approval of the 3 finalists.
-4. After I approve, spawn 'planner', 'copywriter', and 'critic'.
-   - The planner writes prospects/<slug>/questionnaire.md for each approved
-     prospect: a client-facing document I can send as-is, with exactly 10
-     questions in plain English, tailored to THAT business (real services, town,
-     their current site). No website plans and no design work in this run.
-   - The copywriter writes the first-contact outreach that DELIVERS the
-     questionnaire — outreach-email.md if the dossier has a real email (10
-     questions pasted below the sign-off), else outreach-call.md (the questions
-     as a spoken call guide + an offer to text/email them). It must NOT claim a
-     mockup exists.
-   - The critic reviews both against templates/package-checklist.md (Run A
-     section) and loops until they pass.
-5. When all three are signed off, give me a summary: per prospect, the contact
-   channel, the questionnaire path, and the outreach path. Do not contact any
-   business — everything is a draft for me to send.
+   each, verbatim quotes + source URLs, and it verifies the load-bearing facts
+   itself), then writes prospects/<slug>/dossier.md and site-content.md for each.
+3. The analyst delivers the shortlist to me as the run's FINAL output. For each
+   of the 3 I need: how to reach them (phone, email if found, owner's name), why
+   they're winnable, the angle to lead with, and the recommended scope.
+4. Then summarize and stop. No approval pause is needed — nothing runs after the
+   shortlist.
 ```
 
-Then: send the questionnaires, collect the client's answers, and start **Run B** below.
+**Then it's on you (no agents involved):** call or email the prospects yourself. Anyone
+who says yes gets **`templates/questionnaire-master.md`** — the standing client
+questionnaire, already written and ready to send. Collect their answers, then run Team 2
+below.
 
-## Run B — Build & Perfect (skips scout & analyst)
+## Team 2 — Build run (build the site from their answers)
 
-Use this once a client has answered the questions. It goes straight to the planner.
-Their answers can come from **either** the planner's tailored `questionnaire.md` (Run A)
-**or** the standing `templates/questionnaire-master.md` you sent yourself — or just notes
-from a phone call. Paste whatever you got; skipped questions are fine.
+**Who runs:** `planner` + `builder` + `critic` (plus a capture-only `analyst` if this
+client has no dossier yet). Use it once a client has answered the questionnaire —
+answers from `templates/questionnaire-master.md` or just notes from a phone call both
+work. Paste whatever you got; skipped questions are fine.
 
 Paste this to the lead, filling in the two slots:
 
 ```
 Read CLAUDE.md and all files in .claude/agents/. Run the Essex Web Crew
-"Run B — Build & Perfect" pipeline for ONE client. Skip the scout and analyst —
+BUILD pipeline for ONE client. Skip the prospecting team —
 we already have this client. Lineup: planner=Fable (claude-fable-5),
 builder=Opus, critic=Opus. Free tools only — no Firecrawl/Perplexity; the one
 pre-approved paid step is the builder's 2 AI images (~$0.17). Teammates invoke
@@ -114,13 +99,13 @@ Do this:
 2. If prospects/<slug>/dossier.md does NOT exist (a client I found myself):
    spawn 'analyst' in CAPTURE-ONLY mode first — research just this ONE business
    and write dossier.md + site-content.md + the logo URL + real reviews. No
-   scouting, no scoring, no shortlist, no approval pause. The analyst reads
+   scouting, no scoring, no shortlist. The analyst reads
    client-answers.md FIRST and treats it as controlling: its research
    SUPPLEMENTS the client's answers and never corrects them. Any difference
    between an answer and their old site/a directory goes in a "Confirm with
    client (optional)" note for me — never a [verify] blocker, and never
    resolved in the old site's favor.
-3. Spawn 'planner' (Run B): plan FROM the client's answers. Their answers are the
+3. Spawn 'planner': plan FROM the client's answers. Their answers are the
    TOP authority — above the dossier, above the old site, above design instinct.
    The plan must include a "Client answers → decisions" section mapping every
    answer to what the plan does about it, and flag any answer that is unclear or
@@ -131,8 +116,7 @@ Do this:
    content parity, the $10K Checklist (8/8), the web-design-ultra rubric (no
    dimension below 7, boldness >= 8), the interactive click-test, and the
    package checklist. Loop until it passes.
-6. No copywriter — this client is already engaged.
-7. When signed off, summarize what was built and call out anything I should
+6. When signed off, summarize what was built and call out anything I should
    confirm with the client. Expect to iterate: I'll bring their feedback back.
 ```
 

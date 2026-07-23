@@ -1,7 +1,6 @@
 # Package Sign-Off Checklist (Critic's gate)
 
-A prospect's package ships only when BOTH the mockup and the outreach (email OR call
-script) pass. The Critic records the result in `prospects/<slug>/audit.md` **every review
+A client's package ships only when the built site passes every gate below. The Critic records the result in `prospects/<slug>/audit.md` **every review
 round** (NEEDS-WORK rounds included, with a `Review round: N` line), carrying BOTH
 scoreboards below.
 
@@ -77,42 +76,14 @@ they took it themselves?* Both halves must hold. Open each generated image full 
       inner link. Disabled grey submit buttons and silent dead clicks both fail.
 - [ ] No outbound contact of any kind was performed.
 
-## Outreach (email OR call script)
-
-The copywriter writes ONE of these per prospect, decided by whether the dossier has a
-real email address.
-
-**Both paths must pass:**
-- [ ] Personalized — opens with a specific, real observation about this business.
-- [ ] Accurate — every claim traces to the dossier.
-- [ ] **Delivers the questionnaire** — the email pastes the 10 questions below the
-      sign-off; the call script turns them into spoken questions plus an offer to
-      text/email the written version. References the Cecere Brothers portfolio piece.
-- [ ] **No mockup claims** — nothing is built yet in the ask-first model; no "I built
-      you a mockup" and no offer to send a link. Automatic fail if present.
-- [ ] Right voice — short, no hard sell, one soft CTA, kills the maintenance objection.
-- [ ] Draft only — no send/call action was performed; placeholders left for Harry.
-
-**If `outreach-email.md` (email found):**
-- [ ] `To:` line with a real address that traces to the dossier (not a guessed/invented one).
-- [ ] A working `mailto:` link at the top.
-
-**If `outreach-call.md` (no email):**
-- [ ] Phone number at the top matches the dossier (as a `tel:` link).
-- [ ] Script is natural spoken language — lines Harry can actually say, not an essay.
-- [ ] Includes the "if they say…" prepared responses (busy / cost / don't need one / yes).
-
 ## Package folder complete
 
-**Run A (Prospect & Ask) — no mockup is built:**
-- [ ] `dossier.md` (with page map + winnability pitch)
+**From the Prospecting team (may already exist, or be captured in the build run):**
+- [ ] `dossier.md` (with page map + winnability pitch + contact info)
 - [ ] `site-content.md` (full-text capture of the existing site — required whenever the
-      prospect had one)
-- [ ] `questionnaire.md` — client-facing, plain English, **exactly 10 questions**,
-      tailored to this business (names its real services/town; not a generic template)
-- [ ] `outreach-email.md` OR `outreach-call.md` that **delivers** the questionnaire
+      client had one)
 
-**Run B (Build & Perfect) — after the client's answers are in:**
+**The build itself:**
 - [ ] `client-answers.md` (saved verbatim by the lead)
 - [ ] `website-plan.md` (the Planner's design contract, incl. the **"Client answers →
       decisions"** section and the content map)

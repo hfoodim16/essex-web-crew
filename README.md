@@ -6,28 +6,31 @@ A Claude Code **agent team** that runs like a mini web agency on an **ask-first*
 find a business that could use a website → **ask what they want** → build from their
 answers → keep refining it with them. We never build a site speculatively and pitch it.
 
-Work happens in two runs (both prompts in [KICKOFF.md](KICKOFF.md)):
+The work is split into **two independent teams** that never run together (both prompts in
+[KICKOFF.md](KICKOFF.md)):
 
-- **Run A — Prospect & Ask.** Scouts Essex County, NJ businesses whose websites are
-  naturally static/low-maintenance (leading with trades, but any industry that fits),
-  scores them, pauses for Harry's approval, then produces per prospect: a research
-  dossier, a full capture of their existing site, a **tailored 10-question
-  questionnaire**, and first-contact outreach that delivers it — an email when a real
-  address was found, otherwise a phone number + call script. **No mockups.**
-- **Run B — Build & Perfect.** Once the client answers, Harry pastes their answers into
-  the "skip to planner" prompt. The planner plans from the answers (they outrank the old
-  site and the dossier), one builder builds it the "Corey Blake workflow" way, the critic
-  gates it, and the site goes back to the client for feedback and iteration.
-
-**No run required to start asking:** [`templates/questionnaire-master.md`](templates/questionnaire-master.md)
-is a standing, client-ready 30-question questionnaire that can go to any business
-immediately — its answers feed Run B directly.
+- **Team 1 — Prospecting run.** `scout` + `analyst` only. Scouts Essex County, NJ
+  businesses whose websites are naturally static/low-maintenance (leading with trades, but
+  any industry that fits), scores them, then researches the top 3 and writes each one a
+  research dossier plus a full capture of their existing site. The run's final output is
+  **the shortlist with contact info** — then it ends. **Nothing is built, and there's no
+  approval pause.**
+- **Between the teams — Harry, no agents.** He contacts the prospects himself, call or
+  email, in his own words. Anyone who says yes gets
+  [`templates/questionnaire-master.md`](templates/questionnaire-master.md) — a standing,
+  client-ready 30-question questionnaire that needs no run to produce. Harry collects
+  their answers.
+- **Team 2 — Build run.** `planner` + `builder` + `critic` (plus a capture-only `analyst`
+  if the client has no dossier yet). Input is the client's answers, saved to
+  `client-answers.md`. The planner plans FROM the answers (they outrank the old site and
+  the dossier), one builder builds it the "Corey Blake workflow" way, the critic gates it,
+  and the site goes back to the client for feedback and iteration.
 
 Each built site ships with **2 real AI-generated images** (hero + one priority slot) and
 labeled placeholders for the rest, run through the `web-design-ultra` design pipeline.
 
-**The team never contacts anyone.** Everything lands on disk for Harry to review;
-Harry sends the questionnaire and outreach himself and relays the client's answers back.
+**The team never contacts anyone.** Everything lands on disk for Harry to review; all
+client contact is Harry personally, and he relays the client's answers back.
 
 ## Layout
 
@@ -41,34 +44,35 @@ PLAYBOOK.md               Harry's pitch-phase scripts — whole-run walkthrough 
 FULL-PROCESS.md           The whole journey (Steps 1–15): pitch phase + client phase — real content/photos, production build, domain, go-live, maintenance
 .claude/
   settings.local.json     Enables agent teams (experimental flag)
-  agents/                 Teammate roles: scout, analyst, planner, builder, copywriter, critic
+  agents/                 Teammate roles: scout, analyst, planner, builder, critic
 pipeline/
   rubric.md               Candidate scoring rubric
   candidates.md           Scout output → Analyst scoring (regenerated each run)
 templates/
-  email-voice.md          Outreach email voice guide
+  questionnaire-master.md Standing client questionnaire — sent as-is to anyone who says yes
   package-checklist.md    Critic's sign-off gate (both scoreboards + imagery realism +
-                          local-trade + outreach checks)
+                          local-trade checks)
 prospects/
-  <slug>/                 One folder per approved prospect:
-    dossier.md · website-plan.md · mockup/ (incl. assets/) · screenshots/
-    outreach-email.md OR outreach-call.md · audit.md
+  <slug>/                 One folder per prospect:
+    from the Prospecting run:  dossier.md · site-content.md
+    from the Build run:        client-answers.md · website-plan.md ·
+                               mockup/ (incl. assets/) · screenshots/ · audit.md
 ```
 
 ## The team
 
-| Role | Model | Skills | Does |
-|------|-------|--------|------|
-| **scout** | Sonnet | `research`, `docs-seeker` | Finds 10–12 qualifying businesses — any industry with a naturally static site, leading with trades (free web tools; no Firecrawl/Perplexity). |
-| **analyst** | Opus | `research` | Scores them, captures each finalist's real site content + real reviews, writes dossiers, pitches the shortlist. |
-| **planner** | Fable | **`web-design-ultra`**, `ui-ux-pro-max`, `frontend-design`, `design-system`, `aesthetic`, `sequential-thinking` | Runs the web-design-ultra pipeline (Stages 1–5) → `website-plan.md`: art direction, fonts, palette, page map, three divergent directions. |
-| **builder** ×3 | Opus | **`web-design-ultra`**, `ai-multimodal`, `ui-ux-pro-max`, `frontend-design`, `frontend-development`, `web-frameworks` | Each *implements* one prospect's chosen direction (Stage 7) into a mockup with 2 real AI images (hero + 1) + placeholders beyond; owns its own folder. |
-| **copywriter** | Sonnet | `humanizer`, `brand`, `sequential-thinking` | Writes the personalized outreach email + one-pager if the dossier has an email; otherwise a phone number + call script. |
-| **critic** | Opus | **`web-design-ultra`**, `ui-ux-pro-max`, `code-review`, `design-system` | Audits every mockup against the Stage 8 rubric + the $10K Checklist; enforces real-reviews-only; loops until sign-off. |
+| Role | Team | Model | Skills | Does |
+|------|------|-------|--------|------|
+| **scout** | 1 — Prospecting | Sonnet | `research`, `docs-seeker` | Finds 10–12 qualifying businesses — any industry with a naturally static site, leading with trades (free web tools; no Firecrawl/Perplexity). |
+| **analyst** | 1 — Prospecting (capture-only in 2) | Opus | `research` | Scores them, captures each finalist's real site content + real reviews, writes dossiers, delivers the shortlist with contact info. In a build run it only runs if the client has no dossier yet — research this ONE business, nothing else. |
+| **planner** | 2 — Build | Fable | **`web-design-ultra`**, `ui-ux-pro-max`, `frontend-design`, `design-system`, `aesthetic`, `sequential-thinking` | Runs the web-design-ultra pipeline (Stages 1–5) → `website-plan.md`: art direction, fonts, palette, page map, three divergent directions — planned FROM the client's answers. |
+| **builder** | 2 — Build | Opus | **`web-design-ultra`**, `ai-multimodal`, `ui-ux-pro-max`, `frontend-design`, `frontend-development`, `web-frameworks` | One per build run. *Implements* the chosen direction (Stage 7) into a mockup with 2 real AI images (hero + 1) + placeholders beyond. |
+| **critic** | 2 — Build | Opus | **`web-design-ultra`**, `ui-ux-pro-max`, `code-review`, `design-system` | Audits the mockup against the Stage 8 rubric + the $10K Checklist; enforces client-answer fidelity, content parity, real-reviews-only; loops until sign-off. |
 
-The lead session orchestrates, enforces the approval pause, and assembles results.
-Design decisions live with the **planner** (Fable); the **builder** (Opus) implements
-them and doesn't re-decide the design.
+The lead session orchestrates and assembles results — in a build run it also saves the
+client's answers to `client-answers.md` before spawning anyone. Design decisions live with
+the **planner** (Fable); the **builder** (Opus) implements them and doesn't re-decide the
+design.
 
 ## Run it
 
