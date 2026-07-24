@@ -201,3 +201,275 @@ palette, typography, layout or content should change.** On re-submission I will 
 changed rules plus the no-JS render, the 375 px tap targets, and the plate hover state.
 
 `design-memory.md` row will be appended on sign-off, not before.
+
+---
+---
+
+**Review round: 2**
+**Auditor:** Critic (Essex Web Crew)
+**Date:** 2026-07-23
+**Artifact:** `prospects/fora-digital/mockup/` after the round-1 fix pass
+**Method:** re-check of the five round-1 fixes only, plus the no-JS render, 375 px tap targets
+and the plate hover state, as promised in round 1 §7.
+
+## VERDICT — **FAIL** (round 2)
+
+The round-1 blocker was genuinely fixed. Round 2 fails on a **new regression introduced by the
+fix pass itself** — a reminder that a fix round needs the same capture discipline as a build round.
+
+### Round-1 fixes — all five verified fixed
+
+| # | Round-1 finding | Status |
+|---|---|---|
+| 1 | Page renders as solid cobalt blocks with JS disabled | **FIXED** — `main.js` now sets `document.documentElement.classList.add('js')` as its first executable statement, and every curtain rule is scoped `.js .reveal::after`. With JS off the page renders as plain, readable content. |
+| 2 | Sub-44 px tap targets at 375 px | **FIXED** — `@media (pointer:coarse)` block added covering `.link-draw`, `.link-arrow`, `.foot-cols a`, `.nav-links a`, plus `.contact-card .c-email`. |
+| 3 | False affordance — plates look clickable but aren't | **FIXED (by removal)** at this point in time: the cobalt hover cue was stripped so the plates no longer promised a click. *(Superseded in round 3 — see below.)* |
+| 4 | Dead `transition:object-position` declaration | **FIXED** — declaration removed; the caption-title underline-draw implemented in its place. |
+| 5 | Anchor targets have no `scroll-margin-top` | **FIXED** — `#work,#founders,#contact,#top{scroll-margin-top:calc(var(--nav-h) + 12px)}`. |
+
+### 1. [BLOCKER] Regression — the honesty badge and the project title collapsed onto one line
+
+**What fails:** while implementing fix #4, `.plate-caption h3` was given `display:inline` so the
+underline-draw gradient would track the text rather than the full block width. An inline `h3` shares
+a line box with the preceding inline-block `.badge`, so both plates now read as a single run —
+`REAL CLIENT WORK Cecere Brothers Landscaping` — instead of a badge sitting above its title.
+
+**Evidence:** measured on both plates — `gapBadgeToTitle = -37 px` (the title's top sits *above* the
+badge's bottom), `getComputedStyle(h3).display === "inline"`, badge and title tops within 4 px of
+each other. The `h3`'s `margin-bottom` is silently discarded because vertical margins do not apply
+to inline boxes.
+
+**Why this blocks:** those badges are this site's load-bearing honesty device. "Real client work"
+and "Concept build" are the mechanism by which one paying client and one fictional demo are kept
+visibly distinct, which is the single hardest requirement in `client-answers.md`. When the badge
+merges into the title it stops reading as a label and starts reading as a prefix — degrading the
+one element that must never be ambiguous. Content honesty itself re-verified **CLEAN**; the
+regression is presentational, but it presents the honesty.
+
+**What "fixed" looks like:** keep the `h3` block-level and move the underline onto an inner
+element — `<h3><span class="u">…</span></h3>`, with `.plate-caption h3{font-size:var(--fs-h3);
+margin-bottom:var(--space-1)}` and the gradient plus hover target on `.plate-caption h3 .u`.
+
+### 2. [NOTE, non-blocking] `.wordmark` omitted from the coarse-pointer tap-target rule
+
+`.wordmark` measures 95 × 40 px at 375 px — 4 px short on the vertical. It was left out of the
+fix-#2 selector list. Add it.
+
+### 3. Process finding — the capture that would have caught this was never taken
+
+Both screenshots delivered with the round-1 fix pass were **hero-only frames**. A hero frame cannot
+show a defect in the Work section. Round 1 explicitly asked for the plate hover state to be
+re-checked; the regression sat two screens below the delivered evidence. **Any future round that
+touches the Work section must ship a Work-section capture.** Logged into the QA field notes.
+
+## Next round
+
+Fix #1 is required to clear the gate; #2 rides along. Both are surgical CSS/HTML edits. Nothing
+about the art direction, palette, typography, layout or copy changes.
+
+---
+---
+
+**Review round: 3**
+**Auditor:** Critic (Essex Web Crew)
+**Date:** 2026-07-23
+**Artifact:** `prospects/fora-digital/mockup/` (index.html · style.css · main.js · assets/ · **work/**)
+**Verified against:** `client-answers.md` (top authority) → `website-plan.md` → `CLAUDE.md`
+**Method:** served over `http://localhost:5601` in the browser pane; **Work-section capture taken
+this round** (`screenshots/work-section.png`) per the round-2 process finding; both bundled builds
+opened over HTTP *and* over `file://`; no-JS and `prefers-reduced-motion` states reproduced in
+headless Chrome with pixel-level cobalt-coverage measurement; contrast computed numerically;
+coarse-pointer tap targets measured by injecting the shipped `@media (pointer:coarse)` declarations
+into a `pointer:fine` viewport.
+
+## VERDICT — **PASS** (round 3)
+
+- **$10K Checklist: 8 / 8** → clears the gate.
+- **web-design-ultra rubric: PASSES** — no dimension below 7, boldness 9.
+- **Content honesty: CLEAN — full pass, no findings.**
+
+The round-2 regression is gone, the round-1 blocker stays fixed, and the two changes Harry
+requested between rounds are implemented correctly and — importantly — make the page *more*
+honest than it was, not less. Signed off.
+
+## 0. What changed since round 2
+
+Two client-requested changes, plus the round-2 regression fix.
+
+1. **Browser-chrome bar removed from all four plates.** The faux dots + URL pill are gone from the
+   markup and the `.chrome` / `.dots` / `.url-pill` rules are gone from the stylesheet.
+2. **The two real portfolio plates are now genuine links** into bundled copies of the actual builds,
+   shipped inside the mockup at `mockup/work/`.
+3. Round-2 fix: `h3` restored to block-level with the underline moved to an inner `<span class="u">`.
+4. Round-2 note: `.wordmark` added to the coarse-pointer 44 px selector list.
+
+### A round-1 finding is deliberately reversed — and that is correct
+
+Round 1 finding #3 flagged the plates as a **false affordance**: they carried a cobalt hover cue but
+did nothing. Round 2 recorded it fixed by *removing* the cue. The plates are now real links, so the
+cue is no longer a lie — restoring `cursor:pointer` and the cobalt border sweep is the right call and
+is **re-scored as correct**, not as a regression. The affordance and the behaviour now agree, which
+is what the original finding actually asked for.
+
+The chrome-bar removal also retires round 1's open question about the `cecerebrotherslandscaping.com`
+URL pill implying our build was live at that domain. The claim is gone; the question is moot.
+
+## 1. The $10K Checklist
+
+| # | Item | Score | Justification |
+|---|---|---|---|
+| 1 | Point of view, not a template | **PASS** | "Main Street Modern" unchanged and intact. Removing the chrome bar strengthens it — the plates now read as framed prints on a linen wall rather than as browser screenshots, which is the metaphor the section head ("Hung with pride") was always reaching for. |
+| 2 | Typography that does work | **PASS** | Instrument Serif / Hanken Grotesk. Measured at 1440: h1 116 px / lh 121.8, h2 56 px, body 17 px / lh 28.05. No generic fallbacks anywhere. |
+| 3 | Restrained color system | **PASS** | Unchanged. Cobalt still confined to interactive + badge + wordmark; clay still appears exactly once. |
+| 4 | Hierarchy that breathes | **PASS** | Badge → title → description, in that order, on both plates. Verified in the Work-section capture. |
+| 5 | Imagery with intent | **PASS** | Still **zero AI-generated images**, per the ZERO budget in `client-answers.md`. Two real screenshots, both `loading="lazy"`, both with `width`/`height`, both local. |
+| 6 | Motion that whispers | **PASS** | Mask-curtain signature intact and `.js`-scoped. Reduced-motion kill switch verified live (below). No fade-up, no count-up. |
+| 7 | Mobile designed, not shrunk | **PASS** | `document.documentElement.scrollWidth === 375` at a 375 px viewport — no horizontal overflow. **All 15 interactive elements reach ≥44 px** under the shipped `@media (pointer:coarse)` rule (measured: 0 remaining under 44, down from 8 in round 1 and 1 in round 2). |
+| 8 | The invisible expensive stuff | **PASS** | No-JS render safe (0.43 % cobalt). Zero console errors on the mockup and on both bundled builds. Heading order h1→h2→h3 with no skips. Both images have descriptive alt. JSON-LD still omits `telephone`/`address`. WCAG AA passes on every measured pair. |
+
+**Score: 8 / 8.** Gate cleared.
+
+## 2. web-design-ultra 10-dimension rubric
+
+| # | Dimension | Score | Change from round 1 |
+|---|---|---|---|
+| 1 | **Boldness / distinctiveness** | **9** | — |
+| 2 | Visual hierarchy | 8 | — |
+| 3 | Typography craft | 9 | — |
+| 4 | Color & contrast | 9 | — |
+| 5 | Spacing rhythm | 7 | — |
+| 6 | Background / depth | 8 | — |
+| 7 | Imagery quality | **9** | Held. The plates lost the chrome bar and gained ~24 px of image per plate; the frame identity survives on border + radius + shadow alone. |
+| 8 | Responsiveness | **8** | ↑ from 7 — tap-target failure resolved. |
+| 9 | Motion polish | **8** | ↑ from 7 — the curtain now has a real non-JS fallback and the dead `object-position` transition is gone. Still short of 9: two specced flourishes were never built. |
+| 10 | Cohesion | 9 | — |
+
+**Gate: no dimension below 7 ✓ · boldness 9 ≥ 8 ✓ → rubric PASSES.**
+
+## 3. Verified technical evidence — round 3
+
+**Round-2 regression — resolved.** Measured on both plates:
+
+| Plate | `gapBadgeToTitle` | `h3` display | `h3` margin-bottom | badge & title share a line? |
+|---|---|---|---|---|
+| Cecere Brothers Landscaping | **+16 px** | `block` | `8px` | **no** |
+| Corey Blake's Steakhouse | **+16 px** | `block` | `8px` | **no** |
+
+Round 2 measured `-37 px` and `display:inline` on both. **Work-section screenshot captured and
+inspected** (`screenshots/work-section.png`, 1440-wide source) — badge sits on its own line above
+the title on both plates, confirmed visually, not just numerically.
+
+**Chrome bar — fully removed.** `grep` count of `chrome` / `dots` / `url-pill` = **0 in
+`index.html`** and **0 in `style.css`**. No dead CSS left behind. Visually the plates still read as
+deliberate framed objects rather than amputated screenshots.
+
+**Portfolio links — genuine and safe.**
+
+| | Cecere plate | Steakhouse plate |
+|---|---|---|
+| `href` | `work/cecere-brothers/index.html` | `work/corey-blakes-steakhouse/index.html` |
+| `target` / `rel` | `_blank` / `noopener` | `_blank` / `noopener` |
+| `aria-label` | "Open the Cecere Brothers Landscaping site in a new tab" | "Open the Corey Blake's Steakhouse concept site in a new tab" |
+| `cursor` | `pointer` | `pointer` |
+
+- Explicit `index.html` in the href (not a bare directory) — required for `file://`, where
+  directory→index resolution does not happen.
+- `.plate-link:focus-visible` ring present in addition to the global `:focus-visible`.
+- **Coming-soon plates: 0 anchors, `cursor: auto`** — no affordance, nothing to click. Correct.
+
+**Bundled builds load completely, in both contexts.**
+- Over HTTP: Cecere → `index.html` + `logo-real.png` (real client logo, 544 px natural width) +
+  `hero.webp`, `patio.webp`, `design.webp`, `masonry.webp`, `lawn.webp` — **all 200**, document
+  height 8175 px. Steakhouse → `index.html` + `style.css` + `main.js` + `hero-steak.jpg` — **all 200**.
+- Over `file://`: both render correctly (headless capture inspected — Cecere shows the real logo,
+  hero photograph and god-ray treatment intact).
+- **0 absolute-path references** in either bundled build, which is why `file://` works.
+- Every `url()` reference in both builds resolves to a file that exists on disk.
+- Bundle size 3.2 MB total (Cecere 1.4 MB, Steakhouse 1.8 MB) — the ~950 KB of unused Cecere
+  editorial backups and the unused 11.6 MB `hero-steak.png` were correctly excluded.
+
+**No-JS resilience — holds.** Headless Chrome, `--disable-javascript`, 1440×2400:
+**cobalt coverage 0.43 %** (round 1: effectively the entire page). Visual inspection confirms the
+hero renders as plain, readable, correctly-styled content — wordmark, nav, headline, lead, both
+CTAs, marquee. The round-1 blocker is genuinely gone, not merely repainted.
+
+**Reduced motion — holds.** Headless Chrome, `--force-prefers-reduced-motion`, 1440×1600:
+cobalt coverage 0.65 %, all content visible. The `@media(prefers-reduced-motion:reduce)` block kills
+`animation`, `transition` and `scroll-behavior` globally, hides the curtain panel, and stops the
+marquee and asterisk loops. `main.js` independently calls `openAll()` on the reduce branch.
+
+**Contrast (computed, WCAG 2.x) — every pair passes.**
+
+| Element | Ratio | Size | Verdict |
+|---|---|---|---|
+| `.btn-primary` (white on cobalt) | **7.62** | 15 px / 600 | AA + AAA |
+| `.badge-real` (white on cobalt) | **7.62** | 12 px / 600 | AA + AAA |
+| `.badge-concept` (ink on paper) | **15.7** | 12 px / 600 | AAA |
+| `.link-draw` / `.c-email` (cobalt on surface) | **7.37** | 17–17.6 px | AA + AAA |
+| `.foot-line` | **8.33** | 15 px | AAA |
+| founder bio, `.soon-sub`, `.kicker.role` (stone on surface) | **5.40** | 17 / 15 / 13 px | AA |
+| `.hero-kicker`, `.hero-lead`, `.plate-caption p` (stone on paper) | **4.96** | 13–21 px | AA |
+| `.foot-bottom p` | **4.85** | 15 px | AA |
+| `h1 em` (clay on paper) | **4.35** | 54.4 px display | AA-large (needs 3.0) ✓ |
+
+Lowest body-copy ratio is 4.85 against the 4.5 threshold. No failures.
+
+**Structure & accessibility.** 15 interactive elements, all ≥44 px on coarse pointers. Heading
+order: h1 → h2 → h3 ×2 → h2 → h3 ×2 → h2, no skips, exactly one h1. 2 images, **0 missing alt**.
+Zero console messages on the mockup and on both bundled builds. No horizontal overflow at 375 px
+or 1440 px.
+
+## 4. Content-honesty verdict — **CLEAN, no findings**
+
+Re-verified line by line against `client-answers.md`.
+
+- **Two co-owners, named correctly**, both labelled "Co-Owner". No invented division of labour.
+- **Harry's bio** carries exactly the four supplied facts (co-owner; sophomore at The Ohio State
+  University studying accounting; West Essex High School; sports / gym / family and friends) and
+  adds nothing.
+- **Corey's bio** carries exactly the two supplied facts and — correctly — is allowed to be shorter
+  rather than padded to match Harry's. The layout absorbs the asymmetry instead of inventing a
+  third line, which is precisely what the honesty rule demanded.
+- **Emails exact**, including the capitalised `CRapkin@`. Present in the founder cards, the contact
+  cards, the footer and the JSON-LD.
+- **No phone number, no street address** anywhere — including in structured data. `grep` for tel:
+  patterns, digit-group phone formats and address tokens in `index.html`: **0 matches**.
+- **Portfolio labelling is unambiguous.** "Real client work" on Cecere; "Concept build" on the
+  steakhouse, with body copy that says it outright — *"a fictional steakhouse we designed to show
+  the range… Not a client; a demonstration."*
+- **Coming-soon plates invent nothing** — no fake logo, client name or screenshot. "Next project —
+  in progress."
+- **No fabricated social proof.** `grep` for `years`, `experience`, `clients served`, `N+`,
+  `testimonial`, `award`, `certified`, `licensed`, `insured`, `trusted by`, `rated`, `reviews`,
+  `guarantee`: **0 matches**. The section head owns the position instead — *"A young studio's honest
+  wall — one real client, one concept build, and room we intend to fill."*
+- **Headshots are honest placeholders** — HF / CR monograms with "Photo coming soon". No
+  AI-generated faces of real people.
+
+Making the plates clickable *raises* the honesty bar and the build clears it: a prospect can now
+verify the claim rather than take the screenshot on trust, and what they land on is the genuine
+article — the real Cecere build with the real client logo, and the steakhouse concept that is
+labelled a concept before they ever click it.
+
+## 5. Remaining findings
+
+None blocking. One item for Harry's decision, one for the record.
+
+### A. [LOW — Harry's call] The bundled Cecere build has a placeholder `tel:` on its estimate CTA
+
+`work/cecere-brothers/index.html:251` — `<a href="tel:+10000000000" class="btn">Get a free
+estimate</a>`. **No fake number is displayed** (the button reads "Get a free estimate"), so nothing
+dishonest is on screen, but a prospect who taps it on a phone dials a dead placeholder. It is inside
+a bundled copy of a client build, not the Fora site, and we do not have Cecere's real number — so I
+have deliberately **not** changed it. Options: supply the real number, or repoint the CTA at the
+build's own contact section. Flagging, not fixing.
+
+### B. [NOTE] The mockup folder is now 3.2 MB heavier
+
+`mockup/work/` bundles two full sites so the deliverable stays self-contained and works by
+double-click as well as on Netlify. That is the right trade for a portfolio, but it is worth knowing
+before this gets treated as a lightweight static folder.
+
+## 6. Sign-off
+
+Round 3 **PASSES**. `design-memory.md` row appended.

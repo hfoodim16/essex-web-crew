@@ -210,9 +210,50 @@ only.)
    Fix anything with a
    dimension below 7 or boldness below 8 before you message the critic — don't hand off a
    mockup you already know fails the gate.
+9. **Generate the client's release form** (see below) — `release-form.pdf`.
 
 Preview: open the mockup with the browser pane (`preview_start` with a `url` pointing
 at the local file, or run a tiny static server via Bash and point the pane at it).
+
+## The release form (ships with every build)
+
+Every build hands Harry a **pre-filled Fora Digital "Website Release & Publication
+Approval"** — the document the client signs to authorize the site going live. Harry
+sends it once the client approves; your job is to have it ready with as much already
+typed in as possible.
+
+Copy `templates/release-form.html` to `prospects/<slug>/release-form.html`, substitute
+the tokens, then print it to PDF:
+
+```bash
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless --disable-gpu \
+  --no-pdf-header-footer \
+  --print-to-pdf=prospects/<slug>/release-form.pdf \
+  prospects/<slug>/release-form.html
+```
+
+Fill from what you actually know:
+- `{{CLIENT_BUSINESS}}` — the business name **exactly as the finished site displays
+  it** (client-answers wins over the dossier; include the legal suffix like LLC if
+  that's how they write it).
+- `{{CONTACT_NAME}}` — the owner/contact from `client-answers.md`, else the dossier.
+- `{{PAGES_INCLUDED}}` — the pages you actually built, ` · ` separated, in nav order
+  (e.g. `Home · Services · About · Contact`). This **must match the built site** — a
+  form promising a page that doesn't exist is a fail.
+- `{{DOMAIN}}` — only if the client stated a domain in their answers.
+- `{{PREVIEW_LINK}}` — normally **blank**; it's filled in at review time.
+- `{{DATE_PREPARED}}` — today, as `Month D, YYYY`.
+
+Hard rules:
+- **Never invent** a domain, contact name, or page. An unknown field ships as a clean
+  blank ruled line for Harry or the client to write on — that's the correct output, not
+  a gap.
+- **Never truncate** a business name; the template wraps it instead. This is a legal
+  document.
+- Leave every signature and date line blank, and leave the acknowledgement checkboxes
+  unticked — the client ticks and signs.
+- Verify the PDF exists, is one page, and is non-trivial in size before handoff, and
+  that **no `{{` tokens survive** in the generated HTML.
 
 ## The critic loop (this is the point of the team)
 

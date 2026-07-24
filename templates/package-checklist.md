@@ -89,6 +89,10 @@ they took it themselves?* Both halves must hold. Open each generated image full 
       decisions"** section and the content map)
 - [ ] `mockup/` (pages per the **plan's** page map, opens cleanly) incl. `assets/` (logo + 2 generated images)
 - [ ] `screenshots/` (desktop + mobile)
+- [ ] `release-form.pdf` — valid one-page PDF; no `{{` tokens left in its `.html`
+      source; Client/Business, Contact Name and Pages Included filled; **Pages Included
+      matches the pages actually built**; no invented domain/preview link (blank is
+      correct); signature, date and checkbox fields left blank for the client.
 - [ ] `audit.md` (BOTH scoreboards: $10K + 10-dimension rubric, with `Review round: N`)
 
 ## Before sign-off

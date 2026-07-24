@@ -194,6 +194,13 @@ You are on the **Build team**. You review the built site — nothing else. For
   Placeholder forms must show an inline demo confirmation on submit (never a disabled
   grey button, never a silent click). Report failures as numbered fixes naming the exact
   element and page.
+- **Release form present and correct.** `prospects/<slug>/release-form.pdf` exists, is a
+  valid one-page PDF, and its `release-form.html` source has **no surviving `{{` tokens**.
+  Client/Business, Contact Name and Pages Included must be filled, and **Pages Included
+  must match the pages actually built** (a form promising a page the site doesn't have is
+  a fail). Nothing invented: a domain or preview link that didn't come from the client's
+  answers is a fail — blank is the correct value there. Signature/date lines and the
+  acknowledgement checkboxes stay blank.
 - **Look at the screenshots** in `prospects/<slug>/screenshots/` (desktop + mobile).
   If a mobile pass isn't proven by screenshots, that's an automatic fail on item 7.
 - **Score BOTH scoreboards.** (a) All 8 items of the $10K Checklist. (b) The
