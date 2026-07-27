@@ -57,10 +57,16 @@ teammates, so you must call them yourself:
 - **`web-design-ultra` (PRIMARY).** The team's primary design skill. The Planner ran its
   Stages 1–5; you execute **Stage 7 (build)** with its craft discipline — distinctive
   type (never the generic four), the whole palette as CSS variables, deliberate spatial
-  composition (asymmetry, overlap, scale contrast), motion via CSS/anime.js v4 — and its
-  **free depth recipes**: `~/.claude/skills/web-design-ultra/references/backgrounds.md`
-  (layered background/texture/depth) and `references/atmosphere.md` (animated fog, god
-  rays, shimmer, motes). Then self-score its **Stage 8** rubric before handoff (see
+  composition (asymmetry, overlap, scale contrast), and the plan's named signature move
+  from `references/motion.md` — and its **free depth recipes**:
+  `~/.claude/skills/web-design-ultra/references/backgrounds.md`
+  (layered background/texture/depth), `references/atmosphere.md` (animated fog, god
+  rays, shimmer, motes), and `references/reactive-backgrounds.md` (pointer-responsive
+  canvas fields — only if the plan named one; use its `createField` harness verbatim
+  rather than hand-rolling a rAF loop, it already carries the DPR/count caps,
+  off-screen pause and `?still` capture frame). If the plan's move needs the GSAP tier, vendor it — never a CDN:
+  `cp ~/.claude/skills/web-design-ultra/assets/gsap/{gsap,ScrollTrigger}.min.js mockup/vendor/`
+  (recipes and the fail-visible boot preamble in `references/gsap.md`). Then self-score its **Stage 8** rubric before handoff (see
   below). **Stage 6 for us: generate the 2 `GENERATE`-marked images (hard cap 2), rest
   placeholders** — see `ai-multimodal` below and the CLAUDE.md image policy.
   **Also apply `references/local-trade.md`** — our clients are local service businesses:
@@ -68,6 +74,13 @@ teammates, so you must call them yourself:
   plain primary action, service-area block with real town names, trust strip (real values
   or labeled placeholders), project/before-after gallery, estimate form ≤ 4 fields, and a
   consistent NAP footer. A beautiful hero with no visible phone number is a failed build.
+- **`trade-copy` (invoke BEFORE you write any visible text).** Read
+  `prospects/<slug>/voice-spec.md` first, then write every headline, section, service
+  description, CTA, meta and alt string to its register and word budgets. Copy is
+  specification, not prose: concrete nouns, numbers, towns, materials. When a section has
+  no facts behind it, shrink it — never fill it with atmosphere. Run
+  `python3 skills/trade-copy/scripts/copycheck.py prospects/<slug>/mockup/index.html`
+  before handoff; the Critic gates on it.
 - **`ai-multimodal`.** Generate the **2** images the Planner marked `GENERATE` (hero +
   one priority slot) with Gemini `gemini-3-pro-image` — follow the photorealism kit in
   `~/.claude/skills/web-design-ultra/references/imagery.md`, make them maximally
@@ -114,23 +127,32 @@ Use them to execute the Planner's direction at a high craft level — not to ove
 
 ## Use the client's real content (do not invent)
 
-If the prospect already has a website (most do — that's why we're pitching them), the
-dossier captures its real content. **Reuse that real information** — actual service
-names and descriptions, service area, hours, phone/address, tagline, about text, real
-testimonials. We are upgrading the *design and structure*, not rewriting their business.
-Only use `[placeholder]` text for information that genuinely doesn't exist anywhere.
-Never fabricate services, awards, stats, or history (see CLAUDE.md content honesty).
+If the prospect already has a website (most do), the dossier captures its real content.
+**Reuse that real information** — actual service names, service area, hours,
+phone/address, credentials, history, real testimonials. Only use `[placeholder]` text for
+information that genuinely doesn't exist anywhere. Never fabricate services, awards,
+stats, or history (see CLAUDE.md content honesty).
+
+**Their old site is a FACT source, not a voice source.** Carry every fact across; do not
+inherit the phrasing. Dated agency-speak from their 2003 site ("outstanding professional
+service and complete satisfaction, from start to finish") is not information and does not
+belong on the new build — and repeating it in five sections is how a site ends up reading
+fake. How the copy *sounds* comes from `voice-spec.md` and the client's own questionnaire
+answers. (CLAUDE.md — Copy voice.)
 
 **Transfer the content — don't re-summarize it (content parity, hard rule).** Build
 with the plan's **content map** and `prospects/<slug>/site-content.md` open. Every
 content block the map assigns to a page gets transferred at **full informational
-fidelity**: their 8 service descriptions arrive as 8 descriptions (lightly copyedited is
-fine), their educational article arrives as an article, their 11-town list arrives with
-all 11 towns — never compressed into a one-liner because it "reads cleaner." Punchy is
-for heroes and CTAs; the informational body is the VALUE of the site and must not thin
-out. The Critic walks the content map against your build — a mapped block that shrank
-to a mention is a fail. If a block genuinely fights the design, don't drop it: message
-the Planner to move it in the map (or to the dropped-list with a reason).
+fidelity**: their 8 service descriptions arrive as 8 descriptions, their educational
+article arrives as an article, their 11-town list arrives with all 11 towns.
+
+**Parity counts FACTS, not words.** Tightening a 60-word description to 25 words that
+carry the same facts *passes* parity — that's good writing, and `trade-copy` asks for it.
+Dropping one of the facts fails. What parity forbids is a mapped block shrinking to a
+mention, or a long-form article becoming a one-liner because it "reads cleaner" — the
+informational body is the VALUE of the site. **Never pad to survive a parity review.** If
+a block genuinely fights the design, don't drop it: message the Planner to move it in the
+map (or to the dropped-list with a reason).
 
 **Reflect the CURRENT facts.** Use the dossier's current-state facts, including any
 business-announced change the Analyst recorded (new owner, name, address). Render the
@@ -165,9 +187,13 @@ only.)
    `:root`, semantic HTML, full meta/OG/Twitter + inline SVG favicon,
    **`LocalBusiness` JSON-LD + the meta essentials checklist from
    `~/.claude/skills/web-design-ultra/references/local-trade.md`** (real NAP from the
-   dossier only; unknown values stay as `PLACEHOLDER_…` — never invent), reveal
-   animations, custom cursor, magnetic buttons, subtle tilt — all gated behind
-   `prefers-reduced-motion`. Pages per the **plan's** page map (the dossier's is only a recommendation). Every image slot beyond the
+   dossier only; unknown values stay as `PLACEHOLDER_…` — never invent), and **the
+   plan's named signature move** (entrance family + hover personality + at most one
+   scroll set-piece + one tempo) — not the old house recipe of reveal + cursor +
+   magnetic + tilt, which shipped on every prospect and is exactly the sameness item 6
+   fails. All gated behind `prefers-reduced-motion`, and **content is never hidden by
+   JS**: apply hidden states at runtime (`html.js` scope or `gsap.set()`), never in
+   `style.css`. Pages per the **plan's** page map (the dossier's is only a recommendation). Every image slot beyond the
    2 generated ones is a labeled placeholder (see CLAUDE.md — `<!-- AI-IMAGE: … -->` +
    `.img-placeholder`); embeds are placeholders too.
 5. **Desktop QA** in the browser pane, section by section — fix as you go. Confirm the
@@ -192,8 +218,25 @@ only.)
      and unhides, e.g. "Thanks — this is a demo form. On the live site this reaches
      <owner> directly. For now, please call <phone>." Keep `preventDefault()`; never
      wire a real network call.
-7. **Mobile pass** at 375×812 — make real phone-layout decisions, not a shrunk desktop.
-8. **Self-audit against the critic's ACTUAL gate list** before you hand off. Save desktop
+7. **Motion QA — three checks, each of which has already cost a build a round.** Do all
+   three before you screenshot anything.
+   - **JS-off (fail-visible).** Rename `main.js` and any `vendor/*.js`, reload, and read
+     the page. Every word legible, every CTA tappable. A mockup ships as a zip somebody
+     else unpacks — one missing script must not produce a blank homepage. Restore, then
+     confirm the page still animates.
+   - **Reduced motion.** Turn it on at the OS (or capture with headless
+     `--force-prefers-reduced-motion`) and reload. The page must be **complete**, not
+     stripped: no half-applied pre-states, no elements stuck at `opacity:0`, no pinned
+     sections, counters showing final values.
+   - **375px.** No pin, no horizontal panel, no overflow from any translate or track.
+   ⚠️ **Before you diagnose "the animation is broken": check `document.visibilityState`.**
+   GSAP is rAF-driven, and a backgrounded browser-pane tab throttles rAF to zero — the
+   whole page sits frozen at its pre-animation state and looks exactly like a
+   fail-visible bug. `gsap.ticker.frame` stuck at 1 confirms it. To see the real end
+   state, seek the timeline: `gsap.globalTimeline.time(6); gsap.ticker.tick();`. Full
+   write-up in `references/critique.md` field note 13.
+8. **Mobile pass** at 375×812 — make real phone-layout decisions, not a shrunk desktop.
+9. **Self-audit against the critic's ACTUAL gate list** before you hand off. Save desktop
    + mobile screenshots to `prospects/<slug>/screenshots/`, then check every gate the
    critic will check, so nothing bounces back for something you could have caught:
    - **Both scoreboards** from those screenshots — the $10K Checklist AND the
@@ -202,7 +245,12 @@ only.)
    - **Client-answer fidelity** — walk `client-answers.md`; every answer is honored or
      explicitly flagged to the lead with a reason.
    - **Content parity** — walk `site-content.md`; every block is present at full fidelity
-     or on the plan's "Deliberately dropped" list.
+     or on the plan's "Deliberately dropped" list. Facts, not word count.
+   - **Copy voice** — `copycheck.py` exits 0 against `voice-spec.md`, AND you have run
+     `--list` and read every visible string asking whether the owner would say it out loud
+     to a customer. The script can't catch "meticulous by habit" (too poetic), "we read the
+     sun" (too cute), or "when the weather turns, we show up" (too vague); you can. Passing
+     the checks is not passing this gate.
    - **Imagery two-way test** — both generated images pass (not stock-ad perfect, not
      shabby, no fabricated branding).
    - **Interactive QA** — you clicked everything; no dead clicks, no misleading
@@ -210,7 +258,7 @@ only.)
    Fix anything with a
    dimension below 7 or boldness below 8 before you message the critic — don't hand off a
    mockup you already know fails the gate.
-9. **Generate the client's release form** (see below) — `release-form.pdf`.
+10. **Generate the client's release form** (see below) — `release-form.pdf`.
 
 Preview: open the mockup with the browser pane (`preview_start` with a `url` pointing
 at the local file, or run a tiny static server via Bash and point the pane at it).
@@ -283,6 +331,13 @@ list on a NOT-yet-approved mockup; if there is no open fix list, you are done.
 At sign-off you are done — just notify the lead and shut down. (The **Critic** owns
 Stage 8, including appending the design-choices row to the crew's `design-memory.md`;
 that is not your job.)
+
+**One thing to flag when you revise an already-signed-off site.** A signed-off prospect has
+a Claude Design project — its own card-per-section copy at claude.ai/design, which is where
+the site gets reviewed before going live. The moment you edit the mockup, that copy is
+**stale**, and only the lead can refresh it (`/design-push`; the DesignSync auth isn't
+available to subagents). So say so in your handoff: *"revised — the Claude Design copy is
+now stale, needs a re-push."* Otherwise the site gets reviewed against the old version.
 
 ## Rules you must not break
 

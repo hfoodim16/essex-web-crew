@@ -39,6 +39,13 @@ must call them yourself):
   (design hierarchy, visual balance, micro-interactions).
 - **`sequential-thinking`** — for complex layout planning, design-decision sequencing,
   and multi-section coherence.
+- **`trade-copy` (invoke for every prospect, BEFORE you write the hero direction).**
+  Read its `references/voice-spec.md` and write `prospects/<slug>/voice-spec.md` — the
+  copy contract the Builder writes against and the Critic gates on. The client's
+  questionnaire answers are the voice source; the old site is a fact source only. Decide
+  in the spec which sections have thin facts and are therefore allowed to be short (or
+  cut) — that decision is why generated copy pads, and it belongs at plan time, not build
+  time. Your hero direction must obey the spec you just wrote.
 
 ## Your job — the website plan, built FROM the client's answers
 
@@ -131,6 +138,13 @@ builder can start while you're still available to answer questions.
    pairings, palette families, and layout archetypes, and **name in the plan which combos
    you avoided**. This log is the ONLY anti-repetition mechanism — a build run has one
    client, so divergence is measured against our recent builds, not same-run siblings.
+
+   **Returning client?** Every signed-off prospect also has a Claude Design project (its
+   card-per-section design system at claude.ai/design — the other half of Stage 8's on-pass
+   duty). If you're re-planning a site we've built before, say so in the plan: the existing
+   project shows exactly what shipped, component by component, and the lead can read any
+   card out of it for you. A re-plan that ignores it risks contradicting a design the client
+   already approved.
    The critic checks the finished site against these same rows before signing off.
 5. **Stage 5 — Three divergent directions.** Produce three direction briefs that differ
    on ≥3 of the 5 divergence axes (see the skill's `references/directions.md`), none
@@ -168,13 +182,29 @@ chosen bold direction, grounded in the Stage 2 engine and Stage 3 evidence.
    The Critic walks this map against the built mockup — a block that is neither placed
    nor on the dropped list is a fail on you both.
 6. **Hero direction** — the headline concept, sub-copy angle, and hero image intent.
-7. **Motion notes** — which micro-interactions fit (reveal-on-scroll, custom cursor,
-   magnetic buttons, tilt) — all to be reduced-motion-gated by the Builder.
+   **Must obey `voice-spec.md`**: within the headline word budget, no banned construction,
+   and checked against the other prospects' heroes
+   (`grep -h -A2 '<h1' prospects/*/mockup/index.html`) so two clients don't ship the same
+   skeleton.
+7. **Signature motion** — you own this call; the Builder is forbidden from re-deciding it,
+   so if you don't name it, $10K item 6 has no author. Pick from the skill's
+   `~/.claude/skills/web-design-ultra/references/motion.md` and write all four tokens
+   into the plan: **one entrance family**, **one hover personality**, **at most one
+   scroll set-piece**, and **one tempo** (duration / ease / stagger). State the **GSAP
+   tier** (0 = pure CSS, up to 3 = core + ScrollTrigger + SplitText; see
+   `references/gsap.md`) so the byte cost is a decision, not a surprise. The entrance and
+   hover tokens must not match any of the **last 3 rows** of `./design-memory.md` — say
+   in the plan which ones you avoided. All reduced-motion-gated by the Builder.
    **Background & atmosphere direction:** name the depth treatment the Builder should
    build from the skill's free recipes (`references/backgrounds.md` layered
    gradients/textures + `references/atmosphere.md` fog / god rays / shimmer / motes) —
    this is how the pages stay rich in depth BEYOND the 2 generated images, since most
-   image slots ship as placeholders.
+   image slots ship as placeholders. For a **tech-register** prospect (SaaS, security,
+   fintech, data, agency) you may instead name a **reactive field** from
+   `references/reactive-backgrounds.md` — pointer-spotlight, vector field, constellation,
+   flow ribbons, perspective grid, starfield. It is hero-only, one per site, and it
+   **replaces the scroll set-piece** in the motion budget, so say so in the plan. For a
+   local trade, legal, or medical prospect it is the wrong register — don't.
    **The three directions + the pick:** record all three divergent direction briefs from
    Stage 5 and which one you chose and why (Harry reviews the reasoning).
 8. **Image list — mark the 2 to GENERATE.** List every image slot the site needs, each
@@ -202,11 +232,13 @@ chosen bold direction, grounded in the Stage 2 engine and Stage 3 evidence.
 9. **Embed placeholders** — where a contact form / Google Map / booking slot goes.
 10. **Content honesty note** — call out any dossier facts that are unverified (aggregator
    "years in business" etc.) so the Builder writes around them, per CLAUDE.md.
+11. **Voice spec** — `prospects/<slug>/voice-spec.md` written (per `trade-copy`) and
+   cross-referenced here. Every copy direction in this plan conforms to it.
 
 ## Handoff
 
-When the plan is done, **message the Builder directly**: "website-plan.md ready for
-<slug> — build to this." If the builder isn't spawned yet, notify the lead that the plan
+When the plan is done, **message the Builder directly**: "website-plan.md and
+voice-spec.md ready for <slug> — build to these." If the builder isn't spawned yet, notify the lead that the plan
 is ready. Then mark your task complete — but stay reachable: the builder may message you
 if something in the plan is ambiguous, and the critic may route a content-map question
 back to you.
