@@ -98,6 +98,7 @@ Build run.
 | B2. Build | `builder` ×1 | Opus | `prospects/<slug>/mockup/` + `screenshots/` |
 | B3. Critique loop | `critic` | Opus | `prospects/<slug>/audit.md` (every round) + fix messages, sign-off |
 | B3b. **Publish to Claude Design** | lead | — | A card-per-section design-system project at claude.ai/design (`/design-push`) |
+| B3c. *(only if the site was edited in the Design pane)* **Pull those edits back** | lead | — | `/design-pull` → the edits land in `mockup/`, round-trip verified |
 | B4. **Iterate with the client** | Harry ↔ client | — | Feedback → Harry reopens → builder revises → **re-run `/design-push`** |
 
 **Client answers are the top authority.** The hierarchy, highest first:
@@ -218,8 +219,13 @@ sign-off, the lead performs delivery. Harry can also trigger it any time with
    One DesignSync permission prompt per push; that's inherent to the tool and can't
    be automated away. **After a revision round, run `/design-push` again** — it writes
    the same paths, so the same project updates in place rather than duplicating.
-   Note the direction: the repo is the source of truth and a re-push overwrites, so
-   anything edited inside Claude Design must be pulled back with `get_file` first.
+
+   **It's a round trip, not a one-way publish.** The repo stays the source of truth and a
+   re-push overwrites, so edits made *inside* Claude Design have to come back to the site
+   first — that's **`/design-pull`**, which finds them on its own (it re-bundles the source
+   and diffs, so nobody has to remember what they changed) and verifies every write-back by
+   round-trip. `/design-push` refuses to run while unpulled edits exist, so refining a site
+   in the Design pane can't silently cost you the work.
 
 2. Create a Gmail draft with the Gmail MCP `create_draft` tool:
    - **to:** `cbrapkin@gmail.com`
@@ -574,7 +580,7 @@ each agent's `tools` list includes `Skill`.
 | `planner` | **`web-design-ultra` (PRIMARY)**, **`trade-copy`**, `ui-ux-pro-max`, `frontend-design`, `design-system`, `aesthetic`, `sequential-thinking` | Run the 8-stage art-direction pipeline (Stages 1–5): design intelligence, real-site inspiration, anti-repetition, three divergent directions. `trade-copy` Stage A produces `voice-spec.md` from the client's answers before the hero direction is written. |
 | `builder` | **`web-design-ultra` (PRIMARY)**, **`trade-copy`**, `ai-multimodal`, `ui-ux-pro-max`, `frontend-design`, `frontend-development`, `web-frameworks` | Execute the chosen direction (Stage 7): generate the 2 real hero/priority images (`ai-multimodal`), craft discipline + backgrounds/atmosphere recipes; self-score the Stage 8 rubric. `trade-copy` governs every visible string — invoke before writing any text. |
 | `critic` | **`web-design-ultra`**, **`trade-copy`**, `ui-ux-pro-max`, `code-review`, `design-system` | Audit each mockup against the Stage 8 10-dimension rubric AND the $10K Checklist; enforce real-reviews-only and the COPY VOICE gate (`copycheck.py` + a say-aloud read); code-quality + design-system rigor. |
-| **lead** (this session) | **`design-push`** | Publish each signed-off site to Claude Design (Stage 8 on-pass step B3b), and re-publish after every revision round. Only the lead can: `DesignSync` is authorized in this session, not in any subagent. |
+| **lead** (this session) | **`design-push`**, **`design-pull`** | Publish each signed-off site to Claude Design (Stage 8 on-pass step B3b), and re-publish after every revision round. `design-pull` brings edits made in the Design pane back into `mockup/` before a push can overwrite them — and `design-push` refuses to run while any exist. Only the lead can: `DesignSync` is authorized in this session, not in any subagent. |
 
 Optional, invoke only if the situation calls for it: `media-processing` (Builder — if
 processing real images pulled from an existing client site) and `ai-multimodal`

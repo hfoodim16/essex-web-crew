@@ -15,6 +15,20 @@ The Design System pane renders **one card per file**. Pushing a whole `index.htm
 
 ## Steps
 
+### 0. Pre-flight: has anyone edited this project in Design?
+
+A push overwrites the same paths, so if the user refined something in the Design pane
+since the last push, pushing now destroys it. **Check before bundling** — run the
+`design-pull` skill's `--check` (steps 1–3 there: match the project, fetch
+`styles.css` / `components/*` / `pages/*`, run `design-pull.py --check`).
+
+- Clean → carry on to step 1.
+- **Drift → stop and offer `/design-pull` first.** Do not push past it because the edit
+  looks minor; you can't tell from a diff whether the user meant to keep it.
+
+Skip only when there's no project yet (a first push has nothing to lose). `--force` on the
+pull check is for a loss the user has explicitly chosen, not for getting past the gate.
+
 ### 1. Bundle
 
 ```bash
@@ -166,7 +180,7 @@ bare `index.html` → `{up}templates/landing/index.html`.
 
 ## Rules
 
-- **The repo is the source of truth.** A re-push overwrites the same paths, so **any edit made inside Claude Design is lost**. That's deliberate. To keep a refinement, `get_file` it back first and fold it into the source — for motion, distill it into a *named* recipe in `motion.md` / `gsap.md` / `reactive-backgrounds.md`, because an animation is only usable by the crew once it has a name a planner can put in a direction brief and the anti-repetition log can ban.
+- **The repo is the source of truth.** A re-push overwrites the same paths, so **any edit made inside Claude Design is lost** unless it is pulled back first. That direction is deliberate; losing the edit silently is not, which is why step 0 gates on it. Use the **`design-pull` skill** (`/design-pull`) to bring Design edits into the source — it detects them automatically by re-bundling and diffing, and verifies each write-back by round-trip. For motion, a copy-back isn't enough: distill it into a *named* recipe in `motion.md` / `gsap.md` / `reactive-backgrounds.md`, because an animation is only usable by the crew once it has a name a planner can put in a direction brief and the anti-repetition log can ban.
 - **Only push a site that passed the gate.** Claude Design is for finished work, not works in progress.
 - **One project per client.** Never a shared portfolio project — the pane would mix unrelated token systems in one card index.
 - Recompress assets over ~200 KB to WebP first (`web-design-ultra/references/imagery.md`).
