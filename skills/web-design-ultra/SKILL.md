@@ -14,7 +14,8 @@ An art-director pipeline for producing **bold, distinctive, verified** websites 
 This skill orchestrates existing tools rather than duplicating them:
 - **Design intelligence** (styles/palettes/fonts/stack rules) → `ui-ux-pro-max` search engine
 - **AI image generation** → `ai-multimodal` (Gemini)
-- **Animation craft** → `frontend-design` anime.js reference
+- **Motion craft** → `references/motion.md` (the named vocabulary) + `references/gsap.md` (the vendored GSAP 3.15 tier)
+- **Publishing the finished site** → the `design-push` skill (Stage 8 on-pass), which bundles it via `scripts/design-bundle.py` and pushes it to claude.ai/design as a card-per-section design system
 
 ## The Non-Negotiables
 
@@ -26,7 +27,8 @@ This skill orchestrates existing tools rather than duplicating them:
 4. **The bold test.** For a redesign, before/after screenshots must be obviously different at a glance. If a stranger couldn't tell them apart, it failed — start over, don't tweak.
 5. **Verify with screenshots.** You must screenshot the built site (desktop + mobile + dark if relevant) and score it against the rubric before claiming done. See `references/critique.md`.
 6. **Never generic fonts.** Never Inter, Roboto, Arial, or Helvetica as the primary typeface. Never the purple-gradient-on-white AI-slop look.
-7. **Real businesses get real content only.** Never fabricate reviews, testimonials, ratings, stats, credentials, or years-in-business for a real company — a pitch that invents "★★★★★ Sarah M." is a liability, not a flourish. Invented copy is allowed **only** for fictional demos, or as an explicitly labeled placeholder: `[PLACEHOLDER — replace with real review]`. When you lack real content, ship the labeled placeholder, not a plausible lie.
+7. **Content is never hidden by JavaScript.** Motion hides and reveals at runtime; the stylesheet never ships content at `opacity:0` or under a covering panel. Rename the script, reload — if the page goes blank, it fails, no matter how good it looked animated. See `references/motion.md` rule 0.
+8. **Real businesses get real content only.** Never fabricate reviews, testimonials, ratings, stats, credentials, or years-in-business for a real company — a pitch that invents "★★★★★ Sarah M." is a liability, not a flourish. Invented copy is allowed **only** for fictional demos, or as an explicitly labeled placeholder: `[PLACEHOLDER — replace with real review]`. When you lack real content, ship the labeled placeholder, not a plausible lie.
 
 ## The Pipeline (run all 8 stages, in order)
 
@@ -53,7 +55,7 @@ Treat the output as **candidates to diverge from**, not gospel. The engine gives
 Open the browser pane and study **3–5 real reference sites**, then build an evidence sheet. Full playbook: `references/inspiration.md`. Rule: extract *patterns*, never copy a specific site.
 
 ### Stage 4 — Anti-repetition check
-Read the design-memory log and list the banned font pairings, palette families, and layout archetypes from its **last 3 entries**. Carry these bans into Stage 5.
+Read the design-memory log and list the banned font pairings, palette families, layout archetypes, and **signature motion** (entrance family + hero moves) from its **last 3 entries**. Carry these bans into Stage 5 — motion repeats as easily as fonts do, and the default trio (fade-up + text delay + count-up) is exactly what makes builds feel same-y.
 
 **Which log:** if `<project-root>/design-memory.md` exists, use it (a project keeps its own ban list — e.g. the crew's `~/Projects/essex-web-crew/design-memory.md`, so prospects diverge from each other, not from Harry's unrelated test builds). Otherwise fall back to the global `data/design-memory.md`. Read from and, in Stage 8, append to the **same** file.
 
@@ -66,12 +68,12 @@ Produce three direction briefs per `references/directions.md`. Each is a mini-sp
 Generate the imagery the chosen direction needs (hero, textures, OG image) via `references/imagery.md`, construct backgrounds from `references/backgrounds.md`, and layer in animated atmosphere (fog, god rays, clouds, shimmer, motes) from `references/atmosphere.md` where the mood calls for it. Optimize to WebP at correct sizes. A great site is rarely flat color — depth, real imagery, and moving light are how it stops looking like a template. **Imagery must follow `imagery.md`'s photorealism kit, cost rules, and "Fit the slot" sizing** — choose each image's aspect ratio AND resolution tier for where it renders (`--image-size 2K` for full-bleed/background heroes, `1K` for contained cards/plates/OG). Generate exactly ONE image on a skill test/demo; for real builds, announce the image count and per-tier cost (~$0.04 at 1K / ~$0.13 at 2K) before generating a set.
 
 ### Stage 7 — Build
-Implement the chosen direction using Stage 2's stack rules and craft discipline: distinctive type (never the generic four), CSS variables for the whole palette, deliberate spatial composition (asymmetry, overlap, scale contrast), and motion via CSS or anime.js v4 (`~/.claude/skills/frontend-design/references/animejs.md`), plus atmospheric effects from `references/atmosphere.md`. Respect `prefers-reduced-motion` on every animation.
+Implement the chosen direction using Stage 2's stack rules and craft discipline: distinctive type (never the generic four), CSS variables for the whole palette, deliberate spatial composition (asymmetry, overlap, scale contrast), and motion from `references/motion.md` — commit to the direction's **signature move** (one entrance family + one hover personality + at most one scroll set-piece), never the default fade-up/text-delay/count-up trio. Ambient light/air effects come from `references/atmosphere.md`; when the signature move needs scrubbing, pinning, staged timelines, split text, or SVG draw/morph, use the vendored GSAP tier in `references/gsap.md` (copy from `assets/gsap/` into the build's `vendor/` — never a CDN). Respect `prefers-reduced-motion` on every animation, and **never hide content behind JavaScript** — rename the script, reload, and the page must still read.
 
 For a **local service business** (landscaper, dentist, plumber, contractor — the crew's bread and butter), also apply the conversion patterns in `references/local-trade.md`: tap-to-call CTA, service-area town list, license/insurance line, before/after gallery, ≤4-field estimate form, consistent NAP footer. **Ship the local-SEO structure too** — `LocalBusiness` JSON-LD + the meta essentials checklist from that file, with `PLACEHOLDER_…` tokens wherever the real NAP data isn't known (never invent it).
 
 ### Stage 8 — Critique gate & loop
-`preview_start` the site (or, for a static double-click mockup, point the pane at a tiny Bash static server — see `references/critique.md`), then screenshot desktop, mobile (375px), and dark mode if applicable. Score against the 10-dimension rubric in `references/critique.md`. For pitch-mockup deliverables the desktop + mobile screenshots are a **required artifact** saved to `screenshots/`, not just a check — missing mobile screenshots = automatic fail. **Gate:** no dimension below 7, boldness ≥ 8, and (for redesigns) the bold test passes. On failure: fix the specific weak dimensions, re-screenshot, re-score — up to 3 loops, then report honestly with the scores. On pass: append this project's choices (project, date, font pairing, palette, layout archetype, background system) to the **same log Stage 4 read** — the project-local `design-memory.md` if one exists, else the global `data/design-memory.md`.
+`preview_start` the site (or, for a static double-click mockup, point the pane at a tiny Bash static server — see `references/critique.md`), then screenshot desktop, mobile (375px), and dark mode if applicable. Score against the 10-dimension rubric in `references/critique.md`. For pitch-mockup deliverables the desktop + mobile screenshots are a **required artifact** saved to `screenshots/`, not just a check — missing mobile screenshots = automatic fail. **Gate:** no dimension below 7, boldness ≥ 8, and (for redesigns) the bold test passes. On failure: fix the specific weak dimensions, re-screenshot, re-score — up to 3 loops, then report honestly with the scores. On pass, two steps: **(a)** append this project's choices (project, date, font pairing, palette, layout archetype, background system, **signature motion**) to the **same log Stage 4 read** — the project-local `design-memory.md` if one exists, else the global `data/design-memory.md`; **(b)** **publish it to Claude Design** by invoking the `design-push` skill, so the finished site lands at claude.ai/design as a browsable card-per-section design system. Re-running a passing build re-pushes and updates the same project in place. Skip only if the user has opted out for this project.
 
 ## Crew mode (multi-agent teams, e.g. Essex Web Crew)
 
@@ -79,7 +81,7 @@ When a team runs this skill, the 8 stages split across roles instead of one agen
 
 - **Planner owns Stages 1–5.** Output artifact: a `website-plan.md` that is the design contract. It must carry: the named art direction + direction brief, the **color-convention honor/break call** (Stage 5), the page/section map, the font pairing + `:root` palette, and an **image slot list** marking each slot `GENERATE` (real AI image) or `PLACEHOLDER` (labeled `<!-- AI-IMAGE: … -->`). The planner consulted the anti-repetition log; the plan names the banned combos it avoided.
 - **Builder owns Stages 6–7.** Implements the plan exactly — does **not** re-decide direction, fonts, or palette. Generates only the `GENERATE`-marked images within the image cap (see `references/imagery.md` crew tier).
-- **Critic owns Stage 8.** Runs the critique gate + the team's own checklist, loops until sign-off, then appends the passing row to the **project-local** `design-memory.md`.
+- **Critic owns Stage 8.** Runs the critique gate + the team's own checklist, loops until sign-off, then appends the passing row to the **project-local** `design-memory.md`. That's on-pass step (a). Step (b) — **publishing to Claude Design** — the critic **hands to the lead**, because `DesignSync` is authorized in the lead session and not in any subagent. It must be named in the sign-off message or it gets dropped.
 
 Any agent that runs Stage 8 (builder self-check or critic) needs the browser/preview tools in its `tools` list (`preview_start`, `navigate`, `computer`, `read_page`, `read_console_messages`, `resize_window`, `javascript_tool`) — Stage 8 cannot be done without them. Solo mode is unchanged: one agent runs all 8 stages.
 
@@ -93,11 +95,14 @@ Any agent that runs Stage 8 (builder self-check or critic) needs the browser/pre
 | How to research + what to extract from real sites | `references/inspiration.md` |
 | The 5 divergence axes + direction-brief template | `references/directions.md` |
 | Background/texture/depth recipes | `references/backgrounds.md` |
+| Element animations: entrances, reveals, staggers, hovers, scroll set-pieces | `references/motion.md` |
 | Animated atmosphere (fog, god rays, clouds, shimmer, motes) | `references/atmosphere.md` |
+| Reactive backgrounds (pointer fields, constellation, flow, grids — tech register) | `references/reactive-backgrounds.md` |
 | AI image prompt formulas + WebP steps | `references/imagery.md` |
 | Scoring rubric + bold test + fix loop | `references/critique.md` |
 | Anti-repetition log | `data/design-memory.md` |
-| anime.js v4 syntax | `~/.claude/skills/frontend-design/references/animejs.md` |
+| Publish a finished site to Claude Design (Stage 8 on-pass) | `design-push` skill · `scripts/design-bundle.py` |
+| GSAP tier: scrub, pin, timelines, split text, SVG draw/morph | `references/gsap.md` (library in `assets/gsap/`) |
 
 ## Red Flags — STOP
 

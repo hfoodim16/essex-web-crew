@@ -58,7 +58,7 @@ Soft blurred color blobs behind content for a premium dark look:
 ## Section transitions (break the boring stacked-rectangle rhythm)
 - **Angled dividers:** `clip-path: polygon(0 0,100% 0,100% 92%,0 100%)` on a section.
 - **Curved:** an inline SVG wave between sections.
-- **Marquee strip:** an infinite-scroll text/logo band as a divider (pairs with kinetic motion).
+- **Marquee strip:** an infinite-scroll text/logo band as a divider (pairs with kinetic motion) — full recipe in `motion.md` under continuous element motion.
 - **Overlap:** pull the next section up with negative margin so cards straddle the seam.
 
 ## Custom cursor (distinctive, use when the direction is bold)
@@ -70,8 +70,11 @@ Soft blurred color blobs behind content for a premium dark look:
 ```
 Track with a small pointermove listener; scale up on hoverable elements. Always keep a real fallback for touch/reduced-motion.
 
-## When to reach for canvas / WebGL / three.js
-Only when the direction genuinely calls for it (immersive hero, 3D product, particle field) and the payoff justifies it. **Cost warning:** heavier bundle, performance/accessibility burden, more build time. Prefer CSS/SVG for 90% of cases; use three.js for the signature hero moment, lazy-loaded, with a static fallback and `prefers-reduced-motion` respected.
+## Reactive fields (pointer/scroll-responsive)
+For a background that *responds* — pointer spotlight, vector/compass field, constellation network, flow ribbons, perspective grid, starfield — see `reactive-backgrounds.md`. It carries a hardened canvas harness (DPR cap, count cap, off-screen pause, `?still` capture frame) plus a CSS-only tier that needs no canvas at all. Budget: one field, hero only, and it costs you the scroll set-piece.
+
+## When to reach for WebGL / three.js
+Almost never — `reactive-backgrounds.md` reaches the whole "moving tech background" register in 2D canvas or plain CSS, at a fraction of the weight. Reserve 3D for a genuine 3D need (a product you must rotate, real depth), and then: lazy-loaded, static fallback, `prefers-reduced-motion` respected. **Cost warning:** heavier bundle, performance/accessibility burden, more build time.
 
 ## Animated atmosphere
 For *moving* light and air — drifting fog, parallax clouds, god rays / beams, aurora ribbons, shimmer sweeps, dust motes — see `atmosphere.md`. This file is static/ambient depth; that one is the weather-and-light layer, with performance guardrails.

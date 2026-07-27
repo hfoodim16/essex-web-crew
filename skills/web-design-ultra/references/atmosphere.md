@@ -136,6 +136,16 @@ Animated `feTurbulence` + `feDisplacementMap`. **The most expensive recipe here 
 | Premium product / editorial | glint sweep only (restraint IS the flex) |
 | Fire / energy | motes (warm) + glow orbs from backgrounds.md |
 
+## Boundary with `motion.md`
+
+Atmosphere is **ambient**: idle, looping, non-interactive, below the content layer, running forever. `motion.md` is **event-driven**: entrances, hovers, scroll — content layer and above, running once or bound to input. Never re-implement fog or god rays as an element animation, and never author an entrance as an ambient keyframe loop.
+
+Two rules follow from running both at once:
+- **Combined budget ≤ 4 animated systems** on a page — 1 entrance + 1 hover + 1 scroll set-piece + ≤ 2 ambient effects; if you take two ambient effects, drop the set-piece. A reactive field from `reactive-backgrounds.md` counts as the set-piece and pairs with at most **one** ambient effect here.
+- **Never scroll-scrub or parallax a layer that is both blurred and blend-moded.** The compositor trap above is already per-frame; binding it to scroll makes every scroll event a full-viewport re-composite.
+
+One deliberate difference between the files: this one tells you to hand-promote its few permanently-blurred layers with `will-change`. `motion.md`'s element tweens should *not* be hand-promoted — GSAP handles it, and painting `will-change` onto 40 short-lived elements costs more than it saves.
+
 ## Checklist before shipping an effect
 - [ ] Under scrim, text still WCAG AA
 - [ ] `prefers-reduced-motion` guard covers it (CSS keyframes AND any canvas)
