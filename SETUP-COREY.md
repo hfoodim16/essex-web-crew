@@ -25,7 +25,7 @@ git clone https://github.com/hfoodim16/essex-web-crew.git ~/Projects/essex-web-c
 
 ## 2. Install the skills
 
-The crew leans on ~14 Claude Code skills that live in `~/.claude/skills/`. They're
+The crew leans on ~15 Claude Code skills that live in `~/.claude/skills/`. They're
 bundled in this repo under `skills/`. This copies them into place and sets up the
 image-generation environment:
 

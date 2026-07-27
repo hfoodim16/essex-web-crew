@@ -307,8 +307,13 @@ is hosted, their live URL, how to reach me for changes, and a short "what to exp
 
 Then: collect the **second payment**, ask for a **testimonial** (you'll use it like the
 Cecere Brothers reference on future pitches), and ask **"who else do you know who needs
-this?"** — referrals from a happy trade client are your best next lead. Mark the prospect
-`launched` in `pipeline/outreach-log.md`.
+this?"** — referrals from a happy trade client are your best next lead.
+
+**Register the site for monitoring.** This is the step that makes the site *watched*
+instead of merely launched. Spawn the **caretaker** agent and tell it the live URL; it
+appends the entry to `~/Projects/site-caretaker/sites.json` and confirms the hourly
+monitor picks it up. `sites.json` is the crew's system of record for published sites —
+if a site isn't in it, nobody is watching it.
 
 → continue to **Step 15**.
 
@@ -334,9 +339,12 @@ the occasional content change, and each one is a quick Claude session + redeploy
   e-commerce piece). That's a **new mini-project**, not maintenance — scope and price it
   separately. Booking/embeds: **PLAYBOOK Part 3, Reference D**. Bigger builds: run it
   through the planner→builder→critic loop like a fresh site.
-- **15C — the site's just running.** Do a **quarterly check**: load the live site, submit
-  the form to confirm it still delivers, and note the **domain renewal date** so it never
-  lapses. A 5-minute ping keeps the client happy and the door open.
+- **15C — the site's just running.** The **caretaker** agent's hourly monitor
+  (`~/Projects/site-caretaker/`) already watches uptime, DNS, TLS expiry, page content, and
+  broken links, and emails you on a real failure — so you no longer check those by hand.
+  What still needs a human is the **quarterly ping**: submit the contact form to confirm it
+  still delivers, and note the **domain renewal date** so it never lapses. If an alert does
+  fire, spawn the caretaker to diagnose it before you touch anything.
 
 **Then close the loop:** a happy, launched client is your strongest asset — use their site
 as the new portfolio piece, cash the referral, and point the machine at the next prospect

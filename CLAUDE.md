@@ -97,7 +97,8 @@ Build run.
 | B1. Plan FROM the answers | `planner` | Fable | `prospects/<slug>/website-plan.md` incl. "Client answers → decisions" |
 | B2. Build | `builder` ×1 | Opus | `prospects/<slug>/mockup/` + `screenshots/` |
 | B3. Critique loop | `critic` | Opus | `prospects/<slug>/audit.md` (every round) + fix messages, sign-off |
-| B4. **Iterate with the client** | Harry ↔ client | — | Feedback → Harry reopens → builder revises |
+| B3b. **Publish to Claude Design** | lead | — | A card-per-section design-system project at claude.ai/design (`/design-push`) |
+| B4. **Iterate with the client** | Harry ↔ client | — | Feedback → Harry reopens → builder revises → **re-run `/design-push`** |
 
 **Client answers are the top authority.** The hierarchy, highest first:
 
@@ -173,7 +174,9 @@ Each approved prospect gets a folder `prospects/<slug>/` containing:
   **"Client answers → decisions"** section and the **content map** that places every
   site-content.md block (or lists it as deliberately dropped, with a reason).
 - `mockup/` — `index.html`, `style.css`, `main.js` (+ extra `.html` pages if the
-  page map calls for them). Static only. Opens by double-click, no build step.
+  page map calls for them, + `vendor/` if the plan's signature move needs the GSAP
+  tier). Static only. Opens by double-click, no build step, **works offline** —
+  libraries are vendored from the skill's `assets/gsap/`, never loaded from a CDN.
 - `screenshots/` — desktop + mobile captures proving the QA passes ran.
 - `release-form.pdf` (+ `release-form.html` source) — the Fora Digital **Website Release
   & Publication Approval**, pre-filled with this client's business name, contact, and the
@@ -184,6 +187,11 @@ Each approved prospect gets a folder `prospects/<slug>/` containing:
 - `audit.md` — the Critic's scored result for BOTH scoreboards ($10K Checklist 8/8 or
   documented exceptions, plus the 10-dimension rubric), rewritten every review round with
   a `Review round: N` line.
+
+**Not a file in the folder, but part of the contract:** every signed-off prospect also has
+a **Claude Design project** — its own card-per-section design system at claude.ai/design,
+published by the lead with `/design-push`. That's where the site gets reviewed and precisely
+edited before going live, so a signed-off prospect without one is incomplete.
 
 ## Delivery to Corey
 
@@ -204,6 +212,15 @@ sign-off, the lead performs delivery. Harry can also trigger it any time with
    This writes `prospects/<slug>/<slug>-site.zip` — the whole site, correctly named
    `index.html` at the top level, assets included, dev scratch stripped.
 
+   **Then publish it to Claude Design** — invoke the `design-push` skill on
+   `prospects/<slug>/mockup/` with the client's name. The finished site lands at
+   claude.ai/design as a card-per-section design system you can refine visually.
+   One DesignSync permission prompt per push; that's inherent to the tool and can't
+   be automated away. **After a revision round, run `/design-push` again** — it writes
+   the same paths, so the same project updates in place rather than duplicating.
+   Note the direction: the repo is the source of truth and a re-push overwrites, so
+   anything edited inside Claude Design must be pulled back with `get_file` first.
+
 2. Create a Gmail draft with the Gmail MCP `create_draft` tool:
    - **to:** `cbrapkin@gmail.com`
    - **subject:** `<Business Name> website — ready to put live on Netlify`
@@ -214,7 +231,8 @@ sign-off, the lead performs delivery. Harry can also trigger it any time with
      `application/zip`). If it's larger, create the draft *without* the attachment and
      open the body with a line Harry can't miss:
      `ATTACH BEFORE SENDING: <absolute path to zip>`. Base64-ing a multi-MB file through
-     a tool call is not workable — image-heavy sites will always take this path.
+     a tool call is not workable — image-heavy sites will always take this path, and a
+     mockup carrying a vendored GSAP tier (~45 KB zipped) may tip a borderline one over.
 
 3. **Draft only — never send.** Report the draft ID and the zip path back to Harry, and
    say plainly whether the zip was attached or he has to attach it himself.
@@ -248,11 +266,15 @@ the team:
 - **Stage 7 → Builder.** Implement the chosen direction with the skill's craft
   discipline: distinctive type (never the generic four), whole palette as CSS
   variables, deliberate spatial composition (asymmetry, overlap, scale contrast),
-  motion via CSS/anime.js.
+  and the plan's named signature move from the skill's `references/motion.md`
+  (GSAP 3.15 vendored to `mockup/vendor/` when the move needs it — `references/gsap.md`).
 - **Stage 8 → Builder self-check, then Critic (Critic OWNS this stage).** Screenshot
   desktop + mobile, score the 10-dimension rubric in the skill's `references/critique.md`.
   Gate: **no dimension below 7, boldness ≥ 8** — enforced by the Critic alongside the
-  $10K Checklist.
+  $10K Checklist. **On pass there are two duties, not one:** the Critic appends the
+  design-choices row to `design-memory.md`, and the **lead publishes the site to Claude
+  Design** with `/design-push` (the Critic can't — the DesignSync auth lives in the lead
+  session, so it names it in the sign-off instead).
 - **Local-service conversion patterns are house standard.** Our clients are local service
   businesses, so every plan and build applies the skill's `references/local-trade.md`:
   tap-to-call `tel:` link visible in the mobile header (CTA repeated top/mid/footer), one
@@ -303,11 +325,16 @@ for concrete/fencing). The Builder writes those 2–3 sentences of rationale at 
   `role="list"`, a visible focus ring (`:focus-visible` outline).
 - **Meta:** full `<title>`, meta description, Open Graph tags, Twitter card, and an
   inline SVG favicon. (Use the business's real name + town.)
-- **Motion (whisper, don't shout):** reveal-on-scroll via IntersectionObserver,
-  a custom cursor (dot + lerped ring with contextual labels), magnetic buttons,
-  subtle 3D card tilt. **Every motion effect must be gated behind**
+- **Motion (whisper, don't shout):** build the **signature move the plan named** —
+  one entrance family + one hover personality + at most one scroll set-piece + one
+  tempo, from the skill's `references/motion.md`. Do not default to the old house
+  recipe (IO reveal + custom cursor + magnetic + tilt); shipping the same four moves
+  on every prospect is the sameness this checklist exists to kill, and it fails
+  item 6. **Every motion effect must be gated behind**
   `window.matchMedia('(prefers-reduced-motion: reduce)')` and disabled on
-  `(pointer: coarse)` where relevant.
+  `(pointer: coarse)` where relevant. **Content is never hidden by JS** — the hidden
+  state is applied at runtime, so a missing or broken script leaves a readable page
+  (rename `main.js`, reload, read it: that's the test, and it has failed before).
 - **Embeds as placeholders** — contact form, Google Map, booking widget: leave a
   clearly styled placeholder block + an HTML comment saying what goes there. Do not
   wire up real third-party services.
@@ -358,14 +385,20 @@ while the others are still being fixed.
    a deliberate, labeled AI-IMAGE placeholder matching the art direction (see the Image
    policy below). A placeholder in either priority slot is never an acceptable exception.
    No stock defaults.
-6. **Motion that whispers** — hand-crafted micro-interactions, reduced-motion-safe.
+6. **Motion that whispers** — art-directed micro-interactions, reduced-motion-safe.
    **Signature move required:** one entrance family + one hover personality picked from
    the skill's `references/motion.md`, and **distinct from the last 3 prospects** in
    `./design-memory.md`. The default trio (fade-up everywhere + staggered text delay +
-   number count-up) fails this item unless explicitly justified.
+   number count-up) fails this item unless explicitly justified. GSAP (vendored, per
+   `references/gsap.md`) is sanctioned when the move needs it — what's judged here is
+   whether the motion was *chosen*, not whether it was typed by hand.
 7. **Mobile that's designed, not shrunk** — distinct phone layout decisions.
 8. **The invisible expensive stuff** — sub-2s load (compress/omit heavy assets),
    WCAG AA contrast, keyboard navigation, semantic HTML, real meta tags.
+   **JS-off test:** rename `main.js` (and `vendor/*.js`), reload — every word readable,
+   every CTA tappable. Content hidden by default and revealed only by JS is an
+   automatic fail: the site ships as a zip someone else unpacks, so one missing
+   script is a blank homepage. (This has happened; see `fora-digital/audit.md`.)
    **Local SEO:** `LocalBusiness` JSON-LD present (correct schema subtype), meta
    title/description naming the service + towns, OG image, canonical, favicon. The
    footer NAP must match the JSON-LD exactly. Unknown values stay as visible
@@ -460,11 +493,14 @@ else.
 
 Most prospects already have a website — that's what we're improving on. When they do,
 **reuse their real content, don't invent new content.** The Analyst captures the existing
-site's actual services, descriptions, service area, hours, contact info, tagline, about
-text, and testimonials into the dossier; the Planner structures that real material and
-the Builder renders it. We are upgrading the **design and structure**, not rewriting the
-business. Only use `[placeholder]` text where information genuinely doesn't exist. This
-also keeps the pitch honest and makes the mockup feel like *their* site, done right.
+site's actual services, descriptions, service area, hours, contact info, and testimonials
+into the dossier; the Planner structures that real material and the Builder renders it.
+We are upgrading the **design and structure**, not rewriting the business. Only use
+`[placeholder]` text where information genuinely doesn't exist. This keeps the pitch
+honest and makes the site feel like *theirs*, done right.
+
+**Their old site is a fact source, not a voice source** — see Copy voice below. Carry
+every fact; don't inherit the phrasing.
 
 ## Content parity (hard rule)
 
@@ -487,6 +523,44 @@ before they notice our typography. The pipeline summarizes at every hop (site �
 4. **Critic** walks site-content.md against the mockup: every block present or
    accounted for on the dropped list, else a numbered fail list. This is a hard gate.
 
+**Parity counts facts, not words.** Tightening a 60-word description to 25 words that
+carry the same facts passes; dropping a fact fails. Nobody pads to survive a parity
+review, and nobody bounces a mockup for being tighter than the old site.
+
+## Copy voice (hard rule)
+
+A site can be beautifully built and still read fake, and the owner feels it immediately:
+sentences he'd never say out loud, one pretty word carried through every section, a dash
+in the middle of every line restating what the first half already said. That's the single
+most common complaint about our output.
+
+**The client's questionnaire answers are the voice source.** Their old site supplies
+facts only. How the copy sounds comes from how *they* talk.
+
+**Copy is specification, not prose** — concrete nouns, numbers, towns, materials, hours.
+When a section has no real facts behind it, shrink it or cut it. Never write around the
+hole with atmosphere; that is where every bad line in this project has come from.
+
+**The voice is a licensed contractor talking to a homeowner in his driveway.** Three ways
+to miss it: **too poetic** ("meticulous by habit"), **too cute** ("we read the sun",
+"won't need babying", trade puns, winking), **too vague** ("when the weather turns, we
+show up"). "Plain" is not the target — plenty of cutesy copy is plain. Professional is.
+
+Enforced with an artifact chain, same shape as content parity:
+
+1. **Planner** mines `client-answers.md` into `prospects/<slug>/voice-spec.md` — register,
+   the client's own phrases, word budgets, banned words, and which sections are
+   pre-authorized to be short because the facts are thin. Written BEFORE the hero
+   direction.
+2. **Builder** writes every visible string against that spec, then runs
+   `python3 skills/trade-copy/scripts/copycheck.py prospects/<slug>/mockup/index.html`.
+3. **Critic** re-runs the checks as a hard gate AND reads the page one sentence at a time
+   asking whether the owner would say it aloud. The script can't catch "meticulous by
+   habit"; a person can.
+
+Real review quotes, Q14 keep-word-for-word content, legal text, and NAP are exempt from
+every check and are never edited. Full rules: the **`trade-copy`** skill.
+
 ## Skills each agent uses
 
 Skills are NOT auto-loaded for teammates (the agent-teams runtime doesn't apply the
@@ -497,9 +571,10 @@ each agent's `tools` list includes `Skill`.
 |---|---|---|
 | `scout` | `research`, `docs-seeker` | Deeper competitor/reputation research when a web search isn't enough; finding directories/docs on unfamiliar trades. |
 | `analyst` | `research` | Comprehensive dossier research beyond a plain web search. |
-| `planner` | **`web-design-ultra` (PRIMARY)**, `ui-ux-pro-max`, `frontend-design`, `design-system`, `aesthetic`, `sequential-thinking` | Run the 8-stage art-direction pipeline (Stages 1–5): design intelligence, real-site inspiration, anti-repetition, three divergent directions. Supporting skills ground palette/type/token choices. |
-| `builder` | **`web-design-ultra` (PRIMARY)**, `ai-multimodal`, `ui-ux-pro-max`, `frontend-design`, `frontend-development`, `web-frameworks` | Execute the chosen direction (Stage 7): generate the 2 real hero/priority images (`ai-multimodal`), craft discipline + backgrounds/atmosphere recipes; self-score the Stage 8 rubric. |
-| `critic` | **`web-design-ultra`**, `ui-ux-pro-max`, `code-review`, `design-system` | Audit each mockup against the Stage 8 10-dimension rubric AND the $10K Checklist; enforce real-reviews-only; code-quality + design-system rigor. |
+| `planner` | **`web-design-ultra` (PRIMARY)**, **`trade-copy`**, `ui-ux-pro-max`, `frontend-design`, `design-system`, `aesthetic`, `sequential-thinking` | Run the 8-stage art-direction pipeline (Stages 1–5): design intelligence, real-site inspiration, anti-repetition, three divergent directions. `trade-copy` Stage A produces `voice-spec.md` from the client's answers before the hero direction is written. |
+| `builder` | **`web-design-ultra` (PRIMARY)**, **`trade-copy`**, `ai-multimodal`, `ui-ux-pro-max`, `frontend-design`, `frontend-development`, `web-frameworks` | Execute the chosen direction (Stage 7): generate the 2 real hero/priority images (`ai-multimodal`), craft discipline + backgrounds/atmosphere recipes; self-score the Stage 8 rubric. `trade-copy` governs every visible string — invoke before writing any text. |
+| `critic` | **`web-design-ultra`**, **`trade-copy`**, `ui-ux-pro-max`, `code-review`, `design-system` | Audit each mockup against the Stage 8 10-dimension rubric AND the $10K Checklist; enforce real-reviews-only and the COPY VOICE gate (`copycheck.py` + a say-aloud read); code-quality + design-system rigor. |
+| **lead** (this session) | **`design-push`** | Publish each signed-off site to Claude Design (Stage 8 on-pass step B3b), and re-publish after every revision round. Only the lead can: `DesignSync` is authorized in this session, not in any subagent. |
 
 Optional, invoke only if the situation calls for it: `media-processing` (Builder — if
 processing real images pulled from an existing client site) and `ai-multimodal`

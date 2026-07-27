@@ -11,9 +11,9 @@ scoreboards below.
 3. [ ] **Restrained color** — 3–5 colors as tokens, used consistently.
 4. [ ] **Hierarchy breathes** — clear primary/secondary/tertiary; whitespace does work.
 5. [ ] **Imagery with intent** — the **2 Planner-marked `GENERATE` slots (hero + one priority slot) hold REAL generated images** stored locally as WebP in `mockup/assets/` and passing the two-way realism test below; **every other slot is a labeled `AI-IMAGE` placeholder** in the art direction's style. More than 2 generated images = budget fail. NO stock/hotlinked/copyrighted images.
-6. [ ] **Motion whispers** — hand-crafted micro-interactions; ALL gated behind `prefers-reduced-motion`.
+6. [ ] **Motion whispers** — the plan's **named** signature move (entrance family + hover personality, distinct from the last 3 rows of `design-memory.md`); ALL gated behind `prefers-reduced-motion`.
 7. [ ] **Mobile designed, not shrunk** — distinct phone layout decisions, PROVEN by mobile screenshots.
-8. [ ] **Invisible expensive stuff** — sub-2s load (no huge assets), WCAG AA contrast, keyboard nav / focus ring, semantic HTML, real meta+OG+favicon.
+8. [ ] **Invisible expensive stuff** — sub-2s load (no huge assets), WCAG AA contrast, keyboard nav / focus ring, semantic HTML, real meta+OG+favicon, **JS-off test passes** (rename `main.js` + `vendor/*.js`, reload — page still readable).
 
 **Pass = 8/8**, or a documented, defensible exception written into `audit.md`.
 **Never exceptable:** a placeholder sitting in either of the 2 priority image slots.
@@ -66,7 +66,14 @@ they took it themselves?* Both halves must hold. Open each generated image full 
       `site-content.md` block by block against the mockup: every block is present at full
       informational fidelity (descriptions as descriptions, articles as articles, full
       town lists) or on the plan's "Deliberately dropped" list with a reason. Missing or
-      thinned-to-a-mention content = numbered fail list to the builder.
+      thinned-to-a-mention content = numbered fail list to the builder. **Parity counts
+      facts, not words** — same facts in fewer words passes; never bounce a build for
+      being tighter than the old site.
+- [ ] **COPY VOICE** — `voice-spec.md` exists and the build was written against it.
+      `python3 skills/trade-copy/scripts/copycheck.py prospects/<slug>/mockup/index.html`
+      exits 0 (em-dash rate, motif cap, triads, placeholders, contractions, budgets), AND
+      the page survives a say-aloud read: every sentence is something the owner would
+      actually say to a customer. Essayist prose fails even when the numbers pass.
 - [ ] **Every clickable works (click-tested in the browser, not inferred from code)** —
       hamburger opens AND closes (checked on a non-index page too for multi-page sites),
       every nav / card / CTA / footer link navigates, every `#fragment` target exists,
@@ -87,6 +94,8 @@ they took it themselves?* Both halves must hold. Open each generated image full 
 - [ ] `client-answers.md` (saved verbatim by the lead)
 - [ ] `website-plan.md` (the Planner's design contract, incl. the **"Client answers →
       decisions"** section and the content map)
+- [ ] `voice-spec.md` (the Planner's copy contract — register, word budgets, the client's
+      own phrases, thin-fact sections)
 - [ ] `mockup/` (pages per the **plan's** page map, opens cleanly) incl. `assets/` (logo + 2 generated images)
 - [ ] `screenshots/` (desktop + mobile)
 - [ ] `release-form.pdf` — valid one-page PDF; no `{{` tokens left in its `.html`
@@ -94,6 +103,8 @@ they took it themselves?* Both halves must hold. Open each generated image full 
       matches the pages actually built**; no invented domain/preview link (blank is
       correct); signature, date and checkbox fields left blank for the client.
 - [ ] `audit.md` (BOTH scoreboards: $10K + 10-dimension rubric, with `Review round: N`)
+- [ ] **A Claude Design project exists for this client** and matches the signed-off build
+      (the lead runs `/design-push`; the critic doesn't push, it just confirms it happened).
 
 ## Before sign-off
 
@@ -105,3 +116,8 @@ they took it themselves?* Both halves must hold. Open each generated image full 
       it's still unsigned. Reading a frozen prospect's files is research, not a reopening.
 - [ ] **`design-memory.md` row appended** on sign-off (date · slug · font pairing ·
       palette family · layout archetype · background system · signature motion).
+- [ ] **Design-push named in the sign-off message** — the other half of the Stage 8 on-pass
+      duty. You don't push (the DesignSync auth lives in the lead session); you make sure
+      the lead knows it's due: *"signed off — ready for `/design-push` on
+      `prospects/<slug>/mockup/`."* A revision round makes the existing Claude Design copy
+      stale, so it needs re-pushing too.
