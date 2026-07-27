@@ -473,3 +473,381 @@ before this gets treated as a lightweight static folder.
 ## 6. Sign-off
 
 Round 3 **PASSES**. `design-memory.md` row appended.
+
+---
+---
+
+**Review round: 3a — copy revision**
+**Auditor:** Critic (Essex Web Crew)
+**Date:** 2026-07-23
+**Scope:** copy only. No CSS, no layout, no structure, no design decisions touched.
+
+## Why
+
+Round 3 passed the design gate, but Harry's read was that the wording sounded AI-generated. A
+`/humanizer` audit of `index.html` confirmed a dense cluster of tells rather than one or two
+isolated ones:
+
+- **7 em dashes** in visible copy (the single most reliable AI signature)
+- **Four consecutive rule-of-three constructions** in the leads and captions
+- **Manufactured punchline fragments** — "Not a client; a demonstration.", "nothing padded"
+- **Hyphenated-compound pileup** — design-led / estimate-first / mobile-down / reservation-first,
+  four in two sentences
+- **"actually" as an intensifier** — "the businesses people actually rely on"
+- **Stock bio-speak** — "away from the studio you'll find him…"
+
+Every lead landed like a quotable closer. That cadence is the tell, more than any single word.
+
+## What changed
+
+Ten strings, rewritten in a plain first-person "we" voice: meta description, OG description, hero
+lead, Work lead, both plate captions, both coming-soon plates, both founder bios, contact lead.
+Two `alt` attributes and the `<title>` lost their em dashes (the title now reads
+"Fora Digital: Modern sites for local businesses", matching the client's own positioning line
+verbatim instead of title-casing it).
+
+**Deliberately unchanged:** the H1, every section headline ("Hung with pride.", "Two names on the
+door.", "Start a project."), all kickers, both badges, the marquee, the footer, the wordmark, the
+JSON-LD, and every CTA. Those already read as human copywriting.
+
+## Verification
+
+- **Em/en dashes in rendered copy: 0.** Three remain in HTML source comments, which never render.
+- **Layout held.** Desktop `scrollWidth === 1440`, 375 px `scrollWidth === 375`, no horizontal
+  overflow at either width. Badge→title gap still **+16 px** on both plates with `sameLine: false`;
+  title→body **+8 px**. Founder cards stay equal-height (477 px) despite Harry's bio being three
+  lines longer than Corey's, with a 16 px gap to each email link. Work-section and founders-section
+  screenshots captured and inspected.
+- **All three screenshots re-captured** (`desktop.png`, `mobile.png`, `work-section.png`).
+
+## Content honesty — re-verified **CLEAN**
+
+The rewrite adds no facts and removes no labels. Checked against `client-answers.md`:
+
+- Harry's bio still carries exactly his four supplied facts; Corey's still carries exactly his two,
+  and is still allowed to be shorter rather than padded.
+- Emails unchanged and exact. Still no phone, no address, no stats, no testimonials.
+- **The concept labeling got stronger, not weaker.** "A sample build… Not a client; a
+  demonstration." became "This one isn't a client. Corey Blake's is a steakhouse we made up so you
+  can see what we'd do with a restaurant." Plainer language, same badge above it, and harder to
+  misread at a glance.
+- The Work lead now says the quiet part in the first person: "We're a young studio and this wall
+  doesn't pretend otherwise."
+- One detail was added to the Cecere caption: **"in Essex County."** This is not a new claim; it is
+  stated on the bundled Cecere build itself ("West Essex County, NJ") and is the client's own
+  service area, not Fora's. Verified against the bundled source.
+
+**Verdict: PASS holds.** No re-score needed on the 10-dimension rubric or the $10K Checklist since
+design, layout, motion, imagery and structure are untouched.
+
+---
+
+**Review round: 3b — positioning revision**
+**Date:** 2026-07-23
+**Scope:** copy only. No CSS, no layout, no design changes. One `<p class="lead">` added to the
+founders section head, reusing the existing section-head pattern.
+
+## Harry's direction
+
+Three instructions: stop calling it a studio, stop repeating "two people," and say that we're
+client-friendly.
+
+## What changed
+
+- **"Studio" is gone.** 0 occurrences in rendered text. The hero kicker is now "A small web
+  agency," which matches the descriptor in `client-answers.md` ("a two-person web agency") without
+  leading with the headcount.
+- **The headcount drumbeat is gone.** 0 occurrences of "two people" / "two-person." It had been
+  hit five times: hero kicker, hero lead, meta description, OG description, contact lead, plus the
+  founders headline "Two names on the door." The fact is still visibly true (two founder cards,
+  two contact cards, two emails) but the copy no longer keeps announcing it.
+- **Client-friendliness is now stated in three places**, each saying something different rather
+  than repeating one claim:
+  - Hero: "we make it easy: email us directly and get a real answer in plain English."
+  - Founders (new head lead): "Whoever you email is the person who builds your site. Nothing gets
+    handed off."
+  - Contact: "Email either of us directly. Tell us what your business does and what you want the
+    site to do for you, and we'll take it from there."
+- Founders headline "Two names on the door." became "Who you'll be working with." (also
+  client-facing rather than self-describing).
+- Work lead "We're a young studio…" became "We're new at this…".
+
+## Honesty check on the new claims
+
+These are manner-of-service statements, not verifiable specifications, and they are all true given
+that both owners do the work themselves. **Nothing operational or commercial was promised.** A
+draft line offering a free consultation ("no charge to talk it through") was written and then
+**removed before shipping** because Harry has not set that term. If he wants concrete promises on
+the site (response time, revision policy, free first call, pricing), those need his actual terms
+and they are not on the page today.
+
+No new facts about either founder. Bios, emails, badges, portfolio labeling all unchanged.
+
+## Layout verification
+
+- **Hero regression caught and fixed.** The first client-friendly hero lead ran to 5 lines, pushing
+  the hero from its 824 px minimum to 860 px and dropping the marquee band 36 px below the fold at
+  1440x900. Trimmed back to 3 lines; hero is 827 px, marquee bottom 903 px, matching the pre-change
+  baseline.
+- **Orphan check on every `.lead`** (measured per-word line positions): hero 3 lines / 10 words on
+  the last, work 5 / 5, founders 3 / 4, contact 4 / 7. No single-word orphans. An earlier founders
+  lead ended with an orphaned "to." and was rewritten.
+- No horizontal overflow at 1440 px or 375 px. Plate badge-to-title gap still +16 px on both plates.
+- All three screenshots re-captured; founders section inspected separately.
+
+**Verdict: PASS holds.**
+
+---
+
+**Review round: 3c — trims**
+**Date:** 2026-07-23
+**Scope:** copy only, two deletions at Harry's direction.
+
+1. **Work section lead removed.** "We're new at this and the wall doesn't pretend otherwise…"
+   is gone. The Work head is now kicker + H2 only, the same two-element shape the Founders head
+   used before round 3b. Gap from head to first plate measures 104 px at both 1440 and 375, matching
+   the Founders section, so the rhythm is consistent rather than a dropout.
+2. **Hero kicker is now "Fora Digital"** (was "A small web agency"). It reads as a nameplate above
+   the headline. Note it repeats the header wordmark directly above it; that is intentional per
+   Harry and reads as an editorial masthead, not an error.
+
+**Honesty note:** the removed Work lead was the sentence that voluntarily disclosed the studio's
+youth. The load-bearing honesty devices are untouched and still do the work: the "Real client work"
+and "Concept build" badges, the steakhouse caption that says outright "This one isn't a client…
+we made up," and the two "Next project, in progress" placeholders that invent nothing. Content
+honesty re-verified **CLEAN**.
+
+**Verification:** no horizontal overflow at 1440 or 375. Plate badge-to-title gap +16 px on both.
+Hero still 827 px with the marquee at its 903 px baseline. Zero console errors. All three
+screenshots re-captured.
+
+**Verdict: PASS holds.**
+
+---
+
+**Review round: 3d — founders lead removed**
+**Date:** 2026-07-23
+**Scope:** copy only, one deletion at Harry's direction.
+
+Removed the Founders head lead ("Whoever you email is the person who builds your site. Nothing gets
+handed off."). The Founders head is now kicker + H2 only, matching the Work head.
+
+Section-head shapes are now: **Work** kicker+H2, **Founders** kicker+H2, **Contact** kicker+H2+lead.
+All three measure a **104 px** gap from head to content, so the page reads as one rhythm with the
+Contact lead as the single deliberate exception (it tells a prospect what to put in the email).
+
+Client-friendly positioning now lives in two places instead of three: the hero lead ("we make it
+easy: email us directly and get a real answer in plain English") and the contact lead. The founders
+section makes the same point structurally rather than in prose, since the two named owners with
+direct email addresses *are* the answer to "who you'll be working with."
+
+**Verification:** no horizontal overflow at 1440 or 375. Zero console errors. Content honesty
+unchanged and CLEAN. All three screenshots re-captured; Founders section inspected separately.
+
+**Verdict: PASS holds.**
+
+---
+
+**Review round: 3e — reviews section added**
+**Date:** 2026-07-24
+**Scope:** new section + supporting CSS + two nav/footer links. No changes to existing sections.
+
+## What was built
+
+A **Reviews** section between Contact and the footer (literally at the bottom, as asked), plus
+"Reviews" added to the primary nav and the footer Pages list, and `#reviews` added to the
+scroll-margin-top anchor set.
+
+- **Head:** kicker "Reviews" + H2 "Leave a review." + a one-line lead + a cobalt
+  "Email us your review" button (`mailto:hfoodim@foradigital.com?subject=Review for Fora Digital`).
+  Email is the same contact mechanism the whole site uses, so no backend is implied.
+- **Empty state — the "space to show them when they come in."** A dashed-border panel with a
+  cobalt open-quote glyph, "No reviews yet," and "You could be the first…" It mirrors the
+  coming-soon portfolio plates and the "Photo coming soon" monograms: an intentional placeholder,
+  never a fake.
+- **Ready-to-use card system.** `.review-card` (clay stars, serif quote, stone author line) is
+  fully styled and shipped, with an HTML-comment template in place. When a real review arrives,
+  Harry swaps the empty-state block for one `.review-card` per review.
+
+## Honesty — the load-bearing check for this section
+
+`client-answers.md` says: *"No fabricated testimonials, review counts, client counts, or stats…
+If a section needs social proof and we don't have it, cut the section."* The section is compliant
+because **it displays zero reviews and claims none.** It is an invitation plus an honest empty
+state, not manufactured social proof.
+
+- **0 rendered `.review-card` elements**; the only star/quote markup lives inside an HTML comment.
+- The comment template's example quote was changed from a realistic-sounding line ("Their site paid
+  for itself in a month.") to an unmistakable placeholder ("PASTE THE CLIENT'S EXACT WORDS HERE"),
+  with an inline instruction: *"paste in only words a client actually wrote — never invent a quote."*
+  This removes any chance of a plausible fake being shipped by accident.
+- A temporary two-card injection was used to confirm the layout, then discarded; verified the DOM
+  restored to the empty state with no card left behind.
+
+## Verification (measured)
+
+- Section order: hero → work → founders → contact → reviews → footer. Anchor scroll-margin correct.
+- Surface background + top rule separates it from the paper Contact above and the ink footer below.
+- Head-to-content gap 104 px, matching every other section's rhythm.
+- Card template renders as a real two-column grid (508 px cards), clay stars (#B4552D), serif quotes.
+- 375 px: single column, empty panel right edge 356 px inside the 375 viewport, **no horizontal
+  overflow**; button is a 55 px tap target.
+- Zero console errors. No em/en dashes in the new copy.
+- Deliverable capture saved: `screenshots/reviews-section.png`; desktop + mobile re-captured.
+
+**Verdict: PASS holds.**
+
+---
+
+**Review round: 3f — "How it works" section added**
+**Date:** 2026-07-24
+**Scope:** new section + supporting CSS + one nav/footer link. No changes to existing sections.
+
+## What was built and where the content came from
+
+A **How it works** section (kicker "How it works" + H2 "From hello to live.") with four numbered
+steps, placed after Founders and before Contact. Order is now:
+hero → work → founders → **process** → contact → reviews → footer. "Process" added to the primary
+nav and footer Pages list; `#process` added to the scroll-margin anchor set.
+
+Source of the steps: `FULL-PROCESS.md` (the crew's real operating manual for how the business
+takes a client from first contact to a live site). Per Harry's instruction, the section starts
+**from step 2 of that process** — the internal Step 1 (finding/prospecting a business and reaching
+out) is omitted because it isn't client-facing and the Contact section already owns "get in touch."
+Only the **main ideas** are shown, not every sub-step, condensed to four client-facing phases:
+
+| On the site | Maps to FULL-PROCESS |
+|---|---|
+| 01 Tell us about your business | Step 8A/11 questionnaire; golden rule "build only from real answers, never invent" |
+| 02 We design and build it | Steps 5–6 (planner→builder→critic, revision rounds) |
+| 03 We put it live on your domain | Step 13 (client owns the domain) + Step 10 (no monthly fees) |
+| 04 We hand it off and stick around | Step 14 (plain-English handoff) + Step 15 (light maintenance) |
+
+## Honesty check
+
+Every claim traces to the real process document; nothing invented:
+- "starts from your real answers, never guesswork" = the manual's golden rule verbatim in spirit.
+- "a real site to look at, not a template" = custom planner→builder builds, true.
+- "refine it with you until it feels right" = Steps 6/8C revision rounds (1–2 normal), true.
+- "the domain stays yours / no monthly fees" = Step 13 ("the client should own the domain") + Step
+  10 ("no monthly fees, unlike Wix/Squarespace"). True and not overstated: domain renewal is annual
+  and the client's, and the copy says "no monthly fees," not "free forever."
+- "hand it off... plain English / a change later is a quick email" = Steps 14–15, true.
+No stats, no client counts, no fabricated claims.
+
+## Design
+
+Editorial ledger: four steps, each under its own hairline top rule with an oversized serif numeral.
+Numbers are **stone, not cobalt** — cobalt stays reserved for interactive elements, per the design
+system's one-interactive-color rule. Titles are serif h3 (site convention); body is stone `fs-small`.
+
+## Verification (measured)
+
+- Section order corrected: process sits before Contact (an earlier insert had briefly placed it
+  after Contact; moved).
+- Desktop: 4-up grid (234 px columns), head-to-content gap 104 px matching every other section.
+- Tablet ≤900 px: 2×2 grid. Mobile ≤560 px: single column. **No horizontal overflow at 1440 or 375.**
+- Header nav holds five links + CTA on one 76 px row without wrapping at 1440; nav-links are
+  `display:none` on mobile (unchanged behavior), so the extra link doesn't crowd the phone header.
+- Zero console errors. No em/en dashes in visible copy (also cleaned one stray dash inside the
+  reviews template comment).
+- Deliverable capture saved: `screenshots/process-section.png`; desktop + mobile re-captured.
+
+**Verdict: PASS holds.**
+
+---
+
+**Review round: 3g — process steps 3 & 4 corrected**
+**Date:** 2026-07-24
+**Scope:** copy only, two step bodies + titles, at Harry's correction of the actual mechanism.
+
+Harry corrected the domain/hosting reality: they host on **Netlify** and handle the domain by
+either **buying a new one for the client** or **using the client's existing ("old") domain**.
+
+- **03** "We put it live on your domain / …the domain stays yours…" → **"We set up the domain and
+  hosting / We buy you a fresh domain or connect the one you already have, then host the site on
+  Netlify. No monthly fees to keep it running."** Now names the real host and the real two-way
+  domain handling, matching FULL-PROCESS Step 13 (13A existing domain / 13B buy new) + Step 10
+  (no monthly fees).
+- **04** "We hand it off and stick around" → **"We launch it and hand it off / Once everything
+  checks out, we push the site live and hand it over. Want a change down the road? That's a quick
+  email."** Go-live moved here so step 3 is cleanly domain+hosting setup and step 4 is
+  launch+handoff+aftercare (Steps 14–15).
+
+Verified: no overflow at 1440/375, two-line titles wrap cleanly in their columns, no em/en dashes,
+`process-section.png` + desktop/mobile re-captured. **PASS holds.**
+
+---
+
+**Review round: 3h — interactive cobalt hero field**
+**Date:** 2026-07-24
+**Scope:** new hero canvas + CSS + a second IIFE in main.js. Additive; no copy/layout changes.
+
+## What was added
+
+Harry felt the front page was plain (the hero's right half was empty). Added an **interactive
+cobalt "compass field"**: a `<canvas>` behind the hero content renders a grid of short line
+segments that rotate to point at the pointer; segments near it grow longer/brighter, so a soft
+radial spotlight follows the mouse. Idle / touch → a slow auto-orbit keeps it alive. It fills the
+empty right side and makes the page read as "we build interactive things."
+
+- `index.html`: one `<canvas id="hero-field" aria-hidden="true">` after `.hero-wash`; script tag
+  cache-busted to `main.js?v=3`; "Process" + "Reviews" nav already present from earlier rounds.
+- `style.css`: `.hero-field{position:absolute;inset:0;width:100%;height:100%;z-index:0;
+  pointer-events:none}` — layered above the warm wash, below the registration frame and text;
+  `pointer-events:none` so CTAs stay clickable.
+- `main.js`: second IIFE. Grid capped ~1400 segments, DPR capped at 2, **no shadowBlur** (the
+  documented EMBERS perf smell), IntersectionObserver pauses the rAF loop off-screen, debounced
+  resize. Left→right alpha ramp keeps the headline area calm and the right half livelier.
+
+## Brand / honesty
+Pure abstract geometry, cobalt only. The field literally *is* interactive, so cobalt-as-the-only-
+interactive-color still holds. No images, no fabricated content, no copy change.
+
+## Two verification gotchas worth recording (added to the QA field notes takeaways)
+1. **Canvas default size beats `inset:0`.** A `<canvas>` carries presentational width/height
+   attributes (300×150); with `left:0` *and* `right:0` the width hint wins and the box stays 300px.
+   Fix: explicit `width:100%;height:100%` on the canvas.
+2. **A continuous rAF loop starves headless Chrome's `--virtual-time-budget`.** The reveal-curtain
+   transitions froze mid-open in every virtual-time screenshot, at any budget (tested to 9s), even
+   though real Chrome (the browser pane) rendered it perfectly. Fix: a `?still` capture flag that
+   paints ONE static field frame and skips the rAF loop, so virtual-time captures render the real
+   look with curtains open. The live site (no flag) runs the animation. All deliverable screenshots
+   are now taken with `?still=1`.
+
+## Verified
+- Real Chrome (browser pane): field paints, concentrated on the right (~5× the left), headline legible.
+- CTAs still clickable through the canvas (`elementFromPoint` over "See the work" returns the button;
+  canvas never intercepts).
+- Reduced motion (`--force-prefers-reduced-motion`): one static frame, no loop, curtains open.
+- No horizontal overflow at 1440 or 375; canvas stays within the viewport on mobile.
+- Zero console errors. desktop.png + mobile.png re-captured (still mode).
+
+## Kept in reserve (Harry likes it too): floating work cards
+The field is a `z-index:0` background layer, so a later pass can drop the two real portfolio
+screenshots as tilted, parallaxing browser cards into the right half of the hero on top of the field
+without a rebuild.
+
+**Verdict: PASS holds.**
+
+---
+
+**Review round: 3i — marquee fill/seam fix + hero lead trim**
+**Date:** 2026-07-24
+**Scope:** hero marquee markup + CSS; one hero lead sentence swap. No other sections touched.
+
+- **Hero lead:** dropped the "Fora Digital is Harry Foodim and Corey Rapkin." opener (names still
+  live in Founders + Contact), now leads with "We design and build websites…" and closes with a new
+  line: "Take a look at what we've made, then say hello." Still 3 lines; hero height and marquee
+  position unchanged; no em dashes.
+- **Marquee was 0.7× the viewport** (measured 1011px track vs 1440px viewport) → ~30% empty on the
+  right, and the -50% loop exposed the seam as a cut-off word. Rebuilt as **two identical `.mq-set`
+  groups**, each repeating the phrase enough to exceed the viewport (2587px per set), with the
+  spacing carried on the set (internal gap + trailing `padding-right`) so `translateX(-50%)` lands
+  exactly one set over. Track is now 3.59× viewport; loop distance == one set width (seam matches);
+  set width (2587px) covers displays up to ~2560px. Duration 60s (~43px/s).
+- Verified: two sets identical, each covers the viewport (no empty gap), seamless loop math holds,
+  no horizontal overflow at 1440 or 375, marquee still clips (`overflow:hidden`). desktop.png +
+  mobile.png re-captured.
+
+**Verdict: PASS holds.**

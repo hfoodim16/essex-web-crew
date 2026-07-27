@@ -6,14 +6,14 @@
    Electric cobalt is kept as the category's trust cue, and is the ONLY interactive color. */
 
 :root{
-  --paper:#F5F1E8;
-  --surface:#FDFBF5;
-  --ink:#1B1813;
-  --stone:#6E675C;
-  --cobalt:#2447C2;
-  --cobalt-deep:#1B36A0;
-  --clay:#B4552D;
-  --line:#DDD5C4;
+  --paper:#F2F5FF;
+  --surface:#FFFFFF;
+  --ink:#0F1633;
+  --stone:#5A6076;
+  --cobalt:#1F4EFF;
+  --cobalt-deep:#1637C9;
+  --clay:#FF5A1F;
+  --line:#E2E7F5;
 
   --fs-hero:clamp(3.4rem,9vw,7.25rem);
   --fs-h2:clamp(2.1rem,4.5vw,3.5rem);
@@ -54,7 +54,7 @@ a{color:inherit;text-decoration:none}
 .wrap{max-width:var(--container);margin:0 auto;padding:0 5vw}
 
 /* anchor targets clear the sticky header */
-#work,#founders,#contact,#top{scroll-margin-top:calc(var(--nav-h) + 12px)}
+#work,#founders,#process,#contact,#reviews,#top{scroll-margin-top:calc(var(--nav-h) + 12px)}
 
 /* linen grain */
 .grain{
@@ -132,8 +132,11 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:var(--lh-display);
 }
 .hero-wash{
   position:absolute;top:-10%;left:-8%;width:70%;height:80%;z-index:0;pointer-events:none;
-  background:radial-gradient(closest-side,rgba(251,232,208,.45),transparent 70%);
+  background:radial-gradient(closest-side,rgba(31,78,255,.14),transparent 70%);
 }
+/* interactive cobalt "compass field" — reacts to the pointer (see main.js). Sits above the
+   warm wash, below the registration frame and the text. pointer-events:none keeps CTAs clickable. */
+.hero-field{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:0;pointer-events:none}
 .mat{position:absolute;inset:28px;border:1px solid var(--line);z-index:1;pointer-events:none}
 .reg{position:absolute;width:12px;height:12px}
 .reg::before,.reg::after{content:"";position:absolute;background:var(--cobalt)}
@@ -156,10 +159,13 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:var(--lh-display);
   border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0;
 }
 .marquee-track{
-  display:inline-flex;align-items:center;gap:var(--space-3);
+  display:flex;width:max-content;
   font-family:var(--serif);font-size:1.15rem;color:var(--stone);
-  animation:marquee 32s linear infinite;
+  animation:marquee 60s linear infinite;
 }
+/* each set carries the spacing (incl. a trailing gap) so the seam between the two sets
+   matches the internal rhythm and translateX(-50%) lands exactly one set over. */
+.mq-set{display:flex;align-items:center;gap:var(--space-3);padding-right:var(--space-3);flex:none}
 .marquee .sep{color:var(--cobalt)}
 @keyframes marquee{to{transform:translateX(-50%)}}
 @media (hover:hover) and (pointer:fine){.marquee:hover .marquee-track{animation-play-state:paused}}
@@ -239,6 +245,9 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:var(--lh-display);
   display:grid;place-items:center;margin-bottom:var(--space-2);
 }
 .monogram span{font-family:var(--serif);font-size:3.5rem;color:var(--ink)}
+/* real founder photo drops into the same arched frame, filling it */
+.monogram-photo{overflow:hidden;padding:0}
+.monogram-photo img{width:100%;height:100%;object-fit:cover;object-position:center top}
 .photo-note{font-size:.8rem;color:var(--stone);margin-bottom:var(--space-3)!important}
 
 /* ---------- contact ---------- */
@@ -265,20 +274,63 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:var(--lh-display);
   .contact-card:hover .c-email{background-size:100% 1.5px}
 }
 
+/* ---------- how it works ---------- */
+/* Editorial ledger: four steps, each under its own hairline rule with an oversized serif
+   numeral. Numbers are stone, not cobalt — cobalt stays reserved for interactive elements. */
+.steps{
+  list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-4);
+}
+.step{padding-top:var(--space-3);border-top:1px solid var(--line)}
+.step-num{
+  display:block;font-family:var(--serif);font-size:2.75rem;line-height:1;
+  color:var(--stone);margin-bottom:var(--space-2);
+}
+.step h3{font-size:var(--fs-h3);margin-bottom:var(--space-1)}
+.step p{color:var(--stone);font-size:var(--fs-small)}
+
+/* ---------- reviews ---------- */
+/* Surface block with a top rule, so it separates from the paper Contact section above and
+   the ink footer below. Honest empty state mirrors the coming-soon plates: no fabricated
+   quotes ever — the space just waits until real reviews arrive. */
+.reviews{background:var(--surface);border-top:1px solid var(--line)}
+.reviews .section-head .btn{margin-top:var(--space-3)}
+.quote-glyph{
+  display:block;font-family:var(--serif);font-size:4rem;line-height:.6;
+  color:var(--cobalt);margin-bottom:var(--space-2);
+}
+.reviews-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4)}
+.reviews-empty{
+  grid-column:1/-1;background:var(--paper);border:1px dashed var(--line);
+  border-radius:var(--radius);min-height:200px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:var(--space-5);gap:6px;
+}
+.reviews-empty .quote-glyph{margin-bottom:var(--space-1)}
+.reviews-sub{color:var(--stone);font-size:var(--fs-small);max-width:34ch}
+
+/* Review cards — used once real reviews come in (see the template in index.html). */
+.review-card{
+  background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+  padding:var(--space-4);display:flex;flex-direction:column;gap:var(--space-2);
+}
+.review-stars{color:var(--clay);letter-spacing:2px;font-size:1.05rem}
+.review-quote{font-family:var(--serif);font-size:1.35rem;line-height:1.35;color:var(--ink)}
+.review-author{font-size:var(--fs-small);color:var(--stone);font-weight:600}
+
 /* ---------- footer ---------- */
 .site-footer{background:var(--ink);color:var(--paper);padding:var(--space-5) 0 var(--space-3)}
 .foot{display:flex;justify-content:space-between;gap:var(--space-5);flex-wrap:wrap}
 .foot-wordmark{font-size:1.6rem;color:var(--paper)}
-.foot-line{color:#B9B1A4;font-size:var(--fs-small);margin-top:4px}
+.foot-line{color:#AEB4CC;font-size:var(--fs-small);margin-top:4px}
 .foot-cols{display:flex;gap:var(--space-5)}
 .foot-cols a{display:block;color:#A9BAF5;font-size:var(--fs-small);
   background-image:linear-gradient(#A9BAF5,#A9BAF5);background-repeat:no-repeat;
   background-position:0 100%;background-size:0% 1.5px;transition:background-size .34s var(--ease-out);
   padding-bottom:2px;margin-bottom:4px}
 @media (hover:hover) and (pointer:fine){.foot-cols a:hover{background-size:100% 1.5px}}
-.foot-kicker{color:#8C857A;margin-bottom:var(--space-1)}
+.foot-kicker{color:#8990AB;margin-bottom:var(--space-1)}
 .foot-bottom{margin-top:var(--space-4);padding-top:var(--space-3);border-top:1px solid rgba(221,213,196,.18)}
-.foot-bottom p{font-size:var(--fs-small);color:#8C857A}
+.foot-bottom p{font-size:var(--fs-small);color:#8990AB}
 
 /* ---------- scroll set-piece: gallery hang ---------- */
 @supports (animation-timeline:view()){
@@ -302,7 +354,11 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:var(--lh-display);
   .plate-left .plate-caption,.plate-right .plate-caption{grid-column:1/-1}
   .plate-right .plate{order:0}
   .plate-right .plate-caption{order:1}
-  .founder-grid,.contact-grid{grid-template-columns:1fr;gap:var(--space-4)}
+  .founder-grid,.contact-grid,.reviews-grid{grid-template-columns:1fr;gap:var(--space-4)}
+  .steps{grid-template-columns:1fr 1fr;gap:var(--space-4) var(--space-4)}
+}
+@media(max-width:560px){
+  .steps{grid-template-columns:1fr}
 }
 /* Touch: every link is a ≥44px tap target (plan §11). Applied on coarse pointers so the
    desktop's tight typographic rhythm is untouched. */
