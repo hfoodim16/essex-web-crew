@@ -8,7 +8,7 @@ already decided.
 ## The model this has to match
 
 Ask-first. We do **not** build a site and pitch it. Harry finds a business, reaches out,
-asks what they want (`templates/questionnaire-master.md`), and builds from their
+asks what they want (`templates/Website-Questionnaire.docx`), and builds from their
 answers. So the hook is never "look what I made you" — it's "can I ask you a few
 questions." Any draft that offers a finished mockup contradicts the business model.
 

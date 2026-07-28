@@ -24,7 +24,7 @@ together:
   built.
 - **Harry, between the teams (no agents involved).** He contacts the prospects himself
   — call or email, his own words. Whoever says yes gets
-  **`templates/questionnaire-master.md`**, the standing client questionnaire that needs
+  **`templates/Website-Questionnaire.docx`**, the standing client questionnaire that needs
   no run to produce. He collects their answers.
 - **Team 2 — Build.** `planner` + `builder` + `critic`. Input is the client's answers.
   The planner plans FROM them, one builder builds, the critic gates it, and the
@@ -83,7 +83,7 @@ prospecting run — there is nothing to build yet.
 ### Between the teams — Harry (no agents)
 
 Harry contacts the prospects himself, in his own words. Anyone who says yes gets
-**`templates/questionnaire-master.md`** — a standing, client-ready questionnaire
+**`templates/Website-Questionnaire.docx`** — a standing, client-ready questionnaire
 covering everything a build needs. It requires **no run to produce**: it's already
 written and sits in the repo. Harry collects the answers and pastes them into the
 Build run.
@@ -166,7 +166,7 @@ Each approved prospect gets a folder `prospects/<slug>/` containing:
   (required whenever the prospect has one) — the content-parity source of truth.
 
 *(The client questionnaire is NOT a per-prospect artifact — it's the standing
-`templates/questionnaire-master.md`, sent as-is to anyone who says yes.)*
+`templates/Website-Questionnaire.docx`, sent as-is to anyone who says yes.)*
 
 **From the Build run (only after the client's answers are in):**
 - `client-answers.md` — the client's answers, saved verbatim by the lead from Harry's
@@ -261,6 +261,13 @@ the team:
 > before any screenshot), the fail-visible measurement, and the countable composition checks.
 > `references/craft-floor.md` is the build-time quality floor. `design-gates.md` (repo root)
 > is now just a one-page map of where each gate lives and what stays crew-specific.
+>
+> **Don't add an "impeccable" or "taste" skill — both are already in here.** Impeccable is
+> the source of the detector, the nine craft references and the `impeccable-disable` waiver
+> syntax, forked in and stripped of its native-platform material. The countable checks worth
+> having from `design-taste-frontend` were folded into `critique.md`'s composition block.
+> Installing either as a standalone skill would give the crew a second rulebook that
+> disagrees with this one on fonts and em-dashes — and the two copies would drift.
 >
 > Precedence is strict and runs one way:
 >

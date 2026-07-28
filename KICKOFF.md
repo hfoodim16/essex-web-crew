@@ -70,7 +70,7 @@ save time:
 ```
 
 **Then it's on you (no agents involved):** call or email the prospects yourself. Anyone
-who says yes gets **`templates/questionnaire-master.md`** — the standing client
+who says yes gets **`templates/Website-Questionnaire.docx`** — the standing client
 questionnaire, already written and ready to send. Collect their answers, then run Team 2
 below.
 
@@ -78,7 +78,7 @@ below.
 
 **Who runs:** `planner` + `builder` + `critic` (plus a capture-only `analyst` if this
 client has no dossier yet). Use it once a client has answered the questionnaire —
-answers from `templates/questionnaire-master.md` or just notes from a phone call both
+answers from `templates/Website-Questionnaire.docx` or just notes from a phone call both
 work. Paste whatever you got; skipped questions are fine.
 
 Paste this to the lead, filling in the two slots:

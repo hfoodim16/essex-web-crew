@@ -2,7 +2,7 @@
 
 > **⚠️ Ask-first model, two independent teams.** We find a business, **you** reach out
 > personally, whoever's interested gets the master questionnaire
-> (`templates/questionnaire-master.md`), and we build FROM their answers and keep refining
+> (`templates/Website-Questionnaire.docx`), and we build FROM their answers and keep refining
 > it with them. We never build a site speculatively and pitch it. So Steps 1–4 are the
 > **Team 1 — Prospecting run** (`scout` + `analyst`, ends at a shortlist with contact info,
 > nothing built), Step 8 is **you** — no agents, your own words, and the questionnaire on a
@@ -110,7 +110,7 @@ Steps 11–12 once they're a paying client.)*
 **No agents here.** Nothing is drafted for you — you take the contact info and the angle
 out of `prospects/<slug>/dossier.md` and reach out in your own words, by call or email,
 whichever suits that business. Full version: **PLAYBOOK Step 8**.
-- **8A — they're interested.** Send **`templates/questionnaire-master.md`** as-is (or walk
+- **8A — they're interested.** Send **`templates/Website-Questionnaire.docx`** as-is (or walk
   the questions on the phone and type their answers). Skipped questions are fine. → **8B**
   when the answers come back.
 - **8B — their answers are in.** Paste the **Team 2 — Build run** prompt from `KICKOFF.md`

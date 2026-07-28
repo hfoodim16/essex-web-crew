@@ -77,7 +77,7 @@ That sets `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` and launches Claude Code. The
 The crew **never contacts anyone**. Everything lands on disk in `prospects/<name>/` for
 you to review. A prospecting run ends at a shortlist with contact info — you reach out to
 those businesses yourself, in your own words, and send anyone who says yes
-`templates/questionnaire-master.md`. Their answers are what you paste into a build run.
+`templates/Website-Questionnaire.docx`. Their answers are what you paste into a build run.
 
 ## 5. Optional: rtk
 

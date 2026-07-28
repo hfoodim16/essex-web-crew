@@ -49,7 +49,7 @@ Scout + Analyst run together (a few minutes).
 
 **6. The run ends at the shortlist — now it's on you.** Nothing was built, and there's no
 approval pause. Call or email the 3 prospects yourself, in your own words. Anyone who says
-yes gets `templates/questionnaire-master.md` as-is — it's already written, no run needed.
+yes gets `templates/Website-Questionnaire.docx` as-is — it's already written, no run needed.
 Collect their answers, then start a Build run.
 
 **7. Run 2 — Build. Paste this, filling in the two slots:**
@@ -149,6 +149,6 @@ rename it (`index-4.html`), and hosts only serve an exactly-named `index.html` a
   first few minutes.
 - **Nothing is sent to any business** — everything lands on disk for you to review.
 - All client contact is you, personally: reach out to the shortlist in your own words, and
-  send `templates/questionnaire-master.md` to anyone who says yes.
+  send `templates/Website-Questionnaire.docx` to anyone who says yes.
 - After review: generate the real images from the `AI-IMAGE:` prompts before the site goes
   to the client.

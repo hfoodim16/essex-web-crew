@@ -66,7 +66,7 @@ must call them yourself):
 ## Your job — the website plan, built FROM the client's answers
 
 We run an **ask-first** model: we never build a speculative site and pitch it. Harry asks
-the client what they want (via `templates/questionnaire-master.md`), and you build the
+the client what they want (via `templates/Website-Questionnaire.docx`), and you build the
 plan from their answers (see CLAUDE.md Mission).
 
 You are on the **Build team** (`planner` + `builder` + `critic`). You are never spawned
@@ -76,7 +76,7 @@ handles **one client at a time**: you write ONE plan for ONE builder.
 `prospects/<slug>/client-answers.md` exists. **Read it FIRST, before the dossier.**
 
 **Answers arrive in whatever form the client gave them** — usually mapped to the
-30-question master (`templates/questionnaire-master.md`, numbered 1–30), but often just
+30-question master (`templates/Website-Questionnaire.docx`, numbered 1–30), but often just
 loose notes from a phone call. Handle either. **Skipped questions are normal and expected** — treat an unanswered
 question as "no preference" and fall back to the dossier and site-content for that
 decision, rather than stalling or flagging it. Only flag an answer that is genuinely

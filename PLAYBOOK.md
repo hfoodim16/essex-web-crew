@@ -13,7 +13,7 @@
 >    pause — the shortlist *is* the output.
 > 2. **You, between the teams — no agents at all.** You call or email them yourself, in
 >    your own words. There are no drafted emails and no call scripts. Whoever's interested
->    gets **`templates/questionnaire-master.md`** — a standing, ready-to-send questionnaire
+>    gets **`templates/Website-Questionnaire.docx`** — a standing, ready-to-send questionnaire
 >    that already sits in the repo. You collect their answers.
 > 3. **Team 2 — Build run** (`planner` + `builder` + `critic`). You paste their answers in;
 >    the team plans from them, builds, and audits. Then you review the finished site
@@ -115,7 +115,7 @@ images, drop them in, and check the site still looks right. Then show it to the 
 The team never contacts anyone, and it no longer writes you anything to send. You take the
 contact info from `prospects/<slug>/dossier.md` and reach out **in your own words** —
 call or email, whichever suits that business. Anyone who's interested gets
-**`templates/questionnaire-master.md`** exactly as it is; it's already written and sitting
+**`templates/Website-Questionnaire.docx`** exactly as it is; it's already written and sitting
 in the repo. When their answers come back you paste them into the **Team 2 — Build run**
 prompt (that's **Step 5**), review the result yourself (**Steps 6–7**), then walk the
 client through it and fix whatever they want changed.
@@ -310,7 +310,7 @@ you can say in one sentence why you're calling THIS business · you're not promi
 finished site, you're offering to build one from their answers · you know where you'll log
 it (below).
 
-- **Step 8A — they're interested.** Send them **`templates/questionnaire-master.md`** —
+- **Step 8A — they're interested.** Send them **`templates/Website-Questionnaire.docx`** —
   as-is, no run needed, it's already written and sitting in the repo. Paste it into an
   email or text them the questions; if you're on the phone with a talker, just walk the
   questions yourself and type their answers as they go. Skipped questions are fine. Then

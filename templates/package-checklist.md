@@ -85,6 +85,17 @@ they took it themselves?* Both halves must hold. Open each generated image full 
 
 ## Package folder complete
 
+> **These gates bind at sign-off time, and they are not retroactive.** Prospects signed off
+> before a gate existed are grandfathered — as of 2026-07-28 that's everything except
+> `paul-da-silva-law`, which is the only complete package (seven predate `voice-spec.md`,
+> six predate `release-form.pdf`). Do **not** manufacture the missing artifacts for a frozen
+> prospect: a voice spec written now from no client answers, or a release form filled with a
+> contact we never spoke to, is invented content — the thing this checklist exists to stop.
+>
+> **The moment a prospect reopens or converts to a real client, it meets the CURRENT
+> checklist in full** — by which point the client's answers exist, so the voice spec and the
+> release form have something true to be built from.
+
 **From the Prospecting team (may already exist, or be captured in the build run):**
 - [ ] `dossier.md` (with page map + winnability pitch + contact info)
 - [ ] `site-content.md` (full-text capture of the existing site — required whenever the

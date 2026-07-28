@@ -17,7 +17,7 @@ The work is split into **two independent teams** that never run together (both p
   approval pause.**
 - **Between the teams — Harry, no agents.** He contacts the prospects himself, call or
   email, in his own words. Anyone who says yes gets
-  [`templates/questionnaire-master.md`](templates/questionnaire-master.md) — a standing,
+  [`templates/Website-Questionnaire.docx`](templates/Website-Questionnaire.docx) — a standing,
   client-ready 30-question questionnaire that needs no run to produce. Harry collects
   their answers.
 - **Team 2 — Build run.** `planner` + `builder` + `critic` (plus a capture-only `analyst`
@@ -53,7 +53,9 @@ pipeline/
   candidates.md           Scout output → Analyst scoring (regenerated each run)
   package-site.sh         Packages a signed-off site for delivery
 templates/
-  questionnaire-master.md Standing client questionnaire — sent as-is to anyone who says yes
+  Website-Questionnaire.docx
+                          Standing client questionnaire — sent as-is to anyone who says yes
+  release-form.html       Release & publication approval, filled per client by the Builder
   package-checklist.md    Critic's sign-off gate (both scoreboards + imagery realism +
                           local-trade checks)
 prospects/
