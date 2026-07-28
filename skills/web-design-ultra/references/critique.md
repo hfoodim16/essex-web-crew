@@ -124,6 +124,9 @@ The rubric above is judgment. These are arithmetic — you count them off the sc
 - Fits the first viewport: headline ≤ 2 lines, subtext ≤ 20 words, CTA visible without scrolling.
 - **≤ 4 text elements total** — (eyebrow *or* brand strip, pick one or neither), headline, subtext, CTAs. A tagline under the buttons, a trust micro-strip, or a pricing teaser inside the hero is a fail; those get their own section below it.
 - A "trusted by / serving" strip lives **under** the hero, never inside it.
+- **Top padding ≤ ~6rem at desktop.** More and the hero content floats halfway down the viewport, which reads as a layout bug rather than breathing room.
+- **A 4-line headline is a font-size error, not a copy-length error.** Fix the scale before you cut the words — the words were chosen against the voice spec.
+- **Italic display type needs descender clearance.** `y g j p q` in an italic headline clip against a tight line-height or a following element. Give the line room and reserve padding below it; check it on the screenshot, not in your head.
 
 **Calls to action**
 - No CTA label wraps to two lines at desktop. Shorten it or widen the button — three words max on a primary, ideally one or two.
@@ -137,6 +140,17 @@ The rubric above is judgment. These are arithmetic — you count them off the sc
 - **Layout variety:** each layout family is used once. Eight sections need ≥ 4 distinct families.
 - **One marquee per page**, maximum.
 - **Grid cell count == item count.** Three items, three cells. An empty tile at the end means the grid was planned wrong.
+- **A multi-cell grid carries real visual weight in ≥ 2 cells** — a photo, a brand-appropriate gradient, a pattern, a tinted ground. Every cell being text-on-flat is the icon-heading-paragraph card wall wearing a different name (see `craft-floor.md`).
+
+**Labels and dressing**
+- **Eyebrow arithmetic: count ≤ ceil(sections ÷ 3)**, and the hero's counts as one. A tracked kicker over *every* section is grammar you didn't choose; one or two make it a system.
+- **No decorative page furniture.** Each of these is a tell, not a flourish: scroll cues ("↓ scroll", animated mouse wheels), locale/time/weather strips (`LIS 14:23 · 18°C`), version stamps on a marketing page (`v1.4.2`, `Build 0048`), photo-credit captions used as decoration (`Field study no. 12 · Ines Caetano`), a word strip pinned under the hero (`BRAND. MOTION. SPATIAL.`), tile pagination (`01 / 4`), and floating sub-text in the top-right of a section heading.
+- **A logo wall carries logos only** — no category label under each one ("Vercel · hosting"). If the logos need explaining, they're the wrong logos.
+
+**Alignment (the cheap-looking tells)**
+- **Card CTAs bottom-align** across a row, regardless of body length above them.
+- **Parallel lists share a Y origin** — feature rows across pricing or comparison columns start on the same line, not wherever their heading left off.
+- **Optical, not mathematical, centering.** An icon beside text and a glyph inside a circle (a play triangle especially) usually need a 1–2px nudge to *look* centred. Trust the screenshot over the CSS.
 
 **Consistency locks**
 - **One theme.** A light section between dark ones (or the reverse) reads as walking into a different website mid-scroll. One deliberate full switch is a device; alternation is a bug.
@@ -146,6 +160,16 @@ The rubric above is judgment. These are arithmetic — you count them off the sc
 **Lists and density** — more than 5 items needs a real component (grouped columns, card grid, tabs, accordion, scroll-snap pills), not a longer `<ul>` with a hairline under every row. Quotes ≤ 3 lines, attributed with name + role.
 
 **Contrast, verified not assumed** — every CTA's text against its own background (4.5:1 body, 3:1 large), and form inputs, **placeholders**, focus rings, helper and error text against their section background. Light placeholders on a near-white form is the usual miss.
+
+**Present or it isn't finished** — a skip-to-content link as the first focusable element, and privacy/terms links in the footer. Both are invisible until someone needs them, which is exactly why they get skipped.
+
+> The five groups above — hero measurements, dressing, alignment, grid weight, and the two
+> presence checks — are adapted from the `design-taste-frontend` skill. Only its countable
+> checks were taken. Its font list, its zero-tolerance em-dash rule, and its
+> variance/motion/density dials were deliberately left out: the first collides with this
+> skill's own `overused-font` detector, the second contradicts the density-gated advisory
+> rule in Step 0, and the third would be a second direction-setting vocabulary competing
+> with Stage 5's named archetypes — which is what `design-memory.md` is keyed on.
 
 ## The gate
 
