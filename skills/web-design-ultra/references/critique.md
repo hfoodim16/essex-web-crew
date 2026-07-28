@@ -2,6 +2,31 @@
 
 Purpose: quality is inconsistent when nobody checks the built result. This stage forces you to *look* at the site (screenshots) and score it before claiming done. No score, no ship.
 
+## Step 0 — the mechanical scan (run this first, it's free)
+
+Before opening a browser, run the deterministic detector. 60 rules, no LLM, no install, about a second:
+
+```bash
+node ~/.claude/skills/web-design-ultra/scripts/detect.mjs <path to index.html or src dir>
+```
+
+**The gate is the exit code.** `exit 2` = blocking findings; fix them before spending any screenshot or scoring effort on the build. `exit 0` = clean, or advisory-only. Do **not** filter on severity yourself — a `warning` can be blocking (`overused-font` is), and the exit code already did that arithmetic. In `--json`, blocking findings are the ones **without** `"advisory": true`. Zero findings prints nothing at all; silence plus `exit 0` is a pass, not a broken run.
+
+It catches what the eye reliably misses on a fast read: banned fonts, AI palettes, eyebrow chips over every section, repeated kickers, section numbering, gradient text, nested cards, low contrast, grey-on-colour, tiny text, broken images, text overflow and occlusion, clipped containers, marquees, bounce easing, dark-glow and radial-halo backgrounds.
+
+A finding that is genuinely the locked direction gets waived **in the file**, with a reason — the waiver travels with the code and explains itself to the next person who scans it:
+
+```html
+<!-- impeccable-disable cream-palette -- earthy direction locked in the Stage 5 brief -->
+```
+```css
+.spec-row { border-bottom: 1px solid var(--rule); } /* impeccable-disable-line repeating-stripes-gradient */
+```
+
+A bare disable with no reason after the `--` is not a waiver; treat it as an unfixed finding. Report the scan result alongside the scores.
+
+Don't hand-check anything in that list — it's already covered, and re-auditing it by eye is wasted review.
+
 ## How to run
 
 1. Open the site in the browser pane. For a dev-server project, `preview_start` by name. For a **static double-click mockup** (no build step — the crew's `mockup/index.html + style.css + main.js`), start a tiny server and point the pane at it: `cd <mockup dir> && (python3 -m http.server <port> &)` then `navigate` to `http://localhost:<port>/`. (`file://` often blocks fonts/fetch — always serve over http.)
@@ -91,13 +116,56 @@ Note the trap inside the trap: spinning `gsap.ticker.tick()` in a synchronous lo
 | 9 | Motion polish | Purposeful, smooth, reduced-motion respected — **and it has a signature move you could name from the screenshots alone**. One ease, one stagger, at most one set-piece. Deduct hard for the default trio (fade-up everywhere + staggered text delay + number count-up) used without justification, or motion matching the last 3 design-memory entries. See `motion.md` and `gsap.md`. |
 | 10 | Cohesion | Every choice feels from one art director. Nothing off-brand. |
 
+## Composition checks (countable, not scored)
+
+The rubric above is judgment. These are arithmetic — you count them off the screenshots and they're either true or they aren't. They fold into the existing gate; they are **not** a second scoreboard. A dimension can score 8 while the page still has three zigzag sections in a row.
+
+**Hero**
+- Fits the first viewport: headline ≤ 2 lines, subtext ≤ 20 words, CTA visible without scrolling.
+- **≤ 4 text elements total** — (eyebrow *or* brand strip, pick one or neither), headline, subtext, CTAs. A tagline under the buttons, a trust micro-strip, or a pricing teaser inside the hero is a fail; those get their own section below it.
+- A "trusted by / serving" strip lives **under** the hero, never inside it.
+
+**Calls to action**
+- No CTA label wraps to two lines at desktop. Shorten it or widen the button — three words max on a primary, ideally one or two.
+- **No two CTAs share an intent.** "Get in touch" + "Let's talk" + "Request an estimate" is one intent wearing three hats: pick the label and use it in the nav, the body, and the footer. (A repeated tap-to-call CTA is the deliberate exception — see `local-trade.md`.)
+
+**Navigation** — one line at desktop, height ≤ 80px.
+
+**Section composition**
+- **Zigzag cap:** at most **2 consecutive** image-left/text-right ↔ text-left/image-right splits. The third in a row fails — break it with a full-bleed section, a vertical stack, a grid, or another family.
+- **Split-header ban:** big headline left + small explainer paragraph floating right, used as a *section header*. Stack them instead. Allowed only when that right column carries a real visual or control, not filler prose.
+- **Layout variety:** each layout family is used once. Eight sections need ≥ 4 distinct families.
+- **One marquee per page**, maximum.
+- **Grid cell count == item count.** Three items, three cells. An empty tile at the end means the grid was planned wrong.
+
+**Consistency locks**
+- **One theme.** A light section between dark ones (or the reverse) reads as walking into a different website mid-scroll. One deliberate full switch is a device; alternation is a bug.
+- **One accent colour**, used identically in every section.
+- **One corner-radius system** — all-sharp, all-soft, all-pill, or a documented rule followed everywhere.
+
+**Lists and density** — more than 5 items needs a real component (grouped columns, card grid, tabs, accordion, scroll-snap pills), not a longer `<ul>` with a hairline under every row. Quotes ≤ 3 lines, attributed with name + role.
+
+**Contrast, verified not assumed** — every CTA's text against its own background (4.5:1 body, 3:1 large), and form inputs, **placeholders**, focus rings, helper and error text against their section background. Light placeholders on a near-white form is the usual miss.
+
 ## The gate
 
 Ship only when **all** hold:
+- **Step 0's mechanical scan exits 0**, or every blocking finding is waived in-file with a stated reason.
 - No dimension scored below **7**.
 - **Boldness ≥ 8.**
+- **Every composition check above passes**, or the Stage 5 brief explains the exception.
 - No console errors, no horizontal overflow at 375px.
 - **The JS-off test passes.** Rename the motion script (`main.js`, and `vendor/gsap.min.js` if present), reload, screenshot. Every word must still be readable and every CTA tappable. Content hidden by default and revealed only by JS **caps dimension 9 at 3 and fails outright** — the deliverable ships as a zip somebody else unpacks, so one missing script is a blank homepage. This is written law, not a judgment call: it has already happened once.
+
+  **Measure it, don't just eyeball it.** The screenshot above tells you *whether* the page survived; this tells you *how much* of it is hidden, and catches the partial cases a glance forgives. In the same browser session — **before** force-revealing anything for capture, since force-revealing is precisely what masks this bug — inject the bundled browser build and read the number:
+
+  ```js
+  // copy scripts/detect-antipatterns-browser.js next to the mockup, or fetch it from the skill
+  const m = window.impeccableMeasureHiddenText();
+  Math.round(100 * m.hiddenChars / m.totalChars);   // percent of page text invisible at rest
+  ```
+
+  **Above ~15%, with real body copy showing up in `m.hiddenSamples`, is a fail** — same severity as the rename test above; the two are one gate, not two. Calibration from real runs: a page whose reveal handler never fires measures **86–100%**; a shipped site whose entire motion vocabulary is mask-curtain and clip-wipe reveals measures **0% of 3,035 characters**. It does not false-positive on this skill's own motion. (`window.impeccableScan()` is not useful here — in this build it returns highlight-overlay DOM nodes, not findings.)
 - For a **redesign**: the **bold test** passes (below).
 
 ## The bold test (redesigns)
@@ -107,6 +175,13 @@ Put the before and after screenshots side by side. If a stranger glancing for on
 ## Fix loop
 
 On any failure: name the specific low-scoring dimensions, fix those (edit source), re-screenshot, re-score. Max **3 loops**. If still failing after 3, stop and report honestly: the scores, what's weak, and what you'd change next — do not claim success.
+
+**Fix with a method, not a nudge.** "Make it bolder" applied freehand is how a fix loop burns all three rounds and lands somewhere noisier but no better:
+
+- **Boldness low, or one section reads flat** → `references/bolder.md`. Amplify what the system *already owns* (its motif, its type scale at full strength) rather than importing a new colour, font, or effect; touch only the named section; run the skeleton test — strip the copy out and check the bare structure still says what the section is.
+- **The result came back overloud, busy, or over-effected** → `references/quieter.md`. Concrete levers: desaturate toward 70–85%, drop font weights a step, shorten animation distances, flatten competing shadows — without collapsing into generic.
+- **Hierarchy, rhythm, or density is the problem** → `references/layout-craft.md`. **Type hierarchy or measure** → `references/type-craft.md`. **Palette or contrast** → `references/color-craft.md`. Each pairs an assessment with a domain-scoped rerun of Step 0's detector.
+- **Motion scored low** → re-read `references/motion-thesis.md` before reaching back into `motion.md`. A low motion score is usually a missing thesis (everything animating identically), not a missing technique.
 
 ## On pass — two steps, both required
 

@@ -81,6 +81,32 @@ teammates, so you must call them yourself:
   no facts behind it, shrink it — never fill it with atmosphere. Run
   `python3 skills/trade-copy/scripts/copycheck.py prospects/<slug>/mockup/index.html`
   before handoff; the Critic gates on it.
+- **The build-craft references, all part of `web-design-ultra` now.** Read
+  `references/craft-floor.md` once the direction is settled and immediately before you edit
+  UI — it's the mechanical quality floor (contrast, shadow depth, spacing rhythm, measure,
+  real states) plus the category defaults to refuse. When a build needs more than a first
+  pass, `references/layout-craft.md`, `references/type-craft.md` and
+  `references/color-craft.md` each pair an assessment with a domain-scoped rerun of the
+  detector. `references/motion-thesis.md` decides *whether and why* a moment gets motion
+  before `motion.md` decides *which* technique; `references/delight.md` finds the one moment
+  that earns personality. None of them pick the direction — the plan does.
+- **Run the Stage 8 scan before handoff, every round:**
+  ```bash
+  node skills/web-design-ultra/scripts/detect.mjs prospects/<slug>/mockup/index.html
+  ```
+  **It must exit 0 before you hand off** (`echo $?`). The Critic runs this same command first
+  and bounces on a non-zero exit, so shipping one just costs you a round trip. If a finding is
+  genuinely the plan's locked direction, waive it in-file with a reason —
+  `<!-- impeccable-disable cream-palette -- earthy direction locked in website-plan.md §2 -->`
+  — never bare. **What this scan cannot see:** the fail-visible check is browser-only, so it's
+  the Critic's. Your protection is the skill's rule 0 — entrances start from an already-visible
+  default and `main.js` cancels the dead-man's timer. Load the page once with JS disabled
+  before handoff; coloured rectangles mean you have the bug.
+- **Build against the composition checks** in `references/critique.md` — hero ≤ 4 text elements
+  and fits the viewport, no wrapped or duplicate-intent CTAs, single-line nav, max 2
+  consecutive image+text splits, ≥ 4 layout families across 8 sections, one theme + one accent
+  + one radius, grid cells == item count, WCAG AA on every CTA and form field. The Critic
+  counts these off your screenshots.
 - **`ai-multimodal`.** Generate the **2** images the Planner marked `GENERATE` (hero +
   one priority slot) with Gemini `gemini-3-pro-image` — follow the photorealism kit in
   `~/.claude/skills/web-design-ultra/references/imagery.md`, make them maximally
@@ -239,6 +265,12 @@ only.)
 9. **Self-audit against the critic's ACTUAL gate list** before you hand off. Save desktop
    + mobile screenshots to `prospects/<slug>/screenshots/`, then check every gate the
    critic will check, so nothing bounces back for something you could have caught:
+   - **The Stage 8 scan — run this FIRST, it's free and it's what the critic runs first.**
+     `node skills/web-design-ultra/scripts/detect.mjs prospects/<slug>/mockup/index.html`
+     → must **exit 0**, or every blocking finding waived in-file with a stated reason.
+   - **The composition checks** in `references/critique.md` (hero stack, CTA wrap and
+     intent, nav line, zigzag cap, layout-family variety, the three consistency locks,
+     grid cell count, CTA/form contrast).
    - **Both scoreboards** from those screenshots — the $10K Checklist AND the
      `web-design-ultra` 10-dimension rubric
      (`~/.claude/skills/web-design-ultra/references/critique.md`).

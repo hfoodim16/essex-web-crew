@@ -46,6 +46,22 @@ must call them yourself):
   in the spec which sections have thin facts and are therefore allowed to be short (or
   cut) — that decision is why generated copy pads, and it belongs at plan time, not build
   time. Your hero direction must obey the spec you just wrote.
+- **The Stage 8 composition checks** in `references/critique.md` — read them once, then plan
+  around them. They're the Builder's build target and the Critic's gate, so **don't lock a
+  direction that will later fail one**: a hero spec carrying six text elements, five stacked
+  image+text splits in a row, two marquees, a section header split into
+  headline-plus-explainer, or eight sections built from two layout families. Your plan is
+  where those are cheap to fix.
+  Precedence runs one way — **your locked direction outranks the gates.** When the trade's
+  colour convention or the client's brief genuinely lands in territory a rule bans (an earthy
+  landscaper against the `cream-palette` rule, or the premium-consumer palette ban in
+  `references/color-conventions.md`), **say so explicitly in `website-plan.md`**. That
+  sentence is what lets the Builder waive it and the Critic accept it.
+- **Name your patterns.** Stage 3's evidence sheets now use a shared pattern vocabulary
+  (`references/inspiration.md` → "Name what you see") — bento grid, sticky scroll stack,
+  mask-curtain reveal, magnetic button. Use those names in `website-plan.md` too: a named
+  archetype is checkable against `design-memory.md` and buildable without re-deriving it,
+  where "a big picture with tiles under it" is neither.
 
 ## Your job — the website plan, built FROM the client's answers
 

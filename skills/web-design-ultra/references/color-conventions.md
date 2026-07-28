@@ -44,6 +44,33 @@ For the brief's industry, name the convention, then choose:
 2. Say whether the direction **honors** or **breaks** it, and why that serves *this* brief.
 3. If breaking, **keep at least one trust cue** from the category (clean whitespace, a calm secondary, legible medical-grade contrast) so you don't forfeit the category's baseline expectation. A broken convention should feel intentional, not ignorant.
 
+## The premium-consumer trap (a convention nobody chose)
+
+There is one palette that isn't an industry convention at all — it's an *AI* convention, and it shows up unbidden on every premium-consumer brief (cookware, wellness, artisan goods, heritage craft, DTC home, small-batch anything). It is **warm beige/cream ground + brass/clay/oxblood/ochre accent + espresso near-black text**. Reached for by default, it makes every premium brand look like the same brand.
+
+Concretely, as *defaults*:
+
+| Role | Overused values |
+|---|---|
+| Backgrounds | `#f5f1ea` `#f7f5f1` `#fbf8f1` `#efeae0` `#ece6db` `#faf7f1` `#e8dfcb` (warm paper / cream / chalk / bone) |
+| Accents | `#b08947` `#b6553a` `#9a2436` `#9c6e2a` `#bc7c3a` `#7d5621` (brass / clay / oxblood / ochre) |
+| Text | `#1a1714` `#1a1814` `#1b1814` (espresso / warm near-black) |
+
+**Rotate instead.** Seven families that read as expensive without the beige reflex:
+
+- **Cold luxury** — silver-grey, chrome, smoke
+- **Forest** — deep green, bone, amber accent
+- **Black and tan** — true off-black against warm tan, sharp contrast, no beige
+- **Cobalt + cream** — one saturated blue against a single neutral, no brass
+- **Terracotta + slate** — warm rust against cool grey
+- **Olive + brick + paper** — muted olive with a brick-red accent
+- **Monochrome + one pop** — off-white, off-black, one bright accent (electric blue, emerald, hot pink)
+
+**The rotation rule:** check `design-memory.md` (Stage 4). If the last premium-consumer build used a family, this one uses a different one — the same mechanism that already bans repeat font pairings and layout archetypes.
+
+**This is a ban on the *default*, not on the colours.** Earth tones are correct for a landscaper, warm stone for a heritage mason, cream for an actual bakery — the occupational map above outranks this section every time, and a brand brief that names these colours settles it. What's banned is arriving here because the brief said "premium" and no other decision got made. Say which it was.
+
 ## How it feeds the pipeline
 - **Stage 2** captures the conventional palette + psychology (query the bare industry term).
 - **Stage 5** makes the call explicit: at least one of the three directions **honors/adapts** the convention; each direction's brief states honor-or-break. The user chooses knowing the trade-off.
+- **Stage 7** builds it: this file decides *which* palette, `references/color-craft.md` decides *how* — colour roles, OKLCH ramps, contrast verification, and deriving secondary text from the surface hue instead of reaching for generic grey.

@@ -26,8 +26,8 @@ This skill orchestrates existing tools rather than duplicating them:
 3. **No repeats.** Read `data/design-memory.md` and do not reuse the last 3 projects' font pairing, palette family, or layout archetype.
 4. **The bold test.** For a redesign, before/after screenshots must be obviously different at a glance. If a stranger couldn't tell them apart, it failed — start over, don't tweak.
 5. **Verify with screenshots.** You must screenshot the built site (desktop + mobile + dark if relevant) and score it against the rubric before claiming done. See `references/critique.md`.
-6. **Never generic fonts.** Never Inter, Roboto, Arial, or Helvetica as the primary typeface. Never the purple-gradient-on-white AI-slop look.
-7. **Content is never hidden by JavaScript.** Motion hides and reveals at runtime; the stylesheet never ships content at `opacity:0` or under a covering panel. Rename the script, reload — if the page goes blank, it fails, no matter how good it looked animated. See `references/motion.md` rule 0.
+6. **Never generic fonts.** The banned set is **Inter, Roboto, Arial, Helvetica, Fraunces, Instrument Serif, Geist, Plus Jakarta Sans, Space Grotesk** — the first four are the old defaults, the rest are the ones each new wave of AI-generated sites converged on next. Stage 8's detector flags all of them mechanically (`overused-font`). A client's genuine brand font is a documented exception, never a silent pass. Never the purple-gradient-on-white AI-slop look.
+7. **Content is never hidden by JavaScript.** Motion hides and reveals at runtime; the stylesheet never ships content at `opacity:0` or under a covering panel. Rename the script, reload — if the page goes blank, it fails, no matter how good it looked animated. See `references/motion.md` rule 0. Stage 8 now **measures** this rather than eyeballing it: `impeccableMeasureHiddenText()` reports the percent of page text invisible at rest (a broken page reads ~86–100%, a healthy one 0%).
 8. **Real businesses get real content only.** Never fabricate reviews, testimonials, ratings, stats, credentials, or years-in-business for a real company — a pitch that invents "★★★★★ Sarah M." is a liability, not a flourish. Invented copy is allowed **only** for fictional demos, or as an explicitly labeled placeholder: `[PLACEHOLDER — replace with real review]`. When you lack real content, ship the labeled placeholder, not a plausible lie.
 
 ## The Pipeline (run all 8 stages, in order)
@@ -68,7 +68,18 @@ Produce three direction briefs per `references/directions.md`. Each is a mini-sp
 Generate the imagery the chosen direction needs (hero, textures, OG image) via `references/imagery.md`, construct backgrounds from `references/backgrounds.md`, and layer in animated atmosphere (fog, god rays, clouds, shimmer, motes) from `references/atmosphere.md` where the mood calls for it. Optimize to WebP at correct sizes. A great site is rarely flat color — depth, real imagery, and moving light are how it stops looking like a template. **Imagery must follow `imagery.md`'s photorealism kit, cost rules, and "Fit the slot" sizing** — choose each image's aspect ratio AND resolution tier for where it renders (`--image-size 2K` for full-bleed/background heroes, `1K` for contained cards/plates/OG). Generate exactly ONE image on a skill test/demo; for real builds, announce the image count and per-tier cost (~$0.04 at 1K / ~$0.13 at 2K) before generating a set.
 
 ### Stage 7 — Build
-Implement the chosen direction using Stage 2's stack rules and craft discipline: distinctive type (never the generic four), CSS variables for the whole palette, deliberate spatial composition (asymmetry, overlap, scale contrast), and motion from `references/motion.md` — commit to the direction's **signature move** (one entrance family + one hover personality + at most one scroll set-piece), never the default fade-up/text-delay/count-up trio. Ambient light/air effects come from `references/atmosphere.md`; when the signature move needs scrubbing, pinning, staged timelines, split text, or SVG draw/morph, use the vendored GSAP tier in `references/gsap.md` (copy from `assets/gsap/` into the build's `vendor/` — never a CDN). Respect `prefers-reduced-motion` on every animation, and **never hide content behind JavaScript** — rename the script, reload, and the page must still read.
+
+**Load `references/craft-floor.md` first** — once the direction is settled and immediately before you edit UI. It is the mechanical quality floor (contrast, shadow depth, spacing rhythm, type measure, real states) plus the category defaults to refuse (icon+heading+text card grids, eyebrow over every section, gradient text, nested cards, decorative glass). It never picks the direction; it stops the build from quietly regressing to the mean.
+
+Then implement the chosen direction using Stage 2's stack rules and craft discipline: distinctive type (never the banned set), CSS variables for the whole palette, deliberate spatial composition (asymmetry, overlap, scale contrast), and motion from `references/motion.md` — commit to the direction's **signature move** (one entrance family + one hover personality + at most one scroll set-piece), never the default fade-up/text-delay/count-up trio.
+
+**Decide motion before you pick a technique.** `references/motion-thesis.md` is the *whether and why* layer — name the one focal moment that deserves authorship, what each supporting animation explains (feedback, state, continuity, attention), and the budget. `motion.md` is the *which* layer: the named entrance families, hover personalities, and set-pieces you choose from once the thesis says a moment has earned motion. Running the catalog without the thesis is how a page ends up animating every section identically.
+
+**Work the three craft domains** when a build needs more than a first pass — each pairs a qualitative assessment with a mechanical scan scoped to that domain: `references/layout-craft.md` (squint test, grouping, rhythm, density), `references/type-craft.md` (hierarchy, measure, scale, delivery), `references/color-craft.md` (roles, OKLCH ramps, contrast — the *how to build it* half of `color-conventions.md`'s *which palette*).
+
+**Find one moment that earns personality** via `references/delight.md` — first use, completion, error recovery, or discovery. One is the target; whimsy sprayed across a page costs more than it gives. Ambient light/air effects come from `references/atmosphere.md`; when the signature move needs scrubbing, pinning, staged timelines, split text, or SVG draw/morph, use the vendored GSAP tier in `references/gsap.md` (copy from `assets/gsap/` into the build's `vendor/` — never a CDN). Respect `prefers-reduced-motion` on every animation, and **never hide content behind JavaScript** — rename the script, reload, and the page must still read.
+
+**Opt-in only — technical ambition.** If the user explicitly asks to be blown away ("make it extraordinary", "push what the browser can do", "go all out"), load `references/overdrive.md`: View Transitions, WebGL/WebGPU, scroll-driven animation, spring physics, virtual scrolling. It carries its own mandatory gate — propose 2–3 directions with their trade-offs and get the user's pick **before** writing any code. Never load it on the default path, and never build from it without that confirmation; in Crew mode it also conflicts with the Builder's "implement the plan, don't re-decide it" contract unless the plan itself called for it.
 
 For a **local service business** (landscaper, dentist, plumber, contractor — the crew's bread and butter), also apply the conversion patterns in `references/local-trade.md`: tap-to-call CTA, service-area town list, license/insurance line, before/after gallery, ≤4-field estimate form, consistent NAP footer. **Ship the local-SEO structure too** — `LocalBusiness` JSON-LD + the meta essentials checklist from that file, with `PLACEHOLDER_…` tokens wherever the real NAP data isn't known (never invent it).
 
@@ -94,12 +105,19 @@ Any agent that runs Stage 8 (builder self-check or critic) needs the browser/pre
 | Local service-business conversion patterns | `references/local-trade.md` |
 | How to research + what to extract from real sites | `references/inspiration.md` |
 | The 5 divergence axes + direction-brief template | `references/directions.md` |
+| The build quality floor + defaults to refuse (load before editing UI) | `references/craft-floor.md` |
+| Whether/why to animate a moment (before picking a technique) | `references/motion-thesis.md` |
+| Layout / type / color craft passes + domain-scoped mechanical scan | `references/layout-craft.md` · `references/type-craft.md` · `references/color-craft.md` |
+| One earned micro-interaction | `references/delight.md` |
+| Amplify a flat section / calm an overloud one (Stage 8 fix loop) | `references/bolder.md` · `references/quieter.md` |
+| Technically extraordinary effects (OPT-IN, propose-and-confirm first) | `references/overdrive.md` |
 | Background/texture/depth recipes | `references/backgrounds.md` |
 | Element animations: entrances, reveals, staggers, hovers, scroll set-pieces | `references/motion.md` |
 | Animated atmosphere (fog, god rays, clouds, shimmer, motes) | `references/atmosphere.md` |
 | Reactive backgrounds (pointer fields, constellation, flow, grids — tech register) | `references/reactive-backgrounds.md` |
 | AI image prompt formulas + WebP steps | `references/imagery.md` |
 | Scoring rubric + bold test + fix loop | `references/critique.md` |
+| Deterministic anti-pattern scan (60 rules, no LLM, ~1s) | `scripts/detect.mjs` |
 | Anti-repetition log | `data/design-memory.md` |
 | Publish a finished site to Claude Design (Stage 8 on-pass) | `design-push` skill · `scripts/design-bundle.py` |
 | GSAP tier: scrub, pin, timelines, split text, SVG draw/morph | `references/gsap.md` (library in `assets/gsap/`) |

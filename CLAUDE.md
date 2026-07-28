@@ -255,6 +255,24 @@ team's primary design skill — every mockup runs through its 8-stage art-direct
 pipeline. The recipe steps below execute *inside* that pipeline. How the stages map to
 the team:
 
+> **The mechanical gates are inside the skill now** — the crew gets them by running the
+> pipeline, not from a separate tool. `references/critique.md` carries all three: the Step 0
+> detector scan (60 deterministic rules, zero tokens, ~1s — Builder before handoff, Critic
+> before any screenshot), the fail-visible measurement, and the countable composition checks.
+> `references/craft-floor.md` is the build-time quality floor. `design-gates.md` (repo root)
+> is now just a one-page map of where each gate lives and what stays crew-specific.
+>
+> Precedence is strict and runs one way:
+>
+> **client brief + `voice-spec.md` → `web-design-ultra` direction + `local-trade.md` → the gates.**
+>
+> A gate never overrules a direction the Planner locked for a real reason. This is not
+> theoretical: the detector flags `cream-palette` and the skill's own premium-consumer palette
+> ban points the same way, but a landscaper in earth tones or a mason in warm stone is
+> *correctly* there, because our trades carry their own colour conventions. What's banned is
+> *defaulting* there without deciding. Exceptions get stated in `website-plan.md` and waived
+> in-file with a reason.
+
 - **Stages 1–5 → Planner.** Brief (from the dossier) → design intelligence
   (`ui-ux-pro-max` search engine + the industry's conventional palette) → real-site
   inspiration (3–5 references, extract patterns never copy) → anti-repetition check
@@ -274,10 +292,20 @@ the team:
   variables, deliberate spatial composition (asymmetry, overlap, scale contrast),
   and the plan's named signature move from the skill's `references/motion.md`
   (GSAP 3.15 vendored to `mockup/vendor/` when the move needs it — `references/gsap.md`).
-- **Stage 8 → Builder self-check, then Critic (Critic OWNS this stage).** Screenshot
-  desktop + mobile, score the 10-dimension rubric in the skill's `references/critique.md`.
-  Gate: **no dimension below 7, boldness ≥ 8** — enforced by the Critic alongside the
-  $10K Checklist. **On pass there are two duties, not one:** the Critic appends the
+- **Stage 8 → Builder self-check, then Critic (Critic OWNS this stage).** Run it in the order
+  the skill's `references/critique.md` gives. **First, Step 0 — the mechanical scan, before
+  anything is served or screenshotted:**
+  `node skills/web-design-ultra/scripts/detect.mjs prospects/<slug>/mockup/index.html`
+  (60 deterministic rules, no LLM, no install, ~1s). **The gate is the exit code — `exit 2`
+  bounces** the build with the findings as the fix list; no review tokens are spent on a
+  mockup that fails mechanically. Waivers only as in-file
+  `<!-- impeccable-disable <rule> -- reason -->`.
+  Then the **fail-visible measurement** in the pane the Critic already opens, **before**
+  force-revealing anything for screenshots: above ~15% of page text hidden at rest is a fail.
+  Then the countable **composition checks**. **Then** the visual review:
+  screenshot desktop + mobile, score the 10-dimension rubric in the skill's
+  `references/critique.md`. Gate: **no dimension below 7, boldness ≥ 8** — enforced by the
+  Critic alongside the $10K Checklist. **On pass there are two duties, not one:** the Critic appends the
   design-choices row to `design-memory.md`, and the **lead publishes the site to Claude
   Design** with `/design-push` (the Critic can't — the DesignSync auth lives in the lead
   session, so it names it in the sign-off instead).
@@ -317,7 +345,12 @@ editorial" for a landscaper, "dark-luxury stone" for a high-end mason, "clean in
 for concrete/fencing). The Builder writes those 2–3 sentences of rationale at the top of
 `style.css`. The plan locks:
 - **Font pairing** — a display face + a body face from Google Fonts.
-  **Never Inter, Roboto, Arial, or Helvetica.** (Corey Blake used Cormorant + Montserrat.)
+  **Never Inter, Roboto, Arial, or Helvetica** — and the skill's banned set (`SKILL.md`
+  non-negotiable 6) extends that to **Fraunces, Instrument Serif, Geist, Plus Jakarta Sans and
+  Space Grotesk**, which are the same saturated-AI-default problem one generation later (we
+  shipped Fraunces twice and Instrument Serif once before this was mechanical). The Step 0 scan
+  flags all of them. A client's real brand font is a waiver with a reason, never a silent pass.
+  (Corey Blake used Cormorant + Montserrat.)
 - **Palette** — 3 to 5 colors as CSS custom properties in `:root`. Restraint signals
   premium. (See the token block pattern below.)
 
@@ -367,9 +400,11 @@ Score all 8, fix gaps, re-verify. Source: Metics Media Field Guide No. 01.
 
 The critic writes `prospects/<slug>/audit.md` after **every** review round (NEEDS-WORK
 versions included, with a `Review round: N` line), not only at sign-off, recording BOTH
-scoreboards. **The gate is both:** below 8/8 on the $10K Checklist (barring a documented
-exception) OR any rubric dimension below 7 / boldness below 8 sends it back to the builder
-and the loop repeats. After
+scoreboards — headed by the one-line scan result (`Detector: N errors, M advisory`, plus
+any waived rule and its reason). **The gate is both:** below 8/8 on the $10K Checklist
+(barring a documented exception) OR any rubric dimension below 7 / boldness below 8 sends it
+back to the builder and the loop repeats. A non-zero Step 0 exit short-circuits all of it —
+the build goes back before it is ever screenshotted. After
 the first full audit, re-reviews are **incremental** — the critic re-checks only the
 failed items and the sections the builder's change report says changed (plus a spot-check
 if a fix could ripple), not the whole site again.
@@ -577,9 +612,9 @@ each agent's `tools` list includes `Skill`.
 |---|---|---|
 | `scout` | `research`, `docs-seeker` | Deeper competitor/reputation research when a web search isn't enough; finding directories/docs on unfamiliar trades. |
 | `analyst` | `research` | Comprehensive dossier research beyond a plain web search. |
-| `planner` | **`web-design-ultra` (PRIMARY)**, **`trade-copy`**, `ui-ux-pro-max`, `frontend-design`, `design-system`, `aesthetic`, `sequential-thinking` | Run the 8-stage art-direction pipeline (Stages 1–5): design intelligence, real-site inspiration, anti-repetition, three divergent directions. `trade-copy` Stage A produces `voice-spec.md` from the client's answers before the hero direction is written. |
-| `builder` | **`web-design-ultra` (PRIMARY)**, **`trade-copy`**, `ai-multimodal`, `ui-ux-pro-max`, `frontend-design`, `frontend-development`, `web-frameworks` | Execute the chosen direction (Stage 7): generate the 2 real hero/priority images (`ai-multimodal`), craft discipline + backgrounds/atmosphere recipes; self-score the Stage 8 rubric. `trade-copy` governs every visible string — invoke before writing any text. |
-| `critic` | **`web-design-ultra`**, **`trade-copy`**, `ui-ux-pro-max`, `code-review`, `design-system` | Audit each mockup against the Stage 8 10-dimension rubric AND the $10K Checklist; enforce real-reviews-only and the COPY VOICE gate (`copycheck.py` + a say-aloud read); code-quality + design-system rigor. |
+| `planner` | **`web-design-ultra` (PRIMARY)**, **`trade-copy`**, `ui-ux-pro-max`, `frontend-design`, `design-system`, `aesthetic`, `sequential-thinking` | Run the 8-stage art-direction pipeline (Stages 1–5): design intelligence, real-site inspiration, anti-repetition, three divergent directions. `trade-copy` Stage A produces `voice-spec.md` from the client's answers before the hero direction is written. Names each reference site's patterns using the skill's `inspiration.md` vocabulary, and doesn't lock a direction the Stage 8 composition checks will fail — any deliberate exception is stated in `website-plan.md`. |
+| `builder` | **`web-design-ultra` (PRIMARY)**, **`trade-copy`**, `ai-multimodal`, `ui-ux-pro-max`, `frontend-design`, `frontend-development`, `web-frameworks` | Execute the chosen direction (Stage 7): generate the 2 real hero/priority images (`ai-multimodal`), craft discipline + backgrounds/atmosphere recipes; self-score the Stage 8 rubric. `trade-copy` governs every visible string — invoke before writing any text. Reads the skill's `craft-floor.md` before editing UI, works `motion-thesis.md` / `layout-craft.md` / `type-craft.md` / `color-craft.md` when a build needs more than a first pass, and runs the Step 0 scan to `exit 0` before handoff. |
+| `critic` | **`web-design-ultra`**, **`trade-copy`**, `ui-ux-pro-max`, `code-review`, `design-system` | Audit each mockup against the Stage 8 10-dimension rubric AND the $10K Checklist; enforce real-reviews-only and the COPY VOICE gate (`copycheck.py` + a say-aloud read); code-quality + design-system rigor. Runs the skill's Step 0 scan as the **first** gate, before any screenshot, then the fail-visible measurement and the composition checks; drives fix rounds with `bolder.md` / `quieter.md` rather than freehand nudges. |
 | **lead** (this session) | **`design-push`**, **`design-pull`** | Publish each signed-off site to Claude Design (Stage 8 on-pass step B3b), and re-publish after every revision round. `design-pull` brings edits made in the Design pane back into `mockup/` before a push can overwrite them — and `design-push` refuses to run while any exist. Only the lead can: `DesignSync` is authorized in this session, not in any subagent. |
 
 Optional, invoke only if the situation calls for it: `media-processing` (Builder — if

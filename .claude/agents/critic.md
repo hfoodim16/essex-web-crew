@@ -37,6 +37,20 @@ Invoke these skills (via the Skill tool — not auto-loaded for teammates, so ca
   `python3 skills/trade-copy/scripts/copycheck.py prospects/<slug>/mockup/index.html`
   against the Planner's `voice-spec.md`, then read the page the way its owner would. See
   the COPY VOICE gate below.
+**The mechanical gates are part of `web-design-ultra` now — you get them by running Stage 8,
+not from a separate tool.** `references/critique.md` carries all three and is the authority;
+run them in the order it gives:
+
+1. **Step 0, the scan** — before you serve the mockup or take a single screenshot:
+   `node skills/web-design-ultra/scripts/detect.mjs prospects/<slug>/mockup/index.html`.
+   The gate is the exit code. `exit 2` bounces the build with the findings as the fix list —
+   don't spend review tokens screenshotting something that fails mechanically.
+2. **The fail-visible measurement** — in the browser session you already open, **before**
+   force-revealing anything for capture. Above ~15% of page text hidden at rest is a fail.
+3. **The composition checks** — countable off the screenshots, folded into the same gate.
+
+Record the Step 0 result in `audit.md`. `design-gates.md` (repo root) is a one-page map of
+where each gate lives plus what stays crew-specific; the rules themselves are in the skill.
 
 You are deliberately hard to please. A package ships only when it's genuinely worth
 what Harry would charge for it. Do not rubber-stamp.
@@ -242,6 +256,9 @@ You are on the **Build team**. You review the built site — nothing else. For
   `web-design-ultra` 10-dimension rubric from the screenshots. Write both into
   `prospects/<slug>/audit.md` with a one-line justification per item and an overall
   PASS / NEEDS-WORK.
+- **Head `audit.md` with the Gate A line** — `Detector: N errors, M advisory` plus each
+  waived rule and its reason. It is a pre-gate, not a third scoreboard: one line, above
+  the two scoreboards, recording what the mechanical scan found this round.
 - **Write `audit.md` after EVERY review pass, not just at sign-off.** A NEEDS-WORK
   audit.md is expected and required — it records the current per-item scores, a
   `Review round: N` line, and the numbered fix list you sent. Update the same file each
@@ -316,6 +333,11 @@ lead as an observation for next time and let `design-memory.md` do its job.
 
 ## Bar for sign-off
 
+- **`web-design-ultra` Stage 8 gate passes in full** — the Step 0 scan exits 0 (or every
+  blocking finding is waived in-file with a stated reason), ≤ ~15% of page text hidden at
+  rest, and every composition check passes. The scan is checked first and on its own: a
+  mechanical fail never reaches the rest of this list. Exceptions must be explained by the
+  Planner's locked direction in `website-plan.md`.
 - Mockup, $10K Checklist: 8/8, OR a documented, defensible exception. Note: item 5
   (imagery) expects the 2 priority slots to be REAL generated images that pass the
   two-way test — placeholders in those two are NOT an acceptable exception; slots beyond
