@@ -34,6 +34,17 @@ message the Planner — never quietly override what the client asked for.
 reopens the mockup for revisions. That's the model working, not a failure — the freeze
 rule still holds (only Harry reopens), but reopening for client feedback is normal here.
 
+**A revision round is triage, not a rebuild.** The direction is already signed off in
+`website-plan.md` and, once pushed, mirrored in the client's Claude Design project — so
+"the client wants the hero warmer" does not re-run eight stages. Scan the specific
+complaint, diagnose the cause, fix in this order: **font → palette → hover/active states →
+spacing and layout → replace the generic component → type polish.** Work with the stack
+that's there; keep the change reviewable. Two limits on that instinct: a revision never
+invents content to fill a gap (no plausible-sounding names, no randomized dates — the
+real-content rule doesn't relax for a small edit), and "small and safe" is only right
+*inside* an approved direction. If Harry calls for a genuine redesign, the bold test in
+`references/critique.md` governs and a timid pass fails it.
+
 **If your plan isn't written yet, DON'T idle — do the pre-work.** You may be spawned
 before the Planner finishes your prospect. While waiting, complete everything that
 doesn't depend on design decisions:
@@ -90,6 +101,9 @@ teammates, so you must call them yourself:
   detector. `references/motion-thesis.md` decides *whether and why* a moment gets motion
   before `motion.md` decides *which* technique; `references/delight.md` finds the one moment
   that earns personality. None of them pick the direction — the plan does.
+  `design-gates.md` (repo root) maps every gate to the file it lives in and who owns it —
+  the build quality floor is **yours**, not the Critic's. Read it if you're unsure whether
+  something is your call or theirs.
 - **Run the Stage 8 scan before handoff, every round:**
   ```bash
   node skills/web-design-ultra/scripts/detect.mjs prospects/<slug>/mockup/index.html
@@ -171,6 +185,22 @@ with the plan's **content map** and `prospects/<slug>/site-content.md` open. Eve
 content block the map assigns to a page gets transferred at **full informational
 fidelity**: their 8 service descriptions arrive as 8 descriptions, their educational
 article arrives as an article, their 11-town list arrives with all 11 towns.
+
+**Lock the counts before you write, check them after.** Read the content map and write
+down the numbers first — N sections, N service descriptions, N towns, N real reviews, N
+pages. Build to those numbers, then count what you actually produced and compare. Parity
+fails silently and gets caught a round later; a locked count catches it in the same pass.
+Two rules follow from it, and they're absolute while you're writing markup:
+
+- **Never truncate your own output.** `<!-- rest of the sections follow the same pattern -->`,
+  `/* …remaining cards… */`, `// TODO: fill in the other towns`, or trailing `...` in place
+  of real markup are all the same bug: a file that looks finished and isn't. If the page
+  needs 11 towns, type 11 towns. If you're running long, finish the section you're in and
+  say what's left — never compress to fit.
+- **A spec'd placeholder is not truncation, it's the deliverable.** The labeled
+  `<!-- AI-IMAGE: … -->` slots, `PLACEHOLDER_…` tokens in the JSON-LD, and
+  `[Real review goes here — none captured yet]` are all *required* output. Leave them exactly
+  as specified; inventing content to fill them is the failure, not leaving them.
 
 **Parity counts FACTS, not words.** Tightening a 60-word description to 25 words that
 carry the same facts *passes* parity — that's good writing, and `trade-copy` asks for it.
