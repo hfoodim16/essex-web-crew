@@ -18,6 +18,14 @@
     items.forEach(function (el) { el.classList.add('in'); });
   }
 
+  // The hero device loop is decorative, so reduced motion (and the ?still capture flag)
+  // freezes it on its poster frame instead of turning.
+  var still = /(?:^|[?&])still(?:=|&|$)/.test(window.location.search);
+  if (reduce || still) {
+    var vid = document.querySelector('.hero-device .device-video');
+    if (vid) { vid.autoplay = false; vid.removeAttribute('autoplay'); vid.pause(); }
+  }
+
   // Reduced motion: nothing to animate — CSS already hides the curtain panel.
   if (reduce || !('IntersectionObserver' in window)) {
     openAll();
