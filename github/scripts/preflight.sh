@@ -74,6 +74,26 @@ fi
 git rev-parse --verify --quiet "$UPSTREAM" >/dev/null \
   || fail "Can't resolve '$UPSTREAM'. Run: git fetch origin"
 
+# A clone made before a force-push shares no ancestor with the remote. git can't
+# merge that — it errors with "refusing to merge unrelated histories" — so catch it
+# here with the actual fix instead of letting the pull fail cryptically.
+if ! git merge-base HEAD "$UPSTREAM" >/dev/null 2>&1; then
+  DIRTY_NOW="$(git status --porcelain | wc -l | tr -d ' ')"
+  fail "This clone's history has nothing in common with GitHub's — it was made before
+     the history was replaced. A plain 'git pull' refuses outright, and a rebase would
+     try to replay the whole stale snapshot as a patch. Reset the clone instead.
+
+     This clone currently has $DIRTY_NOW uncommitted file(s).
+     ** The reset below DELETES them permanently. ** Copy anything you want to keep
+     out of the folder first, then:
+
+       git -C $ROOT fetch origin
+       git -C $ROOT reset --hard $UPSTREAM
+       $ROOT/install.sh --force
+
+     Then restart Claude Code and run this again."
+fi
+
 # ---------- 5. what's out of sync ----------
 COUNTS="$(git rev-list --left-right --count "HEAD...$UPSTREAM" 2>/dev/null || echo '0	0')"
 AHEAD="$(echo "$COUNTS" | cut -f1)"
