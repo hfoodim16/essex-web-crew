@@ -601,13 +601,25 @@ Enforced with an artifact chain, same shape as content parity:
    pre-authorized to be short because the facts are thin. Written BEFORE the hero
    direction.
 2. **Builder** writes every visible string against that spec, then runs
-   `python3 skills/trade-copy/scripts/copycheck.py prospects/<slug>/mockup/index.html`.
-3. **Critic** re-runs the checks as a hard gate AND reads the page one sentence at a time
+   `python3 skills/trade-copy/scripts/copycheck.py prospects/<slug>/mockup/index.html`,
+   then sweeps the page with **`web-humanizer`** and runs
+   `python3 skills/web-humanizer/scripts/aitells.py prospects/<slug>/mockup/*.html`.
+3. **Critic** re-runs both scripts as a hard gate AND reads the page one sentence at a time
    asking whether the owner would say it aloud. The script can't catch "meticulous by
    habit"; a person can.
 
+Two skills, two failure modes, and they do not overlap. **`trade-copy`** owns *register* —
+how the owner talks, word budgets, banned vocabulary, em dashes, cutesiness.
+**`web-humanizer`** owns *page shape* — the tells that survive a correct register: a hero
+opening with a verb any industry could use, card titles built from two abstractions
+("Professional Service"), a page carrying no number a customer could check, cards stamped
+to identical lengths. Their word lists are deliberately disjoint so no single word gets two
+different fixes; both push the same direction, which is more concrete.
+
 Real review quotes, Q14 keep-word-for-word content, legal text, and NAP are exempt from
-every check and are never edited. Full rules: the **`trade-copy`** skill.
+every check and are never edited. Nothing is ever *added* to a page to satisfy a check —
+terseness passes, invented facts never do. Full rules: the **`trade-copy`** and
+**`web-humanizer`** skills.
 
 ## Skills each agent uses
 
@@ -620,8 +632,8 @@ each agent's `tools` list includes `Skill`.
 | `scout` | `research`, `docs-seeker` | Deeper competitor/reputation research when a web search isn't enough; finding directories/docs on unfamiliar trades. |
 | `analyst` | `research` | Comprehensive dossier research beyond a plain web search. |
 | `planner` | **`web-design-ultra` (PRIMARY)**, **`trade-copy`**, `ui-ux-pro-max`, `frontend-design`, `design-system`, `aesthetic`, `sequential-thinking` | Run the 8-stage art-direction pipeline (Stages 1–5): design intelligence, real-site inspiration, anti-repetition, three divergent directions. `trade-copy` Stage A produces `voice-spec.md` from the client's answers before the hero direction is written. Names each reference site's patterns using the skill's `inspiration.md` vocabulary, and doesn't lock a direction the Stage 8 composition checks will fail — any deliberate exception is stated in `website-plan.md`. |
-| `builder` | **`web-design-ultra` (PRIMARY)**, **`trade-copy`**, `ai-multimodal`, `ui-ux-pro-max`, `frontend-design`, `frontend-development`, `web-frameworks` | Execute the chosen direction (Stage 7): generate the 2 real hero/priority images (`ai-multimodal`), craft discipline + backgrounds/atmosphere recipes; self-score the Stage 8 rubric. `trade-copy` governs every visible string — invoke before writing any text. Reads the skill's `craft-floor.md` before editing UI, works `motion-thesis.md` / `layout-craft.md` / `type-craft.md` / `color-craft.md` when a build needs more than a first pass, and runs the Step 0 scan to `exit 0` before handoff. |
-| `critic` | **`web-design-ultra`**, **`trade-copy`**, `ui-ux-pro-max`, `code-review`, `design-system` | Audit each mockup against the Stage 8 10-dimension rubric AND the $10K Checklist; enforce real-reviews-only and the COPY VOICE gate (`copycheck.py` + a say-aloud read); code-quality + design-system rigor. Runs the skill's Step 0 scan as the **first** gate, before any screenshot, then the fail-visible measurement and the composition checks; drives fix rounds with `bolder.md` / `quieter.md` rather than freehand nudges. |
+| `builder` | **`web-design-ultra` (PRIMARY)**, **`trade-copy`**, **`web-humanizer`**, `ai-multimodal`, `ui-ux-pro-max`, `frontend-design`, `frontend-development`, `web-frameworks` | Execute the chosen direction (Stage 7): generate the 2 real hero/priority images (`ai-multimodal`), craft discipline + backgrounds/atmosphere recipes; self-score the Stage 8 rubric. `trade-copy` governs every visible string — invoke before writing any text; `web-humanizer` is the sweep after it, catching the page shapes that still read machine-written (interchangeable hero verbs, abstract-pair card titles, no checkable fact, cards stamped to identical lengths) and gating on `aitells.py` exit 0 alongside `copycheck.py`. Reads the skill's `craft-floor.md` before editing UI, works `motion-thesis.md` / `layout-craft.md` / `type-craft.md` / `color-craft.md` when a build needs more than a first pass, and runs the Step 0 scan to `exit 0` before handoff. |
+| `critic` | **`web-design-ultra`**, **`trade-copy`**, **`web-humanizer`**, `ui-ux-pro-max`, `code-review`, `design-system` | Audit each mockup against the Stage 8 10-dimension rubric AND the $10K Checklist; enforce real-reviews-only and the COPY VOICE gate (`copycheck.py` + `aitells.py` + a say-aloud read + the cold read); code-quality + design-system rigor. Runs the skill's Step 0 scan as the **first** gate, before any screenshot, then the fail-visible measurement and the composition checks; drives fix rounds with `bolder.md` / `quieter.md` rather than freehand nudges. |
 | **lead** (this session) | **`design-push`**, **`design-pull`** | Publish each signed-off site to Claude Design (Stage 8 on-pass step B3b), and re-publish after every revision round. `design-pull` brings edits made in the Design pane back into `mockup/` before a push can overwrite them — and `design-push` refuses to run while any exist. Only the lead can: `DesignSync` is authorized in this session, not in any subagent. |
 
 Optional, invoke only if the situation calls for it: `media-processing` (Builder — if

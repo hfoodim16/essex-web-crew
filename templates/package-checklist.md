@@ -72,6 +72,10 @@ they took it themselves?* Both halves must hold. Open each generated image full 
 - [ ] **COPY VOICE** — `voice-spec.md` exists and the build was written against it.
       `python3 skills/trade-copy/scripts/copycheck.py prospects/<slug>/mockup/index.html`
       exits 0 (em-dash rate, motif cap, triads, placeholders, contractions, budgets), AND
+      `python3 skills/web-humanizer/scripts/aitells.py prospects/<slug>/mockup/*.html`
+      exits 0 (no hero-verb openers, no abstract-pair card titles, no AI-vocab cluster, no
+      vague audience line, at least one number a customer could check, no cards stamped to
+      identical lengths), AND
       the page survives a say-aloud read: every sentence is something the owner would
       actually say to a customer. Essayist prose fails even when the numbers pass.
 - [ ] **Every clickable works (click-tested in the browser, not inferred from code)** —

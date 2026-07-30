@@ -92,6 +92,16 @@ teammates, so you must call them yourself:
   no facts behind it, shrink it — never fill it with atmosphere. Run
   `python3 skills/trade-copy/scripts/copycheck.py prospects/<slug>/mockup/index.html`
   before handoff; the Critic gates on it.
+- **`web-humanizer` (invoke AFTER the trade-copy sweep, before handoff).** `trade-copy`
+  gets the register right; this catches the page *shapes* that still read machine-written:
+  a hero opening with Elevate/Transform, card titles like "Professional Service", a page
+  with no number a customer could check, four cards stamped to identical lengths. Do its
+  four-step pass (sweep with `--list`, write the "why would this read as AI" critique,
+  rewrite, measure), then run
+  `python3 skills/web-humanizer/scripts/aitells.py prospects/<slug>/mockup/*.html`
+  which must **exit 0** alongside copycheck before you hand off; the Critic gates on both.
+  `voice-spec.md` outranks it, and the fix for a tell is always more concrete, never more
+  clever: no charm, no puns, no invented facts, no added words.
 - **The build-craft references, all part of `web-design-ultra` now.** Read
   `references/craft-floor.md` once the direction is settled and immediately before you edit
   UI — it's the mechanical quality floor (contrast, shadow depth, spacing rhythm, measure,
@@ -308,7 +318,8 @@ only.)
      explicitly flagged to the lead with a reason.
    - **Content parity** — walk `site-content.md`; every block is present at full fidelity
      or on the plan's "Deliberately dropped" list. Facts, not word count.
-   - **Copy voice** — `copycheck.py` exits 0 against `voice-spec.md`, AND you have run
+   - **Copy voice** — `copycheck.py` **and `aitells.py`** exit 0 against `voice-spec.md`,
+     AND you have run
      `--list` and read every visible string asking whether the owner would say it out loud
      to a customer. The script can't catch "meticulous by habit" (too poetic), "we read the
      sun" (too cute), or "when the weather turns, we show up" (too vague); you can. Passing

@@ -227,7 +227,16 @@ If you catch yourself thinking any of these, the copy is going wrong:
 | `references/outreach-voice.md` | Email and call-script voice (Harry sends; the crew never contacts anyone) |
 | `scripts/copycheck.py` | The measurement tool |
 
-`humanizer` may be run as a final sweep on long about/article sections. Where it
-conflicts with the voice spec — it bans em dashes outright, it is register-agnostic, and
-it actively coaches "add personality" — **the voice spec wins**. Never run it over real
-review quotes.
+**`web-humanizer` runs as the final sweep on every built page** — after this skill's
+checks, never instead of them. It owns the website-shaped tells this skill doesn't measure:
+heroes that open with a verb any industry could use, card titles built from two
+abstractions, a page with no number a customer could check, cards stamped to identical
+lengths. Its `scripts/aitells.py` gates alongside `copycheck.py`, and its word lists are
+kept disjoint from `banlist.md` so no word ever gets two different fixes. It already
+encodes this project's precedence: the voice spec wins, real review quotes are never
+touched, and nothing gets added to a page to satisfy it.
+
+The general-text `humanizer` stays available for long-form prose outside a mockup —
+articles, outreach drafts. Where it conflicts with the voice spec — it bans em dashes
+outright, it is register-agnostic, and it actively coaches "add personality" — **the voice
+spec wins**. Never run it over real review quotes.

@@ -50,6 +50,77 @@
 })();
 
 
+/* Mobile nav: the header's .nav-links hides under 720px (see style.css), so this toggle
+   is the only way to reach Work/Process/Founders/Contact/Reviews on a phone. */
+(function () {
+  'use strict';
+
+  var toggle = document.querySelector('.nav-toggle');
+  var panel = document.getElementById('mobile-nav');
+  if (!toggle || !panel) return;
+
+  function closeMenu() {
+    panel.hidden = true;
+    toggle.setAttribute('aria-expanded', 'false');
+  }
+  function openMenu() {
+    panel.hidden = false;
+    toggle.setAttribute('aria-expanded', 'true');
+  }
+
+  toggle.addEventListener('click', function () {
+    if (panel.hidden) openMenu(); else closeMenu();
+  });
+  panel.addEventListener('click', function (e) {
+    if (e.target.tagName === 'A') closeMenu();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !panel.hidden) closeMenu();
+  });
+  window.addEventListener('resize', function () {
+    if (window.innerWidth > 720 && !panel.hidden) closeMenu();
+  });
+})();
+
+/* Inquiry form.
+   On the deployed Netlify site this script does almost nothing: the form POSTs natively to
+   Netlify Forms, which stores the submission and emails both owners, so the form still works
+   with JavaScript off. Locally (file:// or a dev server) there is no endpoint, so a native
+   submit would either 404 or silently do nothing — that's a dead-click QA failure. Here we
+   intercept it and show the inline confirmation instead. */
+(function () {
+  'use strict';
+
+  var form = document.querySelector('.inquiry-form');
+  if (!form) return;
+  var status = form.querySelector('.form-status');
+
+  var host = window.location.hostname;
+  var isLocal = window.location.protocol === 'file:' ||
+                host === 'localhost' || host === '127.0.0.1' || host === '::1' || host === '';
+
+  function say(msg) {
+    if (!status) return;
+    status.textContent = msg;
+    status.hidden = false;
+  }
+
+  form.addEventListener('submit', function (e) {
+    form.classList.add('submitted');
+
+    // Let the browser's own validation UI handle empty required fields either way.
+    if (!form.checkValidity()) return;
+
+    if (!isLocal) return;   // deployed: hand off to Netlify
+
+    e.preventDefault();
+    var name = (form.elements.name && form.elements.name.value || '').trim();
+    say((name ? name.split(' ')[0] + ', t' : 'T') + 'his is a local preview, so nothing was ' +
+        'sent. On the live site this goes to Netlify Forms and emails both owners.');
+    if (status) status.scrollIntoView({ block: 'nearest' });
+  });
+})();
+
 /* Interactive cobalt "compass field" — a grid of short line segments in the hero that
    rotate to point at the pointer; segments near it grow longer and brighter, so a soft
    spotlight of activity follows the mouse. When the pointer is idle or absent (touch), a

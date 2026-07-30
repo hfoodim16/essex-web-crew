@@ -117,13 +117,49 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:var(--lh-display);
 .nav{display:flex;align-items:center;justify-content:space-between;height:var(--nav-h)}
 .wordmark{font-family:var(--serif);font-size:1.5rem;letter-spacing:-.01em}
 .wordmark .dot{color:var(--cobalt)}
-.nav-links{display:flex;gap:var(--space-4);font-weight:500;font-size:var(--fs-small)}
+.nav-links{display:flex;gap:var(--space-3);font-weight:500;font-size:var(--fs-small)}
 .nav-links a{
   background:linear-gradient(var(--cobalt),var(--cobalt)) no-repeat 0 100%/0% 1.5px;
   transition:background-size .34s var(--ease-out);padding-bottom:3px;
 }
 @media (hover:hover) and (pointer:fine){.nav-links a:hover{background-size:100% 1.5px}}
-@media(max-width:720px){.nav-links{display:none}.nav-cta{padding:11px 18px}}
+.nav-links a.current{background-size:100% 1.5px;color:var(--cobalt)}
+
+/* mobile menu toggle: hidden on desktop, shown under the nav-links breakpoint */
+.nav-toggle{
+  display:none;flex-direction:column;align-items:center;justify-content:center;gap:5px;
+  width:44px;height:44px;margin-left:var(--space-2);background:none;border:0;cursor:pointer;
+}
+.nav-toggle .bar{
+  display:block;width:22px;height:2px;background:var(--ink);
+  transition:transform .25s var(--ease-out),opacity .25s var(--ease-out);
+}
+.nav-toggle[aria-expanded="true"] .bar:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-toggle[aria-expanded="true"] .bar:nth-child(2){opacity:0}
+.nav-toggle[aria-expanded="true"] .bar:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* dropdown link list the toggle opens on mobile — same pages as .nav-links, just too
+   cramped to stay inline once the header collapses under 720px. Sits right under the
+   header (which is `position:sticky`, so it's the containing block) and sizes to its
+   own content — never a fixed-height panel the links have to scroll inside. */
+.mobile-nav{
+  position:absolute;top:100%;left:0;right:0;z-index:59;
+  background:var(--surface);border-bottom:1px solid var(--line);
+  box-shadow:0 16px 32px rgba(15,22,51,.1);
+  padding:var(--space-2) 5vw var(--space-3);
+}
+.mobile-nav[hidden]{display:none}
+.mobile-nav a{
+  display:block;padding:13px 0;font-weight:500;font-size:1.05rem;
+  border-bottom:1px solid var(--line);
+}
+.mobile-nav a.current{color:var(--cobalt)}
+.mobile-nav .mobile-cta{
+  margin-top:var(--space-3);border-bottom:none;text-align:center;
+}
+
+@media(max-width:720px){.nav-links{display:none}.nav-cta{padding:11px 18px}.nav-toggle{display:flex}}
+@media(min-width:721px){.mobile-nav{display:none!important}}
 
 /* ---------- hero ---------- */
 .hero{
@@ -168,12 +204,44 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:var(--lh-display);
   .hero{max-height:none}
   .hero-device{width:min(280px,66vw);margin-top:var(--space-4)}
 }
+/* hero with the device moved into the next section — copy runs one column */
+.hero-inner--solo{display:block}
+/* our own site shown on a phone, hung as a portrait plate in the gallery rhythm */
+.plate-device .device-plate{grid-column:1/span 5;background:#0B0E16;overflow:hidden}
+.plate-device .device-plate .device-video{width:100%;height:auto;display:block}
+.plate-device .plate-caption{grid-column:7/span 5;align-self:center}
+@media(max-width:900px){.plate-device .device-plate,.plate-device .plate-caption{grid-column:1/-1}}
 .hero-kicker{display:inline-block;margin-bottom:var(--space-3)}
 .hero-h1{font-size:var(--fs-hero);margin-bottom:var(--space-3);max-width:14ch}
 .hero-h1 .line{display:block;width:fit-content}
 .hero-h1 em{font-style:italic;color:var(--clay)}
 .hero-h1 .period{color:var(--cobalt)}
-.hero-lead{margin-bottom:var(--space-4)}
+.hero-lead{margin-bottom:var(--space-3)}
+/* the speed/price facts, hung as hairline-ruled rows so they read as spec, not marketing */
+.hero-facts{
+  list-style:none;margin:0 0 var(--space-4);padding:0;
+  display:grid;gap:0;max-width:52ch;border-top:1px solid var(--line);
+}
+.hero-facts li{
+  font-size:var(--fs-small);color:var(--stone);line-height:1.45;
+  padding:10px 0 10px 18px;border-bottom:1px solid var(--line);position:relative;
+}
+.hero-facts li::before{
+  content:"";position:absolute;left:0;top:1.05em;width:7px;height:1px;background:var(--cobalt);
+}
+.hero-facts strong{color:var(--ink);font-weight:600}
+/* desktop: the three facts run as one ruled band so the hero (and the marquee under it)
+   still fits inside the 860px cap instead of being clipped by it */
+@media(min-width:1000px){
+  .hero-inner{padding-top:var(--space-4);padding-bottom:var(--space-4)}
+  .hero-facts{
+    grid-template-columns:repeat(3,minmax(0,1fr));max-width:none;
+    border-bottom:1px solid var(--line);margin-bottom:var(--space-3);
+  }
+  .hero-facts li{border-bottom:0;padding:9px 20px 9px 18px}
+  .hero-facts li+li{border-left:1px solid var(--line);padding-left:22px}
+  .hero-facts li+li::before{left:4px}
+}
 .cta-row{display:inline-flex;align-items:center;gap:var(--space-3);flex-wrap:wrap}
 
 /* marquee */
@@ -295,6 +363,59 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:var(--lh-display);
 @media (hover:hover) and (pointer:fine){
   .contact-card:hover{border-color:var(--cobalt)}
   .contact-card:hover .c-email{background-size:100% 1.5px}
+}
+
+/* ---------- inquiry form ----------
+   Two-column ruled sheet: inputs are hairline-underlined rather than boxed, so the form
+   reads like the gallery's linework instead of a generic bordered widget. */
+.inquiry-form{
+  position:relative;display:grid;grid-template-columns:1fr 1fr;
+  gap:var(--space-3) var(--space-4);margin-bottom:var(--space-6);
+  padding:var(--space-4);background:var(--surface);
+  border:1px solid var(--line);border-radius:var(--radius);
+}
+.field{display:flex;flex-direction:column;gap:6px;min-width:0}
+.field-wide{grid-column:1/-1}
+.field label{
+  font-family:var(--sans);font-weight:600;font-size:var(--fs-small);color:var(--ink);
+}
+.field .opt{font-weight:400;color:var(--stone);text-transform:none;letter-spacing:0}
+.field input{
+  font-family:var(--sans);font-size:var(--fs-body);color:var(--ink);
+  background:transparent;border:0;border-bottom:1px solid var(--line);
+  border-radius:0;padding:9px 2px;width:100%;
+  transition:border-color .3s var(--ease-out);
+}
+.field input::placeholder{color:#9AA1B8}
+.field input:focus{outline:none;border-color:var(--cobalt)}
+.field input:focus-visible{outline:2px solid var(--cobalt);outline-offset:3px}
+/* invalid styling only after a submit attempt, so nothing is red while still typing */
+.inquiry-form.submitted :invalid{border-color:var(--clay)}
+.form-actions{
+  flex-direction:row;align-items:center;gap:var(--space-3);flex-wrap:wrap;
+  margin-top:var(--space-2);
+}
+.form-note{color:var(--stone);font-size:var(--fs-small);max-width:34ch}
+.form-status{
+  grid-column:1/-1;margin:0;padding:12px 14px;border-radius:var(--radius);
+  background:rgba(31,78,255,.07);border:1px solid var(--line);
+  font-size:var(--fs-small);color:var(--ink);
+}
+/* submission confirmation page (thanks.html) — one column of text, so it gets more
+   measure than the 32ch section heads on the home page */
+.thanks-head{max-width:56ch}
+.thanks-head h1{font-size:var(--fs-h2);margin-bottom:var(--space-3)}
+.thanks-head .lead{margin-bottom:var(--space-4)}
+
+/* honeypot: off-screen for bots to find, never shown to a person */
+.hp-field{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+@media(max-width:760px){
+  .inquiry-form{grid-template-columns:1fr;padding:var(--space-3)}
+  .form-actions .btn{width:100%;text-align:center}
+}
+/* touch: inputs clear the 44px tap-target floor */
+@media (pointer:coarse){
+  .field input{padding:12px 2px}
 }
 
 /* ---------- how it works ---------- */

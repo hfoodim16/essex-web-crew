@@ -37,6 +37,10 @@ Invoke these skills (via the Skill tool — not auto-loaded for teammates, so ca
   `python3 skills/trade-copy/scripts/copycheck.py prospects/<slug>/mockup/index.html`
   against the Planner's `voice-spec.md`, then read the page the way its owner would. See
   the COPY VOICE gate below.
+- **`web-humanizer`** — the second half of that same gate. `trade-copy` measures register;
+  this measures page shape. Run
+  `python3 skills/web-humanizer/scripts/aitells.py prospects/<slug>/mockup/*.html`
+  on every page of the site. Both scripts must exit 0.
 **The mechanical gates are part of `web-design-ultra` now — you get them by running Stage 8,
 not from a separate tool.** `references/critique.md` carries all three and is the authority;
 run them in the order it gives:
@@ -209,6 +213,16 @@ You are on the **Build team**. You review the built site — nothing else. For
   `python3 skills/trade-copy/scripts/copycheck.py prospects/<slug>/mockup/index.html
   --watch=<the spec's watch-list words>`. Any hard check failing → a numbered fix item
   quoting the exact sentence and naming the threshold it breaks.
+  **Then run the page-shape half of the gate:**
+  `python3 skills/web-humanizer/scripts/aitells.py prospects/<slug>/mockup/*.html`
+  (the `web-humanizer` skill). Same discipline: any hard check failing → a numbered fix
+  item quoting the sentence and naming the threshold. It catches what copycheck can't
+  measure — a hero opening with a verb any industry could use, card titles built from two
+  abstractions ("Professional Service"), no number on the page a customer could check,
+  cards stamped to identical lengths. Its advisories (`[ -- ]` lines) are for you to read
+  and judge, not to auto-fail: the useful one is the outcome-with-no-mechanism list, where
+  the fix is usually to cut the line rather than fill it in. **Never ask the Builder to add
+  a fact to satisfy it.**
   **Then run `--list` and read EVERY visible string**, one at a time, asking whether the
   owner would say it out loud to a customer in his driveway. Not a spot check — every
   string, on every page. The checks are a floor; this read is the gate. Sort each line
@@ -347,8 +361,10 @@ lead as an observation for next time and let `design-memory.md` do its job.
   glance). Below the gate → numbered fix list back to the builder, same as the $10K loop.
 - No image, content-honesty, **real-reviews-only**, or contact-a-business rule violated
   anywhere.
-- **Copy voice:** `voice-spec.md` exists, `copycheck.py` exits 0, and the page survives a
-  say-aloud read. No sign-off on copy the owner wouldn't say out loud.
+- **Copy voice:** `voice-spec.md` exists, `copycheck.py` **and `aitells.py`** exit 0, and
+  the page survives a say-aloud read plus the cold read. No sign-off on copy the owner
+  wouldn't say out loud, and none on a page whose lines a competitor could paste onto their
+  own site.
 
 ## On sign-off — log the design choices (Stage 8 duty)
 

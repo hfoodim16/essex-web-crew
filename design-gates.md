@@ -34,7 +34,10 @@ The skill is general-purpose; these are ours and belong here, not in it:
   estimate form, NAP footer. In the skill as `references/local-trade.md`, but non-negotiable for us
   in a way it isn't for a general build: a beautiful hero with no visible phone number is a failed
   build.
-- **The copy-voice gate** — `voice-spec.md` + `copycheck.py` + the say-aloud read. Entirely ours.
+- **The copy-voice gate** — `voice-spec.md` + `copycheck.py` + `aitells.py` + the say-aloud
+  read. Entirely ours. `copycheck.py` (`trade-copy`) measures register; `aitells.py`
+  (`web-humanizer`) measures page shape — interchangeable heroes, abstract card titles, no
+  checkable fact, stamped card lengths. Both must exit 0; neither replaces the read.
 
 ## Precedence
 
