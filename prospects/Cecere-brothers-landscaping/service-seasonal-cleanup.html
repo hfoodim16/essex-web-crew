@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Seasonal &amp; Storm Cleanup — Cecere Brothers Landscaping, West Essex NJ</title>
+<meta name="description" content="Spring and fall cleanups, leaf removal, and after-storm clearing in West Essex County, NJ. Free estimates." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0c1610; --forest:#1a3526; --forest-2:#132a1e; --sage:#7fba94;
+    --bone:#f0ebdd; --bone-dim:#b9b6a5; --red:#c0392b; --red-lt:#e04637;
+    --line:rgba(240,235,221,.14);
+    --sans:'Figtree',system-ui,sans-serif; --serif:'Fraunces',Georgia,serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--ink);color:var(--bone);font-family:var(--sans);line-height:1.6;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden}
+  body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:80;opacity:.05;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+  .wrap{max-width:1280px;margin:0 auto;padding:0 clamp(20px,5vw,68px)}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--red);color:#fff}
+
+  header{position:fixed;inset:0 0 auto;z-index:50;transition:.4s}
+  header.scrolled{background:rgba(12,22,16,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:80px}
+  .brand{font-family:var(--serif);font-weight:600;font-size:20px;display:flex;align-items:center;gap:12px}
+  .brand-logo{background:var(--bone);padding:8px 14px;border-radius:6px}
+  .brand-logo img{display:block;height:34px;width:auto}
+  @media(max-width:480px){.brand-logo img{height:26px}}
+  .nav-links{display:flex;gap:24px;font-size:14px;color:var(--bone-dim);letter-spacing:.02em;align-items:center}
+  .nav-links a{transition:color .25s}.nav-links a:hover{color:var(--bone)}
+  .nav-links a.current{color:var(--sage)}
+  .est{border:1px solid var(--line);padding:12px 22px;border-radius:2px;font-weight:600;font-size:13px;
+    letter-spacing:.06em;text-transform:uppercase;transition:.3s}
+  .est:hover{background:var(--red);border-color:var(--red);color:#fff}
+  @media(max-width:1040px){.nav-links{display:none}}
+
+  .contours{position:absolute;inset:0;z-index:0;opacity:.5;pointer-events:none}
+
+  /* page hero */
+  .phero{position:relative;min-height:66vh;display:flex;align-items:flex-end;overflow:hidden;padding-bottom:clamp(40px,7vh,80px)}
+  .phero-photo{position:absolute;inset:0;z-index:0;background:url('public/hero.webp') center/cover no-repeat}
+  .phero-scrim{position:absolute;inset:0;z-index:1;background:
+    linear-gradient(90deg,rgba(10,18,13,.95) 0%,rgba(10,18,13,.76) 44%,rgba(10,18,13,.36) 100%),
+    linear-gradient(0deg,rgba(10,18,13,.92) 0%,transparent 55%)}
+  .phero .contours{z-index:1;opacity:.3}
+  .phero .wrap{position:relative;z-index:2;width:100%;padding-top:120px}
+  .crumb{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--sage);margin-bottom:24px;transition:.25s}
+  .crumb:hover{color:var(--bone)}
+  .phero h1{font-family:var(--serif);font-weight:500;line-height:1.02;letter-spacing:-.02em;
+    font-size:clamp(38px,6.4vw,86px);max-width:16ch}
+  .phero h1 em{font-style:italic;color:var(--sage)}
+  .phero .lede{max-width:56ch;margin-top:24px;font-size:clamp(16px,1.5vw,19px);color:#d7d2c2}
+
+  section{position:relative;z-index:2}
+  .pad{padding:clamp(72px,11vh,120px) 0}
+  .kicker{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--sage);margin-bottom:18px}
+  .sec-head h2{font-family:var(--serif);font-weight:500;font-size:clamp(30px,4.4vw,52px);line-height:1.04;
+    letter-spacing:-.02em;max-width:18ch;margin-bottom:48px}
+
+  /* included list */
+  .incl{display:grid;grid-template-columns:1fr 1fr;gap:2px 40px}
+  @media(max-width:760px){.incl{grid-template-columns:1fr}}
+  .incl .item{display:flex;gap:16px;padding:22px 0;border-top:1px solid var(--line)}
+  .incl .item .tick{flex:none;color:var(--sage);font-size:15px;margin-top:2px}
+  .incl .item h4{font-family:var(--serif);font-weight:500;font-size:20px;margin-bottom:5px}
+  .incl .item p{color:var(--bone-dim);font-size:14.5px}
+
+  .cta{position:relative;overflow:hidden;background:var(--forest-2)}
+  .cta .contours{opacity:.35}
+  .cta .wrap{position:relative;z-index:2;text-align:center}
+  .cta h2{font-family:var(--serif);font-weight:500;font-size:clamp(34px,5.4vw,72px);line-height:1;letter-spacing:-.02em}
+  .cta h2 em{font-style:italic;color:var(--sage)}
+  .cta p{color:#d7d2c2;max-width:42ch;margin:22px auto 36px;font-size:17px}
+  .btn{display:inline-block;background:var(--red);color:#fff;font-weight:600;padding:17px 34px;border-radius:2px;
+    letter-spacing:.05em;text-transform:uppercase;font-size:13px;transition:.3s}
+  .btn:hover{background:var(--red-lt);transform:translateY(-2px);box-shadow:0 14px 40px rgba(192,57,43,.35)}
+
+  footer{border-top:1px solid var(--line);padding:56px 0 44px}
+  .foot{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;color:var(--bone-dim);font-size:13px}
+  .foot .brand{color:var(--bone);font-size:17px}
+
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs>
+  <g id="contour">
+    <path d="M-50 120 C 200 60, 400 180, 700 100 S 1200 40, 1500 140" fill="none" stroke="#7fba94" stroke-width="1"/>
+    <path d="M-50 200 C 220 140, 420 260, 720 190 S 1220 130, 1500 220" fill="none" stroke="#7fba94" stroke-width="1"/>
+    <path d="M-50 300 C 240 250, 440 350, 740 290 S 1240 240, 1500 320" fill="none" stroke="#7fba94" stroke-width="1"/>
+    <path d="M-50 400 C 260 350, 460 450, 760 390 S 1260 350, 1500 420" fill="none" stroke="#7fba94" stroke-width="1"/>
+    <path d="M-50 500 C 260 460, 460 540, 760 500 S 1260 470, 1500 520" fill="none" stroke="#7fba94" stroke-width="1"/>
+  </g>
+</defs></svg>
+
+<header id="hdr">
+  <div class="wrap nav">
+    <a href="index.html" class="brand brand-logo">
+      <img src="public/logo-real.png" alt="Cecere Brothers Landscaping, LLC" width="544" height="150">
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="service-landscape-design.html">Landscape Design</a>
+      <a href="service-lawn-care.html">Lawn Care</a>
+      <a href="service-hardscape-masonry.html">Hardscape &amp; Masonry</a>
+      <a href="service-seasonal-cleanup.html" class="current">Seasonal Cleanup</a>
+    </nav>
+    <a href="index.html#estimate" class="est">Get an estimate</a>
+  </div>
+</header>
+
+<section class="phero">
+  <div class="phero-photo"></div>
+  <div class="phero-scrim"></div>
+  <svg class="contours" viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid slice"><use href="#contour"/></svg>
+  <div class="wrap">
+    <a href="index.html" class="crumb">← All services</a>
+    <h1>Seasonal &amp; storm <em>cleanup.</em></h1>
+    <p class="lede">Spring and fall cleanups, leaf removal, and after-storm clearing across West Essex County.</p>
+  </div>
+</section>
+
+<section class="pad wrap">
+  <div class="sec-head reveal">
+    <p class="kicker">What's included</p>
+    <h2>Scheduled cleanups and storm calls.</h2>
+  </div>
+  <div class="incl">
+    <div class="item reveal"><span class="tick">✓</span><div><h4>Spring cleanup</h4><p>Winter debris cleared, beds cut back and re-edged, so the first mow starts on a clean yard.</p></div></div>
+    <div class="item reveal"><span class="tick">✓</span><div><h4>Fall cleanup</h4><p>Beds and lawn cleared after the last leaf drop.</p></div></div>
+    <div class="item reveal"><span class="tick">✓</span><div><h4>Leaf removal</h4><p>Repeat passes through the fall, so leaves don't sit and smother the grass.</p></div></div>
+    <div class="item reveal"><span class="tick">✓</span><div><h4>Storm debris clearing</h4><p>Downed limbs and blown debris hauled off after a storm.</p></div></div>
+    <div class="item reveal"><span class="tick">✓</span><div><h4>Bed &amp; foundation-line clearing</h4><p>Leaves pulled off beds and away from the foundation line where they trap moisture.</p></div></div>
+    <div class="item reveal"><span class="tick">✓</span><div><h4>Winter bed prep</h4><p>Cutbacks, winter protection for tender plantings, and beds cleared before the first freeze.</p></div></div>
+  </div>
+</section>
+
+<section class="cta pad">
+  <svg class="contours" viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid slice"><use href="#contour"/></svg>
+  <div class="wrap">
+    <h2 class="reveal">Let's walk your <em>property.</em></h2>
+    <p class="reveal">Free on-site estimate, usually within 48 hours.</p>
+    <a href="index.html#estimate" class="btn reveal">Get a free estimate</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <div class="brand">Cecere Brothers Landscaping, LLC</div>
+    <div>Serving West Essex County, New Jersey · Mon–Sat</div>
+    <div>© 2026 · A design concept</div>
+  </div>
+</footer>
+
+<script>
+  const hdr=document.getElementById('hdr');
+  addEventListener('scroll',()=>hdr.classList.toggle('scrolled',scrollY>40));
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
