@@ -23,6 +23,18 @@ by name, so a different location means fixing paths later.
 git clone https://github.com/hfoodim16/essex-web-crew.git ~/Projects/essex-web-crew
 ```
 
+## 1b. Log in to GitHub
+
+Cloning a private repo needs a login; **pushing** needs that login wired into git itself.
+Do it now so sending work back later just works:
+
+```bash
+gh auth login && gh auth setup-git
+```
+
+Pick **GitHub.com → HTTPS → authenticate in browser**. No `gh` on the machine?
+`brew install gh` first.
+
 ## 2. Install the skills
 
 The crew leans on ~15 Claude Code skills that live in `~/.claude/skills/`. They're
@@ -101,7 +113,31 @@ want to change — easiest way is to open Claude Code in the project and ask it 
 `design-memory.md` is shipped on purpose: it's a running ban-list of design choices already
 used, so your sites don't come out looking like Harry's. Keep appending to it.
 
-## Don't commit
+## Trading work back and forth
 
-`prospects/` (your run output) and any `.env` are gitignored. Keep it that way — the
-`.env` holds a live billing key.
+The repo is how we swap files. Two skills do it, from either Mac — just say what you want:
+
+| Say | Skill | When |
+|---|---|---|
+| "pull" / "get Harry's latest" | `github-pull` | **Start of every session**, before you build anything |
+| "push this" / "send Harry my changes" | `github-push` | When a run finishes, or before you stop for the day |
+
+Pull first, always — editing a stale copy is what creates conflicts. When a pull brings
+new or changed skills, re-run `./install.sh --force` and restart Claude Code so the copies
+in `~/.claude/skills/` update.
+
+Full details, including a troubleshooting table: **[github/README.md](github/README.md)**.
+
+## What is and isn't committed
+
+`prospects/` **is** tracked — that's the whole point, it's how a build gets from one Mac to
+the other. What stays local:
+
+- **any `.env`** — holds a live billing key, never commit one
+- `prospects/**/*.zip` — delivery zips, rebuilt on demand by `pipeline/package-site.sh`
+- loose source art in a prospect folder (`assets-src/`, stray `.png`/`.jpg`)
+- `.claude/settings.local.json` — per-machine settings
+
+Images a mockup actually loads **are** tracked. If you put images somewhere new inside a
+mockup, `github-push` checks for that before pushing — a page once shipped with seven
+missing images because `.gitignore` swallowed them.

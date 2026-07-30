@@ -12,24 +12,29 @@ FORCE=0
 [ "${1:-}" = "--force" ] && FORCE=1
 
 SKILLS_SRC="$PWD/skills"
+GITHUB_SKILLS_SRC="$PWD/github/skills"
 SKILLS_DST="$HOME/.claude/skills"
 AIM="$SKILLS_DST/ai-multimodal"
 
 echo "Essex Web Crew setup"
 echo "  skills from : $SKILLS_SRC"
+echo "                $GITHUB_SKILLS_SRC"
 echo "  skills to   : $SKILLS_DST"
 echo
 
 # ---------- 1. skills ----------
 mkdir -p "$SKILLS_DST"
 installed=0 skipped=0
-for src in "$SKILLS_SRC"/*/; do
+
+install_skill() {
+  local src="$1"
+  local name dst tmpenv
   name="$(basename "$src")"
   dst="$SKILLS_DST/$name"
   if [ -e "$dst" ] && [ "$FORCE" -eq 0 ]; then
     echo "  skip     $name (already installed — use --force to overwrite)"
     skipped=$((skipped + 1))
-    continue
+    return
   fi
   # Never clobber a live .env when overwriting.
   if [ -f "$dst/.env" ]; then
@@ -42,7 +47,19 @@ for src in "$SKILLS_SRC"/*/; do
   if [ -n "$tmpenv" ]; then cp "$tmpenv" "$dst/.env"; chmod 600 "$dst/.env"; rm -f "$tmpenv"; fi
   echo "  install  $name"
   installed=$((installed + 1))
+}
+
+for src in "$SKILLS_SRC"/*/; do
+  install_skill "$src"
 done
+
+# The two GitHub sync skills live in github/skills/ — same install, separate folder
+# so all the repo-syncing pieces sit together.
+if [ -d "$GITHUB_SKILLS_SRC" ]; then
+  for src in "$GITHUB_SKILLS_SRC"/*/; do
+    install_skill "$src"
+  done
+fi
 echo
 echo "Skills: $installed installed, $skipped skipped."
 echo

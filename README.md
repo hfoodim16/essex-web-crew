@@ -48,6 +48,10 @@ COREY-DEPLOY.md           Deploying a signed-off site
 .claude/
   settings.local.json     Enables agent teams (experimental flag)
   agents/                 Teammate roles: scout, analyst, planner, builder, critic
+github/                   Moving work between Harry's Mac and Corey's — see github/README.md
+  scripts/preflight.sh    Shared sync checks (finds the repo, verifies login, reports the gap)
+  skills/github-push/     "push this" — pull first, safety-check the diff, commit, push
+  skills/github-pull/     "pull" — show what's incoming, protect local work, pull, re-install skills
 pipeline/
   rubric.md               Candidate scoring rubric
   candidates.md           Scout output → Analyst scoring (regenerated each run)
