@@ -17,7 +17,7 @@
 ## Contact (real — use exactly)
 
 - Harry Foodim — **hfoodim@foradigital.com**
-- Corey Rapkin — **CRapkin@foradigital.com**
+- Corey Rapkin — **crapkin@foradigital.com**
 - No phone number, no street address supplied. **Do not invent either.** Contact section
   is the two emails only.
 

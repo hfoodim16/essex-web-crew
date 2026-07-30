@@ -302,7 +302,7 @@ multi-page build would be empty rooms. One page, anchor navigation, five section
     Email: `hfoodim@foradigital.com`.
   - **Corey Rapkin — Co-Owner.** Bio copy (verbatim): "Corey is a co-owner of Fora and a
     sophomore at the University of Georgia, where he studies accounting."
-    Email: `CRapkin@foradigital.com`.
+    Email: `crapkin@foradigital.com`.
   - **Asymmetry rule for the unequal bios:** cards are equal width and the monogram/name/
     role rows align; Harry's extra sentence simply runs longer — do NOT pad Corey's bio,
     do NOT add invented lines, do NOT bottom-align. A short honest bio beats a padded one.
@@ -313,7 +313,7 @@ multi-page build would be empty rooms. One page, anchor navigation, five section
   us — you'll get a real person, because there are exactly two of us." (Fact.)
 - **Two email cards** (two-up, matching the founders rhythm): each = name, role `Co-Owner`,
   and the email as a large Instrument Serif `mailto:` link with underline-draw hover.
-  - `hfoodim@foradigital.com` (Harry Foodim) · `CRapkin@foradigital.com` (Corey Rapkin)
+  - `hfoodim@foradigital.com` (Harry Foodim) · `crapkin@foradigital.com` (Corey Rapkin)
 - **No form** (client said emails only; also avoids a dead-submit placeholder), **no
   phone**, **no address, no map** — deliberately. This is the adapted local-trade
   conversion pattern: the "one plain primary action" is *email us*, repeated in header,
@@ -400,7 +400,7 @@ founders, nothing padded.">
     { "@type": "Person", "name": "Harry Foodim",  "jobTitle": "Co-Owner",
       "email": "hfoodim@foradigital.com" },
     { "@type": "Person", "name": "Corey Rapkin", "jobTitle": "Co-Owner",
-      "email": "CRapkin@foradigital.com" }
+      "email": "crapkin@foradigital.com" }
   ]
 }
 </script>

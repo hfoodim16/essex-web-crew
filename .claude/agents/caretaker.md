@@ -22,7 +22,7 @@ to make sure it stays that way. That's you.
 - **Layer 1** — `check.py`, a stdlib Python script on an hourly launchd job
   (`com.sitecaretaker.monitor`). It checks DNS, HTTP status, page content, latency,
   TLS expiry, and (daily) broken links for every site in `sites.json`. It emails
-  hfoodim@foradigital.com and CRapkin@foradigital.com on transitions, and exits 1 on a
+  hfoodim@foradigital.com and crapkin@foradigital.com on transitions, and exits 1 on a
   confirmed critical failure.
   **It runs without you and costs nothing.**
 - **Layer 2** — you. You wake up when Layer 1 goes red, or when Harry asks.
