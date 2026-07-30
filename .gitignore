@@ -15,6 +15,11 @@
 # Scout run state
 pipeline/.scout-signal
 
+# Per-run handoff markers teammates drop in a prospect folder — state, not artifacts
+prospects/**/.submit
+prospects/**/.plan-ready
+prospects/**/.outreach-ready
+
 # Python
 **/.venv/
 **/__pycache__/
