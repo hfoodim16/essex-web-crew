@@ -36,3 +36,9 @@ prospects/**/*.webp
 # ...but DO track real client logos the builder downloads into a mockup's assets/ —
 # these are functional (the site references them), not throwaway generated images.
 !prospects/**/mockup/assets/*
+# Same goes for the images a work-sample subpage loads from its own folder
+# (fora-digital/mockup/work/**) — without these the portfolio pages render broken.
+!prospects/**/mockup/work/**/*.png
+!prospects/**/mockup/work/**/*.jpg
+!prospects/**/mockup/work/**/*.jpeg
+!prospects/**/mockup/work/**/*.webp
