@@ -16,8 +16,11 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%23131D33'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='21' font-weight='700' fill='%23EAD9AE' text-anchor='middle'%3ED%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Besley:ital,wght@0,700;0,800;1,400&family=Schibsted+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,400..700;1,400&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<!-- Motion opt-in + dead-man timer: if main.js never runs, .js is stripped and
+     every hidden entrance state disappears, leaving a finished page. -->
+<script>document.documentElement.className+=" js";window.__revealFail=setTimeout(function(){document.documentElement.classList.remove("js")},1200);</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -40,156 +43,186 @@
 </head>
 <body>
 
-<header class="site-header">
-  <div class="lang-strip">
-    <div class="container">
-      <div class="langs"><span>Se Habla Espanol</span> &nbsp;·&nbsp; <span>Nos falamos o portugues</span></div>
-      <div class="addr">385 Lafayette Street · Newark's Ironbound</div>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="masthead">
+  <div class="deck-top">
+    <div class="shell">
+      <p class="langs">Se Habla Espanol &nbsp;·&nbsp; Nos falamos o portugues</p>
+      <p class="addr">385 Lafayette Street · Newark's Ironbound</p>
     </div>
   </div>
-  <div class="header-bar">
-    <div class="container">
+  <div class="deck-main" id="deck-main">
+    <div class="shell">
       <a href="index.html" class="brand" aria-label="DaSilva &amp; Associates, LLC — home">
-        <span class="brand-plate"><img src="assets/logo.png" alt="DaSilva & Associates, LLC logo"></span>
+        <img src="assets/logo.png" alt="DaSilva &amp; Associates, LLC logo" width="240" height="60">
       </a>
       <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav">
-        <svg class="open-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
-        <svg class="close-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        <svg class="open-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        <svg class="close-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
       </button>
-      <nav class="main-nav" id="primary-nav" aria-label="Primary">
-        <a href="index.html">Home</a>
-        <a href="practice-areas.html" aria-current="page">Practice Areas</a>
-        <a href="attorney-bio.html">Attorney Bio</a>
-        <a href="contact.html">Contact</a>
+      <nav class="nav" id="primary-nav" aria-label="Primary">
+        <a class="ws" data-t="Home" href="index.html"><span>Home</span></a>
+        <a class="ws" data-t="Practice Areas" href="practice-areas.html" aria-current="page"><span>Practice Areas</span></a>
+        <a class="ws" data-t="Attorney Bio" href="attorney-bio.html"><span>Attorney Bio</span></a>
+        <a class="ws" data-t="Contact" href="contact.html"><span>Contact</span></a>
       </nav>
-      <a href="tel:+19733440808" class="call-btn"><span class="ico">☎</span> Call 973-344-0808</a>
+      <a href="tel:+19733440808" class="btn-call">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 4h4l2 5-2.5 1.6a11 11 0 0 0 5.9 5.9L15 14l5 2v4a1 1 0 0 1-1.1 1A16 16 0 0 1 3 5.1 1 1 0 0 1 4 4z"/></svg>
+        Call 973-344-0808
+      </a>
     </div>
   </div>
 </header>
 
-<main>
-  <section class="page-head ink-ground grain on-ink">
-    <div class="container">
-      <p class="eyebrow reveal-up">DaSilva &amp; Associates, LLC</p>
-      <h1 class="reveal">Practice Areas</h1>
-      <p class="intro reveal-up" style="--i:1">Four areas of work, from a Newark office at 385 Lafayette Street. If you're facing a charge, the fastest way to reach us is by phone: <a href="tel:+19733440808" style="color:var(--lamp)">973-344-0808</a>.</p>
+<main id="main">
+  <!-- ================= PAGE HEAD (pedra masthead) ================= -->
+  <section class="page-head">
+    <div class="shell">
+      <p class="label settle">DaSilva &amp; Associates, LLC</p>
+      <h1 class="settle" style="--i:1">Practice Areas</h1>
+      <p class="intro settle" style="--i:2">Four areas of work, from a Newark office at 385 Lafayette Street. If you're facing a charge, the fastest way to reach us is by phone: <a href="tel:+19733440808">973-344-0808</a>.</p>
     </div>
   </section>
+  <div class="rule-brass drawx"></div>
 
-  <!-- CRIMINAL -->
-  <section class="pad practice-block" id="criminal">
-    <div class="container">
-      <div class="head reveal-up">
-        <p class="eyebrow">01 · Criminal Defense</p>
-        <h2>Criminal Defense</h2>
-        <p class="intro">Paul Da Silva has handled criminal matters since his years at the New Jersey Office of the Public Defender, where he litigated cases up to and including murder trials. You don't have to explain everything on the phone. Just call, and we'll take it from there.</p>
-      </div>
-      <div class="sub-grid">
-        <div class="sub reveal-up">
-          <h3>DUI / DWI &amp; Vehicular Crimes</h3>
-          <p>First-time and repeat offenses. The office can also help with the administrative process of protecting your driving privileges.</p>
+  <!-- ================= BODY: STICKY INDEX RAIL + LEDGER ================= -->
+  <section class="pad-sm">
+    <div class="shell pb-grid">
+      <nav class="rail" aria-label="Practice areas index">
+        <div class="rail-list" id="rail-list">
+          <span class="rail-mark" aria-hidden="true"></span>
+          <a href="#criminal"><span class="rn">01</span><span>Criminal Defense</span></a>
+          <a href="#traffic"><span class="rn">02</span><span>Traffic</span></a>
+          <a href="#family"><span class="rn">03</span><span>Family Law</span></a>
+          <a href="#real"><span class="rn">04</span><span>Real Estate</span></a>
         </div>
-        <div class="sub reveal-up" style="--i:1">
-          <h3>Sex Offenses</h3>
-          <p>Rape, statutory rape, child pornography, and sexual assault charges.</p>
+        <a href="tel:+19733440808" class="btn-call">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 4h4l2 5-2.5 1.6a11 11 0 0 0 5.9 5.9L15 14l5 2v4a1 1 0 0 1-1.1 1A16 16 0 0 1 3 5.1 1 1 0 0 1 4 4z"/></svg>
+          Call 973-344-0808
+        </a>
+      </nav>
+
+      <div class="pb-main">
+        <!-- ---- 01 CRIMINAL ---- -->
+        <article class="grp" id="criminal">
+          <div class="grp-head settle">
+            <span class="num">01</span>
+            <h2>Criminal Defense</h2>
+          </div>
+          <p class="intro settle" style="--i:1">Paul Da Silva has handled criminal matters since his years at the New Jersey Office of the Public Defender, where he litigated cases up to and including murder trials. You don't have to explain everything on the phone. Just call, and we'll take it from there.</p>
+          <div class="grid-12 cells sub-ledger">
+            <div class="cmp span-6">
+              <h3>DUI / DWI &amp; Vehicular Crimes</h3>
+              <p>First-time and repeat offenses. The office can also help with the administrative process of protecting your driving privileges.</p>
+            </div>
+            <div class="cmp span-6" style="--i:1">
+              <h3>Sex Offenses</h3>
+              <p>Rape, statutory rape, child pornography, and sexual assault charges.</p>
+            </div>
+            <div class="cmp span-6" style="--i:2">
+              <h3>Violent Crimes &amp; Weapon Offenses</h3>
+              <p>Murder, manslaughter, robbery, burglary, assault, and firearm offenses.</p>
+            </div>
+            <div class="cmp span-6" style="--i:3">
+              <h3>Drug Crimes</h3>
+              <p>Possession, distribution, trafficking, and prescription-drug charges.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- ---- 02 TRAFFIC ---- -->
+        <article class="grp" id="traffic">
+          <div class="grp-head settle">
+            <span class="num">02</span>
+            <h2>Traffic Law</h2>
+          </div>
+          <p class="intro settle" style="--i:1">Common violations handled by the office:</p>
+          <ul class="lineitems settle" style="--i:2">
+            <li>Driving without a license</li>
+            <li>Suspended license</li>
+            <li>Reckless driving</li>
+            <li>Uninsured driving</li>
+            <li>Speeding</li>
+          </ul>
+          <p class="aim settle" style="--i:3">The goal in these matters is to reduce or dismiss the charge and keep license points to a minimum.</p>
+        </article>
+
+        <!-- ---- 03 FAMILY ---- -->
+        <article class="grp" id="family">
+          <div class="grp-head settle">
+            <span class="num">03</span>
+            <h2>Family Law</h2>
+          </div>
+          <p class="intro settle" style="--i:1">Family matters are sensitive, and the office handles them with understanding and discretion.</p>
+          <!-- 7 items run as two collapsed-rule columns (4 + 3), not one long
+               hairlined list; same strings, same order down then across -->
+          <ul class="lineitems lineitems-2col settle" style="--i:2">
+            <li>Divorce</li>
+            <li>Alimony</li>
+            <li>Child support</li>
+            <li>Child custody</li>
+            <li>Domestic violence</li>
+            <li>Pre- and post-nuptial agreements</li>
+            <li>Juvenile delinquency and dependency proceedings</li>
+          </ul>
+        </article>
+
+        <!-- ---- 04 REAL ESTATE ---- -->
+        <article class="grp" id="real">
+          <div class="grp-head settle">
+            <span class="num">04</span>
+            <h2>Real Estate</h2>
+          </div>
+          <p class="intro settle" style="--i:1">Protecting your legal and financial interests from offer through closing.</p>
+          <ul class="lineitems settle" style="--i:2">
+            <li>Purchase and sale agreements</li>
+            <li>Title searches</li>
+            <li>Leases and rental agreements</li>
+            <li>Co-op and condominium transactions</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CTA BAND (shared) ================= -->
+  <section class="band-ink pad cta-band" aria-label="Contact the office">
+    <div class="shell">
+      <div class="cta-in">
+        <div class="cta-left">
+          <p class="label">Ready to talk</p>
+          <a href="tel:+19733440808" class="phone">973-344-0808</a>
+          <p class="cta-addr">385 Lafayette Street, Newark, NJ 07105</p>
         </div>
-        <div class="sub reveal-up" style="--i:2">
-          <h3>Violent Crimes &amp; Weapon Offenses</h3>
-          <p>Murder, manslaughter, robbery, burglary, assault, and firearm offenses.</p>
-        </div>
-        <div class="sub reveal-up" style="--i:3">
-          <h3>Drug Crimes</h3>
-          <p>Possession, distribution, trafficking, and prescription-drug charges.</p>
+        <div class="cta-right">
+          <p class="line">The fastest way to reach the office is by phone.</p>
+          <a href="contact.html" class="text-link ws" data-t="Send a message instead →"><span>Send a message instead →</span></a>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- TRAFFIC -->
-  <section class="pad practice-block" id="traffic">
-    <div class="container">
-      <div class="head reveal-up">
-        <p class="eyebrow">02 · Traffic</p>
-        <h2>Traffic Law</h2>
-        <p class="intro">Common violations handled by the office:</p>
-      </div>
-      <ul class="chip-list reveal-up">
-        <li>Driving without a license</li>
-        <li>Suspended license</li>
-        <li>Reckless driving</li>
-        <li>Uninsured driving</li>
-        <li>Speeding</li>
-      </ul>
-      <p class="aim reveal-up">The goal in these matters is to reduce or dismiss the charge and keep license points to a minimum.</p>
-    </div>
-  </section>
-
-  <!-- FAMILY -->
-  <section class="pad practice-block" id="family">
-    <div class="container">
-      <div class="head reveal-up">
-        <p class="eyebrow">03 · Family Law</p>
-        <h2>Family Law</h2>
-        <p class="intro">Family matters are sensitive, and the office handles them with understanding and discretion.</p>
-      </div>
-      <ul class="chip-list reveal-up">
-        <li>Divorce</li>
-        <li>Alimony</li>
-        <li>Child support</li>
-        <li>Child custody</li>
-        <li>Domestic violence</li>
-        <li>Pre- and post-nuptial agreements</li>
-        <li>Juvenile delinquency and dependency proceedings</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- REAL ESTATE -->
-  <section class="pad practice-block" id="real">
-    <div class="container">
-      <div class="head reveal-up">
-        <p class="eyebrow">04 · Real Estate</p>
-        <h2>Real Estate</h2>
-        <p class="intro">Protecting your legal and financial interests from offer through closing.</p>
-      </div>
-      <ul class="chip-list reveal-up">
-        <li>Purchase and sale agreements</li>
-        <li>Title searches</li>
-        <li>Leases and rental agreements</li>
-        <li>Co-op and condominium transactions</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- CONTACT CTA -->
-  <section class="pad ink-ground grain on-ink cta-band">
-    <div class="container">
-      <p class="eyebrow reveal-up">Ready to talk</p>
-      <a href="tel:+19733440808" class="phone reveal-up" style="--i:1">973-344-0808</a>
-      <p class="addr reveal-up" style="--i:2">385 Lafayette Street, Newark, NJ 07105</p>
-      <p class="line reveal-up" style="--i:2">The fastest way to reach the office is by phone.</p>
-      <a href="contact.html" class="text-link reveal-up" style="--i:3">Send a message instead <span class="arw">→</span></a>
     </div>
   </section>
 </main>
 
-<footer class="site-footer footer">
-  <div class="container">
+<footer class="footer">
+  <div class="shell">
     <div class="footer-top">
       <div class="footer-brand">
-        <span class="brand-plate"><img src="assets/logo.png" alt="DaSilva & Associates, LLC logo"></span>
+        <span class="chip"><img src="assets/logo.png" alt="DaSilva &amp; Associates, LLC logo" width="240" height="60"></span>
         <p>Criminal defense, traffic, family law, and real estate in Newark's Ironbound, since 2002.</p>
         <p class="langs">Se Habla Espanol · Nos falamos o portugues</p>
       </div>
       <div class="footer-col">
         <h4>Pages</h4>
-        <a href="index.html">Home</a>
-        <a href="practice-areas.html">Practice Areas</a>
-        <a href="attorney-bio.html">Attorney Bio</a>
-        <a href="contact.html">Contact</a>
+        <span class="fcol-rule" aria-hidden="true"></span>
+        <a class="ws" data-t="Home" href="index.html"><span>Home</span></a>
+        <a class="ws" data-t="Practice Areas" href="practice-areas.html"><span>Practice Areas</span></a>
+        <a class="ws" data-t="Attorney Bio" href="attorney-bio.html"><span>Attorney Bio</span></a>
+        <a class="ws" data-t="Contact" href="contact.html"><span>Contact</span></a>
       </div>
       <div class="footer-col">
         <h4>Office</h4>
+        <span class="fcol-rule" aria-hidden="true"></span>
         <address class="nap">
           DaSilva &amp; Associates, LLC<br>
           385 Lafayette Street<br>
@@ -210,7 +243,12 @@
   </div>
 </footer>
 
-<div class="mobile-call"><a href="tel:+19733440808">☎ Call 973-344-0808</a></div>
+<div class="mobile-call">
+  <a href="tel:+19733440808">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 4h4l2 5-2.5 1.6a11 11 0 0 0 5.9 5.9L15 14l5 2v4a1 1 0 0 1-1.1 1A16 16 0 0 1 3 5.1 1 1 0 0 1 4 4z"/></svg>
+    Call 973-344-0808
+  </a>
+</div>
 
 <script src="main.js"></script>
 </body>

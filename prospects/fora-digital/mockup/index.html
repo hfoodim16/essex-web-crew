@@ -30,6 +30,7 @@
     <nav class="nav-links" aria-label="Primary">
       <a href="#work">Work</a>
       <a href="#process">Process</a>
+      <a href="#pricing">Pricing</a>
       <a href="#founders">Founders</a>
       <a href="#contact">Contact</a>
       <a href="#reviews">Reviews</a>
@@ -42,6 +43,7 @@
   <nav id="mobile-nav" class="mobile-nav" aria-label="Mobile" hidden>
     <a href="#work">Work</a>
     <a href="#process">Process</a>
+    <a href="#pricing">Pricing</a>
     <a href="#founders">Founders</a>
     <a href="#contact">Contact</a>
     <a href="#reviews">Reviews</a>
@@ -68,14 +70,14 @@
           <span class="line reveal" style="--i:3">for less<span class="period">.</span></span>
         </h1>
         <p class="lead hero-lead reveal" style="--i:4">
-          Send us your answers and you get a working site to click through in 48 to 72
-          hours, not six weeks. Two owners do the whole build, so there's no agency
-          overhead in the price.
+          Answer a few questions and we hand you a real site in 48 to 72 hours. Every
+          page is built by hand and perfected before we publish it. You tell us what to
+          change and we change it, until you sign off.
         </p>
         <ul class="hero-facts reveal" style="--i:5" role="list">
           <li><strong>48&ndash;72 hours</strong> to a working site</li>
           <li><strong>Two owners</strong> build it, start to launch</li>
-          <li><strong>Domain and hosting</strong> set up on Netlify</li>
+          <li><strong>Your domain</strong> connected, hosting on Netlify</li>
         </ul>
         <div class="cta-row reveal" style="--i:6">
           <a href="#work" class="btn btn-primary"><span>See the work</span></a>
@@ -200,33 +202,6 @@
         </div>
       </article>
 
-      <!-- Plates 3 & 4 — coming soon -->
-      <div class="soon-grid">
-        <div class="plate plate-soon reveal" style="--i:0">
-          <div class="soon-body">
-            <svg class="asterisk" viewBox="0 0 40 40" aria-hidden="true">
-              <g stroke="#1F4EFF" stroke-width="2.2" stroke-linecap="round">
-                <line x1="20" y1="6" x2="20" y2="34"/><line x1="6" y1="20" x2="34" y2="20"/>
-                <line x1="10" y1="10" x2="30" y2="30"/><line x1="30" y1="10" x2="10" y2="30"/>
-              </g>
-            </svg>
-            <p class="kicker">Next project, in progress</p>
-            <p class="soon-sub">The next build goes here.</p>
-          </div>
-        </div>
-        <div class="plate plate-soon reveal" style="--i:1">
-          <div class="soon-body">
-            <svg class="asterisk" viewBox="0 0 40 40" aria-hidden="true">
-              <g stroke="#1F4EFF" stroke-width="2.2" stroke-linecap="round">
-                <line x1="20" y1="6" x2="20" y2="34"/><line x1="6" y1="20" x2="34" y2="20"/>
-                <line x1="10" y1="10" x2="30" y2="30"/><line x1="30" y1="10" x2="10" y2="30"/>
-              </g>
-            </svg>
-            <p class="kicker">Next project, in progress</p>
-            <p class="soon-sub">The next build goes here.</p>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -254,8 +229,7 @@
         <li class="step reveal" style="--i:2">
           <span class="step-num" aria-hidden="true">03</span>
           <h3>We set up the domain and hosting</h3>
-          <p>We buy you a fresh domain or connect the one you already have, then host the
-             site on Netlify.</p>
+          <p>We connect your domain, or buy it for you, then host the site on Netlify.</p>
         </li>
         <li class="step reveal" style="--i:3">
           <span class="step-num" aria-hidden="true">04</span>
@@ -264,6 +238,39 @@
              email us and we'll do it.</p>
         </li>
       </ol>
+    </div>
+  </section>
+
+  <!-- ============ PRICING ============ -->
+  <!-- One number on the page, and it appears once — the big figure IS the headline, so the
+       h2 must not repeat it. The domain is NOT in the $1,500 and the page says so out loud,
+       right next to the free-hosting line, so "free hosting" can never be read as a free
+       domain. Do NOT add a monthly fee, a revision count, a domain cost, or a second tier
+       here without Harry confirming the real terms. -->
+  <section id="pricing" class="section pricing">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker reveal" style="--i:0">Pricing</p>
+        <h2 class="reveal" style="--i:1">What a site costs.</h2>
+      </div>
+
+      <div class="price-row">
+        <div class="price-figure reveal" style="--i:0">
+          <span class="price-from">Starting at</span>
+          <p class="price-number"><span class="price-cur">$</span>1,500</p>
+        </div>
+        <div class="price-detail">
+          <p class="kicker reveal" style="--i:1">What that covers</p>
+          <ul class="price-list reveal" style="--i:2" role="list">
+            <li>Design and build, done in 48 to 72 hours</li>
+            <li>Both owners on the build, start to launch</li>
+            <li>A 60 day warranty after launch</li>
+            <li>You talk to the two people building it, nobody in between</li>
+          </ul>
+          <a href="#contact" class="btn btn-primary reveal" style="--i:3">
+            <span>Get a quote</span></a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -302,9 +309,6 @@
       <div class="section-head">
         <p class="kicker reveal" style="--i:0">Say hello</p>
         <h2 class="reveal" style="--i:1">Start a project.</h2>
-        <p class="lead reveal" style="--i:2">Fill this out and it lands in both of our
-          inboxes. Tell us who you are and what the business does, and we'll write back
-          with what we'd build and what it costs.</p>
       </div>
 
       <!-- Netlify Forms. On a deployed Netlify site the POST is captured at the platform
@@ -381,15 +385,68 @@
       <div class="section-head">
         <p class="kicker reveal" style="--i:0">Reviews</p>
         <h2 class="reveal" style="--i:1">Leave a review.</h2>
-        <p class="lead reveal" style="--i:2">Worked with us? Email us a review and we'll
-          post it below, where the next person can read it.</p>
-        <a class="btn btn-primary reveal" style="--i:3"
-           href="mailto:hfoodim@foradigital.com?subject=Review%20for%20Fora%20Digital">
-          <span>Email us your review</span></a>
       </div>
 
-      <!-- Reviews render in this grid. When a real one arrives, replace the .reviews-empty
-           block below with one .review-card per review (paste in only words a client
+      <!-- Netlify Forms, same pattern as the inquiry form: with JavaScript off the browser
+           POSTs natively and lands on thanks.html, so the form still works. With JavaScript
+           on, main.js posts it in the background and drops the review straight into the grid
+           below marked "Pending approval", so the writer sees their own words land.
+           Nobody else sees it until we publish it.
+           TO PUBLISH ONE: Netlify dashboard → Forms → reviews → read the submission, then
+           paste the client's EXACT words into a .review-card below. Never invent a quote,
+           never tidy one up.
+           ONE MANUAL STEP after the first deploy: Netlify dashboard → Forms → reviews →
+           Add notification → Email notification, once for hfoodim@foradigital.com and once
+           for CRapkin@foradigital.com. Netlify takes one address per notification, so both
+           addresses = two notifications. -->
+      <form class="review-form reveal" style="--i:2"
+            name="reviews" method="POST" action="thanks.html"
+            data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="reviews">
+        <p class="hp-field" aria-hidden="true">
+          <label>Leave this field empty<input name="bot-field" tabindex="-1" autocomplete="off"></label>
+        </p>
+
+        <div class="field">
+          <label for="r-name">Your first name</label>
+          <input id="r-name" name="name" type="text" required autocomplete="given-name"
+                 placeholder="Mike">
+        </div>
+        <div class="field">
+          <label for="r-business">Business name</label>
+          <input id="r-business" name="business" type="text" required
+                 autocomplete="organization" placeholder="What it's called">
+        </div>
+
+        <fieldset class="field field-wide stars-field">
+          <legend>Stars</legend>
+          <div class="stars-input">
+            <input id="r5" type="radio" name="rating" value="5" required>
+            <label for="r5"><span class="sr-only">5 stars</span></label>
+            <input id="r4" type="radio" name="rating" value="4">
+            <label for="r4"><span class="sr-only">4 stars</span></label>
+            <input id="r3" type="radio" name="rating" value="3">
+            <label for="r3"><span class="sr-only">3 stars</span></label>
+            <input id="r2" type="radio" name="rating" value="2">
+            <label for="r2"><span class="sr-only">2 stars</span></label>
+            <input id="r1" type="radio" name="rating" value="1">
+            <label for="r1"><span class="sr-only">1 star</span></label>
+          </div>
+        </fieldset>
+
+        <div class="field field-wide">
+          <label for="r-text">Your review</label>
+          <textarea id="r-text" name="review" rows="4" required maxlength="600"
+                    placeholder="What we built, how long it took, how it went."></textarea>
+        </div>
+        <div class="field field-wide form-actions">
+          <button type="submit" class="btn btn-primary"><span>Post my review</span></button>
+        </div>
+        <p class="form-status" role="status" aria-live="polite" hidden></p>
+      </form>
+
+      <!-- Reviews render in this grid. To publish a real one, delete the .reviews-empty
+           block and add one .review-card per review (paste in only words a client
            actually wrote, never invent a quote). Copy this template and fill it in:
         <article class="review-card reveal" style="--i:0">
           <p class="review-stars" aria-label="5 out of 5 stars">★★★★★</p>
@@ -428,6 +485,7 @@
         <p class="kicker foot-kicker">Pages</p>
         <a class="link-draw" href="#work">Work</a>
         <a class="link-draw" href="#process">Process</a>
+        <a class="link-draw" href="#pricing">Pricing</a>
         <a class="link-draw" href="#founders">Founders</a>
         <a class="link-draw" href="#contact">Contact</a>
         <a class="link-draw" href="#reviews">Reviews</a>
@@ -447,6 +505,7 @@
   "url": "https://foradigital.com",
   "slogan": "Modern sites for local businesses",
   "email": "hfoodim@foradigital.com",
+  "priceRange": "From $1500",
   "founder": [
     { "@type": "Person", "name": "Harry Foodim", "jobTitle": "Co-Owner",
       "email": "hfoodim@foradigital.com" },

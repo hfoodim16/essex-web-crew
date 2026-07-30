@@ -121,6 +121,106 @@
   });
 })();
 
+/* Review form.
+   JavaScript off: the browser POSTs natively to Netlify Forms and lands on thanks.html, so
+   the review still reaches us. JavaScript on: we POST it in the background and put the
+   review straight into the grid, marked "Pending approval", so the writer watches their own
+   words land instead of losing the page. It is theirs only — the card lives in this one
+   page view and is gone on reload. Publishing to everyone stays a human step: read the
+   submission in the Netlify dashboard, paste the exact words into a .review-card. */
+(function () {
+  'use strict';
+
+  var form = document.querySelector('.review-form');
+  var grid = document.querySelector('.reviews-grid');
+  if (!form || !grid) return;
+  var status = form.querySelector('.form-status');
+
+  var host = window.location.hostname;
+  var isLocal = window.location.protocol === 'file:' ||
+                host === 'localhost' || host === '127.0.0.1' || host === '::1' || host === '';
+
+  function say(msg) {
+    if (!status) return;
+    status.textContent = msg;
+    status.hidden = false;
+  }
+
+  function val(field) {
+    var el = form.elements[field];
+    return (el && el.value || '').trim();
+  }
+
+  function addCard(name, business, rating, text) {
+    var empty = grid.querySelector('.reviews-empty');
+    if (empty) empty.remove();
+
+    var card = document.createElement('article');
+    card.className = 'review-card is-pending';
+
+    var stars = document.createElement('p');
+    stars.className = 'review-stars';
+    stars.setAttribute('aria-label', rating + ' out of 5 stars');
+    stars.textContent = new Array(rating + 1).join('★');
+
+    var quote = document.createElement('p');
+    quote.className = 'review-quote';
+    quote.textContent = text;                       // textContent, never innerHTML
+
+    var author = document.createElement('p');
+    author.className = 'review-author';
+    author.textContent = business ? name + ', ' + business : name;
+
+    var pending = document.createElement('p');
+    pending.className = 'review-pending';
+    pending.textContent = 'Pending approval';
+
+    card.appendChild(stars);
+    card.appendChild(quote);
+    card.appendChild(author);
+    card.appendChild(pending);
+    grid.appendChild(card);
+    card.scrollIntoView({ block: 'nearest' });
+  }
+
+  form.addEventListener('submit', function (e) {
+    form.classList.add('submitted');
+    if (!form.checkValidity()) return;
+
+    e.preventDefault();
+
+    var name = val('name');
+    var business = val('business');
+    var text = val('review');
+    var rated = form.querySelector('input[name="rating"]:checked');
+    var rating = rated ? parseInt(rated.value, 10) : 5;
+
+    addCard(name, business, rating, text);
+
+    if (isLocal) {
+      say('This is a local preview, so nothing was sent. On the live site your review ' +
+          'goes to Netlify and we post it here once we have read it.');
+      form.reset();
+      return;
+    }
+
+    // Netlify Forms accepts a urlencoded POST to the page path.
+    var data = new URLSearchParams(new FormData(form)).toString();
+    fetch(window.location.pathname || '/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: data
+    }).then(function (res) {
+      if (!res.ok) throw new Error(res.status);
+      say('Thanks, ' + (name.split(' ')[0] || 'we got it') + '. We read every review ' +
+          'before it goes up, so yours is showing to you for now.');
+      form.reset();
+    })['catch'](function () {
+      say('That did not send. Email it to hfoodim@foradigital.com and we will post it.');
+    });
+  });
+})();
+
 /* Interactive cobalt "compass field" — a grid of short line segments in the hero that
    rotate to point at the pointer; segments near it grow longer and brighter, so a soft
    spotlight of activity follows the mouse. When the pointer is idle or absent (touch), a

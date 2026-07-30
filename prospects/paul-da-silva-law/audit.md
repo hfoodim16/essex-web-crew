@@ -236,3 +236,147 @@ affordances. One defect found + fixed + pixel-verified (hero descender clipping,
 
 Both scoreboards pass; all hard gates clean; live click-test passes; the one defect found
 during it is fixed and verified. **Signed off.** design-memory.md row appended.
+
+---
+
+# Rev 3 — "Counsel of Record" (type + layout overhaul, palette & content frozen)
+
+## FINAL — Rev 3 SIGNED OFF (rounds 1–3)
+
+**Overall: PASS — SIGNED OFF.** $10K Checklist **8/8**; rubric **8/9/9/9/8/8/8/8/9/9**
+(boldness 8 ≥ 8, lowest 8 ≥ 7); all four round-1 composition-check failures closed and
+re-verified by live measurement. `Detector: 0 errors, 0 advisory` on all four pages with
+**zero waivers in file** — the `cream-palette`-family rules never fired, so the waiver the
+plan pre-wrote in R3-3 was never needed.
+
+Harry-directed reopening of the Rev 2 sign-off. His brief: *"Keep the colors, and info. I
+like how the info is shown in blocks, but I don't love font and format as a whole please
+change with the team."* Palette and copy were therefore **frozen by instruction** and no
+gate was allowed to fail the build for honoring them.
+
+**Detail lives in four files, merged by the lead rather than rewritten:**
+
+| File | Scope |
+|---|---|
+| `audit-rev3-lead-static.md` | Detector, copy scripts, font purge, meta, NAP↔JSON-LD, semantic HTML, focus ring, JS-off architecture, local-trade, map embed |
+| `audit-rev3-content.md` | Content parity, palette freeze, real-reviews-only |
+| `audit-rev3-browser.md` | Round 1: live JS-off, composition checks, 10-dim rubric, $10K 1–7, measured contrast, distinctiveness, click-test |
+| `audit-rev3-round2.md` | Rounds 2–3: fix verification, ripple checks, re-measurements |
+
+### What changed vs Rev 2
+
+Besley / Schibsted Grotesk → **Libre Caslon Text / Albert Sans**, fully purged including
+fallback stacks. Dark split-screen advocacy → **light-first modular ruled ledger**. Azulejo
+lattice + lamp-glow radial → flat porcelain + corner washes + 0.04 grain. Clip-wipe +
+lift/tilt + parallax → **rules-draw-in + weight-shift** (+ a sticky progress rail on
+`practice-areas.html` only), GSAP tier 0.
+
+### Frozen and verified still frozen
+
+- **Palette:** the nine tokens at exact hex, original names. Every hex literal in the 35 KB
+  stylesheet is those nine plus `#fff` ×6 (the compartment fill Rev 2 already used) —
+  **no tenth hue.** Rev 3 is in fact *stricter* than Rev 2, which carried two off-token
+  hues (`#c6984a`, `#9aa3b0`); both are gone.
+- **Content:** parity PASS, **no fact lost on any page**. One authorized drop only — the
+  reviews `h2` "In their words.", absorbed by the bare header treatment. `contact.html` has
+  zero visible-text change from Rev 2.
+- **Reviews:** the three Lawyer.com quotes byte-identical, including the reviewer's own
+  "curtious" misspelling and the doubled period in "NJ..".
+- **Harry's map edit:** the OpenStreetMap iframe **and** the Google "Get directions" link
+  survived the full rebuild with the same provider, URLs and attributes.
+
+### Hard gates
+
+- **Fail-visible:** swept before measuring — **0.00% real hidden text at rest** on all four
+  pages. (Methodology trap worth keeping: measuring immediately after load, before a scroll
+  sweep, reports a false 66.9% on index.)
+- **Live JS-off:** `main.js` renamed out (404 verified), `<html>` class `""` on all four
+  pages — the 1200 ms dead-man timer fires, nothing is hidden, every CTA renders full size.
+  Restored byte-identical (6423 B, md5 `35f9e2fa…`).
+- **Click-test:** zero dead clicks across four pages × two viewports. Both flags an earlier
+  automated pass raised were proven **false positives** (a deliberately scrollable mobile
+  rail; a map container with `cursor:auto` and no hover affordance).
+- **Contrast:** AA everywhere that carries meaning, measured from token hex.
+
+### Distinctiveness — the round's sharpest question
+
+**Genuinely a different site, not Rev 2 in a new font.** Measured dark ground **50.8% →
+36.9%**; different type genus, retired background system, replaced motion vocabulary. Also
+checked against the softer sameness the ban list misses — nearest light neighbour is
+`john-sessa-cpa` (5 rows back) and Rev 3 diverges on all four of its logged columns.
+
+### Known non-gating items, recorded rather than papered over
+
+1. **R3-3's "~70% porcelain / ~30% ink" actually measures 63.1% / 36.9%.** A real inversion,
+   ~7 points heavier on ink than the plan claims. Worth correcting in the plan text, not the
+   build.
+2. **The secondary `Send a message →` link's lower ~27px sits behind the fixed mobile call
+   bar at scroll 0.** Strictly better than before the hero tightening (it used to sit
+   entirely behind the bar and partly below the viewport), fully reachable after any scroll,
+   and the primary CTA is completely clear at +33px. Inherent to a fixed bottom bar over a
+   hero ending at 798 of 812. Closes with ~30px off the `.hero-foot .shell` bottom gap if it
+   is ever worth a round.
+3. **Recognition bodies still don't share one Y origin** (2015 / 2015 / 2070) — deviation
+   shrank from 83px to 55px after the gutter scoping.
+4. **The three review quotes render 4 lines** against a ≤3-line composition check.
+   **Not actionable** — verbatim protected reviews; the only lawful fix is layout, never
+   edited copy.
+5. **Service-area block anchored on Newark/Ironbound only.** `client-answers.md` Q4 (towns
+   served) is `[UNKNOWN] — never stated`, so inventing a town list would violate content
+   honesty, which outranks a conversion pattern. **A question for Harry to ask the client,
+   not for us to answer.**
+6. A few sub-44px touch targets that were never on a fix list and are not regressions:
+   footer nav row links 32px, the footer's inline phone 25.9px, contact's `.big` phone 37.8px.
+
+### Process note
+
+Seven teammate agents died or stalled during this round — four on
+`API Error: Connection closed mid-response` (two of them at the same millisecond, proving an
+API-side outage rather than context length), one on `529 Overloaded`, plus two stalls with
+zero writes. The audit survived because every teammate was instructed to append to disk after
+each gate, and because the lead ran every browser-independent gate in-session. Two figures in
+an intermediate report proved **stale** (contradicting the stylesheet on disk) and were
+re-measured behind a precondition guard rather than accepted.
+
+---
+
+## Review round: 1
+
+**Gate A — Detector (Step 0, run before any screenshot):**
+`Detector: 0 errors, 0 advisory` on all four pages (`index.html`, `practice-areas.html`,
+`attorney-bio.html`, `contact.html`) — verified myself, exit code 0 each. **Zero waivers
+in file** (`grep impeccable-disable` → none); the cream-palette-family rules never fired.
+
+**Copy-voice scripts (re-run by me, not taken on report):**
+- `copycheck.py` — exit **0** on all four pages. Advisories only (median paragraph length,
+  no-number paragraphs, service-noun repetition, two dash-restatement shapes on
+  index/attorney-bio). Copy is frozen this round; advisories logged, not actioned.
+- `aitells.py` — exit **0** across all four pages. All six hard checks PASS on every page.
+  Advisories: 4 near-identical card lengths on attorney-bio (lines 126-147), sentence-length
+  spread 2.89 on contact.
+
+**Gate B — Fail-visible measurement (run before any force-reveal): PASS.**
+Method per `critique.md` + the measurement's own contract (`checkContentHiddenAtRest`):
+load the page, natural scroll sweep to the bottom in 0.7×vh steps and back to top, settle,
+then `window.impeccableMeasureHiddenText()`. **No `.in` classes injected by hand.**
+
+| Page | hidden text at rest | chars |
+|---|---|---|
+| index.html | **0.0%** | 0 / 3288 |
+| practice-areas.html | **0.0%** | 0 / 2630 |
+| attorney-bio.html | **0.0%** | 0 / 2610 |
+| contact.html | **0.0%** | 0 / 1242 |
+
+Threshold is ~15%; every page is at zero. Also captured in the same session, all four pages,
+desktop 1440 and 375-wide (iframe-emulated viewport): **zero console errors, zero horizontal
+overflow** (`scrollWidth == innerWidth` on all eight runs).
+
+*Methodology note, recorded because it nearly produced a false fail:* measuring immediately
+after load without the scroll sweep reports **66.9%** on index — the transitions have been
+started but not finished, and everything below the fold has not been offered a reveal yet.
+The measurement is specified to run *after* a sweep; that is what the 0% figures are.
+
+**Interactive click-test (all four pages × two viewports) — instrumented, real clicks:** see
+the dedicated section below.
+
+

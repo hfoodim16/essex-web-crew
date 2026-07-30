@@ -471,3 +471,449 @@ trade-copy Stage A. Every visible string is drafted against it; builder runs
 `python3 skills/trade-copy/scripts/copycheck.py` on **all four pages** + the `--list` sweep +
 cold read before handoff. Tier 2 banlist + the site-specific watch list (no "aggressive,"
 no "results," no "navigate," etc.) apply to every page.
+
+---
+---
+
+## Rev 3 (2026-07-29) — type + layout overhaul, Harry-directed
+
+> **Controlling brief: `revision-brief-rev3.md`.** Harry reopened the signed-off Rev 2 site:
+> *"Keep the colors, and info. I like how the info is shown in blocks, but I don't love font
+> and format as a whole please change with the team."* So: **palette frozen (all nine tokens,
+> verbatim), all content frozen, voice-spec frozen, both real images frozen, real logo frozen,
+> the live map iframe in contact.html frozen. Typography, layout grammar, ground rhythm,
+> background system, and motion are ALL replaced.** The Rev 2 record above stays load-bearing
+> for the content map, palette rationale, and honesty notes; wherever Rev 2's layout,
+> typography, or motion specs conflict with this section, **Rev 3 wins.**
+>
+> **Stage 3 note (lead instruction):** this round's inspiration stage ran off the **local
+> `ui-ux-pro-max` database** (styles / palettes / 74 font pairings / UX guidelines / motion
+> presets) plus the skill's own `references/inspiration.md` pattern vocabulary — **no live-site
+> WebSearch/WebFetch**, by lead instruction after a prior attempt stalled on live research.
+
+## R3-1. Art direction — **"Counsel of Record"**
+
+*Counsel of record* is the attorney officially entered on a case's docket — and this design
+renders the firm the way a serious legal record reads: a **light-first, hairline-ruled ledger**
+set in Caslon, the typeface lawyers have trusted in briefs for two centuries. Porcelain pages
+carry the information in **rule-bounded compartments** (Harry's blocks, kept — but composed
+like a ledger, not stacked like cards); deep ink bands punctuate rather than dominate; brass
+appears as drawn rules, index numerals, and the call button — the fittings on the record, not
+the wallpaper. Where Rev 2 was a dark split-screen you looked *into*, Rev 3 is a document you
+*hold*: at a glance it is an obviously different site (the bold test), yet every cue still says
+*established, serious, local, speaks our language, call this number*.
+
+**The format flip in one line:** dark-first split-screen → **light-first ruled modular ledger**;
+floating rounded cards → **flat, square, rule-bounded compartments that share their hairlines
+like ledger cells**; centered dark bands → **asymmetric ink punctuation**.
+
+## R3-2. Typography (all-new system — Besley / Schibsted Grotesk retired)
+
+- **Display: `Libre Caslon Text`** (Google Fonts; 400, 400 italic, 700). Caslon is the
+  historical setting face of the American legal profession — old-style, inky, unshowy. It reads
+  *counsel*, not *studio*. Used for: h1–h3, the big phone numbers, index numerals (italic), the
+  protected language lines (400 italic), review quotes (400 italic).
+- **Body: `Albert Sans`** (Google Fonts; **variable**, use 400/500/600). Humanist-geometric,
+  warm, plain-spoken; the variable axis powers the weight-shift hover (R3-7). Used for: body,
+  lists, nav, labels, forms, buttons, captions.
+- **Ban check:** neither family appears in any `design-memory.md` row; neither is on the banned
+  set (Inter/Roboto/Arial/Helvetica/Fraunces/Instrument Serif/Geist/Plus Jakarta Sans/Space
+  Grotesk) nor in the last-3-rows pairings (Zilla Slab/Work Sans · Instrument Serif/Hanken
+  Grotesk · Besley/Schibsted Grotesk). Deliberately NOT the engine's conventional legal pairing
+  (EB Garamond/Lato): Caslon is sturdier at text sizes than Garamond and Albert Sans is warmer
+  than Lato — convention-adjacent gravity without the category default.
+
+**The type system, with numbers (builder implements exactly):**
+
+| Role | Face / weight | Size / leading | Tracking / case |
+|---|---|---|---|
+| Hero h1 (home) | Libre Caslon Text 700 | `clamp(2.75rem, 6.5vw, 5rem)` / 1.04 | −0.015em |
+| Interior h1 | Libre Caslon Text 700 | `clamp(2.4rem, 5vw, 3.5rem)` / 1.08 | −0.012em |
+| h2 section | Libre Caslon Text 700 | `clamp(1.75rem, 3vw, 2.5rem)` / 1.12 | −0.01em |
+| h3 block heading | Libre Caslon Text 700 | 1.375rem / 1.25 | −0.005em |
+| Big phone (CTA band / contact) | Libre Caslon Text 700, `font-variant-numeric: lining-nums` | `clamp(2.5rem, 7vw, 4.5rem)` / 1 | −0.01em |
+| Ledger label (replaces the eyebrow) | Albert Sans 600 | 0.8125rem / 1.4 | +0.09em, UPPERCASE |
+| Index numeral (01–04) | Libre Caslon Text 400 italic | 2.5rem / 1 | 0 |
+| Body | Albert Sans 400 | 1.0625rem / 1.65 | 0 |
+| Lead paragraph | Albert Sans 400 | 1.1875rem / 1.6 | 0 |
+| Small / captions / footer | Albert Sans 400 | 0.875rem / 1.5 | +0.01em |
+| Nav / buttons / go-links | Albert Sans 500 | 0.9375rem / 1.2 | +0.02em |
+| Language lines (protected strings) | Libre Caslon Text 400 **italic** | 1.0625rem / 1.4 | +0.01em |
+| Review quotes | Libre Caslon Text 400 italic | 1.25rem / 1.5 | 0 |
+
+**How a block's heading relates to its body:** every compartment runs *label → rule → heading →
+body*: ledger label (Albert Sans 600 caps, brass `--ouro-escuro` on light / `--lamp` on ink) ·
+8px gap · a 1px `--linha` rule the width of the text column · 12px gap · h3 in Caslon 700 at
+≈1.3× body size · 8px gap · Albert Sans body. Weight contrast is carried by **genus, not just
+weight**: inky serif display against a light humanist sans, with the brass caps label as the
+middle voice. No gradient text, no letter-spaced display serif, no all-caps Caslon ever.
+
+## R3-3. Color system — **frozen verbatim** (Rev 2 tokens, zero changes)
+
+```css
+:root{
+  --tinta:#131D33; --tinta-2:#0D1526; --pedra:#F0F2F5; --ink:#161A24;
+  --ouro:#B3873E; --ouro-escuro:#806026; --muted:#566072; --linha:#C8CDD6;
+  --lamp:#EAD9AE;
+}
+```
+Same nine names, same nine hex — no new hues, no tints outside these. **What changes is
+proportion and placement (allowed by the brief):** Rev 2 was dark-first (~55% ink grounds);
+Rev 3 is **light-first — roughly 70% porcelain `--pedra` (with pure `#fff` only as compartment
+fill on pedra, already the Rev 2 precedent), ~30% ink** (`--tinta` punctuation bands, `--tinta-2`
+footer). Brass moves from "CTA + lamp-glow atmosphere" to **drawn structure**: rules, index
+numerals, corner ticks, and the call button. `--lamp` shrinks to small type on ink (labels,
+links on dark) and the glint highlight (R3-8). All Rev 2 contrast rules stand: `--ouro` is
+never body-text on light grounds (use `--ouro-escuro`, ≈5:1 on pedra); body is `--ink` on
+`--pedra`; text on ink grounds is `--pedra`/`--linha`/`--lamp`.
+
+**Detector waiver, pre-stated:** this palette is warm-brass-on-ink and **client-locked** (Harry
+chose blue+gold in Rev 2 and froze it in the Rev 3 brief). If any `cream-palette`-family or
+premium-consumer-palette rule fires on pedra + brass, the builder waives it in-file:
+`<!-- impeccable-disable <rule> -- palette client-locked per revision-brief-rev3.md; carried from signed-off Rev 2 -->`.
+
+## R3-4. Anti-repetition (Stage 4 — read 2026-07-29)
+
+Last 3 rows banned: **happy-trees** (Zilla Slab/Work Sans · bark/moss/lime · canopy-descent
+full-bleed · dapple/photo-scrim), **fora-digital** (Instrument Serif/Hanken Grotesk · paper/ink/
+cobalt/clay · gallery-wall plates · mask-curtain + ink-sweep/underline-draw hovers + `view()`
+gallery-hang + pointer field), **paul-da-silva-law Rev 2 itself** (Besley/Schibsted Grotesk ·
+split-screen advocacy + document stack · azulejo lattice + grain + lamp-glow · clip-wipe +
+lift/tilt + hero parallax). All avoided — Rev 3 shares no font, archetype, background recipe,
+entrance, or hover with any of the three.
+
+**Softer-sameness checks (older rows, for the critic's cold eye):**
+- **john-sessa-cpa** (5 rows back) is the nearest light neighbor: porcelain + ink-navy,
+  sidebar-anchored letterhead, dot-grid graph paper. Rev 3 deliberately differs: modular ruled
+  ledger (not a sidebar letterhead), Caslon/Albert Sans (not Spectral/Public Sans), **no dot
+  grid anywhere**, brass accent (not verdigris), and ink punctuation bands john-sessa never had.
+- **cedar-grove** bento: our compartments **share collapsed hairline rules and run square to
+  full-bleed section rules** — a ledger table, not gap-separated rounded bento tiles.
+- **fora** gallery plates: no framed floating plates, no warm paper (pedra is cool), no cobalt.
+
+## R3-5. The three directions (Stage 5, palette-frozen — divergence on composition, type,
+ground rhythm, background, motion) + the pick
+
+**Direction A — "Counsel of Record" ← PICKED.**
+Concept: the firm as a serious legal record — light-first ruled ledger a frightened family can
+actually read. Layout: **Swiss/modular ruled grid + ledger compartments** (named per
+`inspiration.md`: editorial masthead hero · Swiss/modular grid · flat bordered containers ·
+service index/ledger) · Type: Libre Caslon Text / Albert Sans · Grounds: ~70% pedra, ink as
+punctuation · Background: ledger rule-field + corner washes + grain + one brass glint sweep ·
+Motion: line-draw entrance, weight-shift hover, sticky-progress index rail (practice page only),
+GSAP tier 0. Why bold: a full value-structure flip from Rev 2 — passes the bold test at a
+glance — and nobody in this category ships a ruled-ledger law site; the gravity comes from
+Caslon and drawn rules instead of dark panels.
+
+**Direction B — "Standing Counsel" (not picked).**
+Concept: dark-first monumental civic register — oversized Newsreader display over ink,
+porcelain plates overlapping dark grounds, brass frame lines. Type: Newsreader (opsz) / IBM
+Plex Sans · Background: duotone-scrim imagery + grain · Motion: split-line mask `[GSAP tier 2]`
++ zoom-crop hover + hero-exit. Why not: it stays **dark-first** — the weakest possible answer
+to "I don't love the format as a whole," and it spends a GSAP tier this site doesn't need.
+
+**Direction C — "Primeira Página" (not picked).**
+Concept: broadsheet front page — nameplate masthead, column rules, dateline small caps,
+all-serif print grammar (Playfair Display / Source Serif 4) · Background: flat newsprint +
+rules · Motion: scale-settle + crossfade-zoom. Why not: newspaper grammar reads *coverage of
+crime*, not *counsel* — the same alarmist-register failure that killed Rev 2's "Docket
+Broadsheet" — and Playfair drifts fashion-editorial.
+
+Axes check: A/B differ on grounds, layout, type, background, motion (5); A/C differ on layout,
+type genus mix, background, motion (4); B/C differ on grounds, layout, type, motion (4).
+**Pick: A** — the boldest that answers Harry's actual complaint (the format), stated per Stage 5
+autonomous rule. The color-convention call is settled and inherited: the palette **honors**
+legal blue+gold by client instruction (Rev 2 §1's argument stands verbatim); Rev 3 only
+re-proportions it light-first, which moves it *further* from the generic dark-navy firm site.
+
+## R3-6. The block system, re-composed (Harry's keeper, new grammar)
+
+The bounded info block stays the organizing unit. Its Rev 3 grammar:
+
+- **Border/ground:** square corners (`--radius: 0` for compartments), 1px `--linha` borders that
+  **collapse between neighbors** (adjacent compartments share one hairline, like ledger cells —
+  build as a bordered grid wrapper with `gap:0` and single interior rules, not per-card borders
+  that double up). Fill: `#fff` compartments on the `--pedra` page ground; on ink bands,
+  compartments are borderless fields divided by `--linha` rules at ~28% opacity.
+- **Label:** every compartment opens with the ledger label (Albert Sans 600 caps, brass) over a
+  text-column-width rule — see R3-2. This replaces Rev 2's floating eyebrow.
+- **Scale contrast:** compartments are sized by the weight of their content, not stamped equal.
+  On a 12-column grid the home practice row runs **Criminal 7 / Traffic 5** over
+  **Family 6 / Real Estate 6** (Criminal reads visibly senior — it's the practice's own
+  emphasis, Q9). Never four identical cards in a row again.
+- **Index numerals:** 01–04 set large (2.5rem) in Libre Caslon Text 400 *italic*, `--ouro`
+  (on white) / `--lamp` (on ink), top-right of the compartment — the brass folio number.
+- **Blocks meet section edges:** section-framing rules run **full-bleed edge to edge** of the
+  viewport; the compartment grid hangs from those rules, and the content column is asymmetric
+  (offset left, `max-width: 72rem`, with the right margin wider than the left at desktop). One
+  overlap moment per page maximum (named per page below).
+- **Section headers vary — never the same stacked eyebrow+h2 on every section** (craft-floor
+  refuses "eyebrow over every section"). Three treatments, rotated: **(a) ruled header row** —
+  label left, h2 beside it, index range right, hairlines above and below, full-bleed; **(b) side
+  label** — the label rotated vertical along the section's left rule, h2 in the content column;
+  **(c) bare** — label + rule only, no h2, where the content is self-explaining (reviews, CTA).
+
+## R3-7. Signature motion (all-new — clip-wipe / lift-tilt / parallax retired)
+
+- **Entrance family: `line-draw`.** The compartment/section rules **draw themselves in**
+  (scaleX 0→1 from `transform-origin:left` on border elements; `pathLength=1` dash trick on the
+  few real SVG rules), and each block's content settles 8px upward behind its drawn rule as the
+  tail of the same move. The rule IS the reveal — document lines being ruled onto the page.
+  Delivered by IntersectionObserver `.in` (threshold ~.12, once, unobserve), stagger
+  `--i` × 60ms (editorial lines), cap 12. Justification vs the flagged fade-up default: the
+  authored element is the drawn rule; the 8px settle is subordinate and never ships alone.
+  **Fail-visible per motion.md rule 0:** hidden states live only under `html.js` +
+  `prefers-reduced-motion: no-preference`, with the `<head>` opt-in snippet + `motionOK()`
+  cancel — JS off/broken = finished page.
+- **Hover personality: `weight-shift`** (Albert Sans is variable): nav links, go-links, and the
+  footer links animate `font-variation-settings` 'wght' 400→650 over 200ms (reserve layout with
+  a hidden bold duplicate or `text-rendering` care so nothing reflows visibly); compartment
+  hover = fill swap `#fff → --pedra` + index numeral deepens `--ouro → --ouro-escuro`; buttons
+  get label weight 500→650 + `:active{transform:scale(.97)}`. **No lift, no tilt, no shadow
+  motion anywhere** — that was Rev 2's language. Guarded `(hover:hover) and (pointer:fine)`.
+- **Scroll set-piece (the one): `sticky-progress` index rail** on `practice-areas.html` only —
+  the ledger's tab column (01–04 + phone) sticks and marks the current section (IO toggles
+  `aria-current`; a 2px brass rule slides between items). CSS `position:sticky` + the same IO.
+  No parallax anywhere (Rev 2 had it), no `view()` scrub (fora owns it).
+- **Tempo:** ease `cubic-bezier(.16,1,.3,1)` everywhere (expensive, slow-settling, editorial);
+  durations — rule draw 700ms, content settle 600ms, hover 200ms; stagger 60ms. Never `linear`,
+  never bare `ease`.
+- **GSAP tier: 0** — pure CSS + IntersectionObserver. No vendored library; the bytes stay in
+  the photographs.
+- Ban check vs last 3 rows: line-draw ∉ {mask-curtain, clip-wipe, dapple-scrim};
+  weight-shift ∉ {ink-sweep/underline-draw/fill-sweep, lift+tilt}; sticky-progress ∉
+  {`view()` gallery-hang, hero parallax, pointer field}. No fade-up, no count-up.
+
+## R3-8. Background & atmosphere (all-new — azulejo lattice / lamp-glow radial retired)
+
+- **Pedra pages — "ruled paper":** flat `--pedra` base + two barely-there corner washes
+  (radial `--linha` at 12–15% alpha, top-left and bottom-right) + the standard **grain overlay**
+  at 0.04 — paper-grade depth, no pattern. **No dot grid, no graph paper** (john-sessa owns it),
+  no lattice (Rev 2 owns it). Structural hairlines (the full-bleed section rules) are the only
+  "pattern" — they are real rules, not a repeating background.
+- **Ink bands:** flat vertical gradient `--tinta → --tinta-2` + grain. **No lattice, no
+  lamp-glow radial.**
+- **Atmosphere (one effect, sitewide): `shimmer/glint sweep`** on the big Caslon phone number
+  in each page's ink CTA band — a brass-to-`--lamp` glint crossing the digits every ~7s with the
+  long idle (polished-brass-catching-light; the banker's-lamp warmth carried into Rev 3 as a
+  moving highlight instead of a radial). Reduced-motion kills it. Budget per page: 1 entrance +
+  1 hover + ≤1 set-piece + 1 ambient = within the ≤4-system cap.
+
+## R3-9. Per-section layout spec (all four pages — same filenames, nav labels, URLs)
+
+**Shared header (every page) — porcelain masthead, two decks (replaces the tinta header):**
+1. **Top deck:** 13px Albert Sans row between hairlines — language lines left (verbatim,
+   protected), address "385 Lafayette Street · Newark's Ironbound" right. On `--pedra`, text
+   `--muted`, language lines `--ouro-escuro` italic Caslon.
+2. **Main deck:** real `assets/logo.png` top-left **directly on the porcelain** (it lived on a
+   pedra chip against Rev 2's dark header; on a light masthead it needs no chip — builder
+   verifies legibility, never recolors) · nav right (Albert Sans 500; active page = 2px `--ouro`
+   rule under the link, not bold) · **call button**: `--ouro` fill, `--ink` label, **square
+   corners**, small inline-SVG phone glyph (stroke, currentColor) — **the ☎ dingbat is retired
+   sitewide** (craft checklist: no emoji icons). A 2px `--ouro` rule closes the masthead bottom.
+3. Sticky behavior: top deck scrolls away; main deck sticks (`sticky condensing bar`) with a
+   hairline + subtle white fill.
+
+**Shared footer — `--tinta-2` ledger:** same strings as Rev 2 (logo on a small pedra chip —
+still needed on dark, Rev 2 precedent · one-line services sentence · language lines · Pages
+column · Office/NAP column), recomposed as **ruled columns sharing hairlines** (`--linha` at
+28% opacity), ledger labels for column heads ("Pages", "Office") in `--lamp` caps. Disclaimer
+block (bracket-flagged, verbatim) sits under a full-width rule; bottom row unchanged.
+Sticky mobile call bar stays (conversion pattern, not a layout signature).
+
+### index.html
+1. **Masthead hero (pedra, header treatment none — it IS the masthead):** the h1
+   *"A Newark defense attorney who speaks your language."* (frozen copy) set huge in Caslon
+   across ~10 of 12 columns, max 2 lines · hero-sub (frozen 30-word line) in lead size, offset
+   to start at column 4 (asymmetry) · then a **full-bleed ruled row**: language lines (Caslon
+   italic, `--ouro-escuro`) left | CTA pair right (ouro call button + "Send a message →"
+   weight-shift link). 4 text elements + CTA row — under the composition cap.
+2. **Photo band + overlap (the page's one overlap):** `assets/hero.webp` full-width at a
+   **~21:9 CSS crop** (`aspect-ratio:21/9; object-fit:cover; object-position:center 62%` — the
+   file is untouched, brief rule 4), hairline top rule, and its bottom edge **overlaps ~64px
+   into the ink band below** (negative margin) so the photograph sits clipped to the ledger
+   like a mounted plate. This is the hero re-framed: type-first masthead + mounted photograph,
+   nothing like Rev 2's split panel.
+3. **The record row (ink band):** the 4 frozen trust facts as a **ruled ledger row** — four
+   fields divided by `--linha`-at-28% vertical rules (2×2 on mobile), k in Caslon 700 `--pedra`,
+   v in Albert Sans `--linha`. Header treatment (c): none — the row explains itself. No
+   count-up (they aren't numbers anyway).
+4. **Practice compartments (pedra):** header treatment (a) ruled header row — label "Practice
+   areas" + h2 "Find your matter, then call." (frozen) left, index range "01–04" in Caslon
+   italic `--ouro-escuro` right. Then the **asymmetric compartment grid**: Criminal 7-col /
+   Traffic 5-col / Family 6-col / Real Estate 6-col, collapsed shared rules, each compartment =
+   label rule + h3 + frozen ≤25-word p + "See … →" go-link (weight-shift) + folio numeral
+   top-right. Whole compartment is the link target (as in Rev 2 — no dead-looking affordances).
+5. **About compartment (white on pedra, split):** header treatment (b) — "The office" as a
+   **vertical side label** on the compartment's left rule. Inside: `assets/about.webp`
+   **reused as-is at its native 4:3** in a ruled frame with brass corner ticks, left 5 cols;
+   frozen copy (h2 "Since 2002, one case at a time." + two paragraphs + "Meet Paul Da Silva →")
+   right 7 cols.
+6. **Commentary band (ink, asymmetric):** left 7 cols — label "On the air", h2 "A legal voice
+   the press calls on.", frozen paragraph, "Read the full bio →" link. Right 5 cols — the two
+   marks (RTP-Portugal / CourtTV, frozen strings) as **stacked borderless fields sharing one
+   rule**, RTP first and set larger (the answers' own weighting). Text names only, no fake
+   network logos (unchanged hard rule).
+7. **Reviews (pedra):** header treatment (c) — label "Client reviews · Lawyer.com" + rule only
+   (drop the h2 "In their words." — **not a content drop: a 3-word section ornament absorbed
+   by the new header grammar**; the three quotes carry the section. Logged in R3-10.) Three
+   **ruled columns sharing vertical hairlines** (no cards): quote in Caslon italic 1.25rem,
+   attribution in Albert Sans small caps. All three quotes verbatim incl. "curtious"/"best"
+   (protected).
+8. **CTA band (ink, asymmetric — Rev 2's was centered):** left-aligned label "Ready to talk" +
+   the giant Caslon phone (tap-to-call, **glint sweep lives here**) + address line; right
+   column, divided by a vertical rule: the frozen one-liner "The fastest way to reach the
+   office is by phone." + "Send a message instead →". All strings frozen.
+
+### practice-areas.html
+1. **Page head (pedra masthead, not ink):** label "DaSilva & Associates, LLC" · h1 "Practice
+   Areas" in Caslon · frozen intro line with the inline phone link (`--ouro-escuro` on pedra —
+   AA, replacing Rev 2's `--lamp`-on-ink link). Closed by the full-bleed 2px brass rule.
+2. **Body = sticky index rail + ledger (the set-piece):** left 2-col sticky rail — 01 Criminal
+   Defense / 02 Traffic / 03 Family Law / 04 Real Estate (anchor links `#criminal #traffic
+   #family #real`, preserved) + a small call button; 2px brass rule slides to the active item.
+   Right 10 cols: the four practice sections as **ruled compartment groups** sharing hairlines,
+   each opening with header treatment (a): folio numeral + h2 + frozen intro.
+   - **#criminal:** frozen intro; the 4 sub-blocks (DUI/DWI · Sex Offenses · Violent Crimes &
+     Weapon Offenses · Drug Crimes, all frozen) as a **2×2 collapsed-rule sub-ledger** inside
+     the group — scale contrast: this group is visibly the deepest.
+   - **#traffic:** frozen intro + the 5 violations as **ledger line items** (full-width rows
+     divided by hairlines, brass tick left — replaces Rev 2's chip pills) + frozen goal
+     sentence. Stays thin by design (voice spec).
+   - **#family:** frozen intro + 7 ledger line items.
+   - **#real:** frozen intro + 4 ledger line items.
+3. **CTA band:** shared component (R3-9 index §8).
+
+### attorney-bio.html
+1. **Page head (pedra):** label "Attorney" · h1 "Paul Da Silva" · frozen intro line.
+2. **Bio compartment (white, split):** portrait placeholder left 4 cols — **3:4 ruled frame
+   with brass corner ticks**, frozen label "Photo of Paul Da Silva — real headshot to come."
+   (NEVER generated — standing hard rule); frozen two-paragraph bio right 8 cols, first
+   paragraph at lead size.
+3. **Timeline → ledger table (pedra):** header treatment (a): label "Education & career" + h2
+   "The path to the practice." (frozen). The 6 frozen entries as **full-width ledger rows**:
+   year column (Caslon 700, `--ouro-escuro`, right-aligned, fixed width) | rule | what (h3
+   size) + desc. Hairline between rows; rows draw in via the entrance family. Replaces Rev 2's
+   vertical timeline rail.
+4. **Recognition (pedra):** header treatment (b) vertical side label "Recognition"; h2 "Beyond
+   the courtroom." (frozen) in-column; the 3 frozen recognition blocks as compartments spanned
+   **5 / 4 / 3** (commentator widest — the site's best proof). Personal line (frozen) as an
+   italic footnote under a short brass rule.
+5. **CTA band:** shared component.
+
+### contact.html
+1. **Page head (pedra):** label "Get in touch" · h1 "Contact the office." · frozen intro.
+2. **Contact ledger (two compartments sharing one rule, 5 / 7):**
+   - **Left — call compartment (white):** label "Call the office" · the big Caslon number
+     (tap-to-call) · the frozen `<dl>` (Fax / Office / Languages) as ledger rows with hairlines ·
+     then the **LIVE map iframe — preserved exactly as it exists in the file today** (Harry's
+     hand-edit, currently uncommitted: an **OpenStreetMap embed iframe** + the "Get directions"
+     Google Maps link. The brief calls it a Google Maps iframe; the file's actual embed is OSM
+     with a Google directions link — **preserve the file's actual live embed byte-for-byte**,
+     src untouched, `loading="lazy"` kept, and only restyle the frame). **Frame spec:** square
+     corners, 1px `--linha` border, a 2px `--ouro` rule across the top edge, and the "Get
+     directions" link restyled as a ledger caption row (Albert Sans small, `--ouro-escuro`,
+     weight-shift hover) directly beneath.
+   - **Right — form compartment (white):** label "Send a message" · h2 "Tell us what happened."
+     (frozen) · the 3 frozen fields (Name / Phone / What happened?) restyled as **ledger
+     fields**: no boxes — a 1px `--linha` bottom rule per field, focus = 2px `--tinta` rule +
+     label weight-shift 400→600; submit = ouro button (square). Demo behavior unchanged: inline
+     confirmation in `.form-result`, never a dead click; the HTML comment marking the real
+     handler stays.
+3. **CTA band:** shared component minus the address line (as in Rev 2's contact variant —
+   "Prefer to call?" label, phone with glint, frozen one-liner).
+
+## R3-10. Rev 3 content map — every current string placed (parity already banked)
+
+Content is frozen, so the map is a **carry-over ledger**: every visible string on the four
+Rev 2 pages moves to its Rev 3 home. The critic re-walks this against `site-content.md` + the
+Rev 2 pages.
+
+| Current string block (Rev 2) | Rev 3 destination |
+|---|---|
+| All `<head>` meta: titles, descriptions, OG/Twitter, canonicals, favicon, JSON-LD (×4 pages) | **Unchanged, byte-for-byte** (only the Google Fonts `<link>` swaps to Libre Caslon Text + Albert Sans) |
+| Header: language lines + address strip · nav 4 labels · "Call 973-344-0808" | Masthead top deck + main deck (R3-9 shared header) — same strings, same URLs |
+| Hero: h1 · language-lines pair · 30-word sub · CTA pair | Masthead hero §1 — same strings, new composition |
+| Trust strip: 4 k/v facts | The record row (ink) §3 — all 4 verbatim |
+| Practice section: label "Practice areas" + h2 "Find your matter, then call." + 4 cards (num, h3, p, go-link) | Compartment grid §4 — every string carried; spans change, words don't |
+| About: label "The office" + h2 + lead + p + "Meet Paul Da Silva →" | About compartment §5 (label becomes the vertical side label — same text) |
+| Commentary: label "On the air" + h2 + p + link + 2 marks (name + desc) | Commentary band §6 — all strings, RTP field set larger |
+| Reviews: label "Client reviews · Lawyer.com" + 3 verbatim quotes + attributions | Reviews ruled columns §7 — quotes/attributions protected, untouched |
+| CTA band strings (label, phone, address, line, link) ×3 page variants | Shared CTA band — all strings, asymmetric composition |
+| Footer: services sentence · language lines · Pages · NAP block (incl. fax) · disclaimer (bracket flag + text) · © row | Footer ledger — all strings verbatim; NAP still matches JSON-LD exactly |
+| practice-areas.html: page-head strings · 4 section intros · 4 criminal sub-blocks · 5 traffic items + goal · 7 family items · 4 real-estate items | Same page — intros and every list item carried; chips become ledger line items (same text); anchors `#criminal #traffic #family #real` preserved |
+| attorney-bio.html: page-head · 2-paragraph bio · portrait placeholder label · 6 timeline entries (yr/what/desc) · recognition h2 + 3 blocks · personal line | Same page — timeline becomes the ledger table, every yr/what/desc string carried |
+| contact.html: page-head · "Call the office" + number + dl (Fax/Office/Languages) · **live map iframe + "Get directions" link** · form (label, h2, 3 fields, "Send", comment, `.form-result`) | Same page — **iframe src byte-for-byte** (see R3-9 contact §2); all form strings + demo behavior carried |
+
+**Deliberately dropped (with reasons — nothing else is dropped):**
+- **h2 "In their words." (home reviews section)** — a 3-word section ornament, zero
+  informational content (parity counts facts); absorbed by the new bare-header grammar where
+  the label + quotes carry the section. If the critic reads this as a parity nick, the builder
+  reinstates it in the ruled header row — either way it's logged, not silent.
+- **The ☎ dingbat glyphs (header button, hero CTA, mobile bar)** — decorative characters, not
+  content; replaced by an inline-SVG phone glyph (craft checklist: no text dingbats as icons).
+- **The header logo's pedra chip** (visual treatment, not a string) — unnecessary on the light
+  masthead; the chip **stays in the footer**, where the logo still sits on dark.
+
+## R3-11. Image list — **NO new generation authorized** (the 2-image cap is spent)
+
+| # | Asset | Rev 3 slot | Treatment |
+|---|---|---|---|
+| A | `assets/hero.webp` (16:9, 1600×893, frozen) | Home photo band under the masthead | **Reused as-is; ~21:9 crop done in CSS only** (`aspect-ratio:21/9; object-fit:cover; object-position:center 62%` — builder tunes the Y% so the storefront line stays in frame at 375px too, where the band relaxes to 16:9). File untouched, no regeneration, no re-encode |
+| B | `assets/about.webp` (4:3, 1000×747, frozen) | Home about compartment, left 5 cols | **Reused as-is at native 4:3** in the ruled frame. No crop needed |
+| C | Portrait placeholder | attorney-bio.html §2 | Restyled to the direction: 3:4 ruled frame, brass corner ticks, frozen label text. Never generated |
+| D | `assets/og.jpg` | OG/Twitter image, all pages | Unchanged |
+| E | Live map iframe | contact.html | Not an image slot — preserved live embed (R3-9 contact §2) |
+| F | `assets/logo.png` | Masthead + footer | Frozen, unmodified, local |
+
+No other image slots exist in this direction; the depth budget is carried by R3-8's ruled-paper
+system, not imagery. If the builder finds a slot that seems to want an image, the answer is a
+rule, a numeral, or nothing — **never a third generation.**
+
+## R3-12. Mobile (375px) — real decisions for the ledger grammar
+
+- **Masthead:** top deck compresses to the language lines only (identity — never disappears;
+  address moves into the footer's reach); main deck = logo + hamburger + compact call button.
+  Menu = full-width ruled list (ledger rows), not a floating sheet.
+- **Hero:** h1 at the clamp floor (2.75rem) · sub full-width · ruled row stacks: language lines,
+  then **full-width ouro call button**, then the message link. Photo band relaxes to 16:9 and
+  the ink-band overlap shrinks to ~32px (still present — the grammar survives the viewport).
+- **Record row:** 2×2 ruled grid (shared hairlines both axes).
+- **Practice compartments:** single column, **collapsed rules kept** (one continuous hairline
+  between stacked compartments — reads as one ledger, not four cards); folio numerals stay
+  top-right at 2rem.
+- **Sticky index rail (practice page):** becomes a **horizontally scrollable tab row pinned
+  under the sticky masthead** (01–04, brass rule under the active tab); content sections run
+  full-width beneath. The criminal 2×2 sub-ledger stacks to 1-col with shared rules.
+- **Timeline ledger table (bio):** year column narrows to a 4.5rem left rail; what/desc stack
+  right of it — still a table, not a rail of dots.
+- **Contact:** call compartment first (number at clamp floor), map iframe full-width ~4:3,
+  form below; sticky bottom call bar in ouro on all pages (kept from Rev 2 — conversion
+  pattern). All tap targets ≥44px; weight-shift hover is `(hover:hover)`-guarded so touch gets
+  the pressed state only.
+- Screenshots desktop + 375px, all four pages → `screenshots/` (re-captured, brief rule).
+
+## R3-13. Gate compliance notes (builder + critic)
+
+- **Composition checks, planned around:** hero = 4 text elements + CTA row (under the cap);
+  exactly **one** image+text split per page (about / bio); **zero marquees**; section headers
+  rotate three treatments (R3-6) instead of eyebrow+h2 everywhere; layout families across the
+  home page: masthead hero · mounted photo band · ruled record row · asymmetric compartment
+  grid · split compartment · asymmetric ink band · ruled quote columns · asymmetric CTA — no
+  two-family monotony.
+- **Detector:** expected clean at `exit 0`; the single pre-authorized waiver family is the
+  palette one (R3-3) — client-locked colors, waived in-file with the stated reason. Libre
+  Caslon Text / Albert Sans are not on the overused-font list.
+- **JS-off:** line-draw hidden states scoped `html.js` + reduced-motion wrapper with the
+  `motionOK` cancel (R3-7) — rename `main.js`, every word reads.
+- **Copy gates:** content is frozen, so `copycheck.py` + `aitells.py` should pass as they did
+  at Rev 2 sign-off; the builder re-runs both on all four pages anyway (brief rule 3) since
+  even carried strings sit in new markup. The one string-length judgment call (reviews h2) is
+  logged in R3-10.
+- **Design-memory row (critic, on pass — REPLACES the paul-da-silva-law row):**
+  `2026-07-29 · paul-da-silva-law — "Counsel of Record" (Rev 3; palette client-locked, carried
+  from Rev 2) · Libre Caslon Text / Albert Sans · dark-first→light-first iron-gall ink +
+  aged brass + cool porcelain (client-directed, deliberately carried) · light-first ruled
+  modular ledger (Swiss/modular compartments, collapsed hairlines) · porcelain rule-field +
+  corner washes + grain; ink punctuation bands; brass glint sweep · line-draw entrance +
+  weight-shift hover + sticky-progress index rail — deliberately NOT fade-up/count-up.`

@@ -54,7 +54,7 @@ a{color:inherit;text-decoration:none}
 .wrap{max-width:var(--container);margin:0 auto;padding:0 5vw}
 
 /* anchor targets clear the sticky header */
-#work,#founders,#process,#contact,#reviews,#top{scroll-margin-top:calc(var(--nav-h) + 12px)}
+#work,#founders,#process,#pricing,#contact,#reviews,#top{scroll-margin-top:calc(var(--nav-h) + 12px)}
 
 /* linen grain */
 .grain{
@@ -314,15 +314,42 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:var(--lh-display);
   transition:background-size .34s var(--ease-out);
 }
 
-/* coming-soon plates */
-.soon-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4)}
-.plate-soon .soon-body{
-  background:var(--surface);min-height:230px;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;text-align:center;padding:var(--space-4);gap:6px;
+/* ---------- pricing ---------- */
+/* The one number on the page, hung like a piece on the gallery wall: an oversized serif
+   figure on the left with the hairline rule beside it doing the framing, the plain list of
+   what it covers on the right. No card, no tier grid — a tier grid would imply prices we
+   have not quoted. */
+.price-row{
+  display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);
+  gap:var(--space-5);align-items:start;
 }
-.asterisk{width:34px;height:34px;margin-bottom:var(--space-2);animation:spin 40s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.soon-sub{color:var(--stone);font-size:var(--fs-small);max-width:26ch}
+.price-figure{border-top:1px solid var(--line);padding-top:var(--space-3)}
+.price-from{
+  font-family:var(--sans);font-weight:600;font-size:var(--fs-kicker);
+  text-transform:uppercase;letter-spacing:.14em;color:var(--stone);
+}
+.price-number{
+  font-family:var(--serif);font-size:clamp(4rem,10vw,7.5rem);line-height:.92;
+  letter-spacing:-.02em;color:var(--ink);margin-top:var(--space-1);
+}
+.price-cur{font-size:.45em;vertical-align:.62em;margin-right:.06em;color:var(--stone)}
+.price-detail .kicker{margin-bottom:var(--space-2)}
+.price-list{list-style:none;display:flex;flex-direction:column;gap:var(--space-2)}
+.price-list li{
+  position:relative;padding:0 0 var(--space-2) 26px;border-bottom:1px solid var(--line);
+}
+.price-list li:last-child{border-bottom:0;padding-bottom:0}
+/* cobalt tick — the only color in the section, matching the interactive-only rule */
+.price-list li::before{
+  content:"";position:absolute;left:2px;top:.62em;width:10px;height:6px;
+  border-left:1.8px solid var(--cobalt);border-bottom:1.8px solid var(--cobalt);
+  transform:rotate(-45deg);
+}
+.price-detail .btn{margin-top:var(--space-4)}
+@media(max-width:860px){
+  .price-row{grid-template-columns:1fr;gap:var(--space-4)}
+  .price-detail .btn{width:100%;text-align:center}
+}
 
 /* ---------- founders ---------- */
 .founders{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
@@ -442,6 +469,61 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:var(--lh-display);
   display:block;font-family:var(--serif);font-size:4rem;line-height:.6;
   color:var(--cobalt);margin-bottom:var(--space-2);
 }
+/* Review form — same hairline-field language as the inquiry form, one column narrower so
+   the two forms don't read as the same block twice. */
+.review-form{
+  position:relative;display:grid;grid-template-columns:1fr 1fr;
+  gap:var(--space-3) var(--space-4);margin-bottom:var(--space-5);
+  padding:var(--space-4);background:var(--paper);
+  border:1px solid var(--line);border-radius:var(--radius);
+}
+.review-form textarea{
+  font-family:var(--sans);font-size:var(--fs-body);color:var(--ink);
+  background:transparent;border:1px solid var(--line);border-radius:var(--radius);
+  padding:10px 12px;width:100%;resize:vertical;min-height:110px;
+  transition:border-color .3s var(--ease-out);
+}
+.review-form textarea::placeholder{color:#9AA1B8}
+.review-form textarea:focus{outline:none;border-color:var(--cobalt)}
+.review-form textarea:focus-visible{outline:2px solid var(--cobalt);outline-offset:3px}
+.review-form.submitted :invalid{border-color:var(--clay)}
+.stars-field{border:0;padding:0;margin:0;min-width:0}
+.stars-field legend{
+  font-family:var(--sans);font-weight:600;font-size:var(--fs-small);color:var(--ink);
+  padding:0;margin-bottom:6px;
+}
+/* Radios sit in DOM order 5→1 so a checked star can style the lower ones with ~ ;
+   row-reverse puts them back on screen as 1→5, left to right. */
+.stars-input{display:inline-flex;flex-direction:row-reverse;justify-content:flex-end;gap:4px}
+.stars-input input{position:absolute;opacity:0;width:1px;height:1px}
+.stars-input label{
+  cursor:pointer;font-size:1.6rem;line-height:1;color:var(--line);
+  padding:2px 1px;transition:color .2s var(--ease-out);
+}
+.stars-input label::before{content:"\2605"}
+.stars-input label:hover,
+.stars-input label:hover ~ label,
+.stars-input input:checked,
+.stars-input input:checked ~ label{color:var(--clay)}
+.stars-input input:focus-visible + label{outline:2px solid var(--cobalt);outline-offset:2px}
+.sr-only{
+  position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;
+}
+/* a review the writer just submitted: visible to them, not published yet */
+.review-card.is-pending{border-style:dashed}
+.review-pending{
+  font-size:var(--fs-small);color:var(--stone);font-weight:600;
+  text-transform:uppercase;letter-spacing:.08em;
+}
+@media(max-width:760px){
+  .review-form{grid-template-columns:1fr;padding:var(--space-3)}
+  .stars-input label{font-size:1.9rem;padding:6px 3px}
+}
+@media (pointer:coarse){
+  .stars-input label{font-size:1.9rem;padding:6px 4px}
+}
+
 .reviews-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4)}
 .reviews-empty{
   grid-column:1/-1;background:var(--paper);border:1px dashed var(--line);
@@ -516,7 +598,6 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:var(--lh-display);
 }
 
 @media(max-width:560px){
-  .soon-grid{grid-template-columns:1fr}
   .hero{min-height:auto;max-height:none;padding-top:var(--space-4)}
   .section{padding:clamp(4rem,14vw,6rem) 0}
   .mat{inset:16px}
@@ -532,5 +613,4 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:var(--lh-display);
   *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
   .js .reveal::after{display:none}
   .marquee-track{animation:none}
-  .asterisk{animation:none}
 }

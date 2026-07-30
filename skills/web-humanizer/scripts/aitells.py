@@ -478,7 +478,14 @@ def unattributed_reviews(quotes):
 
 # ------------------------------------------------------------------ analysis
 def analyze(path):
-    raw = Path(path).read_text(errors="replace")
+    # The Critic passes globs (mockup/*.html). A shell that matches nothing hands
+    # the pattern through literally, and a page can move between runs -- say so
+    # and keep going rather than dying on a traceback mid-audit.
+    try:
+        raw = Path(path).read_text(errors="replace")
+    except (FileNotFoundError, IsADirectoryError):
+        print(f"=== {path}\n    [SKIP] no such page", file=sys.stderr)
+        return None
     p = Extract()
     p.feed(raw)
     p._flush()

@@ -16,8 +16,11 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='5' fill='%23131D33'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='21' font-weight='700' fill='%23EAD9AE' text-anchor='middle'%3ED%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Besley:ital,wght@0,700;0,800;1,400&family=Schibsted+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,400..700;1,400&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<!-- Motion opt-in + dead-man timer: if main.js never runs, .js is stripped and
+     every hidden entrance state disappears, leaving a finished page. -->
+<script>document.documentElement.className+=" js";window.__revealFail=setTimeout(function(){document.documentElement.classList.remove("js")},1200);</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -40,47 +43,55 @@
 </head>
 <body>
 
-<header class="site-header">
-  <div class="lang-strip">
-    <div class="container">
-      <div class="langs"><span>Se Habla Espanol</span> &nbsp;·&nbsp; <span>Nos falamos o portugues</span></div>
-      <div class="addr">385 Lafayette Street · Newark's Ironbound</div>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="masthead">
+  <div class="deck-top">
+    <div class="shell">
+      <p class="langs">Se Habla Espanol &nbsp;·&nbsp; Nos falamos o portugues</p>
+      <p class="addr">385 Lafayette Street · Newark's Ironbound</p>
     </div>
   </div>
-  <div class="header-bar">
-    <div class="container">
+  <div class="deck-main" id="deck-main">
+    <div class="shell">
       <a href="index.html" class="brand" aria-label="DaSilva &amp; Associates, LLC — home">
-        <span class="brand-plate"><img src="assets/logo.png" alt="DaSilva & Associates, LLC logo"></span>
+        <img src="assets/logo.png" alt="DaSilva &amp; Associates, LLC logo" width="240" height="60">
       </a>
       <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav">
-        <svg class="open-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
-        <svg class="close-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        <svg class="open-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        <svg class="close-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
       </button>
-      <nav class="main-nav" id="primary-nav" aria-label="Primary">
-        <a href="index.html">Home</a>
-        <a href="practice-areas.html">Practice Areas</a>
-        <a href="attorney-bio.html">Attorney Bio</a>
-        <a href="contact.html" aria-current="page">Contact</a>
+      <nav class="nav" id="primary-nav" aria-label="Primary">
+        <a class="ws" data-t="Home" href="index.html"><span>Home</span></a>
+        <a class="ws" data-t="Practice Areas" href="practice-areas.html"><span>Practice Areas</span></a>
+        <a class="ws" data-t="Attorney Bio" href="attorney-bio.html"><span>Attorney Bio</span></a>
+        <a class="ws" data-t="Contact" href="contact.html" aria-current="page"><span>Contact</span></a>
       </nav>
-      <a href="tel:+19733440808" class="call-btn"><span class="ico">☎</span> Call 973-344-0808</a>
+      <a href="tel:+19733440808" class="btn-call">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 4h4l2 5-2.5 1.6a11 11 0 0 0 5.9 5.9L15 14l5 2v4a1 1 0 0 1-1.1 1A16 16 0 0 1 3 5.1 1 1 0 0 1 4 4z"/></svg>
+        Call 973-344-0808
+      </a>
     </div>
   </div>
 </header>
 
-<main>
-  <section class="page-head ink-ground grain on-ink">
-    <div class="container">
-      <p class="eyebrow reveal-up">Get in touch</p>
-      <h1 class="reveal">Contact the office.</h1>
-      <p class="intro reveal-up" style="--i:1">Call, or send a few lines and we'll call you back.</p>
+<main id="main">
+  <!-- ================= PAGE HEAD (pedra) ================= -->
+  <section class="page-head">
+    <div class="shell">
+      <p class="label settle">Get in touch</p>
+      <h1 class="settle" style="--i:1">Contact the office.</h1>
+      <p class="intro settle" style="--i:2">Call, or send a few lines and we'll call you back.</p>
     </div>
   </section>
+  <div class="rule-brass drawx"></div>
 
-  <section class="pad">
-    <div class="container">
-      <div class="contact-grid">
-        <div class="contact-phone reveal-up">
-          <p class="eyebrow">Call the office</p>
+  <!-- ================= CONTACT LEDGER (two compartments, 5 / 7) ================= -->
+  <section class="pad-sm">
+    <div class="shell">
+      <div class="contact-ledger settle">
+        <div class="contact-call">
+          <p class="label">Call the office</p>
           <a href="tel:+19733440808" class="big">973-344-0808</a>
           <dl class="contact-detail">
             <dt>Fax</dt>
@@ -91,69 +102,77 @@
             <dd>Se Habla Espanol · Nos falamos o portugues</dd>
           </dl>
 
-          <!-- Google Map embed goes here on the live site -->
-          <div class="map-embed" role="img" aria-label="Map location: 385 Lafayette Street, Newark, NJ 07105">
-            <div>
-              <div class="pin" aria-hidden="true">◉</div>
-              <strong>Google Map · 385 Lafayette Street, Newark</strong><br>
-              <span style="font-size:.9rem;">Interactive map placeholder for the live site.</span>
-            </div>
+          <!-- Live OpenStreetMap embed + Google directions link (client-added; carried across verbatim) -->
+          <div class="map-frame">
+          <iframe class="map-embed" style="border:0;width:100%"
+            src="https://www.openstreetmap.org/export/embed.html?bbox=-74.1598293%2C40.7224296%2C-74.1518293%2C40.7304296&layer=mapnik&marker=40.7264296%2C-74.1558293"
+            loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            title="Map location: 385 Lafayette Street, Newark, NJ 07105"></iframe>
+          <a href="https://www.google.com/maps/search/?api=1&query=385+Lafayette+Street,+Newark,+NJ+07105"
+             target="_blank" rel="noopener" class="map-caption ws" data-t="Get directions"><span>Get directions</span></a>
           </div>
         </div>
 
-        <div class="reveal-up" style="--i:1">
-          <div class="form-card">
-            <p class="eyebrow">Send a message</p>
-            <h2 style="color:var(--tinta); font-size:1.7rem;">Tell us what happened.</h2>
-            <!-- Demo form only — no network call. On the live site this posts to a real handler. -->
-            <form id="contact-form" novalidate>
-              <div class="field">
-                <label for="cf-name">Name</label>
-                <input type="text" id="cf-name" name="name" autocomplete="name" required>
-              </div>
-              <div class="field">
-                <label for="cf-phone">Phone</label>
-                <input type="tel" id="cf-phone" name="phone" autocomplete="tel" required>
-              </div>
-              <div class="field">
-                <label for="cf-what">What happened?</label>
-                <textarea id="cf-what" name="what" rows="5" required></textarea>
-              </div>
-              <button type="submit" class="btn btn-primary">Send</button>
-              <p class="form-result" role="status" hidden></p>
-            </form>
-          </div>
+        <div class="contact-form">
+          <p class="label">Send a message</p>
+          <h2>Tell us what happened.</h2>
+          <!-- Demo form only — no network call. On the live site this posts to a real handler. -->
+          <form id="contact-form" novalidate>
+            <div class="field">
+              <label for="cf-name">Name</label>
+              <input type="text" id="cf-name" name="name" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label for="cf-phone">Phone</label>
+              <input type="tel" id="cf-phone" name="phone" autocomplete="tel" required>
+            </div>
+            <div class="field">
+              <label for="cf-what">What happened?</label>
+              <textarea id="cf-what" name="what" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send</button>
+            <p class="form-result" role="status" hidden></p>
+          </form>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="pad ink-ground grain on-ink cta-band">
-    <div class="container">
-      <p class="eyebrow reveal-up">Prefer to call?</p>
-      <a href="tel:+19733440808" class="phone reveal-up" style="--i:1">973-344-0808</a>
-      <p class="line reveal-up" style="--i:2">The fastest way to reach the office is by phone.</p>
+  <!-- ================= CTA BAND (contact variant, no address line) ================= -->
+  <section class="band-ink pad cta-band" aria-label="Call the office">
+    <div class="shell">
+      <div class="cta-in">
+        <div class="cta-left">
+          <p class="label">Prefer to call?</p>
+          <a href="tel:+19733440808" class="phone">973-344-0808</a>
+        </div>
+        <div class="cta-right">
+          <p class="line">The fastest way to reach the office is by phone.</p>
+        </div>
+      </div>
     </div>
   </section>
 </main>
 
-<footer class="site-footer footer">
-  <div class="container">
+<footer class="footer">
+  <div class="shell">
     <div class="footer-top">
       <div class="footer-brand">
-        <span class="brand-plate"><img src="assets/logo.png" alt="DaSilva & Associates, LLC logo"></span>
+        <span class="chip"><img src="assets/logo.png" alt="DaSilva &amp; Associates, LLC logo" width="240" height="60"></span>
         <p>Criminal defense, traffic, family law, and real estate in Newark's Ironbound, since 2002.</p>
         <p class="langs">Se Habla Espanol · Nos falamos o portugues</p>
       </div>
       <div class="footer-col">
         <h4>Pages</h4>
-        <a href="index.html">Home</a>
-        <a href="practice-areas.html">Practice Areas</a>
-        <a href="attorney-bio.html">Attorney Bio</a>
-        <a href="contact.html">Contact</a>
+        <span class="fcol-rule" aria-hidden="true"></span>
+        <a class="ws" data-t="Home" href="index.html"><span>Home</span></a>
+        <a class="ws" data-t="Practice Areas" href="practice-areas.html"><span>Practice Areas</span></a>
+        <a class="ws" data-t="Attorney Bio" href="attorney-bio.html"><span>Attorney Bio</span></a>
+        <a class="ws" data-t="Contact" href="contact.html"><span>Contact</span></a>
       </div>
       <div class="footer-col">
         <h4>Office</h4>
+        <span class="fcol-rule" aria-hidden="true"></span>
         <address class="nap">
           DaSilva &amp; Associates, LLC<br>
           385 Lafayette Street<br>
@@ -174,7 +193,12 @@
   </div>
 </footer>
 
-<div class="mobile-call"><a href="tel:+19733440808">☎ Call 973-344-0808</a></div>
+<div class="mobile-call">
+  <a href="tel:+19733440808">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 4h4l2 5-2.5 1.6a11 11 0 0 0 5.9 5.9L15 14l5 2v4a1 1 0 0 1-1.1 1A16 16 0 0 1 3 5.1 1 1 0 0 1 4 4z"/></svg>
+    Call 973-344-0808
+  </a>
+</div>
 
 <script src="main.js"></script>
 </body>
