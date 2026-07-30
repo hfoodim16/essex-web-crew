@@ -28,6 +28,13 @@ Works from any directory — it finds the repo itself. If it prints `RESULT: FAI
 the `FIX:` line says and stop. Do not work around it. The two real failures are *not logged in on
 this Mac* (`gh auth login`) and *repo not where expected* (set `CREW_ROOT`).
 
+If the shell says **`No such file or directory`**, this clone predates the sync tooling. Bootstrap it
+once by hand, then start over:
+
+```bash
+git -C ~/Projects/essex-web-crew pull --rebase && ~/Projects/essex-web-crew/install.sh --force
+```
+
 Read the counts. `uncommitted: 0` **and** `ahead: 0` means there is nothing to send — say so and
 stop. `behind` > 0 means the other person has pushed work you don't have; step 4 folds it in.
 

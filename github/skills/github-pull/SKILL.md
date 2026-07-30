@@ -25,6 +25,15 @@ bash github/scripts/preflight.sh
 
 Works from any directory. `RESULT: FAIL` → do what the `FIX:` line says and stop.
 
+If the shell says **`No such file or directory`**, this clone predates the sync tooling. Bootstrap it
+once by hand — this is also the whole job the first time, since the pull is what delivers the tooling:
+
+```bash
+git -C ~/Projects/essex-web-crew pull --rebase && ~/Projects/essex-web-crew/install.sh --force
+```
+
+Then restart Claude Code and the skills are live.
+
 Read the report:
 
 - `behind: 0` and `uncommitted: 0` → already up to date. Say so and stop; there is nothing to do.

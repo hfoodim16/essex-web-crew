@@ -59,6 +59,7 @@ carrying a duplicate, so there is one place to fix when something about the setu
 
 | What you see | What it means | Fix |
 |---|---|---|
+| `github/scripts/preflight.sh: No such file or directory` | Your clone predates this tooling | `git pull --rebase && ./install.sh --force`, then restart Claude Code |
 | `FIX: GitHub rejected the connection` | Not logged in on this Mac | `gh auth login && gh auth setup-git` |
 | Still rejected after logging in | Not a collaborator yet | Harry adds you at Settings → Collaborators on the repo |
 | `FIX: Can't find the crew repo` | Clone is somewhere else | `export CREW_ROOT=/path/to/your/clone`, or re-clone to `~/Projects/essex-web-crew` |
