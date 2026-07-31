@@ -1,6 +1,6 @@
 /* Fora Digital — "Main Street Modern" (warm gallery)
-   A small-town gallery wall hung with modern work: warm linen paper, oversized Instrument
-   Serif, hairline frame linework, portfolio shown as framed browser plates.
+   A small-town gallery wall hung with modern work: warm linen paper, clean General Sans
+   display type, hairline frame linework, portfolio shown as framed browser plates.
    Deliberately BREAKS the dark/tech-slick agency convention — our buyers are local trade
    owners, and both portfolio screenshots are dark heroes that pop against a light wall.
    Electric cobalt is kept as the category's trust cue, and is the ONLY interactive color. */
@@ -35,8 +35,14 @@
   --ease-out:cubic-bezier(.22,.9,.24,1);
   --ease-curtain:cubic-bezier(.77,0,.18,1);
 
-  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
-  --sans:'Hanken Grotesk','Segoe UI',system-ui,sans-serif;
+  --serif:'General Sans',Georgia,'Times New Roman',serif;
+  --wordmark-font:'General Sans','Segoe UI',system-ui,sans-serif;
+  --sans:'General Sans','Segoe UI',system-ui,sans-serif;
+
+  /* derived tints, not new palette colors — used only where light text sits on the dark footer */
+  --footer-text:color-mix(in srgb,var(--paper) 70%,var(--ink) 30%);
+  --footer-link:color-mix(in srgb,var(--cobalt) 55%,white 45%);
+  --footer-kicker:color-mix(in srgb,var(--paper) 55%,var(--ink) 45%);
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
@@ -62,12 +68,12 @@ a{color:inherit;text-decoration:none}
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:var(--lh-display);letter-spacing:-.01em}
+h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:var(--lh-display);letter-spacing:-.01em}
 .kicker{
-  font-family:var(--sans);font-weight:600;font-size:var(--fs-kicker);
-  text-transform:uppercase;letter-spacing:.14em;color:var(--stone);
+  font-family:var(--sans);font-weight:700;font-size:var(--fs-kicker);
+  text-transform:none;letter-spacing:.01em;color:var(--cobalt);
 }
-.lead{font-size:var(--fs-lead);color:var(--stone);max-width:52ch}
+.lead{font-size:var(--fs-lead);font-weight:400;line-height:1.55;letter-spacing:-.005em;color:color-mix(in srgb,var(--ink) 62%,var(--stone) 38%);max-width:52ch}
 
 /* ---------- mask-curtain entrance (signature) ----------
    Scoped to .js (set by main.js before anything else). Without JavaScript there is no
@@ -115,7 +121,7 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:var(--lh-display);
   backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
 }
 .nav{display:flex;align-items:center;justify-content:space-between;height:var(--nav-h)}
-.wordmark{font-family:var(--serif);font-size:1.5rem;letter-spacing:-.01em}
+.wordmark{font-family:var(--wordmark-font);font-weight:700;font-size:1.45rem;letter-spacing:-.02em}
 .wordmark .dot{color:var(--cobalt)}
 .nav-links{display:flex;gap:var(--space-3);font-weight:500;font-size:var(--fs-small)}
 .nav-links a{
@@ -185,7 +191,7 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:var(--lh-display);
 /* hero device — the site itself, turning on a phone. Dark plate against the paper, framed
    in the same border/radius/shadow language as the work plates. */
 .hero-device{
-  position:relative;border-radius:var(--radius-plate);overflow:hidden;background:#0B0E16;
+  position:relative;border-radius:var(--radius-plate);overflow:hidden;background:var(--ink);
   border:1px solid var(--line);box-shadow:0 34px 64px -30px rgb(15 22 51 / .5);
 }
 .hero-device::before{
@@ -207,7 +213,7 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:var(--lh-display);
 /* hero with the device moved into the next section — copy runs one column */
 .hero-inner--solo{display:block}
 /* our own site shown on a phone, hung as a portrait plate in the gallery rhythm */
-.plate-device .device-plate{grid-column:1/span 5;background:#0B0E16;overflow:hidden}
+.plate-device .device-plate{grid-column:1/span 5;background:var(--ink);overflow:hidden}
 .plate-device .device-plate .device-video{width:100%;height:auto;display:block}
 .plate-device .plate-caption{grid-column:7/span 5;align-self:center}
 @media(max-width:900px){.plate-device .device-plate,.plate-device .plate-caption{grid-column:1/-1}}
@@ -295,7 +301,7 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:var(--lh-display);
 .badge-real{background:var(--cobalt);color:#fff}
 .badge-concept{border:1px solid var(--line);color:var(--ink)}
 .plate-caption h3{font-size:var(--fs-h3);margin-bottom:var(--space-1)}
-.plate-caption p{color:var(--stone);font-size:var(--fs-small)}
+.plate-caption p{color:color-mix(in srgb,var(--ink) 55%,var(--stone) 45%);font-size:var(--fs-small);line-height:1.55}
 
 /* Portfolio plates ARE links now — each opens its real bundled build in a new tab. The
    cobalt hover cue is therefore correct here (cobalt = "a click lives here"), unlike the
@@ -413,7 +419,7 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:var(--lh-display);
   border-radius:0;padding:9px 2px;width:100%;
   transition:border-color .3s var(--ease-out);
 }
-.field input::placeholder{color:#9AA1B8}
+.field input::placeholder{color:var(--stone)}
 .field input:focus{outline:none;border-color:var(--cobalt)}
 .field input:focus-visible{outline:2px solid var(--cobalt);outline-offset:3px}
 /* invalid styling only after a submit attempt, so nothing is red while still typing */
@@ -483,7 +489,7 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:var(--lh-display);
   padding:10px 12px;width:100%;resize:vertical;min-height:110px;
   transition:border-color .3s var(--ease-out);
 }
-.review-form textarea::placeholder{color:#9AA1B8}
+.review-form textarea::placeholder{color:var(--stone)}
 .review-form textarea:focus{outline:none;border-color:var(--cobalt)}
 .review-form textarea:focus-visible{outline:2px solid var(--cobalt);outline-offset:3px}
 .review-form.submitted :invalid{border-color:var(--clay)}
@@ -547,16 +553,16 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:var(--lh-display);
 .site-footer{background:var(--ink);color:var(--paper);padding:var(--space-5) 0 var(--space-3)}
 .foot{display:flex;justify-content:space-between;gap:var(--space-5);flex-wrap:wrap}
 .foot-wordmark{font-size:1.6rem;color:var(--paper)}
-.foot-line{color:#AEB4CC;font-size:var(--fs-small);margin-top:4px}
+.foot-line{color:var(--footer-text);font-size:var(--fs-small);margin-top:4px}
 .foot-cols{display:flex;gap:var(--space-5)}
-.foot-cols a{display:block;color:#A9BAF5;font-size:var(--fs-small);
-  background-image:linear-gradient(#A9BAF5,#A9BAF5);background-repeat:no-repeat;
+.foot-cols a{display:block;color:var(--footer-link);font-size:var(--fs-small);
+  background-image:linear-gradient(var(--footer-link),var(--footer-link));background-repeat:no-repeat;
   background-position:0 100%;background-size:0% 1.5px;transition:background-size .34s var(--ease-out);
   padding-bottom:2px;margin-bottom:4px}
 @media (hover:hover) and (pointer:fine){.foot-cols a:hover{background-size:100% 1.5px}}
-.foot-kicker{color:#8990AB;margin-bottom:var(--space-1)}
-.foot-bottom{margin-top:var(--space-4);padding-top:var(--space-3);border-top:1px solid rgba(221,213,196,.18)}
-.foot-bottom p{font-size:var(--fs-small);color:#8990AB}
+.foot-kicker{color:var(--footer-kicker);margin-bottom:var(--space-1)}
+.foot-bottom{margin-top:var(--space-4);padding-top:var(--space-3);border-top:1px solid rgba(226,231,245,.18)}
+.foot-bottom p{font-size:var(--fs-small);color:var(--footer-kicker)}
 
 /* ---------- scroll set-piece: gallery hang ---------- */
 @supports (animation-timeline:view()){

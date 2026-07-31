@@ -243,7 +243,7 @@
 
   // brand cobalt from CSS, with a safe fallback
   var cobalt = (getComputedStyle(document.documentElement)
-    .getPropertyValue('--cobalt') || '#2447C2').trim() || '#2447C2';
+    .getPropertyValue('--cobalt') || '#1F4EFF').trim() || '#1F4EFF';
 
   var GAP = 30;          // cell spacing in CSS px
   var MAX_CELLS = 1400;  // hard cap (backstop, not a target)
