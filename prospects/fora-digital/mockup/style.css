@@ -488,6 +488,31 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:var(--lh-display);
 .thanks-head h1{font-size:var(--fs-h2);margin-bottom:var(--space-3)}
 .thanks-head .lead{margin-bottom:var(--space-4)}
 
+/* ---------- legal pages (privacy policy, terms of service) ---------- */
+.legal-head{max-width:60ch}
+.legal-head h1{font-size:var(--fs-h2);margin-bottom:var(--space-2)}
+.legal-body{max-width:68ch}
+.legal-body h2{
+  font-family:var(--serif);font-weight:600;font-size:var(--fs-h3);
+  margin-top:var(--space-5);margin-bottom:var(--space-2);
+}
+.legal-body p{
+  margin-bottom:var(--space-3);line-height:1.7;
+  color:color-mix(in srgb,var(--ink) 62%,var(--stone) 38%);
+}
+.legal-body ul{margin:0 0 var(--space-3) 1.25rem;padding:0}
+.legal-body li{
+  margin-bottom:.4rem;line-height:1.7;
+  color:color-mix(in srgb,var(--ink) 62%,var(--stone) 38%);
+}
+.legal-body strong{color:var(--ink);font-weight:600}
+.legal-body a{color:var(--cobalt);text-decoration:underline;text-underline-offset:2px}
+.legal-body hr{border:0;border-top:1px solid var(--line);margin:var(--space-4) 0}
+.legal-note{
+  font-size:var(--fs-small);font-style:italic;color:var(--stone);
+  margin-top:var(--space-4);padding-top:var(--space-3);border-top:1px solid var(--line);
+}
+
 /* honeypot: off-screen for bots to find, never shown to a person */
 .hp-field{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 @media(max-width:760px){
@@ -609,8 +634,18 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:var(--lh-display);
   padding-bottom:2px;margin-bottom:4px}
 @media (hover:hover) and (pointer:fine){.foot-cols a:hover{background-size:100% 1.5px}}
 .foot-kicker{color:var(--footer-kicker);margin-bottom:var(--space-1)}
-.foot-bottom{margin-top:var(--space-4);padding-top:var(--space-3);border-top:1px solid rgba(226,231,245,.18)}
+.foot-bottom{
+  margin-top:var(--space-4);padding-top:var(--space-3);border-top:1px solid rgba(226,231,245,.18);
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--space-2);
+}
 .foot-bottom p{font-size:var(--fs-small);color:var(--footer-kicker)}
+.foot-legal{display:flex;gap:var(--space-3);flex-wrap:wrap}
+.foot-legal a{
+  font-size:var(--fs-small);color:var(--footer-link);
+  background:linear-gradient(var(--footer-link),var(--footer-link)) no-repeat 0 100%/0% 1.5px;
+  transition:background-size .34s var(--ease-out);padding-bottom:2px;
+}
+@media (hover:hover) and (pointer:fine){.foot-legal a:hover{background-size:100% 1.5px}}
 
 /* ---------- scroll set-piece: gallery hang ---------- */
 @supports (animation-timeline:view()){
@@ -643,10 +678,10 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:var(--lh-display);
 /* Touch: every link is a ≥44px tap target (plan §11). Applied on coarse pointers so the
    desktop's tight typographic rhythm is untouched. */
 @media (pointer:coarse){
-  .link-draw,.link-arrow,.foot-cols a,.nav-links a,.wordmark{
+  .link-draw,.link-arrow,.foot-cols a,.foot-legal a,.nav-links a,.wordmark{
     min-height:44px;display:inline-flex;align-items:center;
   }
-  .founder-card .link-draw,.foot-cols a{padding-block:8px}
+  .founder-card .link-draw,.foot-cols a,.foot-legal a{padding-block:8px}
   .contact-card{padding:var(--space-4) var(--space-3)}
   .contact-card .c-email{min-height:44px;display:flex;align-items:center}
   /* inline inside the "Feel free to contact us at …" sentence, so the tap target comes
