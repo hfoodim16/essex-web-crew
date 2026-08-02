@@ -14,6 +14,26 @@ Purpose: stop inventing designs in a vacuum. Study real, high-quality sites in t
 
 Always include **1–2 real competitors** in the exact niche alongside the gallery picks — the galleries give you ambition, the competitors give you category expectations to deliberately beat.
 
+## The local `Inspiration/` folder (Essex Web Crew)
+
+`~/Projects/essex-web-crew/Inspiration/` is a curated reference library Harry maintains. **Check it first** — before opening the browser — and treat it as a peer of the live-site research, not a replacement for it. It holds two different kinds of image, and they serve two different purposes:
+
+- **Site mockups / screenshots** (landscape, a full page design) → **design inspiration.** Read them exactly like a live reference: fill an evidence sheet, extract the pattern, never clone. Same rule as everything else here.
+- **Photography** (portrait, real subjects — trade work, machinery, landscapes) → **art-direction reference and image-to-video source.** Use them to fix the register of a shot: lighting, camera height, grit level, how the work is framed.
+
+Sort them by looking, not by filename — the names are content hashes and tell you nothing.
+
+### The transformation rule (hard)
+
+These are collected reference images, **not licensed stock**. So:
+
+- **As style reference — always fine.** Describe the lighting, framing, or mood in a prompt. Ideas aren't owned.
+- **As an image-to-video source (`imageUrls`) — allowed, but the output must be transformed, not merely animated.** The clip must be a new shot the reference informed, not the reference itself with motion added. Change the subject, setting, or composition enough that the source is no longer recognizable as the same photograph. Adding drifting motion to someone else's photo and shipping it on a client site is a fail, and the critic checks for it.
+- **Never as a shipped still.** An image out of this folder is never dropped into a build as-is. If a slot needs a photo, generate it (`imagery.md`) or leave the labeled placeholder for the client's real job photos.
+- **Never for a logo or a real person's likeness.**
+
+When a clip was seeded from an `Inspiration/` image, name the source file in the build report so the critic can run the comparison.
+
 ## How to research
 
 1. Open the browser pane (`preview_start` with a `url`, or navigate the browser tools).

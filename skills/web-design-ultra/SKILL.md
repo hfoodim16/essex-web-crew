@@ -13,7 +13,7 @@ An art-director pipeline for producing **bold, distinctive, verified** websites 
 
 This skill orchestrates existing tools rather than duplicating them:
 - **Design intelligence** (styles/palettes/fonts/stack rules) → `ui-ux-pro-max` search engine
-- **AI image generation** → `ai-multimodal` (Gemini)
+- **AI image + video generation** → the `generate` skill (Nano Banana 2 for images, Veo 3.1 for video, via Kie AI)
 - **Motion craft** → `references/motion.md` (the named vocabulary) + `references/gsap.md` (the vendored GSAP 3.15 tier)
 - **Publishing the finished site** → the `design-push` skill (Stage 8 on-pass), which bundles it via `scripts/design-bundle.py` and pushes it to claude.ai/design as a card-per-section design system
 
@@ -52,7 +52,7 @@ python3 ~/.claude/skills/ui-ux-pro-max/scripts/search.py "<product type + niche 
 Treat the output as **candidates to diverge from**, not gospel. The engine gives a solid baseline; your job is to push past it — but for the palette specifically, diverge *deliberately*, not by accident (see below).
 
 ### Stage 3 — Inspiration (mandatory)
-Open the browser pane and study **3–5 real reference sites**, then build an evidence sheet. Full playbook: `references/inspiration.md`. Rule: extract *patterns*, never copy a specific site.
+Open the browser pane and study **3–5 real reference sites**, then build an evidence sheet. Full playbook: `references/inspiration.md`. Rule: extract *patterns*, never copy a specific site. **Crew builds: check the local `Inspiration/` library first** — it carries both site mockups (design references) and photography (art-direction and image-to-video source), under that file's transformation rule.
 
 ### Stage 4 — Anti-repetition check
 Read the design-memory log and list the banned font pairings, palette families, layout archetypes, and **signature motion** (entrance family + hero moves) from its **last 3 entries**. Carry these bans into Stage 5 — motion repeats as easily as fonts do, and the default trio (fade-up + text delay + count-up) is exactly what makes builds feel same-y.
@@ -66,6 +66,8 @@ Produce three direction briefs per `references/directions.md`. Each is a mini-sp
 
 ### Stage 6 — Assets (imagery + backgrounds + atmosphere)
 Generate the imagery the chosen direction needs (hero, textures, OG image) via `references/imagery.md`, construct backgrounds from `references/backgrounds.md`, and layer in animated atmosphere (fog, god rays, clouds, shimmer, motes) from `references/atmosphere.md` where the mood calls for it. Optimize to WebP at correct sizes. A great site is rarely flat color — depth, real imagery, and moving light are how it stops looking like a template. **Imagery must follow `imagery.md`'s photorealism kit, cost rules, and "Fit the slot" sizing** — choose each image's aspect ratio AND resolution tier for where it renders (`--image-size 2K` for full-bleed/background heroes, `1K` for contained cards/plates/OG). Generate exactly ONE image on a skill test/demo; for real builds, announce the image count and per-tier cost (~$0.04 at 1K / ~$0.13 at 2K) before generating a set.
+
+**Video comes in two registers, and picking the register is the decision that matters.** `references/video.md` carries the full system. **Filmed action** is documentary proof — it must pass the frame-2 test (what does frame 2 show that frame 1 cannot?) and suits businesses whose work is physically visible. **Designed loop** is a motion-design object — abstract rendered animation in the site's palette whose job is brand register, not proof; it suits studio/tech/premium brands only, inverts the photorealism kit, and takes the scroll-set-piece slot. Work the cost-ascending ladder first: static depth → atmosphere → reactive field (all free) → designed loop → filmed action. **One clip per site total, either register, never both**; most sites ship zero, and that is never a deduction. **Video always requires an explicit yes before it is generated, in every mode** — propose the register and concept, state clip count × duration × rate, wait. In **crew mode** the planner may mark one `VIDEO` slot, but that is a *request*: the lead takes it to Harry and the builder generates only once he approves that specific clip. Ceilings on the ask are filmed ≤$1 and designed loop ≤$2.50, ≤8s either way; images remain the pre-approved exception.
 
 ### Stage 7 — Build
 
@@ -90,8 +92,8 @@ For a **local service business** (landscaper, dentist, plumber, contractor — t
 
 When a team runs this skill, the 8 stages split across roles instead of one agent doing all of them. Official mapping (matches the crew's Mockup Recipe):
 
-- **Planner owns Stages 1–5.** Output artifact: a `website-plan.md` that is the design contract. It must carry: the named art direction + direction brief, the **color-convention honor/break call** (Stage 5), the page/section map, the font pairing + `:root` palette, and an **image slot list** marking each slot `GENERATE` (real AI image) or `PLACEHOLDER` (labeled `<!-- AI-IMAGE: … -->`). The planner consulted the anti-repetition log; the plan names the banned combos it avoided.
-- **Builder owns Stages 6–7.** Implements the plan exactly — does **not** re-decide direction, fonts, or palette. Generates only the `GENERATE`-marked images within the image cap (see `references/imagery.md` crew tier).
+- **Planner owns Stages 1–5.** Output artifact: a `website-plan.md` that is the design contract. It must carry: the named art direction + direction brief, the **color-convention honor/break call** (Stage 5), the page/section map, the font pairing + `:root` palette, and an **image slot list** marking each slot `GENERATE` (real AI image) or `PLACEHOLDER` (labeled `<!-- AI-IMAGE: … -->`). The planner consulted the anti-repetition log; the plan names the banned combos it avoided. The planner may also mark **at most one `VIDEO` slot** — naming its **register** (`filmed-action` or `designed-loop`) with a written justification, within the crew video tier in `references/video.md`; default is no video.
+- **Builder owns Stages 6–7.** Implements the plan exactly — does **not** re-decide direction, fonts, or palette. Generates only the `GENERATE`-marked images within the image cap (see `references/imagery.md` crew tier), plus the `VIDEO` slot if the plan marked one, generated **to its declared register** (`references/video.md` crew tier: filmed ≤$1 Fast/Lite, designed loop ≤$2.50 Standard, ≤6s, one clip per site). Never invents either kind of asset the plan didn't mark.
 - **Critic owns Stage 8.** Runs the critique gate + the team's own checklist, loops until sign-off, then appends the passing row to the **project-local** `design-memory.md`. That's on-pass step (a). Step (b) — **publishing to Claude Design** — the critic **hands to the lead**, because `DesignSync` is authorized in the lead session and not in any subagent. It must be named in the sign-off message or it gets dropped.
 
 Any agent that runs Stage 8 (builder self-check or critic) needs the browser/preview tools in its `tools` list (`preview_start`, `navigate`, `computer`, `read_page`, `read_console_messages`, `resize_window`, `javascript_tool`) — Stage 8 cannot be done without them. Solo mode is unchanged: one agent runs all 8 stages.
@@ -116,6 +118,7 @@ Any agent that runs Stage 8 (builder self-check or critic) needs the browser/pre
 | Animated atmosphere (fog, god rays, clouds, shimmer, motes) | `references/atmosphere.md` |
 | Reactive backgrounds (pointer fields, constellation, flow, grids — tech register) | `references/reactive-backgrounds.md` |
 | AI image prompt formulas + WebP steps | `references/imagery.md` |
+| AI video generation (Veo 3.1, opt-in, cost-gated) | `references/video.md` |
 | Scoring rubric + bold test + fix loop | `references/critique.md` |
 | Deterministic anti-pattern scan (60 rules, no LLM, ~1s) | `scripts/detect.mjs` |
 | Anti-repetition log | `data/design-memory.md` |

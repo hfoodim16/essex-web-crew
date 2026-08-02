@@ -174,6 +174,10 @@ Each approved prospect gets a folder `prospects/<slug>/` containing:
 - `website-plan.md` — the Planner's design brief the Builder implements, including the
   **"Client answers → decisions"** section and the **content map** that places every
   site-content.md block (or lists it as deliberately dropped, with a reason).
+- `voice-spec.md` — the Planner's copy-voice contract for this client, written via
+  `trade-copy` Stage A from their answers, before any hero direction. It governs every
+  visible string the Builder writes and is what the Critic's copy gate scores against; a
+  missing one is a fail on the Planner.
 - `mockup/` — `index.html`, `style.css`, `main.js` (+ extra `.html` pages if the
   page map calls for them, + `vendor/` if the plan's signature move needs the GSAP
   tier). Static only. Opens by double-click, no build step, **works offline** —
@@ -187,7 +191,7 @@ Each approved prospect gets a folder `prospects/<slug>/` containing:
   blank lines rather than invented values.
 - `audit.md` — the Critic's scored result for BOTH scoreboards ($10K Checklist 8/8 or
   documented exceptions, plus the 10-dimension rubric), rewritten every review round with
-  a `Review round: N` line.
+  a `Review round: N` line and a `Paid calls this prospect:` ledger line.
 
 **Not a file in the folder, but part of the contract:** every signed-off prospect also has
 a **Claude Design project** — its own card-per-section design system at claude.ai/design,
@@ -196,9 +200,11 @@ edited before going live, so a signed-off prospect without one is incomplete.
 
 ## Delivery to Corey
 
-The moment the Critic signs a prospect off (`audit.md` PASS on both scoreboards), that
-site is ready to go live. Corey Rapkin (**cbrapkin@gmail.com**) is the one who puts it
-live via Netlify Drop — he needs the packaged zip, not loose files.
+Corey Rapkin (**crapkin@foradigital.com**) is the one who puts a site live via Netlify
+Drop — he needs the packaged zip, not loose files.
+
+**The Critic's sign-off means the BUILD is done. It does not mean "publish it."**
+Delivery has its own gate, below.
 
 **Only the lead session does this.** Teammates have no Gmail tools; the Critic signals
 sign-off, the lead performs delivery. Harry can also trigger it any time with
@@ -210,6 +216,15 @@ starting one. A signed-off prospect should go up to GitHub as well as out as a z
 whoever picks it up next has the source.
 
 **The procedure:**
+
+0. **Check the signed release form FIRST — this is a hard gate.** Confirm with Harry that
+   the client has returned a **signed** `release-form.pdf`. The Critic only verifies the
+   form exists and is filled correctly; it cannot know whether the client signed it. No
+   signature on file → **stop here.** Say what's missing and let the package wait. Nothing
+   goes to Corey, because the next thing that happens to that zip is a real business's
+   name, phone number, and address appearing on the public internet, and an AI score is
+   not the client's permission to publish. A signed-off `audit.md` means the build is
+   finished, never that it may go live.
 
 1. Package the site:
    ```bash
@@ -233,7 +248,7 @@ whoever picks it up next has the source.
    in the Design pane can't silently cost you the work.
 
 2. Create a Gmail draft with the Gmail MCP `create_draft` tool:
-   - **to:** `cbrapkin@gmail.com`
+   - **to:** `crapkin@foradigital.com`
    - **subject:** `<Business Name> website — ready to put live on Netlify`
    - **body:** four lines, no fluff — which business this is, drag the attached zip onto
      https://app.netlify.com/drop, claim the site and rename the subdomain to
@@ -247,6 +262,13 @@ whoever picks it up next has the source.
 
 3. **Draft only — never send.** Report the draft ID and the zip path back to Harry, and
    say plainly whether the zip was attached or he has to attach it himself.
+
+4. **When Corey replies with the live URL, register the site for monitoring.** Add it to
+   `~/Projects/site-caretaker/sites.json` (the `caretaker` agent owns that file and its
+   format — hand it the URL and let it do the write). This is the ONLY thing that puts a
+   published site under the hourly uptime/DNS/TLS monitor. Skip it and the site is live,
+   carrying a client's phone number, and watched by nobody. A delivery isn't finished at
+   the draft — it's finished when the live URL is in the registry.
 
 ## The Mockup Recipe (the "Corey Blake workflow")
 
@@ -293,9 +315,12 @@ the team:
   other) → **three genuinely divergent directions**, pick the boldest. All recorded in
   `website-plan.md`.
 - **Stage 6 → runs, capped.** Builders generate **up to 2 real AI images per mockup**
-  (hero + the one highest-impact slot the Planner marked `GENERATE`) via `ai-multimodal`
-  + the skill's `references/imagery.md` photorealism kit; every slot beyond 2 stays a
-  labeled AI-IMAGE placeholder (see Image policy). ALSO layer the skill's free CSS craft:
+  (hero + the one highest-impact slot the Planner marked `GENERATE`) via the `/generate`
+  skill on `nano-banana-2` + the skill's `references/imagery.md` photorealism kit; every
+  slot beyond 2 stays a labeled AI-IMAGE placeholder (see Image policy). **Optionally one
+  video clip — only after Harry approves it** (a marked `VIDEO` slot is a request, not an
+  authorization), in its declared register: `filmed-action` ≤$1 or `designed-loop` ≤$2.50,
+  ≤8s, never both; zero video is the norm (see Video policy). ALSO layer the skill's free CSS craft:
   `references/backgrounds.md` (background/texture/depth) and `references/atmosphere.md`
   (animated fog, god rays, shimmer, motes — reduced-motion gated). Real imagery + real
   depth.
@@ -421,6 +446,14 @@ the first full audit, re-reviews are **incremental** — the critic re-checks on
 failed items and the sections the builder's change report says changed (plus a spot-check
 if a fix could ripple), not the whole site again.
 
+**The loop is capped at 3 fix rounds.** If round 3 is still NEEDS-WORK, the critic does
+not send a fourth fix list — it marks `audit.md` `STALLED — escalated to lead, round 3`
+and hands the lead a stalemate report (what still fails, what was already sent, why it
+isn't converging, and the options: documented exception, re-scope, or park). Harry
+decides from there. The cap moves the decision to a human; it never lowers the bar, and a
+capped-out mockup is not signed off and does not go to delivery. Details in
+`.claude/agents/critic.md`.
+
 **Sign-off freezes a prospect.** The moment a mockup clears BOTH gates (8/8 $10K **and**
 no rubric dimension below 7 with boldness ≥ 8), it is FINAL: its builder
 stops and its files never change again, and the critic never reopens it or sends more
@@ -460,21 +493,43 @@ while the others are still being fixed.
 ### Step 6 — Proof
 Save desktop + mobile screenshots to `prospects/<slug>/screenshots/`.
 
+## The `Inspiration/` library
+
+`~/Projects/essex-web-crew/Inspiration/` is Harry's curated reference folder. The Planner
+**checks it first at Stage 3**, before opening the browser — but it supplements live-site
+research, it never replaces it. Filenames are content hashes, so identify images by
+looking at them. Two kinds, two uses:
+
+- **Site mockups / screenshots** → design references. Dissect them like any live site and
+  fill an evidence sheet. Extract patterns, never clone.
+- **Photography** (trade work, machinery, landscape) → art-direction reference for the
+  register of a shot (lighting, camera height, grit level), and a permitted
+  **image-to-video seed frame**.
+
+**Transformation rule (hard).** These are collected references, not licensed stock.
+Describing their style in a prompt is always fine. Seeding an image-to-video shot from one
+is allowed **only if the plan named the file**, and the output must be a *new shot the
+reference informed* — not that photograph with motion added. An image from this folder is
+**never shipped as a still**, and never used for a logo or a real person's likeness. The
+Critic compares any clip against its named source.
+
 ## Image policy (hard rule)
 
 **Tiered: 2 real AI images per mockup, placeholders beyond.**
 
-- **Builders generate up to 2 AI images per mockup — HARD CAP.** Use the
-  `ai-multimodal` skill (Gemini `gemini-3-pro-image` / Nano Banana Pro). Priced by
-  resolution: **~$0.04 at 1K, ~$0.13 at 2K.** Per-prospect ≈ $0.08 (both 1K) to $0.27
-  (both 2K); typical one-2K-hero-plus-one-1K ≈ $0.17. Pre-approved by Harry at the
-  2-image cap; NEVER exceed 2 without the lead asking Harry first.
+- **Builders generate up to 2 AI images per mockup — HARD CAP.** Use the **`/generate`
+  skill** on **`nano-banana-2`** (Google Gemini 3.1 Flash Image, via Kie AI) — say the
+  model explicitly, because `/generate`'s default `-lite` is a draft tier and is not
+  acceptable for a client-facing image. Priced by resolution: **~$0.04 at 1K, ~$0.06 at
+  2K.** Per-prospect ≈ $0.08 (both 1K) to $0.12 (both 2K); typical one-2K-hero-plus-one-1K
+  ≈ $0.10. Pre-approved by Harry at the 2-image cap; NEVER exceed 2 without the lead
+  asking Harry first.
 - **Priority order: the hero first**, then the one next most visible slot — the
   Planner marks these two as `GENERATE` in the plan's image list.
 - **The Planner sizes each GENERATE slot** (see the plan-spec below): aspect ratio +
   resolution tier + where it renders. Rule of thumb: **full-bleed / background hero → `2K`;
   contained cards, plates, split-hero, OG → `1K`** (see the "Fit the slot" section of
-  `imagery.md`). The Builder passes `--aspect-ratio` and `--image-size` accordingly.
+  `imagery.md`). The Builder passes `aspect_ratio` and `resolution` accordingly.
 - **Quality bar — "proud contractor" register is the DEFAULT for trades.** Follow the
   photorealism kit in `~/.claude/skills/web-design-ultra/references/imagery.md`. The bar is
   the **best photo on the business's Google Business profile**: **flawless finished work**
@@ -504,6 +559,62 @@ Style `.img-placeholder` as a labeled block in the art direction's colors so the
 mockup still reads well. Harry generates the remaining images from these prompts before
 anything goes to a client (PLAYBOOK Part 3 Reference A). Still banned always: stock
 photos, Unsplash/Google image URLs, hotlinked or copyrighted images.
+
+## Video policy (hard rule)
+
+**Default is zero video.** Stills plus the free CSS/GSAP motion tiers carry almost every
+mockup, and a clip-free build is never a deduction. **Unlike images, video is NEVER
+pre-approved** — the Planner may *request* a clip, but Harry approves each one
+individually before the Builder spends anything. Full framework:
+`~/.claude/skills/web-design-ultra/references/video.md`.
+
+All generation — images and video alike — runs through the **`/generate` skill**
+(`~/.claude/skills/generate/`): Nano Banana 2 for images, Veo 3.1 (`veo3_fast`, Kie AI)
+for video. It owns model choice, provider routing, keys, polling and logging; no agent
+touches an API key.
+
+**Work the cost-ascending ladder first, stop at the first rung that serves the brief:**
+static depth (`backgrounds.md`) → ambient atmosphere (`atmosphere.md`) → reactive canvas
+field (`reactive-backgrounds.md`) — all free — then paid video. If a free rung sells the
+same feeling, take it.
+
+**Two registers, and a site gets ONE clip TOTAL — either register, never both.**
+
+- **`filmed-action`** — documentary proof. Gate: **the frame-2 test.** What does frame 2
+  show that frame 1 cannot? Nothing → ship the still. Real motion that proves or sells
+  (water feature, fire, a process/timelapse proof, venue ambience) → justified. For
+  businesses whose work is **physically visible**. Photorealism kit applies in full.
+  **Ceiling: ≤$1**, ≤8s.
+- **`designed-loop`** — an abstract rendered motion object in the site's exact palette; its
+  job is **brand register, not proof**, so frame-2 does not apply. Gate: **occupational fit
+  — studio / tech / SaaS / premium / creative ONLY** (behind a trade, legal, or medical
+  prospect it's the convention error `color-conventions.md` prevents — hard no), the moment
+  needs rendered richness no free tier can fake, and it **consumes the scroll-set-piece
+  slot** (mutually exclusive with a reactive field). **INVERTS the photorealism kit** — the
+  CGI look is the point. **Ceiling: ≤$2.50**, ≤8s.
+
+"It looks premium" and "the hero feels static" are not justifications in either register.
+
+Those dollar figures are **ceilings on what Harry will consider, not budgets the crew may
+spend.** Because Kie runs ~4× cheaper than Google direct, an approved clip can afford
+1080p and the full 8s inside them — spend the room on quality, never on retries.
+
+- **The Planner marks 0 or 1 `VIDEO` slot** with its **register**, justification, budget,
+  duration, aspect, source (text-to-video or an image-to-video seed frame), and poster
+  still. **Marking it is a REQUEST.** Unmarked means the Builder ships no clip.
+- **The lead takes the request to Harry.** No answer is not a yes — the poster still ships
+  alone and the plan is not defective for it.
+- **The Builder generates only after Harry approves that specific clip**, to the declared
+  register, and never switches it. **No retries** — one approval buys one run; exhaust the
+  free `ffmpeg` fixes, then report. A second clip, 4K, >8s, a non-default model
+  (Kling/Sora), or any regeneration is a fresh ask.
+- **Shipping is part of the rule:** `<video autoplay muted loop playsinline poster="…">`,
+  a `prefers-reduced-motion` branch showing the poster still, <~5MB, and a checked loop
+  seam. Same content bans in both registers — no readable branding (compose lettering out
+  of the shot; negating it does not work), no invented people for a real business.
+- **The Critic judges against the declared register** and fails any clip that is
+  unauthorized, unjustified, over cap, fallback-less, register-mismatched, or wrong for the
+  occupation. The realism test applies to filmed clips only.
 
 **The ONE exception — the client's own logo.** If the business's existing site (or
 Facebook / Google Business profile) shows a logo, the mockup must use **that exact
@@ -621,7 +732,7 @@ opening with a verb any industry could use, card titles built from two abstracti
 to identical lengths. Their word lists are deliberately disjoint so no single word gets two
 different fixes; both push the same direction, which is more concrete.
 
-Real review quotes, Q14 keep-word-for-word content, legal text, and NAP are exempt from
+Real review quotes, **Q7** keep-word-for-word content, legal text, and NAP are exempt from
 every check and are never edited. Nothing is ever *added* to a page to satisfy a check —
 terseness passes, invented facts never do. Full rules: the **`trade-copy`** and
 **`web-humanizer`** skills.
@@ -632,13 +743,21 @@ Skills are NOT auto-loaded for teammates (the agent-teams runtime doesn't apply 
 `skills` frontmatter field) — each agent must invoke them itself via the Skill tool, and
 each agent's `tools` list includes `Skill`.
 
+**A required skill that won't load is a stop-and-report, never a proceed-without.** If a
+skill marked PRIMARY (or a `references/*.md` file it depends on) is missing or fails to
+invoke, say so to the lead and stop that step. Do not improvise the skill's contents from
+memory — the whole point of the skill is that it is more current and more specific than
+what you'd reconstruct, and a build done from a half-remembered version of the design
+pipeline is exactly the generic output the pipeline exists to prevent.
+
 | Agent | Skills to invoke | Why |
 |---|---|---|
 | `scout` | `research`, `docs-seeker` | Deeper competitor/reputation research when a web search isn't enough; finding directories/docs on unfamiliar trades. |
 | `analyst` | `research` | Comprehensive dossier research beyond a plain web search. |
 | `planner` | **`web-design-ultra` (PRIMARY)**, **`trade-copy`**, `ui-ux-pro-max`, `frontend-design`, `design-system`, `aesthetic`, `sequential-thinking` | Run the 8-stage art-direction pipeline (Stages 1–5): design intelligence, real-site inspiration, anti-repetition, three divergent directions. `trade-copy` Stage A produces `voice-spec.md` from the client's answers before the hero direction is written. Names each reference site's patterns using the skill's `inspiration.md` vocabulary, and doesn't lock a direction the Stage 8 composition checks will fail — any deliberate exception is stated in `website-plan.md`. |
-| `builder` | **`web-design-ultra` (PRIMARY)**, **`trade-copy`**, **`web-humanizer`**, `ai-multimodal`, `ui-ux-pro-max`, `frontend-design`, `frontend-development`, `web-frameworks` | Execute the chosen direction (Stage 7): generate the 2 real hero/priority images (`ai-multimodal`), craft discipline + backgrounds/atmosphere recipes; self-score the Stage 8 rubric. `trade-copy` governs every visible string — invoke before writing any text; `web-humanizer` is the sweep after it, catching the page shapes that still read machine-written (interchangeable hero verbs, abstract-pair card titles, no checkable fact, cards stamped to identical lengths) and gating on `aitells.py` exit 0 alongside `copycheck.py`. Reads the skill's `craft-floor.md` before editing UI, works `motion-thesis.md` / `layout-craft.md` / `type-craft.md` / `color-craft.md` when a build needs more than a first pass, and runs the Step 0 scan to `exit 0` before handoff. |
+| `builder` | **`web-design-ultra` (PRIMARY)**, **`trade-copy`**, **`web-humanizer`**, `generate`, `ui-ux-pro-max`, `frontend-design`, `frontend-development`, `web-frameworks` | Execute the chosen direction (Stage 7): generate the 2 real hero/priority images (`/generate` on `nano-banana-2`), plus an approved video clip if there is one, craft discipline + backgrounds/atmosphere recipes; self-score the Stage 8 rubric. `trade-copy` governs every visible string — invoke before writing any text; `web-humanizer` is the sweep after it, catching the page shapes that still read machine-written (interchangeable hero verbs, abstract-pair card titles, no checkable fact, cards stamped to identical lengths) and gating on `aitells.py` exit 0 alongside `copycheck.py`. Reads the skill's `craft-floor.md` before editing UI, works `motion-thesis.md` / `layout-craft.md` / `type-craft.md` / `color-craft.md` when a build needs more than a first pass, and runs the Step 0 scan to `exit 0` before handoff. |
 | `critic` | **`web-design-ultra`**, **`trade-copy`**, **`web-humanizer`**, `ui-ux-pro-max`, `code-review`, `design-system` | Audit each mockup against the Stage 8 10-dimension rubric AND the $10K Checklist; enforce real-reviews-only and the COPY VOICE gate (`copycheck.py` + `aitells.py` + a say-aloud read + the cold read); code-quality + design-system rigor. Runs the skill's Step 0 scan as the **first** gate, before any screenshot, then the fail-visible measurement and the composition checks; drives fix rounds with `bolder.md` / `quieter.md` rather than freehand nudges. |
+| `caretaker` | `site-caretaker-cycle` (from `~/Projects/site-caretaker/.claude/skills/`) | Post-launch only, and only for sites already live on a real domain. Keeps `~/Projects/site-caretaker/sites.json` — the system of record for published sites — current, and diagnoses the uptime/DNS/TLS/content failures the hourly `com.sitecaretaker.monitor` job flags. Never edits a live site on its own, and never polls in a loop: Layer 1 already watches, for free, every hour. Its standing spec is `~/Projects/site-caretaker/VISION.md`, which lives outside this repo — so the role only works on a machine that has it. |
 | **lead** (this session) | **`design-push`**, **`design-pull`**, **`github-push`**, **`github-pull`** | Publish each signed-off site to Claude Design (Stage 8 on-pass step B3b), and re-publish after every revision round. `design-pull` brings edits made in the Design pane back into `mockup/` before a push can overwrite them — and `design-push` refuses to run while any exist. Only the lead can: `DesignSync` is authorized in this session, not in any subagent. `github-pull` / `github-push` move the whole repo between Harry's Mac and Corey's — **pull at the start of a session, push when a run finishes.** Details in `github/README.md`. |
 
 Optional, invoke only if the situation calls for it: `media-processing` (Builder — if
@@ -651,12 +770,23 @@ processing real images pulled from an existing client site) and `ai-multimodal`
   all research and scraping. **Do NOT call Firecrawl or Perplexity** (they cost Harry
   money) — if a page genuinely can't be reached any other way, stop and ask the lead,
   who asks Harry.
-- **The one sanctioned paid operation: the builder's 2 AI images per mockup.** Image
-  generation costs real money (~$0.04 at 1K / ~$0.13 at 2K ≈ $0.17 per prospect) and is
-  **pre-approved at that cap** — a builder generating its 2 `GENERATE`-marked images is
-  following the rules, not breaking them. Everything beyond 2 images, and every other
-  paid call, needs the lead to ask Harry first. "Free tools only" elsewhere in these docs
-  means *no Firecrawl/Perplexity*; it never meant skipping the sanctioned images.
+- **The only pre-approved paid operation is the builder's 2 AI images per mockup.**
+  Generated through the `/generate` skill on **`nano-banana-2`** — the shipping tier, never
+  the `-lite` draft model. It costs real money (~$0.04 at 1K / ~$0.06 at 2K ≈ $0.10 per
+  prospect) and is **pre-approved at that cap**. A builder generating exactly those 2 is
+  following the rules, not breaking them.
+- **Video is NOT pre-approved — it is a request.** The Planner may mark ONE justified
+  `VIDEO` slot in its declared register (`filmed-action` ≤$1 or `designed-loop` ≤$2.50,
+  ≤8s, never both — see the Video policy above), but marking it only *asks*. **The lead
+  takes that request to Harry, and the Builder generates nothing until Harry has said yes
+  to that specific clip.** No answer yet → the poster still ships in the slot and the site
+  is otherwise complete. A clip with no recorded approval is unauthorized spend and the
+  Critic hard-fails it.
+- Everything beyond — a 3rd image, any video without a confirmed yes, a 2nd clip, 4K, a
+  longer clip, any regeneration, or any other paid call — needs the lead to ask Harry
+  first.
+  "Free tools only" elsewhere in these docs means *no Firecrawl/Perplexity*; it never meant
+  skipping the sanctioned assets.
 - **Never contact a business.** No emails, no form submissions, no DMs, no calls.
   Drafts only.
 

@@ -1,23 +1,20 @@
-# Imagery — AI-generated visuals via Gemini
+# Imagery — AI-generated visuals via Nano Banana
 
-Purpose: real, style-matched imagery is how a site stops looking like a stock template. Generate hero visuals, textures, and OG images with the existing `ai-multimodal` (Gemini) skill, matched to the chosen direction's style. **Never ship the generic stock-photo look.**
+Purpose: real, style-matched imagery is how a site stops looking like a stock template. Generate hero visuals, textures, and OG images matched to the chosen direction's style. **Never ship the generic stock-photo look.**
 
 ## How to generate
 
-Command (from `ai-multimodal`; uses its own venv — run verbatim). **One prompt = one image per call**; loop the command for a set. The `--model gemini-3-pro-image` flag is **mandatory** — without it the script silently calls the text model and returns no image. (`gemini-3-pro-image` = "Nano Banana Pro", Google's high-realism image model; it supersedes the older `gemini-2.5-flash-image` for this skill.)
-```bash
-~/.claude/skills/ai-multimodal/.venv/bin/python \
-  ~/.claude/skills/ai-multimodal/scripts/gemini_batch_process.py \
-  --task generate \
-  --prompt "<prompt formula below>" \
-  --output <project>/public/hero.png \
-  --model gemini-3-pro-image \
-  --aspect-ratio 16:9 \
-  --image-size 2K
-```
-`--aspect-ratio` accepts **only** `1:1 | 16:9 | 9:16 | 4:3 | 3:4`. `--image-size` accepts `1K | 2K | 4K` (default 1K if omitted). **Choose both per the slot — see "Fit the slot" below.**
+**Route every image through the `/generate` skill** (`~/.claude/skills/generate/`) — invoke it with the Skill tool. It owns model choice, provider routing, keys, polling, download, and the sidecar log. Same path as video, so one build produces one consistent set of logs.
 
-It occasionally returns a transient `503 UNAVAILABLE` ("high demand") — that is NOT a `limit: 0` billing error; just retry (up to ~3×). A failed 503 produces no image and no charge.
+Model: **`nano-banana-2`** (Google Gemini 3.1 Flash Image, via Kie AI) — recipe at `~/.claude/skills/generate/models/image-nano-banana-2.md`. This is the *shipping* tier. `/generate`'s default `nano-banana-2-lite` is a draft model and is **not** acceptable for a client-facing image — say the model explicitly when you invoke the skill.
+
+Brief `/generate` with: the prompt (formula below), `aspect_ratio`, and `resolution` — **choose both per the slot, see "Fit the slot" below.** `aspect_ratio` accepts `1:1 | 2:3 | 3:2 | 3:4 | 4:3 | 4:5 | 5:4 | 9:16 | 16:9 | 21:9 | auto`; `resolution` accepts `1K | 2K | 4K`.
+
+**One prompt = one image.** Run a set one at a time, not in parallel — Kie rate-limits concurrent jobs.
+
+Reference images (a client logo, a composition reference from `Inspiration/`) are passed as `image_urls`; `/generate` uploads local files to a public URL first. Never describe a logo in words — pass the real file.
+
+`/generate` saves flat into its own iCloud generations folder. **Copy the result into the project** (`<project>/public/` or `mockup/assets/`) and reference that local path — never an iCloud path or an expiring result URL.
 
 ## Fit the slot (choose aspect + resolution per image)
 
@@ -34,28 +31,30 @@ Every generated image must be sized for **where it actually renders** — realis
 | Avatar, icon-ish detail, square card | `1:1` |
 
 **Resolution — by displayed width (the deciding rule):**
-- **2K (~$0.13)** → the image renders **full-bleed or ≥ ~1400px wide** on desktop: background heroes, full-width photo bands, anything the eye sees edge-to-edge. At 16:9, 2K ≈ 2752×1536 — sharp on large retina displays.
+- **2K (~$0.06)** → the image renders **full-bleed or ≥ ~1400px wide** on desktop: background heroes, full-width photo bands, anything the eye sees edge-to-edge. At 16:9, 2K ≈ 2752×1536 — sharp on large retina displays.
 - **1K (~$0.04, default)** → **contained** slots: cards, work/gallery plates, arch-framed or split-hero images, sidebars, OG images (1K ≈ 1376×768 at 16:9 — plenty for a 1200×630 OG). Most slots are 1K.
-- **4K (~$0.24)** → almost never; only a print or deep-zoom deliverable.
+- **4K (~$0.09)** → almost never; only a print or deep-zoom deliverable.
 
 **Then always downscale to the real display size** during WebP optimization (`media_optimizer.py`) — target ~1.5–2× the CSS pixel width for retina, no more. Generate big for a big slot, but never ship a 2752px file into a 640px card. Never upscale a 1K image to fake 2K — regenerate at 2K instead.
 
 ### The API key
-The key lives in `~/.claude/skills/ai-multimodal/.env` (`GEMINI_API_KEY=…`); an exported shell var wins over it. The Bash tool does **not** source `~/.zshrc`, so the `.env` file is what makes it work in this harness. If the key is missing, copy it from `~/.zshrc` into that `.env`.
+`/generate` owns the keys — it reads `KIE_API_KEY` from its own `.env` (path in that skill's `SKILL.md`). You never handle, echo, or paste a key. If it reports a missing or rejected key, say so and fall back below; don't go hunting for one to substitute.
 
 ### Billing gate — read before assuming failure
-Gemini **image generation is a paid feature**. On a free-tier Google project the image model returns `429 RESOURCE_EXHAUSTED` with **`limit: 0`** (not a per-minute rate limit — a zero entitlement). When you see `limit: 0` for `generate_content_free_tier_requests`, **do not retry** — the account needs billing enabled at aistudio.google.com / Google Cloud. Text calls still work free, so a working text call + `limit: 0` on image = billing not enabled, *not* a bad key. Report this to the user; you cannot enable billing for them.
+Billing lives with **Kie AI** (`KIE_API_KEY`), not Google — `/generate` reads it from its own `.env`. A `fail` state comes back with `data.failCode` and `data.failMsg`; report both rather than blind-retrying. An exhausted Kie balance is an account issue you cannot fix for the user — say so and fall back below.
 
-### When generation is unavailable (no key, or `limit: 0`)
+(Historical note, for anyone calling Google directly instead: Gemini image generation there is a paid feature, and a free-tier project returns `429 RESOURCE_EXHAUSTED` with **`limit: 0`** — a zero entitlement, not a rate limit. Don't retry that one either.)
+
+### When generation is unavailable (no key, or a hard billing fail)
 Fall back to a strong CSS/SVG treatment from `backgrounds.md`, plus **elegant labeled image slots** (a framed plate with an italic `"— photo"` caption and the intended subject/location) so the layout reads as intentional, not broken. Say explicitly in your report that imagery is the fallback and name what unlocks it. Never ship a bland grey placeholder box.
 
 ## Cost discipline (hard rules — real money)
 
-Every generated image costs **real money**. Nano Banana Pro (`gemini-3-pro-image`) is priced by resolution: **~$0.04/image at the default 1024×1024 (1K)** — which is what the script emits — rising to ~$0.13 at 2K and ~$0.24 at 4K. The script requests 1K by default (no resolution flag exposed), so budget at **~$0.04/image**. Generate the fewest the design genuinely needs. The budget depends on the context:
+Every generated image costs **real money**. `nano-banana-2` via Kie is priced by resolution: **~$0.04 at 1K, ~$0.06 at 2K, ~$0.09 at 4K** (output-only pricing). Generate the fewest the design genuinely needs. The budget depends on the context:
 
 - **Skill tests / demos: exactly ONE image. No exceptions.** Pick the highest-impact slot (usually the hero); static CSS/background treatments for the rest.
-- **Crew pitch mockups (Essex Web Crew): hard cap of 2, pre-approved — no need to ask.** The planner marks exactly which slots are `GENERATE` (hero + 1 priority slot), each with its aspect + resolution tier; **every other image slot stays a labeled `<!-- AI-IMAGE: … -->` placeholder** — this is expected, most slots ship as placeholders for the client to fill with real job photos. Cost depends on tier: **~$0.08/prospect** if both are 1K, up to **~$0.27** if both are 2K (typical: one 2K hero + one 1K ≈ $0.17). Do not exceed 2 without the lead asking Harry.
-- **Other real builds: announce the count and per-tier cost (`1K ≈ $0.04, 2K ≈ $0.13 each`) and get the user's OK** before generating a set.
+- **Crew pitch mockups (Essex Web Crew): hard cap of 2, pre-approved — no need to ask.** The planner marks exactly which slots are `GENERATE` (hero + 1 priority slot), each with its aspect + resolution tier; **every other image slot stays a labeled `<!-- AI-IMAGE: … -->` placeholder** — this is expected, most slots ship as placeholders for the client to fill with real job photos. Cost depends on tier: **~$0.08/prospect** if both are 1K, up to **~$0.12** if both are 2K (typical: one 2K hero + one 1K ≈ $0.10). Do not exceed 2 without the lead asking Harry.
+- **Other real builds: announce the count and per-tier cost (`1K ≈ $0.04, 2K ≈ $0.06 each`) and get the user's OK** before generating a set.
 - **The client's real logo doesn't count** against any cap — always download and use it locally (never hotlink), never regenerate a real brand's logo.
 - **Never regenerate an asset more than once** without asking — the realism QA below allows a single retry, then stop.
 - Never generate speculative spares or variations. **Reuse first:** check the project's `public/` or `mockup/assets/` for existing generated images before generating anything.

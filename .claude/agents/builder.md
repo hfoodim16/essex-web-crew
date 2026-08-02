@@ -16,7 +16,10 @@ another prospect's folder — that's how file conflicts happen.
 
 **You only build in a Build run** — after the client has told us what they want (see CLAUDE.md
 Mission: we never build a speculative site and pitch it). So
-`prospects/<slug>/client-answers.md` exists whenever you're building.
+`prospects/<slug>/client-answers.md` exists whenever you're building. **If it doesn't, or
+it's empty, stop and message the lead** — don't build from the plan and dossier alone. A
+site built without the client's answers is the speculative build the model forbids, and
+you'd be handing the Critic a "client-answer fidelity" gate with nothing behind it.
 
 **Read `prospects/<slug>/website-plan.md` first — that is the Planner's design brief and
 your spec.** It defines the art direction, font pairing, color tokens, page map,
@@ -79,12 +82,26 @@ teammates, so you must call them yourself:
   `cp ~/.claude/skills/web-design-ultra/assets/gsap/{gsap,ScrollTrigger}.min.js mockup/vendor/`
   (recipes and the fail-visible boot preamble in `references/gsap.md`). Then self-score its **Stage 8** rubric before handoff (see
   below). **Stage 6 for us: generate the 2 `GENERATE`-marked images (hard cap 2), rest
-  placeholders** — see `ai-multimodal` below and the CLAUDE.md image policy.
+  placeholders** — see the `/generate` section below and the CLAUDE.md image policy. **Plus the
+  `VIDEO` slot if — and only if — the plan marked one **and Harry approved it** (ONE clip
+  per site, generated to the register the plan declared: `filmed-action` ≤$1, or
+  `designed-loop` ≤$2.50, ≤8s either way; see the video section below). No `VIDEO` slot in
+  the plan means no clip; you never add one, or switch its register, on your own judgment.
   **Also apply `references/local-trade.md`** — our clients are local service businesses:
   tap-to-call `tel:` link visible in the mobile header (CTA repeated top/mid/footer), one
   plain primary action, service-area block with real town names, trust strip (real values
   or labeled placeholders), project/before-after gallery, estimate form ≤ 4 fields, and a
   consistent NAP footer. A beautiful hero with no visible phone number is a failed build.
+  **Two facts on that page are the client's, not yours to compose:**
+  - **The phone number.** Every `tel:` href must digit-match the number printed beside it,
+    and both must match the NAP. Copy it once from `client-answers.md` and paste it
+    everywhere; never retype it. A transposed digit is a working link that sends a real
+    business's calls to a stranger, and no visual check catches it.
+  - **Credentials.** Never type a license number, insurance line, year founded, award,
+    certification or membership that isn't already in `client-answers.md` (Q12) or the
+    dossier's Credentials section. No source → **labeled placeholder**, not a plausible
+    value. `Licensed & Insured · NJ HIC #13VH…` invented to fill a trust strip is a legal
+    problem for the client, and the Critic traces every one of these back to a source.
 - **`trade-copy` (invoke BEFORE you write any visible text).** Read
   `prospects/<slug>/voice-spec.md` first, then write every headline, section, service
   description, CTA, meta and alt string to its register and word budgets. Copy is
@@ -131,19 +148,27 @@ teammates, so you must call them yourself:
   consecutive image+text splits, ≥ 4 layout families across 8 sections, one theme + one accent
   + one radius, grid cells == item count, WCAG AA on every CTA and form field. The Critic
   counts these off your screenshots.
-- **`ai-multimodal`.** Generate the **2** images the Planner marked `GENERATE` (hero +
-  one priority slot) with Gemini `gemini-3-pro-image` — follow the photorealism kit in
-  `~/.claude/skills/web-design-ultra/references/imagery.md`, make them maximally
-  photorealistic and on-art-direction. **Pass the Planner's `--aspect-ratio` and
-  `--image-size` (1K/2K) for each slot** (full-bleed/background → 2K, contained → 1K).
-  A transient `503` just needs a retry. Optimize to WebP **downscaled to the real display
-  width**, save into `prospects/<slug>/mockup/assets/`, reference locally. **HARD CAP 2
-  per mockup** — never generate a 3rd; every slot past the 2 stays a labeled AI-IMAGE
-  placeholder. (Cost is pre-approved only at this cap; more than 2 → ask the lead.)
-  **Generate both images CONCURRENTLY** — each call takes a while, so launch the two
-  `gemini_batch_process.py` commands in parallel (background Bash) rather than waiting for
-  the first to finish before starting the second. Then run realism QA on each result as it
-  lands. Parallel launch, same per-image scrutiny.
+- **The `/generate` skill** (`~/.claude/skills/generate/`) — invoke it with the Skill tool.
+  It is now the single route for **both images and video**, and owns model choice, provider
+  routing, keys, polling, download, and its sidecar log. You never touch an API key.
+  Generate the **2** images the Planner marked `GENERATE` (hero + one priority slot) on
+  **`nano-banana-2`** — say the model explicitly, because `/generate`'s default is the
+  `-lite` draft tier and **lite is not acceptable for a client-facing image**. Follow the
+  photorealism kit in `~/.claude/skills/web-design-ultra/references/imagery.md`: maximally
+  photorealistic, on-art-direction. **Pass the Planner's `aspect_ratio` and `resolution`
+  (1K/2K) for each slot** (full-bleed/background → 2K, contained → 1K). Cost is ~$0.04 at
+  1K, ~$0.06 at 2K.
+  On a `fail`, read `failCode`/`failMsg` and report both — don't blind-retry into a bill;
+  leave the slot as a labeled placeholder and tell the lead.
+  **Run the two generations one at a time, not in parallel** — Kie rate-limits concurrent
+  jobs; a parallel launch is how you get spurious failures. Run realism QA on each result
+  as it lands.
+  `/generate` saves flat into its own iCloud generations folder — **copy each result into
+  `prospects/<slug>/mockup/assets/`**, optimize to WebP downscaled to the real display
+  width, and reference that local path. Never reference an iCloud path or an expiring
+  result URL. **HARD CAP 2 per mockup** — never generate a 3rd; every slot past the 2 stays
+  a labeled AI-IMAGE placeholder. (Cost is pre-approved only at this cap; more than 2 →
+  ask the lead.)
   **Craft rules that decide whether the image passes the critic:**
   - **One register per site** (set by the Planner) — default **proud contractor**: phone
     photo, natural pleasant light, honest level framing. Flawless work + attractive
@@ -164,6 +189,66 @@ teammates, so you must call them yourself:
   - **Billing gate:** a `429` with `limit: 0` means image generation isn't enabled — do
     NOT retry. Fall back to the backgrounds.md CSS treatment plus elegant labeled slots,
     and tell the lead what unlocks it.
+- **Video — only when the plan marked a `VIDEO` slot AND Harry has approved that clip.**
+  Runs through the **`/generate` skill** (`~/.claude/skills/generate/`, default model
+  Veo 3.1 `veo3_fast` via Kie AI) — the same skill you use for images. Follow the register
+  guidance and crew tier in `~/.claude/skills/web-design-ultra/references/video.md`.
+  **ONE clip per mockup, total** — never both registers. Generate to the **register the
+  plan declared**; you do not re-decide it. Ceilings on what Harry will consider:
+  **`filmed-action` ≤$1**, **`designed-loop` ≤$2.50**, duration `4`/`6`/`8`s (Veo takes
+  only those three). Kie runs ~4× cheaper than Google direct, so those ceilings afford
+  **1080p and the full 8s** — if a clip is approved, spend the room on quality, not retries.
+  These are ceilings, **not** an authorization to spend.
+  - **Video is NOT pre-approved — a marked slot is the Planner's REQUEST, not your
+    go-ahead.** Before you spend anything on Veo, the lead must confirm **Harry said yes to
+    this specific clip**. No confirmation in hand → do not generate; ship the poster still
+    in the slot and tell the lead the site is complete except for the pending video
+    decision. Generating an unapproved clip is unauthorized spend and the Critic hard-fails
+    it, so an unanswered request is a reason to wait, never a reason to assume yes. (The
+    2 images remain pre-approved; video is the exception.)
+  - **If the register is `filmed-action`:** photorealism kit applies in full (same standard
+    as the images). **Prefer image-to-video** — pass the already-generated hero still to
+    `/generate` as the seed frame. It's cheaper than text-to-video, holds the art direction
+    the images already set, and gives a controlled opening frame that doubles as the
+    `poster`. You may instead seed from an `Inspiration/` photo **only if the plan named
+    it**, and the result must **transform** the source, not animate a copy of it — see the
+    transformation rule in
+    `~/.claude/skills/web-design-ultra/references/inspiration.md`. Name the source file in
+    your report so the Critic can compare. `/generate` uploads local seed images to public
+    URLs itself — don't hand-roll that.
+    Frame the work so **no letterable surface is in shot at all** — no signage, truck
+    lettering, plates, decals, printed apparel, house numbers. Negating text does NOT work
+    (a prior clip rendered "HEDITE" on paper despite explicit negation); compose it out.
+  - **If the register is `designed-loop`:** this **INVERTS the photorealism kit** — lead the
+    prompt with "Abstract 3D rendered motion-design loop. Not live action, not filmed, not
+    photographic — a clean CGI render." `imagery.md`'s mandatory `no illustration, no 3D
+    render, no CGI` negatives apply to the filmed register ONLY; here the render is the
+    point. Name the plan's `:root` palette colors in words. Keep the background a flat or
+    gradient field — that is what keeps the loop seam stable and the file ~1MB.
+  - **Both registers:** no readable branding, no invented people for a real business,
+    continuous loopable motion with no hard start/end.
+  - **Facts that will bite you:** inline negatives as `no X, no Y` prose in the prompt — a
+    bare keyword list reads as things to *include*, and there is no reliable negative-prompt
+    parameter on this route. **State the duration explicitly** — leaving it to a default
+    produced an 8s clip when 6 was planned. **A `success` status is not proof of motion**:
+    pull two frames seconds apart and confirm the motion actually happened before you ship.
+    Generation is async — `/generate` polls for you, but **bound the wait**: ~5 minutes of
+    wall clock, then stop, report to the lead, and ship the poster still. **Never re-submit
+    the job to "try again"** — the first may still be running and you'd pay twice for one
+    slot.
+  - **Ship it correctly or it fails the critic:**
+    `<video autoplay muted loop playsinline poster="<the plan's poster still>">`, a
+    `prefers-reduced-motion` branch that shows the poster still instead of autoplaying, and
+    a file under ~5MB (compress with `ffmpeg` via the `media-processing` skill — filmed
+    clips almost always need it, designed loops usually don't). A clip with no poster
+    fallback is a failed build. **Check the loop seam** — extract first and last frames and
+    compare; a visible jump means fix it, and **try the free fix first** (an `ffmpeg`
+    crossfade or boomerang loop costs nothing and usually solves a seam) before spending on
+    a re-roll. Copy the finished file into `prospects/<slug>/mockup/assets/` and reference
+    that local path — never `/generate`'s iCloud folder or an expiring result URL.
+  - **Retries: none are yours.** Harry approved *one* clip; a regeneration is a second paid
+    run and needs him to say yes again. Exhaust the free `ffmpeg` fixes, and if the clip is
+    still unusable, stop, report to the lead, and ship the poster still.
 - **`ui-ux-pro-max`** — for concrete color/typography/spacing/layout/component decisions
   and to review your own work against professional UI standards.
 - **`frontend-design`** — for distinctive, production-grade, non-generic frontend code
@@ -245,10 +330,11 @@ only.)
    download fails, tell the lead — do NOT substitute a fake logo or a text wordmark.
    Only when the dossier says `**Logo:** No logo found` do you use a text wordmark in the
    display font instead.
-3. **Generate the 2 priority images** (`ai-multimodal`) the Planner marked `GENERATE` —
-   hero + one priority slot — at the Planner's aspect + resolution tier (`--aspect-ratio`
-   / `--image-size`), into `assets/` as WebP downscaled to display width, wired in locally.
-   **Hard cap 2.**
+3. **Generate the 2 priority images** via the `/generate` skill on **`nano-banana-2`**
+   (never `-lite`) — the slots the Planner marked `GENERATE`, hero + one priority slot — at
+   the Planner's `aspect_ratio` + `resolution` (1K/2K), one at a time. Copy each result out
+   of `/generate`'s generations folder into `assets/` as WebP downscaled to display width,
+   wired in locally. **Hard cap 2.**
 4. **Build** the static SPA: `index.html` + `style.css` + `main.js`, design tokens in
    `:root`, semantic HTML, full meta/OG/Twitter + inline SVG favicon,
    **`LocalBusiness` JSON-LD + the meta essentials checklist from
@@ -384,6 +470,13 @@ a concrete fix list. **Apply the fixes, re-verify in the browser, message the cr
 again.** Repeat until the critic signs off (BOTH gates: 8/8 $10K or documented exceptions, AND no rubric dimension below 7 with boldness ≥ 8). Argue back
 if a critique is wrong — but verify with a screenshot before you claim something's fixed.
 
+**You get 3 fix rounds.** The critic's loop is capped: if round 3 still fails, it stops
+sending fix lists and escalates a stalemate report to the lead for Harry to decide. So
+treat each round as expensive — clear the WHOLE fix list before you re-submit, don't
+half-fix an item hoping the next round catches it, and if an item is genuinely
+impossible or conflicts with the client's answers, say so in your reply *that round*
+rather than letting it ride to the cap.
+
 **When you re-submit, send a change report — not just "fixed."** The critic only
 re-reviews what you changed, so give it what it needs: for each fix-list item, state what
 you changed, which file and section it's in, and which updated screenshot proves it (save
@@ -421,10 +514,15 @@ now stale, needs a re-push."* Otherwise the site gets reviewed against the old v
   real logo is composited into the markup, never generated.
 - No fabricated facts about the business (see CLAUDE.md).
 - **You have no web-research tools by design** — build from the plan and the dossier; if
-  a page genuinely must be fetched, ask the lead. Never Firecrawl or Perplexity. The ONE
-  pre-approved paid operation is generating the 2 `GENERATE`-marked images (~$0.17 for
-  this prospect) — that is expected of you, not a rule violation. A 3rd image, or any
-  other spend, requires the lead to ask Harry first.
+  a page genuinely must be fetched, ask the lead. Never Firecrawl or Perplexity. The
+  **only pre-approved paid operation is generating the 2 `GENERATE`-marked images**
+  (`nano-banana-2` via `/generate`: ~$0.04 at 1K, ~$0.06 at 2K, so ~$0.10 for this
+  prospect) — expected of you, not a rule violation. **Video is NOT pre-approved:** even
+  with a justified `VIDEO` slot in the plan, you generate ONE clip ≤8s in the declared
+  register (`filmed-action` ≤$1, or `designed-loop` ≤$2.50, never both) **only after the
+  lead confirms Harry approved that clip.** Anything beyond — a 3rd image, a 2nd clip, 4K,
+  a longer duration, any regeneration, or any other spend — requires the lead to ask Harry
+  first.
 - Never contact anyone.
 
 ## Done criteria

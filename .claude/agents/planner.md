@@ -75,8 +75,14 @@ handles **one client at a time**: you write ONE plan for ONE builder.
 
 `prospects/<slug>/client-answers.md` exists. **Read it FIRST, before the dossier.**
 
+**If it does NOT exist, or is empty: STOP and message the lead. Do not plan from the
+dossier alone.** A plan built without the client's answers is a speculative site nobody
+asked for — the exact thing this crew's business model forbids — and every gate downstream
+that checks "client-answer fidelity" would have nothing to check against. A missing file is
+a run that started too early, not a gap for you to fill with research.
+
 **Answers arrive in whatever form the client gave them** — usually mapped to the
-30-question master (`templates/Website-Questionnaire.docx`, numbered 1–30), but often just
+17-question master (`templates/Website-Questionnaire.docx`, numbered 1–17), but often just
 loose notes from a phone call. Handle either. **Skipped questions are normal and expected** — treat an unanswered
 question as "no preference" and fall back to the dossier and site-content for that
 decision, rather than stalling or flagging it. Only flag an answer that is genuinely
@@ -143,10 +149,22 @@ builder can start while you're still available to answer questions.
    python3 ~/.claude/skills/ui-ux-pro-max/scripts/search.py "<bare industry term>" --domain color
    ```
    (e.g. "landscaping", "tree service"). Treat output as candidates to diverge from.
-3. **Stage 3 — Inspiration (mandatory).** Study 3–5 real reference sites (WebSearch +
-   WebFetch, or the browser pane if available). Extract *patterns* — layout moves, type
-   treatment, color logic, motion — never copy a specific site. Build a short evidence
-   sheet in the plan.
+3. **Stage 3 — Inspiration (mandatory).** **Start with the crew's local library:
+   `~/Projects/essex-web-crew/Inspiration/`.** Read the images (filenames are content
+   hashes and tell you nothing — look at them). It holds two kinds:
+   - **site mockups / screenshots** → design references; dissect them exactly like a live
+     site and fill an evidence sheet;
+   - **photography** (trade work, machinery, landscape) → art-direction reference for the
+     register of a shot — lighting, camera height, grit level — and a possible
+     **image-to-video source** for the Builder under the transformation rule in
+     `~/.claude/skills/web-design-ultra/references/inspiration.md`.
+
+   Then study **3–5 real reference sites** (WebSearch + WebFetch, or the browser pane).
+   The local library does not replace live research — galleries give ambition, real
+   competitors give the category expectations you're beating. Extract *patterns* — layout
+   moves, type treatment, color logic, motion — never copy a specific site. Build a short
+   evidence sheet in the plan, and **name any `Inspiration/` file you drew from** so the
+   Builder and Critic can trace it.
 4. **Stage 4 — Anti-repetition.** Read the crew's **project-local** log
    `~/Projects/essex-web-crew/design-memory.md` — NOT the skill's global
    `data/design-memory.md`. (The crew keeps its own ban list so prospects diverge from
@@ -226,7 +244,8 @@ chosen bold direction, grounded in the Stage 2 engine and Stage 3 evidence.
 8. **Image list — mark the 2 to GENERATE.** List every image slot the site needs, each
    with a specific, photorealistic generation prompt. **Mark exactly two as
    `GENERATE`** — the hero first, then the one highest-impact/most-visible slot — which
-   the Builder will actually generate (Gemini, hard cap 2). Mark every other slot
+   the Builder will actually generate (via the `/generate` skill on **`nano-banana-2`**,
+   the shipping tier — never the `-lite` draft model; hard cap 2). Mark every other slot
    `PLACEHOLDER` (labeled AI-IMAGE box; Harry/the client fills later). For **each
    GENERATE slot, specify: register + size**:
    - **Register — pick ONCE per prospect, apply to the hero + every GENERATE slot (never
@@ -245,10 +264,67 @@ chosen bold direction, grounded in the Stage 2 engine and Stage 3 evidence.
    Write the GENERATE prompts to the photorealism-kit standard (register-aware) in
    `~/.claude/skills/web-design-ultra/references/imagery.md` so the Builder can generate
    directly. No real/stock images — generated or placeholder only.
-9. **Embed placeholders** — where a contact form / Google Map / booking slot goes.
-10. **Content honesty note** — call out any dossier facts that are unverified (aggregator
+9. **Video slot — mark 0 or 1, and name its register.** **Default is no video.** Most
+   prospects ship zero clips and that is never a deduction. Full system:
+   `~/.claude/skills/web-design-ultra/references/video.md`.
+
+   **Work the cost-ascending ladder first — stop at the first rung that serves the brief:**
+   (1) `backgrounds.md` static depth — free; (2) `atmosphere.md` ambient light/air — free;
+   (3) `reactive-backgrounds.md` canvas field — free, tech register; (4) **designed loop** —
+   paid; (5) **filmed action** — paid. If a free rung sells the same feeling, take it.
+
+   **Two registers. Pick one — a site gets ONE clip TOTAL, either register, never both.**
+
+   - **`filmed-action`** — documentary proof. Gate: the **frame-2 test** — what does frame 2
+     show that frame 1 cannot? Nothing → no video. Real motion that proves or sells → passes
+     (water feature, fire, a process/timelapse proof for a trade, ambience for a venue).
+     For businesses whose work is **physically visible**. Never for a business whose product
+     lives on a screen — every such attempt becomes a workaround that dodges the real work.
+   - **`designed-loop`** — an abstract rendered motion object in the site's exact palette;
+     its job is **brand register, not proof**, so frame-2 does NOT apply. Gate instead:
+     (a) **occupational fit — studio / tech / SaaS / premium / creative ONLY.** Behind a
+     local trade, legal, or medical prospect this is the convention error
+     `color-conventions.md` exists to prevent — hard no, same table as
+     `reactive-backgrounds.md`; (b) the moment needs rendered richness no free tier can fake
+     (subsurface scattering, viscous 3D morph, liquid-glass refraction); (c) it **consumes
+     the scroll-set-piece slot** in the ≤4-animated-systems budget and is **mutually
+     exclusive with a reactive canvas field** — cross-check your item 7 signature-motion
+     call; a plan carrying both a designed loop and a scroll set-piece is a defect.
+
+   "It looks premium" and "the hero feels static" are **not** justifications in either
+   register and are a plan defect if written as one.
+
+   If a slot passes, mark exactly ONE slot `VIDEO` and specify:
+   - **Register** — `filmed-action` or `designed-loop`.
+   - **Justification** — one sentence. Filmed: the frame-2 argument. Designed loop: which
+     free ladder rung it beat and why that rung couldn't carry the moment.
+   - **Budget** — filmed **≤$1**, designed loop **≤$2.50**. All generation runs through
+     the `/generate` skill (Veo 3.1 `veo3_fast` via Kie, ~4× cheaper than Google direct),
+     so those caps now afford **1080p and the full 8s** — spend the headroom on quality,
+     not retries.
+   - **Source** — `text-to-video`, or `image-to-video` naming the seed frame. Prefer
+     image-to-video for filmed action: animate the `GENERATE` hero still, or seed from an
+     `Inspiration/` photo. If seeding from `Inspiration/`, **name the file** and state how
+     the shot transforms it — an animated copy of someone else's photograph is a fail
+     (transformation rule in `references/inspiration.md`).
+   - **Duration** — `4`, `6` or `8` seconds (Veo takes only those three), loopable
+     (continuous motion, no hard start/end).
+   - **Aspect** — `16:9` for a hero band, `9:16` for a mobile/social slot.
+   - **Poster still** — which `GENERATE` image slot serves as the `poster` fallback; on a
+     $0-imagery build, name the clip's own first frame (exported free via `ffmpeg`). A
+     `VIDEO` slot with no poster still is a plan defect.
+   **Video is NOT pre-approved. Marking a slot is a REQUEST, not an authorization.** Write
+   the slot into the plan with its register, cap, duration, aspect, poster still, and the
+   one-line justification for why frame 1 can't carry the moment — then say in your handoff
+   that the plan contains a video request the lead must take to Harry. The Builder will not
+   generate it until Harry has said yes. If the answer is no, the poster still ships alone
+   and the plan is not defective for it. Two clips, 4K, >8s, a non-default model
+   (Kling/Sora), or anything above the caps
+   isn't yours to request either — route that through the lead.
+10. **Embed placeholders** — where a contact form / Google Map / booking slot goes.
+11. **Content honesty note** — call out any dossier facts that are unverified (aggregator
    "years in business" etc.) so the Builder writes around them, per CLAUDE.md.
-11. **Voice spec** — `prospects/<slug>/voice-spec.md` written (per `trade-copy`) and
+12. **Voice spec** — `prospects/<slug>/voice-spec.md` written (per `trade-copy`) and
    cross-referenced here. Every copy direction in this plan conforms to it.
 
 ## Handoff
