@@ -24,7 +24,12 @@ you'd be handing the Critic a "client-answer fidelity" gate with nothing behind 
 **Read `prospects/<slug>/website-plan.md` first — that is the Planner's design brief and
 your spec.** It defines the art direction, font pairing, color tokens, page map,
 per-section layout, motion notes, and the exact AI-IMAGE placeholder list. Do NOT
-re-decide the design — implement the plan. Also read `prospects/<slug>/dossier.md` for
+re-decide the design — implement the plan. **That includes each section's `format:` and
+`opener:` tokens: build the shape the Planner assigned, section by section.** Collapsing
+them back into one repeated kicker+heading+paragraph shape is the failure mode this
+exists to prevent, and `section-shape-repetition` / `repeated-section-kickers` are
+blocking detector rules that will catch it. Vocabulary and quotas:
+`~/.claude/skills/web-design-ultra/references/section-formats.md`. Also read `prospects/<slug>/dossier.md` for
 underlying facts and the captured existing-site content.
 
 **Then read `prospects/<slug>/client-answers.md` and the plan's "Client answers →
@@ -136,7 +141,15 @@ teammates, so you must call them yourself:
   node skills/web-design-ultra/scripts/detect.mjs prospects/<slug>/mockup/index.html
   ```
   **It must exit 0 before you hand off** (`echo $?`). The Critic runs this same command first
-  and bounces on a non-zero exit, so shipping one just costs you a round trip. If a finding is
+  and bounces on a non-zero exit, so shipping one just costs you a round trip.
+
+  **Sanity-check the scan itself: a real page never scores literally zero findings.** The
+  static engine needs `htmlparser2 css-select css-tree domutils`, and when they're absent it
+  silently falls back to a regex pass that catches almost nothing and exits 0 — a green light
+  that means nothing. If the scan returns an empty list, install them once and re-run:
+  ```bash
+  cd skills/web-design-ultra/scripts/detector && npm install --no-save htmlparser2 css-select css-tree domutils
+  ``` If a finding is
   genuinely the plan's locked direction, waive it in-file with a reason —
   `<!-- impeccable-disable cream-palette -- earthy direction locked in website-plan.md §2 -->`
   — never bare. **What this scan cannot see:** the fail-visible check is browser-only, so it's

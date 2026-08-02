@@ -32,6 +32,7 @@ import {
   checkPageQualityFromDoc,
   checkRepeatedContainerTextFromDoc,
   checkRepeatedSectionKickersFromDoc,
+  checkSectionShapeRepetitionFromDoc,
   resolveBackground,
   resolveBorderRadiusPx,
 } from '../../rules/checks.mjs';
@@ -203,6 +204,9 @@ async function detectHtml(filePath, options = {}) {
       findings.push(finding(f.id, filePath, f.snippet));
     }
     for (const f of runPageCheck('repeated-section-kickers', () => checkRepeatedSectionKickersFromDoc(document, window))) {
+      findings.push(finding(f.id, filePath, f.snippet));
+    }
+    for (const f of runPageCheck('section-shape-repetition', () => checkSectionShapeRepetitionFromDoc(document))) {
       findings.push(finding(f.id, filePath, f.snippet));
     }
     for (const f of runPageCheck('numbered-section-labels', () => checkNumberedSectionLabelsFromDoc(document, window))) {

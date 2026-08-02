@@ -71,6 +71,8 @@ Generate the imagery the chosen direction needs (hero, textures, OG image) via `
 
 ### Stage 7 — Build
 
+**Assign a section format to every section before building.** `references/section-formats.md` carries the format families, the opener vocabulary beyond the eyebrow, and the variety quotas (≥4 distinct families per 8 sections, no family twice consecutively, kicker budget ≤ ceil(sections÷3), no two adjacent sections sharing an opener). 79% of visitors scan by riding section openers for landmarks, so a page of identically shaped sections offers one landmark stamped repeatedly. Two blocking detector rules — `section-shape-repetition` and `repeated-section-kickers` — enforce this mechanically.
+
 **Load `references/craft-floor.md` first** — once the direction is settled and immediately before you edit UI. It is the mechanical quality floor (contrast, shadow depth, spacing rhythm, type measure, real states) plus the category defaults to refuse (icon+heading+text card grids, eyebrow over every section, gradient text, nested cards, decorative glass). It never picks the direction; it stops the build from quietly regressing to the mean.
 
 Then implement the chosen direction using Stage 2's stack rules and craft discipline: distinctive type (never the banned set), CSS variables for the whole palette, deliberate spatial composition (asymmetry, overlap, scale contrast), and motion from `references/motion.md` — commit to the direction's **signature move** (one entrance family + one hover personality + at most one scroll set-piece), never the default fade-up/text-delay/count-up trio.
@@ -109,6 +111,7 @@ Any agent that runs Stage 8 (builder self-check or critic) needs the browser/pre
 | The 5 divergence axes + direction-brief template | `references/directions.md` |
 | The build quality floor + defaults to refuse (load before editing UI) | `references/craft-floor.md` |
 | Whether/why to animate a moment (before picking a technique) | `references/motion-thesis.md` |
+| Section format families + opener vocabulary + variety quotas | `references/section-formats.md` |
 | Layout / type / color craft passes + domain-scoped mechanical scan | `references/layout-craft.md` · `references/type-craft.md` · `references/color-craft.md` |
 | One earned micro-interaction | `references/delight.md` |
 | Amplify a flat section / calm an overloud one (Stage 8 fix loop) | `references/bolder.md` · `references/quieter.md` |

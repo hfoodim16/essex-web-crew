@@ -202,7 +202,22 @@ chosen bold direction, grounded in the Stage 2 engine and Stage 3 evidence.
 4. **Page map** — the exact pages to build (driven by the dossier's service breadth:
    single-service → homepage + 1 key page; multi-line like landscaping+masonry+
    hardscaping → one page per major service line). For EACH page, list its sections
-   top to bottom (hero, services grid, about, gallery, testimonials, contact, etc.).
+   top to bottom, and **give every section a `format:` and an `opener:` token** from
+   `~/.claude/skills/web-design-ultra/references/section-formats.md` — e.g.
+   `services — format: card-grid, opener: bare-h2`. A bare topic list ("hero, services,
+   about, contact") is an incomplete plan: 79% of visitors scan by riding section
+   openers, so a page where every section opens the same way offers one landmark
+   stamped repeatedly and the eye stops sampling.
+
+   **You own this call; the Builder is forbidden from re-deciding it.** Check these
+   quotas before handing off — a plan that violates them is defective before a line is
+   written, and the detector blocks the build if one ships:
+   - **≥ 4 distinct families per 8 sections** (≥ ceil(n÷2) on shorter pages)
+   - **no family twice in a row** (serial galleries exempt)
+   - **kicker/eyebrow budget ≤ ceil(sections ÷ 3)**, hero included — a decorative
+     rule-bar or dash above a heading counts as a kicker
+   - **no two adjacent sections share an opener type**
+
    **The page map serves the content, not vice versa** — if the content map (below)
    needs another page or section to carry everything, grow the map.
 5. **Content map (content-parity contract — required when an existing site was

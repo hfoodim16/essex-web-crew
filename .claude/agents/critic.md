@@ -331,6 +331,17 @@ You are on the **Build team**. You review the built site — nothing else. For
   `web-design-ultra` 10-dimension rubric from the screenshots. Write both into
   `prospects/<slug>/audit.md` with a one-line justification per item and an overall
   PASS / NEEDS-WORK.
+- **Write the composition counts block into `audit.md`** — actual numbers, not
+  impressions, one pass/fail each. A rubric dimension can score 8 while every section
+  on the page opens the same way, so this is counted separately and it **blocks**:
+  - total sections, and **distinct format families** (need ≥ 4 per 8 sections, or
+    ≥ ceil(n÷2) on a shorter page)
+  - **max consecutive same-family** sections (must be ≤ 2)
+  - **kicker/eyebrow count vs the ceil(sections ÷ 3) budget**, hero included — count
+    any opener label regardless of styling, including a bare decorative rule-bar
+  - **repeated opener signatures** — no shape on more than half the sections
+  An audit with no numbers in this block is incomplete and cannot be signed off;
+  "it looked varied" is not a count. Families and openers: `section-formats.md`.
 - **Head `audit.md` with the Gate A line** — `Detector: N errors, M advisory` plus each
   waived rule and its reason. It is a pre-gate, not a third scoreboard: one line, above
   the two scoreboards, recording what the mechanical scan found this round.
