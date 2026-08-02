@@ -1,8 +1,15 @@
 # OS / editor
 .DS_Store
+Thumbs.db
+.obsidian/
+.vscode/
+.idea/
 
 # Local dev servers, logs
 *.log
+
+# Node
+node_modules/
 
 # Secrets — never commit an API key
 .env
@@ -23,6 +30,8 @@ prospects/**/.outreach-ready
 # Python
 **/.venv/
 **/__pycache__/
+*.pyc
+.pytest_cache/
 
 # Delivery zips are rebuilt on demand by pipeline/package-site.sh
 prospects/**/*.zip
@@ -32,7 +41,11 @@ prospects/**/*.png
 prospects/**/*.jpg
 prospects/**/*.jpeg
 prospects/**/*.webp
-!prospects/**/screenshots/*
+# Screenshots are QA proof, not deliverables — full-page retina captures run 2-6 MB each
+# and are regenerable from the mockup at any time. They were tracked until 2026-08-01 and
+# had grown to 79 MB, ~77% of the repo. Already-tracked ones stay tracked (git ignores
+# .gitignore for files it already knows); this only stops NEW ones from being added.
+# Tradeoff: a fresh clone won't carry them, so re-shoot rather than expecting them on pull.
 # ...but DO track real client logos the builder downloads into a mockup's assets/ —
 # these are functional (the site references them), not throwaway generated images.
 !prospects/**/mockup/assets/*
@@ -42,3 +55,12 @@ prospects/**/*.webp
 !prospects/**/mockup/work/**/*.jpg
 !prospects/**/mockup/work/**/*.jpeg
 !prospects/**/mockup/work/**/*.webp
+
+# ...except these, which the assets/ exemption above re-admitted by accident: they sit in
+# an assets/ folder but no page references them (verified 2026-08-01; cedar-grove's own
+# audit.md line 31 calls team.jpg "unreferenced — optional cleanup"). team.jpg alone is a
+# 6000x4000 camera original at 5.5 MB. Untracked, but left on disk in case they're wanted.
+prospects/cedar-grove-transmission/mockup/assets/team.jpg
+prospects/cedar-grove-transmission/mockup/assets/team-sm.webp
+prospects/anthonys-landscaping/mockup/assets/original-header-banner.jpg
+prospects/happy-trees-by-mgm/mockup/assets/logo-og.png
