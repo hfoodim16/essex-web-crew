@@ -1,5 +1,8 @@
 # Harry's Playbook
 
+> **`CLAUDE.md` is canonical.** Rules, checklists, and role/skill assignments are defined
+> there. If this file disagrees with `CLAUDE.md`, `CLAUDE.md` wins — fix this file.
+
 > **⚠️ The business model changed — read this first.** We work **ask-first**: find a
 > business that could use a site → **you** reach out personally → anyone who says yes gets
 > the master questionnaire → build FROM their answers → keep refining it with them. We do
@@ -286,7 +289,7 @@ Re-open `index.html` yourself to confirm.
   wrong, send it back for ONE regeneration naming the flaw; if it fails again, escalate
   rather than shipping a placeholder there. → go back to **Step 8C**.
 
-  *(The client's own job photos beat AI images anyway — question 19 of the questionnaire
+  *(The client's own job photos beat AI images anyway — question 11 of the questionnaire
   asks for them. Once they send some, swap them in: **FULL-PROCESS Step 11**.)*
 
 ---

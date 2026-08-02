@@ -85,8 +85,19 @@ claims as fact (see CLAUDE.md content-honesty rule).
 
 If the lead authorizes it, you may use the `Task` tool to run one Explore/general
 subagent per niche in parallel to gather candidate lists faster, then dedupe and
-verify the results yourself. If subagent spawning isn't available to you as a
-teammate, just do the searches inline. Never try to spawn other *teammates*.
+verify the results yourself. **Cap it at 4 running at once, and 8 for the whole run** — a
+hunt that needs more than that needs a different angle, not more agents. If subagent
+spawning isn't available to you as a teammate, just do the searches inline. Never try to
+spawn other *teammates*.
+
+**Every brief you write must carry both hard rules verbatim — subagents don't inherit
+them:**
+- **Free tools only: `WebSearch` and `WebFetch`. Never Firecrawl or Perplexity.** Both are
+  live MCP servers in this environment and both cost real money per call, so a subagent
+  that doesn't know the rule will reach for them.
+- **Never contact a business.** Read public pages only — no form submissions, no emails, no
+  DMs, no calls, no "just checking if the number works." You are browsing strangers'
+  contact pages all day; that is research, never outreach. Harry does all contacting.
 
 ## Output — `pipeline/candidates.md`
 

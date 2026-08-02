@@ -88,8 +88,9 @@ Read CLAUDE.md and all files in .claude/agents/. Run the Essex Web Crew
 BUILD pipeline for ONE client. Skip the prospecting team —
 we already have this client. Lineup: planner=Fable (claude-fable-5),
 builder=Opus, critic=Opus. Free tools only — no Firecrawl/Perplexity; the one
-pre-approved paid step is the builder's 2 AI images (~$0.17). Teammates invoke
-their own skills via the Skill tool.
+pre-approved paid step is the builder's 2 AI images (~$0.17). If the planner marks a
+VIDEO slot, that is a REQUEST — bring it to me and wait for a yes before the
+builder generates anything. Teammates invoke their own skills via the Skill tool.
 
 CLIENT: <slug or business name>
 

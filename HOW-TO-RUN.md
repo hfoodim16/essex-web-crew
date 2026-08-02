@@ -1,5 +1,8 @@
 # How to Run — Simple Steps
 
+> **`CLAUDE.md` is canonical.** Rules, checklists, and role/skill assignments are defined
+> there. If this file disagrees with `CLAUDE.md`, `CLAUDE.md` wins — fix this file.
+
 **1. Open Terminal** (Cmd+Space → "Terminal" → Enter).
 
 **2. Start it:**
@@ -58,8 +61,9 @@ Read CLAUDE.md and all files in .claude/agents/. Run the Essex Web Crew
 BUILD pipeline for ONE client. Skip the prospecting team —
 we already have this client. Lineup: planner=Fable (claude-fable-5),
 builder=Opus, critic=Opus. Free tools only — no Firecrawl/Perplexity; the one
-pre-approved paid step is the builder's 2 AI images (~$0.17). Teammates invoke
-their own skills via the Skill tool.
+pre-approved paid step is the builder's 2 AI images (~$0.17). If the planner marks a
+VIDEO slot, that is a REQUEST — bring it to me and wait for a yes before the
+builder generates anything. Teammates invoke their own skills via the Skill tool.
 
 CLIENT: <slug or business name>
 
@@ -112,7 +116,7 @@ build run it also has `client-answers.md`, `website-plan.md`, `mockup/` (incl. `
 **10. Shut down** when done: `Ask all teammates to shut down.` — or just `/exit`.
 
 **11. Delivery to Corey — automatic.** When the critic signs a prospect off, the lead
-packages the site and drafts the Gmail to Corey (cbrapkin@gmail.com) for you. Check your
+packages the site and drafts the Gmail to Corey (crapkin@foradigital.com) for you. Check your
 Gmail drafts, glance at it, hit send. Nothing is ever sent without you.
 
 Zips over 200 KB can't be attached automatically — those drafts open with an

@@ -2,6 +2,9 @@
 
 **Setting this up on a new machine? Start with [SETUP-COREY.md](SETUP-COREY.md).**
 
+> **`CLAUDE.md` is canonical.** Rules, checklists, and role/skill assignments are defined
+> there. If this file disagrees with `CLAUDE.md`, `CLAUDE.md` wins — fix this file.
+
 A Claude Code **agent team** that runs like a mini web agency on an **ask-first** model:
 find a business that could use a website → **ask what they want** → build from their
 answers → keep refining it with them. We never build a site speculatively and pitch it.
@@ -18,7 +21,7 @@ The work is split into **two independent teams** that never run together (both p
 - **Between the teams — Harry, no agents.** He contacts the prospects himself, call or
   email, in his own words. Anyone who says yes gets
   [`templates/Website-Questionnaire.docx`](templates/Website-Questionnaire.docx) — a standing,
-  client-ready 30-question questionnaire that needs no run to produce. Harry collects
+  client-ready 17-question questionnaire that needs no run to produce. Harry collects
   their answers.
 - **Team 2 — Build run.** `planner` + `builder` + `critic` (plus a capture-only `analyst`
   if the client has no dossier yet). Input is the client's answers, saved to
@@ -71,13 +74,17 @@ prospects/
 
 ## The team
 
-| Role | Team | Model | Skills | Does |
-|------|------|-------|--------|------|
-| **scout** | 1 — Prospecting | Sonnet | `research`, `docs-seeker` | Finds 10–12 qualifying businesses — any industry with a naturally static site, leading with trades (free web tools; no Firecrawl/Perplexity). |
-| **analyst** | 1 — Prospecting (capture-only in 2) | Opus | `research` | Scores them, captures each finalist's real site content + real reviews, writes dossiers, delivers the shortlist with contact info. In a build run it only runs if the client has no dossier yet — research this ONE business, nothing else. |
-| **planner** | 2 — Build | Fable | **`web-design-ultra`**, `ui-ux-pro-max`, `frontend-design`, `design-system`, `aesthetic`, `sequential-thinking` | Runs the web-design-ultra pipeline (Stages 1–5) → `website-plan.md`: art direction, fonts, palette, page map, three divergent directions — planned FROM the client's answers. |
-| **builder** | 2 — Build | Opus | **`web-design-ultra`**, `ai-multimodal`, `ui-ux-pro-max`, `frontend-design`, `frontend-development`, `web-frameworks` | One per build run. *Implements* the chosen direction (Stage 7) into a mockup with 2 real AI images (hero + 1) + placeholders beyond. |
-| **critic** | 2 — Build | Opus | **`web-design-ultra`**, `ui-ux-pro-max`, `code-review`, `design-system` | Audits the mockup against the Stage 8 rubric + the $10K Checklist; enforces client-answer fidelity, content parity, real-reviews-only; loops until sign-off. |
+| Role | Team | Model | Does |
+|------|------|-------|------|
+| **scout** | 1 — Prospecting | Sonnet | Finds 10–12 qualifying businesses — any industry with a naturally static site, leading with trades (free web tools; no Firecrawl/Perplexity). |
+| **analyst** | 1 — Prospecting (capture-only in 2) | Opus | Scores them, captures each finalist's real site content + real reviews, writes dossiers, delivers the shortlist with contact info. In a build run it only runs if the client has no dossier yet — research this ONE business, nothing else. |
+| **planner** | 2 — Build | Fable | Runs the web-design-ultra pipeline (Stages 1–5) → `website-plan.md`: art direction, fonts, palette, page map, three divergent directions — planned FROM the client's answers. |
+| **builder** | 2 — Build | Opus | One per build run. *Implements* the chosen direction (Stage 7) into a mockup with 2 real AI images (hero + 1) + placeholders beyond. |
+| **critic** | 2 — Build | Opus | Audits the mockup against the Stage 8 rubric + the $10K Checklist; enforces client-answer fidelity, content parity, real-reviews-only. Loops with the builder, capped at 3 fix rounds, then escalates a stalemate to Harry. |
+| **caretaker** | Post-launch | Sonnet | Watches sites already live on a real domain: keeps the site registry current and diagnoses uptime/DNS/TLS/content failures flagged by the hourly monitor. Never edits a live site on its own. |
+
+**Per-role skills: see the role table in [CLAUDE.md](CLAUDE.md) — that table is
+canonical.** Skills change often; keeping a second copy here is how the two drift apart.
 
 The lead session orchestrates and assembles results — in a build run it also saves the
 client's answers to `client-answers.md` before spawning anyone. Design decisions live with

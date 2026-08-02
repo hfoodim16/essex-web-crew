@@ -84,6 +84,12 @@ available to you, research inline.) Never spawn teammates.
 dossier is the foundation every downstream teammate builds on, and the details that
 matter most are exactly the ones that get flattened in a summary. So:
 
+- **Carry both hard rules into every brief, verbatim — subagents don't inherit them.**
+  (a) **Free tools only: `WebSearch` and `WebFetch`. Never Firecrawl or Perplexity** — both
+  are live MCP servers here and both cost real money per call. (b) **Never contact the
+  business** — public pages only, no forms, no emails, no calls. This applies to *all* your
+  fetching, including capture-only mode and the full existing-site capture, which is the
+  heaviest fetching you do.
 - **Demand verbatim capture, not summaries.** Each subagent brief must require: exact
   quotes of the site's tagline, about text, and service names/descriptions; review quotes
   with the reviewer's first name + platform; the **logo image URL**; contact details; and
@@ -159,6 +165,20 @@ you cannot find any usable public reviews, write "**No usable reviews found**" e
 so the mockup ships with no testimonial section rather than fabricated praise. (This is
 the review case of the project-wide rule: never make up any information — see CLAUDE.md.)
 
+**Capture CREDENTIALS the same way you capture reviews — into their own section.** Every
+license number, insurance line, year founded, award, certification, and membership goes in
+a dedicated **"Credentials"** section, each with the source it came from. Q12 of the
+questionnaire asks the client for exactly these, so `client-answers.md` outranks anything
+you find publicly; your job is to fill what they didn't answer.
+
+**Mark anything you couldn't confirm as `UNVERIFIED — <source>`.** An aggregator's "in
+business 22 years" is a lead signal, not a fact, and it must not cross into the dossier
+looking like one. If there's nothing, write "**No credentials found**" — same discipline as
+the reviews line. The Builder may only print what's in this section or in the answers, and
+the Critic traces every credential on the page back to one of the two, so a value that
+arrives here unlabeled is how an invented license number ends up on a real contractor's
+live site.
+
 **Hunt hard for a real email address** (site contact page, Facebook "About", Google
 Business / Yelp listing) and record it explicitly in the dossier — Harry contacts these
 prospects himself, so this line decides his first move: he emails when there's an
@@ -170,7 +190,10 @@ fallback.
 
 Include: business summary, **existing-site content captured verbatim/near-verbatim**
 (services, copy, contact, hours — with source), a **"Real reviews"** section (verbatim
-quotes + reviewer first name + platform, or "No usable reviews found"), the **Logo:**
+quotes + reviewer first name + platform, or "No usable reviews found"), a
+**"Credentials"** section (licenses, insurance, year founded, awards, certifications,
+memberships — each with its source, anything unconfirmed marked `UNVERIFIED —`, or "No
+credentials found"), the **Logo:**
 line, services (grouped), **recommended page map** (list the pages and why), service
 area, reputation notes,
 competitor references, current-presence critique, suggested art-direction hints, and a

@@ -1,5 +1,8 @@
 # The Full Process — Demo to Delivered
 
+> **`CLAUDE.md` is canonical.** Rules, checklists, and role/skill assignments are defined
+> there. If this file disagrees with `CLAUDE.md`, `CLAUDE.md` wins — fix this file.
+
 > **⚠️ Ask-first model, two independent teams.** We find a business, **you** reach out
 > personally, whoever's interested gets the master questionnaire
 > (`templates/Website-Questionnaire.docx`), and we build FROM their answers and keep refining
