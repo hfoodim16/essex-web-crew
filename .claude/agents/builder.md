@@ -138,8 +138,11 @@ teammates, so you must call them yourself:
   something is your call or theirs.
 - **Run the Stage 8 scan before handoff, every round:**
   ```bash
-  node skills/web-design-ultra/scripts/detect.mjs prospects/<slug>/mockup/index.html
+  node skills/web-design-ultra/scripts/detect.mjs prospects/<slug>/mockup/*.html
   ```
+  **Every page, not just the homepage.** A five-page mockup that only ever scans
+  `index.html` ships four unaudited pages — interior pages are usually where the repeated
+  card walls and copied section shapes actually live.
   **It must exit 0 before you hand off** (`echo $?`). The Critic runs this same command first
   and bounces on a non-zero exit, so shipping one just costs you a round trip.
 
@@ -405,8 +408,9 @@ only.)
    + mobile screenshots to `prospects/<slug>/screenshots/`, then check every gate the
    critic will check, so nothing bounces back for something you could have caught:
    - **The Stage 8 scan — run this FIRST, it's free and it's what the critic runs first.**
-     `node skills/web-design-ultra/scripts/detect.mjs prospects/<slug>/mockup/index.html`
-     → must **exit 0**, or every blocking finding waived in-file with a stated reason.
+     `node skills/web-design-ultra/scripts/detect.mjs prospects/<slug>/mockup/*.html`
+     → **every page** must **exit 0**, or every blocking finding waived in-file with a
+     stated reason.
    - **The composition checks** in `references/critique.md` (hero stack, CTA wrap and
      intent, nav line, zigzag cap, layout-family variety, the three consistency locks,
      grid cell count, CTA/form contrast).

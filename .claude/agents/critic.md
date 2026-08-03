@@ -46,7 +46,10 @@ not from a separate tool.** `references/critique.md` carries all three and is th
 run them in the order it gives:
 
 1. **Step 0, the scan** — before you serve the mockup or take a single screenshot:
-   `node skills/web-design-ultra/scripts/detect.mjs prospects/<slug>/mockup/index.html`.
+   `node skills/web-design-ultra/scripts/detect.mjs prospects/<slug>/mockup/*.html`.
+   **Audit every page, not just the homepage** — this is Impeccable's mandate here, and
+   interior pages are where copied section shapes and card walls hide. Record the
+   per-page counts in the Gate A line.
    The gate is the exit code, and **`2` and `1` mean completely different things**:
    - **`exit 2` = the design failed.** Bounce the build with the findings as the fix list —
      don't spend review tokens screenshotting something that fails mechanically.

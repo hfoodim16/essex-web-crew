@@ -29,6 +29,25 @@ must call them yourself):
   / rating — real or clearly labeled placeholder), a project or before/after gallery, an
   estimate form of ≤ 4 fields, and a consistent NAP footer. Section order that works:
   hero → trust strip → services → work → service area → reviews → estimate CTA → footer.
+- **`design-taste-frontend` (the "taste" skill — invoke after `web-design-ultra`, before
+  you write directions).** Use it for **four sections only**, all of which are planning
+  work:
+  - **§0 Brief Inference** — produce its one-line **Design Read**
+    ("Reading this as: <page kind> for <audience>, with a <vibe> language, leaning
+    toward <aesthetic family>") and write it verbatim into the plan's brief section. It
+    forces you to name the read instead of defaulting to an aesthetic.
+  - **§0.D Anti-Default Discipline** and **§9 AI Tells** — the forbidden-pattern list;
+    run your three directions against it at Stage 5 before committing.
+  - **§11 Redesign Protocol** — only when the prospect has an existing site (audit-first).
+
+  **Skip everything else in it** — its stack picks, install commands, dial machinery and
+  block library are build-time concerns and belong to the Builder, not the plan.
+
+  **Precedence, and this matters: client answers + `voice-spec.md` → `web-design-ultra`
+  → taste.** Where the two skills disagree, `web-design-ultra` wins — it is the house
+  rulebook. Concretely: taste's own examples suggest **Geist**, which is on our banned
+  font list, and its em-dash guidance differs from `trade-copy`'s. Take its *reasoning*,
+  never its specific picks, when they collide with ours.
 - **`ui-ux-pro-max`** — its style catalog, palettes, and font pairings inform your art
   direction, color system, and typography choices (this IS the Stage 2 engine).
 - **`frontend-design`** — its principles keep your plan pointed at distinctive,
@@ -350,7 +369,22 @@ chosen bold direction, grounded in the Stage 2 engine and Stage 3 evidence.
 
 ## Handoff
 
-When the plan is done, **message the Builder directly**: "website-plan.md and
+**Lint the plan first — it must exit 0 before you hand anything off:**
+
+```bash
+node ~/.claude/skills/web-design-ultra/scripts/plan-lint.mjs prospects/<slug>/website-plan.md
+```
+
+It checks the things that are cheapest to fix now and most expensive to fix after a
+build: the section-format quotas (≥4 distinct families per 8 sections, no family twice
+in a row, kicker openers ≤ ceil(sections÷3), no two adjacent sections sharing an
+opener), banned fonts named as picks, and the required plan fields — Design Read,
+Composition device, signature-motion tokens, imagery register, and a VIDEO slot's
+register if you marked one. Fix what it names and re-run until clean. Handing the
+Builder a plan that fails the lint just moves the failure downstream into HTML, where
+the detector catches it and the round trip costs a rebuild.
+
+When the plan is done and lint-clean, **message the Builder directly**: "website-plan.md and
 voice-spec.md ready for <slug> — build to these." If the builder isn't spawned yet, notify the lead that the plan
 is ready. Then mark your task complete — but stay reachable: the builder may message you
 if something in the plan is ambiguous, and the critic may route a content-map question

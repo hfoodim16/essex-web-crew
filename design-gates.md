@@ -8,7 +8,8 @@ Everything the crew runs comes from the skill, which every agent already invokes
 
 | Gate | Where it lives now | When it runs |
 |---|---|---|
-| **Mechanical scan** — 60 deterministic rules, no LLM, ~1s | `references/critique.md` → "Step 0", script at `skills/web-design-ultra/scripts/detect.mjs` | Builder before handoff; Critic first, before any screenshot |
+| **Plan lint** — section-format quotas, banned fonts, required plan fields | `skills/web-design-ultra/scripts/plan-lint.mjs` | Planner, on `website-plan.md`, **before handoff** — must exit 0 |
+| **Mechanical scan** — 60+ deterministic rules, no LLM, ~1s. Impeccable's audit engine | `references/critique.md` → "Step 0", script at `skills/web-design-ultra/scripts/detect.mjs` | Builder before handoff; Critic first, before any screenshot. **Every `mockup/*.html` page**, not just the homepage |
 | **Fail-visible measurement** — % of page text hidden at rest | `references/critique.md` → the JS-off test | Critic, in the browser session it already opens, **before** force-revealing for capture |
 | **Composition checks** — hero stack, CTA wrap/intent, nav line, zigzag cap, layout variety, consistency locks, grid cell count, contrast | `references/critique.md` → "Composition checks" | Critic, folded into the existing gate |
 | **Build quality floor** — contrast, depth, spacing, states, defaults to refuse | `references/craft-floor.md` | Builder, immediately before editing UI |

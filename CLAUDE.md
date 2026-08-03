@@ -290,12 +290,27 @@ the team:
 > `references/craft-floor.md` is the build-time quality floor. `design-gates.md` (repo root)
 > is now just a one-page map of where each gate lives and what stays crew-specific.
 >
-> **Don't add an "impeccable" or "taste" skill — both are already in here.** Impeccable is
-> the source of the detector, the nine craft references and the `impeccable-disable` waiver
-> syntax, forked in and stripped of its native-platform material. The countable checks worth
-> having from `design-taste-frontend` were folded into `critique.md`'s composition block.
-> Installing either as a standalone skill would give the crew a second rulebook that
-> disagrees with this one on fonts and em-dashes — and the two copies would drift.
+> **Both Impeccable and taste are in play, at opposite ends of the pipeline.**
+>
+> **Impeccable is the frontend audit engine.** It is the source of the detector, the nine
+> craft references and the `impeccable-disable` waiver syntax, forked in and stripped of
+> its native-platform material. Its job is auditing what got built: the Builder runs the
+> scan across **every page** of the mockup before handoff, the Critic runs it first at
+> Stage 8, plus the fail-visible measurement and the composition checks.
+> `references/craft-floor.md` loads at Stage 7, immediately before UI edits. Impeccable
+> never sets direction — a gate checks the build, it does not choose the design.
+>
+> **`design-taste-frontend` (taste) is a planning input.** The Planner invokes it for four
+> sections only — §0 Brief Inference (the one-line **Design Read**, written into the
+> plan), §0.D Anti-Default Discipline and §9 AI Tells (run the three directions against
+> them at Stage 5), and §11 Redesign Protocol when an existing site is being replaced. Its
+> stack picks, install commands, dials and block library are build-time material and are
+> **not** used — that is the Builder's territory and `web-design-ultra` governs it.
+>
+> **The two rulebooks do disagree, so precedence is explicit:** client answers +
+> `voice-spec.md` → `web-design-ultra` → taste. Taste's examples suggest **Geist**, which
+> our banned-font list forbids, and its em-dash guidance differs from `trade-copy`'s. Take
+> its reasoning, never its specific picks, wherever they collide with ours.
 >
 > Precedence is strict and runs one way:
 >
@@ -503,13 +518,14 @@ each has an owner and most are mechanically enforced:
 
 | # | Lever | Owner | Enforced by |
 |---|-------|-------|-------------|
-| 1 | Named art direction before building | Planner | direction brief (Stage 5) |
+| 1 | Named art direction before building | Planner | direction brief (Stage 5) + taste §0 **Design Read** |
 | 2 | Banned defaults (fonts, purple-gradient, card-wall) | Builder | detector blocking rules |
 | 3 | Section-format variety | Planner assigns, Builder obeys | `section-shape-repetition` + `repeated-section-kickers` (blocking) + critic counts |
 | 4 | Deliberate symmetry break | Planner names device, Builder lands it | critic composition check (screenshot) |
 | 5 | Scale contrast as hierarchy | Builder | `flat-type-hierarchy` (blocking, ≥1.25 step ratio) |
 | 6 | Copy specificity — ≥1 falsifiable fact, no abstract-pair labels | Builder (trade-copy + web-humanizer) | `copycheck.py` + `aitells.py` exit 0 |
 | 7 | Real assets — real logo, real photos or labeled placeholders, never stock | Builder | critic imagery gate |
+| 8 | Plan lint — quotas and required fields checked before a line is built | Planner | `plan-lint.mjs` exit 0 before handoff |
 
 Process levers that keep builds from converging on each other: evidence before design
 (Stage 3), three forced-divergent directions (Stage 5), the anti-repetition log
