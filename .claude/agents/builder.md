@@ -1,6 +1,6 @@
 ---
 name: builder
-description: Website mockup builder — builds one prospect's static site mockup following the Corey Blake recipe, verifies in the browser, and loops with the critic. Reusable as an agent-team teammate.
+description: Website mockup builder — builds one prospect's static site mockup following the DaSilva recipe, verifies in the browser, and loops with the critic. Reusable as an agent-team teammate.
 tools: Read, Write, Edit, Bash, Glob, Grep, Skill, mcp__Claude_Browser__preview_start, mcp__Claude_Browser__navigate, mcp__Claude_Browser__computer, mcp__Claude_Browser__read_page, mcp__Claude_Browser__read_console_messages, mcp__Claude_Browser__resize_window, mcp__Claude_Browser__javascript_tool
 model: claude-opus-5
 ---

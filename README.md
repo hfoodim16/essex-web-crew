@@ -26,7 +26,7 @@ The work is split into **two independent teams** that never run together (both p
 - **Team 2 — Build run.** `planner` + `builder` + `critic` (plus a capture-only `analyst`
   if the client has no dossier yet). Input is the client's answers, saved to
   `client-answers.md`. The planner plans FROM the answers (they outrank the old site and
-  the dossier), one builder builds it the "Corey Blake workflow" way, the critic gates it,
+  the dossier), one builder builds it the "DaSilva workflow" way, the critic gates it,
   and the site goes back to the client for feedback and iteration.
 
 Each built site ships with **2 real AI-generated images** (hero + one priority slot) and

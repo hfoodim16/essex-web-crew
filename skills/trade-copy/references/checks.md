@@ -22,21 +22,22 @@ edited.** If a check trips on a real review, the markup is wrong, not the review
 ## The thresholds, and where they came from
 
 Calibrated against the two pages in this project whose copy already reads right:
-`~/Claude Code/corey-blakes-steakhouse/index.html` and
+`prospects/paul-da-silva-law/mockup/index.html` and
 `prospects/fora-digital/mockup/index.html`. Both pass every hard check. Every other
-mockup in `prospects/` fails at least two.
+mockup in `prospects/` fails at least two. The **Reference site** column below is the
+DaSilva home page, measured.
 
 | Check | Threshold | Reference site | What a failure means |
 |---|---|---|---|
-| **em-dash rate** | ≤ 1.0 per 100 words | 0.5 | You're using the dash as a rhythm device. Current mockups run 1.1–3.4. |
-| **dash-restatement shape** | ≤ 15% of paragraphs contain an em dash | 7.3% | The `[clause] — [prettier restatement]` template has become the house style. The script prints the first three offenders — fix those and the rate usually follows. |
-| **longest paragraph** | ≤ 60 words | 41 | Someone wrote an essay paragraph. Split it or cut it. |
-| **hero headline length** | 3–9 words | 4 | Under 3 is a fragment with no information; over 9 stops being a headline. |
+| **em-dash rate** | ≤ 1.0 per 100 words | 0.62 | You're using the dash as a rhythm device. Current mockups run 1.1–3.4. |
+| **dash-restatement shape** | ≤ 15% of paragraphs contain an em dash | 6.2% | The `[clause] — [prettier restatement]` template has become the house style. The script prints the first three offenders — fix those and the rate usually follows. |
+| **longest paragraph** | ≤ 60 words | 35 | Someone wrote an essay paragraph. Split it or cut it. |
+| **hero headline length** | 3–9 words | 8 | Under 3 is a fragment with no information; over 9 stops being a headline. |
 | **formal openers** | ≤ 2 "It is / There is / That is" | 0 | Period-piece register. Contract them. |
-| **contraction floor** | ≥ 3 contractions | 12 | Zero contractions is the clearest sign nobody spoke these sentences aloud. |
-| **spelled numerals** | ≤ 3 above ten | 1 | "Forty-five years" belongs in a novel; the site says "45 years". |
+| **contraction floor** | ≥ 3 contractions | 6 | Zero contractions is the clearest sign nobody spoke these sentences aloud. |
+| **spelled numerals** | ≤ 3 above ten | 0 | "Forty-five years" belongs in a novel; the site says "45 years". |
 | **triad constructions** | ≤ 1 per page | 0 | "X. Y. Z." heroes. One is a choice; two is a tic. Check other prospects before using your one. |
-| **motif cap** | ≤ 2 uses of any banned or watched word | 2 | Motif-hammering — the loudest tell in this project's output. `oasis` appeared 6× on one page. |
+| **motif cap** | ≤ 2 uses of any banned or watched word | 0 | Motif-hammering — the loudest tell in this project's output. `oasis` appeared 6× on one page. |
 | **no placeholders** | 0 | 0 | `[Hours — placeholder]` or `AI-IMAGE` strings are visible in the copy. This alone makes a deploy-ready build look fake. |
 | **no cutesy language** | 0 | 0 | A Tier 1B word — anthropomorphised plants, winking, whimsy. Zero tolerance: unlike a motif, one is already wrong. |
 

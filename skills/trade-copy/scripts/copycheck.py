@@ -21,12 +21,12 @@ from html.parser import HTMLParser
 from pathlib import Path
 
 # ---------------------------------------------------------------- thresholds
-# Calibrated against corey-blakes-steakhouse (reference) plus the two mockups
+# Calibrated against paul-da-silva-law (reference) plus the two mockups
 # whose copy already reads right (cedar-grove-transmission, john-sessa-cpa).
 T = {
-    "emdash_per_100w": 1.0,      # reference site sits at 0.5; every current mockup is 1.1-3.4
-    "dash_paragraph_pct": 15,     # reference 7.3%; current mockups 17-67%
-    "max_para_words": 60,         # reference longest is 41
+    "emdash_per_100w": 1.0,      # reference site sits at 0.62; every current mockup is 1.1-3.4
+    "dash_paragraph_pct": 15,     # reference 6.2%; current mockups 17-67%
+    "max_para_words": 60,         # reference longest is 35
     "h1_words": (2, 9),           # hero headline word count
     "formal_openers": 2,          # <= 2 "It is / There is / That is" sentence openers
     "min_contractions": 3,        # body copy must contain at least this many contractions
@@ -402,7 +402,7 @@ def main():
             print(f"    [{'PASS' if ok else 'FAIL'}] {name:24} {detail}")
             failed |= not ok
         print(f"    [ -- ] median paragraph       {r['median_para_words']} words   "
-              f"(advisory; reference site is 8)")
+              f"(advisory; the crew's tightest reference pages sit at 8-12)")
         print(f"    [ -- ] paragraphs with no number or proper noun   "
               f"{r['noanchor_para_pct']}%   (advisory; read them, cut the ones saying nothing)")
         if r["repeated"]:

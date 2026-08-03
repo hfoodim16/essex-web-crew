@@ -108,7 +108,7 @@ want to change — easiest way is to open Claude Code in the project and ask it 
 | `CLAUDE.md` line ~11, ~22 | Territory is **Essex County, NJ** (Newark, Montclair, Bloomfield…). Swap in yours. |
 | `CLAUDE.md` line ~40 | Portfolio anchor is **Cecere Brothers Landscaping**, Harry's client. Replace with a build of your own, or drop the reference. |
 | `CLAUDE.md` "Delivery to Corey" (~line 122) | Tells the crew to package a zip and email it to you for Netlify deploy. On your machine **you're** the deployer — follow `COREY-DEPLOY.md` directly and delete the email step. |
-| `CLAUDE.md` "Corey Blake workflow" (~line 156) | Names a reference build that lives on Harry's machine. The recipe itself is written out in full right there, so nothing breaks — it's just an unreachable example link. |
+| `CLAUDE.md` "DaSilva workflow" (~line 156) | Names `prospects/paul-da-silva-law/` as the reference build. That folder ships in this repo, so it opens on your machine too — nothing to change. |
 
 `design-memory.md` is shipped on purpose: it's a running ban-list of design choices already
 used, so your sites don't come out looking like Harry's. Keep appending to it.

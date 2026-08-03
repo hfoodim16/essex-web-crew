@@ -185,16 +185,20 @@ skeleton is how a bespoke site starts looking like a template.
 
 ## And what the reference site does
 
-`~/Claude Code/corey-blakes-steakhouse/index.html` — the best-reading page in this
+`prospects/paul-da-silva-law/mockup/index.html` — the best-reading page in this
 project — is mostly not sentences at all:
 
-> 12 oz · Japanese A5 · 45-day dry aged · $185
+> 385 Lafayette Street · Newark's Ironbound
 
-> Roasted veal marrow, shallot gremolata, micro arugula, toasted sourdough
+> Se Habla Espanol · Nos falamos o portugues
 
-> Mon–Thu 5–10pm
+> DWI and vehicular charges, drug crimes, weapon and violent offenses, and sex offenses.
 
-Specification. Nouns and numbers. It carries 804 words of body copy with 4 em dashes
-total, and the only lyrical passage on the whole site is one first-person founder block
-that's clearly marked as the owner talking. That's the pattern: **plain everywhere, with
-exactly one place where a person speaks.**
+> Purchase and sale agreements, title searches, leases, and co-op and condo transactions,
+> from offer through closing.
+
+Specification. Nouns, streets, statutes, numbers. Its home page carries 322 words of body
+copy with 2 em dashes total, and the one place it stops listing and starts talking is a
+single line in the office band — *"A real estate closing or a traffic ticket may be
+routine for the office, but it rarely feels that way from where you're sitting."* That's
+the pattern: **plain everywhere, with exactly one place where a person speaks.**

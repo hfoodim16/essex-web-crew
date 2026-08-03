@@ -30,7 +30,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 
 # ---------------------------------------------------------------- thresholds
-# Calibrated against the same corpus copycheck.py uses -- corey-blakes-steakhouse
+# Calibrated against the same corpus copycheck.py uses -- paul-da-silva-law
 # (reference) plus cedar-grove-transmission and john-sessa-cpa -- then swept
 # across all 23 built pages in prospects/. Every signed-off page must exit 0
 # untouched; a threshold that fails one of those is wrong, because sign-off
