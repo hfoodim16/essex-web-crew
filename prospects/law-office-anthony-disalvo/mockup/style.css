@@ -1,0 +1,789 @@
+/* ============================================================================
+   Law Office of Anthony DiSalvo, Esq. — Bloomfield, NJ
+   Art direction: "PORTA APERTA" (The Open Door)
+
+   A neighborhood professional's office with the door open — warm plaster,
+   Bloomfield brick, slate composure, and a chunky humanist serif that reads like
+   a hand-painted shingle done well. Everything the legal category default is not:
+   no navy, no gold, no columns, no gavel. His differentiator is being the opposite
+   of intimidating, so the site is built on a literal arched-doorway motif — the
+   practice areas are four doors, the hero image sits in an arch, light falls
+   through arch-shaped washes.
+
+   The colour convention (legal = navy + gold) is BROKEN deliberately; see
+   website-plan.md §1. Trust cues kept from the category: a composed serif voice,
+   a restrained 6-token system, generous whitespace, and an espresso near-black
+   that carries gravitas where it is needed.
+
+   RADIUS RULE (one system, documented per website-plan.md §12):
+     Arch-top frames — 999px 999px 4px 4px — are used ONLY on media frames.
+     Every other corner in the build is 4px. There is no third radius anywhere.
+   ========================================================================== */
+
+:root {
+  /* Palette — 6 tokens, Italian names (website-plan.md §3) */
+  --intonaco:       #F5EEE2;  /* warm plaster — page ground */
+  --mattone:        #B05A38;  /* Bloomfield brick — LARGE display text, rules, arches only (4.17:1) */
+  --mattone-scuro:  #7E3A20;  /* darkened brick — CTA fills, all normal-size brick text (7.24:1) */
+  --ardesia:        #47535B;  /* slate — secondary text, meta, labels (6.86:1) */
+  --ink:            #2A211B;  /* espresso near-black — body, footer + CTA ground (13.2:1) */
+  --linea:          #DDD2C2;  /* warm hairline */
+
+  --font-display: 'Young Serif', Georgia, 'Times New Roman', serif;
+  --font-body:    'Alegreya Sans', 'Segoe UI', system-ui, sans-serif;
+
+  /* Body type scale — THREE steps at a 1.25 ratio, nothing off-ramp.
+     Display sizes are clamped separately (h1 tops out at 3.4rem = 54px),
+     so the full range across the page is 13.6px -> 54px. */
+  --fs-sm:   0.78rem;    /* 12.5px — meta, captions, labels, notes */
+  --fs-base: 1.0625rem;  /* 17px   — body, nav, buttons, lists */
+  --fs-md:   1.5rem;     /* 24px   — card titles, town names, wordmarks */
+
+  /* Tempo — ONE ease, ONE duration, ONE stagger (website-plan.md §11) */
+  --ease:    cubic-bezier(.2, .7, .2, 1);
+  --dur:     650ms;
+  --stagger: 80ms;
+
+  --nav-h:     76px;
+  --radius:    4px;
+  --arch:      999px 999px var(--radius) var(--radius);
+  --container: 1180px;
+  --gutter:    clamp(1.25rem, 4vw, 2.5rem);
+}
+
+/* ---------------------------------------------------------------- reset */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--intonaco);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  line-height: 1.6;
+}
+
+/* Fine stucco grain over the plaster ground — the whole-site texture layer. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: .04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+body > * { position: relative; z-index: 1; }
+
+img { max-width: 100%; height: auto; display: block; }
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 400;              /* Young Serif has one weight — heft IS the hierarchy */
+  line-height: 1.08;
+  letter-spacing: -0.005em;
+  margin: 0;
+  text-wrap: balance;
+}
+
+p { margin: 0 0 1rem; max-width: 68ch; }
+
+a { color: var(--mattone-scuro); }
+
+:focus-visible {
+  outline: 2px solid var(--mattone-scuro);
+  outline-offset: 3px;
+  border-radius: var(--radius);
+}
+
+.wrap {
+  width: min(100% - (var(--gutter) * 2), var(--container));
+  margin-inline: auto;
+}
+
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  background: var(--ink);
+  color: var(--intonaco);
+  padding: .75rem 1.25rem;
+  border-radius: var(--radius);
+  text-decoration: none;
+  font-weight: 700;
+}
+.skip:focus { left: 1rem; top: 1rem; }
+
+/* ---------------------------------------------------------------- header */
+
+.hdr {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--intonaco);
+  border-bottom: 1px solid var(--linea);
+}
+
+.hdr-in {
+  width: min(100% - (var(--gutter) * 2), var(--container));
+  margin-inline: auto;
+  min-height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.mark {
+  text-decoration: none;
+  color: var(--ink);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 44px;              /* tap target */
+  line-height: 1.4;
+  flex: none;
+}
+.mark-1 {
+  display: block;
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--ardesia);
+  margin-bottom: .15rem;
+}
+.mark-2 {
+  display: block;
+  font-family: var(--font-display);
+  font-size: var(--fs-md);
+}
+.mark-esq { color: var(--mattone-scuro); }
+
+.nav { margin-left: auto; }
+.nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 1.6rem;
+}
+.nav a {
+  text-decoration: none;
+  color: var(--ink);
+  font-size: var(--fs-base);
+  font-weight: 500;
+  padding: .35rem 0;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  transition: color .2s var(--ease), border-color .2s var(--ease);
+}
+.nav a[aria-current="page"] { border-bottom-color: var(--mattone); }
+
+.hdr-act { display: flex; align-items: center; gap: .75rem; flex: none; }
+
+.burger {
+  display: none;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--linea);
+  border-radius: var(--radius);
+  background: transparent;
+  cursor: pointer;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.burger span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--ink);
+  transition: transform .2s var(--ease), opacity .2s var(--ease);
+}
+.burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ---------------------------------------------------------------- buttons */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: .6rem 1.15rem;
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--fs-base);
+  text-decoration: none;
+  white-space: nowrap;
+  background: var(--mattone-scuro);
+  color: var(--intonaco);
+  border: 1px solid var(--mattone-scuro);
+  transition: background .2s var(--ease), transform .1s var(--ease);
+}
+.btn:hover { background: var(--ink); border-color: var(--ink); }
+.btn:active { transform: scale(.97); }
+
+.btn-primary { min-height: 54px; padding: .7rem 1.6rem; font-size: var(--fs-base); }
+
+.btn-call-short { display: none; }
+
+.btn-text {
+  display: inline-flex;
+  align-items: center;
+  min-height: 46px;              /* tap target */
+  font-weight: 700;
+  color: var(--mattone-scuro);
+  text-decoration: none;
+  border-bottom: 2px solid var(--linea);
+  padding-bottom: 2px;
+  transition: border-color .2s var(--ease), color .2s var(--ease);
+}
+.btn-text:hover { border-bottom-color: var(--mattone); }
+.btn-text:active { transform: scale(.97); display: inline-block; }
+
+
+/* ---------------------------------------------------------------- arch system */
+
+.arch {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--arch);
+  background: var(--linea);
+  margin: 0;
+}
+.arch img { width: 100%; height: 100%; object-fit: cover; transition: transform .55s var(--ease); }
+
+/* Warm light falling through the doorway — inside the hero arch only. */
+.arch-glow {
+  position: absolute;
+  inset: -20%;
+  pointer-events: none;
+  background: radial-gradient(closest-side, rgba(176, 90, 56, .55), rgba(176, 90, 56, 0) 70%);
+  mix-blend-mode: soft-light;
+  opacity: .32;
+}
+
+.img-placeholder {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  background:
+    repeating-linear-gradient(135deg, rgba(176,90,56,.09) 0 10px, rgba(176,90,56,0) 10px 20px),
+    var(--linea);
+  color: var(--ardesia);
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  text-align: center;
+  transition: transform .55s var(--ease);
+}
+.img-placeholder::after { content: attr(data-label); }
+
+/* Editorial annotations for Harry and the client — deliberately NOT site copy.
+   Rendered from data-note so they read as margin notes, not as body text. */
+.note {
+  display: inline-block;
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+  letter-spacing: .02em;
+  color: var(--ardesia);
+  border: 1px dashed var(--linea);
+  border-radius: var(--radius);
+  padding: .4rem .6rem;
+  background: rgba(176, 90, 56, .04);
+}
+.note::after { content: attr(data-note); }
+.note-light { color: rgba(245, 238, 226, .72); border-color: rgba(245, 238, 226, .28); background: rgba(245, 238, 226, .05); }
+
+/* ---------------------------------------------------------------- motion
+   Rule 0: every hidden state is scoped to html.js AND to no-preference, so a
+   missing or broken main.js leaves a fully readable page. */
+
+@media (prefers-reduced-motion: no-preference) {
+  .js .reveal {
+    opacity: 0;
+    transform: scale(.97);
+    transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
+    transition-delay: calc(var(--i, 0) * var(--stagger));
+  }
+  .js .reveal.in { opacity: 1; transform: none; }
+
+  .arch-glow { animation: doorlight 22s var(--ease) infinite alternate; animation-play-state: paused; }
+  .arch-glow.run { animation-play-state: running; }
+}
+
+@keyframes doorlight {
+  from { transform: translate3d(-5%, 3%, 0) scale(1.02); opacity: .26; }
+  to   { transform: translate3d(7%, -2%, 0) scale(1.14); opacity: .46; }
+}
+
+/* Hover personality: zoom-crop (image scales inside its frame, label lifts 4px) */
+@media (hover: hover) and (pointer: fine) {
+  .door:hover .arch img,
+  .door:focus-visible .arch img,
+  .door:hover .img-placeholder,
+  .door:focus-visible .img-placeholder { transform: scale(1.06); }
+
+  .door:hover .arch-tint::before,
+  .door:focus-visible .arch-tint::before { transform: scale(1.06); }
+
+  .door:hover .door-go,
+  .door:focus-visible .door-go { transform: translateY(-4px); }
+
+  .nav a:hover { color: var(--mattone-scuro); border-bottom-color: var(--linea); }
+}
+
+/* ---------------------------------------------------------------- hero */
+
+.hero { padding: clamp(2rem, 4vw, 3.5rem) 0 clamp(2.5rem, 5vw, 4rem); }
+
+.hero-in {
+  display: grid;
+  grid-template-columns: minmax(0, 1.42fr) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+}
+
+/* Sized so each of the two tagline lines sets on ONE line — the headline is
+   two lines by design, never four (critique.md hero composition check). */
+h1 { font-size: clamp(2.05rem, 4.35vw, 3.4rem); }
+.h1-l1, .h1-l2 { display: block; }
+h1 em { font-style: normal; color: var(--mattone); }
+h1 .sm { font-size: .78em; }
+h1 .bg { font-size: 1.16em; }
+
+.hero-sub {
+  font-size: var(--fs-md);
+  color: var(--ardesia);
+  max-width: 46ch;
+  margin: 1.6rem 0 2rem;
+}
+
+.hero-cta { display: flex; align-items: center; gap: 1.75rem; flex-wrap: wrap; }
+
+.arch-hero { aspect-ratio: 3 / 4; max-width: 396px; margin-inline: auto; }
+
+/* ---------------------------------------------------------------- trust strip */
+
+.trust { border-block: 1px solid var(--linea); padding: 1.35rem 0; }
+.trust-row {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem 1.5rem;
+}
+.trust-row li {
+  font-size: var(--fs-base);
+  font-weight: 500;
+  padding-left: 1rem;
+  border-left: 1px solid var(--linea);
+}
+.trust-row li:first-child { border-left: 0; padding-left: 0; }
+
+/* ---------------------------------------------------------------- section heads */
+
+.sec-h { font-size: clamp(1.85rem, 3.2vw, 2.6rem); margin-bottom: 1.5rem; }
+
+/* ---------------------------------------------------------------- four doors */
+
+.doors { padding: clamp(3.5rem, 7vw, 6rem) 0; }
+
+.door-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+.door {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid var(--linea);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, .38);
+  overflow: hidden;
+  transition: border-color .25s var(--ease), background .25s var(--ease);
+}
+.door:hover { border-color: var(--mattone); background: rgba(255, 255, 255, .72); }
+.door:active { transform: scale(.99); }
+
+.arch-card { aspect-ratio: 4 / 3.4; border-radius: var(--arch); margin: .85rem .85rem 0; }
+
+.arch-tint { position: relative; background: var(--linea); }
+.arch-tint::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transition: transform .55s var(--ease);
+}
+.arch-tint-a::before {
+  background:
+    radial-gradient(120% 92% at 50% 100%, rgba(176, 90, 56, .52), rgba(176, 90, 56, .05) 72%),
+    repeating-linear-gradient(0deg, rgba(42,33,27,.10) 0 1px, rgba(42,33,27,0) 1px 12px),
+    var(--intonaco);
+}
+/* Same brick wash as -a, rotated ruling — the four doors stay one system.
+   Slate appears here only as the deeper shadow under the arch, never as the ground. */
+.arch-tint-b::before {
+  background:
+    radial-gradient(120% 92% at 50% 100%, rgba(176, 90, 56, .46), rgba(176, 90, 56, .04) 74%),
+    radial-gradient(90% 60% at 50% 100%, rgba(71, 83, 91, .20), rgba(71, 83, 91, 0) 70%),
+    repeating-linear-gradient(90deg, rgba(42,33,27,.10) 0 1px, rgba(42,33,27,0) 1px 12px),
+    var(--intonaco);
+}
+
+.door-body { display: flex; flex-direction: column; flex: 1; padding: 1.15rem .95rem 1.15rem; }
+.door-h {
+  font-family: var(--font-display);
+  font-size: var(--fs-md);
+  line-height: 1.4;
+  min-height: 2.5em;             /* every card body starts on the same Y across the row */
+  margin-bottom: .55rem;
+}
+.door-p { color: var(--ardesia); font-size: var(--fs-base); line-height: 1.55; }
+.door-go {
+  margin-top: auto;
+  padding-top: 1rem;          /* bottom-aligned across the row regardless of body length */
+  font-weight: 700;
+  font-size: var(--fs-sm);
+  color: var(--mattone-scuro);
+  transition: transform .25s var(--ease);
+}
+
+/* ---------------------------------------------------------------- reviews */
+
+.reviews { padding: 4.5rem 0; background: rgba(176, 90, 56, .05); border-block: 1px solid var(--linea); }
+
+.rev-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.rev-rating { font-weight: 700; color: var(--mattone-scuro); margin: 0 0 1.5rem; }
+
+.rev-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: clamp(1.25rem, 2.5vw, 2rem); align-items: stretch; }
+
+.rev { margin: 0; display: flex; flex-direction: column; justify-content: center; }
+
+.rev-real {
+  border-left: 1px solid var(--mattone);
+  padding: .5rem 0 .5rem 2rem;
+}
+.rev-real p {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 2.2vw, 1.72rem);
+  line-height: 1.4;
+  margin-bottom: .9rem;
+}
+.rev-real cite { font-style: normal; font-size: var(--fs-sm); color: var(--ardesia); }
+
+.rev-slot { justify-content: center; align-items: center; min-height: 148px; }
+
+/* ---------------------------------------------------------------- photo band */
+
+/* Edge-to-edge, no scrim and no overlay text — the photograph carries the band
+   on its own (website-plan.md §6.5). */
+.band { display: block; }
+.band img { width: 100%; height: clamp(280px, 40vw, 460px); object-fit: cover; }
+
+/* ---------------------------------------------------------------- service area */
+
+.area { padding: clamp(3.5rem, 7vw, 6rem) 0; }
+.area-in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(2rem, 5vw, 4rem); align-items: start; }
+.area-lede p { color: var(--ardesia); }
+.area-orient {
+  font-size: var(--fs-sm);
+  padding-bottom: .85rem;
+  margin-bottom: 1.1rem;
+  border-bottom: 1px solid var(--linea);
+}
+.area-counties { font-size: var(--fs-sm); padding-top: .75rem; border-top: 1px solid var(--linea); }
+
+.town-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  columns: 2;
+  column-gap: clamp(1.5rem, 4vw, 3rem);
+}
+.town-list li {
+  font-family: var(--font-display);
+  font-size: var(--fs-md);
+  padding: .55rem 0;
+  border-bottom: 1px solid var(--linea);
+  break-inside: avoid;
+}
+
+/* ------------------------------------------------- closing "open door" block
+   The motif closing every page: a mattone-stroked doorway arch on plaster with
+   the warm wash inside, a button-sized tap-to-call, and a secondary link.
+   Deliberately NOT a dark band with a display-serif phone numeral — the footer
+   is each page's only dark section (website-plan.md §6.7, §4 item 2). */
+
+.opendoor { padding: clamp(3.5rem, 7vw, 6rem) 0 clamp(3rem, 6vw, 5rem); }
+.door-frame {
+  position: relative;
+  width: min(540px, 100%);
+  margin-inline: auto;
+  padding: clamp(2.75rem, 6vw, 4rem) clamp(1.5rem, 4vw, 2.5rem) clamp(2rem, 4vw, 2.75rem);
+  border: 2px solid var(--mattone);
+  border-radius: var(--arch);
+  background: radial-gradient(88% 62% at 50% 6%, rgba(176, 90, 56, .17), rgba(176, 90, 56, 0) 72%);
+  text-align: center;
+}
+.od-h { font-size: clamp(1.55rem, 3vw, 2.1rem); margin-bottom: .85rem; }
+.od-note { color: var(--ardesia); margin: 0 auto 1.75rem; max-width: 30ch; }
+.od-btn { width: min(300px, 100%); }
+.od-link { margin-top: .35rem; }
+
+/* The page's single dark section. */
+.ft { background: var(--ink); color: var(--intonaco); padding: 0 0 2.5rem; }
+.ft-in {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 3.5rem);
+  padding-top: clamp(3rem, 6vw, 4rem);
+}
+.ft-mark { display: block; font-family: var(--font-display); font-size: var(--fs-md); line-height: 1.4; }
+.ft-mark .mark-esq { color: var(--mattone); }
+.ft-tag { margin-top: .9rem; color: rgba(245, 238, 226, .82); font-size: var(--fs-base); max-width: 28ch; }
+
+.ft-nap { font-style: normal; line-height: 1.75; color: rgba(245, 238, 226, .86); }
+.ft-nap-name { display: block; font-weight: 700; color: var(--intonaco); }
+.ft-nap a { display: inline-flex; align-items: center; min-height: 44px; color: var(--intonaco); font-weight: 700; }
+.ft-fax, .ft-lang { display: block; }
+.ft-lang { margin-top: .6rem; color: rgba(245, 238, 226, .7); }
+
+.ft-nav ul { list-style: none; margin: 0; padding: 0; display: grid; }
+.ft-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;              /* tap target */
+  color: rgba(245, 238, 226, .86);
+  text-decoration: none;
+}
+.ft-nav a:hover { color: var(--intonaco); text-decoration: underline; }
+
+.ft-legal {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .75rem 1.25rem;
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(245, 238, 226, .16);
+}
+.ft-copy { font-size: var(--fs-sm); color: rgba(245, 238, 226, .6); margin-left: auto; }
+
+/* ---------------------------------------------------------------- interior pages */
+
+.page-head { position: relative; padding: clamp(2.75rem, 6vw, 4.5rem) 0 clamp(2rem, 4vw, 3rem); overflow: hidden; }
+.page-head::before {
+  content: "";
+  position: absolute;
+  top: -12%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(680px, 92%);
+  height: 132%;
+  border-radius: var(--arch);
+  /* Light through a doorway: an arch-shaped wash that fades out well before its
+     own edges, so only the arch curve reads and the sides never show a seam. */
+  background: radial-gradient(78% 62% at 50% 12%, rgba(176, 90, 56, .19), rgba(176, 90, 56, 0) 68%);
+  pointer-events: none;
+}
+.page-head > * { position: relative; }
+.page-head h1 { font-size: clamp(2.1rem, 4.6vw, 3.4rem); }
+.page-lede { font-size: var(--fs-md); line-height: 1.5; color: var(--ardesia); margin-top: 1.25rem; max-width: 54ch; }
+
+.sec { padding: 4rem 0; }
+.sec + .sec { border-top: 1px solid var(--linea); }
+
+.cols-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.5rem, 3vw, 2.75rem); }
+.cols-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(1.5rem, 3vw, 2.75rem); }
+
+.col-h { font-family: var(--font-display); font-size: var(--fs-md); line-height: 1.32; margin-bottom: .65rem; padding-bottom: .65rem; border-bottom: 1px solid var(--mattone); }
+.col p { color: var(--ardesia); font-size: var(--fs-base); line-height: 1.6; }
+
+.spec-list { list-style: none; margin: 0; padding: 0; }
+.spec-list li {
+  position: relative;
+  padding: .7rem 0 .7rem 1.5rem;
+  border-bottom: 1px solid var(--linea);
+  line-height: 1.6;
+  color: var(--ardesia);
+}
+.spec-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1.25rem;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px 999px 0 0;
+  background: var(--mattone);
+}
+.spec-list li strong { color: var(--ink); font-weight: 700; }
+
+.arch-slot { aspect-ratio: 16 / 10; max-width: 760px; margin-inline: auto; }
+
+.block-note { margin-top: 1.25rem; }
+
+/* about page */
+.bio-in { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(2rem, 5vw, 4rem); align-items: start; }
+.portrait { aspect-ratio: 3 / 4; max-width: 340px; }
+.portrait .img-placeholder { align-items: center; }
+
+.cred-list { list-style: none; margin: 1.5rem 0 0; padding: 0; }
+.cred-list li { display: flex; gap: 1rem; padding: .6rem 0; border-bottom: 1px solid var(--linea); font-size: var(--fs-base); }
+.cred-list dt, .cred-list .cred-k { flex: 0 0 40%; color: var(--ardesia); }
+.cred-list .cred-v { font-weight: 500; }
+
+.contact-in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 5vw, 4rem); align-items: start; }
+
+.contact-phone {
+  display: inline-flex;
+  align-items: center;
+  min-height: 46px;              /* tap target */
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  line-height: 1.05;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 3px solid var(--mattone);
+  padding-bottom: .08em;
+}
+.contact-phone:hover { color: var(--mattone-scuro); }
+.contact-meta { margin-top: 1.5rem; line-height: 1.8; font-style: normal; color: var(--ardesia); }
+.contact-meta strong { color: var(--ink); }
+
+.form { display: grid; gap: 1rem; }
+.form label { display: block; font-size: var(--fs-sm); font-weight: 700; color: var(--ardesia); margin-bottom: .3rem; }
+.form input, .form textarea {
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  color: var(--ink);
+  background: rgba(255, 255, 255, .6);
+  border: 1px solid var(--linea);
+  border-radius: var(--radius);
+  padding: .7rem .8rem;
+  min-height: 46px;
+}
+.form textarea { min-height: 120px; resize: vertical; }
+.form input::placeholder, .form textarea::placeholder { color: var(--ardesia); opacity: 1; }
+.form input:focus-visible, .form textarea:focus-visible { border-color: var(--mattone-scuro); }
+.form button { justify-self: start; }
+
+.form-result {
+  margin: 0;
+  padding: .85rem 1rem;
+  border: 1px solid var(--mattone);
+  border-radius: var(--radius);
+  background: rgba(176, 90, 56, .08);
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.map-slot { aspect-ratio: 16 / 7; margin-top: 2.5rem; border-radius: var(--radius); }
+.map-slot .img-placeholder { align-items: center; }
+
+/* ---------------------------------------------------------------- responsive */
+
+@media (max-width: 1080px) {
+  .door-grid { grid-template-columns: repeat(2, 1fr); }
+  .rev-grid { grid-template-columns: 1fr 1fr; }
+  .rev-real { grid-column: 1 / -1; }
+}
+
+@media (max-width: 900px) {
+  :root { --nav-h: 66px; }
+
+  /* Single-row phone header: wordmark left, tap-to-call + menu right. */
+  .hdr-in { flex-wrap: wrap; gap: .7rem; padding-block: .5rem; }
+  .mark-2 { font-size: var(--fs-base); }
+  .mark-1 { font-size: var(--fs-sm); letter-spacing: .11em; }
+
+  /* JS off: the nav renders as a plain stacked list, so every link stays
+     reachable. JS on: it collapses behind the hamburger. */
+  .nav { order: 3; width: 100%; margin-left: 0; }
+  .nav ul { flex-direction: column; gap: 0; }
+  .nav li { border-top: 1px solid var(--linea); }
+  .nav a { display: block; padding: .85rem 0; }
+  .nav a[aria-current="page"] { border-bottom: 0; color: var(--mattone-scuro); }
+
+  .hdr-act { margin-left: auto; }
+  .burger { display: none; }
+  .js .burger { display: flex; }
+  .js .nav { display: none; }
+  .js .nav.open { display: block; }
+
+  .btn-call-full { display: none; }
+  .btn-call-short { display: inline; }
+  .btn-call { min-width: 64px; }
+
+  .hero-in { grid-template-columns: 1fr; gap: 1.75rem; }
+  .hero { padding-top: 2rem; }
+  h1 { font-size: clamp(1.7rem, 7.1vw, 2.4rem); }
+  .hero-sub { margin: 1.1rem 0 1.4rem; font-size: var(--fs-base); }
+
+  /* Phone hero: the arch turns wide-and-short so the whole hero still fits
+     one screen, and the CTAs stay above it. */
+  .hero-media { order: 3; }
+  .arch-hero { aspect-ratio: 5 / 3; max-width: none; max-height: 210px; }
+
+  .hero-cta { flex-direction: column; align-items: stretch; gap: 1rem; text-align: center; }
+  .hero-cta .btn-primary { width: 100%; }
+
+  .trust-row { grid-template-columns: 1fr 1fr; }
+  .trust-row li { border-left: 0; padding-left: 0; }
+
+  .sec { padding: 2.75rem 0; }
+  .reviews { padding: 3rem 0; }
+  .area-in, .bio-in, .contact-in, .cols-3, .cols-2 { grid-template-columns: 1fr; }
+  .ft-in { grid-template-columns: 1fr; }
+  .ft-copy { margin-left: 0; }
+  .portrait { max-width: none; }
+}
+
+@media (max-width: 620px) {
+  .door-grid { grid-template-columns: 1fr; }
+  .rev-grid { grid-template-columns: 1fr; }
+  .rev-real { grid-column: auto; }
+  /* Young Serif is weight 400, so WCAG's large-text allowance starts at 24px,
+     not 18.66px. Below ~440px the h1 clamp bottoms out and the emphasised words
+     land near 21px — normal-size text, which --mattone (4.17:1) fails. Step them
+     to --mattone-scuro (7.24:1) here, exactly as §3 prescribes for normal-size
+     brick text. The scale gesture that carries §10's differentiation is untouched. */
+  h1 em { color: var(--mattone-scuro); }
+
+  .town-list { columns: 2; column-gap: 1.25rem; }
+  .town-list li { font-size: var(--fs-base); }
+  .arch-card { aspect-ratio: 16 / 7; }
+  .band img { height: 240px; }
+}
+
+/* ---------------------------------------------------------------- reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+  .arch-glow { animation: none; opacity: .3; transform: none; }
+}

@@ -46,13 +46,16 @@
 
 ## Portfolio — what to feature and how to label it
 
-Honest labeling is mandatory. We have one real client; say so proudly, don't inflate it.
+Honest labeling is mandatory. Say what's real, proudly; don't inflate it.
 
 1. **Cecere Brothers Landscaping** — *real client work.* Label as a real client project.
    Source build: `~/Projects/cecere-test/` (screenshot provided in `assets-src/`).
-2. **Corey Blake's Steakhouse** — *concept / sample build.* Must be labeled as a concept
-   or sample, NOT presented as a paying client. Source: `~/Claude Code/corey-blakes-steakhouse/`
-   (screenshot provided in `assets-src/`).
+2. **DaSilva & Associates, LLC (Paul Da Silva Law)** — *real client work.* Live at
+   **https://pauldasilvalaw.netlify.app**; source build in
+   `prospects/paul-da-silva-law/mockup/`.
+   *Amended 2026-08-02 by Harry: this slot previously held Corey Blake's Steakhouse (a
+   fictional concept). Replaced with the DaSilva build, which Harry confirms is a real
+   client — labeled "Real client work," same as Cecere.*
 3. **1–2 empty "coming soon" slots** — Harry plans to add 1–2 more samples. Design real,
    styled placeholder cards that look intentional (e.g. "Next project — in progress").
    **Never fake a project, logo, client name, or screenshot to fill them.**

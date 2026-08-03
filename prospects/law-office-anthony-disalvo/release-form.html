@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Website Release &amp; Publication Approval — Law Office of Anthony DiSalvo, Esq.</title>
+<style>
+/* ============================================================
+   Fora Digital LLC — Website Release & Publication Approval
+   Token template. The builder copies this file per client,
+   substitutes the placeholder tokens, and prints it to PDF with
+   headless Chrome. Self-contained on purpose: NO external fonts
+   or CSS, so it renders identically with no network.
+   (No doubled-brace sequences outside real tokens — the critic
+   greps for leftovers.)
+   ============================================================ */
+@page { size: Letter; margin: 0.6in; }
+
+:root {
+  --ink:    #1B1813;
+  --cobalt: #2447C2;
+  --stone:  #6E675C;
+  --line:   #DDD5C4;
+  --paper:  #F5F1E8;
+  --rule:   #C9C0AE;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #fff;
+  color: var(--ink);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 10.5pt;
+  line-height: 1.45;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+/* ---------- Header ---------- */
+.masthead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding-bottom: 0.5rem;
+}
+.brand-name {
+  font-size: 19pt;
+  font-weight: 700;
+  letter-spacing: 0.005em;
+  color: var(--cobalt);
+  line-height: 1.05;
+  margin: 0;
+}
+.brand-sub {
+  font-size: 7.5pt;
+  letter-spacing: 0.22em;
+  color: var(--stone);
+  text-transform: uppercase;
+  margin-top: 0.28rem;
+}
+.doc-meta {
+  text-align: right;
+  font-size: 7.5pt;
+  letter-spacing: 0.19em;
+  color: var(--stone);
+  text-transform: uppercase;
+  line-height: 1.7;
+  padding-top: 0.25rem;
+  white-space: nowrap;
+}
+.rule-heavy {
+  height: 2.5px;
+  background: var(--cobalt);
+  margin-bottom: 1.25rem;
+}
+
+/* ---------- Titles ---------- */
+h1 {
+  font-size: 16.5pt;
+  font-weight: 700;
+  color: var(--cobalt);
+  margin: 0 0 0.28rem;
+  letter-spacing: -0.005em;
+}
+.subtitle {
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: italic;
+  font-size: 10pt;
+  color: var(--stone);
+  margin: 0 0 1.35rem;
+}
+
+/* ---------- Section headings ---------- */
+h2 {
+  font-size: 9pt;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cobalt);
+  margin: 0 0 0.6rem;
+  padding-bottom: 0.32rem;
+  border-bottom: 1px solid var(--line);
+}
+section { margin-bottom: 1.15rem; }
+
+/* ---------- Project details (ruled fill-in fields) ---------- */
+.fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.62rem 2rem;
+}
+.field.full { grid-column: 1 / -1; }
+.field {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  min-width: 0;
+}
+.field .label {
+  font-size: 7.2pt;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--stone);
+  white-space: nowrap;
+  flex: none;
+}
+/* The ruled line the value sits on. Empty = a clean blank to write on.
+   NEVER truncate: this is a legal document, so a long business name wraps
+   onto a second ruled line rather than being cut off. The 9.5pt size and
+   tight labels mean most names fit on one line anyway. */
+.field .value {
+  flex: 1 1 auto;
+  min-width: 0;
+  border-bottom: 1px solid var(--rule);
+  padding: 0 0.2rem 0.12rem;
+  min-height: 1.05em;
+  font-size: 9.5pt;
+  color: var(--ink);
+  overflow-wrap: break-word;
+}
+
+/* ---------- Approval statement ---------- */
+.statement {
+  background: var(--paper);
+  border-left: 3px solid var(--cobalt);
+  padding: 0.72rem 0.9rem;
+  font-size: 10pt;
+  line-height: 1.55;
+}
+.statement p { margin: 0; }
+
+/* ---------- Acknowledgement checklist ---------- */
+ul.ack { list-style: none; margin: 0; padding: 0; }
+ul.ack li {
+  position: relative;
+  padding-left: 1.6rem;
+  margin-bottom: 0.5rem;
+  font-size: 9.8pt;
+  line-height: 1.5;
+}
+ul.ack li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.12em;
+  width: 0.78em;
+  height: 0.78em;
+  border: 1px solid var(--stone);
+  border-radius: 1px;
+  background: #fff;
+}
+
+/* ---------- Authorization ---------- */
+.authorize { font-size: 10pt; line-height: 1.55; margin: 0; }
+
+/* ---------- Signatures ---------- */
+.signatures {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.2rem;
+  margin-top: 1.5rem;
+}
+.sig-party {
+  font-size: 8.5pt;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cobalt);
+  margin-bottom: 2.5rem;
+}
+.sig-line {
+  border-bottom: 1px solid var(--ink);
+  margin-bottom: 0.26rem;
+}
+.sig-caption {
+  font-size: 7.5pt;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--stone);
+  margin-bottom: 0.85rem;
+}
+.sig-row { display: flex; align-items: baseline; gap: 0.55rem; }
+.sig-row .label {
+  font-size: 7.5pt;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--stone);
+  white-space: nowrap;
+  flex: none;
+}
+.sig-row .value {
+  flex: 1 1 auto;
+  min-width: 0;
+  border-bottom: 1px solid var(--rule);
+  padding: 0 0.2rem 0.1rem;
+  min-height: 1.05em;
+  font-size: 9.5pt;
+}
+.sig-row .value.date { flex: 0 0 5.4em; }
+
+/* ---------- Footer ---------- */
+.footer {
+  margin-top: 1.6rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 7.5pt;
+  color: var(--stone);
+}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div>
+    <p class="brand-name">FORA DIGITAL LLC</p>
+    <div class="brand-sub">Web Design &amp; Development</div>
+  </div>
+  <div class="doc-meta">
+    Website Release Form<br>
+    Rev. 2026
+  </div>
+</header>
+<div class="rule-heavy"></div>
+
+<h1>Website Release &amp; Publication Approval</h1>
+<p class="subtitle">Confirming the client has reviewed the completed website and authorizes it to be published live.</p>
+
+<section>
+  <h2>Project Details</h2>
+  <div class="fields">
+    <div class="field">
+      <span class="label">Client / Business</span>
+      <span class="value">Law Office of Anthony DiSalvo, Esq.</span>
+    </div>
+    <div class="field">
+      <span class="label">Contact Name</span>
+      <span class="value">Anthony DiSalvo, Esq.</span>
+    </div>
+    <div class="field">
+      <span class="label">Preview Link Reviewed</span>
+      <span class="value"></span>
+    </div>
+    <div class="field">
+      <span class="label">Website Address (Domain)</span>
+      <span class="value"></span>
+    </div>
+    <div class="field full">
+      <span class="label">Pages Included</span>
+      <span class="value">Home &middot; Real Estate &amp; Closings &middot; Wills, Trusts &amp; Probate &middot; Land Use &amp; Zoning &middot; About &amp; Contact</span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Approval Statement</h2>
+  <div class="statement">
+    <p>I confirm that I have <strong>reviewed the completed website</strong> prepared for my business by <strong>Fora Digital LLC</strong> on both desktop and mobile, and that I <strong>approve it for publication</strong>. I authorize Fora Digital LLC to publish the site to the domain listed above and make it publicly accessible.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Before I Sign, I Acknowledge</h2>
+  <ul class="ack">
+    <li>I have reviewed <strong>every page</strong>, and the text, contact information, hours, and services shown are <strong>accurate and current</strong> for my business.</li>
+    <li>The website reflects the agreed scope. Any change requested after this approval that falls <strong>outside the revision rounds we agreed to</strong> may be treated as new work.</li>
+    <li>I understand this is a <strong>static informational website</strong> — it has no monthly subscription or platform fee, and content changes after launch are handled as separate requests.</li>
+    <li>I own (or authorize the use of) the <strong>domain, logo, photos, and content</strong> provided for the site, and confirm nothing on it infringes anyone else's rights.</li>
+    <li>Any remaining <strong>balance due at launch</strong> will be paid per our agreement before or upon the site going live.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Authorization to Publish</h2>
+  <p class="authorize">By signing below, I give Fora Digital LLC written approval to take this website live. This release confirms the design and content are approved as of the date signed.</p>
+</section>
+
+<div class="signatures">
+  <div>
+    <div class="sig-party">Client Approval</div>
+    <div class="sig-line"></div>
+    <div class="sig-caption">Signature</div>
+    <div class="sig-row">
+      <span class="label">Printed Name</span>
+      <span class="value"></span>
+      <span class="label">Date</span>
+      <span class="value date"></span>
+    </div>
+  </div>
+  <div>
+    <div class="sig-party">Fora Digital LLC</div>
+    <div class="sig-line"></div>
+    <div class="sig-caption">Signature</div>
+    <div class="sig-row">
+      <span class="label">Name</span>
+      <span class="value">Harry Foodim &amp; Corey Rapkin</span>
+      <span class="label">Date</span>
+      <span class="value date"></span>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <span>Fora Digital LLC &nbsp;·&nbsp; Essex County, New Jersey</span>
+  <span>Website Release &amp; Publication Approval &nbsp;·&nbsp; Prepared August 2, 2026</span>
+</div>
+
+</body>
+</html>
