@@ -218,6 +218,12 @@ chosen bold direction, grounded in the Stage 2 engine and Stage 3 evidence.
      rule-bar or dash above a heading counts as a kicker
    - **no two adjacent sections share an opener type**
 
+   **Also name the plan's composition device** (from the direction brief): the ONE
+   deliberate symmetry break — dominant column, overlap, off-grid offset, or a ≥3×
+   scale jump — and which section carries it. Equal columns everywhere are for
+   spreadsheets; a page of centered, evenly-split sections is the template look wearing
+   good fonts. The Critic verifies the device landed, by name, from the screenshot.
+
    **The page map serves the content, not vice versa** — if the content map (below)
    needs another page or section to carry everything, grow the map.
 5. **Content map (content-parity contract — required when an existing site was

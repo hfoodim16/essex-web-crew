@@ -152,6 +152,14 @@ The rubric above is judgment. These are arithmetic — you count them off the sc
 - **Grid cell count == item count.** Three items, three cells. An empty tile at the end means the grid was planned wrong.
 - **A multi-cell grid carries real visual weight in ≥ 2 cells** — a photo, a brand-appropriate gradient, a pattern, a tinted ground. Every cell being text-on-flat is the icon-heading-paragraph card wall wearing a different name (see `craft-floor.md`).
 
+**Copy specificity (blocking)**
+- **≥ 1 falsifiable fact visible on the page** — a number, a place name, or a claim a customer could check ("since 1998", "Bloomfield and the Oranges", "24-hour storm response"). A page with zero checkable facts is slop regardless of layout: vague copy invites skepticism, specific claims carry their own proof ("33% more light" beat "brighter" a century ago and still does). Phone numbers and zips don't count — they prove reachability, not the offer. Crew builds: `aitells.py` counts this mechanically (`min_falsifiable`); non-crew builds count it by hand off the screenshot.
+- **No benefit-triad headline, no two-abstract-noun labels** ("Seamless Integration", "Professional Service") — an abstract pair carries no information scent, so a scanner can't predict the payoff and won't commit.
+
+**Composition (counted off the desktop screenshot)**
+- **At least ONE deliberate symmetry break above the fold or in the first two sections** — a dominant column (not 50/50), an overlapping element, an off-grid offset, or a scale jump ≥ 3× between adjacent elements. Name which device and where in the audit. Equal columns everywhere are for spreadsheets, not stories; a page of centered, evenly-split sections is the template look wearing good fonts. (The zigzag cap above limits alternating splits; this check requires the *positive* move.)
+- Type scale contrast is enforced mechanically by the detector's `flat-type-hierarchy` rule (≥1.25 ratio between steps) — don't re-judge it, just confirm the scan ran.
+
 **Labels and dressing**
 - **Eyebrow arithmetic (quota 3–5, blocking): count ≤ ceil(sections ÷ 3)**, and the hero's counts as one. **Any** opener label counts regardless of styling — tracked caps, sentence-case accent text, or a bare decorative rule-bar/dash above the heading. Also check no two adjacent sections share an opener type, and that no single opener signature covers more than half the sections. A kicker over *every* section is grammar you didn't choose; one or two make it a system.
 - **No decorative page furniture.** Each of these is a tell, not a flourish: scroll cues ("↓ scroll", animated mouse wheels), locale/time/weather strips (`LIS 14:23 · 18°C`), version stamps on a marketing page (`v1.4.2`, `Build 0048`), photo-credit captions used as decoration (`Field study no. 12 · Ines Caetano`), a word strip pinned under the hero (`BRAND. MOTION. SPATIAL.`), tile pagination (`01 / 4`), and floating sub-text in the top-right of a section heading.

@@ -340,6 +340,13 @@ You are on the **Build team**. You review the built site — nothing else. For
   - **kicker/eyebrow count vs the ceil(sections ÷ 3) budget**, hero included — count
     any opener label regardless of styling, including a bare decorative rule-bar
   - **repeated opener signatures** — no shape on more than half the sections
+  - **composition device: named and landed** — the plan names one symmetry break
+    (dominant column / overlap / off-grid offset / ≥3× scale jump) and which section
+    carries it; confirm it's visible in the desktop screenshot. Plan names none, or the
+    build flattened it back to centered-and-even → fail.
+  - **falsifiable-fact count ≥ 1** — take it from `aitells.py`'s `min_falsifiable`
+    output (the builder's gate already computes it); a page with zero checkable
+    numbers/place-names/claims is slop regardless of layout.
   An audit with no numbers in this block is incomplete and cannot be signed off;
   "it looked varied" is not a count. Families and openers: `section-formats.md`.
 - **Head `audit.md` with the Gate A line** — `Detector: N errors, M advisory` plus each

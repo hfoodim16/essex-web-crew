@@ -48,6 +48,7 @@ Typography: <heading font / body font — from Stage 2 candidates or a deliberat
 Palette: <dominant + accent, with hex; name the family>
 Background system: <axis 4 — specific recipe from backgrounds.md>
 Motion: entrance=<family> hover=<personality> set-piece=<one or none>; tempo <duration/ease/stagger>; GSAP tier <0–3>
+Composition device: <the ONE named symmetry break — dominant column / overlap / off-grid offset / >=3x scale jump — and which section carries it. "Centered and even throughout" is not a device; every direction names one>
 Hero + imagery: <what the hero is; what images to generate (feeds imagery.md)>
 Why it's bold: <what makes it NOT generic for this niche>
 ```

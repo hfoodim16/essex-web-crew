@@ -270,10 +270,11 @@ whoever picks it up next has the source.
    carrying a client's phone number, and watched by nobody. A delivery isn't finished at
    the draft — it's finished when the live URL is in the registry.
 
-## The Mockup Recipe (the "Corey Blake workflow")
+## The Mockup Recipe (the "DaSilva workflow")
 
-This is our house method, distilled from a real build
-(`~/Claude Code/corey-blakes-steakhouse/`). Builders MUST follow it.
+This is our house method. The reference build is
+**`prospects/paul-da-silva-law/`** — in-repo, so every teammate on either Mac can open it.
+Builders MUST follow the recipe.
 
 ### PRIMARY design skill: `web-design-ultra`
 
@@ -387,7 +388,7 @@ for concrete/fencing). The Builder writes those 2–3 sentences of rationale at 
   Space Grotesk**, which are the same saturated-AI-default problem one generation later (we
   shipped Fraunces twice and Instrument Serif once before this was mechanical). The Step 0 scan
   flags all of them. A client's real brand font is a waiver with a reason, never a silent pass.
-  (Corey Blake used Cormorant + Montserrat.)
+  (DaSilva used Libre Caslon Text + Albert Sans.)
 - **Palette** — 3 to 5 colors as CSS custom properties in `:root`. Restraint signals
   premium. (See the token block pattern below.)
 
@@ -492,6 +493,29 @@ while the others are still being fixed.
 
 ### Step 6 — Proof
 Save desktop + mobile screenshots to `prospects/<slug>/screenshots/`.
+
+## The anti-slop standard (all three Build agents)
+
+AI slop = the statistical mean: hero, three feature cards, testimonials, CTA, one
+section shape repeated, vague copy. It's a **direction failure, not a creativity
+failure** — absent constraint, output regresses to the default. Seven levers kill it;
+each has an owner and most are mechanically enforced:
+
+| # | Lever | Owner | Enforced by |
+|---|-------|-------|-------------|
+| 1 | Named art direction before building | Planner | direction brief (Stage 5) |
+| 2 | Banned defaults (fonts, purple-gradient, card-wall) | Builder | detector blocking rules |
+| 3 | Section-format variety | Planner assigns, Builder obeys | `section-shape-repetition` + `repeated-section-kickers` (blocking) + critic counts |
+| 4 | Deliberate symmetry break | Planner names device, Builder lands it | critic composition check (screenshot) |
+| 5 | Scale contrast as hierarchy | Builder | `flat-type-hierarchy` (blocking, ≥1.25 step ratio) |
+| 6 | Copy specificity — ≥1 falsifiable fact, no abstract-pair labels | Builder (trade-copy + web-humanizer) | `copycheck.py` + `aitells.py` exit 0 |
+| 7 | Real assets — real logo, real photos or labeled placeholders, never stock | Builder | critic imagery gate |
+
+Process levers that keep builds from converging on each other: evidence before design
+(Stage 3), three forced-divergent directions (Stage 5), the anti-repetition log
+(`design-memory.md`, Stage 4/8), deterministic detection (Step 0 scan), and the
+screenshot rubric (Stage 8). **A build that ships with any lever unaddressed is not
+done** — the critic's audit records where each one landed.
 
 ## The `Inspiration/` library
 
