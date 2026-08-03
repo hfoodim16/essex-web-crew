@@ -145,7 +145,7 @@ The rubric above is judgment. These are arithmetic — you count them off the sc
 **Navigation** — one line at desktop, height ≤ 80px.
 
 **Section composition**
-- **Zigzag cap:** at most **2 consecutive** image-left/text-right ↔ text-left/image-right splits. The third in a row fails — break it with a full-bleed section, a vertical stack, a grid, or another family.
+- **Zigzag cap — superseded by quota 2, kept for redesigns of sites we didn't plan.** Quota 2 already forbids **any** family twice in a row, so two consecutive `split` sections fail before this rule is reached. Where no format tokens exist (an inherited build, a third-party site being audited), fall back to the old bar: at most **2 consecutive** image-left/text-right ↔ text-left/image-right splits, the third fails. Break it with a full-bleed section, a vertical stack, a grid, or another family.
 - **Split-header ban:** big headline left + small explainer paragraph floating right, used as a *section header*. Stack them instead. Allowed only when that right column carries a real visual or control, not filler prose.
 - **Layout variety (quota 1–2, blocking):** each layout family is used once. Eight sections need ≥ 4 distinct families, and no family appears twice in a row. Families are named in `section-formats.md`; the plan assigns one per section.
 - **One marquee per page**, maximum.

@@ -339,7 +339,9 @@ You are on the **Build team**. You review the built site — nothing else. For
   on the page opens the same way, so this is counted separately and it **blocks**:
   - total sections, and **distinct format families** (need ≥ 4 per 8 sections, or
     ≥ ceil(n÷2) on a shorter page)
-  - **max consecutive same-family** sections (must be ≤ 2)
+  - **no format family twice in a row** (serial `gallery` sections exempt when the
+    content is genuinely serial) — same rule the Planner writes to and `plan-lint.mjs`
+    enforces; a run of 2 identical families is a fail here too
   - **kicker/eyebrow count vs the ceil(sections ÷ 3) budget**, hero included — count
     any opener label regardless of styling, including a bare decorative rule-bar
   - **repeated opener signatures** — no shape on more than half the sections

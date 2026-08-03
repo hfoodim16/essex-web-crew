@@ -160,8 +160,9 @@ teammates, so you must call them yourself:
   default and `main.js` cancels the dead-man's timer. Load the page once with JS disabled
   before handoff; coloured rectangles mean you have the bug.
 - **Build against the composition checks** in `references/critique.md` — hero ≤ 4 text elements
-  and fits the viewport, no wrapped or duplicate-intent CTAs, single-line nav, max 2
-  consecutive image+text splits, ≥ 4 layout families across 8 sections, one theme + one accent
+  and fits the viewport, no wrapped or duplicate-intent CTAs, single-line nav, **no format
+  family twice in a row** (serial galleries exempt — this supersedes the old "max 2
+  consecutive splits" zigzag bar), ≥ 4 layout families across 8 sections, one theme + one accent
   + one radius, grid cells == item count, WCAG AA on every CTA and form field. The Critic
   counts these off your screenshots.
 - **The `/generate` skill** (`~/.claude/skills/generate/`) — invoke it with the Skill tool.

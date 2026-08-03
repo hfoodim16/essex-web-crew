@@ -349,7 +349,12 @@ the team:
   the skill's `references/critique.md` gives. **First, Step 0 — the mechanical scan, before
   anything is served or screenshotted:**
   `node skills/web-design-ultra/scripts/detect.mjs prospects/<slug>/mockup/index.html`
-  (60 deterministic rules, no LLM, no install, ~1s). **The gate is the exit code — `exit 2`
+  (60+ deterministic rules, no LLM, ~1s). **One-time setup on a fresh clone:**
+  `cd skills/web-design-ultra/scripts/detector && npm install` — its parser packages are
+  gitignored, and without them the engine falls back to a regex pass that catches almost
+  nothing and still exits 0. It now prints a loud DETECTOR DEGRADED warning when that
+  happens; if you ever see it, a clean result is not a passing gate.
+  **The gate is the exit code — `exit 2`
   bounces** the build with the findings as the fix list; no review tokens are spent on a
   mockup that fails mechanically. Waivers only as in-file
   `<!-- impeccable-disable <rule> -- reason -->`.

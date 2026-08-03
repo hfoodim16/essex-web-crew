@@ -142,7 +142,21 @@ async function detectHtml(filePath, options = {}) {
         domutils,
       };
     });
-  } catch {
+  } catch (err) {
+    // The static-HTML engine needs htmlparser2 / css-select / css-tree / domutils.
+    // Without them this falls back to a regex pass that catches almost nothing and
+    // still exits 0 — a green gate that means nothing, which is exactly how a build
+    // with 5 of 7 identical sections once passed. Never fail quietly here.
+    if (!globalThis.__detectorDegradedWarned) {
+      globalThis.__detectorDegradedWarned = true;
+      process.stderr.write(
+        '\n⚠  DETECTOR DEGRADED — the static-HTML engine could not load its parser dependencies,\n' +
+        '   so this run used the regex fallback and checked only a fraction of the rules.\n' +
+        '   A clean result here is NOT a passing gate. Restore the full engine with:\n' +
+        `     cd ${new URL('../..', import.meta.url).pathname} && npm install\n` +
+        `   (underlying error: ${err && err.code ? err.code : err})\n\n`,
+      );
+    }
     return detectText(html, filePath, options);
   }
 
