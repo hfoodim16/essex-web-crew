@@ -427,12 +427,15 @@ sheet id that exists. Fix what it names and re-run until clean. Handing the Buil
 sheet that fails the lint just moves the failure downstream into HTML, where the
 detector catches it and the round trip costs a rebuild.
 
-When both files are done and lint-clean, **message the Builder directly**:
-"build-sheet.md and voice-spec.md ready for <slug> — build the sheet top to bottom."
-If the builder isn't spawned yet, notify the lead. Then mark your task complete — but
-stay reachable: the builder may message you if something in the sheet is ambiguous
-(which is a defect in your sheet, so fix the sheet, don't just answer), and the critic
-may route a content-map question back to you.
+When both files are done and lint-clean, **message the Critic first**: "build-sheet.md
+and voice-spec.md ready for <slug> — sheet review please." The Critic runs the B1b
+judgment pass (direction sanity, copy quality, content routing) and answers **SHEET GO**
+or a numbered fix list back to you — two rounds max, then the lead. **The Builder starts
+only on SHEET GO** (the lead relays it), so a fix list here costs minutes where a bounced
+build costs a full round. Then mark your task complete — but stay reachable: the builder
+may message you if something in the sheet is ambiguous (which is a defect in your sheet,
+so fix the sheet, don't just answer), and the critic may route a content-map question
+back to you.
 
 **Reachable means CLARIFY, never re-decide.** You may explain what the plan already
 says; you may not issue new decisions, change a locked choice, or append instructions to

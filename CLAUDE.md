@@ -96,7 +96,8 @@ Build run.
 | B0a. *(only if a prior build for this prospect was speculative)* log the delta | `planner` | Fable | rows appended to `pipeline/speculation-log.md` |
 | B0b. *(only if no dossier exists)* capture-only research | `analyst` | Opus | `dossier.md` + `site-content.md` for this ONE business |
 | B1. Plan FROM the answers | `planner` | Fable | **`build-sheet.md`** (the Builder's only input — self-contained, lint-clean) + `website-plan.md` (the reasoning, for Harry + Critic) |
-| B2. Build | `builder` ×1 | Opus | `prospects/<slug>/mockup/` + `screenshots/` |
+| B1b. **Sheet review** — judgment pass BEFORE any build | `critic` | Opus | **SHEET GO** message, or a numbered fix list back to the planner (≤2 rounds, then lead) |
+| B2. Build (starts only on SHEET GO) | `builder` ×1 | Opus | `prospects/<slug>/mockup/` + `screenshots/` + the **evidence block** in STATE.md |
 | B3. Critique loop | `critic` | Opus | `prospects/<slug>/audit.md` (every round) + fix messages, sign-off |
 | B3b. **Publish to Claude Design** | lead | — | A card-per-section design-system project at claude.ai/design (`/design-push`) |
 | B3c. *(only if the site was edited in the Design pane)* **Pull those edits back** | lead | — | `/design-pull` → the edits land in `mockup/`, round-trip verified |
@@ -190,6 +191,29 @@ hunt, and a stale dev server. These five rules exist so that never repeats:
    file.** Precedence is Harry → lead → plan → gates. And before any screenshot,
    confirm the served page's `<title>` names this prospect — stale servers have
    answered the port with the wrong site.
+
+## Find problems early, prove cleanliness cheaply (efficiency doctrine)
+
+Two structural rules that exist because problems used to surface at the most expensive
+possible moment — after a full Opus build, in an Opus critique round:
+
+- **The sheet review (B1b).** The Critic judges `build-sheet.md` + `voice-spec.md`
+  against `client-answers.md` BEFORE the Builder starts: direction sanity, copy
+  quality, content routing, format choices. plan-lint must already be exit 0 — the
+  review is judgment, not mechanics. Verdict is one message: **"SHEET GO"** or a
+  numbered fix list to the Planner (two rounds max, then the lead). **No build starts
+  without SHEET GO.** A ten-minute review that kills a bad sheet saves an entire build
+  round — the best token trade in the pipeline.
+- **The evidence block.** The Builder's handoff must carry proof in STATE.md: detector
+  exit codes per page, copycheck + aitells exit codes, composition counts, screenshot
+  list. The Critic spot-checks ONE claim at random and — if it holds — **re-runs no
+  mechanical checks at all**, spending its round purely on judgment (realism, taste,
+  client fidelity). A handoff without the evidence block is bounced unreviewed.
+
+**Model policy — Opus only where judgment lives.** Fable plans. Opus builds, critiques,
+and writes dossiers. **Sonnet scouts and runs cold reads** (fresh eyes matter; depth
+doesn't). Scripts do everything mechanical for free. Never spend Opus tokens re-deriving
+what a script or an attached exit code already proves.
 
 ## Per-prospect output contract
 

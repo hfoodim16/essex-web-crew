@@ -49,11 +49,21 @@ Invoke these skills (via the Skill tool — not auto-loaded for teammates, so ca
 not from a separate tool.** `references/critique.md` carries all three and is the authority;
 run them in the order it gives:
 
-1. **Step 0, the scan** — before you serve the mockup or take a single screenshot:
-   `node skills/web-design-ultra/scripts/detect.mjs prospects/<slug>/mockup/*.html`.
-   **Audit every page, not just the homepage** — this is Impeccable's mandate here, and
-   interior pages are where copied section shapes and card walls hide. Record the
-   per-page counts in the Gate A line.
+1. **Step 0, the scan — but the Builder already ran it, so VERIFY, don't repeat.**
+   A valid handoff carries the **evidence block** in STATE.md: detector exit codes per
+   page, copycheck + aitells exit codes, composition counts, screenshot list. **No
+   evidence block → bounce the handoff in one line, unreviewed** — the Builder skipped
+   its own gate.
+   With the block present, **spot-check ONE claim at random** (re-run the detector on
+   one page you pick, compare to the claimed exit code). If it holds, **trust the rest
+   and run no further mechanical checks** — your round is judgment: realism, taste,
+   client fidelity, composition off the screenshots. If the spot-check contradicts the
+   claim, the evidence is unreliable: re-run everything, and the false evidence itself
+   is a fail item.
+   When you DO run the scan (spot-check, or full re-run after a failed one):
+   `node skills/web-design-ultra/scripts/detect.mjs prospects/<slug>/mockup/<page>.html`.
+   **Every page is in scope, not just the homepage** — interior pages are where copied
+   section shapes and card walls hide. Record per-page results in the Gate A line.
    The gate is the exit code, and **`2` and `1` mean completely different things**:
    - **`exit 2` = the design failed.** Bounce the build with the findings as the fix list —
      don't spend review tokens screenshotting something that fails mechanically.
@@ -217,6 +227,30 @@ can't act on is a failure. Per
   everywhere else — a client who moved and told us so must not be "corrected" back to the
   dossier's old address.
 
+## The sheet review (B1b — BEFORE any build exists)
+
+When the Planner hands off `build-sheet.md`, you review it **before the Builder writes a
+line**. This is the cheapest gate in the pipeline: a bad sheet caught here costs a
+10-minute read; caught after the build it costs a full Opus round.
+
+**Precondition:** plan-lint exit 0 (the Planner runs it; if the sheet arrives unlinted,
+bounce it back in one line without reviewing). Your review is **judgment only** — never
+re-check what the lint proved:
+
+- **Direction sanity** — does the sheet's direction serve THIS client's answers, or is
+  it a beautiful idea pasted onto the wrong business?
+- **Copy quality** — read the inline copy against `voice-spec.md` and the answers. Wrong
+  register, invented facts, or padded vagueness fails here, not after it's typeset.
+- **Content routing** — walk the parity contract: does every real content block have a
+  section, and does each section's format actually suit what it carries (a 40-row
+  service list in a `quote-monolith` is a routing fail)?
+- **Judgment contradictions** — anything the lint can't see: a composition device the
+  palette undermines, a hero premise the imagery register can't deliver.
+
+**Verdict is ONE message:** `SHEET GO` (the lead relays it; the Builder starts), or a
+numbered fix list **to the Planner** (never the Builder — no build exists). Two rounds
+max, then escalate to the lead like any stalemate. Log the verdict in STATE.md.
+
 ## Review on arrival
 
 You are the gate the build funnels through, so idle time here stalls the run. **Review
@@ -334,7 +368,9 @@ You are on the **Build team**. You review the built site — nothing else. For
   and treat any `[ !! ] year drift` line as a real finding — accuracy outranks tone.
   **Then dispatch a cold read** (`skills/trade-copy/references/cold-read.md`): a fresh
   subagent, given no account of what was changed, judging the copy against the owner's own
-  standard and the voice spec's *Settled* list. You are reviewing a page you may have
+  standard and the voice spec's *Settled* list. **Spawn the cold reader on Sonnet**
+  (`claude-sonnet-5`) — its value is fresh eyes, not depth, and an Opus cold read is the
+  model policy's definition of wasted spend. You are reviewing a page you may have
   already sent fix items for; the cold reader is the one party who can still hear it. Fold
   its findings into your numbered list.
   **If agent spawning is restricted in your session, do NOT self-simulate the cold

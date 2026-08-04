@@ -28,6 +28,22 @@
 <!-- e.g. "Palette changed to azul+gold — round-1 distinctiveness PASS void; re-run at next audit."
      A gate listed here is NOT passed, whatever audit.md says. -->
 
+## Sheet review (B1b)
+
+<!-- One line per round: "Round 1 — SHEET GO" or "Round 1 — 4 fixes to planner (listed
+     in critic message <time>)". The Builder starts only after a SHEET GO line exists. -->
+
+## Evidence block (written by the Builder at handoff — REQUIRED)
+
+<!-- Paste real outputs, never summaries. A handoff without this block gets bounced
+     unreviewed; a claim that fails the Critic's random spot-check triggers a full
+     re-run and is itself a fail item.
+     - detector exit code per page (with per-page finding counts)
+     - copycheck.py exit code · aitells.py exit code
+     - composition counts: sections / distinct families / max consecutive / kickers vs
+       budget / opener dupes
+     - screenshot filenames saved -->
+
 ## Stood-down teammates
 
 <!-- Name + timestamp when a teammate is stood down. A teammate on this list who receives

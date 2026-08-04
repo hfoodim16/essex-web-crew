@@ -74,10 +74,13 @@ doesn't depend on design decisions:
 - Start your static server so the browser pane is ready for QA.
 - Invoke your skills so they're loaded.
 
-Then, the moment the Planner messages you that the plan is ready, read it and build. Do
-NOT guess at art direction, fonts, palette, or layout to get a head start — those are the
-Planner's calls, and pre-empting them is how a mockup ends up off-brief. If the plan is
-missing when you're otherwise ready to build, message the Planner.
+Then wait for **SHEET GO** — the Critic reviews `build-sheet.md` before any build (stage
+B1b), and the lead relays its verdict. A ready sheet is NOT a go: if the review sends
+fixes to the Planner, the sheet you would have built from was defective, and starting
+early means building the defect. Do NOT guess at art direction, fonts, palette, or
+layout to get a head start — those are the Planner's calls. If the sheet is missing when
+you're otherwise ready, message the Planner; if the sheet is ready but no verdict has
+arrived, message the lead.
 
 ## Skills you use
 
@@ -446,6 +449,17 @@ only.)
    Fix anything with a
    dimension below 7 or boldness below 8 before you message the critic — don't hand off a
    mockup you already know fails the gate.
+   **Then write the EVIDENCE BLOCK into STATE.md — a handoff without it gets bounced
+   unreviewed.** The block is the receipts for everything above, so the Critic can skip
+   every mechanical re-run and spend its round on judgment:
+   - detector exit code **per page** (paste the per-page counts)
+   - `copycheck.py` and `aitells.py` exit codes
+   - composition counts (sections, distinct families, max consecutive, kicker count vs
+     budget, opener dupes)
+   - the screenshot filenames you saved
+   The Critic spot-checks ONE claim at random. If your evidence doesn't survive the
+   spot-check, everything gets re-run and the false evidence itself becomes a fail item
+   — so paste real outputs, never summaries of what you expect them to say.
 10. **Generate the client's release form** (see below) — `release-form.pdf`.
 
 Preview: open the mockup with the browser pane (`preview_start` with a `url` pointing
