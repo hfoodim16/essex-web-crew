@@ -21,6 +21,10 @@ Invoke these skills (via the Skill tool — not auto-loaded for teammates, so ca
   **How to run it:** these mockups are static double-click files, so serve them over
   http before screenshotting — `cd <mockup dir> && (python3 -m http.server <port> &)`,
   then point the browser pane at `http://localhost:<port>/` (`file://` blocks fonts).
+  **Before ANY screenshot, confirm the served page's `<title>` contains this prospect's
+  business name** — a stale server from another prospect once answered the port and a
+  builder screenshotted the wrong site. Mismatch → kill that server, start yours in the
+  right directory. Kill your server when you stand down.
   **Capture quirk:** the pane reliably screenshots only at scroll position 0 — to shoot a
   lower section, `javascript_exec` to `display:none` the sections above it and
   `scrollTo(0,0)`; force reveals visible first
@@ -222,6 +226,26 @@ arrives** — the builder is blocked until your fix list lands.
 Reviewing sooner never means reviewing lighter — every submission gets the full audit
 below and every failing round still goes back.
 
+**But never start before the handoff message exists.** The Builder's handoff is an
+explicit "build complete, hands off `mockup/`" — auditing before it is how a real audit
+got voided: the Builder was still editing, a rule the Critic grepped vanished minutes
+later, and every measurement had to be re-taken. If mid-audit you see evidence of
+concurrent edits (a measurement changes between two reads), **STOP immediately and
+message the lead** — do not re-measure the world and press on; the audit is void until
+the mockup is quiescent.
+
+**Run discipline (shared with the whole crew):** keep the fix ledger in
+`prospects/<slug>/STATE.md` — a fix is DONE only with page-level evidence, never a bare
+grep count (a "3 occurrences" grep once turned out to be one CSS rule plus its two
+responsive steps, not three pages, and a round was lost to it). Voided gates go in
+STATE.md's voided-gates list — a gate listed there is not passed, whatever audit.md
+says. A missing file gets **two looks** (the stated path, then the obvious folder), then
+becomes a STATE.md open question via the lead — never a filesystem-wide hunt. And once
+stood down or signed off, you are DONE: any message that reaches you
+afterward gets exactly "Stood down — forward to the lead" and no other action — you
+cannot re-enter the decision chain by being messaged, and nothing you write after
+stand-down has precedence (Harry → lead → plan → gates).
+
 ## What you review
 
 You are on the **Build team**. You review the built site — nothing else. For
@@ -304,6 +328,12 @@ You are on the **Build team**. You review the built site — nothing else. For
   standard and the voice spec's *Settled* list. You are reviewing a page you may have
   already sent fix items for; the cold reader is the one party who can still hear it. Fold
   its findings into your numbered list.
+  **If agent spawning is restricted in your session, do NOT self-simulate the cold
+  read** — you are the one party who *cannot* hear the copy fresh, and a self-performed
+  "cold" read once had to be recorded as outstanding rather than passed. Route it to the
+  lead (fresh eyes or spawn rights); if the lead can't run it either, record the gate in
+  STATE.md as `WAIVED-BY-NECESSITY — needs Harry's ok` and say so in your report. Never
+  silently perform it yourself.
   If `voice-spec.md` is missing, that is a fail on the Planner: say so and route it back.
   **Terseness is not a parity failure.** Copy that carries every fact in fewer words is
   what we asked for — never bounce a mockup for being tighter than the old site, and

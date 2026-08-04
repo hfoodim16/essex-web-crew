@@ -543,6 +543,42 @@ now stale, needs a re-push."* Otherwise the site gets reviewed against the old v
   first.
 - Never contact anyone.
 
+## Run discipline — the rules that keep a run from freezing
+
+These codify what actually went wrong in a real run (dasilva-associates, 2026-08-03):
+a write race voided a full audit, a filesystem-wide hunt burned a session, and a stale
+server screenshotted the wrong site.
+
+- **The STATE ledger.** Keep `prospects/<slug>/STATE.md` current (template:
+  `templates/STATE-template.md`). Every fix you complete gets a ledger row, and **DONE
+  requires page-level evidence** — the page plus what you observed rendering, never a
+  bare grep count. A grep once counted a CSS base rule plus its two responsive steps as
+  "3 occurrences = 3 pages fixed"; the fix had landed on zero pages and a full round was
+  wasted rediscovering that. If the run pauses, STATE.md is the handoff — you never
+  write an improvised RESUME/handoff note.
+- **The handoff barrier.** Handing off to the Critic is an explicit message — "build
+  complete, hands off `mockup/`" — and from that moment **you do not edit the mockup**
+  until a fix list arrives. Editing during the audit is a write race: the Critic
+  measures a moving target, and every number in the audit becomes void. The freeze rule
+  below covers after sign-off; this covers *during* review.
+- **The two-look rule.** A missing asset gets exactly TWO looks: the path you were
+  given, then the prospect's `assets/`. Not found → put it in STATE.md's open
+  questions, ask via the lead, and move to other work. **Never search the wider
+  filesystem** — a run once crawled `~/Downloads`, `~/Desktop`, and every
+  recently-modified image under `~` for a photo that wasn't on the machine at all.
+- **Dev-server hygiene.** Before ANY screenshot, confirm the served page's `<title>`
+  contains this prospect's business name. Mismatch → a stale server from another
+  prospect is answering that port (it has happened — DiSalvo's server once served
+  screenshots for a different build); kill it and restart in the right directory. One
+  server per prospect; kill yours when you stand down.
+- **Stood down means stood down.** Once you've handed off, been stood down, or your
+  build is signed off, you are DONE. If a message reaches you afterward, reply exactly
+  "Stood down — forward to the lead" and take **no other action** — no edits, no file
+  appends, no opinions in shared docs. You cannot re-enter the decision chain by being
+  messaged, and nothing you write after stand-down has precedence. (A stood-down
+  teammate was once resurrected by a stray message and wrote conflicting orders into a
+  shared file, forcing a lead override. Precedence is Harry → lead → plan → gates.)
+
 ## Done criteria
 
 Critic has signed off, screenshots (desktop + mobile) are saved, and the mockup opens

@@ -39,7 +39,7 @@ project tracks live client URLs. (`pipeline/outreach-log.md` tracks Harry's *out
 deployments, and it's his file to write, not yours.)
 
 When Harry says a site has gone live — or when the lead reports back a live URL after
-delivery, which is now the last step of CLAUDE.md's Delivery procedure:
+delivery, which is the last step of the delivery procedure (`docs/delivery.md`):
 
 1. `WebFetch` the live URL and read what's actually on the page.
 2. Append an entry to the `sites` array with `key`, `label`, `url`,
