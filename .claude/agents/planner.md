@@ -100,6 +100,18 @@ asked for — the exact thing this crew's business model forbids — and every g
 that checks "client-answer fidelity" would have nothing to check against. A missing file is
 a run that started too early, not a gap for you to fill with research.
 
+**If a PRIOR build for this prospect was speculative, your first deliverable is the
+delta report.** Some prospects were built before the client ever replied — their old
+`client-answers.md` carries a `SPECULATIVE PITCH` banner saying so, and everything in
+that build was inferred from the old site and the dossier. When the real questionnaire
+finally arrives, diff it against what that build assumed and append one row per
+**material** difference to `pipeline/speculation-log.md` (date, prospect, source of the
+guess, what we assumed, what the client actually said, verdict, rule of thumb). Verdicts
+are `confirmed` / `wrong` / `unasked`. Skip cosmetic wording differences — log the ones
+that would have changed the build. This is the only place the crew finds out which
+inferences are reliable, so a run that skips it throws away the most valuable thing the
+questionnaire produced.
+
 **Answers arrive in whatever form the client gave them** — usually mapped to the
 17-question master (`templates/Website-Questionnaire.docx`, numbered 1–17), but often just
 loose notes from a phone call. Handle either. **Skipped questions are normal and expected** — treat an unanswered

@@ -93,6 +93,7 @@ Build run.
 | Stage | Owner | Model | Output |
 |---|---|---|---|
 | B0. Save the client's answers | lead | — | `prospects/<slug>/client-answers.md` |
+| B0a. *(only if a prior build for this prospect was speculative)* log the delta | `planner` | Fable | rows appended to `pipeline/speculation-log.md` |
 | B0b. *(only if no dossier exists)* capture-only research | `analyst` | Opus | `dossier.md` + `site-content.md` for this ONE business |
 | B1. Plan FROM the answers | `planner` | Fable | `prospects/<slug>/website-plan.md` incl. "Client answers → decisions" |
 | B2. Build | `builder` ×1 | Opus | `prospects/<slug>/mockup/` + `screenshots/` |
@@ -232,6 +233,15 @@ whoever picks it up next has the source.
    ```
    This writes `prospects/<slug>/<slug>-site.zip` — the whole site, correctly named
    `index.html` at the top level, assets included, dev scratch stripped.
+
+   **The packager is gated and will refuse a failing build.** It re-runs the detector
+   against the staged copy, greps for placeholder leakage (`[placeholder: …]`,
+   `[… — confirm]`, `PLACEHOLDER_TOKENS`), and checks the build has a `design-memory.md`
+   row. Any failure → it names the problem, writes nothing, and exits 2. This exists
+   because gee-kay's `deploy-ready/` folder shipped with a visible
+   `[placeholder: a short note from owner…]` and 27 contrast failures in it — packaging
+   used to run after critique and check nothing. `--force` packages anyway but renames
+   the artifact `<slug>-site-UNGATED.zip`, so an override is visible in the filename.
 
    **Then publish it to Claude Design** — invoke the `design-push` skill on
    `prospects/<slug>/mockup/` with the client's name. The finished site lands at
@@ -531,6 +541,18 @@ each has an owner and most are mechanically enforced:
 | 6 | Copy specificity — ≥1 falsifiable fact, no abstract-pair labels | Builder (trade-copy + web-humanizer) | `copycheck.py` + `aitells.py` exit 0 |
 | 7 | Real assets — real logo, real photos or labeled placeholders, never stock | Builder | critic imagery gate |
 | 8 | Plan lint — quotas and required fields checked before a line is built | Planner | `plan-lint.mjs` exit 0 before handoff |
+
+**After changing any gate, rule, threshold, or agent instruction, run the fire drill:**
+
+```bash
+pipeline/fire-drill.sh
+```
+
+It costs nothing and takes seconds. Against the synthetic fixtures in
+`prospects/_smoke-test/` it checks that every gate both **accepts a known-good build**
+and **rejects a known-bad one** — the second half being the one that matters, since a
+gate that quietly stopped firing is indistinguishable from a clean codebase. If it goes
+red, find the change that caused it; never loosen the fixtures to make it green.
 
 Process levers that keep builds from converging on each other: evidence before design
 (Stage 3), three forced-divergent directions (Stage 5), the anti-repetition log
