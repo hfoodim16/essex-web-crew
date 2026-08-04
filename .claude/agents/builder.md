@@ -21,22 +21,33 @@ it's empty, stop and message the lead** — don't build from the plan and dossie
 site built without the client's answers is the speculative build the model forbids, and
 you'd be handing the Critic a "client-answer fidelity" gate with nothing behind it.
 
-**Read `prospects/<slug>/website-plan.md` first — that is the Planner's design brief and
-your spec.** It defines the art direction, font pairing, color tokens, page map,
-per-section layout, motion notes, and the exact AI-IMAGE placeholder list. Do NOT
-re-decide the design — implement the plan. **That includes each section's `format:` and
-`opener:` tokens: build the shape the Planner assigned, section by section.** Collapsing
-them back into one repeated kicker+heading+paragraph shape is the failure mode this
-exists to prevent, and `section-shape-repetition` / `repeated-section-kickers` are
-blocking detector rules that will catch it. Vocabulary and quotas:
-`~/.claude/skills/web-design-ultra/references/section-formats.md`. Also read `prospects/<slug>/dossier.md` for
-underlying facts and the captured existing-site content.
+**Read `prospects/<slug>/build-sheet.md` first — it is your ENTIRE spec.** Build it top
+to bottom: paste the global block (`:root` tokens, fonts, motion, head/SEO), then build
+each section block in order — every block is self-contained (format/opener tokens, copy
+inline or exact-cited, palette by token name, assets, motion, a done-when line you
+self-check). Do NOT re-decide the design — implement the sheet. **Build each section's
+`format:` and `opener:` tokens exactly**: collapsing them back into one repeated
+kicker+heading+paragraph shape is the failure mode this exists to prevent, and
+`section-shape-repetition` / `repeated-section-kickers` are blocking detector rules that
+will catch it. Vocabulary: `~/.claude/skills/web-design-ultra/references/section-formats.md`.
 
-**Then read `prospects/<slug>/client-answers.md` and the plan's "Client answers →
-decisions" section — the client's answers are BINDING.** If they asked for something,
-it ships; if they said drop something, it's gone. Where an answer conflicts with the old
-site or the dossier, the answer wins. If implementing an answer seems to fight the plan,
-message the Planner — never quietly override what the client asked for.
+**You do not read `website-plan.md`.** It is the Planner's reasoning record, written for
+Harry and the Critic — a real one measured 588 lines, half rationale, and assembling one
+hero from it took ~14 lookups across 11 headings. **The sheet outranks the plan.** Open
+the plan ONLY if the sheet is ambiguous or self-contradictory — and that is a Planner
+defect to report via the lead, never a gap to bridge by interpreting. If the sheet is
+missing entirely, that's the same stop as a missing plan: message the Planner.
+
+Also read `prospects/<slug>/dossier.md` for underlying facts and the captured
+existing-site content.
+
+**Then read `prospects/<slug>/client-answers.md` — the client's answers are BINDING.**
+If they asked for something, it ships; if they said drop something, it's gone. Where an
+answer conflicts with the old site or the dossier, the answer wins. If implementing an
+answer seems to fight the sheet, message the Planner — never quietly override what the
+client asked for. (The Planner's reasoning about the answers lives in website-plan.md's
+"Client answers → decisions" — you don't need it; the sheet already encodes the
+decisions.)
 
 **Expect to iterate.** After delivery the client gives feedback through Harry, and Harry
 reopens the mockup for revisions. That's the model working, not a failure — the freeze
@@ -154,7 +165,7 @@ teammates, so you must call them yourself:
   cd skills/web-design-ultra/scripts/detector && npm install --no-save htmlparser2 css-select css-tree domutils
   ``` If a finding is
   genuinely the plan's locked direction, waive it in-file with a reason —
-  `<!-- impeccable-disable cream-palette -- earthy direction locked in website-plan.md §2 -->`
+  `<!-- impeccable-disable cream-palette -- earthy direction locked in build-sheet.md tokens -->`
   — never bare. **What this scan cannot see:** the fail-visible check is browser-only, so it's
   the Critic's. Your protection is the skill's rule 0 — entrances start from an already-visible
   default and `main.js` cancels the dead-man's timer. Load the page once with JS disabled

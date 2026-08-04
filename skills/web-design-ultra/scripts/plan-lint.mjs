@@ -98,15 +98,18 @@ for (const font of BANNED_FONTS) {
   }
 }
 
-// ── Required plan fields ────────────────────────────────────────────────────
+// ── Required plan fields (plans only — a build sheet has its own field checks) ──
+const isSheetFile = /build-sheet\.md$/.test(file);
 const requiredFields = [
   [/composition device/i, 'Composition device (the named symmetry break + carrying section)'],
   [/design read|reading this as/i, 'Design Read line (taste-skill §0 — one-line brief inference)'],
   [/entrance\s*=|entrance family/i, 'signature-motion tokens (entrance/hover/set-piece/tempo)'],
   [/register/i, 'imagery register (proud-contractor / editorial)'],
 ];
-for (const [re, label] of requiredFields) {
-  if (!re.test(text)) warn(`missing required field: ${label}`);
+if (!isSheetFile) {
+  for (const [re, label] of requiredFields) {
+    if (!re.test(text)) warn(`missing required field: ${label}`);
+  }
 }
 
 // VIDEO slot, if marked, must declare its register.
@@ -114,9 +117,77 @@ if (/\bVIDEO\b/.test(text) && !/filmed-action|designed-loop/i.test(text)) {
   warn('a VIDEO slot is marked but no register (filmed-action / designed-loop) is declared');
 }
 
+// ── Build sheet (if one sits beside the plan, or was passed directly) ───────
+// The sheet is the Builder's ONLY input, so its own defect classes get linted:
+// every one of these checks encodes a failure a real build actually hit.
+import path from 'node:path';
+
+let sheetPath = null;
+if (/build-sheet\.md$/.test(file)) sheetPath = file;
+else {
+  const sibling = path.join(path.dirname(file), 'build-sheet.md');
+  if (fs.existsSync(sibling)) sheetPath = sibling;
+}
+
+if (sheetPath && sheetPath !== file) {
+  lintSheet(fs.readFileSync(sheetPath, 'utf8'), sheetPath);
+} else if (sheetPath === file) {
+  lintSheet(text, sheetPath);
+}
+
+function lintSheet(sheet, p) {
+  const rel = path.basename(p);
+
+  // 1. Every var(--x) referenced must be defined in the :root token block.
+  //    (A real plan named --verde-2 in a motion spec; the token table didn't have it.)
+  const rootBlock = (sheet.match(/:root\s*\{([\s\S]*?)\}/) || [,''])[1];
+  const defined = new Set([...rootBlock.matchAll(/--([a-z0-9-]+)\s*:/gi)].map(m => m[1].toLowerCase()));
+  const referenced = new Set([...sheet.matchAll(/var\(--([a-z0-9-]+)\)/gi)].map(m => m[1].toLowerCase()));
+  for (const v of referenced) {
+    if (!defined.has(v)) warn(`${rel}: var(--${v}) is referenced but not defined in the :root block — every variable the sheet names must exist there`);
+  }
+
+  // 2. Rename/cross-reference instructions are banned outright.
+  const banned = [
+    [/\bread\s+\S+\s+as\s+\S+/i, `a "read X as Y" rename instruction — regenerate the sheet with final names instead (the verde→azul map left 28 stale lines in a real plan)`],
+    [/\bsee\s+§/i, `a "see §" cross-reference — section blocks must be self-contained`],
+    [/\bthroughout\b/i, `"throughout" — global substitution instructions are the Builder doing the Planner's find-and-replace by hand`],
+    [/\bnever used\b|\bwas generated\b|\bpost-plan\b/i, `past-tense status prose — the sheet is a forward-looking contract; status lives in STATE.md`],
+  ];
+  for (const [re, label] of banned) {
+    const hit = sheet.split('\n').findIndex(l => re.test(l));
+    if (hit !== -1) warn(`${rel}:${hit + 1} contains ${label}`);
+  }
+
+  // 3. Section blocks: unique ids + required fields.
+  const blocks = [...sheet.matchAll(/^###\s+\d+\.\s+id:\s*([a-z0-9-]+)\s*$([\s\S]*?)(?=^###\s|\n## |$(?![\s\S]))/gim)];
+  if (blocks.length === 0) {
+    warn(`${rel}: no section blocks found (expected "### <n>. id: <kebab-id>" headings)`);
+  } else {
+    const ids = blocks.map(b => b[1]);
+    const dupes = ids.filter((id, i) => ids.indexOf(id) !== i);
+    for (const d of new Set(dupes)) warn(`${rel}: duplicate section id "${d}"`);
+    for (const [, id, body] of blocks) {
+      for (const field of ['format:', 'copy:', 'palette:', 'done-when:']) {
+        if (!body.includes(field)) warn(`${rel}: section "${id}" is missing its ${field} field`);
+      }
+    }
+    // 4. Content-map rows in the PLAN that target a section id must resolve to a sheet id.
+    //    (A real plan routed content to ".penalty-list" under a section that never defined it.)
+    if (p !== file) {
+      const targets = [...text.matchAll(/→\s*(?:section\s+)?`?([a-z0-9-]{3,})`?\s*(?:\(|,|$)/gim)]
+        .map(m => m[1].toLowerCase()).filter(t => /-/.test(t));
+      const idSet = new Set(ids);
+      for (const t of new Set(targets)) {
+        if (!idSet.has(t)) warn(`plan routes content to "${t}" but no sheet section has that id`);
+      }
+    }
+  }
+}
+
 // ── Report ──────────────────────────────────────────────────────────────────
 if (problems.length === 0) {
-  console.log(`plan-lint: clean (${sections.length} sections, ${new Set(sections.map(s => s.family)).size} families)`);
+  console.log(`plan-lint: clean (${sections.length} sections, ${new Set(sections.map(s => s.family)).size} families${sheetPath ? ', build-sheet checked' : ''})`);
   process.exit(0);
 }
 console.log(`plan-lint: ${problems.length} problem${problems.length === 1 ? '' : 's'} in ${file}\n`);

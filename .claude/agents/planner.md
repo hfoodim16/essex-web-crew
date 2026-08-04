@@ -221,16 +221,43 @@ builder can start while you're still available to answer questions.
 The `website-plan.md` you write is the output of this pipeline — it must reflect the
 chosen bold direction, grounded in the Stage 2 engine and Stage 3 evidence.
 
-## What every website-plan.md must contain
+## Your output is TWO files — the sheet is the contract, the plan is the reasoning
 
-1. **Art direction** — a named direction that fits THIS trade and business (e.g.
+**`prospects/<slug>/build-sheet.md`** (template: `templates/build-sheet-template.md`)
+is the Builder's ONLY required input — self-contained, zero cross-references, ordered in
+build order. Every executable item below lands there in final form: the paste-ready
+`:root` block, fonts, motion tokens, composition device, head/SEO block, and one
+self-contained block per section (id, format/opener, copy inline or exact-cited, palette
+by token name, assets, motion, done-when). Its hard rules, enforced by plan-lint where
+mechanical: **single authority** (the sheet outranks the plan — a disagreement is YOUR
+defect), **no renames ever** (a direction change means regenerating the sheet with final
+names — a real plan's "read verde as azul throughout" left 28 stale lines, a CSS var
+that didn't exist, and an image prompt whose meaning depended on whether you
+substituted), **present tense only** (status lives in STATE.md), and **self-containment**
+(a section block must be buildable reading only itself plus the global block).
+
+**`website-plan.md`** carries the reasoning — direction argument, the three divergent
+directions and the pick, Stage 3 evidence, anti-repetition notes, client-answer
+decisions, divergence honesty. Audience: Harry and the Critic. **The Builder never
+reads it** — if the Builder is forced into it, the sheet failed.
+
+A real 588-line plan measured 50% rationale interleaved with 50% spec; assembling ONE
+hero section took ~14 lookups across 11 headings. That is the failure this split exists
+to prevent.
+
+## What the two files must contain
+
+Items marked **[SHEET]** land in `build-sheet.md` in final executable form; items marked
+**[PLAN]** stay in `website-plan.md` as reasoning.
+
+1. **[PLAN] Art direction** — a named direction that fits THIS trade and business (e.g.
    "earthy editorial" for a landscaper, "dark-luxury stone" for a high-end mason),
    with 2–3 sentences of rationale. This is checklist item #1 (point of view).
-2. **Typography** — a specific Google Font pairing (display + body). **Never Inter or
+2. **[SHEET] Typography** — a specific Google Font pairing (display + body). **Never Inter or
    Roboto.** Name the exact families and where each is used (headings vs body).
-3. **Color system** — 3–5 named colors with hex values, intended as CSS `:root` tokens,
+3. **[SHEET] Color system** — 3–5 named colors with hex values, intended as CSS `:root` tokens,
    plus which is background / text / accent. Restraint over decoration.
-4. **Page map** — the exact pages to build (driven by the dossier's service breadth:
+4. **[SHEET] Page map** — the exact pages to build (driven by the dossier's service breadth:
    single-service → homepage + 1 key page; multi-line like landscaping+masonry+
    hardscaping → one page per major service line). For EACH page, list its sections
    top to bottom, and **give every section a `format:` and an `opener:` token** from
@@ -257,7 +284,7 @@ chosen bold direction, grounded in the Stage 2 engine and Stage 3 evidence.
 
    **The page map serves the content, not vice versa** — if the content map (below)
    needs another page or section to carry everything, grow the map.
-5. **Content map (content-parity contract — required when an existing site was
+5. **[SHEET routing / PLAN drop-reasons] Content map (content-parity contract — required when an existing site was
    captured).** Open `prospects/<slug>/site-content.md` and assign EVERY content block
    in it a destination: `<block> → <new page> / <section>`. Anything you don't carry
    goes under a **"Deliberately dropped"** list with a one-line reason each (e.g.
@@ -267,12 +294,12 @@ chosen bold direction, grounded in the Stage 2 engine and Stage 3 evidence.
    SEO surface; the default is CARRY it (own section or page), never quietly drop it.
    The Critic walks this map against the built mockup — a block that is neither placed
    nor on the dropped list is a fail on you both.
-6. **Hero direction** — the headline concept, sub-copy angle, and hero image intent.
+6. **[SHEET] Hero direction** — the headline concept, sub-copy angle, and hero image intent.
    **Must obey `voice-spec.md`**: within the headline word budget, no banned construction,
    and checked against the other prospects' heroes
    (`grep -h -A2 '<h1' prospects/*/mockup/index.html`) so two clients don't ship the same
    skeleton.
-7. **Signature motion** — you own this call; the Builder is forbidden from re-deciding it,
+7. **[SHEET tokens / PLAN the three directions] Signature motion** — you own this call; the Builder is forbidden from re-deciding it,
    so if you don't name it, $10K item 6 has no author. Pick from the skill's
    `~/.claude/skills/web-design-ultra/references/motion.md` and write all four tokens
    into the plan: **one entrance family**, **one hover personality**, **at most one
@@ -293,7 +320,7 @@ chosen bold direction, grounded in the Stage 2 engine and Stage 3 evidence.
    local trade, legal, or medical prospect it is the wrong register — don't.
    **The three directions + the pick:** record all three divergent direction briefs from
    Stage 5 and which one you chose and why (Harry reviews the reasoning).
-8. **Image list — mark the 2 to GENERATE.** List every image slot the site needs, each
+8. **[SHEET] Image list — mark the 2 to GENERATE.** List every image slot the site needs, each
    with a specific, photorealistic generation prompt. **Mark exactly two as
    `GENERATE`** — the hero first, then the one highest-impact/most-visible slot — which
    the Builder will actually generate (via the `/generate` skill on **`nano-banana-2`**,
@@ -316,7 +343,7 @@ chosen bold direction, grounded in the Stage 2 engine and Stage 3 evidence.
    Write the GENERATE prompts to the photorealism-kit standard (register-aware) in
    `~/.claude/skills/web-design-ultra/references/imagery.md` so the Builder can generate
    directly. No real/stock images — generated or placeholder only.
-9. **Video slot — mark 0 or 1, and name its register.** **Default is no video.** Most
+9. **[SHEET] Video slot — mark 0 or 1, and name its register.** **Default is no video.** Most
    prospects ship zero clips and that is never a deduction. Full system:
    `~/.claude/skills/web-design-ultra/references/video.md`.
 
@@ -373,10 +400,10 @@ chosen bold direction, grounded in the Stage 2 engine and Stage 3 evidence.
    and the plan is not defective for it. Two clips, 4K, >8s, a non-default model
    (Kling/Sora), or anything above the caps
    isn't yours to request either — route that through the lead.
-10. **Embed placeholders** — where a contact form / Google Map / booking slot goes.
-11. **Content honesty note** — call out any dossier facts that are unverified (aggregator
+10. **[SHEET] Embed placeholders** — where a contact form / Google Map / booking slot goes.
+11. **[SHEET] Content honesty note** — call out any dossier facts that are unverified (aggregator
    "years in business" etc.) so the Builder writes around them, per CLAUDE.md.
-12. **Voice spec** — `prospects/<slug>/voice-spec.md` written (per `trade-copy`) and
+12. **[SHEET-adjacent] Voice spec** — `prospects/<slug>/voice-spec.md` written (per `trade-copy`) and
    cross-referenced here. Every copy direction in this plan conforms to it.
 
 ## Handoff
@@ -392,15 +419,20 @@ build: the section-format quotas (≥4 distinct families per 8 sections, no fami
 in a row, kicker openers ≤ ceil(sections÷3), no two adjacent sections sharing an
 opener), banned fonts named as picks, and the required plan fields — Design Read,
 Composition device, signature-motion tokens, imagery register, and a VIDEO slot's
-register if you marked one. Fix what it names and re-run until clean. Handing the
-Builder a plan that fails the lint just moves the failure downstream into HTML, where
-the detector catches it and the round trip costs a rebuild.
+register if you marked one. **When `build-sheet.md` sits beside the plan it lints that
+too**: every `var(--x)` the sheet references must be defined in its `:root` block, section
+ids unique with all required fields, no rename instructions ("read X as Y"), no "see §"
+cross-references, no past-tense status prose, and every content-map row routing to a
+sheet id that exists. Fix what it names and re-run until clean. Handing the Builder a
+sheet that fails the lint just moves the failure downstream into HTML, where the
+detector catches it and the round trip costs a rebuild.
 
-When the plan is done and lint-clean, **message the Builder directly**: "website-plan.md and
-voice-spec.md ready for <slug> — build to these." If the builder isn't spawned yet, notify the lead that the plan
-is ready. Then mark your task complete — but stay reachable: the builder may message you
-if something in the plan is ambiguous, and the critic may route a content-map question
-back to you.
+When both files are done and lint-clean, **message the Builder directly**:
+"build-sheet.md and voice-spec.md ready for <slug> — build the sheet top to bottom."
+If the builder isn't spawned yet, notify the lead. Then mark your task complete — but
+stay reachable: the builder may message you if something in the sheet is ambiguous
+(which is a defect in your sheet, so fix the sheet, don't just answer), and the critic
+may route a content-map question back to you.
 
 **Reachable means CLARIFY, never re-decide.** You may explain what the plan already
 says; you may not issue new decisions, change a locked choice, or append instructions to

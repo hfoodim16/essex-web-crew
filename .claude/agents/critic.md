@@ -294,9 +294,18 @@ You are on the **Build team**. You review the built site — nothing else. For
   their full town list — not thinned to a mention), or (b) on the plan's **"Deliberately
   dropped"** list with a reason. A block that is neither placed nor accounted for →
   numbered fail item to the builder listing exactly which content is missing or thinned
-  and where the plan's content map says it belongs. A beautiful mockup that carries a
-  fraction of the original's information is a FAILED mockup — the client notices their
-  missing content before they notice our typography.
+  and where the plan's content map says it belongs — **and every content-map row must
+  route to a `build-sheet.md` section id that exists** (a real plan once routed statutory
+  text to a `.penalty-list` no section defined; that's a Planner fail, not a Builder
+  one). A beautiful mockup that carries a fraction of the original's information is a
+  FAILED mockup — the client notices their missing content before they notice our
+  typography.
+- **SHEET INTEGRITY (routes to the PLANNER, not the builder).** The Builder builds from
+  `build-sheet.md` alone; the sheet outranks `website-plan.md`. If the mockup and the
+  plan disagree but the mockup matches the sheet — that's sheet/plan drift, a Planner
+  defect. If the Builder reports it was forced into website-plan.md because the sheet
+  was ambiguous, that too is a Planner fail. Route both back via the lead; never dock
+  the Builder for building exactly what the sheet said.
 - **COPY VOICE (hard gate).** Read `prospects/<slug>/voice-spec.md`, then run
   `python3 skills/trade-copy/scripts/copycheck.py prospects/<slug>/mockup/index.html
   --watch=<the spec's watch-list words>`. Any hard check failing → a numbered fix item

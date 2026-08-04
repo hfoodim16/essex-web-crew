@@ -71,6 +71,37 @@ elif ! echo "$PL_OUT" | grep -q "kicker-style openers"; then
   bad "rejected, but the kicker-budget check did not fire"
 else ok; fi
 
+# ── 2b. plan-lint PASSES the good build sheet ───────────────────────────────
+step "plan-lint accepts the known-good build sheet"
+if node "$PLANLINT" "$FIXTURE/build-sheet.md" >/dev/null 2>&1; then ok
+else bad "the good fixture sheet no longer passes — a sheet rule changed"; fi
+
+# ── 2c. plan-lint FAILS a defective build sheet ─────────────────────────────
+# Undefined var + a rename instruction: the two canonical sheet defects
+# (--verde-2 named nowhere; "read verde as azul throughout").
+mkdir -p "$SCRATCH/badsheet"
+cat > "$SCRATCH/badsheet/build-sheet.md" <<'EOF'
+# Build Sheet — broken fixture
+```css
+:root{ --ink:#111; }
+```
+Read verde as azul throughout.
+### 1. id: hero
+- format: hero , opener: none
+- copy: inline
+- palette: bg var(--ghost)
+- done-when: renders
+EOF
+step "plan-lint rejects a defective build sheet"
+BS_OUT="$(node "$PLANLINT" "$SCRATCH/badsheet/build-sheet.md" 2>&1)"; BS_RC=$?
+if [ "$BS_RC" -eq 0 ]; then
+  bad "accepted a sheet with an undefined var and a rename instruction"
+elif ! echo "$BS_OUT" | grep -q "not defined in the :root"; then
+  bad "rejected, but the undefined-var check did not fire"
+elif ! echo "$BS_OUT" | grep -q "rename instruction"; then
+  bad "rejected, but the rename-instruction check did not fire"
+else ok; fi
+
 # ── 3. detector PASSES the good mockup ──────────────────────────────────────
 step "detector accepts the known-good mockup"
 if node "$DETECT" "$FIXTURE/mockup/index.html" >/dev/null 2>&1; then ok

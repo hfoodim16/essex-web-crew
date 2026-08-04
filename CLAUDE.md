@@ -95,7 +95,7 @@ Build run.
 | B0. Save the client's answers | lead | — | `prospects/<slug>/client-answers.md` |
 | B0a. *(only if a prior build for this prospect was speculative)* log the delta | `planner` | Fable | rows appended to `pipeline/speculation-log.md` |
 | B0b. *(only if no dossier exists)* capture-only research | `analyst` | Opus | `dossier.md` + `site-content.md` for this ONE business |
-| B1. Plan FROM the answers | `planner` | Fable | `prospects/<slug>/website-plan.md` incl. "Client answers → decisions" |
+| B1. Plan FROM the answers | `planner` | Fable | **`build-sheet.md`** (the Builder's only input — self-contained, lint-clean) + `website-plan.md` (the reasoning, for Harry + Critic) |
 | B2. Build | `builder` ×1 | Opus | `prospects/<slug>/mockup/` + `screenshots/` |
 | B3. Critique loop | `critic` | Opus | `prospects/<slug>/audit.md` (every round) + fix messages, sign-off |
 | B3b. **Publish to Claude Design** | lead | — | A card-per-section design-system project at claude.ai/design (`/design-push`) |
@@ -120,9 +120,14 @@ what they want kept, changed, or dropped).
 `<slug>` = kebab-case business name, e.g. `montclair-stone-masonry`.
 
 **Division of design labor:** the `planner` (Fable) makes ALL the design decisions —
-art direction, fonts, palette, page map, per-section layout — and writes them to
-`website-plan.md`. The `builder` (Opus) IMPLEMENTS that plan and does not re-decide the
-design.
+art direction, fonts, palette, page map, per-section layout — and writes the executable
+result into **`build-sheet.md`** (template: `templates/build-sheet-template.md`), a
+self-contained contract the `builder` (Opus) executes top to bottom without re-deciding
+anything. **The sheet outranks `website-plan.md`** — the plan carries the Planner's
+reasoning for Harry and the Critic, and the Builder never reads it; a sheet that forces
+the Builder into the plan is a Planner defect. (A real 588-line plan was half rationale,
+and building one hero from it took ~14 lookups across 11 headings — that's the failure
+the split prevents.)
 
 ## Speed rules — overlap the work, never lower the bar
 
