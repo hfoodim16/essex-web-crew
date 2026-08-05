@@ -542,6 +542,13 @@ then let the builder implement the amended plan. Everything that lives in the
 implementation — palette values, type scale, spacing, states, copy, markup, motion
 tuning — still goes straight to the builder as usual.
 
+**On sign-off, append a `copy-memory.md` row** in the same pass as the `design-memory.md`
+row — the hero verbatim, the construction named in three or four words, and the register
+tier. `design-memory.md` keeps two prospects from looking alike; `copy-memory.md` keeps
+them from sounding alike, and the crew already shipped the same three-fragment-plus-year
+hero to two clients before it existed. A paraphrased hero makes the row useless to the
+next planner, so quote it.
+
 **This never overrides the freeze.** Reading an already-signed prospect's screenshots or
 its `design-memory.md` row is research, not reopening — you never send a fix to a frozen
 mockup. If the sameness clearly sits in the older, already-signed site, note it to the

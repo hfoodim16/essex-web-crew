@@ -38,7 +38,7 @@ least two. The **Reference site** column below is the DaSilva home page, measure
 | **em-dash rate** | ≤ 1.0 per 100 words | 0.62 | You're using the dash as a rhythm device. Current mockups run 1.1–3.4. |
 | **dash-restatement shape** | ≤ 15% of paragraphs contain an em dash | 6.2% | The `[clause] — [prettier restatement]` template has become the house style. The script prints the first three offenders — fix those and the rate usually follows. |
 | **longest paragraph** | ≤ 60 words | 35 | Someone wrote an essay paragraph. Split it or cut it. |
-| **hero headline length** | 3–9 words | 8 | Under 3 is a fragment with no information; over 9 stops being a headline. |
+| **hero headline length** | 2–9 words | 8 | Over 9 stops being a headline. The floor is 2, not 3: interior pages legitimately title themselves "Practice areas" and "Privacy Policy", both on reference builds. The docs said 3 and the script said 2 until 2026-08-05; the script was right and the docs were corrected to match, not the other way round. |
 | **formal openers** | ≤ 2 "It is / There is / That is" | 0 | Period-piece register. Contract them. |
 | **contraction floor** | ≥ 3 contractions | 6 | Zero contractions is the clearest sign nobody spoke these sentences aloud. |
 | **spelled numerals** | ≤ 3 above ten | 0 | "Forty-five years" belongs in a novel; the site says "45 years". |
@@ -46,6 +46,7 @@ least two. The **Reference site** column below is the DaSilva home page, measure
 | **motif cap** | ≤ 2 uses of any banned or watched word | 0 | Motif-hammering — the loudest tell in this project's output. `oasis` appeared 6× on one page. |
 | **no placeholders** | 0 | 0 | `[Hours — placeholder]` or `AI-IMAGE` strings are visible in the copy. This alone makes a deploy-ready build look fake. |
 | **no cutesy language** | 0 | 0 | A Tier 1B word — anthropomorphised plants, winking, whimsy. Zero tolerance: unlike a motif, one is already wrong. |
+| **no banned phrases** | 0 | 0 | A phrase from the "Banned phrases" section — "we pride ourselves on", "from start to finish", "no job too big or too small". **New 2026-08-05.** These were in `banlist.md` since July and read by nothing: the loader only picked up single backticked words, so the whole quoted list was decoration. Entries marked "(unless the client said it)" are still exempt. |
 
 ## The advisory readouts
 
@@ -74,6 +75,15 @@ can honestly be true (an owner with 25 years in the trade whose own company star
 size: a number that contradicts the page reads careless to the one reader who counts, and
 the stale figure almost always *undersells* the client. Accuracy findings outrank tone
 findings — wrong is worse than ugly.
+
+**Elegant variation** (new 2026-08-05). Fires when four or more different banlist words
+each appear exactly once. This is the counterweight to `motif cap`, and the two pull in
+opposite directions on purpose: a page that says "oasis" five times fails the cap, while a
+page that says oasis, sanctuary, retreat, haven once each passes every check and is the
+*same tell* — humanizer category 11. Until now nothing in this project pushed back on
+synonym cycling, which meant the cheapest way to satisfy the motif cap was to commit the
+other sin. Advisory, because touching four banlist words once can be honest; a reader
+decides whether it is vocabulary or evasion.
 
 **Median paragraph length** (reference: 8 words). A low median is not automatically
 good — the wordiest sites in this project score *well* here because they use many tiny
@@ -105,6 +115,17 @@ python3 skills/trade-copy/scripts/copycheck.py <page.html> --list
 and go down every string asking one question: *would the owner say this out loud to a
 customer standing in his driveway?* Sort each into fine / too poetic / too cute / too
 vague / overwritten before editing anything.
+
+> **Baseline re-measured 2026-08-05**, after the banlist loader was fixed and the phrase
+> check added. Across all 30 built pages: 2 pages trip **no banned phrases** —
+> `anthonys-landscaping` (19 hits: "from start to finish", "every step of the way", "a cut
+> above", "outstanding professional service", "complete satisfaction") and
+> `duran-and-son-landscaping` ("quality workmanship"). `duran-and-son` also trips **motif
+> cap** on `oasis` ×7. **All three are frozen and stay as they are** — the same rule that
+> governs the two `overused-font` bounces in `design-gates.md`. They are listed so nobody
+> mistakes the failure for a broken check; per **Lessons flow forward** in `CLAUDE.md`, a
+> signed build is calibration data, never a fix list. The phrase check earned its place by
+> finding 19 instances of exactly what the banlist was written to stop.
 
 A page that passes all eleven checks and fails the read is a failing page. It has happened
 on this project already: the script went green while "won't need babying to survive the

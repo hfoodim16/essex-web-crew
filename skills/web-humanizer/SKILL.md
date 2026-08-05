@@ -101,12 +101,24 @@ at least one FAIL.
 python3 skills/web-humanizer/scripts/aitells.py <page.html> [more pages] [--list|--json]
 ```
 
-Six hard checks: hero verb openers · abstract-pair card titles · AI-vocab cluster · vague
-audience · falsifiable-claim floor · card symmetry.
+**Eighteen hard checks.** The original six — hero verb openers · abstract-pair card
+titles · AI-vocab cluster · vague audience · falsifiable-claim floor · card symmetry —
+plus twelve added 2026-08-05: chat-register openers · signposting · filler phrases ·
+authority tropes · negative parallelism · negation runs · `-ing` trailer clause ·
+punchline cadence · copula avoidance · weasel attribution · emoji · hyphen-compound
+pileup. See `references/tells.md` for what each one is and why.
+
+Those twelve came from the Wikipedia "Signs of AI writing" set the general `humanizer`
+skill carries: 28 of its 33 categories had no mechanical check anywhere in this crew,
+while the original six had gone quiet — zero hits across all 30 built pages. Every new
+check swept to zero across those same 30 pages before it was made hard, so none of them
+fires on work already signed off.
 
 Advisories, printed and never auto-failed, because each needs a human read: comma-triad
 headings, sentence-rhythm uniformity, near-identical card lengths, outcome-with-no-mechanism
-sentences, review blocks carrying no name, and vocab hits under the cluster threshold.
+sentences, review blocks carrying no name, vocab hits under the cluster threshold, false
+ranges, Title Case headings, `Label: sentence` card stacks, boldface density, and the
+overall hyphen-compound rate.
 
 **It does not re-check anything copycheck owns** — em-dash rate, three-fragment triads,
 contractions, paragraph length, motif caps, cutesy language, placeholders. The two word

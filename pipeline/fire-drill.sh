@@ -18,6 +18,8 @@ CREW_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 FIXTURE="$CREW_ROOT/prospects/_smoke-test"
 DETECT="$CREW_ROOT/skills/web-design-ultra/scripts/detect.mjs"
 PLANLINT="$CREW_ROOT/skills/web-design-ultra/scripts/plan-lint.mjs"
+COPYCHECK="$CREW_ROOT/skills/trade-copy/scripts/copycheck.py"
+AITELLS="$CREW_ROOT/skills/web-humanizer/scripts/aitells.py"
 SCRATCH="$(mktemp -d)"
 trap 'rm -rf "$SCRATCH"' EXIT
 
@@ -34,7 +36,8 @@ echo "────────────────────────�
 # ── 0a. The fixtures must exist, or step 0 greps a missing file, finds no
 #        "DEGRADED" string, and reports PASS on nothing. A drill that lies
 #        is worse than no drill — abort loudly instead.
-for f in "$FIXTURE/mockup/index.html" "$FIXTURE/website-plan.md" "$FIXTURE/build-sheet.md"; do
+for f in "$FIXTURE/mockup/index.html" "$FIXTURE/website-plan.md" "$FIXTURE/build-sheet.md" \
+         "$FIXTURE/copy-good.html" "$FIXTURE/copy-bad.html"; do
   if [ ! -f "$f" ]; then
     step "fixtures present"
     bad "missing ${f#"$CREW_ROOT/"}"
@@ -167,6 +170,35 @@ elif [ -f "$PLANT/_smoke-test-plant-site.zip" ]; then
   bad "refused but still wrote a zip"
 else ok; fi
 rm -rf "$PLANT"
+
+# ── 6. the copy gates accept clean copy ─────────────────────────────────────
+# Added 2026-08-05 with the round-2 tells. The copy gates had never been in the
+# drill, which is how three banlist sections and six Tier 2 words sat unparsed
+# for a month with every check reporting green.
+step "copy gates accept clean copy"
+CG_OK=1
+python3 "$COPYCHECK" "$FIXTURE/copy-good.html" >/dev/null 2>&1 || CG_OK=0
+python3 "$AITELLS"   "$FIXTURE/copy-good.html" >/dev/null 2>&1 || CG_OK=0
+if [ "$CG_OK" -eq 1 ]; then ok
+else bad "the known-good copy fixture now fails a gate — a threshold moved"; fi
+
+# ── 7. the copy gates catch planted slop ────────────────────────────────────
+# copy-bad.html plants one instance of each tell. Both scripts must reject it,
+# and the named round-2 checks must be the reason.
+step "copy gates catch planted slop"
+CB_OUT="$(python3 "$COPYCHECK" "$FIXTURE/copy-bad.html" 2>&1)"; CB_RC=$?
+AB_OUT="$(python3 "$AITELLS" "$FIXTURE/copy-bad.html" 2>&1)"; AB_RC=$?
+if [ "$CB_RC" -eq 0 ]; then
+  bad "copycheck passed the planted slop fixture"
+elif ! echo "$CB_OUT" | grep -q "no banned phrases"; then
+  bad "copycheck failed, but the banned-phrase check did not fire"
+elif [ "$AB_RC" -eq 0 ]; then
+  bad "aitells passed the planted slop fixture"
+elif ! echo "$AB_OUT" | grep -q "FAIL.*chat-register openers"; then
+  bad "aitells failed, but the round-2 phrase checks did not fire"
+elif ! echo "$AB_OUT" | grep -q "FAIL.*-ing trailer clause"; then
+  bad "aitells failed, but the -ing trailer check did not fire"
+else ok; fi
 
 # ── report ──────────────────────────────────────────────────────────────────
 echo "───────────────────────────────────────────────────────────────────"

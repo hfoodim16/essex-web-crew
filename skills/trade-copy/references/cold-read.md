@@ -53,6 +53,8 @@ That is not carelessness and more diligence will not fix it. A second pair of ey
 > - VAGUE (claim with no content, self-announced virtue, adjectives doing a fact's job,
 >   absolute overclaims)
 > - OVERWRITTEN (trailing clause or restatement adding no fact)
+> - CADENCE (lines landing like quotable closers; fragments used for drama; every
+>   paragraph ending on a punchline; a rhythm so even it reads as designed)
 > - UNSUPPORTED (a number, price, turnaround, guarantee, or spec not established anywhere
 >   else on the site, and reading as invented)
 > - INACCURATE (a claim the rest of the page contradicts)
@@ -73,6 +75,10 @@ That is not carelessness and more diligence will not fix it. A second pair of ey
   consequence clauses; tell me if any assert something the business never claimed" —
   turned up three invented promises (a pricing structure, a ten-year lifespan, a storm
   response time) that a generic audit of the same page would likely have read past.
+- **CADENCE is the category this project learned the hard way.** FORA's round-3a audit
+  found the page's real problem was that *"every lead landed like a quotable closer —
+  that cadence is the tell, more than any single word."* No individual line looked
+  wrong. Ask the reader for the pattern, not just the offenders.
 - **Findings in the UNSUPPORTED and INACCURATE buckets outrank every tone finding.** The last two the cold
   read caught were a "20 yrs" stat on a page that said "since 2004" (it was 2026), and a
   heading promising "what every visit includes" over a list of twice-a-year work. Wrong

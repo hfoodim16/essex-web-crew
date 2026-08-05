@@ -32,13 +32,16 @@ from pathlib import Path
 # ---------------------------------------------------------------- thresholds
 # Calibrated against the same corpus copycheck.py uses -- dasilva-associates
 # (reference) plus cedar-grove-transmission and john-sessa-cpa -- then swept
-# across all 23 built pages in prospects/. Every signed-off page must exit 0
+# across all 30 built pages in prospects/. Every signed-off page must exit 0
 # untouched; a threshold that fails one of those is wrong, because sign-off
 # freezes a prospect (CLAUDE.md) and the loop would never close.
 #
-# Sweep at time of writing: 0 hard-check hits across all 22 built pages. The
-# checks are aimed at shapes this crew's gates already keep out by hand, so the
-# script's job is to keep them out when nobody is reading closely.
+# Sweep 2026-08-05, after the round-2 checks landed: 0 hard-check hits across all
+# 30 built pages, on all 18 hard checks. That number is the calibration result,
+# not a victory lap -- the six ORIGINAL checks also read 0 across the corpus,
+# which is what prompted the round-2 audit: a gate that never fires looks exactly
+# like a clean corpus. The twelve new checks were each swept to 0 before being
+# made hard, so no signed-off page is retroactively failed by them.
 #
 # One threshold was loosened during that sweep, and the reason is worth keeping:
 # hero_verbs originally fired on any sentence-initial hit anywhere on the page,
@@ -56,9 +59,27 @@ T = {
     "min_falsifiable": 1,     # >= 1 visible claim carrying a checkable number
     "symmetry_run": 4,        # 4+ consecutive same-tag blocks of IDENTICAL length
     "symmetry_floor": 8,      # ...counting only blocks of 8+ words (service lists are fine)
+    # --- round 2, 2026-08-05. Every one of these swept to 0 across all 30 built
+    # pages before being made hard; two needed an anchor guard to get there and
+    # both guards are recorded in the check's own docstring. Nothing was edited
+    # to make a check pass -- per CLAUDE.md "Lessons flow forward", a signed
+    # build is calibration data, never a fix list.
+    "rhetorical": 0,          # "Here's the thing" -- chat register on a client page
+    "signposting": 0,         # "let's break this down"
+    "filler": 0,              # "at the end of the day", "when it comes to"
+    "authority": 0,           # "the real question is", "at its core"
+    "neg_parallel": 0,        # "not just a lawn, it's a first impression"
+    "neg_runs": 0,            # 3+ negated fragments in one block
+    "ing_trailer": 0,         # ", keeping the property looking its best."
+    "punchline": 0,           # 3+ consecutive <=5-word fragments in body copy
+    "copula": 0,              # "serves as", "stands as"
+    "weasel": 0,              # "experts agree" with nobody named
+    "emoji": 0,               # never on a contractor's site
+    "hyphen_sentence": 3,     # coined hyphen-compounds in ONE sentence
 }
 ADVISORY = ["body_verb_openers", "comma_triads", "rhythm_stdev", "loose_symmetry",
-            "unattributed_reviews", "no_mechanism", "vocab_hits"]
+            "unattributed_reviews", "no_mechanism", "vocab_hits",
+            "false_ranges", "title_case", "inline_headers", "hyphen_rate", "boldface"]
 
 # ------------------------------------------------------------------ lexicons
 # H1: the verbs that open a hero on any site in any industry. Position matters
@@ -119,6 +140,119 @@ OUTCOME_VERB = re.compile(
     r"\b(?:save|saves|grow|grows|boost|boosts|improve|improves|increase|increases|"
     r"enhance|enhances|maximize|maximizes|streamline|streamlines|optimize|optimizes)\b",
     re.I)
+
+# ------------------------------------------------------- round-2 tell lexicons
+# Added 2026-08-05 from the Wikipedia "Signs of AI writing" categories the
+# general-purpose `humanizer` skill carries (~/.claude/skills/humanizer/) that
+# neither crew script covered. That audit found 28 of its 33 categories with no
+# mechanical check here at all, while this script's six original gates had gone
+# quiet -- 0 hits across all 30 built pages. A gate that never fires is not a
+# clean corpus, it is a gate that stopped measuring anything the crew still does.
+#
+# Split rule unchanged: VOCABULARY lives in trade-copy's banlist (register);
+# SHAPE lives here. Everything below is a shape or a fixed multi-word phrase --
+# a single banned adjective would belong in the banlist, not in this file.
+
+# Fixed phrases. These are chat-assistant registers leaking into a client page:
+# nobody writes "Here's the thing" on their own landscaping site. Hard at 0
+# because the strings are unambiguous -- there is no legitimate trade use.
+RHETORICAL_OPENER = re.compile(
+    r"(?:^|(?<=[.!?]\s))\s*(?:here'?s? the thing|the thing is|let'?s be (?:honest|real)|"
+    r"real talk|look,|here'?s? the deal|truth be told|let'?s face it|"
+    r"here'?s? what (?:you need to know|we know|matters))\b", re.I)
+SIGNPOSTING = re.compile(
+    r"\b(?:let'?s (?:dive in|break (?:this|it) down|take a look|explore)|"
+    r"in this (?:section|article|guide)|as (?:we|you'?ll) (?:see|discuss)|"
+    r"before we (?:begin|dive)|by the end of this|read on to)\b", re.I)
+FILLER_PHRASE = re.compile(
+    r"\b(?:it'?s worth noting|it is important to note|needless to say|"
+    r"at the end of the day|when it comes to|in today'?s (?:world|market|"
+    r"digital landscape|fast-paced)|in order to better|the fact of the matter)\b", re.I)
+AUTHORITY_TROPE = re.compile(
+    r"\b(?:the real question is|at its core|what (?:really )?matters (?:most|here) is|"
+    r"make no mistake|here'?s? why (?:that|this) matters|the bottom line is|"
+    r"more importantly)\b", re.I)
+# Negative parallelism / tailing negation. "It's not just a lawn, it's a
+# first impression" is the shape; humanizer category 9.
+NEG_PARALLEL = re.compile(
+    r"\b(?:not (?:just|only|merely|simply) (?!a moment)[^.!?;]{2,60}?[,;]?\s*(?:but|it'?s|they'?re|we'?re)\b"
+    r"|it'?s not (?:about|just|only)\b"
+    r"|isn'?t (?:just|only|about)\b"
+    r"|more than (?:just|simply) a\b)", re.I)
+# "No guessing. No surprises. No hidden fees." -- three+ negated fragments in a
+# row. Two is a trade site being plain; three is a cadence.
+NEG_RUN = re.compile(r"\bno[nt]?[\s-][\w'’-]+[.,;]", re.I)
+# Sentence-final participial tail: "...twice a year, keeping the property
+# looking its best." banlist.md:95 bans this shape by name and nothing read it.
+#
+# Scoped to BENEFIT participles. An enumerating tail ("...traffic matters,
+# including murder trials") is ordinary English and appears all over the
+# reference builds; the tell is the tail that restates the sentence as a soft
+# outcome instead of adding a fact. Naming the semantics is the only honest way
+# to separate them, so the verb list is the check.
+ING_BENEFIT = (r"keeping|ensuring|making|leaving|helping|providing|delivering|"
+               r"creating|allowing|giving|bringing|adding|saving|protecting|"
+               r"maintaining|boosting|improving|enhancing|transforming|elevating|"
+               r"preserving|extending|maximizing|restoring")
+ING_TRAILER = re.compile(
+    rf",\s+(?!and\b|but\b|or\b)(?:[a-z]+ly\s+)?({ING_BENEFIT})\b[^.!?]*[.!?]\s*$", re.I)
+# Ad-hoc hyphenated compounds: design-led / estimate-first / mobile-down. Real
+# words that live hyphenated in the dictionary are exempt or the check is noise.
+HYPHEN_PAIR = re.compile(r"\b[a-z]{3,}-[a-z]{3,}\b", re.I)
+HYPHEN_EXEMPT = {
+    # ordinary hyphenated English + trade vocabulary, not compound-coinage
+    "state-of-the-art", "up-to-date", "full-time", "part-time", "long-term",
+    "short-term", "family-owned", "family-run", "well-known", "high-end",
+    "on-site", "off-site", "in-house", "year-round", "hard-working", "top-rated",
+    "so-called", "one-on-one", "face-to-face", "day-to-day", "hands-on",
+    "air-conditioning", "four-wheel", "all-wheel", "front-end", "rear-end",
+    "heavy-duty", "cold-air", "check-engine", "drop-off", "walk-in", "same-day",
+    "next-day", "double-check", "e-mail", "co-op", "non-profit", "self-employed",
+    "second-hand", "brand-new", "old-fashioned", "well-maintained", "custom-built",
+    "pre-owned", "energy-efficient", "low-maintenance", "free-standing",
+}
+COPULA_AVOID = re.compile(
+    r"\b(?:serves as|stands as|stands out as|represents|marks a|emerges as|"
+    r"functions as|acts as|remains a|continues to be)\b", re.I)
+# Figurative "from X to Y" -- a false range. Literal ranges (dates, prices,
+# distances, real geography) are excluded by requiring both sides to be words.
+FALSE_RANGE = re.compile(
+    r"\bfrom\s+([a-z][\w'’-]*(?:\s+[a-z][\w'’-]*){0,2})\s+to\s+([a-z][\w'’-]*(?:\s+[a-z][\w'’-]*){0,2})\b", re.I)
+FALSE_RANGE_LITERAL = re.compile(
+    r"\b(?:from\s+)?(?:\d|\$|mon|tue|wed|thu|fri|sat|sun|jan|feb|mar|apr|may|jun|"
+    r"jul|aug|sep|oct|nov|dec)", re.I)
+# "from time to time" is legal boilerplate, not a rhetorical range.
+FALSE_RANGE_IDIOM = re.compile(r"\bfrom time to time\b", re.I)
+WEASEL_ATTRIB = re.compile(
+    r"\b(?:experts? (?:agree|say|recommend)|studies (?:show|suggest)|"
+    r"(?:industry|market) (?:reports?|data) (?:show|suggest|indicate)|"
+    r"(?:many|most|some) (?:homeowners|businesses|customers|clients|people) "
+    r"(?:agree|know|find|say|report)|it is (?:widely|generally) (?:known|accepted|"
+    r"believed)|research (?:shows|suggests))\b", re.I)
+# Real emoji only. The BMP symbol blocks are deliberately NOT included: this
+# crew's builds use star and check glyphs as typography -- cedar-grove renders
+# its rating with U+2605 BLACK STAR and law-office uses U+2713 CHECK MARK, both
+# on signed-off pages. Those are dingbats doing a designer's job, not emoji.
+# What is matched: the emoji planes, regional-indicator flags, and any BMP
+# symbol explicitly given emoji presentation with U+FE0F.
+EMOJI = re.compile(
+    "[\U0001F300-\U0001FAFF\U0001F900-\U0001F9FF\U0001F1E6-\U0001F1FF]"
+    "|[\u2190-\u2BFF\u2600-\u27BF]\uFE0F")
+# Title Case is only evidence when a word that has no business being capitalized
+# is capitalized. "Paul Da Silva" and "Fairleigh Dickinson University" are
+# headings on signed-off reference pages; they are names, not a magazine cover.
+# So the check keys on COMMON words wearing capitals, never on capital density.
+TITLE_STOPWORD = {"a", "an", "the", "and", "or", "but", "for", "nor", "of", "to",
+                  "in", "on", "at", "by", "with", "from", "into", "over", "up"}
+TITLE_COMMON = {
+    "your", "our", "their", "my", "his", "her", "its", "you", "we", "us",
+    "that", "this", "these", "those", "every", "each", "all", "more", "most",
+    "best", "better", "new", "next", "first", "last", "own", "real", "right",
+    "how", "what", "why", "when", "where", "who", "make", "makes", "made",
+    "get", "gets", "keep", "keeps", "need", "needs", "want", "wants", "know",
+    "done", "built", "back", "home", "work", "works", "way", "ways", "help",
+    "helps", "here", "now", "today", "matters", "means", "looks", "feels",
+}
 
 # ------------------------------------------------------------------- parsing
 # Extract, VOID_TAGS, SKIP_TAGS, SKIP_CLASS, BLOCK_TAGS and words() are vendored
@@ -476,6 +610,258 @@ def unattributed_reviews(quotes):
     return [(line, t) for t, line in quotes if not NAME_ATTRIB.search(t)]
 
 
+# --------------------------------------------------------- round-2 detectors
+def phrase_hits(blocks, pattern):
+    """Every block matching a fixed-phrase pattern. (line, matched text, block)."""
+    out = []
+    for _, text, line in blocks:
+        for m in pattern.finditer(text):
+            out.append((line, m.group(0).strip(), text))
+    return out
+
+
+def ing_trailer_hits(blocks):
+    """The participial tail: "...season after season, keeping the property
+    looking its best."
+
+    banlist.md:95 bans this shape by name with that exact example, and no parser
+    ever read it -- the banlist loader only picks up backticked single words.
+    The tail is the tell because it adds no fact: it restates the sentence in a
+    softer register, which is what a model does when it has run out of content
+    but not out of sentence.
+
+    Scoped to sentence-final position after a comma. A mid-sentence participle
+    ("the crew, working around the sprinklers, finished Tuesday") is ordinary
+    English and is not matched.
+
+    A tail carrying a NUMBER or a PROPER NOUN is exempt, because then it is not
+    a restatement -- it is the fact. happy-trees ships "Adult beetles surface in
+    May or early June, leaving a three-to-four-millimetre exit hole", which is
+    the shape and the opposite of the sin: the tail is the entomology. The guard
+    is the same one that defines the tell, so it belongs in the check.
+    """
+    out = []
+    for tag, text, line in blocks:
+        if tag.startswith("h"):
+            continue
+        for s in sentences(text):
+            m = ING_TRAILER.search(s)
+            if not m:
+                continue
+            tail = s[m.start():]
+            if re.search(r"\d", tail) or PROPER.search(tail):
+                continue
+            out.append((line, m.group(1), s))
+    return out
+
+
+def hyphen_pileup(blocks, body_words):
+    """Coined hyphenated compounds stacked up: design-led, estimate-first,
+    mobile-down, reservation-first -- four in two sentences on FORA's own site,
+    caught by a human read in round 3a and by nothing mechanical.
+
+    Dictionary hyphenates (family-owned, year-round, same-day) are exempt: they
+    are how tradespeople actually write. What is measured is invented compounds,
+    which read as a model reaching for compression.
+
+    Returns (per-100-word rate, worst single sentence count, examples).
+    """
+    coined, per_sentence = [], 0
+    for tag, text, line in blocks:
+        for s in sentences(text):
+            n = 0
+            for m in HYPHEN_PAIR.finditer(s):
+                w = m.group(0).lower()
+                if w in HYPHEN_EXEMPT:
+                    continue
+                coined.append((line, m.group(0)))
+                n += 1
+            per_sentence = max(per_sentence, n)
+    rate = round(len(coined) * 100.0 / body_words, 2) if body_words else 0.0
+    return rate, per_sentence, coined
+
+
+def negative_parallelism(blocks):
+    """"It's not just a lawn, it's a first impression." Humanizer category 9.
+
+    The shape sells nothing and proves nothing -- it sets up a strawman version
+    of the service in order to knock it down. Trade sites do it constantly
+    because it feels like elevation.
+    """
+    return phrase_hits(blocks, NEG_PARALLEL)
+
+
+def negation_runs(blocks):
+    """"No guessing. No surprises. No hidden fees." Three or more in a row.
+
+    Two negated fragments is a plain trade site being direct, and that is good
+    copy. Three is a cadence -- the rule of three wearing a negation costume.
+    Advisory, because the third one is sometimes a real promise the client made.
+    """
+    out = []
+    for tag, text, line in blocks:
+        n = len(NEG_RUN.findall(text))
+        if n >= 3:
+            out.append((line, n, text))
+    return out
+
+
+def punchline_cadence(blocks):
+    """Every lead landing like a quotable closer.
+
+    From fora-digital/audit.md round 3a: "Not a client; a demonstration.",
+    "nothing padded" -- the diagnosis there was "Every lead landed like a
+    quotable closer. That cadence is the tell, more than any single word."
+
+    Measured as short terminated fragments (<= 5 words, no verb needed) running
+    consecutively inside body copy, outside the hero. copycheck's TRIAD check
+    needs exactly three <= 4-word fragments back to back; this catches the
+    two-fragment version and the longer drum-roll alike.
+    """
+    out = []
+    lead = _lead_index(blocks)
+    for i, (tag, text, line) in enumerate(blocks):
+        if tag.startswith("h") or i == lead:
+            continue
+        frags, run = sentences(text), 0
+        best, seq = 0, []
+        for s in frags:
+            if len(words(s)) <= 5 and re.search(r"[.!?]$", s):
+                run += 1
+                seq.append(s)
+                best = max(best, run)
+            else:
+                run, seq = 0, []
+        if best >= 3:
+            out.append((line, best, " ".join(seq[:3])))
+    return out
+
+
+def copula_avoidance(blocks):
+    """"serves as", "stands as", "represents" -- humanizer category 8.
+
+    A model reaches for these to avoid writing "is". The fix is almost always
+    the shorter verb. Advisory: "represents" has honest uses ("the estimate
+    represents parts and labor").
+    """
+    return phrase_hits(blocks, COPULA_AVOID)
+
+
+def false_ranges(blocks):
+    """"From patios to retaining walls" -- humanizer category 12.
+
+    A false range implies a spectrum where there are just two examples. Literal
+    ranges (dates, dollar figures, hours) are excluded by requiring both sides
+    to be words rather than numbers.
+    """
+    out = []
+    for _, text, line in blocks:
+        for m in FALSE_RANGE.finditer(text):
+            span = text[m.start():m.end()]
+            if FALSE_RANGE_LITERAL.search(span) or FALSE_RANGE_IDIOM.search(span):
+                continue
+            out.append((line, m.group(0).strip()))
+    return out
+
+
+def weasel_attributions(blocks):
+    """"Experts agree", "many homeowners find" -- humanizer category 5.
+
+    An appeal to an authority that is never named. On a client site this is also
+    an honesty problem: it asserts third-party endorsement nobody gave.
+
+    Exempt when the same sentence names the source or carries a number --
+    "Most people find us through Ticketmaster and StubHub" names two, so the
+    attribution is not vague and there is nothing to fix. The tell is the
+    unnamed authority, not the quantifier.
+    """
+    out = []
+    for _, text, line in blocks:
+        for s in sentences(text):
+            m = WEASEL_ATTRIB.search(s)
+            if not m:
+                continue
+            rest = s[m.end():]
+            if re.search(r"\d", rest) or PROPER.search(rest):
+                continue
+            out.append((line, m.group(0).strip(), s))
+    return out
+
+
+def emoji_hits(blocks):
+    """Emoji in visible copy. Zero, always.
+
+    examples.md:161 records the register this comes from -- "Work smarter this
+    summer" with a sun emoji, lifted from a SaaS newsletter. It does not belong
+    on a contractor's site and it never survives a client read.
+    """
+    out = []
+    for _, text, line in blocks:
+        for m in EMOJI.finditer(text):
+            out.append((line, m.group(0), text))
+    return out
+
+
+def title_case_headings(blocks):
+    """Headings Capitalized Like A Magazine Cover.
+
+    Every canonical bad hero in tells.md is title-cased -- "Elevate Your Outdoor
+    Living Experience", "Unlock Your Home's Potential" -- and the casing is an
+    independent signal from the words. Real businesses write headings the way
+    they write sentences.
+
+    Requires every content word capitalized AND at least two of them drawn from
+    TITLE_COMMON -- ordinary words a person would never capitalize mid-heading.
+    That is what separates "Elevate Your Outdoor Living Experience" (Your, and
+    the whole stack) from "Fairleigh Dickinson University", which is a name.
+    """
+    out = []
+    for tag, text, line in blocks:
+        if tag not in {"h1", "h2", "h3"}:
+            continue
+        w = words(text)
+        if len(w) < 3:
+            continue
+        content = [x for x in w if x.lower() not in TITLE_STOPWORD]
+        if len(content) < 3:
+            continue
+        if any(not x[:1].isupper() for x in content):
+            continue
+        common_capped = sum(1 for x in content if x.lower() in TITLE_COMMON)
+        if common_capped >= 2:
+            out.append((line, text))
+    return out
+
+
+def boldface_density(raw, body_words):
+    """<strong>/<b> runs. Humanizer category 15.
+
+    A model bolds the phrase it thinks is important in every paragraph, which
+    produces a page that shouts uniformly and therefore emphasizes nothing.
+    Advisory -- some designs use <strong> as a type style, which is a build
+    decision, not a copy one.
+    """
+    n = len(re.findall(r"<(?:strong|b)\b", raw, re.I))
+    rate = round(n * 100.0 / body_words, 2) if body_words else 0.0
+    return n, rate
+
+
+def inline_header_lists(blocks):
+    """"Fast turnaround: we finish most jobs in a day." -- humanizer category 16.
+
+    The bolded-label-then-sentence card, repeated down a page. One is a design
+    pattern; five in a row is a model filling a template. Advisory.
+    """
+    out = []
+    for tag, text, line in blocks:
+        if tag not in {"li", "p", "dd"}:
+            continue
+        m = re.match(r"^([A-Z][\w'’ -]{2,28}):\s+[A-Z]", text)
+        if m:
+            out.append((line, m.group(1)))
+    return out
+
+
 # ------------------------------------------------------------------ analysis
 def analyze(path):
     # The Critic passes globs (mockup/*.html). A shell that matches nothing hands
@@ -525,6 +911,23 @@ def analyze(path):
         "no_mechanism": no_mechanism(paras),
         "unattributed_reviews": unattributed_reviews(q.quotes),
         "reviews": len(q.quotes),
+        # --- round 2 ---
+        "rhetorical": phrase_hits(blocks, RHETORICAL_OPENER),
+        "signposting": phrase_hits(blocks, SIGNPOSTING),
+        "filler": phrase_hits(blocks, FILLER_PHRASE),
+        "authority": phrase_hits(blocks, AUTHORITY_TROPE),
+        "neg_parallel": negative_parallelism(blocks),
+        "neg_runs": negation_runs(blocks),
+        "ing_trailer": ing_trailer_hits(blocks),
+        "hyphen": hyphen_pileup(blocks, wc),
+        "punchline": punchline_cadence(blocks),
+        "copula": copula_avoidance(blocks),
+        "false_ranges": false_ranges(blocks),
+        "weasel": weasel_attributions(blocks),
+        "emoji": emoji_hits(blocks),
+        "title_case": title_case_headings(blocks),
+        "boldface": boldface_density(raw, wc),
+        "inline_headers": inline_header_lists(blocks),
         "blocks": blocks,
     }
 
@@ -556,6 +959,43 @@ def verdict(r):
     v.append(("card symmetry", not r["symmetry"],
               f"{len(r['symmetry'])} run(s) of {T['symmetry_run']}+ blocks at identical length"
               if r["symmetry"] else "none"))
+
+    # --- round 2 -----------------------------------------------------------
+    def fixed(name, key, note):
+        hits = r[key]
+        detail = "none" if not hits else f"{len(hits)}: " + ", ".join(
+            f"'{h[1]}' line {h[0]}" for h in hits[:3]) + f"  ({note})"
+        v.append((name, len(hits) <= T[key], detail))
+
+    fixed("chat-register openers", "rhetorical", "nobody writes this on their own site")
+    fixed("signposting", "signposting", "essay scaffolding on a sales page")
+    fixed("filler phrases", "filler", "cut the phrase, keep the sentence")
+    fixed("authority tropes", "authority", "asserts weight instead of earning it")
+    fixed("negative parallelism", "neg_parallel", "sets up a strawman to knock down")
+    fixed("copula avoidance", "copula", "the shorter verb is almost always right")
+    fixed("weasel attribution", "weasel", "name the source or cut the claim")
+    fixed("emoji", "emoji", "not on a contractor's site")
+
+    v.append(("negation runs", len(r["neg_runs"]) <= T["neg_runs"],
+              "none" if not r["neg_runs"] else
+              f"{len(r['neg_runs'])}: " + ", ".join(
+                  f"{n} negations line {ln}" for ln, n, _ in r["neg_runs"][:3])
+              + "  (two is plain, three is a cadence)"))
+    v.append(("-ing trailer clause", len(r["ing_trailer"]) <= T["ing_trailer"],
+              "none" if not r["ing_trailer"] else
+              f"{len(r['ing_trailer'])}: " + ", ".join(
+                  f"'{w}' line {ln}" for ln, w, _ in r["ing_trailer"][:3])
+              + "  (the tail restates instead of adding a fact)"))
+    v.append(("punchline cadence", len(r["punchline"]) <= T["punchline"],
+              "none" if not r["punchline"] else
+              f"{len(r['punchline'])} run(s): " + ", ".join(
+                  f"{n} fragments line {ln}" for ln, n, _ in r["punchline"][:3])
+              + "  (every lead landing like a closer IS the tell)"))
+    rate, worst, coined = r["hyphen"]
+    v.append(("hyphen-compound pileup", worst <= T["hyphen_sentence"],
+              f"worst sentence has {worst} coined compounds (max {T['hyphen_sentence']}), "
+              f"{rate}/100w overall" + (
+                  "  -- " + ", ".join(w for _, w in coined[:4]) if coined else "")))
     return v
 
 
@@ -628,6 +1068,27 @@ def main():
                   "carry no name (advisory; ask the client, never edit a real quote):")
             for ln, t in r["unattributed_reviews"][:3]:
                 print(f"      line {ln}: {t[:110]}")
+        if r["false_ranges"]:
+            print("    [ -- ] false range -- 'from X to Y' implying a spectrum where there are")
+            print("           two examples (advisory; a literal range is fine):")
+            for ln, m in r["false_ranges"][:4]:
+                print(f"      line {ln}: {m}")
+        if r["title_case"]:
+            print("    [ -- ] Title Case Heading (advisory; real businesses write headings the")
+            print("           way they write sentences -- legal boilerplate is a fair exception):")
+            for ln, txt in r["title_case"][:4]:
+                print(f"      line {ln}: {txt[:100]}")
+        if len(r["inline_headers"]) >= 3:
+            print(f"    [ -- ] {len(r['inline_headers'])} 'Label: sentence' blocks (advisory; one is a")
+            print("           design pattern, five in a row is a filled template):")
+            for ln, lbl in r["inline_headers"][:4]:
+                print(f"      line {ln}: {lbl}")
+        bn, brate = r["boldface"]
+        if brate >= 2.0:
+            print(f"    [ -- ] {bn} bold runs, {brate}/100 words (advisory; bolding the important")
+            print("           phrase in every paragraph emphasizes nothing)")
+        if r["hyphen"][0] >= 2.5:
+            print(f"    [ -- ] coined hyphen-compounds at {r['hyphen'][0]}/100 words (advisory)")
         if r["vocab"] and r["vocab_distinct"] <= T["vocab_cluster"]:
             print("    flagged vocabulary (under the cluster threshold, still worth a look): "
                   + ", ".join(f"{w} x{c}" for w, c in r["vocab"].items()))

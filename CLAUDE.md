@@ -359,8 +359,10 @@ red, find the change that caused it; never loosen the fixtures to make it green.
 
 Process levers that keep builds from converging on each other: evidence before design
 (Stage 3), three forced-divergent directions (Stage 5), the anti-repetition log
-(`design-memory.md`, Stage 4/8), deterministic detection (Step 0 scan), and the
-screenshot rubric (Stage 8). **A build that ships with any lever unaddressed is not
+(`design-memory.md`, Stage 4/8), **the voice anti-repetition log (`copy-memory.md`) —
+every hero this crew has shipped and the constructions now spent, because two clients
+already got the same three-fragment-plus-founding-year hero** — deterministic detection
+(Step 0 scan), and the screenshot rubric (Stage 8). **A build that ships with any lever unaddressed is not
 done** — the critic's audit records where each one landed.
 
 ## The `Inspiration/` library

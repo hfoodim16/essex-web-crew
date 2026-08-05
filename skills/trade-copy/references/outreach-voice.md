@@ -37,7 +37,17 @@ write to a professional office like it's a job site.
    spots."
 6. **Proof, lightly.** One line about the Cecere Brothers site. No exaggeration.
 7. **Accurate.** Only facts from the dossier. No invented compliments or stats.
-8. **The banlist applies here too.** `references/banlist.md` — no "elevate your online
+8. **The banlist applies here too — and now a script enforces it:**
+
+```bash
+python3 skills/trade-copy/scripts/copycheck.py prospects/<slug>/outreach-email.md --outreach
+```
+
+Run it on every draft before Harry sends it. The hero-length and placeholder checks are
+skipped in this mode (a draft is supposed to carry `[Harry's phone]`); everything else —
+banned phrases, banned words, em-dash rate, triads, paragraph length, contractions —
+applies exactly as it does to a page.
+ `references/banlist.md` — no "elevate your online
    presence", no "in today's digital landscape", no triads.
 
 ## Shape

@@ -202,6 +202,8 @@ builder can start while you're still available to answer questions.
    evidence sheet in the plan, and **name any `Inspiration/` file you drew from** so the
    Builder and Critic can trace it.
 4. **Stage 4 — Anti-repetition.** Read the crew's **project-local** log
+   `~/Projects/essex-web-crew/copy-memory.md` for the VOICE ban list (every hero this
+   crew has shipped + the constructions now spent) and
    `~/Projects/essex-web-crew/design-memory.md` — NOT the skill's global
    `data/design-memory.md`. (The crew keeps its own ban list so prospects diverge from
    each other, not from Harry's unrelated test builds.) Ban the last 3 entries' font

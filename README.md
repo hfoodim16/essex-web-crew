@@ -41,7 +41,8 @@ client contact is Harry personally, and he relays the client's answers back.
 SETUP-COREY.md            First-time setup on a new machine (start here)
 install.sh                One-shot installer used by SETUP-COREY
 CLAUDE.md                 Shared playbook (all teammates read this)
-design-memory.md          Anti-repetition log — planner reads, critic appends per sign-off
+design-memory.md          Visual anti-repetition log — planner reads, critic appends per sign-off
+copy-memory.md            VOICE anti-repetition log — every shipped hero + the constructions now spent
 HOW-TO-RUN.md             Quick start (terminal steps + paste prompts)
 run.sh                    Launcher (sets the agent-teams flag)
 KICKOFF.md                How to run — dry run + Prospecting + Build run prompts

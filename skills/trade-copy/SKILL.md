@@ -125,7 +125,7 @@ its budgets, then run `references/checks.md`.
    give it a first-person attributed block ("— Mike, owner"). It must be built from what
    they actually said in their answers, never invented. Everywhere else on the page is
    plain.
-12. **Write to the budgets** in the voice spec. Defaults: hero headline 3–9 words, hero
+12. **Write to the budgets** in the voice spec. Defaults: hero headline 2–9 words (2 only for an interior page title like "Practice areas"; a homepage hero wants a real sentence), hero
    subhead ≤ 30, service card ≤ 30, service detail ≤ 45, about ≤ 120 across 2–3 short
    paragraphs, FAQ answer ≤ 40.
 13. **Plain CTA, no wordplay.** "Get a free estimate." "Call Mike." The CTA verb comes
@@ -155,9 +155,25 @@ kept every fact is misreading the rule.
 python3 skills/trade-copy/scripts/copycheck.py prospects/<slug>/mockup/index.html
 ```
 
-Eleven hard checks, plus advisory readouts that need a human read. Full explanation of
+Twelve hard checks, plus advisory readouts that need a human read. Full explanation of
 each threshold, what a failure means, and how to fix it: `references/checks.md`.
 The Builder runs this before handoff. The Critic runs it as a hard gate.
+
+**`no banned phrases` is new (2026-08-05)** and so is the reason: the loader only ever
+read single backticked words, so `banlist.md`'s whole "Banned phrases" section — and six
+Tier 2 words wrapped across a line break — were written down and checked by nothing. The
+first run of the fixed loader found 19 hits on one built page.
+
+**Outreach drafts have a gate now too:**
+
+```bash
+python3 skills/trade-copy/scripts/copycheck.py prospects/<slug>/outreach-email.md --outreach
+```
+
+`references/outreach-voice.md` always said "the banlist applies here too" and nothing
+could run it — this script read HTML only. Harry sends those drafts himself, which makes
+them the copy with the least review and the most consequence. In outreach mode the hero
+and placeholder checks are skipped: a draft is *supposed* to carry `[Harry's phone]`.
 
 ## Fixing an existing page
 

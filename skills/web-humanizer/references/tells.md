@@ -187,6 +187,59 @@ real one: "Fall cleanup books out by mid-October."
 
 ---
 
+## Round 2 — the tells added 2026-08-05 `[script hard]`
+
+Sourced from the Wikipedia "Signs of AI writing" categories the general `humanizer` skill
+carries. An audit found 28 of its 33 categories with no mechanical check anywhere in this
+crew, while `aitells.py`'s original six gates had gone quiet — **zero hits across all 30
+built pages**. A gate that never fires is not proof of a clean corpus; it is a gate that
+stopped measuring what the crew still does. Each one below swept to zero across those 30
+pages before it was made hard, so none of them fires on work already signed off.
+
+| # | Tell | Example | Why it is a tell |
+|---|---|---|---|
+| 21 | **Chat-register opener** | "Here's the thing:" · "Let's be honest" | An assistant's voice, not a business's. Nobody writes this on their own site. |
+| 22 | **Signposting** | "Let's break this down" · "In this section" | Essay scaffolding on a page that is not an essay. |
+| 23 | **Filler phrase** | "At the end of the day" · "when it comes to" | Cut the phrase and the sentence survives unchanged — which is the test. |
+| 24 | **Authority trope** | "The real question is" · "At its core" | Asserts weight instead of earning it with a fact. |
+| 25 | **Negative parallelism** | "not just a lawn, it's a first impression" | Builds a strawman version of the service in order to knock it down. |
+| 26 | **Negation run** | "No guessing. No surprises. No hidden fees." | Two is a plain trade site being direct. Three is the rule of three in a costume. |
+| 27 | **`-ing` trailer clause** | "…twice a year, keeping the property looking its best." | The tail restates instead of adding. `banlist.md` banned this shape by name and nothing read it until now. Exempt when the tail carries a number or a name — then it is the fact, not a restatement. |
+| 28 | **Punchline cadence** | "Fast. Clean. Done." mid-page | From the FORA round-3a audit: *"Every lead landed like a quotable closer. That cadence is the tell, more than any single word."* |
+| 29 | **Copula avoidance** | "serves as" · "stands as" | Reaching around the word "is". The shorter verb is almost always right. |
+| 30 | **Weasel attribution** | "Experts agree…" | An authority nobody names. On a client site this is also an honesty problem. Exempt when the sentence names the source. |
+| 31 | **Emoji** | "Work smarter this summer ☀️" | Never on a contractor's site. Note `★` and `✓` are typography, not emoji, and are not flagged. |
+| 32 | **Hyphen-compound pileup** | "design-led, estimate-first, mobile-down" | Four coined compounds in two sentences, caught by a human read on FORA's own site and by nothing mechanical. Dictionary hyphenates (family-owned, year-round) are exempt. |
+
+Advisory in the same pass: **false ranges** ("from patios to retaining walls"), **Title
+Case Headings**, **`Label: sentence` card stacks**, **boldface density**, and the overall
+hyphen-compound rate.
+
+---
+
+## Signs of HUMAN writing — preserve these
+
+Every other section here is about what to remove. This one is about what a rewrite must
+not sand off, and it is the reason a humanizing pass can make a page worse. If an edit
+deletes one of these, the edit is wrong:
+
+- **A specific number nobody would invent** — "47 years on Pompton Avenue", "$95, and it
+  comes off the bill".
+- **An admission** — "we don't do irrigation", "that repair isn't worth it on this car".
+  A model does not volunteer limits; a business does.
+- **A named, checkable particular** — a street, a brand of equipment, a town, a person.
+- **Uneven rhythm.** A three-word sentence next to a thirty-word one is a human writing.
+  Evening it out is the single most common way a "cleanup" pass adds slop.
+- **Mild, unpolished phrasing** — "we'll tell you straight", "give us a call". Plain is
+  the target, not a symptom.
+- **The owner's own words** from the questionnaire, even when they are clumsy. Especially
+  when they are clumsy. `voice-spec.md`'s "Sounds like them" block outranks every rule
+  in this file.
+- **Repetition that carries information** — a landscaper's page should say "patio" six
+  times.
+
+---
+
 ## What NOT to flag
 
 The false-positive list matters as much as the tells. Do not flag:
