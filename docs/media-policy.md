@@ -60,8 +60,10 @@
 ```
 
 Style `.img-placeholder` as a labeled block in the art direction's colors so the
-mockup still reads well. Harry generates the remaining images from these prompts before
-anything goes to a client (PLAYBOOK Part 3 Reference A). Still banned always: stock
+mockup still reads well. If one of those slots turns out to need a generated image rather
+than one of the client's own photos, Harry can fill it from its prompt before the site
+goes to the client (PLAYBOOK Part 3 Reference A) — through `/generate`, and only while the
+site's all-in budget still holds. Still banned always: stock
 photos, Unsplash/Google image URLs, hotlinked or copyrighted images.
 
 
@@ -114,6 +116,14 @@ There is no separate image budget and no separate video budget — there is one 
 and images spend against it first.
 
 What that means in practice:
+
+**The budget ends at sign-off.** It governs the build, and the Critic's spend ledger
+closes when the Critic signs off. Anything generated afterwards — during the client phase,
+when Harry is filling placeholder slots or acting on client feedback — is his own
+deliberate spend, priced per ask (~$0.04 at 1K, ~$0.06 at 2K) and not charged against a
+closed ledger. Everything else still binds there: `/generate` only, the plan's register,
+no readable branding, no stock. There is no doc-enforced ceiling on the client phase
+because by then a real client is paying for the site.
 
 - **No-video build.** $1.00 buys ~16 images at 2K or ~25 at 1K. There is no count cap —
   generate what the design needs and keep the running total inside the dollar. In practice

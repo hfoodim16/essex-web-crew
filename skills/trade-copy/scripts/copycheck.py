@@ -21,7 +21,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 
 # ---------------------------------------------------------------- thresholds
-# Calibrated against paul-da-silva-law (reference) plus the two mockups
+# Calibrated against dasilva-associates (reference) plus the two mockups
 # whose copy already reads right (cedar-grove-transmission, john-sessa-cpa).
 T = {
     "emdash_per_100w": 1.0,      # reference site sits at 0.62; every current mockup is 1.1-3.4

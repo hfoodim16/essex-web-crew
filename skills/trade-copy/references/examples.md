@@ -185,7 +185,7 @@ skeleton is how a bespoke site starts looking like a template.
 
 ## And what the reference site does
 
-`prospects/paul-da-silva-law/mockup/index.html` — the best-reading page in this
+`prospects/dasilva-associates/mockup/index.html` — the best-reading page in this
 project — is mostly not sentences at all:
 
 > 385 Lafayette Street · Newark's Ironbound

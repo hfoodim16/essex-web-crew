@@ -22,10 +22,16 @@ edited.** If a check trips on a real review, the markup is wrong, not the review
 ## The thresholds, and where they came from
 
 Calibrated against the two pages in this project whose copy already reads right:
-`prospects/paul-da-silva-law/mockup/index.html` and
-`prospects/fora-digital/mockup/index.html`. Both pass every hard check. Every other
-mockup in `prospects/` fails at least two. The **Reference site** column below is the
-DaSilva home page, measured.
+`prospects/dasilva-associates/mockup/index.html` and
+`prospects/fora-digital/mockup/index.html`. Every other mockup in `prospects/` fails at
+least two. The **Reference site** column below is the DaSilva home page, measured.
+
+> **Re-measured 2026-08-04.** Both pages were calibration-clean when these thresholds
+> were set (2026-08-02) and have since drifted by exactly one check each: DaSilva was
+> rebuilt and now trips **contraction floor** (2, min 3); FORA trips **longest paragraph**
+> (83 words, max 60). Both remain the best-reading pages in the project and stay the
+> reference — a reference page is not required to be gate-perfect, and neither threshold
+> was loosened to accommodate them. Read them for register, run the gate on your own page.
 
 | Check | Threshold | Reference site | What a failure means |
 |---|---|---|---|

@@ -33,6 +33,21 @@ together:
 **We never contact a business.** All client contact is Harry personally; the teams only
 produce research and websites.
 
+**Outside both teams — the caretaker and the FORA pair.** These are never spawned in a
+Prospecting or Build run:
+
+- **`caretaker`** — post-launch only, for sites already live on a real domain. Registry
+  keeping + incident diagnosis. Its beat starts where the two teams' ends.
+- **`fora-benchmark` + `fora-site-auditor`** — FORA-internal tooling for auditing **our own
+  agency site** (foradigital.com), not client work. `fora-benchmark` researches
+  well-executed sites and produces a "copy bar"; `fora-site-auditor` grades FORA's site
+  against it plus its own seven categories. Neither writes files — the benchmark's output
+  is pasted into the auditor's task context by hand. The boundary is **whose site it is**,
+  not which folder: FORA's own site sits at `prospects/fora-digital/` for historical
+  reasons and is theirs to read, but **every other `prospects/<slug>/` is a client build
+  belonging to the `critic`** — two auditors grading one build by different rubrics is how
+  a crew ships contradictions.
+
 ## Territory & target
 
 - **Where:** Essex County, NJ (Newark, Montclair, Bloomfield, Nutley, Belleville,
@@ -193,6 +208,30 @@ hunt, and a stale dev server. These five rules exist so that never repeats:
    confirm the served page's `<title>` names this prospect — stale servers have
    answered the port with the wrong site.
 
+## Lessons flow forward — never backward (audit doctrine)
+
+**An audit, a new gate, a changed rule, or a discovered mistake NEVER reopens a
+signed-off prospect build.** Sign-off freezes a build; a rule written after it does not
+retroactively un-freeze it. When we find something wrong — a weak pattern, a copy tell, a
+missing gate, a contradiction in our own instructions — the finding is evidence, and the
+fix lands **forward**: in `CLAUDE.md`, the agent files, the skills, the templates, the
+gates. The next build is where a lesson shows up, never the last one.
+
+Two reasons this is a hard rule, not a preference:
+
+1. **The shipped sites are the evidence.** Retro-editing them destroys the record of what
+   we actually did and why the rule exists. `design-memory.md`, `pipeline/speculation-log.md`
+   and each `audit.md` only mean anything if they describe builds nobody quietly rewrote.
+2. **Reopening is unbounded work.** Every new gate would re-litigate nine finished
+   prospects, and a client whose site changed under them without asking is a client we
+   lose. The grandfather clause in `templates/package-checklist.md` is this same rule
+   applied at the package level: gates bind at sign-off time and are not retroactive.
+
+**The only thing that reopens a signed-off build is Harry saying so, per build, in words**
+— the Step 6B/6C paths in `PLAYBOOK.md`. "We improved the rules" is never that
+authorization. If an audit finds something genuinely broken in a shipped site, the move is
+to tell Harry what and where and let him decide, not to fix it in passing.
+
 ## Find problems early, prove cleanliness cheaply (efficiency doctrine)
 
 Two structural rules that exist because problems used to surface at the most expensive
@@ -232,16 +271,21 @@ Each approved prospect gets a folder `prospects/<slug>/` containing:
 **From the Build run (only after the client's answers are in):**
 - `client-answers.md` — the client's answers, saved verbatim by the lead from Harry's
   paste. The top authority for everything downstream.
-- `website-plan.md` — the Planner's design brief the Builder implements, including the
+- `build-sheet.md` — **the Builder's entire spec**: self-contained, lint-clean, and it
+  outranks the plan. This is the contract.
+- `STATE.md` — the run's durable ledger and the handoff on any pause (never a RESUME note).
+- `website-plan.md` — the Planner's **reasoning record, for Harry and the Critic — the
+  Builder never reads it**, including the
   **"Client answers → decisions"** section and the **content map** that places every
   site-content.md block (or lists it as deliberately dropped, with a reason).
 - `voice-spec.md` — the Planner's copy-voice contract for this client, written via
   `trade-copy` Stage A from their answers, before any hero direction. It governs every
   visible string the Builder writes and is what the Critic's copy gate scores against; a
   missing one is a fail on the Planner.
-- `mockup/` — `index.html`, `style.css`, `main.js` (+ extra `.html` pages if the
-  page map calls for them, + `vendor/` if the plan's signature move needs the GSAP
-  tier). Static only. Opens by double-click, no build step, **works offline** —
+- `mockup/` — **one `.html` per page in the plan's page map** (multi-page is the default;
+  a single-file SPA is the exception for a page map small enough that separate files
+  would be ceremony), plus one shared `style.css` and one `main.js` (+ `vendor/` if the
+  plan's signature move needs the GSAP tier). Static only. Opens by double-click, no build step, **works offline** —
   libraries are vendored from the skill's `assets/gsap/`, never loaded from a CDN.
 - `screenshots/` — desktop + mobile captures proving the QA passes ran.
 - `release-form.pdf` (+ `release-form.html` source) — the Fora Digital **Website Release
@@ -264,16 +308,19 @@ edited before going live, so a signed-off prospect without one is incomplete.
 Lead-only procedure, run after sign-off: **signed release form gates everything** (none
 on file → stop), then the **gated packager** (`pipeline/package-site.sh <slug>` — refuses
 on detector failures, placeholder leakage, or a missing design-memory row), then
-`/design-push` to Claude Design, then register the live URL with the site-caretaker.
+`/design-push` to Claude Design. **Caretaker registration is NOT part of delivery** — the
+caretaker only watches sites already live on a real domain, and at delivery the site is
+still a zip. Note it for **go-live** (`FULL-PROCESS.md` Step 14), where the domain exists
+and there is a URL to register.
 **Full procedure with every step and check: `docs/delivery.md` — the lead reads it at
 each delivery; teammates never need it.**
 ## The Mockup Recipe (the "DaSilva workflow")
 
-Our house method — reference build `prospects/paul-da-silva-law/`. The `web-design-ultra`
+Our house method — reference build `prospects/dasilva-associates/`. The `web-design-ultra`
 skill is PRIMARY: the Planner runs its Stages 1–5 (Design Read, inspiration, three
 divergent directions, per-section `format:`/`opener:` tokens, plan-lint clean), the
-Builder executes Stages 6–7 (2 capped images + free CSS craft; implements the plan, never
-re-decides it), the Critic owns Stage 8 (Step-0 detector scan, both scoreboards,
+Builder executes Stages 6–7 (the plan's `GENERATE` images, budget-capped, + free CSS
+craft; implements the plan, never re-decides it), the Critic owns Stage 8 (Step-0 detector scan, both scoreboards,
 composition counts, content honesty, sign-off freezes the build). Precedence: client
 brief + voice-spec → web-design-ultra direction + local-trade → the gates.
 **The full recipe — stage-by-stage duties, token-block patterns, craft rules, gate
@@ -499,10 +546,12 @@ pipeline is exactly the generic output the pipeline exists to prevent.
 |---|---|---|
 | `scout` | `research`, `docs-seeker` | Deeper competitor/reputation research when a web search isn't enough; finding directories/docs on unfamiliar trades. |
 | `analyst` | `research` | Comprehensive dossier research beyond a plain web search. |
-| `planner` | **`web-design-ultra` (PRIMARY)**, **`trade-copy`**, `ui-ux-pro-max`, `frontend-design`, `design-system`, `aesthetic`, `sequential-thinking` | Run the 8-stage art-direction pipeline (Stages 1–5): design intelligence, real-site inspiration, anti-repetition, three divergent directions. `trade-copy` Stage A produces `voice-spec.md` from the client's answers before the hero direction is written. Names each reference site's patterns using the skill's `inspiration.md` vocabulary, and doesn't lock a direction the Stage 8 composition checks will fail — any deliberate exception is stated in `website-plan.md`. |
-| `builder` | **`web-design-ultra` (PRIMARY)**, **`trade-copy`**, **`web-humanizer`**, `generate`, `ui-ux-pro-max`, `frontend-design`, `frontend-development`, `web-frameworks` | Execute the chosen direction (Stage 7): generate the 2 real hero/priority images (`/generate` on `nano-banana-2`), plus an approved video clip if there is one, craft discipline + backgrounds/atmosphere recipes; self-score the Stage 8 rubric. `trade-copy` governs every visible string — invoke before writing any text; `web-humanizer` is the sweep after it, catching the page shapes that still read machine-written (interchangeable hero verbs, abstract-pair card titles, no checkable fact, cards stamped to identical lengths) and gating on `aitells.py` exit 0 alongside `copycheck.py`. Reads the skill's `craft-floor.md` before editing UI, works `motion-thesis.md` / `layout-craft.md` / `type-craft.md` / `color-craft.md` when a build needs more than a first pass, and runs the Step 0 scan to `exit 0` before handoff. |
+| `planner` | **`web-design-ultra` (PRIMARY)**, **`trade-copy`**, **`taste-skill`**, `ui-ux-pro-max`, `frontend-design`, `design-system`, `aesthetic`, `sequential-thinking` | Run the 8-stage art-direction pipeline (Stages 1–5): design intelligence, real-site inspiration, anti-repetition, three divergent directions. `taste-skill` supplies the §0 Design Read, §0.D Anti-Default and §9 AI-Tells passes over the three directions (planning sections only — its stack picks and block library are the Builder's territory). `trade-copy` Stage A produces `voice-spec.md` from the client's answers before the hero direction is written. Names each reference site's patterns using the skill's `inspiration.md` vocabulary, and doesn't lock a direction the Stage 8 composition checks will fail — any deliberate exception is stated in `website-plan.md`. |
+| `builder` | **`web-design-ultra` (PRIMARY)**, **`trade-copy`**, **`web-humanizer`**, `generate`, `ui-ux-pro-max`, `frontend-design` | Execute the chosen direction (Stage 7): generate every image the plan marked `GENERATE` (`/generate` on `nano-banana-2`; no count cap — stop at the site budget), plus an approved video clip if there is one, craft discipline + backgrounds/atmosphere recipes; self-score the Stage 8 rubric. `trade-copy` governs every visible string — invoke before writing any text; `web-humanizer` is the sweep after it, catching the page shapes that still read machine-written (interchangeable hero verbs, abstract-pair card titles, no checkable fact, cards stamped to identical lengths) and gating on `aitells.py` exit 0 alongside `copycheck.py`. Reads the skill's `craft-floor.md` before editing UI, works `motion-thesis.md` / `layout-craft.md` / `type-craft.md` / `color-craft.md` when a build needs more than a first pass, and runs the Step 0 scan to `exit 0` before handoff. |
 | `critic` | **`web-design-ultra`**, **`trade-copy`**, **`web-humanizer`**, `ui-ux-pro-max`, `code-review`, `design-system` | Audit each mockup against the Stage 8 10-dimension rubric AND the $10K Checklist; enforce real-reviews-only and the COPY VOICE gate (`copycheck.py` + `aitells.py` + a say-aloud read + the cold read); code-quality + design-system rigor. Runs the skill's Step 0 scan as the **first** gate, before any screenshot, then the fail-visible measurement and the composition checks; drives fix rounds with `bolder.md` / `quieter.md` rather than freehand nudges. |
 | `caretaker` | `site-caretaker-cycle` (from `~/Projects/site-caretaker/.claude/skills/`) | Post-launch only, and only for sites already live on a real domain. Keeps `~/Projects/site-caretaker/sites.json` — the system of record for published sites — current, and diagnoses the uptime/DNS/TLS/content failures the hourly `com.sitecaretaker.monitor` job flags. Never edits a live site on its own, and never polls in a loop: Layer 1 already watches, for free, every hour. Its standing spec is `~/Projects/site-caretaker/VISION.md`, which lives outside this repo — so the role only works on a machine that has it. |
+| `fora-benchmark` | — | **FORA-internal, never a client run.** Researches well-executed sites (Fortune 500, small agencies, local trades) and returns a pattern table plus a "copy bar". Writes no files: its output is pasted by hand into `fora-site-auditor`'s task context. |
+| `fora-site-auditor` | `trade-copy`, `web-humanizer` | **FORA-internal, never a client run.** Audits foradigital.com — repo source plus the live site in the browser pane — across seven categories, and grades copy against `fora-benchmark`'s bar plus `copycheck.py` / `aitells.py`. Read-only. Client mockups under `prospects/` are the `critic`'s, never its own. |
 | **lead** (this session) | **`design-push`**, **`design-pull`**, **`github-push`**, **`github-pull`** | Publish each signed-off site to Claude Design (Stage 8 on-pass step B3b), and re-publish after every revision round. `design-pull` brings edits made in the Design pane back into `mockup/` before a push can overwrite them — and `design-push` refuses to run while any exist. Only the lead can: `DesignSync` is authorized in this session, not in any subagent. `github-pull` / `github-push` move the whole repo between Harry's Mac and Corey's — **pull at the start of a session, push when a run finishes.** Details in `github/README.md`. |
 
 Optional, invoke only if the situation calls for it: `media-processing` (Builder — if

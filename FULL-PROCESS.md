@@ -93,18 +93,19 @@ Open `prospects/<slug>/mockup/index.html`, click every page, check phone width a
   re-review. → **Step 7**.
 
 ### Step 7 — Add the remaining images
-The hero and one priority slot already hold real AI-generated images (in
-`mockup/assets/`). List what's still a placeholder:
+Every slot the plan marked `GENERATE` already holds a real AI-generated image (in
+`mockup/assets/`). The rest are labeled placeholders — mostly where the client's own job
+photos belong. List what's still a placeholder:
 `grep -rn "AI-IMAGE" prospects/<slug>/mockup/`. Generate and place — full how-to in
 **PLAYBOOK Part 3, Reference A** (match the register the plan set; no business names or
 signage in generated images).
 - **7A — all good.** → back to **Step 8C** (show the client).
-- **7B — one won't come out right.** For a SECONDARY slot, leave the styled placeholder or
-  reframe the section. The hero and the other priority slot must stay real images — send
+- **7B — one won't come out right.** For a `PLACEHOLDER` slot, leave the styled placeholder
+  or reframe the section. Every `GENERATE` slot must stay a real image — send
   those back for one regeneration instead.
   → back to **Step 8C**.
 
-*(The first build ships with exactly 2 real AI images plus labeled placeholders beyond —
+*(The first build ships with real AI images in the plan's `GENERATE` slots plus labeled placeholders where the client's own job photos belong —
 that's the standard, not a shortfall. Leftover `[placeholder]` TEXT gaps are fine, and the
 client's own job photos replace AI images anyway; you finalize everything properly in
 Steps 11–12 once they're a paying client.)*
@@ -195,7 +196,7 @@ patios, clean lawns, crew shots). Then:
   I've added the client's real photos to prospects/<slug>/production/images/. Crop and
   compress them for the web (use the media-processing skill), then place them: replace
   the AI-IMAGE placeholders with the best-fitting real photo in each slot, AND swap out
-  the two AI-generated images in assets/ (hero + priority slot) wherever a client photo
+  the AI-generated images in assets/ wherever a client photo
   of their own work is genuinely better — real job photos beat AI on a live site. Keep
   alt text and
   aspect ratios. Show me before/after.

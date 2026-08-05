@@ -16,7 +16,7 @@ scoreboards below.
 8. [ ] **Invisible expensive stuff** — sub-2s load (no huge assets), WCAG AA contrast, keyboard nav / focus ring, semantic HTML, real meta+OG+favicon, **JS-off test passes** (rename `main.js` + `vendor/*.js`, reload — page still readable).
 
 **Pass = 8/8**, or a documented, defensible exception written into `audit.md`.
-**Never exceptable:** a placeholder sitting in either of the 2 priority image slots.
+**Never exceptable:** a placeholder sitting in a slot the plan marked `GENERATE` — the hero above all.
 
 ## Mockup, scoreboard 2 — the web-design-ultra 10-dimension rubric
 
@@ -50,7 +50,7 @@ they took it themselves?* Both halves must hold. Open each generated image full 
 - [ ] Trust strip — years / license / insured / rating (real values or clearly labeled placeholders).
 - [ ] Project or before/after gallery present.
 - [ ] Estimate form ≤ 4 fields, phone-first.
-- [ ] Consistent NAP footer matching the dossier.
+- [ ] Consistent NAP footer matching **`client-answers.md`** — the dossier only where the answers are silent. A client who moved and told us so must not be "corrected" back to the dossier's old address.
 
 ## Hard rules (any failure blocks sign-off)
 
@@ -91,7 +91,8 @@ they took it themselves?* Both halves must hold. Open each generated image full 
 
 > **These gates bind at sign-off time, and they are not retroactive.** Prospects signed off
 > before a gate existed are grandfathered — as of 2026-07-28 that's everything except
-> `paul-da-silva-law`, which is the only complete package (seven predate `voice-spec.md`,
+> `dasilva-associates` (built as `paul-da-silva-law`, since renamed), which is the only
+> complete package (seven predate `voice-spec.md`,
 > six predate `release-form.pdf`). Do **not** manufacture the missing artifacts for a frozen
 > prospect: a voice spec written now from no client answers, or a release form filled with a
 > contact we never spoke to, is invented content — the thing this checklist exists to stop.
@@ -107,8 +108,13 @@ they took it themselves?* Both halves must hold. Open each generated image full 
 
 **The build itself:**
 - [ ] `client-answers.md` (saved verbatim by the lead)
-- [ ] `website-plan.md` (the Planner's design contract, incl. the **"Client answers →
-      decisions"** section and the content map)
+- [ ] `build-sheet.md` (**the Builder's entire spec** — self-contained, lint-clean; it
+      outranks the plan, and a sheet that forces the Builder into the plan is a defect)
+- [ ] `STATE.md` (the run's ledger, incl. the Builder's evidence block; also the handoff
+      on any pause — never an improvised RESUME note)
+- [ ] `website-plan.md` (the Planner's **reasoning record for Harry and the Critic** —
+      the Builder never reads it — incl. the **"Client answers → decisions"** section
+      and the content map)
 - [ ] `voice-spec.md` (the Planner's copy contract — register, word budgets, the client's
       own phrases, thin-fact sections)
 - [ ] `mockup/` (pages per the **plan's** page map, opens cleanly) incl. `assets/` (logo + every generated image)
@@ -127,7 +133,9 @@ they took it themselves?* Both halves must hold. Open each generated image full 
       **last 3 `design-memory.md` rows** (and the most recent signed prospect's hero
       screenshot if it's on disk). Hunting the softer sameness the ban list misses:
       section rhythm, imagery register, motion vocabulary, a hero that's the same shot in
-      different colors. Reads like a sibling of a recent build → back to the builder while
+      different colors. Reads like a sibling of a recent build → **back to the PLANNER**, not
+      the builder — rhythm, hero framing, page order and imagery register are
+      `website-plan.md` decisions the builder is barred from re-deciding — while
       it's still unsigned. Reading a frozen prospect's files is research, not a reopening.
 - [ ] **`design-memory.md` row appended** on sign-off (date · slug · font pairing ·
       palette family · layout archetype · background system · signature motion).

@@ -306,10 +306,6 @@ teammates, so you must call them yourself:
   and to review your own work against professional UI standards.
 - **`frontend-design`** — for distinctive, production-grade, non-generic frontend code
   (avoid the "generic AI aesthetic").
-- **`frontend-development`** — for modern React/TypeScript SPA patterns, Suspense,
-  lazy loading, useSuspenseQuery, file organization, MUI v7, performance optimization.
-- **`web-frameworks`** — for TanStack Router (data-page SPA navigation), monorepo
-  patterns, build optimization, and RemixIcon SVG icon patterns.
 
 Use them to execute the Planner's direction at a high craft level — not to override it.
 
@@ -371,9 +367,9 @@ quote, never invent a reviewer.** If the dossier has no real reviews (or the pla
 omit the section — do not fill it with fabricated praise. (CLAUDE.md — Real reviews
 only.)
 
-## Build it the house way (Mockup Recipe in CLAUDE.md)
+## Build it the house way (full Mockup Recipe: `docs/mockup-recipe.md`)
 
-1. **Set up from the plan** — put the plan's palette into `:root` tokens, wire the Google
+1. **Set up from the sheet** — put the sheet's palette into `:root` tokens, wire the Google
    Font pairing, and write the plan's art-direction rationale at the top of `style.css`.
 2. **Use the client's real logo.** If the dossier has a `**Logo:**` line with a real URL,
    download that exact file into `prospects/<slug>/mockup/assets/` via Bash
@@ -389,19 +385,24 @@ only.)
    of `/generate`'s generations folder into `assets/` as WebP downscaled to display width,
    wired in locally. **No count cap — keep a running total (~$0.04/1K, ~$0.06/2K) and stop
    at the site budget: $1.00 with no video, $1.50 with an approved one.**
-4. **Build** the static SPA: `index.html` + `style.css` + `main.js`, design tokens in
-   `:root`, semantic HTML, full meta/OG/Twitter + inline SVG favicon,
+4. **Build** the static site — **real multi-page HTML by default**: one `.html` per page
+   in the plan's page map, sharing one `style.css` and one `main.js`. (A single-file SPA
+   is the exception, only for a page map small enough that separate files would be
+   ceremony — and `main.js` must still load and its ids match on every page you do ship.)
+   Design tokens in `:root`, semantic HTML, full meta/OG/Twitter + inline SVG favicon,
    **`LocalBusiness` JSON-LD + the meta essentials checklist from
-   `~/.claude/skills/web-design-ultra/references/local-trade.md`** (real NAP from the
-   dossier only; unknown values stay as `PLACEHOLDER_…` — never invent), and **the
+   `~/.claude/skills/web-design-ultra/references/local-trade.md`** (real NAP from
+   `client-answers.md`, the dossier only where the answers are silent; unknown values
+   stay as `PLACEHOLDER_…` — never invent — and the footer NAP must match the JSON-LD
+   exactly), and **the
    plan's named signature move** (entrance family + hover personality + at most one
    scroll set-piece + one tempo) — not the old house recipe of reveal + cursor +
    magnetic + tilt, which shipped on every prospect and is exactly the sameness item 6
    fails. All gated behind `prefers-reduced-motion`, and **content is never hidden by
    JS**: apply hidden states at runtime (`html.js` scope or `gsap.set()`), never in
-   `style.css`. Pages per the **plan's** page map (the dossier's is only a recommendation). Every image slot beyond the
-   2 generated ones is a labeled placeholder (see CLAUDE.md — `<!-- AI-IMAGE: … -->` +
-   `.img-placeholder`); embeds are placeholders too.
+   `style.css`. Pages per the **sheet's** page map (the dossier's is only a recommendation).
+   Every slot the plan marked `PLACEHOLDER` is a labeled box (see the Image policy in
+   CLAUDE.md — `<!-- AI-IMAGE: … -->` + `.img-placeholder`); embeds are placeholders too.
 5. **Desktop QA** in the browser pane, section by section — fix as you go. Confirm the
    real logo renders in the header and every generated image looks photorealistic.
 6. **Interactive QA — CLICK EVERYTHING (hard rule).** Actually click every interactive
@@ -450,7 +451,8 @@ only.)
      → **every page** must **exit 0**, or every blocking finding waived in-file with a
      stated reason.
    - **The composition checks** in `references/critique.md` (hero stack, CTA wrap and
-     intent, nav line, zigzag cap, layout-family variety, the three consistency locks,
+     intent, nav line, no-repeated-family (the rule that superseded the zigzag cap),
+     layout-family variety, the three consistency locks,
      grid cell count, CTA/form contrast).
    - **Both scoreboards** from those screenshots — the $10K Checklist AND the
      `web-design-ultra` 10-dimension rubric
@@ -588,9 +590,10 @@ now stale, needs a re-push."* Otherwise the site gets reviewed against the old v
   with a justified `VIDEO` slot in the plan, you generate ONE clip ≤8s in the declared
   register (`filmed-action` or `designed-loop`, never both) **only after the
   lead confirms Harry approved that clip.** **All of it lives inside one all-in site
-  budget: $1.00 with no video, $1.50 with one — images included.** Anything beyond — a 3rd
-  image, a 2nd clip, 4K, a longer duration, any regeneration, or any spend that would break
-  the site budget — requires the lead to ask Harry first.
+  budget: $1.00 with no video, $1.50 with one — images included.** Anything beyond — an
+  image the plan did not mark `GENERATE`, a 2nd clip, 4K, a longer duration, any
+  regeneration, or any spend that would break the site budget — requires the lead to ask
+  Harry first.
 - Never contact anyone.
 
 ## Run discipline — the rules that keep a run from freezing

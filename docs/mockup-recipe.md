@@ -7,7 +7,9 @@
 ## The Mockup Recipe (the "DaSilva workflow")
 
 This is our house method. The reference build is
-**`prospects/paul-da-silva-law/`** — in-repo, so every teammate on either Mac can open it.
+**`prospects/dasilva-associates/`** — in-repo, so every teammate on either Mac can open it.
+(It was called `paul-da-silva-law` until it was renamed and rebuilt; older docs and plans
+may still use the old name.)
 Builders MUST follow the recipe.
 
 ### PRIMARY design skill: `web-design-ultra`
@@ -34,7 +36,9 @@ the team:
 > `references/craft-floor.md` loads at Stage 7, immediately before UI edits. Impeccable
 > never sets direction — a gate checks the build, it does not choose the design.
 >
-> **`design-taste-frontend` (taste) is a planning input.** The Planner invokes it for four
+> **`taste-skill` (taste) is a planning input.** Invoke it as `taste-skill` — the skill's
+> own frontmatter says `design-taste-frontend`, which the Skill tool does not resolve.
+> The Planner invokes it for four
 > sections only — §0 Brief Inference (the one-line **Design Read**, written into the
 > plan), §0.D Anti-Default Discipline and §9 AI Tells (run the three directions against
 > them at Stage 5), and §11 Redesign Protocol when an existing site is being replaced. Its
@@ -130,9 +134,10 @@ the team:
   next client's site diverges.
 
 ### Step 1 — Design brief before any code (**the PLANNER's step**)
-> The Planner makes these calls in `website-plan.md` (web-design-ultra Stages 1–5). The
-> Builder implements them and does **not** re-decide them — see "Division of design
-> labor" above.
+> The Planner makes these calls at web-design-ultra Stages 1–5, records the reasoning in
+> `website-plan.md`, and writes the executable version into **`build-sheet.md`** — the
+> sheet is what the Builder reads and implements, and it does **not** re-decide them —
+> see "Division of design labor" above.
 
 The plan commits to a **named art direction** that fits the business (e.g. "earthy
 editorial" for a landscaper, "dark-luxury stone" for a high-end mason, "clean industrial"
@@ -149,9 +154,16 @@ for concrete/fencing). The Builder writes those 2–3 sentences of rationale at 
   premium. (See the token block pattern below.)
 
 ### Step 2 — Build
-- **Structure:** single-file SPA. `index.html` holds all "pages" as
-  `<main class="page" id="page-home">` sections; nav uses `data-page="…"` links and
-  `main.js` toggles the `.active` page. (Multi-file only if the page map is large.)
+- **Structure: real multi-page HTML is the default.** One `.html` file per page in the
+  plan's page map (`index.html`, `services.html`, `contact.html`, …), sharing one
+  `style.css` and one `main.js`. Every recent shipped build works this way — real pages
+  are linkable, indexable, and survive JS failing.
+  A **single-file SPA** (`index.html` holding every page as
+  `<main class="page" id="page-home">` sections, nav using `data-page="…"` links and
+  `main.js` toggling `.active`) is the **exception**, for a page map small enough that
+  separate files would be ceremony — a one-pager with anchors. If you ship the SPA shape,
+  say so in the sheet, because the Critic's click-test and the detector both assume
+  multi-page and will check a non-index page.
 - **Design tokens** in `:root` — colors, fonts, easing curves, `--nav-h`, `--radius`,
   `--container`. Everything references the tokens; no hardcoded hex in components.
 - **Semantic HTML** — real `<header> <nav> <main> <section> <footer>`, `aria-label`s,

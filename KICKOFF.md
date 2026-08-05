@@ -88,9 +88,11 @@ Read CLAUDE.md and all files in .claude/agents/. Run the Essex Web Crew
 BUILD pipeline for ONE client. Skip the prospecting team —
 we already have this client. Lineup: planner=Fable (claude-fable-5),
 builder=Opus, critic=Opus. Free tools only — no Firecrawl/Perplexity; the one
-pre-approved paid step is the builder's 2 AI images (~$0.17). If the planner marks a
-VIDEO slot, that is a REQUEST — bring it to me and wait for a yes before the
-builder generates anything. Teammates invoke their own skills via the Skill tool.
+pre-approved paid step is image generation, capped by the site's all-in budget:
+$1.00 total if the site ships no video, $1.50 if it ships one — images, video and
+any regeneration all come out of that one number. No image count cap. If the
+planner marks a VIDEO slot, that is a REQUEST — bring it to me and wait for a yes
+before the builder generates anything. Teammates invoke their own skills via the Skill tool.
 
 CLIENT: <slug or business name>
 
@@ -110,11 +112,17 @@ Do this:
    resolved in the old site's favor.
 3. Spawn 'planner': plan FROM the client's answers. Their answers are the
    TOP authority — above the dossier, above the old site, above design instinct.
+   It writes TWO files: build-sheet.md (the Builder's entire spec, self-contained
+   and lint-clean) and website-plan.md (the reasoning, for me and the critic).
    The plan must include a "Client answers → decisions" section mapping every
    answer to what the plan does about it, and flag any answer that is unclear or
    conflicts with another so I can ask them.
-4. Spawn ONE 'builder' for this prospect. It implements the plan and treats the
-   client's answers as binding.
+3b. SHEET REVIEW — no build starts without it. The critic reviews build-sheet.md
+   BEFORE any code exists and returns SHEET GO or a numbered fix list back to the
+   planner (max 2 rounds, then bring it to me). Relay the GO to the builder.
+4. Spawn ONE 'builder' for this prospect, on SHEET GO. It implements the
+   BUILD SHEET — it does not read website-plan.md — and treats the client's
+   answers as binding.
 5. Spawn 'critic': enforce client-answer fidelity (an ignored answer is a fail),
    content parity, the $10K Checklist (8/8), the web-design-ultra rubric (no
    dimension below 7, boldness >= 8), the imagery two-way realism test,

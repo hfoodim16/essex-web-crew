@@ -11,6 +11,7 @@
  */
 
 import fs from 'node:fs';
+import path from 'node:path';
 
 const BANNED_FONTS = [
   'Inter', 'Roboto', 'Arial', 'Helvetica', 'Fraunces',
@@ -32,6 +33,26 @@ let text;
 try { text = fs.readFileSync(file, 'utf8'); }
 catch (e) { console.error(`cannot read ${file}: ${e.message}`); process.exit(2); }
 
+// ── Resolve the build sheet FIRST — it owns the page-map tokens ─────────────
+// The Planner routes `format:`/`opener:` tokens to build-sheet.md, because the
+// sheet is the Builder's only input. So the quota checks below must read them
+// from the sheet whenever one exists; a plan linted with no sheet beside it
+// still gets checked on its own tokens.
+let sheetPath = null;
+if (/build-sheet\.md$/.test(file)) sheetPath = file;
+else {
+  const sibling = path.join(path.dirname(file), 'build-sheet.md');
+  if (fs.existsSync(sibling)) sheetPath = sibling;
+}
+let sheetText = null;
+if (sheetPath === file) sheetText = text;
+else if (sheetPath) {
+  try { sheetText = fs.readFileSync(sheetPath, 'utf8'); }
+  catch (e) { console.error(`cannot read ${sheetPath}: ${e.message}`); process.exit(2); }
+}
+const tokenText = sheetText ?? text;
+const tokenFrom = path.basename(sheetPath ?? file);
+
 const problems = [];
 const warn = (msg) => problems.push(msg);
 
@@ -42,12 +63,12 @@ const warn = (msg) => problems.push(msg);
 const tokenRe = /format:\s*`?([a-z0-9+-]+)`?\s*,\s*opener:\s*`?([a-z0-9+-]+)`?/gi;
 const sections = [];
 let m;
-while ((m = tokenRe.exec(text)) !== null) {
+while ((m = tokenRe.exec(tokenText)) !== null) {
   sections.push({ family: m[1].toLowerCase(), opener: m[2].toLowerCase() });
 }
 
 if (sections.length === 0) {
-  warn('no `format:` / `opener:` tokens found — the page map must assign one per section (see section-formats.md)');
+  warn(`no \`format:\` / \`opener:\` tokens found in ${tokenFrom} — the page map must assign one per section (see section-formats.md)`);
 } else {
   // Unknown tokens
   for (const s of sections) {
@@ -117,23 +138,10 @@ if (/\bVIDEO\b/.test(text) && !/filmed-action|designed-loop/i.test(text)) {
   warn('a VIDEO slot is marked but no register (filmed-action / designed-loop) is declared');
 }
 
-// ── Build sheet (if one sits beside the plan, or was passed directly) ───────
-// The sheet is the Builder's ONLY input, so its own defect classes get linted:
-// every one of these checks encodes a failure a real build actually hit.
-import path from 'node:path';
-
-let sheetPath = null;
-if (/build-sheet\.md$/.test(file)) sheetPath = file;
-else {
-  const sibling = path.join(path.dirname(file), 'build-sheet.md');
-  if (fs.existsSync(sibling)) sheetPath = sibling;
-}
-
-if (sheetPath && sheetPath !== file) {
-  lintSheet(fs.readFileSync(sheetPath, 'utf8'), sheetPath);
-} else if (sheetPath === file) {
-  lintSheet(text, sheetPath);
-}
+// ── Build sheet (resolved at the top; lint its own defect classes) ──────────
+// The sheet is the Builder's ONLY input, so every check here encodes a failure
+// a real build actually hit.
+if (sheetPath) lintSheet(sheetText, sheetPath);
 
 function lintSheet(sheet, p) {
   const rel = path.basename(p);

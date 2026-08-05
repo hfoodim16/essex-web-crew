@@ -31,7 +31,23 @@ echo ""
 echo "Fire drill — crew gate verification"
 echo "───────────────────────────────────────────────────────────────────"
 
-# ── 0. The detector must not be degraded, or everything below is theatre ────
+# ── 0a. The fixtures must exist, or step 0 greps a missing file, finds no
+#        "DEGRADED" string, and reports PASS on nothing. A drill that lies
+#        is worse than no drill — abort loudly instead.
+for f in "$FIXTURE/mockup/index.html" "$FIXTURE/website-plan.md" "$FIXTURE/build-sheet.md"; do
+  if [ ! -f "$f" ]; then
+    step "fixtures present"
+    bad "missing ${f#"$CREW_ROOT/"}"
+    echo ""
+    echo "Stopping: the fixtures are the drill. Restore them with" >&2
+    echo "  git restore prospects/_smoke-test/" >&2
+    echo "and never delete them to make a check go green." >&2
+    exit 1
+  fi
+done
+step "fixtures present"; ok
+
+# ── 0b. The detector must not be degraded, or everything below is theatre ───
 step "detector has its parser dependencies"
 DEG="$(node "$DETECT" "$FIXTURE/mockup/index.html" 2>&1 >/dev/null | grep -c "DETECTOR DEGRADED" || true)"
 if [ "$DEG" -eq 0 ]; then ok; else
