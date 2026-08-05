@@ -65,7 +65,11 @@ must call them yourself):
 - **`trade-copy` (invoke for every prospect, BEFORE you write the hero direction).**
   Read its `references/voice-spec.md` and write `prospects/<slug>/voice-spec.md` — the
   copy contract the Builder writes against and the Critic gates on. The client's
-  questionnaire answers are the voice source; the old site is a fact source only. Decide
+  questionnaire answers are the voice source; the old site is a fact source only.
+  When you write the spec's **watch list**, check the skill's `references/examples.md`
+  §6 (motif-hammering — one word used seven times on one page) and §13 (a mood word
+  spreading across hero, section header and gallery label): the watch list exists to catch
+  exactly those before they are written, not after. Decide
   in the spec which sections have thin facts and are therefore allowed to be short (or
   cut) — that decision is why generated copy pads, and it belongs at plan time, not build
   time. Your hero direction must obey the spec you just wrote.

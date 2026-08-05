@@ -217,6 +217,14 @@ missing gate, a contradiction in our own instructions — the finding is evidenc
 fix lands **forward**: in `CLAUDE.md`, the agent files, the skills, the templates, the
 gates. The next build is where a lesson shows up, never the last one.
 
+**Forward has an address and an owner.** A copy tell that a human read caught while both
+scripts passed goes into `skills/trade-copy/references/examples.md` (register) or
+`skills/web-humanizer/references/tells.md` (page shape) — appended by the **Critic at
+sign-off**, in the same pass as the `design-memory.md` and `copy-memory.md` rows. A
+doctrine with no artifact and no owner is how the same tell gets fixed twice: the
+third-person "the team built…" construction was caught in FORA's round 3a, written down
+nowhere, and found again on the live site months later.
+
 Two reasons this is a hard rule, not a preference:
 
 1. **The shipped sites are the evidence.** Retro-editing them destroys the record of what

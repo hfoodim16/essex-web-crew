@@ -123,8 +123,12 @@ teammates, so you must call them yourself:
     dossier's Credentials section. No source → **labeled placeholder**, not a plausible
     value. `Licensed & Insured · NJ HIC #13VH…` invented to fill a trust strip is a legal
     problem for the client, and the Critic traces every one of these back to a source.
-- **`trade-copy` (invoke BEFORE you write any visible text).** Read
-  `prospects/<slug>/voice-spec.md` first, then write every headline, section, service
+- **`trade-copy` (invoke BEFORE you write any visible text).** Read two files first, in
+  this order: `prospects/<slug>/voice-spec.md` (this client's contract), then the skill's
+  **`references/examples.md`** — 14 sections of real before/after pairs from this crew's
+  own shipped pages. Read it **every build**, not once ever: the "before" column is what
+  your first draft will sound like if you write on instinct, and the "after" column is the
+  register you are aiming at. Then write every headline, section, service
   description, CTA, meta and alt string to its register and word budgets. Copy is
   specification, not prose: concrete nouns, numbers, towns, materials. When a section has
   no facts behind it, shrink it — never fill it with atmosphere. Run

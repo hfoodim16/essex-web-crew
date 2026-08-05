@@ -43,7 +43,7 @@ least two. The **Reference site** column below is the DaSilva home page, measure
 | **contraction floor** | ≥ 3 contractions | 6 | Zero contractions is the clearest sign nobody spoke these sentences aloud. |
 | **spelled numerals** | ≤ 3 above ten | 0 | "Forty-five years" belongs in a novel; the site says "45 years". |
 | **triad constructions** | ≤ 1 per page | 0 | "X. Y. Z." heroes. One is a choice; two is a tic. Check other prospects before using your one. |
-| **motif cap** | ≤ 2 uses of any banned or watched word | 0 | Motif-hammering — the loudest tell in this project's output. `oasis` appeared 6× on one page. |
+| **motif cap** | ≤ 2 uses of any banned or watched word | 0 | Motif-hammering — the loudest tell in this project's output. `oasis` appears **7×** on one page (`duran-and-son`); all seven are quoted with rewrites in `examples.md` §6. |
 | **no placeholders** | 0 | 0 | `[Hours — placeholder]` or `AI-IMAGE` strings are visible in the copy. This alone makes a deploy-ready build look fake. |
 | **no cutesy language** | 0 | 0 | A Tier 1B word — anthropomorphised plants, winking, whimsy. Zero tolerance: unlike a motif, one is already wrong. |
 | **no banned phrases** | 0 | 0 | A phrase from the "Banned phrases" section — "we pride ourselves on", "from start to finish", "no job too big or too small". **New 2026-08-05.** These were in `banlist.md` since July and read by nothing: the loader only picked up single backticked words, so the whole quoted list was decoration. Entries marked "(unless the client said it)" are still exempt. |
@@ -78,7 +78,7 @@ findings — wrong is worse than ugly.
 
 **Elegant variation** (new 2026-08-05). Fires when four or more different banlist words
 each appear exactly once. This is the counterweight to `motif cap`, and the two pull in
-opposite directions on purpose: a page that says "oasis" five times fails the cap, while a
+opposite directions on purpose: a page that says "oasis" seven times fails the cap, while a
 page that says oasis, sanctuary, retreat, haven once each passes every check and is the
 *same tell* — humanizer category 11. Until now nothing in this project pushed back on
 synonym cycling, which meant the cheapest way to satisfy the motif cap was to commit the

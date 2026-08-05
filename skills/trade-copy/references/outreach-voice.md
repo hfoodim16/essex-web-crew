@@ -93,3 +93,57 @@ Same voice, spoken. What changes:
 - No claim the dossier doesn't support.
 - No offering a finished site — that's the old model, and it's not what we do.
 - No sending. Leave it as a draft with `[placeholders]` where Harry personalizes.
+
+## A model email
+
+Nothing in this file was demonstrated until now, and every draft on disk predates the
+ask-first pivot. This is the shape, filled in — invented prospect, real structure.
+
+> **Subject:** Cedar Grove Transmission — quick question about your website
+>
+> Hi Mike,
+>
+> I called about a transmission for my sister's Civic last month and ended up finding
+> you through a Yelp listing — your own site 404s on the services page.
+>
+> I build websites for local shops around Essex County. Before I design anything I'd
+> rather hear what you'd actually want on it than guess, so I put together a short list
+> of questions — what work you want to come in more of, what people always call and ask,
+> that kind of thing.
+>
+> It's a build-once site, not something you'd have to keep feeding. No monthly anything.
+>
+> I did one recently for Cecere Brothers Landscaping in Caldwell if you want to see the
+> kind of thing I mean.
+>
+> Worth a ten-minute call this week?
+>
+> Harry
+> [phone]
+
+What it does: names a real specific observation (the 404) instead of a compliment, asks
+before offering, kills the maintenance objection in one line, offers proof without
+pitching, and ends on one question. **No mockup is offered** — see the hazard below.
+
+### Subject lines
+
+| Bad | Why | Good |
+|---|---|---|
+| Elevating Cedar Grove Transmission's online presence | Banlist verb, agency register, says nothing | Cedar Grove Transmission — quick question about your website |
+| Your website — built and ready to see | Offers a speculative build (old model) | Quick question before I'd build anything |
+| Transform your business with a modern website | Interchangeable; could be spam to anyone | Noticed your services page is down |
+
+## ⚠ The drafts on disk are the OLD model
+
+All six `prospects/*/outreach-email.md` drafts, and the one call script, **offer a
+finished mockup** — "I went ahead and built you a mockup… It's done and ready to look
+at." Three carry PASS audits, written before the pivot.
+
+That contradicts the rule at the top of this file and the business model in `CLAUDE.md`:
+we ask first and build from the answers. Each of those drafts now carries a SUPERSEDED
+banner. **Rewrite to the shape above before sending any of them** — they are drafts
+pending a send, not shipped work, so unlike a signed-off mockup they are not frozen.
+
+Two also fail the gate: `anthonys-landscaping` (66-word paragraph, plus "outstanding
+professional service" straight out of the banlist) and `gee-kay-landscaping` (63-word
+paragraph).

@@ -63,7 +63,9 @@ Name the specific lines. Vague answers ("the tone is a bit generic") mean you ha
 looked yet. This step is inherited from `humanizer` and it is the reason the loop converges
 without a human editing words afterwards.
 
-**3. Rewrite.** Use the fix recipes in `references/tells.md`, the structures in
+**3. Rewrite.** Use the fix recipes in `references/tells.md` (every tell now carries a
+before → after), the real shipped cases in **`trade-copy/references/examples.md`** — §10
+is the cadence failure this skill's step 2 is looking for — the structures in
 `references/exemplars.md`, and the three tests in `references/principles.md`:
 
 - Can I visualize it?
@@ -132,7 +134,7 @@ to satisfy one and break the other, the fix is wrong.
 
 | File | What's in it |
 |---|---|
-| `references/tells.md` | The 20 website AI tells, each with a fix recipe, plus the what-NOT-to-flag list |
+| `references/tells.md` | The 32 website AI tells, each with a before → after fix, plus the what-NOT-to-flag list and the signs-of-human-writing preserve list |
 | `references/exemplars.md` | Real attributed copy from sites that read human, with what transfers to a trade site and what doesn't |
 | `references/principles.md` | Why those lines work — Harry Dry and Mailchimp, distilled, with the three tests |
 | `scripts/aitells.py` | The hard gate |

@@ -363,7 +363,11 @@ You are on the **Build team**. You review the built site — nothing else. For
   **Then run `--list` and read EVERY visible string**, one at a time, asking whether the
   owner would say it out loud to a customer in his driveway. Not a spot check — every
   string, on every page. The checks are a floor; this read is the gate. Sort each line
-  into fine / too poetic / too cute / too vague / overwritten. Three ways copy fails here
+  into fine / too poetic / too cute / too vague / overwritten.
+  The quoted examples below are excerpts — **the canonical case file is
+  `skills/trade-copy/references/examples.md`**; read it once per build before this pass.
+  Its §10 covers the failure this list cannot describe: a page where no single line is
+  wrong and the *rhythm* is the tell. Three ways copy fails here
   even when all eleven checks pass:
   - **too poetic** — "meticulous by habit", "Thirty Years, Gallery-Hung"
   - **too cute** — "we read the sun", "Three steps, no mystery", "Rooted in West Essex",
@@ -548,6 +552,20 @@ tier. `design-memory.md` keeps two prospects from looking alike; `copy-memory.md
 them from sounding alike, and the crew already shipped the same three-fragment-plus-year
 hero to two clients before it existed. A paraphrased hero makes the row useless to the
 next planner, so quote it.
+
+**Also on sign-off: bank any case the scripts missed.** If your say-aloud read or the
+cold read caught a line that **both `copycheck.py` and `aitells.py` passed**, append it to
+`skills/trade-copy/references/examples.md` — before verbatim, an after that keeps every
+fact, one line on what the words were doing instead of informing. Page-shape failures go
+to `skills/web-humanizer/references/tells.md` instead; register failures go to examples.
+Then tell the lead the skills need re-syncing to `~/.claude/skills/`.
+
+This is the only mechanism by which the crew gets better at copy. A finding that lives
+only in this round's fix list is spent the moment the build ships — the third-person
+"the team built…" tell was found and fixed in FORA's round 3a, written down nowhere, and
+**came back**, where a later audit caught it a second time by hand. One append would have
+cost thirty seconds. If the finding looks like a new *class* rather than an instance, say
+so to the lead: it may be worth a script check.
 
 **This never overrides the freeze.** Reading an already-signed prospect's screenshots or
 its `design-memory.md` row is research, not reopening — you never send a fix to a frozen

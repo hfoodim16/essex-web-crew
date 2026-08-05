@@ -88,3 +88,22 @@ That is not carelessness and more diligence will not fix it. A second pair of ey
   homeowner can too.
 - **"SHIP" from an agent told it may say SHIP is meaningful.** That's the point of the
   honest-null instruction.
+
+## Banking the result
+
+The fix list is for this build. **The case file is for every build after it.**
+
+Any finding the cold read produced that both scripts passed goes into
+`references/examples.md` — before verbatim, after with every fact intact, one line on
+what the words were doing. The Critic does this at sign-off (`.claude/agents/critic.md`).
+
+Why this step exists: the cold read is the most productive slop-detector this crew has —
+by the record at the top of this file, it found what the script missed twice and what a
+careful self-read missed 48 times. All of that value evaporates if the finding ships with
+the build and is never written down. It has already cost us once: a third-person
+construction fixed in FORA's round 3a reverted onto the live site, because the lesson
+existed in a fix list and nowhere else.
+
+If the finding is a *shape* rather than a register problem, it belongs in
+`web-humanizer/references/tells.md`. If it looks like a whole class nobody has named yet,
+tell the lead — new classes are where the next script check comes from.
