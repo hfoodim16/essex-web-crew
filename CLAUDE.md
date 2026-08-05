@@ -140,7 +140,8 @@ teammate follows these; none of them touch a quality gate.
    candidates rather than delivering all 10–12 at the end; the planner hands its finished
    plan to the builder the moment it's done instead of polishing it further.
 2. **Parallelize independent work.** The analyst researches all three finalists at once
-   (one subagent each); the builder launches both image generations concurrently.
+   (one subagent each). Image generations are the exception — the builder runs them
+   **one at a time**, because Kie rate-limits concurrent jobs.
    **Delegated research must return verbatim quotes + source URLs (never summaries) and
    surface source contradictions rather than resolving them — and the analyst still
    verifies the load-bearing facts against primary sources itself.** Delegation speeds up
@@ -337,20 +338,34 @@ Critic compares any clip against its named source.
 
 ## Image policy (hard rule)
 
-**Hard cap 2 generated images per mockup, pre-approved** — through the `/generate` skill
-on **`nano-banana-2`** (the shipping tier, never `-lite`; ~$0.04 at 1K / ~$0.06 at 2K).
-The Planner marks exactly which 2 slots are `GENERATE` (hero + one priority slot, each
-with register + aspect + resolution); **every other slot ships as a labeled AI-IMAGE
-placeholder.** The client's real logo never counts against the cap and is never
-regenerated. A 3rd image, or any regeneration past the single retry, needs the lead to
-ask Harry. **Full policy (registers, sizing, realism QA, spend ledger):
-`docs/media-policy.md` — read it before any generation.**
+**No count cap — the site budget is the only limit.** Generate as many images as the design
+genuinely needs through the `/generate` skill on **`nano-banana-2`** (the shipping tier,
+never `-lite`; ~$0.04 at 1K / ~$0.06 at 2K), keeping the **projected total inside the
+site's all-in budget** ($1.00 no video / $1.50 with one — see Video policy below). At those
+rates $1.00 is ~16 images at 2K or ~25 at 1K, so on a still-only site money is not the
+binding constraint — **design judgment is.** Generate what makes the page look finished and
+specific; don't pad to spend the budget, don't starve a page that needs six plates.
+The Planner marks every generated slot `GENERATE` (hero first, then by visibility, each
+with register + aspect + resolution) and carries a running cost total. **Slots whose real
+answer is the client's own job photography stay labeled AI-IMAGE placeholders** — that is a
+content-honesty call, not a cost one. The client's real logo never counts against the
+budget and is never regenerated. Anything that would break the budget needs the lead to ask
+Harry. **Full policy (registers, sizing, realism QA, spend ledger): `docs/media-policy.md`
+— read it before any generation.**
 ## Video policy (hard rule)
 
 **Default is zero video, and video is NEVER pre-approved** — the Planner may mark ONE
-`VIDEO` slot as a REQUEST (register `filmed-action` ≤$1 or `designed-loop` ≤$2.50, ≤8s,
-never both), the lead takes it to Harry, and **the Builder generates nothing until Harry
+`VIDEO` slot as a REQUEST (register `filmed-action` or `designed-loop`, ≤8s, never both),
+the lead takes it to Harry, and **the Builder generates nothing until Harry
 says yes to that specific clip.** One approval = one run, no retries without a fresh ask.
+
+**THE SITE BUDGET (hard rule, 2026-08-04): one all-in number per site covering ALL paid
+generation — images, video, everything. $1.00 if the site ships no video; $1.50 if it
+ships one.** Images spend against it first, so budget the clip before the stills — a
+handful of images (~$0.20–0.30) still leaves over $1.10 for it. This replaced the old per-register ceilings (filmed ≤$1, designed ≤$2.50);
+register choice no longer buys extra money. A failed clip has already spent the budget —
+exhaust the free `ffmpeg` fixes, then ship the poster still. The budget is a **ceiling on
+an approved ask, never an authorization to spend.**
 Work the free ladder first (backgrounds → atmosphere → reactive field); a clip-free build
 is never a deduction. Shipping needs `poster` + `prefers-reduced-motion` + <5MB + checked
 loop seam. **Full policy (registers, gates, ladder, occupational fit): `docs/media-policy.md`
@@ -500,20 +515,23 @@ processing real images pulled from an existing client site) and `ai-multimodal`
   all research and scraping. **Do NOT call Firecrawl or Perplexity** (they cost Harry
   money) — if a page genuinely can't be reached any other way, stop and ask the lead,
   who asks Harry.
-- **The only pre-approved paid operation is the builder's 2 AI images per mockup.**
-  Generated through the `/generate` skill on **`nano-banana-2`** — the shipping tier, never
-  the `-lite` draft model. It costs real money (~$0.04 at 1K / ~$0.06 at 2K ≈ $0.10 per
-  prospect) and is **pre-approved at that cap**. A builder generating exactly those 2 is
-  following the rules, not breaking them.
+- **The only pre-approved paid operation is image generation, and it is pre-approved up to
+  the site budget — not to a count.** Generated through the `/generate` skill on
+  **`nano-banana-2`** — the shipping tier, never the `-lite` draft model. It costs real
+  money (~$0.04 at 1K / ~$0.06 at 2K), and the builder may spend up to the site's all-in
+  budget on it: **$1.00 with no video, $1.50 if a video is approved.** A builder generating
+  eight images that total $0.40 is following the rules, not breaking them. Track the
+  running total; the moment a plan would break the budget, the lead asks Harry.
 - **Video is NOT pre-approved — it is a request.** The Planner may mark ONE justified
-  `VIDEO` slot in its declared register (`filmed-action` ≤$1 or `designed-loop` ≤$2.50,
-  ≤8s, never both — see the Video policy above), but marking it only *asks*. **The lead
+  `VIDEO` slot in its declared register (`filmed-action` or `designed-loop`, ≤8s, never
+  both — see the Video policy above), priced to fit the site's **$1.50 all-in budget
+  alongside its images**, but marking it only *asks*. **The lead
   takes that request to Harry, and the Builder generates nothing until Harry has said yes
   to that specific clip.** No answer yet → the poster still ships in the slot and the site
   is otherwise complete. A clip with no recorded approval is unauthorized spend and the
   Critic hard-fails it.
-- Everything beyond — a 3rd image, any video without a confirmed yes, a 2nd clip, 4K, a
-  longer clip, any regeneration, or any other paid call — needs the lead to ask Harry
+- Everything beyond — any spend that breaks the site budget, any video without a confirmed
+  yes, a 2nd clip, 4K, a longer clip, or any other paid call — needs the lead to ask Harry
   first.
   "Free tools only" elsewhere in these docs means *no Firecrawl/Perplexity*; it never meant
   skipping the sanctioned assets.

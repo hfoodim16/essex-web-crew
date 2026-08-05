@@ -91,12 +91,12 @@ The team's toolkit can produce **real AI-generated photography, animated atmosph
 timid, or half-animated mockup has no excuse — grade it against that ceiling, not on a
 "it's only a mockup" curve. **The mockup IS the pitch.** Specifically:
 
-- **Imagery.** The two priority slots (hero + one) must hold **real, photorealistic,
-  on-art-direction generated images** — the hero above all. An empty/flat hero or an
-  un-generated priority slot → **fail**. Every other slot must be a proper labeled
+- **Imagery.** Every `GENERATE` slot in the plan must hold a **real, photorealistic,
+  on-art-direction generated image** — the hero above all. An empty/flat hero or any
+  un-generated `GENERATE` slot → **fail**. Every `PLACEHOLDER` slot must be a proper labeled
   placeholder (that is BY DESIGN — the client fills those with real job photos);
-  **more than 2 generated images is a budget-rule fail**; stock/hotlinked images fail
-  always. Judge realism with the two-way test below — it's the most common failure.
+  **there is no image count cap, but a spend ledger over the site budget is a budget-rule
+  fail**; stock/hotlinked images fail always. Judge realism with the two-way test below — it's the most common failure.
 - **Video.** Most mockups have none — that is the correct default, never a deduction.
   When a clip IS present, **judge it against the register the plan declared**, not against
   a single standard. It must clear every one of these or it's a **fail**:
@@ -108,9 +108,13 @@ timid, or half-animated mockup has no excuse — grade it against that ceiling, 
     fail.
   - The slot carries a written **justification** — the frame-2 argument for filmed, or
     which free ladder rung it beat for a designed loop. Marked but unjustified → fail.
-  - **Budget:** exactly ONE clip per site, never both registers. `filmed-action` ≤$1;
-    `designed-loop` ≤$2.50; ≤8s either way. Two clips, 4K, a longer duration, or any
-    regeneration beyond the single approved run is a budget-rule fail.
+  - **Budget:** exactly ONE clip per site, never both registers, ≤8s. **The site has one
+    all-in budget covering every paid generation, images included: $1.00 with no video,
+    $1.50 with one.** Add up what the build actually spent — every image, every
+    regeneration, plus the clip — and fail it if the total breaks the site's number. Two clips, 4K, a longer duration, or
+    any regeneration beyond the single approved run is a budget-rule fail. The old
+    per-register ceilings (filmed ≤$1, designed ≤$2.50) no longer apply — do not grade
+    against them.
   - **If the clip was seeded from an `Inspiration/` image:** the plan must name the source
     file, and the clip must be a **transformation** of it, not that photograph with motion
     added. Open the named source and compare. If a viewer would recognize the clip as the
@@ -285,12 +289,12 @@ stand-down has precedence (Harry → lead → plan → gates).
 You are on the **Build team**. You review the built site — nothing else. For
 `prospects/<slug>/mockup/`, do a real audit:
 - **Read the code** — check tokens, semantic HTML, meta/OG tags, reduced-motion gating,
-  the image policy (the 2 priority slots are real local WebP images in `assets/`, every
-  other slot a labeled AI-IMAGE placeholder, **no more than 2 generated**, no
-  stock/hotlinked images), the video policy (**0 or 1 clip, never both registers**; if
+  the image policy (every `GENERATE` slot in the plan is a real local WebP image in
+  `assets/`, every `PLACEHOLDER` slot a labeled AI-IMAGE box, **no count cap — the spend
+  ledger must fit the site budget**, no stock/hotlinked images), the video policy (**0 or 1 clip, never both registers**; if
   present it must be slot-marked with a declared register and justified in the plan,
-  within its register's ceiling — filmed ≤$1, designed loop ≤$2.50 — ≤8s,
-  with a `poster` still and a `prefers-reduced-motion` branch), and that no fabricated
+  ≤8s, inside the site's all-in budget — **$1.00 no-video / $1.50 with-video, images
+  included** — with a `poster` still and a `prefers-reduced-motion` branch), and that no fabricated
   business facts appear.
 - **Real logo present.** If the dossier has a `**Logo:**` line with a real URL, verify
   the actual logo file exists in `prospects/<slug>/mockup/assets/` and renders in the
@@ -439,12 +443,14 @@ You are on the **Build team**. You review the built site — nothing else. For
   stalled loop is distinguishable from an in-progress one).
 - **Keep a spend ledger: `Paid calls this prospect: N (~$X.XX)`.** Carry it forward and
   increment it every round — count each image generation, each regeneration you ordered,
-  and any approved video call. The 2-image cap is enforced by counting files in `assets/`,
-  but regenerations **overwrite in place and are invisible to that count**: two initial
-  images plus three ordered regenerations is five paid calls sitting behind an `audit.md`
-  that truthfully says "2 generated images." The ledger is what makes the real number
-  visible. It is a record, not a new cap — but if it passes ~$1.00 on a prospect, say so to
-  the lead rather than quietly ordering another regeneration.
+  and any approved video call. **The ledger is now the enforcement mechanism, not a
+  record** — with the image count cap gone, the site budget is the only limit and the only
+  way to check it is to add up the calls. Counting files in `assets/` is not enough:
+  regenerations **overwrite in place and are invisible to that count**, so six images plus
+  three ordered regenerations is nine paid calls behind an `audit.md` that truthfully says
+  "6 generated images." **Fail the build if the ledger exceeds the site budget** — $1.00
+  with no video, $1.50 with an approved one. Flag to the lead as you approach it rather
+  than quietly ordering another regeneration.
 
 ## How you communicate
 
@@ -545,9 +551,9 @@ lead as an observation for next time and let `design-memory.md` do its job.
   mechanical fail never reaches the rest of this list. Exceptions must be explained by the
   Planner's locked direction in `website-plan.md`.
 - Mockup, $10K Checklist: 8/8, OR a documented, defensible exception. Note: item 5
-  (imagery) expects the 2 priority slots to be REAL generated images that pass the
-  two-way test — placeholders in those two are NOT an acceptable exception; slots beyond
-  the 2 are placeholders by design.
+  (imagery) expects every `GENERATE` slot to be a REAL generated image that passes the
+  two-way test — a placeholder sitting in a `GENERATE` slot is NOT an acceptable
+  exception; `PLACEHOLDER` slots are placeholders by design.
 - Mockup, `web-design-ultra` rubric: **no dimension below 7 and boldness ≥ 8** (and, for
   a redesign of an existing site, the bold test passes — obviously different at a
   glance). Below the gate → numbered fix list back to the builder, same as the $10K loop.

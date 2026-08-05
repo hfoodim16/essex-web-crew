@@ -100,11 +100,13 @@ teammates, so you must call them yourself:
   off-screen pause and `?still` capture frame). If the plan's move needs the GSAP tier, vendor it — never a CDN:
   `cp ~/.claude/skills/web-design-ultra/assets/gsap/{gsap,ScrollTrigger}.min.js mockup/vendor/`
   (recipes and the fail-visible boot preamble in `references/gsap.md`). Then self-score its **Stage 8** rubric before handoff (see
-  below). **Stage 6 for us: generate the 2 `GENERATE`-marked images (hard cap 2), rest
-  placeholders** — see the `/generate` section below and the CLAUDE.md image policy. **Plus the
+  below). **Stage 6 for us: generate every `GENERATE`-marked image the plan lists (no count
+  cap — stop at the site budget), and leave the `PLACEHOLDER` slots as labeled boxes** —
+  see the `/generate` section below and the CLAUDE.md image policy. **Plus the
   `VIDEO` slot if — and only if — the plan marked one **and Harry approved it** (ONE clip
-  per site, generated to the register the plan declared: `filmed-action` ≤$1, or
-  `designed-loop` ≤$2.50, ≤8s either way; see the video section below). No `VIDEO` slot in
+  per site, generated to the register the plan declared: `filmed-action` or
+  `designed-loop`, ≤8s either way, inside the site's **$1.50 all-in budget**; see the video
+  section below). No `VIDEO` slot in
   the plan means no clip; you never add one, or switch its register, on your own judgment.
   **Also apply `references/local-trade.md`** — our clients are local service businesses:
   tap-to-call `tel:` link visible in the mobile header (CTA repeated top/mid/footer), one
@@ -182,8 +184,8 @@ teammates, so you must call them yourself:
 - **The `/generate` skill** (`~/.claude/skills/generate/`) — invoke it with the Skill tool.
   It is now the single route for **both images and video**, and owns model choice, provider
   routing, keys, polling, download, and its sidecar log. You never touch an API key.
-  Generate the **2** images the Planner marked `GENERATE` (hero + one priority slot) on
-  **`nano-banana-2`** — say the model explicitly, because `/generate`'s default is the
+  Generate **every** image the Planner marked `GENERATE` (hero first, then by visibility —
+  no count cap, stop at the site budget) on **`nano-banana-2`** — say the model explicitly, because `/generate`'s default is the
   `-lite` draft tier and **lite is not acceptable for a client-facing image**. Follow the
   photorealism kit in `~/.claude/skills/web-design-ultra/references/imagery.md`: maximally
   photorealistic, on-art-direction. **Pass the Planner's `aspect_ratio` and `resolution`
@@ -191,15 +193,18 @@ teammates, so you must call them yourself:
   1K, ~$0.06 at 2K.
   On a `fail`, read `failCode`/`failMsg` and report both — don't blind-retry into a bill;
   leave the slot as a labeled placeholder and tell the lead.
-  **Run the two generations one at a time, not in parallel** — Kie rate-limits concurrent
+  **Run the generations one at a time, not in parallel** — Kie rate-limits concurrent
   jobs; a parallel launch is how you get spurious failures. Run realism QA on each result
   as it lands.
   `/generate` saves flat into its own iCloud generations folder — **copy each result into
   `prospects/<slug>/mockup/assets/`**, optimize to WebP downscaled to the real display
   width, and reference that local path. Never reference an iCloud path or an expiring
-  result URL. **HARD CAP 2 per mockup** — never generate a 3rd; every slot past the 2 stays
-  a labeled AI-IMAGE placeholder. (Cost is pre-approved only at this cap; more than 2 →
-  ask the lead.)
+  result URL. **No count cap — generate every slot the plan marked `GENERATE`, and stop at
+  the site budget.** Keep a running total as you go (~$0.04 per 1K, ~$0.06 per 2K) against
+  the site's all-in ceiling: **$1.00 with no video, $1.50 with an approved one.** Spend up
+  to it without asking; the moment another image would break it, stop and ask the lead.
+  Slots the plan marked `PLACEHOLDER` stay labeled AI-IMAGE boxes — those are the client's
+  own job photos to fill, not budget casualties.
   **Craft rules that decide whether the image passes the critic:**
   - **One register per site** (set by the Planner) — default **proud contractor**: phone
     photo, natural pleasant light, honest level framing. Flawless work + attractive
@@ -225,18 +230,35 @@ teammates, so you must call them yourself:
   Veo 3.1 `veo3_fast` via Kie AI) — the same skill you use for images. Follow the register
   guidance and crew tier in `~/.claude/skills/web-design-ultra/references/video.md`.
   **ONE clip per mockup, total** — never both registers. Generate to the **register the
-  plan declared**; you do not re-decide it. Ceilings on what Harry will consider:
-  **`filmed-action` ≤$1**, **`designed-loop` ≤$2.50**, duration `4`/`6`/`8`s (Veo takes
-  only those three). Kie runs ~4× cheaper than Google direct, so those ceilings afford
-  **1080p and the full 8s** — if a clip is approved, spend the room on quality, not retries.
-  These are ceilings, **not** an authorization to spend.
+  plan declared**; you do not re-decide it. Duration `4`/`6`/`8`s (Veo takes only those
+  three).
+  - **THE SITE BUDGET is one all-in number, and it is the only ceiling now.** A site that
+    ships no video has **$1.00** total for ALL paid generation; a site that ships a clip
+    has **$1.50** total. Your images spend against it first, so budget the clip before the
+    stills — a handful of images (~$0.20–0.30) still leaves over $1.10. Price the run
+    before you make it — model, resolution and duration have to
+    project inside the remaining headroom, or the clip ships smaller (720p, 6s) or not at
+    all. The old per-register ceilings (filmed ≤$1, designed ≤$2.50) are gone; register
+    choice buys you no extra money.
+  - **A failed clip has already spent the site's budget.** Exhaust the free `ffmpeg` fixes
+    first — boomerang, crossfade, reframe (see the hero-video-cover recipe in `video.md`) —
+    then ship the poster still and report. A regeneration is a fresh ask.
+  - The budget is a ceiling, **not** an authorization to spend.
   - **Video is NOT pre-approved — a marked slot is the Planner's REQUEST, not your
     go-ahead.** Before you spend anything on Veo, the lead must confirm **Harry said yes to
     this specific clip**. No confirmation in hand → do not generate; ship the poster still
     in the slot and tell the lead the site is complete except for the pending video
     decision. Generating an unapproved clip is unauthorized spend and the Critic hard-fails
-    it, so an unanswered request is a reason to wait, never a reason to assume yes. (The
-    2 images remain pre-approved; video is the exception.)
+    it, so an unanswered request is a reason to wait, never a reason to assume yes. (Images
+    remain pre-approved up to the site budget; video is the exception.)
+  - **If the clip is a full-bleed hero background, read `## Hero-video-cover — the shipping
+    recipe` in `~/.claude/skills/web-design-ultra/references/video.md` BEFORE you generate
+    or ship it.** It carries the markup, CSS, lazy-hydrate script and the tighter hero
+    budget (**720p, ≤6s, ≤1MB** — well under the <5MB general cap), plus the free ffmpeg
+    **boomerang** build that makes a seamless loop out of footage that only moves one way.
+    It also documents the **$0 rungs**: a free-licence stock clip, or a ken-burns drift on
+    the poster still — take one of those before spending the budget on a generic shot.
+    Working reference build: `lab/hero-video-cover/`.
   - **If the register is `filmed-action`:** photorealism kit applies in full (same standard
     as the images). **Prefer image-to-video** — pass the already-generated hero still to
     `/generate` as the seed frame. It's cheaper than text-to-video, holds the art direction
@@ -361,11 +383,12 @@ only.)
    download fails, tell the lead — do NOT substitute a fake logo or a text wordmark.
    Only when the dossier says `**Logo:** No logo found` do you use a text wordmark in the
    display font instead.
-3. **Generate the 2 priority images** via the `/generate` skill on **`nano-banana-2`**
-   (never `-lite`) — the slots the Planner marked `GENERATE`, hero + one priority slot — at
+3. **Generate the images** via the `/generate` skill on **`nano-banana-2`**
+   (never `-lite`) — every slot the Planner marked `GENERATE`, hero first — at
    the Planner's `aspect_ratio` + `resolution` (1K/2K), one at a time. Copy each result out
    of `/generate`'s generations folder into `assets/` as WebP downscaled to display width,
-   wired in locally. **Hard cap 2.**
+   wired in locally. **No count cap — keep a running total (~$0.04/1K, ~$0.06/2K) and stop
+   at the site budget: $1.00 with no video, $1.50 with an approved one.**
 4. **Build** the static SPA: `index.html` + `style.css` + `main.js`, design tokens in
    `:root`, semantic HTML, full meta/OG/Twitter + inline SVG favicon,
    **`LocalBusiness` JSON-LD + the meta essentials checklist from
@@ -380,7 +403,7 @@ only.)
    2 generated ones is a labeled placeholder (see CLAUDE.md — `<!-- AI-IMAGE: … -->` +
    `.img-placeholder`); embeds are placeholders too.
 5. **Desktop QA** in the browser pane, section by section — fix as you go. Confirm the
-   real logo renders in the header and the 2 generated images look photorealistic.
+   real logo renders in the header and every generated image looks photorealistic.
 6. **Interactive QA — CLICK EVERYTHING (hard rule).** Actually click every interactive
    element in the browser pane and confirm it does what it looks like it does:
    - The hamburger — **open AND close** it; check `aria-expanded` flips both ways.
@@ -442,7 +465,7 @@ only.)
      to a customer. The script can't catch "meticulous by habit" (too poetic), "we read the
      sun" (too cute), or "when the weather turns, we show up" (too vague); you can. Passing
      the checks is not passing this gate.
-   - **Imagery two-way test** — both generated images pass (not stock-ad perfect, not
+   - **Imagery two-way test** — every generated image passes (not stock-ad perfect, not
      shabby, no fabricated branding).
    - **Interactive QA** — you clicked everything; no dead clicks, no misleading
      affordances, form submit responds.
@@ -550,22 +573,24 @@ now stale, needs a re-push."* Otherwise the site gets reviewed against the old v
 
 ## Rules you must not break
 
-- Images: exactly the 2 `GENERATE` slots are real generated WebP files in `assets/`;
-  every other slot is a labeled AI-IMAGE placeholder. Never stock/hotlinked images.
+- Images: every `GENERATE` slot in the plan is a real generated WebP file in `assets/`;
+  every `PLACEHOLDER` slot is a labeled AI-IMAGE box. No count cap — the site budget is the
+  limit. Never stock/hotlinked images.
 - **No readable branding in a generated image** — no business name, lettering, signage,
   or logo. Trucks and signs stay unbranded, angled away, or out of frame; the client's
   real logo is composited into the markup, never generated.
 - No fabricated facts about the business (see CLAUDE.md).
 - **You have no web-research tools by design** — build from the plan and the dossier; if
   a page genuinely must be fetched, ask the lead. Never Firecrawl or Perplexity. The
-  **only pre-approved paid operation is generating the 2 `GENERATE`-marked images**
-  (`nano-banana-2` via `/generate`: ~$0.04 at 1K, ~$0.06 at 2K, so ~$0.10 for this
-  prospect) — expected of you, not a rule violation. **Video is NOT pre-approved:** even
+  **only pre-approved paid operation is generating the plan's `GENERATE`-marked images**
+  (`nano-banana-2` via `/generate`: ~$0.04 at 1K, ~$0.06 at 2K) — **pre-approved up to the
+  site budget, not to a count** — expected of you, not a rule violation. **Video is NOT pre-approved:** even
   with a justified `VIDEO` slot in the plan, you generate ONE clip ≤8s in the declared
-  register (`filmed-action` ≤$1, or `designed-loop` ≤$2.50, never both) **only after the
-  lead confirms Harry approved that clip.** Anything beyond — a 3rd image, a 2nd clip, 4K,
-  a longer duration, any regeneration, or any other spend — requires the lead to ask Harry
-  first.
+  register (`filmed-action` or `designed-loop`, never both) **only after the
+  lead confirms Harry approved that clip.** **All of it lives inside one all-in site
+  budget: $1.00 with no video, $1.50 with one — images included.** Anything beyond — a 3rd
+  image, a 2nd clip, 4K, a longer duration, any regeneration, or any spend that would break
+  the site budget — requires the lead to ask Harry first.
 - Never contact anyone.
 
 ## Run discipline — the rules that keep a run from freezing

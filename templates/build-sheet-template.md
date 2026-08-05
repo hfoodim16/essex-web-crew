@@ -43,6 +43,14 @@
 
 <!-- the ONE symmetry break + which section id carries it -->
 
+### Media budget
+
+<!-- No image count cap — the site budget is the only limit: $1.00 all-in if the site
+     ships no video, $1.50 if it ships one (images + video + regenerations, everything).
+     List every GENERATE slot with its tier and total it here; the builder stops at the
+     ceiling. e.g.  1×2K hero ($0.06) + 5×1K ($0.20) = $0.26 of $1.00 — fits.
+     If a VIDEO slot is marked, price it here too and show the combined total. -->
+
 ### Head / SEO
 
 <!-- title, meta description, canonical, og:*, LocalBusiness JSON-LD.

@@ -11,6 +11,7 @@ Rhythm is the designed contrast between adjacent sections — dense ↔ breathe,
 | `card-grid` | compare 3–6 equivalent things (services, plans) | dense | items are genuinely parallel; NEVER the default container |
 | `split` | one idea + one image, side by side | medium | the media carries half the argument |
 | `full-bleed-band` | visual breather / mood reset | breathe | after 2 dense sections; photo, video poster, or rich gradient |
+| `hero-video-cover` | the hero, carried by a full-bleed looping plate | breathe | the opening moment earns real motion — full markup/CSS/loop-build recipe (and its $0 ken-burns fallback) in `video.md` |
 | `editorial-column` | one narrow measure of real prose | medium | the story matters (about, origin, process narrative) |
 | `stat-strip` | 3–4 numbers that prove something | breathe | the numbers are real and verifiable |
 | `steps` | sequence with an order (process, timeline) | medium | order itself informs; numbered ONLY here |

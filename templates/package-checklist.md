@@ -10,7 +10,7 @@ scoreboards below.
 2. [ ] **Typography** — paired display + body Google Fonts; NEVER Inter, Roboto, Arial, or Helvetica; hierarchy via scale/weight.
 3. [ ] **Restrained color** — 3–5 colors as tokens, used consistently.
 4. [ ] **Hierarchy breathes** — clear primary/secondary/tertiary; whitespace does work.
-5. [ ] **Imagery with intent** — the **2 Planner-marked `GENERATE` slots (hero + one priority slot) hold REAL generated images** stored locally as WebP in `mockup/assets/` and passing the two-way realism test below; **every other slot is a labeled `AI-IMAGE` placeholder** in the art direction's style. More than 2 generated images = budget fail. NO stock/hotlinked/copyrighted images.
+5. [ ] **Imagery with intent** — **every Planner-marked `GENERATE` slot holds a REAL generated image** stored locally as WebP in `mockup/assets/` and passing the two-way realism test below; **every `PLACEHOLDER` slot is a labeled `AI-IMAGE` box** in the art direction's style. No image count cap — but a spend ledger over the site budget ($1.00 no video / $1.50 with one) = budget fail. NO stock/hotlinked/copyrighted images.
 6. [ ] **Motion whispers** — the plan's **named** signature move (entrance family + hover personality, distinct from the last 3 rows of `design-memory.md`); ALL gated behind `prefers-reduced-motion`.
 7. [ ] **Mobile designed, not shrunk** — distinct phone layout decisions, PROVEN by mobile screenshots.
 8. [ ] **Invisible expensive stuff** — sub-2s load (no huge assets), WCAG AA contrast, keyboard nav / focus ring, semantic HTML, real meta+OG+favicon, **JS-off test passes** (rename `main.js` + `vendor/*.js`, reload — page still readable).
@@ -54,7 +54,7 @@ they took it themselves?* Both halves must hold. Open each generated image full 
 
 ## Hard rules (any failure blocks sign-off)
 
-- [ ] **Images** — exactly 2 locally-stored generated images; every other slot a labeled placeholder; the client's real logo served as a LOCAL file. No stock, hotlinked, or copyrighted images anywhere.
+- [ ] **Images** — every `GENERATE` slot is a locally-stored generated image and every `PLACEHOLDER` slot a labeled box; the spend ledger fits the site budget ($1.00 no video / $1.50 with one); the client's real logo served as a LOCAL file. No stock, hotlinked, or copyrighted images anywhere.
 - [ ] **Real logo present** — if the dossier has a `**Logo:**` URL, the actual file is in `mockup/assets/` and renders in the header (local `src`, not hotlinked, not a substituted text wordmark).
 - [ ] **Real reviews only** — every testimonial traces to a real review in the dossier's "Real reviews" section (same quote, reviewer, platform). No dossier reviews → no testimonial section, or a clearly labeled placeholder. Invented praise = automatic fail.
 - [ ] **Current facts, not stale** — the mockup reflects business-announced changes (owner, name, address); no outdated version presented as current.
@@ -111,7 +111,7 @@ they took it themselves?* Both halves must hold. Open each generated image full 
       decisions"** section and the content map)
 - [ ] `voice-spec.md` (the Planner's copy contract — register, word budgets, the client's
       own phrases, thin-fact sections)
-- [ ] `mockup/` (pages per the **plan's** page map, opens cleanly) incl. `assets/` (logo + 2 generated images)
+- [ ] `mockup/` (pages per the **plan's** page map, opens cleanly) incl. `assets/` (logo + every generated image)
 - [ ] `screenshots/` (desktop + mobile)
 - [ ] `release-form.pdf` — valid one-page PDF; no `{{` tokens left in its `.html`
       source; Client/Business, Contact Name and Pages Included filled; **Pages Included

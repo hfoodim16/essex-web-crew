@@ -311,8 +311,8 @@ Items marked **[SHEET]** land in `build-sheet.md` in final executable form; item
    **Background & atmosphere direction:** name the depth treatment the Builder should
    build from the skill's free recipes (`references/backgrounds.md` layered
    gradients/textures + `references/atmosphere.md` fog / god rays / shimmer / motes) —
-   this is how the pages stay rich in depth BEYOND the 2 generated images, since most
-   image slots ship as placeholders. For a **tech-register** prospect (SaaS, security,
+   this is how the pages stay rich in depth between the generated images and the
+   client-photo placeholder slots. For a **tech-register** prospect (SaaS, security,
    fintech, data, agency) you may instead name a **reactive field** from
    `references/reactive-backgrounds.md` — pointer-spotlight, vector field, constellation,
    flow ribbons, perspective grid, starfield. It is hero-only, one per site, and it
@@ -320,13 +320,22 @@ Items marked **[SHEET]** land in `build-sheet.md` in final executable form; item
    local trade, legal, or medical prospect it is the wrong register — don't.
    **The three directions + the pick:** record all three divergent direction briefs from
    Stage 5 and which one you chose and why (Harry reviews the reasoning).
-8. **[SHEET] Image list — mark the 2 to GENERATE.** List every image slot the site needs, each
-   with a specific, photorealistic generation prompt. **Mark exactly two as
-   `GENERATE`** — the hero first, then the one highest-impact/most-visible slot — which
-   the Builder will actually generate (via the `/generate` skill on **`nano-banana-2`**,
-   the shipping tier — never the `-lite` draft model; hard cap 2). Mark every other slot
-   `PLACEHOLDER` (labeled AI-IMAGE box; Harry/the client fills later). For **each
-   GENERATE slot, specify: register + size**:
+8. **[SHEET] Image list — mark what to GENERATE, and price it.** List every image slot the
+   site needs, each with a specific, photorealistic generation prompt. **There is no count
+   cap** — mark as many `GENERATE` as the design genuinely needs, hero first and then by
+   visibility, for the Builder to generate (via the `/generate` skill on **`nano-banana-2`**,
+   the shipping tier — never the `-lite` draft model).
+   - **Carry a running cost total and show it fits the site budget** — `$0.04` per 1K slot,
+     `$0.06` per 2K, all-in ceiling `$1.00` with no video / `$1.50` with one. Write the
+     total on the sheet (e.g. `6 slots: 1×2K + 5×1K = $0.26 of $1.00`). A list you cannot
+     price inside the budget is a plan defect.
+   - **Money is not the binding constraint on a still-only site** — $1.00 buys ~16 images
+     at 2K. **Design judgment is.** Mark the slots that make the page look finished and
+     specific; don't pad the list to spend the budget.
+   - Mark a slot `PLACEHOLDER` (labeled AI-IMAGE box) when its real answer is the client's
+     **own job photography** — galleries, before/after, the actual crew and trucks. That is
+     a content-honesty call, not a cost one, and it is still the right call for those slots.
+   For **each GENERATE slot, specify: register + size**:
    - **Register — pick ONCE per prospect, apply to the hero + every GENERATE slot (never
      mix).** `proud-contractor` (DEFAULT for trades: **flawless finished work at an
      attractive home, shot casually but flatteringly in pleasant natural light** — like the
@@ -377,10 +386,16 @@ Items marked **[SHEET]** land in `build-sheet.md` in final executable form; item
    - **Register** — `filmed-action` or `designed-loop`.
    - **Justification** — one sentence. Filmed: the frame-2 argument. Designed loop: which
      free ladder rung it beat and why that rung couldn't carry the moment.
-   - **Budget** — filmed **≤$1**, designed loop **≤$2.50**. All generation runs through
-     the `/generate` skill (Veo 3.1 `veo3_fast` via Kie, ~4× cheaper than Google direct),
-     so those caps now afford **1080p and the full 8s** — spend the headroom on quality,
-     not retries.
+   - **Budget** — **the site has ONE all-in budget covering every paid generation, images
+     included: $1.00 if it ships no video, $1.50 if it ships one.** Your `GENERATE` images
+     spend against it first, so budget the clip before the stills — a handful of images
+     (~$0.20–0.30) still leaves over $1.10 for it. State the
+     projected clip cost in the slot and show it fits. If the shape you want (1080p, 8s)
+     projects over the headroom, spec a smaller one (720p, 6s) or drop the slot — do not
+     mark a slot you cannot price inside the budget. The old per-register ceilings (filmed
+     ≤$1, designed loop ≤$2.50) are retired; register choice buys no extra money. All
+     generation runs through the `/generate` skill (Veo 3.1 `veo3_fast` via Kie, ~4×
+     cheaper than Google direct).
    - **Source** — `text-to-video`, or `image-to-video` naming the seed frame. Prefer
      image-to-video for filmed action: animate the `GENERATE` hero still, or seed from an
      `Inspiration/` photo. If seeding from `Inspiration/`, **name the file** and state how
@@ -456,10 +471,11 @@ in STATE.md's open questions via the lead — never a filesystem-wide hunt.
 ## Rules
 
 - You plan; you do not build. Do not write HTML/CSS/JS.
-- Mark exactly **2 slots `GENERATE`** (hero + one priority slot, each with register,
-  aspect ratio, and resolution tier); every other slot is a labeled AI-IMAGE
-  `PLACEHOLDER`. Never specify real or stock images.
+- Mark **as many slots `GENERATE`** as the design needs (each with register, aspect ratio,
+  and resolution tier), with a **running cost total that fits the site budget** — $1.00 no
+  video / $1.50 with one. No count cap. Client-photo slots (galleries, before/after, crew,
+  trucks) stay labeled AI-IMAGE `PLACEHOLDER`. Never specify real or stock images.
 - **Free tools for your own research — never Firecrawl or Perplexity.** (The
-  `search.py` engine is local and free.) The 2 images you mark `GENERATE` are a
-  pre-approved cost the Builder incurs, not a rule violation.
+  `search.py` engine is local and free.) The images you mark `GENERATE` are a pre-approved
+  cost the Builder incurs — pre-approved **up to the site budget**, not to a count.
 - Never contact anyone.

@@ -6,17 +6,29 @@
 
 ## Image policy (hard rule)
 
-**Tiered: 2 real AI images per mockup, placeholders beyond.**
+**There is no image count cap. The site budget is the only limit.**
 
-- **Builders generate up to 2 AI images per mockup — HARD CAP.** Use the **`/generate`
-  skill** on **`nano-banana-2`** (Google Gemini 3.1 Flash Image, via Kie AI) — say the
-  model explicitly, because `/generate`'s default `-lite` is a draft tier and is not
-  acceptable for a client-facing image. Priced by resolution: **~$0.04 at 1K, ~$0.06 at
-  2K.** Per-prospect ≈ $0.08 (both 1K) to $0.12 (both 2K); typical one-2K-hero-plus-one-1K
-  ≈ $0.10. Pre-approved by Harry at the 2-image cap; NEVER exceed 2 without the lead
-  asking Harry first.
-- **Priority order: the hero first**, then the one next most visible slot — the
-  Planner marks these two as `GENERATE` in the plan's image list.
+- **Builders generate as many AI images as the design genuinely needs, priced to fit the
+  site's all-in budget** ($1.00 with no video, $1.50 with an approved one — see "The site
+  budget" below). Use the **`/generate` skill** on **`nano-banana-2`** (Google Gemini 3.1
+  Flash Image, via Kie AI) — say the model explicitly, because `/generate`'s default
+  `-lite` is a draft tier and is not acceptable for a client-facing image. Priced by
+  resolution: **~$0.04 at 1K, ~$0.06 at 2K.** At those rates $1.00 buys roughly **16 images
+  at 2K, or 25 at 1K** — the budget is not the binding constraint on a still-only site, and
+  it never was. **Count the projected total before generating and keep it inside the
+  budget**; the lead asks Harry before anything that would break it.
+- **The constraint that actually binds is design judgment, not money.** Generate the images
+  the page needs to look finished and specific — hero, section plates, service cards,
+  gallery, OG. Do not pad a page with generated filler to spend the budget, and do not
+  starve a page that genuinely needs six images because two used to be the rule.
+- **Priority order: the hero first**, then by visibility — the Planner marks every
+  generated slot `GENERATE` in the plan's image list, in that order, with a running cost
+  total.
+- **Placeholders are still right for client-photo slots — for content reasons, not cost.**
+  Slots that should carry the business's own real work (job galleries, before/after,
+  team, the actual trucks) stay labeled `AI-IMAGE` placeholders for the client to fill.
+  That call is about honesty and what the client will want to swap, and it survives the
+  cap's removal untouched.
 - **The Planner sizes each GENERATE slot** (see the plan-spec below): aspect ratio +
   resolution tier + where it renders. Rule of thumb: **full-bleed / background hero → `2K`;
   contained cards, plates, split-hero, OG → `1K`** (see the "Fit the slot" section of
@@ -37,7 +49,8 @@
   in the build if a branded truck or sign is wanted. Optimize to
   WebP, **downscaling to the real display width** (never ship a 2K file into a small slot),
   store in `prospects/<slug>/mockup/assets/`, reference locally (never hotlink).
-- **Every slot beyond the 2 stays a labeled AI-IMAGE placeholder** (this is the norm — most image slots ship as marked placeholders for the client to fill with real job photos)**:**
+- **Client-photo slots stay labeled AI-IMAGE placeholders** — the slots whose real answer
+  is the business's own job photography, which the client fills after the pitch**:**
 
 ```html
 <!-- AI-IMAGE: wide drone shot of a finished bluestone paver patio at golden hour -->
@@ -76,20 +89,53 @@ same feeling, take it.
   show that frame 1 cannot? Nothing → ship the still. Real motion that proves or sells
   (water feature, fire, a process/timelapse proof, venue ambience) → justified. For
   businesses whose work is **physically visible**. Photorealism kit applies in full.
-  **Ceiling: ≤$1**, ≤8s.
 - **`designed-loop`** — an abstract rendered motion object in the site's exact palette; its
   job is **brand register, not proof**, so frame-2 does not apply. Gate: **occupational fit
   — studio / tech / SaaS / premium / creative ONLY** (behind a trade, legal, or medical
   prospect it's the convention error `color-conventions.md` prevents — hard no), the moment
   needs rendered richness no free tier can fake, and it **consumes the scroll-set-piece
   slot** (mutually exclusive with a reactive field). **INVERTS the photorealism kit** — the
-  CGI look is the point. **Ceiling: ≤$2.50**, ≤8s.
+  CGI look is the point. ≤8s.
 
 "It looks premium" and "the hero feels static" are not justifications in either register.
 
-Those dollar figures are **ceilings on what Harry will consider, not budgets the crew may
-spend.** Because Kie runs ~4× cheaper than Google direct, an approved clip can afford
-1080p and the full 8s inside them — spend the room on quality, never on retries.
+## The site budget (hard rule — everything included)
+
+**One number per site, and it covers ALL paid generation for that site — images, video,
+every retry, every tier.**
+
+| The site ships | All-in budget |
+|---|---|
+| **no video** | **$1.00** |
+| **a video** (either register) | **$1.50** |
+
+This replaced the old per-register ceilings (filmed ≤$1, designed ≤$2.50) on 2026-08-04.
+There is no separate image budget and no separate video budget — there is one site number,
+and images spend against it first.
+
+What that means in practice:
+
+- **No-video build.** $1.00 buys ~16 images at 2K or ~25 at 1K. There is no count cap —
+  generate what the design needs and keep the running total inside the dollar. In practice
+  a strong mockup lands well under it.
+- **Video build.** Images plus the clip must both fit in $1.50, and the clip is by far the
+  expensive half. Budget the clip first, then spend what is left on stills — a handful of
+  images (~$0.20–0.30) still leaves over $1.10 for the clip. Price the actual run before asking: if the model, resolution and
+  duration you want project over the remaining headroom, the ask is over budget and the
+  answer is a cheaper shape (720p instead of 1080p, 6s instead of 8s) or no clip.
+- **A designed loop can no longer assume $2.50.** Whatever it costs has to land inside
+  $1.50 all-in, same as a filmed clip. Register choice does not buy extra money.
+- **No retries, and now it bites harder.** A failed clip has already spent the site's
+  budget. Exhaust the free `ffmpeg` fixes (boomerang, crossfade, reframe — see the
+  hero-video-cover recipe in `video.md`), then ship the poster still and report. A
+  regeneration is a fresh ask against a budget that is already gone.
+- **A free rung costs $0 and always fits.** Static depth, atmosphere, a canvas field, a
+  free-licence stock clip boomeranged locally — none of these touch the budget. Most sites
+  should still ship for well under $0.20.
+
+**The budget is a ceiling, not an authorization.** $1.50 does not mean a site may have a
+video; it means that IF Harry approves one, the site's total paid media may not exceed
+$1.50. Video is still never pre-approved.
 
 - **The Planner marks 0 or 1 `VIDEO` slot** with its **register**, justification, budget,
   duration, aspect, source (text-to-video or an image-to-video seed frame), and poster
