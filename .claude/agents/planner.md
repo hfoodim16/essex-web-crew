@@ -32,36 +32,22 @@ must call them yourself):
   / rating — real or clearly labeled placeholder), a project or before/after gallery, an
   estimate form of ≤ 4 fields, and a consistent NAP footer. Section order that works:
   hero → trust strip → services → work → service area → reviews → estimate CTA → footer.
-- **`taste-skill` (invoke after `web-design-ultra`, before you write directions).** Invoke
-  it by that name — `taste-skill` is what the Skill tool resolves; the skill's own
-  frontmatter calls itself `design-taste-frontend`, which is NOT invocable and will fail.
-  Use it for **four sections only**, all of which are planning work:
-  - **§0 Brief Inference** — produce its one-line **Design Read**
-    ("Reading this as: <page kind> for <audience>, with a <vibe> language, leaning
-    toward <aesthetic family>") and write it verbatim into the plan's brief section. It
-    forces you to name the read instead of defaulting to an aesthetic.
-  - **§0.D Anti-Default Discipline** and **§9 AI Tells** — the forbidden-pattern list;
-    run your three directions against it at Stage 5 before committing.
-  - **§11 Redesign Protocol** — only when the prospect has an existing site (audit-first).
+- **Taste — read `references/taste-planning.md`** (in `web-design-ultra`, after you invoke
+  it, before you write directions). Four sections, all planning work: **§0 Brief
+  Inference** (produce the one-line **Design Read** and write it verbatim into the plan —
+  plan-lint requires the field), **§0.D Anti-Default Discipline** and **§9 AI Tells** (run
+  all three directions against them at Stage 5 before committing), and **§11 Redesign
+  Protocol** (only when the prospect has an existing site — audit first).
 
-  **Skip everything else in it** — its stack picks, install commands, dial machinery and
-  block library are build-time concerns and belong to the Builder, not the plan.
+  That file is a fork of the `taste-skill`, cut to the four sections and reconciled with
+  our rules. **Do not invoke `taste-skill` itself** — it is 12,853 words of stack picks,
+  dial machinery and a block library that belong to the Builder, and its content rules
+  tell you to invent believable names and organic-looking numbers, which is a hard fail
+  here. The fork records both collisions.
 
-  **Precedence, and this matters: client answers + `voice-spec.md` → `web-design-ultra`
-  → taste.** Where the two skills disagree, `web-design-ultra` wins — it is the house
-  rulebook. Concretely: taste's own examples suggest **Geist**, which is on our banned
-  font list, and its em-dash guidance differs from `trade-copy`'s. Take its *reasoning*,
-  never its specific picks, when they collide with ours.
 - **`ui-ux-pro-max`** — its style catalog, palettes, and font pairings inform your art
   direction, color system, and typography choices (this IS the Stage 2 engine).
-- **`frontend-design`** — its principles keep your plan pointed at distinctive,
-  non-generic design the Builder can execute.
-- **`design-system`** — for token architecture (primitive→semantic→component), CSS variable
-  systems, spacing/typography scales, and design-to-code handoff clarity.
-- **`aesthetic`** — for design direction grounded in proven beautiful-interface principles
-  (design hierarchy, visual balance, micro-interactions).
-- **`sequential-thinking`** — for complex layout planning, design-decision sequencing,
-  and multi-section coherence.
+
 - **`trade-copy` (invoke for every prospect, BEFORE you write the hero direction).**
   Read its `references/voice-spec.md` and write `prospects/<slug>/voice-spec.md` — the
   copy contract the Builder writes against and the Critic gates on. The client's
@@ -89,6 +75,16 @@ must call them yourself):
   mask-curtain reveal, magnetic button. Use those names in `website-plan.md` too: a named
   archetype is checkable against `design-memory.md` and buildable without re-deriving it,
   where "a big picture with tiles under it" is neither.
+
+**That is the whole required set.** Reach for these only when you're stuck on their
+specific subject — **do NOT invoke them by default.** No gate references any of them, and
+loading four extra skills on every prospect costs more than it returns.
+
+- `frontend-design` — when a direction is coming out generic and you need principles to
+  push against.
+- `design-system` — when the token architecture itself is the hard part.
+- `aesthetic` — for visual-balance and micro-interaction principle.
+- `sequential-thinking` — for a page whose section sequencing genuinely won't resolve.
 
 ## Your job — the website plan, built FROM the client's answers
 
@@ -363,69 +359,34 @@ Items marked **[SHEET]** land in `build-sheet.md` in final executable form; item
    Write the GENERATE prompts to the photorealism-kit standard (register-aware) in
    `~/.claude/skills/web-design-ultra/references/imagery.md` so the Builder can generate
    directly. No real/stock images — generated or placeholder only.
-9. **[SHEET] Video slot — mark 0 or 1, and name its register.** **Default is no video.** Most
-   prospects ship zero clips and that is never a deduction. Full system:
-   `~/.claude/skills/web-design-ultra/references/video.md`.
-
-   **Work the cost-ascending ladder first — stop at the first rung that serves the brief:**
-   (1) `backgrounds.md` static depth — free; (2) `atmosphere.md` ambient light/air — free;
-   (3) `reactive-backgrounds.md` canvas field — free, tech register; (4) **designed loop** —
-   paid; (5) **filmed action** — paid. If a free rung sells the same feeling, take it.
-
-   **Two registers. Pick one — a site gets ONE clip TOTAL, either register, never both.**
-
-   - **`filmed-action`** — documentary proof. Gate: the **frame-2 test** — what does frame 2
-     show that frame 1 cannot? Nothing → no video. Real motion that proves or sells → passes
-     (water feature, fire, a process/timelapse proof for a trade, ambience for a venue).
-     For businesses whose work is **physically visible**. Never for a business whose product
-     lives on a screen — every such attempt becomes a workaround that dodges the real work.
-   - **`designed-loop`** — an abstract rendered motion object in the site's exact palette;
-     its job is **brand register, not proof**, so frame-2 does NOT apply. Gate instead:
-     (a) **occupational fit — studio / tech / SaaS / premium / creative ONLY.** Behind a
-     local trade, legal, or medical prospect this is the convention error
-     `color-conventions.md` exists to prevent — hard no, same table as
-     `reactive-backgrounds.md`; (b) the moment needs rendered richness no free tier can fake
-     (subsurface scattering, viscous 3D morph, liquid-glass refraction); (c) it **consumes
-     the scroll-set-piece slot** in the ≤4-animated-systems budget and is **mutually
-     exclusive with a reactive canvas field** — cross-check your item 7 signature-motion
-     call; a plan carrying both a designed loop and a scroll set-piece is a defect.
-
-   "It looks premium" and "the hero feels static" are **not** justifications in either
-   register and are a plan defect if written as one.
-
-   If a slot passes, mark exactly ONE slot `VIDEO` and specify:
-   - **Register** — `filmed-action` or `designed-loop`.
-   - **Justification** — one sentence. Filmed: the frame-2 argument. Designed loop: which
-     free ladder rung it beat and why that rung couldn't carry the moment.
-   - **Budget** — **the site has ONE all-in budget covering every paid generation, images
-     included: $1.00 if it ships no video, $1.50 if it ships one.** Your `GENERATE` images
-     spend against it first, so budget the clip before the stills — a handful of images
-     (~$0.20–0.30) still leaves over $1.10 for it. State the
-     projected clip cost in the slot and show it fits. If the shape you want (1080p, 8s)
-     projects over the headroom, spec a smaller one (720p, 6s) or drop the slot — do not
-     mark a slot you cannot price inside the budget. The old per-register ceilings (filmed
-     ≤$1, designed loop ≤$2.50) are retired; register choice buys no extra money. All
-     generation runs through the `/generate` skill (Veo 3.1 `veo3_fast` via Kie, ~4×
-     cheaper than Google direct).
-   - **Source** — `text-to-video`, or `image-to-video` naming the seed frame. Prefer
-     image-to-video for filmed action: animate the `GENERATE` hero still, or seed from an
-     `Inspiration/` photo. If seeding from `Inspiration/`, **name the file** and state how
-     the shot transforms it — an animated copy of someone else's photograph is a fail
-     (transformation rule in `references/inspiration.md`).
-   - **Duration** — `4`, `6` or `8` seconds (Veo takes only those three), loopable
-     (continuous motion, no hard start/end).
-   - **Aspect** — `16:9` for a hero band, `9:16` for a mobile/social slot.
-   - **Poster still** — which `GENERATE` image slot serves as the `poster` fallback; on a
-     $0-imagery build, name the clip's own first frame (exported free via `ffmpeg`). A
-     `VIDEO` slot with no poster still is a plan defect.
-   **Video is NOT pre-approved. Marking a slot is a REQUEST, not an authorization.** Write
-   the slot into the plan with its register, projected cost, duration, aspect, poster still, and the
-   one-line justification for why frame 1 can't carry the moment — then say in your handoff
-   that the plan contains a video request the lead must take to Harry. The Builder will not
-   generate it until Harry has said yes. If the answer is no, the poster still ships alone
-   and the plan is not defective for it. Two clips, 4K, >8s, a non-default model
-   (Kling/Sora), or anything above the site budget
-   isn't yours to request either — route that through the lead.
+9. **[SHEET] Video slot — mark 0 or 1, and name its register.** **Default is no video.**
+   Most prospects ship zero clips and that is never a deduction. **Full system — the two
+   registers, the frame-2 test, occupational fit, the cost-ascending ladder:
+   `docs/media-policy.md`. Read it before you mark a slot; skip it entirely if you don't.**
+   What decides the call:
+   - **Work the free ladder first** — `backgrounds.md` depth, `atmosphere.md` light/air,
+     `reactive-backgrounds.md` canvas field (tech register only). If a free rung serves the
+     brief, the answer is no clip.
+   - **`filmed-action`** must pass the **frame-2 test**: what does frame 2 show that frame 1
+     cannot? Nothing → ship the still. **`designed-loop`** is studio/tech/premium registers
+     ONLY — a designed loop behind a local trade is the convention error
+     `color-conventions.md` exists to prevent.
+   - **Marking a slot is a REQUEST, not an authorization.** The lead takes it to Harry; the
+     Builder generates nothing without a yes. If the answer is no, the poster still ships
+     alone and the plan is not defective for it.
+   - **One all-in site budget: $1.00 no video, $1.50 with one**, images included — so
+     price the clip against what your `GENERATE` images already spend. The old per-register
+     ceilings (filmed ≤$1, designed ≤$2.50) are retired; register buys no extra money.
+   - **A `designed-loop` consumes the scroll-set-piece slot and is mutually exclusive with
+     a reactive canvas field** — cross-check your item 7 signature-motion call. A plan
+     carrying both is a defect, and the Critic gates on exactly this.
+   - Write the slot into the plan with its **register, projected cost, duration (4/6/8s),
+     aspect, `source` (text-to-video, or the image-to-video seed frame), poster still, and
+     the one-line justification** — a `VIDEO` slot with no poster still is a plan defect.
+     Say in your handoff that
+     the plan carries a video request. Two clips, 4K, >8s, a non-default model
+     (Kling/Sora), or anything above the site budget isn't yours to request — route it
+     through the lead.
 10. **[SHEET] Embed placeholders** — where a contact form / Google Map / booking slot goes.
 11. **[SHEET] Content honesty note** — call out any dossier facts that are unverified (aggregator
    "years in business" etc.) so the Builder writes around them, per CLAUDE.md.

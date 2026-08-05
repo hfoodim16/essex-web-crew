@@ -36,14 +36,14 @@ the team:
 > `references/craft-floor.md` loads at Stage 7, immediately before UI edits. Impeccable
 > never sets direction — a gate checks the build, it does not choose the design.
 >
-> **`taste-skill` (taste) is a planning input.** Invoke it as `taste-skill` — the skill's
-> own frontmatter says `design-taste-frontend`, which the Skill tool does not resolve.
-> The Planner invokes it for four
-> sections only — §0 Brief Inference (the one-line **Design Read**, written into the
-> plan), §0.D Anti-Default Discipline and §9 AI Tells (run the three directions against
-> them at Stage 5), and §11 Redesign Protocol when an existing site is being replaced. Its
-> stack picks, install commands, dials and block library are build-time material and are
-> **not** used — that is the Builder's territory and `web-design-ultra` governs it.
+> **Taste is a planning input, and it lives in `web-design-ultra`.** The Planner reads
+> `references/taste-planning.md` — the four sections it uses (§0 Design Read, §0.D
+> anti-default discipline, §9 AI tells, §11 redesign protocol), forked from the
+> `taste-skill` and reconciled with our rules. **The `taste-skill` itself is NOT invoked
+> by the crew**: it is 12,853 words of stack picks, dial machinery and a block library
+> that are the Builder's territory, and its content rules tell you to invent believable
+> names and organic-looking numbers — a hard fail against our real-facts-only rule. The
+> fork records that collision and the Geist one.
 >
 > **The two rulebooks do disagree, so precedence is explicit:** client answers +
 > `voice-spec.md` → `web-design-ultra` → taste. Taste's examples suggest **Geist**, which
@@ -88,7 +88,8 @@ the team:
 - **Stage 8 → Builder self-check, then Critic (Critic OWNS this stage).** Run it in the order
   the skill's `references/critique.md` gives. **First, Step 0 — the mechanical scan, before
   anything is served or screenshotted:**
-  `node skills/web-design-ultra/scripts/detect.mjs prospects/<slug>/mockup/index.html`
+  `node skills/web-design-ultra/scripts/detect.mjs prospects/<slug>/mockup/*.html`
+  — **every page, not just the homepage**; interior pages are where copied section shapes hide.
   (60+ deterministic rules, no LLM, ~1s). **One-time setup on a fresh clone:**
   `cd skills/web-design-ultra/scripts/detector && npm install` — its parser packages are
   gitignored, and without them the engine falls back to a regex pass that catches almost

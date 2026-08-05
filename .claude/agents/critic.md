@@ -31,13 +31,6 @@ Invoke these skills (via the Skill tool — not auto-loaded for teammates, so ca
   `scrollTo(0,0)`; force reveals visible first
   (`document.querySelectorAll('.reveal').forEach(e=>e.classList.add('in'))`). Don't trust
   programmatic mid-page scroll — it returns black frames.
-- **`ui-ux-pro-max`** — to review each mockup with a rigorous design lens — color,
-  typography, spacing, layout, accessibility, components — and hold the build to a
-  professional standard.
-- **`code-review`** — for rigorous code auditing, semantic HTML verification, accessibility
-  (keyboard nav, focus rings, ARIA labels), and performance checklist.
-- **`design-system`** — for systematic design review: token consistency, component specs,
-  spacing/typography scales, and design-to-code accuracy.
 - **`trade-copy`** — the copy-voice gate. Run
   `python3 skills/trade-copy/scripts/copycheck.py prospects/<slug>/mockup/index.html`
   against the Planner's `voice-spec.md`, then read the page the way its owner would. See
@@ -46,6 +39,16 @@ Invoke these skills (via the Skill tool — not auto-loaded for teammates, so ca
   this measures page shape. Run
   `python3 skills/web-humanizer/scripts/aitells.py prospects/<slug>/mockup/*.html`
   on every page of the site. Both scripts must exit 0.
+
+**Those three are the whole required set.** Reach for the following only when a finding
+needs their depth — **do NOT invoke them by default.** `references/critique.md` already
+carries the rubric, the composition checks, and the a11y/semantic-HTML checklist you
+actually gate on; loading three more skills every round re-reads what you already have.
+
+- `ui-ux-pro-max` — when you need to argue a color/typography/spacing call precisely.
+- `code-review` — for a deep code audit beyond the Step 0 scan.
+- `design-system` — when token consistency itself is the finding.
+
 **The mechanical gates are part of `web-design-ultra` now — you get them by running Stage 8,
 not from a separate tool.** `references/critique.md` carries all three and is the authority;
 run them in the order it gives:
@@ -97,48 +100,33 @@ timid, or half-animated mockup has no excuse — grade it against that ceiling, 
   un-generated `GENERATE` slot → **fail**. Every `PLACEHOLDER` slot must be a proper labeled
   placeholder (that is BY DESIGN — the client fills those with real job photos);
   **there is no image count cap, but a spend ledger over the site budget is a budget-rule
-  fail**; stock/hotlinked images fail always. Judge realism with the two-way test below — it's the most common failure.
+  fail**; stock/hotlinked images fail always. Judge realism with the two-way test below —
+  it's the most common failure.
 - **Video.** Most mockups have none — that is the correct default, never a deduction.
-  When a clip IS present, **judge it against the register the plan declared**, not against
-  a single standard. It must clear every one of these or it's a **fail**:
-  - The plan marks a `VIDEO` slot **naming a register** (`filmed-action` or
-    `designed-loop`), **and Harry approved that specific clip.** A marked slot is only the
-    Planner's request — video is not pre-approved. A clip with no slot, **or with a slot but
-    no recorded approval**, is **unauthorized spend** — hard fail, escalate to the lead. A
-    slot with no register, or a clip that doesn't match its declared register, is also a
-    fail.
-  - The slot carries a written **justification** — the frame-2 argument for filmed, or
-    which free ladder rung it beat for a designed loop. Marked but unjustified → fail.
-  - **Budget:** exactly ONE clip per site, never both registers, ≤8s. **The site has one
-    all-in budget covering every paid generation, images included: $1.00 with no video,
-    $1.50 with one.** Add up what the build actually spent — every image, every
-    regeneration, plus the clip — and fail it if the total breaks the site's number. Two clips, 4K, a longer duration, or
-    any regeneration beyond the single approved run is a budget-rule fail. The old
-    per-register ceilings (filmed ≤$1, designed ≤$2.50) no longer apply — do not grade
-    against them.
-  - **If the clip was seeded from an `Inspiration/` image:** the plan must name the source
-    file, and the clip must be a **transformation** of it, not that photograph with motion
-    added. Open the named source and compare. If a viewer would recognize the clip as the
-    same photograph, it's a fail — the folder is collected reference, not licensed stock.
-    An `Inspiration/` image shipped as a **still** anywhere in the build is also a fail.
-  - **Fallbacks (both registers):** a `poster` still on the `<video>` tag AND a
-    `prefers-reduced-motion` branch that shows the still instead of autoplaying. Missing
-    either → fail.
-  - **If `filmed-action`:** apply the two-way realism test below and the proud-contractor
-    bar, exactly as for images. Then re-run the frame-2 test on viewing — if it's generic
-    motion wallpaper that a still plus an atmosphere layer would have sold just as well, it
-    failed the test the planner claimed it passed.
-  - **If `designed-loop`:** the realism test does **NOT** apply — a rendered CGI look is
-    correct here, not a defect. Check instead: **occupational fit** (studio/tech/premium
-    only — a designed loop behind a trade, legal, or medical prospect is a register fail,
-    same rule as a particle field behind a landscaper); **palette adherence** to the plan's
-    `:root` tokens; **loop seam** (compare first and last frames — a visible jump fails);
-    and smoothness (stutter or snapping fails). Also confirm it didn't ship alongside a
-    scroll set-piece or a reactive canvas field — it consumes that slot.
-  - On any failure, give ONE instruction — regenerate tightened, or cut the clip and ship
-    the poster still (cutting is usually the right call). Note that **any** retry breaches
-    the site budget — the failed clip already spent it, in either register — so a
-    regenerate instruction goes to the lead, not the builder.
+  When a clip IS present it must clear all of these or it is a **fail**. Full policy:
+  `docs/media-policy.md`.
+  - The plan marks a `VIDEO` slot **naming a register**, **and Harry approved that
+    specific clip.** A clip with no slot, or with a slot but no recorded approval, is
+    unauthorized spend — **hard fail**, regardless of how good it looks.
+  - **ONE clip, never both registers**, ≤8s. Judge it against the register the plan
+    declared, not a single standard.
+  - **Occupational fit.** A `designed-loop` behind a local trade, legal, or medical
+    prospect is a register fail — that register is studio/tech/premium only.
+  - **The two-way realism test below applies to `filmed-action` ONLY.** For a
+    `designed-loop` a rendered CGI look is correct, not a defect; judge it instead on
+    palette adherence to the plan's `:root` tokens and on loop stability.
+  - **Spend ledger inside the site budget** — $1.00 no video / $1.50 with one, images
+    included. Over → budget-rule fail.
+  - Ships with `poster` + a `prefers-reduced-motion` branch; **loop seam** checked (a
+    visible first/last-frame jump fails); no stutter.
+  - **A `designed-loop` consumes the scroll-set-piece slot** and is mutually exclusive with
+    a reactive canvas field — confirm it didn't ship alongside either. This does NOT apply
+    to `filmed-action`: a filmed clip plus the plan's one set-piece is compliant.
+  - Seeded from an `Inspiration/` image? The plan must name the source and the clip must
+    be a transformation of it, not that photo with motion added. Open the source, compare.
+  - On any failure give ONE instruction — usually cut the clip and ship the poster still.
+    **Any** retry breaches the budget (the failed clip already spent it), so a regenerate
+    instruction goes to the lead, not the builder.
 - **Animation.** Expect real motion craft — atmosphere layers where the mood calls for
   them, reveal choreography, considered micro-interactions — all reduced-motion gated. A
   static page with a single token fade-in scores **low** on the motion dimension. The
@@ -444,13 +432,19 @@ You are on the **Build team**. You review the built site — nothing else. For
   the two scoreboards, recording what the mechanical scan found this round.
 - **Write `audit.md` after EVERY review pass, not just at sign-off.** A NEEDS-WORK
   audit.md is expected and required — it records the current per-item scores, a
-  `Review round: N` line, and the numbered fix list you sent. Update the same file each
-  round; the final version shows PASS. This makes your progress visible on disk (so a
-  stalled loop is distinguishable from an in-progress one).
+  `Review round: N` line, and the numbered fix list you sent. This makes your progress
+  visible on disk (so a stalled loop is distinguishable from an in-progress one).
+  **APPEND, never re-emit.** Each round adds a `## Round N` block at the END of the file;
+  earlier rounds are history and are never rewritten, re-scored, or tidied. The only thing
+  you edit in place is the **verdict line at the very top** (`VERDICT: NEEDS-WORK — round
+  N` → `VERDICT: PASS`). These files reach 40–55 KB by round 3 (`fora-digital/audit.md` is
+  55 KB); re-emitting the whole thing every round costs a multiple of the review itself and
+  buys nothing, since nothing downstream reads the old rounds mechanically.
 - **Keep a spend ledger: `Paid calls this prospect: N (~$X.XX)`.** Carry it forward and
   increment it every round — count each image generation, each regeneration you ordered,
-  and any approved video call. **The ledger is now the enforcement mechanism, not a
-  record** — with the image count cap gone, the site budget is the only limit and the only
+  and any approved video call. Rates for the arithmetic: **~$0.04 per 1K image, ~$0.06 per
+  2K**, plus whatever the approved clip cost. **The ledger is now the enforcement
+  mechanism, not a record** — with the image count cap gone, the site budget is the only limit and the only
   way to check it is to add up the calls. Counting files in `assets/` is not enough:
   regenerations **overwrite in place and are invisible to that count**, so six images plus
   three ordered regenerations is nine paid calls behind an `audit.md` that truthfully says

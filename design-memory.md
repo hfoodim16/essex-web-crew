@@ -11,6 +11,13 @@ Columns:
 - **Background system** — e.g. gradient-mesh, grain, imagery-driven, contours
 - **Signature motion** — entrance family + hero move, e.g. clip-wipe + underline-draw, scale-settle + magnetic (see the skill's `references/motion.md`). ⚠default = the fade-up/text-delay/count-up trio.
 
+> **Row budget: 120 words.** This is an index the Planner and Critic read on **every**
+> build (last 3 rows), so a row is a lookup key, not an essay — the reasoning belongs in
+> that prospect's `website-plan.md`. Rows grew ~9× between the sixth and the tenth entry,
+> and the last-3 window went from ~115 words to 762. Earlier long rows stay as history;
+> the cap binds forward.
+
+
 | Date | Project | Font pairing | Palette family | Layout archetype | Background system | Signature motion |
 |------|---------|--------------|----------------|------------------|-------------------|------------------|
 | 2026-07-21 | Cecere Brothers Landscaping | Fraunces / Figtree | forest-editorial | editorial-gallery / service-index | imagery-driven (AI photos) + topographic-contours + grain | fade-up ⚠default + row-expand hover + headline glint |

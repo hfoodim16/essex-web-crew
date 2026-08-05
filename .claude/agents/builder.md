@@ -172,7 +172,9 @@ teammates, so you must call them yourself:
   that means nothing. If the scan returns an empty list, install them once and re-run:
   ```bash
   cd skills/web-design-ultra/scripts/detector && npm install --no-save htmlparser2 css-select css-tree domutils
-  ``` If a finding is
+  ```
+
+  If a finding is
   genuinely the plan's locked direction, waive it in-file with a reason —
   `<!-- impeccable-disable cream-palette -- earthy direction locked in build-sheet.md tokens -->`
   — never bare. **What this scan cannot see:** the fail-visible check is browser-only, so it's
@@ -229,89 +231,44 @@ teammates, so you must call them yourself:
   - **Billing gate:** a `429` with `limit: 0` means image generation isn't enabled — do
     NOT retry. Fall back to the backgrounds.md CSS treatment plus elegant labeled slots,
     and tell the lead what unlocks it.
-- **Video — only when the plan marked a `VIDEO` slot AND Harry has approved that clip.**
-  Runs through the **`/generate` skill** (`~/.claude/skills/generate/`, default model
-  Veo 3.1 `veo3_fast` via Kie AI) — the same skill you use for images. Follow the register
-  guidance and crew tier in `~/.claude/skills/web-design-ultra/references/video.md`.
-  **ONE clip per mockup, total** — never both registers. Generate to the **register the
-  plan declared**; you do not re-decide it. Duration `4`/`6`/`8`s (Veo takes only those
-  three).
-  - **THE SITE BUDGET is one all-in number, and it is the only ceiling now.** A site that
-    ships no video has **$1.00** total for ALL paid generation; a site that ships a clip
-    has **$1.50** total. Your images spend against it first, so budget the clip before the
-    stills — a handful of images (~$0.20–0.30) still leaves over $1.10. Price the run
-    before you make it — model, resolution and duration have to
-    project inside the remaining headroom, or the clip ships smaller (720p, 6s) or not at
-    all. The old per-register ceilings (filmed ≤$1, designed ≤$2.50) are gone; register
-    choice buys you no extra money.
-  - **A failed clip has already spent the site's budget.** Exhaust the free `ffmpeg` fixes
-    first — boomerang, crossfade, reframe (see the hero-video-cover recipe in `video.md`) —
-    then ship the poster still and report. A regeneration is a fresh ask.
-  - The budget is a ceiling, **not** an authorization to spend.
-  - **Video is NOT pre-approved — a marked slot is the Planner's REQUEST, not your
-    go-ahead.** Before you spend anything on Veo, the lead must confirm **Harry said yes to
-    this specific clip**. No confirmation in hand → do not generate; ship the poster still
-    in the slot and tell the lead the site is complete except for the pending video
-    decision. Generating an unapproved clip is unauthorized spend and the Critic hard-fails
-    it, so an unanswered request is a reason to wait, never a reason to assume yes. (Images
-    remain pre-approved up to the site budget; video is the exception.)
-  - **If the clip is a full-bleed hero background, read `## Hero-video-cover — the shipping
-    recipe` in `~/.claude/skills/web-design-ultra/references/video.md` BEFORE you generate
-    or ship it.** It carries the markup, CSS, lazy-hydrate script and the tighter hero
-    budget (**720p, ≤6s, ≤1MB** — well under the <5MB general cap), plus the free ffmpeg
-    **boomerang** build that makes a seamless loop out of footage that only moves one way.
-    It also documents the **$0 rungs**: a free-licence stock clip, or a ken-burns drift on
-    the poster still — take one of those before spending the budget on a generic shot.
-    Working reference build: `lab/hero-video-cover/`.
-  - **If the register is `filmed-action`:** photorealism kit applies in full (same standard
-    as the images). **Prefer image-to-video** — pass the already-generated hero still to
-    `/generate` as the seed frame. It's cheaper than text-to-video, holds the art direction
-    the images already set, and gives a controlled opening frame that doubles as the
-    `poster`. You may instead seed from an `Inspiration/` photo **only if the plan named
-    it**, and the result must **transform** the source, not animate a copy of it — see the
-    transformation rule in
-    `~/.claude/skills/web-design-ultra/references/inspiration.md`. Name the source file in
-    your report so the Critic can compare. `/generate` uploads local seed images to public
-    URLs itself — don't hand-roll that.
-    Frame the work so **no letterable surface is in shot at all** — no signage, truck
-    lettering, plates, decals, printed apparel, house numbers. Negating text does NOT work
-    (a prior clip rendered "HEDITE" on paper despite explicit negation); compose it out.
-  - **If the register is `designed-loop`:** this **INVERTS the photorealism kit** — lead the
-    prompt with "Abstract 3D rendered motion-design loop. Not live action, not filmed, not
-    photographic — a clean CGI render." `imagery.md`'s mandatory `no illustration, no 3D
-    render, no CGI` negatives apply to the filmed register ONLY; here the render is the
-    point. Name the plan's `:root` palette colors in words. Keep the background a flat or
-    gradient field — that is what keeps the loop seam stable and the file ~1MB.
-  - **Both registers:** no readable branding, no invented people for a real business,
-    continuous loopable motion with no hard start/end.
-  - **Facts that will bite you:** inline negatives as `no X, no Y` prose in the prompt — a
-    bare keyword list reads as things to *include*, and there is no reliable negative-prompt
-    parameter on this route. **State the duration explicitly** — leaving it to a default
-    produced an 8s clip when 6 was planned. **A `success` status is not proof of motion**:
-    pull two frames seconds apart and confirm the motion actually happened before you ship.
-    Generation is async — `/generate` polls for you, but **bound the wait**: ~5 minutes of
-    wall clock, then stop, report to the lead, and ship the poster still. **Never re-submit
-    the job to "try again"** — the first may still be running and you'd pay twice for one
-    slot.
-  - **Ship it correctly or it fails the critic:**
-    `<video autoplay muted loop playsinline poster="<the plan's poster still>">`, a
-    `prefers-reduced-motion` branch that shows the poster still instead of autoplaying, and
-    a file under ~5MB (compress with `ffmpeg` via the `media-processing` skill — filmed
-    clips almost always need it, designed loops usually don't). A clip with no poster
-    fallback is a failed build. **Check the loop seam** — extract first and last frames and
-    compare; a visible jump means fix it, and **try the free fix first** (an `ffmpeg`
-    crossfade or boomerang loop costs nothing and usually solves a seam) before spending on
-    a re-roll. Copy the finished file into `prospects/<slug>/mockup/assets/` and reference
-    that local path — never `/generate`'s iCloud folder or an expiring result URL.
-  - **Retries: none are yours.** Harry approved *one* clip; a regeneration is a second paid
-    run and needs him to say yes again. Exhaust the free `ffmpeg` fixes, and if the clip is
-    still unusable, stop, report to the lead, and ship the poster still.
-- **`ui-ux-pro-max`** — for concrete color/typography/spacing/layout/component decisions
-  and to review your own work against professional UI standards.
-- **`frontend-design`** — for distinctive, production-grade, non-generic frontend code
-  (avoid the "generic AI aesthetic").
+- **Video — only if the plan marked a `VIDEO` slot AND the lead confirms Harry approved
+  that specific clip.** A marked slot is a REQUEST, not an authorization; no confirmation
+  in hand → ship the poster still and report. **Before you generate a clip read both:
+  `docs/media-policy.md`** (registers, the free ladder, occupational fit) **and
+  `web-design-ultra/references/video.md`** (prompt discipline and the hard-won facts —
+  negatives must be inline prose, the `designed-loop` CGI lead-in, composing letterable
+  surfaces out of frame). What you need without opening either:
+  - **ONE clip per site, ever.** Generate to the register the plan declared
+    (`filmed-action` or `designed-loop`) — you never re-decide it, and never ship both.
+  - Duration **4/6/8s only** (Veo takes no others) and **state it explicitly** — a default
+    once produced 8s when 6 was planned and billed ~33% over.
+  - **Site budget is one all-in number and the only ceiling: $1.00 no video, $1.50 with
+    one**, images included. Images spend first, so price the clip before the stills.
+  - **No retries are yours.** Harry approved one run. Exhaust the free `ffmpeg` fixes
+    (boomerang, crossfade, reframe); still unusable → stop, report, ship the poster still.
+  - **Bound the wait to ~5 minutes, then stop and report. NEVER re-submit to "try again"** —
+    the first job may still be running and you would pay twice for one approved slot.
+  - **Compress before shipping** (`media-processing` / `ffmpeg`). A filmed clip runs
+    ~11.7MB per 6s raw and will not meet the size rule untouched; a flat-field designed
+    loop lands near 1MB on its own.
+  - Shipping requires `poster` + a `prefers-reduced-motion` branch + <5MB + a checked loop
+    seam. `success` is not proof of motion — pull two frames seconds apart and confirm.
+  - **Full-bleed hero background?** Read `web-design-ultra/references/video.md` →
+    "Hero-video-cover — the shipping recipe" first: tighter budget (720p, ≤6s, ≤1MB), the
+    lazy-hydrate markup, the boomerang loop build, and the $0 rungs (free stock clip, or
+    ken-burns on the poster). Working example: `lab/hero-video-cover/`.
+  - Copy the result into `mockup/assets/` — never an iCloud path or an expiring URL.
 
-Use them to execute the Planner's direction at a high craft level — not to override it.
+**Reach for these only when stuck on their subject — do NOT invoke by default.** No gate
+references either, and the sheet already carries the decisions they would help you make:
+
+- `ui-ux-pro-max` — when you need a concrete color/spacing/component call the sheet
+  didn't specify.
+- `frontend-design` — when your own output is coming out generic and you need principles
+  to push against.
+
+Everything in this section serves the Planner's direction at a high craft level — none of
+it overrides the sheet.
 
 ## Use the client's real content (do not invent)
 

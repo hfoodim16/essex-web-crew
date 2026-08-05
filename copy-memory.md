@@ -26,6 +26,10 @@ Per **Lessons flow forward** (`CLAUDE.md`): rows recorded here are history, not 
 fix list. Nothing below gets rewritten because it appears twice — the duplicate
 is why the ledger exists, and the next build is where it pays off.
 
+> **Row budget: 60 words.** The Planner reads this on every build. A row is a lookup —
+> hero verbatim, the shape in three or four words, the tier. `design-memory.md` grew ~9×
+> per row before it got a cap; this one starts with one.
+
 ## The ledger
 
 | Signed | Prospect | Hero, verbatim | Construction | Register |
