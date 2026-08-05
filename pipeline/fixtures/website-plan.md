@@ -1,4 +1,4 @@
-# Website plan — Smoke Test Plumbing (`_smoke-test`)
+# Website plan — Smoke Test Plumbing (FIRE-DRILL FIXTURE, not a client)
 
 > **SYNTHETIC FIXTURE — not a real prospect.** Written to pass `plan-lint.mjs`
 > exactly. See `README.md` before editing.

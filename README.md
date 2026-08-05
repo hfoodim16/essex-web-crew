@@ -78,7 +78,9 @@ pipeline/
   fire-drill.sh           Verifies every gate still accepts good / rejects bad —
                           run after ANY gate, rule, or agent change
   speculation-log.md      What we guessed vs what the client actually said
-  _smoke-test/            The fire drill's fixtures (never delete to go green)
+  fixtures/               The fire drill's known-good + known-bad test pages.
+                          NOT a client — synthetic, never ships. Deleting them
+                          disables the drill; it aborts red and tells you so.
 templates/
   Website-Questionnaire.docx
                           Standing client questionnaire — sent as-is to anyone who says yes

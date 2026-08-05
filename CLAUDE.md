@@ -352,7 +352,7 @@ pipeline/fire-drill.sh
 ```
 
 It costs nothing and takes seconds. Against the synthetic fixtures in
-`prospects/_smoke-test/` it checks that every gate both **accepts a known-good build**
+`pipeline/fixtures/` it checks that every gate both **accepts a known-good build**
 and **rejects a known-bad one** — the second half being the one that matters, since a
 gate that quietly stopped firing is indistinguishable from a clean codebase. If it goes
 red, find the change that caused it; never loosen the fixtures to make it green.

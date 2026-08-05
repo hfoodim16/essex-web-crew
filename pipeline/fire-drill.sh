@@ -10,12 +10,14 @@
 # like a clean codebase, which is how a page with 5 of 7 identical sections once
 # passed a green check.
 #
-# Fixtures live in prospects/_smoke-test/ (synthetic, never ships, costs nothing).
+# Fixtures live in pipeline/fixtures/ (synthetic, never ships, costs nothing).
+# They used to live in prospects/, where they looked like a stray client and got
+# deleted twice. They are drill infrastructure, so they live beside the drill.
 # Usage: pipeline/fire-drill.sh
 set -uo pipefail
 
 CREW_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-FIXTURE="$CREW_ROOT/prospects/_smoke-test"
+FIXTURE="$CREW_ROOT/pipeline/fixtures"
 DETECT="$CREW_ROOT/skills/web-design-ultra/scripts/detect.mjs"
 PLANLINT="$CREW_ROOT/skills/web-design-ultra/scripts/plan-lint.mjs"
 COPYCHECK="$CREW_ROOT/skills/trade-copy/scripts/copycheck.py"
@@ -43,7 +45,7 @@ for f in "$FIXTURE/mockup/index.html" "$FIXTURE/website-plan.md" "$FIXTURE/build
     bad "missing ${f#"$CREW_ROOT/"}"
     echo ""
     echo "Stopping: the fixtures are the drill. Restore them with" >&2
-    echo "  git restore prospects/_smoke-test/" >&2
+    echo "  git restore pipeline/fixtures/" >&2
     echo "and never delete them to make a check go green." >&2
     exit 1
   fi
@@ -210,6 +212,6 @@ fi
 echo "  $PASS passed, $FAIL FAILED."
 echo ""
 echo "  A failure means a gate changed behaviour. Work out which change caused it —" >&2
-echo "  do NOT loosen the fixtures in prospects/_smoke-test/ to make this go green." >&2
+echo "  do NOT loosen the fixtures in pipeline/fixtures/ to make this go green." >&2
 echo ""
 exit 1

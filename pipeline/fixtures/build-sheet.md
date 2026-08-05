@@ -1,4 +1,4 @@
-# Build Sheet — _smoke-test (Smoke Test Plumbing)
+# Build Sheet — Smoke Test Plumbing (FIRE-DRILL FIXTURE, not a client)
 
 > SYNTHETIC FIXTURE — written to pass plan-lint's build-sheet checks exactly.
 > See README.md before editing.
