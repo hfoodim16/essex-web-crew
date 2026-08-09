@@ -22,7 +22,7 @@
   // freezes it on its poster frame instead of turning.
   var still = /(?:^|[?&])still(?:=|&|$)/.test(window.location.search);
   if (reduce || still) {
-    var vid = document.querySelector('.hero-device .device-video');
+    var vid = document.querySelector('.plate-device .device-video');
     if (vid) { vid.autoplay = false; vid.removeAttribute('autoplay'); vid.pause(); }
   }
 
