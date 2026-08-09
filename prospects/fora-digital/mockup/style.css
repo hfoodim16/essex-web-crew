@@ -60,7 +60,7 @@ a{color:inherit;text-decoration:none}
 .wrap{max-width:var(--container);margin:0 auto;padding:0 5vw}
 
 /* anchor targets clear the sticky header */
-#work,#founders,#process,#pricing,#contact,#reviews,#top{scroll-margin-top:calc(var(--nav-h) + 12px)}
+#work,#founders,#process,#builds,#contact,#reviews,#top{scroll-margin-top:calc(var(--nav-h) + 12px)}
 
 /* linen grain */
 .grain{
@@ -322,8 +322,45 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:var(--lh-display);
   text-transform:uppercase;letter-spacing:.08em;padding:6px 12px;border-radius:100px;
   margin-bottom:var(--space-2);
 }
-.badge-real{background:var(--cobalt);color:#fff}
+.plate-caption .badge + .badge{margin-left:8px}
 .badge-concept{border:1px solid var(--line);color:var(--ink)}
+/* build-type tags. Classic is the quiet outlined pill; Cinematic is an ink pill carrying
+   the same animated chrome sweep as the cinematic column in the builds chart, so the
+   premium tier reads as premium here too. */
+.badge-classic{border:1px solid var(--cobalt);color:var(--cobalt)}
+.badge-cinematic{background:var(--ink)}
+
+/* Chrome sweep — the animated-gradient text effect, in two palettes.
+   On the light paper wall the stops stay dark (ink → cobalt → cobalt-deep) because clay
+   only reaches 2.9:1 on paper and would fail contrast; on the ink badge the stops flip to
+   the light set, where clay is 5.7:1. Solid color is declared first as the fallback for
+   browsers without background-clip:text, and reduced-motion drops back to it. */
+/* `.plate-caption p` sets its own colour and outranks a bare `.chrome-text`, so the
+   paragraph selector has to be matched at equal-or-higher specificity or the text stays
+   opaque and hides the sweep entirely */
+.chrome-text,.plate-caption p.chrome-text{color:var(--ink)}
+@supports (-webkit-background-clip:text) or (background-clip:text){
+  .chrome-text,.plate-caption p.chrome-text{
+    background-image:linear-gradient(to right,
+      var(--ink),var(--cobalt),var(--ink),var(--cobalt),var(--ink));
+    background-size:220% 100%;background-repeat:repeat;
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    animation:gradient-slide 7s linear infinite alternate;
+  }
+  /* the pill's ink fill lives on the outer .badge — background-clip:text would clip the
+     fill to the glyphs and erase it, so the sweep goes on an inner span */
+  .badge-cinematic .chrome-text{
+    background-image:linear-gradient(to right,
+      var(--paper),var(--clay),var(--footer-link),var(--paper));
+    background-size:180% 100%;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  .chrome-text,.plate-caption p.chrome-text{
+    animation:none;background-image:none;color:var(--ink);
+  }
+  .badge-cinematic .chrome-text{color:var(--paper)}
+}
 .plate-caption h3{font-size:var(--fs-h3);margin-bottom:var(--space-1)}
 .plate-caption p{color:color-mix(in srgb,var(--ink) 55%,var(--stone) 45%);font-size:var(--fs-small);line-height:1.55}
 /* The AI-image admission is the one line on this plate we WANT read, so it steps out of the
@@ -385,6 +422,164 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:var(--lh-display);
 @media(max-width:860px){
   .price-row{grid-template-columns:1fr;gap:var(--space-4)}
   .price-detail .btn{width:100%;text-align:center}
+}
+
+/* ---------- builds (tier comparison chart) ---------- */
+/* Feature-matrix chart: features as ruled rows, one column per tier. The classic
+   column is a light surface strip, the cinematic column is the full ink plate with
+   the film-strip ornament — the premium column at a glance. Plain <table> so it
+   reads correctly with JS off and in screen readers. */
+.sr{
+  position:absolute;width:1px;height:1px;overflow:hidden;
+  clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;
+}
+.compare-wrap{overflow-x:auto}
+/* fixed layout so the two tier columns are exactly equal — auto layout was sizing the
+   cinematic column wider off its badge and title */
+.compare{
+  width:100%;border-collapse:separate;border-spacing:0;min-width:640px;
+  table-layout:fixed;
+}
+.compare .tier-kicker{margin-bottom:2px}
+/* bottom-aligned so any leftover height difference between the two columns collects
+   above the copy instead of opening a dead gap between the copy and the price */
+.compare thead th{
+  vertical-align:bottom;text-align:left;padding:var(--space-3);width:26%;
+}
+.th-classic{background:var(--surface);border-radius:var(--radius-plate) var(--radius-plate) 0 0}
+.th-cine{
+  background:var(--ink);color:var(--footer-text);
+  border-radius:var(--radius-plate) var(--radius-plate) 0 0;
+}
+/* the two figures live in their own header row, so they sit on one baseline no matter
+   how much copy the column above carries (a flex th breaks table column sizing) */
+.compare thead .price-row-cell{
+  vertical-align:bottom;text-align:left;padding:0 var(--space-3) var(--space-3);
+}
+.compare thead .price-row-cell.pc{background:var(--surface)}
+.compare thead .price-row-cell.pn{background:var(--ink)}
+.th-title{
+  font-family:var(--serif);font-weight:600;font-size:1.35rem;letter-spacing:-.01em;
+  line-height:var(--lh-display);margin:2px 0 8px;
+}
+.th-cine .th-title{color:var(--paper)}
+.th-cine .th-title em{font-style:italic;color:var(--clay)}
+.th-cine .tier-kicker{color:var(--footer-link)}
+.premium-badge{
+  display:inline-block;vertical-align:middle;margin-left:8px;
+  background:var(--clay);color:#fff;
+  font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  padding:3px 10px;border-radius:999px;
+}
+.th-lead{font-weight:400;font-size:var(--fs-small);line-height:1.55;color:var(--stone)}
+.th-cine .th-lead{color:var(--footer-text)}
+/* animated gradient text on the cinematic blurb — a CSS port of the React GradientText
+   effect (this site has no React): one wide gradient slid across the text box and
+   clipped to the glyphs. The solid color above stays as the fallback, so browsers
+   without background-clip:text and reduced-motion users still get readable copy. */
+@supports (-webkit-background-clip:text) or (background-clip:text){
+  .th-cine .gradient-text{
+    background-image:linear-gradient(to right,
+      var(--paper),var(--clay),var(--footer-link),var(--paper));
+    background-size:180% 100%;background-repeat:repeat;
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    animation:gradient-slide 7s linear infinite alternate;
+  }
+}
+@keyframes gradient-slide{
+  from{background-position:0% 50%}
+  to{background-position:100% 50%}
+}
+@media(prefers-reduced-motion:reduce){
+  .th-cine .gradient-text{
+    animation:none;background-image:none;color:var(--footer-text);
+  }
+}
+.th-price{
+  font-family:var(--serif);font-size:1.35rem;font-weight:600;letter-spacing:-.01em;
+}
+.pn .th-price{font-size:1.55rem;color:var(--paper)}
+.compare tbody th{
+  text-align:left;font-weight:400;font-size:var(--fs-small);line-height:1.5;
+  color:var(--ink);padding:13px var(--space-3) 13px 0;border-bottom:1px solid var(--line);
+  position:sticky;left:0;background:var(--paper);z-index:1;
+}
+.compare .cell{
+  text-align:center;padding:13px var(--space-2);border-bottom:1px solid var(--line);
+}
+.compare .cl{background:var(--surface)}
+.compare .cine{background:var(--ink);border-bottom-color:rgba(226,231,245,.18)}
+.compare .dash span[aria-hidden]{color:var(--stone)}
+.tick{
+  display:inline-block;width:11px;height:6px;
+  border-left:2px solid var(--cobalt);border-bottom:2px solid var(--cobalt);
+  transform:rotate(-45deg);
+}
+.cine .tick{border-color:var(--clay)}
+.compare tfoot td{padding:var(--space-3);text-align:center;vertical-align:middle}
+.foot-cl{
+  background:var(--surface);
+  border-radius:0 0 var(--radius-plate) var(--radius-plate);
+}
+.foot-cine{
+  background:var(--ink);
+  border-radius:0 0 var(--radius-plate) var(--radius-plate);
+}
+.compare-cta{white-space:nowrap}
+.tier-link{color:var(--cobalt);font-weight:600;font-size:var(--fs-small)}
+.tier-link span{display:inline-block;transition:transform .28s var(--ease-out)}
+.tier-link:hover span{transform:translateX(4px)}
+.film-strip{
+  height:14px;
+  margin:calc(var(--space-3) * -1) calc(var(--space-3) * -1) var(--space-2);
+  border-bottom:1px solid rgba(226,231,245,.18);
+  background:repeating-linear-gradient(90deg,
+    transparent 0 10px,rgba(226,231,245,.28) 10px 16px,transparent 16px 26px);
+}
+/* the classic column's answer to the film strip: same slot, same height, but the
+   gallery's plain hairline instead of sprocket holes, so both columns start level */
+.plate-strip{
+  height:14px;
+  margin:calc(var(--space-3) * -1) calc(var(--space-3) * -1) var(--space-3);
+  border-bottom:1px solid var(--line);
+  background:repeating-linear-gradient(90deg,
+    transparent 0 10px,var(--line) 10px 16px,transparent 16px 26px);
+}
+.frame-count{
+  font-family:var(--sans);font-weight:600;font-size:var(--fs-kicker);
+  text-transform:uppercase;letter-spacing:.16em;color:var(--footer-kicker);
+  margin-bottom:var(--space-2);
+}
+.th-classic .frame-count{color:var(--stone)}
+@media(max-width:760px){
+  .compare{min-width:560px}
+  /* the leads are hidden here, so the columns no longer balance — pin to the top
+     instead, otherwise the edge ornaments float down into the middle of the column */
+  .compare thead th{padding:var(--space-2);width:28%;vertical-align:top}
+  .th-lead{display:none}
+  .compare tbody th{padding-right:var(--space-2)}
+  .compare tfoot td{padding:var(--space-2)}
+  .compare-cta{white-space:normal}
+  .film-strip,.plate-strip{margin:calc(var(--space-2) * -1) calc(var(--space-2) * -1) var(--space-2)}
+}
+/* phone: shrink until the whole chart fits with no sideways scroll */
+@media(max-width:560px){
+  .compare{min-width:0}
+  .compare thead th{width:29%;padding:12px 10px}
+  .th-title{font-size:1.05rem}
+  /* both figures break the same way on a phone: label on one line, number under it.
+     Same size in both columns here — the narrow cinematic column can't fit a larger
+     "Starting at" on one line, and the dark plate already carries the premium signal. */
+  .th-price{font-size:.95rem;line-height:1.25}
+  .th-price strong{display:block;font-size:1.05rem}
+  .pn .th-price{font-size:.95rem}
+  .compare thead .price-row-cell{padding:0 10px 12px}
+  .frame-count{font-size:.6rem;letter-spacing:.12em}
+  .compare tbody th{font-size:.82rem;padding:11px 8px 11px 0}
+  .compare .cell{padding:11px 6px}
+  .compare tfoot td{padding:12px 8px}
+  .compare-cta{padding:12px 10px;font-size:.82rem}
+  .film-strip,.plate-strip{margin:-12px -10px 10px}
 }
 
 /* ---------- founders ---------- */
@@ -472,6 +667,33 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:var(--lh-display);
 .field input:focus-visible{outline:2px solid var(--cobalt);outline-offset:3px}
 /* invalid styling only after a submit attempt, so nothing is red while still typing */
 .inquiry-form.submitted :invalid{border-color:var(--clay)}
+/* classic/cinematic segmented toggle — plain radios under the hood, so the choice posts
+   with the form even with JavaScript off */
+.type-field{border:0;padding:0;margin:0;min-width:0}
+.type-field legend{
+  font-family:var(--sans);font-weight:600;font-size:var(--fs-small);color:var(--ink);
+  padding:0;margin-bottom:6px;
+}
+.type-toggle{
+  display:inline-flex;align-self:flex-start;border:1px solid var(--line);
+  border-radius:var(--radius);overflow:hidden;background:var(--paper);
+}
+.type-toggle input{
+  position:absolute;width:1px;height:1px;overflow:hidden;
+  clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;
+}
+.type-toggle label{
+  font-family:var(--sans);font-weight:600;font-size:var(--fs-small);color:var(--stone);
+  padding:10px 26px;cursor:pointer;
+  transition:background-color .25s var(--ease-out),color .25s var(--ease-out);
+}
+.type-toggle label + input + label{border-left:1px solid var(--line)}
+.type-toggle input:checked + label{background:var(--cobalt);color:#fff}
+.type-toggle input:focus-visible + label{outline:2px solid var(--cobalt);outline-offset:-2px}
+@media(max-width:560px){
+  .type-toggle{display:flex;align-self:stretch}
+  .type-toggle label{flex:1;text-align:center}
+}
 .form-actions{
   flex-direction:row;align-items:center;gap:var(--space-3);flex-wrap:wrap;
   margin-top:var(--space-2);
