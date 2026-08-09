@@ -159,7 +159,7 @@ gsap.from('.hero-img', { clipPath:'circle(0% at 62% 40%)', duration:1.4, ease:'p
 ## Image reveals
 
 - **Clip expand:** `clip-path:inset(12% 12% 12% 12% round 8px)` → `inset(0 round 0)` on enter.
-- **Ken Burns settle:** wrapper `overflow:hidden`; img `scale(1.08)` → `scale(1)` over 1.4s on enter (or slow continuous 18s drift for heroes — then it's ambient, keep subtle).
+- **Ken Burns settle:** wrapper `overflow:hidden`; img `scale(1.08)` → `scale(1)` over 1.4s on enter (or slow continuous 18s drift for heroes — then it's ambient, keep subtle). The hero drift is also the **$0 fallback rung of the hero-video-cover recipe** in `video.md` — same plate, same scrim, same type stack, no clip. Working proof: Variant B of `~/Projects/essex-web-crew/lab/hero-video-cover/`.
 - **Scrim wipe-away:** the plate's gradient scrim `opacity:1 → .6` + image `scale(1.04)→1` on enter — the photo "develops."
 - **Color-in:** `filter:grayscale(1)` (or a duotone via blend-mode layer) → full color on enter/hover. Filter cost: contained elements only.
 

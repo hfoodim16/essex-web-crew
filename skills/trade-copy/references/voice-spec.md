@@ -92,7 +92,11 @@ Cap: twice per page, each.
 - <section>: no material at all — cut it from the page.
 
 ## Hero uniqueness
-Checked against other prospects' heroes: `grep -h -A2 '<h1' prospects/*/mockup/index.html`
+Checked against **`copy-memory.md`** (repo root) — the ledger of every hero this crew has
+shipped and the construction each one used. Read its "Constructions that are now spent"
+list before writing the direction; a spent shape needs a stated reason in
+`website-plan.md`, not a fresh coat of words.
+Cross-check the raw text too: `grep -h -A2 '<h1' prospects/*/mockup/index.html`
 Do not use: <constructions already in use — e.g. three-fragment "X. Y. Since <year>.">
 
 ## Settled — do not re-flag

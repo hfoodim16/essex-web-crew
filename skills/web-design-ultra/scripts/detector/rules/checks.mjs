@@ -457,11 +457,30 @@ function checkHeroEyebrow(opts) {
 }
 
 function checkRepeatedSectionKickers(opts) {
-  const { candidates, minCount = 3 } = opts;
-  if (!Array.isArray(candidates) || candidates.length < minCount) return [];
-  return candidates.map(candidate => ({
+  const { candidates, minCount = 3, sectionCount = 0, labelledSections = 0 } = opts;
+  const list = Array.isArray(candidates) ? candidates : [];
+
+  // Budget scales with the page: ceil(sections / 3), hero included. One or two
+  // kickers are a system; one over every section is grammar you did not choose.
+  // Falls back to the old flat floor when the section count is unavailable.
+  const budget = sectionCount > 0 ? Math.ceil(sectionCount / 3) : minCount - 1;
+
+  // Count the whole page's opener labels, not just the ones preceding a heading.
+  const total = Math.max(list.length, labelledSections);
+  if (total === 0) return [];
+  if (total <= budget) return [];
+  if (total < minCount && sectionCount === 0) return [];
+
+  const over = sectionCount > 0 ? ` — budget is ${budget} for ${sectionCount} sections` : '';
+  if (list.length === 0) {
+    return [{
+      id: 'repeated-section-kickers',
+      snippet: `${total} sections open with the same kicker label (${total} on page${over})`,
+    }];
+  }
+  return list.map(candidate => ({
     id: 'repeated-section-kickers',
-    snippet: `repeated section kicker "${candidate.kickerText}" before ${candidate.headingTag} "${candidate.headingText}" (${candidates.length} on page)`,
+    snippet: `repeated section kicker "${candidate.kickerText}" before ${candidate.headingTag} "${candidate.headingText}" (${total} on page${over})`,
   }));
 }
 
@@ -2430,16 +2449,25 @@ function isRepeatedKickerCardContext(heading, kicker) {
   return Boolean(item && (!item.contains || item.contains(kicker)));
 }
 
+// Colour strings arrive in mixed notations across the DOM and jsdom paths;
+// compare on digits alone so rgb(20,40,200) and rgba(20, 40, 200, 1) match.
+function normalizeKickerColour(value) {
+  return String(value || '').toLowerCase().replace(/\s+/g, '').replace(/^rgba?\(|\)$/g, '').replace(/,1(\.0+)?$/, '');
+}
+
 function isRepeatedKickerCandidate(opts) {
   const {
     headingTag,
     headingText,
     headingFontSize,
+    headingColor,
     kickerTag,
     kickerText,
     kickerTextTransform,
     kickerFontSize,
     kickerLetterSpacing,
+    kickerFontWeight,
+    kickerColor,
   } = opts;
   if (!['h2', 'h3', 'h4'].includes(headingTag)) return false;
   if (!headingText || headingText.length < 3) return false;
@@ -2449,14 +2477,31 @@ function isRepeatedKickerCandidate(opts) {
   if (!['p', 'span', 'div', 'small'].includes(kickerTag)) return false;
   if (!kickerText || kickerText.length < 2 || kickerText.length > 34) return false;
   if (/^step\s*\d+/i.test(kickerText) || /^\d{1,2}$/.test(kickerText)) return false;
+  if (!(kickerFontSize > 0)) return false;
 
+  // Branch A — the classic: tiny UPPERCASE label with real tracking.
   const isUppercased = kickerTextTransform === 'uppercase'
     || (/[A-Z]/.test(kickerText) && !/[a-z]/.test(kickerText));
-  if (!isUppercased) return false;
-  if (!(kickerFontSize > 0 && kickerFontSize <= 14)) return false;
-  const minTrackedSpacing = Math.max(1, kickerFontSize * 0.08);
-  if (!(kickerLetterSpacing >= minTrackedSpacing)) return false;
-  return true;
+  if (isUppercased && kickerFontSize <= 14) {
+    const minTrackedSpacing = Math.max(1, kickerFontSize * 0.08);
+    if (kickerLetterSpacing >= minTrackedSpacing) return true;
+  }
+
+  // Branch B — sentence-case accent kicker: smaller than its heading, bold, and
+  // painted a different colour. Same grammar, different paint. This is the shape
+  // that defeated the rule before (text-transform:none; letter-spacing:.01em).
+  // checkHeroEyebrow already catches it above an h1; sections get it now too.
+  const weight = parseInt(kickerFontWeight, 10);
+  const isBold = Number.isFinite(weight)
+    ? weight >= 600
+    : /^(bold|bolder)$/i.test(String(kickerFontWeight || ''));
+  const isSmallerThanHeading = kickerFontSize <= headingFontSize * 0.6;
+  const kc = normalizeKickerColour(kickerColor);
+  const hc = normalizeKickerColour(headingColor);
+  const differsInColour = Boolean(kc) && Boolean(hc) && kc !== hc;
+  if (isBold && isSmallerThanHeading && differsInColour && kickerFontSize <= 24) return true;
+
+  return false;
 }
 
 function collectRepeatedSectionKickerCandidates(doc, getStyle, resolveLetterSpacing) {
@@ -2479,11 +2524,14 @@ function collectRepeatedSectionKickerCandidates(doc, getStyle, resolveLetterSpac
       headingTag: heading.tagName.toLowerCase(),
       headingText,
       headingFontSize,
+      headingColor: headingStyle.color || '',
       kickerTag: kicker.tagName.toLowerCase(),
       kickerText,
       kickerTextTransform: kickerStyle.textTransform || '',
       kickerFontSize,
       kickerLetterSpacing,
+      kickerFontWeight: kickerStyle.fontWeight || '',
+      kickerColor: kickerStyle.color || '',
     })) {
       continue;
     }
@@ -2497,13 +2545,145 @@ function collectRepeatedSectionKickerCandidates(doc, getStyle, resolveLetterSpac
   return candidates;
 }
 
+// The kicker budget in critique.md counts EVERY opener label on the page, not
+// only the ones that happen to sit directly before an h2 — a label above a
+// blockquote or a stat block is the same grammar. Count by shared class name in
+// an opener position, one vote per section: styling-agnostic, and indifferent to
+// what element follows the label.
+const OPENER_LABEL_MAX_WORDS = 6;
+
+function countSectionsWithOpenerLabel(doc) {
+  const byClass = new Map();
+  for (const section of doc.querySelectorAll('section, main > article')) {
+    if (section.closest?.(SECTION_SIGNATURE_SKIP)) continue;
+    const seen = new Set();
+    // Descend through the first couple of wrappers looking for a short label.
+    const scan = (node, depth) => {
+      if (depth > 3) return;
+      // Use `children` rather than `firstElementChild` — the static-html engine's
+      // DOM shim implements the former but not the latter.
+      const first = (node.children || [])[0];
+      if (!first || !first.tagName) return;
+      const tag = first.tagName.toLowerCase();
+      if (['div', 'header', 'hgroup', 'figure'].includes(tag)) { scan(first, depth + 1); return; }
+      if (!['p', 'span', 'small'].includes(tag)) return;
+      const text = (first.textContent || '').replace(/\s+/g, ' ').trim();
+      if (!text || text.split(' ').length > OPENER_LABEL_MAX_WORDS) return;
+      const cls = (first.getAttribute?.('class') || '').trim().split(/\s+/)[0];
+      if (!cls) return;
+      seen.add(cls);
+    };
+    scan(section, 0);
+    for (const cls of seen) byClass.set(cls, (byClass.get(cls) || 0) + 1);
+  }
+  let max = 0;
+  for (const n of byClass.values()) if (n > max) max = n;
+  return max;
+}
+
 function checkRepeatedSectionKickersDOM() {
   const candidates = collectRepeatedSectionKickerCandidates(
     document,
     (el) => getComputedStyle(el),
     (value, fontSize) => resolveLengthPx(value, fontSize) || 0,
   );
-  return checkRepeatedSectionKickers({ candidates });
+  return checkRepeatedSectionKickers({
+    candidates,
+    sectionCount: countPageSections(document),
+    labelledSections: countSectionsWithOpenerLabel(document),
+  });
+}
+
+// ── Section shape repetition ────────────────────────────────────────────────
+// The structural cousin of the kicker rules, and the one that cannot be dodged
+// with CSS: build a signature from each section's opening elements and see how
+// many sections share it. A page whose sections all open the same way offers the
+// layer-cake scanner exactly one landmark, so the eye stops sampling. Styling is
+// irrelevant here — an empty decorative rule-bar and a tracked caps label
+// produce different signatures than a bare h2, but a page that repeats EITHER of
+// them everywhere fails the same way.
+
+const SECTION_SIGNATURE_SKIP = 'header, footer, nav, aside';
+
+function countPageSections(doc) {
+  return collectSectionSignatures(doc).length;
+}
+
+// A section's signature is the tag + first class of its first few structural
+// descendants, which is stable across content changes but sensitive to shape.
+function sectionSignature(section) {
+  const parts = [];
+  const walk = (node, depth) => {
+    if (parts.length >= 4 || depth > 2) return;
+    for (const child of node.children || []) {
+      if (parts.length >= 4) return;
+      const tag = child.tagName.toLowerCase();
+      if (['script', 'style', 'br'].includes(tag)) continue;
+      const cls = (child.getAttribute?.('class') || '').trim().split(/\s+/)[0] || '';
+      // A wrapper contributes its own token AND descends — a section-head div
+      // wrapping kicker+h2 is exactly the shape we are trying to see.
+      parts.push(cls ? `${tag}.${cls}` : tag);
+      if (['div', 'header', 'hgroup'].includes(tag)) walk(child, depth + 1);
+    }
+  };
+  walk(section, 0);
+  return parts.slice(0, 4).join('>');
+}
+
+function collectSectionSignatures(doc) {
+  const out = [];
+  for (const section of doc.querySelectorAll('section, main > article')) {
+    if (section.closest?.(SECTION_SIGNATURE_SKIP)) continue;
+    const sig = sectionSignature(section);
+    if (sig) out.push({ sig, id: section.getAttribute?.('id') || '' });
+  }
+  return out;
+}
+
+function checkSectionShapeRepetition(opts) {
+  const { signatures, minSections = 4 } = opts;
+  if (!Array.isArray(signatures) || signatures.length < minSections) return [];
+
+  const counts = new Map();
+  for (const { sig } of signatures) counts.set(sig, (counts.get(sig) || 0) + 1);
+
+  const total = signatures.length;
+  const findings = [];
+
+  // (a) One shape dominating the page.
+  let topSig = '', topCount = 0;
+  for (const [sig, n] of counts) if (n > topCount) { topSig = sig; topCount = n; }
+  if (topCount > total / 2 && topCount >= 3) {
+    findings.push({
+      id: 'section-shape-repetition',
+      snippet: `${topCount} of ${total} sections open with the identical shape "${topSig}" — over half the page is one landmark stamped ${topCount}x`,
+    });
+  }
+
+  // (b) Three or more identical shapes back to back, even if the page as a
+  // whole is varied — a monotonous run reads as a stall while scrolling.
+  let runSig = '', run = 1;
+  for (const { sig } of signatures) {
+    if (sig === runSig) {
+      run += 1;
+      if (run === 3) {
+        findings.push({
+          id: 'section-shape-repetition',
+          snippet: `3 consecutive sections open with the identical shape "${sig}"`,
+        });
+      }
+    } else { runSig = sig; run = 1; }
+  }
+
+  return findings;
+}
+
+function checkSectionShapeRepetitionDOM() {
+  return checkSectionShapeRepetition({ signatures: collectSectionSignatures(document) });
+}
+
+function checkSectionShapeRepetitionFromDoc(doc) {
+  return checkSectionShapeRepetition({ signatures: collectSectionSignatures(doc) });
 }
 
 // ── Numbered section labels ─────────────────────────────────────────────────
@@ -3752,7 +3932,11 @@ function checkRepeatedSectionKickersFromDoc(doc, win) {
     (el) => win.getComputedStyle(el),
     (value, fontSize) => resolveLengthPx(value, fontSize) || 0,
   );
-  return checkRepeatedSectionKickers({ candidates });
+  return checkRepeatedSectionKickers({
+    candidates,
+    sectionCount: countPageSections(doc),
+    labelledSections: countSectionsWithOpenerLabel(doc),
+  });
 }
 
 function checkElementMotion(tag, style) {
@@ -5394,6 +5578,7 @@ export {
   isAccentColor,
   checkHeroEyebrow,
   checkRepeatedSectionKickers,
+  checkSectionShapeRepetition,
   checkMotion,
   checkGlow,
   scanCssTextForGlow,
@@ -5427,6 +5612,7 @@ export {
   isRepeatedKickerCandidate,
   collectRepeatedSectionKickerCandidates,
   checkRepeatedSectionKickersDOM,
+  checkSectionShapeRepetitionDOM,
   parseNumberedLabelText,
   isNumberedSectionLabelCandidate,
   collectNumberedSectionLabelCandidates,
@@ -5459,6 +5645,7 @@ export {
   checkElementItalicSerif,
   checkElementHeroEyebrow,
   checkRepeatedSectionKickersFromDoc,
+  checkSectionShapeRepetitionFromDoc,
   checkElementMotion,
   checkElementGlow,
   checkTypography,

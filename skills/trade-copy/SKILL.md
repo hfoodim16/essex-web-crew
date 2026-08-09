@@ -83,6 +83,11 @@ its budgets, then run `references/checks.md`.
 4. **Em dashes: at most one per hundred words, and never twice in a section.** The
    failure mode is a template — `[plain clause] — [prettier restatement of the same
    clause]` — repeated down the whole page.
+   > "Design and installation of walkways, patios, and the stonework that gives a
+   > property its structure — plus upgrades to existing hardscape that has seen better
+   > seasons." → "Walkways, patios, and stonework — new installs and repairs."
+   That dash survives, because it separates two different facts. A dash that restates
+   the clause before it is the one to cut.
 5. **Keep the payoff, cut the restatement.** Not every trailing clause is padding, and
    deleting them all leaves a spec sheet that sells nothing. A second half earns its place
    when it names **a consequence the customer can check**: "with joints locked *so they
@@ -121,18 +126,33 @@ its budgets, then run `references/checks.md`.
    project's output. Any banned or watched word: twice per page, hard ceiling.
 10. **Every paragraph carries a fact.** A number, a town, a material, a service name, a
    name, an hour. A paragraph with none of those is padding — delete it, don't rewrite it.
+   > "Our philosophy is to provide all of our customers with outstanding professional
+   > service and complete satisfaction." → *(cut)*
+   Note the after is nothing. There was no fact to save. Rewriting a padding paragraph
+   produces a better-written padding paragraph.
 11. **One lyrical block per site, or none.** If the owner said something worth quoting,
    give it a first-person attributed block ("— Mike, owner"). It must be built from what
    they actually said in their answers, never invented. Everywhere else on the page is
    plain.
-12. **Write to the budgets** in the voice spec. Defaults: hero headline 3–9 words, hero
+   The reference build spends its one on this, in the office band:
+   > "A real estate closing or a traffic ticket may be routine for the office, but it
+   > rarely feels that way from where you're sitting."
+   322 words of body copy on that page, and exactly one place where a person speaks.
+   That ratio is the rule.
+12. **Write to the budgets** in the voice spec. Defaults: hero headline 2–9 words (2 only for an interior page title like "Practice areas"; a homepage hero wants a real sentence), hero
    subhead ≤ 30, service card ≤ 30, service detail ≤ 45, about ≤ 120 across 2–3 short
    paragraphs, FAQ answer ≤ 40.
 13. **Plain CTA, no wordplay.** "Get a free estimate." "Call Mike." The CTA verb comes
    from how the client said they want to be contacted.
+   > "Want a property maintained a cut above?" → "Want us to look at your property?"
 14. **Use their words.** The sounds-like bank in the voice spec holds phrases the client
    actually wrote. Getting one of their own sentences onto their homepage is worth more
    than anything you can compose.
+   DaSilva's best block is the owner, verbatim from his answers:
+   > "I opened the office in May 2002 to serve the community where I was born and raised."
+   Nothing composed for that page beats it. Cecere's questionnaire gave "a mess and a
+   deadline" — four words no copywriter would have reached for, and the truest thing on
+   the site. **Mine the answers for these before you write a line of your own.**
 
 ## Content parity means facts, not word count
 
@@ -155,9 +175,25 @@ kept every fact is misreading the rule.
 python3 skills/trade-copy/scripts/copycheck.py prospects/<slug>/mockup/index.html
 ```
 
-Eleven hard checks, plus advisory readouts that need a human read. Full explanation of
+Twelve hard checks, plus advisory readouts that need a human read. Full explanation of
 each threshold, what a failure means, and how to fix it: `references/checks.md`.
 The Builder runs this before handoff. The Critic runs it as a hard gate.
+
+**`no banned phrases` is new (2026-08-05)** and so is the reason: the loader only ever
+read single backticked words, so `banlist.md`'s whole "Banned phrases" section — and six
+Tier 2 words wrapped across a line break — were written down and checked by nothing. The
+first run of the fixed loader found 19 hits on one built page.
+
+**Outreach drafts have a gate now too:**
+
+```bash
+python3 skills/trade-copy/scripts/copycheck.py prospects/<slug>/outreach-email.md --outreach
+```
+
+`references/outreach-voice.md` always said "the banlist applies here too" and nothing
+could run it — this script read HTML only. Harry sends those drafts himself, which makes
+them the copy with the least review and the most consequence. In outreach mode the hero
+and placeholder checks are skipped: a draft is *supposed* to carry `[Harry's phone]`.
 
 ## Fixing an existing page
 
@@ -189,7 +225,7 @@ instead of your words. This is not carelessness — on this project the script p
 copy twice, the agent that wrote the fixes then missed 28 offenders and, after fixing
 those, missed 20 more. A fresh reader caught all of them both times.
 
-So the order is: draft → `--list` sweep → checks green → **cold read** → fix → ship. The
+So the order is: **read `references/examples.md`** → draft → `--list` sweep → checks green → **cold read** → fix → **bank any case the scripts missed** → ship. The
 cold reader must not be told what you changed or what you were worried about; it must be
 told the owner's own standard and the settled decisions; and it must be explicitly allowed
 to answer "CLEAN", or it will manufacture findings to look useful.

@@ -1,5 +1,8 @@
 # Harry's Playbook
 
+> **`CLAUDE.md` is canonical.** Rules, checklists, and role/skill assignments are defined
+> there. If this file disagrees with `CLAUDE.md`, `CLAUDE.md` wins — fix this file.
+
 > **⚠️ The business model changed — read this first.** We work **ask-first**: find a
 > business that could use a site → **you** reach out personally → anyone who says yes gets
 > the master questionnaire → build FROM their answers → keep refining it with them. We do
@@ -105,11 +108,13 @@ The client now has a folder `prospects/<name>/`. Open its `mockup/index.html`
 it — you're checking it's good enough to put in front of them.
 
 **Step 7 — Add the remaining images.**
-The hero and one priority slot already hold **real AI-generated images** the builder made
-(they're in `prospects/<slug>/mockup/assets/`). Every OTHER picture slot is a labeled
-placeholder box with a ready-to-use image prompt baked in. Generate those remaining
-images, drop them in, and check the site still looks right. Then show it to the client
-(back at **Step 8C**).
+Every slot the plan marked `GENERATE` already holds a **real AI-generated image** the
+builder made (they're in `prospects/<slug>/mockup/assets/`). The remaining picture slots
+are labeled placeholder boxes with a ready-to-use prompt baked in — those are where the
+client's own job photos belong. If a slot really needs a generated image instead, you can
+make one (Part 3, Reference A) — the build budget closed at sign-off, so that's your own
+call and costs about $0.04–0.06 an image. Drop them in and check the site still looks
+right. Then show it to the client (back at **Step 8C**).
 
 **Step 8 — Reach out yourself, then run the build (the hinge — comes right after Step 4).**
 The team never contacts anyone, and it no longer writes you anything to send. You take the
@@ -207,7 +212,7 @@ the client's real content and invents no facts, and specifically:
   the header, not a text wordmark.
 - **The facts are current** — e.g. if ownership changed, the site says so rather than
   repeating a stale directory listing.
-- **The hero and one other image are real photos**, not placeholder boxes.
+- **Every `GENERATE` slot holds a real image**, not a placeholder box — the hero above all.
 - **It matches what the client actually told you** — skim
   `prospects/<slug>/client-answers.md` against the site. Their answers outrank the dossier,
   their old site, and design instinct; an ignored answer is a fix-list item.
@@ -222,14 +227,17 @@ see **Part 3, Reference B**.)*
   page, mobile issue). Write your complaints as a numbered list and paste:
 
   ```
-  Read CLAUDE.md, prospects/<slug>/website-plan.md, and .claude/agents/builder.md.
+  Read CLAUDE.md, prospects/<slug>/build-sheet.md, and .claude/agents/builder.md.
   Harry is explicitly reopening this signed-off mockup — the freeze rule permits
   this only on his say-so, so treat the fix list below as authorized.
   Spawn ONE builder (Opus) scoped ONLY to prospects/<slug>/mockup/ and
-  prospects/<slug>/screenshots/. Keep the existing design — do NOT redesign.
+  prospects/<slug>/screenshots/. The build sheet is its spec — it does NOT read
+  website-plan.md. Keep the existing design — do NOT redesign.
   Fix exactly this list:
   1. <problem>
   2. <problem>
+  If any fix would change what the sheet specifies, stop and tell me — that is a
+  planner change, not a builder change (Step 6C).
   Re-run the desktop and mobile QA loops, update prospects/<slug>/screenshots/,
   then a critic (Opus) re-audits and updates prospects/<slug>/audit.md.
   ```
@@ -244,10 +252,13 @@ see **Part 3, Reference B**.)*
   you'd rather see, e.g. "too dark and moody for a friendly family lawn crew;
   should feel bright and trustworthy">. Harry is explicitly reopening this
   signed-off prospect — the freeze rule permits this only on his say-so.
-  Spawn the planner (Fable, claude-fable-5)
-  to REVISE website-plan.md, show me the new plan, and wait for my OK. After my OK:
-  spawn a builder (Opus) to rebuild prospects/<slug>/mockup/ from it with full QA
-  and fresh screenshots, then a critic (Opus) audits.
+  Spawn the planner (Fable, claude-fable-5) to REVISE website-plan.md AND regenerate
+  prospects/<slug>/build-sheet.md and voice-spec.md to match — the sheet is the
+  builder's only spec, so a revised plan without a revised sheet is a defect.
+  Run plan-lint on both, show me the new plan, and wait for my OK. After my OK:
+  a critic (Opus) reviews the sheet (B1b) and returns SHEET GO, then relay that GO
+  to a builder (Opus) to rebuild prospects/<slug>/mockup/ from the SHEET with full
+  QA and fresh screenshots, then the critic audits the build.
   ```
 
   When it's done, re-review. → then continue to **Step 7**.
@@ -264,29 +275,33 @@ List every image prompt in the mockup:
 grep -rn "AI-IMAGE" prospects/<slug>/mockup/
 ```
 
-Generate each image with your tool of choice, save them to
+Generate each image through `/generate` (Reference A), save them to
 `prospects/<slug>/mockup/assets/`, then paste this to swap them in:
 
 ```
-In prospects/<slug>/mockup/, I've added real images to the assets/ folder. Replace
-each AI-IMAGE placeholder div with an <img> tag pointing at the matching file (keep
-the aria-labels as alt text, add loading="lazy", keep aspect ratios consistent).
+In prospects/<slug>/mockup/, I've added real images to the assets/ folder.
+Harry is explicitly reopening this signed-off mockup to place them — the freeze rule
+permits this only on his say-so, so treat this as authorized.
+Replace each AI-IMAGE placeholder div with an <img> tag pointing at the matching file
+(keep the aria-labels as alt text, add loading="lazy", keep aspect ratios consistent).
+Change nothing else — this is a swap, not a revision.
 Then open it in the browser pane, verify every section still looks right on desktop
 and at 375px wide, and update prospects/<slug>/screenshots/.
+Finally, remind me that the Claude Design copy is now stale and needs /design-push.
 ```
 
 Re-open `index.html` yourself to confirm.
 
 - **Step 7A — all images look good.** → go back to **Step 8C** and show the client.
-- **Step 7B — one or two won't come out right.** Fine **for the secondary slots only**:
+- **Step 7B — one or two won't come out right.** Fine **for `PLACEHOLDER` slots only**:
   leave those as the styled placeholders (they're designed to look
   intentional), or ask a builder to reframe that section so it doesn't need the image.
-  **Not fine for the hero or the other priority slot** — those two must hold real images
+  **Not fine for any `GENERATE` slot, the hero above all** — those must hold real images
   that pass the realism test (the critic already enforced this). If one of those looks
   wrong, send it back for ONE regeneration naming the flaw; if it fails again, escalate
   rather than shipping a placeholder there. → go back to **Step 8C**.
 
-  *(The client's own job photos beat AI images anyway — question 19 of the questionnaire
+  *(The client's own job photos beat AI images anyway — question 11 of the questionnaire
   asks for them. Once they send some, swap them in: **FULL-PROCESS Step 11**.)*
 
 ---
@@ -416,10 +431,12 @@ Code session inside the project (`cd ~/Projects/essex-web-crew && claude`) and t
 
 ### Reference A — Adding the real pictures
 
-The hero and one priority slot already contain **real AI-generated images** (the builder
-made them, ~$0.17/prospect — they live in `mockup/assets/`). Every picture slot *beyond
-those two* is a labeled placeholder box with a written image prompt baked in (e.g. "wide
-drone shot of a finished bluestone paver patio at golden hour"). List the remaining ones:
+Every slot the plan marked `GENERATE` already contains a **real AI-generated image** (the
+builder made them — they live in `mockup/assets/`). The site's whole media spend is capped
+all-in at **$1.00, or $1.50 if it ships a video**, images included. Every `PLACEHOLDER`
+slot is a labeled box with a written image prompt baked in (e.g. "wide drone shot of a
+finished bluestone paver patio at golden hour") — those are where the client's own job
+photos belong. List the remaining ones:
 
 ```bash
 grep -rn "AI-IMAGE" prospects/<slug>/mockup/
@@ -432,27 +449,36 @@ grep -rn "AI-IMAGE" prospects/<slug>/mockup/
    Read prospects/<slug>/website-plan.md and note the imagery REGISTER it set
    (usually "proud contractor" — casual phone photo, natural light, honest framing).
    Then read prospects/<slug>/mockup/index.html, pull out every AI-IMAGE prompt, and
-   use the ai-multimodal skill to generate each image in that SAME register so they
-   match the two the builder already made. Rules: no readable business name,
-   lettering, signage, or logo in any image; a different property in each project
-   photo; sized for where it sits on the page. Save into
-   prospects/<slug>/mockup/assets/ with clear filenames, then check each one for AI
-   tells (warped lines, stock-ad staging, shabby setting) before placing it.
+   use the /generate skill on nano-banana-2 (never the -lite draft tier) to generate
+   each image in that SAME register so they match the ones already in assets/.
+   Rules: no readable business name, lettering, signage, or logo in any image; a
+   different property in each project photo; sized for where it sits on the page.
+   Tell me the projected cost first (~$0.04 at 1K, ~$0.06 at 2K) and how much of this
+   site's budget is already spent — $1.00 all-in with no video, $1.50 with one. Copy
+   each result into prospects/<slug>/mockup/assets/ with clear filenames, then check
+   each for AI tells (warped lines, stock-ad staging, shabby setting) before placing.
    ```
-   (This uses Google's image generation under the hood — it may ask for a Gemini API
-   key and can cost a little. If it can't run, use option 2.)
-2. **Make them in your own tool** — ChatGPT/DALL·E, Midjourney, whatever you like. Copy
-   each AI-IMAGE prompt in, download the result, and drop the files into
-   `prospects/<slug>/mockup/assets/`. Match the register of the two existing images and
-   keep business names/signage out of them.
+   **All generation goes through `/generate`** — it owns model choice, provider routing,
+   and the API keys, so nothing asks you for one. Do not route image generation through
+   `ai-multimodal`, and do not paste an API key anywhere.
+2. **Use your own photos.** Real job photography from the client always beats a generated
+   image — that is exactly what the placeholder slots are for. Drop the files into
+   `prospects/<slug>/mockup/assets/` and skip generation entirely.
+
+   Avoid making these in ChatGPT/Midjourney/DALL·E: they land outside the register the
+   plan set, outside the spend ledger the critic audits, and with licence terms we have
+   not checked for client work.
 
 **Place them** — paste this and Claude swaps every placeholder for a real image:
 
 ```
-In prospects/<slug>/mockup/, I've added real images to the assets/ folder. Replace
-each AI-IMAGE placeholder div with an <img> tag pointing at the matching file (keep
-the aria-labels as alt text, add loading="lazy", keep aspect ratios consistent),
+In prospects/<slug>/mockup/, I've added real images to the assets/ folder.
+Harry is explicitly reopening this signed-off mockup to place them — the freeze rule
+permits this only on his say-so, so treat this as authorized. Change nothing else.
+Replace each AI-IMAGE placeholder div with an <img> tag pointing at the matching file
+(keep the aria-labels as alt text, add loading="lazy", keep aspect ratios consistent),
 then open it and confirm every section still looks right on desktop and mobile.
+Then remind me the Claude Design copy is stale and needs /design-push.
 ```
 
 (This is the deep version of Script 2, Step 7.)
@@ -501,7 +527,9 @@ You describe the change like you'd tell a designer; Claude makes it. Two sizes:
   section) — you don't need the whole team. Open a plain session in the folder and say it:
   ```
   In prospects/<slug>/mockup/, change the hero headline to "<new headline>" and make
-  the primary buttons a darker green. Then show me how it looks.
+  the primary buttons a darker green. I'm explicitly reopening this signed-off mockup —
+  the freeze rule permits that on my say-so. Change only what I named.
+  Then show me how it looks, and remind me the Claude Design copy needs /design-push.
   ```
 - **Bigger change**:
   - A section is broken or looks cheap, but the overall design is right → use **Script 2,

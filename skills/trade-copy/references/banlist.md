@@ -67,6 +67,22 @@ is what the say-aloud test is for.
 - `renowned`
 - `esteemed`
 
+**Added 2026-08-05** — from the Wikipedia "Signs of AI writing" vocabulary the
+general `humanizer` skill carries, filtered to words that could plausibly reach a
+trade page. Deliberately NOT added: `key`, `highlight`, `valuable`, `landscape` —
+each has an ordinary trade meaning (a key, a landscape) and would fire on honest copy.
+
+- `enhance`
+- `crucial`
+- `underscore`
+- `intricate`
+- `intricacies`
+- `fostering`
+- `garner`
+- `interplay`
+- `emphasizing`
+- `align with`
+
 ### Banned phrases
 
 - "from start to finish"
@@ -165,8 +181,9 @@ Everything in Tier 1 stays banned, with these adjustments:
 - Slightly longer sentences are fine; contractions still required.
 - Credentials, years, and numbers do the persuading: "CPA since 1983", "IRS
   representation", "same-day crowns". No adjective does work a number can do.
-- Additionally banned: `boutique`, `white-glove`, `trusted advisor`, `tailored
-  solutions`, `client-centric`, `personalized approach`.
+- Additionally banned: `boutique`, `white-glove`, `trusted advisor`, `client-centric`, `personalized approach`, `tailored solutions`.
+  (Keep this on ONE line. A backtick wrapped across a line break is invisible to
+  `copycheck.py`'s loader, which is how three of these went unchecked for a month.)
 - Still allowed here and nowhere else: "we", "our practice", modest formality in an
   attorney/medical bio.
 

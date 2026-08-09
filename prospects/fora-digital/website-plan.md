@@ -116,7 +116,7 @@ background, and motion — ≥4 of 5 axes apart. None touches a banned combo.
 | **Corey bio facts (verbatim list)** | Corey card copy ONLY from: Co-Owner at Fora · sophomore at University of Georgia studying accounting. His card is shorter — the layout absorbs it (see §6); we do NOT pad his bio with invented lines |
 | **Headshots: placeholder frames, never AI faces** | Two arch-top monogram frames ("HF", "CR") with a small "Photo coming soon" caption. No generated faces, no stock |
 | **Cecere Brothers = real client work** | Plate #1, largest, badge **"Real client work"** (cobalt fill). Screenshot `assets-src/cecere-brothers.png` used full-frame |
-| **Corey Blake's Steakhouse = concept/sample** | Plate #2, badge **"Concept build"** (outline chip) + one-line caption saying it's a sample project, not a client. Never presented as paying work |
+| **DaSilva & Associates = real client work** | Plate #2, badge **"Real client work"** (cobalt fill), same treatment as Cecere. Links out to the live build at `https://pauldasilvalaw.netlify.app` |
 | **1–2 coming-soon slots; never fake a project** | Two styled "Next project — in progress" plates, pure CSS (no fake logos/screenshots/names). Spec in §7 |
 | **No fabricated testimonials/counts/stats** | NO testimonial section, NO stats row, NO client-count claims, NO count-up animation. Social proof = the honestly-labeled portfolio itself |
 | **Imagery budget ZERO** | Image list has **0 GENERATE slots**. Only the two real screenshots + CSS-built placeholder cards + inline SVG favicon. OG image reuses the Cecere screenshot (real work, no cost) |
@@ -255,8 +255,8 @@ multi-page build would be empty rooms. One page, anchor navigation, five section
 
 ### 6.3 Work — the gallery wall (`#work`) — the biggest section
 - Section head: kicker `THE WORK` + H2 `Hung with pride.` + one honesty line in lead
-  size: "A young studio's honest wall — one real client, one concept build, and room
-  we intend to fill." (This sentence does the trust work our missing stats can't.)
+  size: "A young studio's honest wall — the clients we've built for, and room we intend
+  to fill." (This sentence does the trust work our missing stats can't.)
 - **Four plates**, editorial-asymmetric, generous `--space-6` between:
 
   **Plate 1 — Cecere Brothers Landscaping (REAL CLIENT)**
@@ -272,17 +272,20 @@ multi-page build would be empty rooms. One page, anchor navigation, five section
     Cecere Brothers Landscaping website homepage — dark garden hero reading 'Grounds
     worth coming home to'"`.
 
-  **Plate 2 — Corey Blake's Steakhouse (CONCEPT)**
+  **Plate 2 — DaSilva & Associates, LLC (REAL CLIENT)**
   - Mirrored: frame ~8 cols pulled right, caption left.
-  - Badge: **"Concept build"** — outline chip (`1px solid var(--line)`, ink text) —
-    visually distinct from the real-client badge on purpose.
-  - Title: `Corey Blake's Steakhouse`.
-  - Caption: "A sample build — a fictional steakhouse we designed to show the range:
-    dark luxury, serif fire, reservation-first layout. Not a client; a demonstration."
-    (Honest labeling is mandatory and doubles as confidence.)
-  - Image: `assets/corey-blakes-steakhouse.webp`, full-frame, `alt="Screenshot of the
-    Corey Blake's Steakhouse concept website — dark hero with a seared steak and the
-    headline 'Where Fire Meets Craft'"`.
+  - Badge: **"Real client work"** — cobalt fill chip, same as plate 1.
+  - Title: `DaSilva & Associates, LLC`.
+  - Caption: a Newark law firm's site rebuilt off a dated template — four pages, all four
+    practice areas, Portuguese and Spanish service, tap-to-call on every screen. Facts
+    only; no results or traffic claims.
+  - Link: `https://pauldasilvalaw.netlify.app` (live build, opens in a new tab) — not a
+    bundled local copy, unlike plate 1.
+  - Image: `assets/paul-da-silva-law.webp`, full-frame, `alt="Screenshot of the DaSilva &
+    Associates concept website — light editorial hero reading 'A Newark defense attorney
+    who speaks your language'"`.
+  - No note line under this caption (the AI-imagery disclosure that sat under the old
+    plate 2 was removed at Harry's direction, 2026-08-02).
 
   **Plates 3 & 4 — "Next project" slots (side by side, ~6 cols each)**
   - Pure CSS plates, no images, no fake anything — spec in §7.
@@ -332,7 +335,7 @@ multi-page build would be empty rooms. One page, anchor navigation, five section
 | # | Slot | Type | Source & treatment |
 |---|---|---|---|
 | 1 | Work plate 1 | **REAL screenshot** | Copy `prospects/fora-digital/assets-src/cecere-brothers.png` (1440×900) → convert to `mockup/assets/cecere-brothers.webp`, q80, max-width 1440 (no crop, full 16:10 frame). Rendered inside browser-chrome frame at ~760px wide desktop. Lazy-load (`loading="lazy"`), explicit `width`/`height` attrs |
-| 2 | Work plate 2 | **REAL screenshot** | Same treatment for `assets-src/corey-blakes-steakhouse.png` → `mockup/assets/corey-blakes-steakhouse.webp` |
+| 2 | Work plate 2 | **REAL screenshot** | Same treatment for `assets-src/paul-da-silva-law.png` (top 1440×900 crop of `prospects/paul-da-silva-law/screenshots/desktop-index.png`) → `mockup/assets/paul-da-silva-law.webp` |
 | 3–4 | "Next project — in progress" ×2 | **CSS-only plate** | Same browser-chrome frame, but the "viewport" is `--surface` with linen grain, a centered cobalt asterisk-mark (inline SVG, slow 40s rotation, reduced-motion gated), label `Next project — in progress` (kicker style) + subline "This spot is reserved for what we build next." NO fake logo, NO fake client name, NO fake screenshot |
 | 5–6 | Founder headshot frames ×2 | **CSS monogram frame** | Arch-top frame (border `1px solid var(--line)`, `--surface` fill, arch via `border-radius: 999px 999px var(--radius) var(--radius)` on the top), monogram `HF` / `CR` in Instrument Serif ~3.5rem ink, tiny caption `Photo coming soon` in stone. Never an AI face |
 | 7 | Favicon | **Inline SVG** | Cobalt rounded square, white Instrument-style serif "F" (draw as path or use text), embedded as `data:` URI in `<link rel="icon">` |
@@ -341,9 +344,9 @@ multi-page build would be empty rooms. One page, anchor navigation, five section
 **Framing spec (the browser-chrome plate, used for slots 1–4):** outer card `--surface`,
 `--radius-plate`, border `1px solid var(--line)`, shadow `0 24px 48px -24px rgb(27 24 19
 / 0.18)`; top chrome bar 36px with three 8px dots in `--line` and a centered faux URL pill
-(`--paper`, stone text: `cecerebrotherslandscaping.com` / `coreyblakes.example` /
-`coming-soon`) — the steakhouse pill uses a clearly non-real domain, reinforcing the
-concept label. Screenshot sits below the bar, `overflow: hidden`.
+(`--paper`, stone text: `cecerebrotherslandscaping.com` / `pauldasilvalaw.netlify.app` /
+`coming-soon`) — the concept pill shows the netlify preview host, never the firm's real
+domain, reinforcing the concept label. Screenshot sits below the bar, `overflow: hidden`.
 
 **No AI generation, no stock, no hotlinks. If any additional image feels needed, STOP and
 ask the lead — do not spend.**
@@ -466,10 +469,10 @@ omitted, not faked.) `<html lang="en">`, exactly one `<h1>` (the hero headline),
 - Harry and Corey are REAL people; every bio sentence in §6.4 is built from client-answers
   facts only. **Do not add** experience claims, role divisions ("Harry designs, Corey
   handles clients" — NOT stated), specialties, ages, hometowns beyond what's written.
-- ONE real client. No stats, counts, testimonials, logos-walls, or "trusted by" strips.
-- Cecere = "Real client work" badge; Steakhouse = "Concept build" badge + explicit caption.
-  These labels are load-bearing honesty — the Critic will fail the build if either is
-  missing or softened.
+- No stats, counts, testimonials, logos-walls, or "trusted by" strips.
+- Cecere and DaSilva both carry the "Real client work" badge. A plate that is NOT a paying
+  client must carry "Concept build" + an explicit caption saying so. These labels are
+  load-bearing honesty — the Critic will fail the build if one is missing or softened.
 - No location claims for the agency (no town, county, or state) — none was supplied.
 - Copy in this plan (§6) is final draft; Builder may fix typos but not add facts.
 

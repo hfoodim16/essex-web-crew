@@ -1,0 +1,15 @@
+{
+  "name": "web-design-ultra-detector",
+  "private": true,
+  "type": "module",
+  "description": "Static-HTML engine dependencies for the anti-pattern detector. Without these installed, engines/static-html/detect-html.mjs silently falls back to a regex pass that catches almost nothing and still exits 0 — a green gate that means nothing. Run `npm install` here after cloning.",
+  "scripts": {
+    "postinstall": "node -e \"['htmlparser2','css-select','css-tree','domutils'].forEach(m=>import(m))\" && echo 'detector: static-HTML engine ready'"
+  },
+  "dependencies": {
+    "css-select": "^7.0.0",
+    "css-tree": "^3.2.1",
+    "domutils": "^4.0.2",
+    "htmlparser2": "^12.0.0"
+  }
+}

@@ -63,7 +63,7 @@ Choose the simplest structural model that expresses those relationships. Use lay
 - Use depth only when it clarifies state or hierarchy.
 - Make optical corrections only after inspecting the rendered result.
 
-Variation is not a goal by itself. Repetition should support recognition; break it only when content or priority changes.
+Repetition supports recognition **inside** a family — cards in one grid should match, and breaking that is noise. **Between sections it is the opposite**: the layer-cake scanner rides section openers looking for landmarks, so a page whose sections all share one shape reads as a single undifferentiated layer and the eye stops sampling. Format variation across sections is a requirement with counted quotas, not a matter of taste — see `section-formats.md`.
 
 ## Verify
 

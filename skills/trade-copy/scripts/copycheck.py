@@ -4,6 +4,7 @@
 Usage:
     python3 copycheck.py prospects/<slug>/mockup/index.html
     python3 copycheck.py prospects/*/mockup/index.html --compare
+    python3 copycheck.py prospects/<slug>/outreach-email.md --outreach
 
 Reads visible body copy out of a built page and measures the things that make
 generated copy read fake. Real review quotes, nav, and footer are excluded --
@@ -21,12 +22,12 @@ from html.parser import HTMLParser
 from pathlib import Path
 
 # ---------------------------------------------------------------- thresholds
-# Calibrated against corey-blakes-steakhouse (reference) plus the two mockups
+# Calibrated against dasilva-associates (reference) plus the two mockups
 # whose copy already reads right (cedar-grove-transmission, john-sessa-cpa).
 T = {
-    "emdash_per_100w": 1.0,      # reference site sits at 0.5; every current mockup is 1.1-3.4
-    "dash_paragraph_pct": 15,     # reference 7.3%; current mockups 17-67%
-    "max_para_words": 60,         # reference longest is 41
+    "emdash_per_100w": 1.0,      # reference site sits at 0.62; every current mockup is 1.1-3.4
+    "dash_paragraph_pct": 15,     # reference 6.2%; current mockups 17-67%
+    "max_para_words": 60,         # reference longest is 35
     "h1_words": (2, 9),           # hero headline word count
     "formal_openers": 2,          # <= 2 "It is / There is / That is" sentence openers
     "min_contractions": 3,        # body copy must contain at least this many contractions
@@ -68,14 +69,31 @@ def load_banlist():
     here = Path(__file__).resolve().parent.parent / "references" / "banlist.md"
     motif, cutesy = [], []
     in_cutesy = False
+    section = ""
+    phrases = []
     if here.exists():
         for line in here.read_text().splitlines():
             if line.startswith("## "):
                 in_cutesy = "1B" in line or "cutesy" in line.lower()
-            m = re.match(r"^\s*[-*]\s+`([^`]+)`", line)
-            if m:
-                (cutesy if in_cutesy else motif).append(m.group(1).strip().lower())
-    return motif, cutesy
+            if line.startswith("#"):
+                section = line.lstrip("#").strip().lower()
+            if not re.match(r"^\s*[-*]\s", line):
+                continue
+            # Every backticked span on a bullet, not just one immediately after
+            # the dash. The old pattern required `- \`word\`` and so silently
+            # skipped "- Additionally banned: `boutique`, `white-glove`, ..." --
+            # six Tier 2 words that were written down and checked by nothing.
+            for w in re.findall(r"`([^`]+)`", line):
+                (cutesy if in_cutesy else motif).append(w.strip().lower())
+            # Quoted entries under "Banned phrases" become a phrase check.
+            # Only that section: "Still allowed here and nowhere else: 'we',
+            # 'our practice'" is a PERMISSION list and must never be banned.
+            if "banned phrase" in section and "(unless" not in line:
+                for ph in re.findall(r'"([^"]+)"', line):
+                    ph = ph.strip().lower()
+                    if len(ph.split()) >= 2:
+                        phrases.append(ph)
+    return motif, cutesy, phrases
 
 
 VOID_TAGS = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link",
@@ -270,12 +288,84 @@ def repeated_words(body, top=8, floor=3):
     return hits[:top]
 
 
-def analyze(path, banlist, watch=(), cutesy_list=()):
+def phrase_hits(blocks, phrases):
+    """Banned multi-word phrases from banlist.md's "Banned phrases" section.
+
+    These were written down in 2026-07 and read by nothing until 2026-08-05:
+    the loader only picked up single backticked words, so "we pride ourselves
+    on" and "no job too big or too small" sat in the banlist as decoration.
+    Cap is 0 -- each one is a phrase that says nothing, and the banlist already
+    records what to say instead.
+
+    Entries marked "(unless the client said it)" are skipped by the loader:
+    "peace of mind" is the client's line to use, not ours to ban outright.
+    """
+    out = []
+    for _, text, line in blocks:
+        low = text.lower()
+        for ph in phrases:
+            idx = low.find(ph)
+            if idx >= 0:
+                out.append((line, ph, text))
+    return out
+
+
+def elegant_variation(body, banlist, floor=4):
+    """Synonym cycling to dodge the motif cap.
+
+    This is the counterweight to `motif cap`, and it exists because the two
+    checks pull in opposite directions. A page that says "oasis" five times
+    fails motif cap; a page that says oasis, sanctuary, retreat, haven once each
+    scores perfectly on every existing check while being the SAME tell --
+    humanizer category 11, elegant variation. Nothing in this project pushed
+    back on that until now.
+
+    Advisory: a page can legitimately touch four different banlist words once.
+    A reader decides whether it is vocabulary or evasion.
+    """
+    seen = [w for w in banlist
+            if len(re.findall(rf"\b{re.escape(w)}\w*\b", body, re.I)) == 1]
+    return seen if len(seen) >= floor else []
+
+
+def read_markdown(raw):
+    """Turn a plain-text/markdown draft into the same (tag, text, line) blocks
+    the HTML path produces, so every check downstream is identical.
+
+    Exists because outreach-voice.md:40 says "the banlist applies here too" and
+    nothing could run it: this script's only reader was an HTMLParser, so a
+    `.md` draft went through the one gate the crew never had. Harry sends those
+    drafts himself, which makes them the copy with the least review and the most
+    consequence.
+
+    Quoted lines, signature blocks and subject lines are kept -- an outreach
+    email is short enough that everything in it is visible copy.
+    """
+    blocks = []
+    for i, line in enumerate(raw.splitlines(), 1):
+        s = line.strip()
+        if not s or s.startswith(("```", "---", "***", "|", ">")):
+            continue
+        tag = "h2" if s.startswith("#") else "p"
+        s = re.sub(r"^#+\s*", "", s)                      # headings
+        s = re.sub(r"^[-*+]\s+|^\d+\.\s+", "", s)         # list bullets
+        s = re.sub(r"\*\*([^*]+)\*\*|\*([^*]+)\*|`([^`]+)`",
+                   lambda m: m.group(1) or m.group(2) or m.group(3), s)
+        s = re.sub(r"\[([^\]]+)\]\([^)]*\)", r"\1", s)    # links
+        if s:
+            blocks.append((tag, s, i))
+    return blocks
+
+
+def analyze(path, banlist, watch=(), cutesy_list=(), phrases=(), outreach=False):
     raw = Path(path).read_text(errors="replace")
-    p = Extract()
-    p.feed(raw)
-    p._flush()
-    blocks = p.blocks
+    if outreach or Path(path).suffix.lower() in {".md", ".txt"}:
+        blocks = read_markdown(raw)
+    else:
+        p = Extract()
+        p.feed(raw)
+        p._flush()
+        blocks = p.blocks
 
     paras = [t for tag, t, _ in blocks if tag in {"p", "li", "dd"} and len(words(t)) > 2]
     heads = [t for tag, t, _ in blocks if tag.startswith("h")]
@@ -320,6 +410,9 @@ def analyze(path, banlist, watch=(), cutesy_list=()):
         "echoes": heading_echoes(blocks),
         "year_drift": year_drift(body),
         "framing": framing(body),
+        "outreach": outreach or Path(path).suffix.lower() in {".md", ".txt"},
+        "phrases": phrase_hits(blocks, phrases),
+        "variation": elegant_variation(body, banlist),
     }
     return r
 
@@ -334,8 +427,9 @@ def verdict(r):
     v.append(("longest paragraph", r["max_para_words"] <= T["max_para_words"],
               f"{r['max_para_words']} words (max {T['max_para_words']})"))
     lo, hi = T["h1_words"]
-    v.append(("hero headline length", lo <= r["h1_words"] <= hi,
-              f"{r['h1_words']} words (want {lo}-{hi})"))
+    if not r.get("outreach"):
+        v.append(("hero headline length", lo <= r["h1_words"] <= hi,
+                  f"{r['h1_words']} words (want {lo}-{hi})"))
     v.append(("formal openers", r["formal_openers"] <= T["formal_openers"],
               f"{r['formal_openers']} 'It is/There is' openers (max {T['formal_openers']})"))
     v.append(("contraction floor", r["contractions"] >= T["min_contractions"],
@@ -346,11 +440,19 @@ def verdict(r):
               f"{r['triads']} (max {T['triads']})"))
     v.append(("motif cap", r["motif_max"] <= T["motif_max"],
               f"'{r['motif_worst']}' x{r['motif_max']} (max {T['motif_max']})" if r["motif_worst"] else "none"))
-    v.append(("no placeholders", r["placeholders"] == 0,
-              f"{r['placeholders']} placeholder/AI-IMAGE strings in visible copy"))
+    # A built page must never ship a placeholder; an outreach DRAFT is supposed to
+    # carry them -- [Harry's phone], [mockup link] are the slots Harry fills before
+    # he sends it. Same string, opposite meaning, so the check is scoped to pages.
+    if not r.get("outreach"):
+        v.append(("no placeholders", r["placeholders"] == 0,
+                  f"{r['placeholders']} placeholder/AI-IMAGE strings in visible copy"))
     v.append(("no cutesy language", not r["cutesy"],
               f"{len(r['cutesy'])} hit(s): " + ", ".join(
                   f"'{w}' line {ln}" for ln, w, _ in r["cutesy"][:4]) if r["cutesy"] else "none"))
+    v.append(("no banned phrases", not r["phrases"],
+              f"{len(r['phrases'])} hit(s): " + ", ".join(
+                  f"'{ph}' line {ln}" for ln, ph, _ in r["phrases"][:4])
+              if r["phrases"] else "none"))
     return v
 
 
@@ -362,12 +464,14 @@ def main():
         if f.startswith("--watch="):
             watch = [w.strip().lower() for w in f.split("=", 1)[1].split(",") if w.strip()]
             flags.discard(f)
-    banlist, cutesy_list = load_banlist()
+    banlist, cutesy_list, phrases = load_banlist()
     if not args:
         print(__doc__)
         return 2
 
-    results = [r for r in (analyze(a, banlist, watch, cutesy_list) for a in args) if r]
+    outreach = "--outreach" in flags
+    results = [r for r in (analyze(a, banlist, watch, cutesy_list, phrases, outreach)
+                           for a in args) if r]
 
     if "--list" in flags:
         # Every visible string, for the say-aloud sweep. Put a verdict on each line
@@ -402,9 +506,15 @@ def main():
             print(f"    [{'PASS' if ok else 'FAIL'}] {name:24} {detail}")
             failed |= not ok
         print(f"    [ -- ] median paragraph       {r['median_para_words']} words   "
-              f"(advisory; reference site is 8)")
+              f"(advisory; the crew's tightest reference pages sit at 8-12)")
         print(f"    [ -- ] paragraphs with no number or proper noun   "
               f"{r['noanchor_para_pct']}%   (advisory; read them, cut the ones saying nothing)")
+        if r["variation"]:
+            print("    [ -- ] elegant variation -- " + str(len(r["variation"])) +
+                  " different banlist words, each used exactly once:")
+            print("           " + ", ".join(r["variation"][:8]))
+            print("           (advisory; cycling synonyms dodges the motif cap without")
+            print("            fixing the register -- it is the same tell wearing a thesaurus)")
         if r["repeated"]:
             top = ", ".join(f"{w} x{c}" for w, c in r["repeated"])
             print(f"    [ -- ] used 3+ times: {top}")

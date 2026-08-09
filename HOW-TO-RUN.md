@@ -1,5 +1,8 @@
 # How to Run — Simple Steps
 
+> **`CLAUDE.md` is canonical.** Rules, checklists, and role/skill assignments are defined
+> there. If this file disagrees with `CLAUDE.md`, `CLAUDE.md` wins — fix this file.
+
 **1. Open Terminal** (Cmd+Space → "Terminal" → Enter).
 
 **2. Start it:**
@@ -58,8 +61,11 @@ Read CLAUDE.md and all files in .claude/agents/. Run the Essex Web Crew
 BUILD pipeline for ONE client. Skip the prospecting team —
 we already have this client. Lineup: planner=Fable (claude-fable-5),
 builder=Opus, critic=Opus. Free tools only — no Firecrawl/Perplexity; the one
-pre-approved paid step is the builder's 2 AI images (~$0.17). Teammates invoke
-their own skills via the Skill tool.
+pre-approved paid step is image generation, capped by the site's all-in budget:
+$1.00 total if the site ships no video, $1.50 if it ships one — images, video and
+any regeneration all come out of that one number. No image count cap. If the
+planner marks a VIDEO slot, that is a REQUEST — bring it to me and wait for a yes
+before the builder generates anything. Teammates invoke their own skills via the Skill tool.
 
 CLIENT: <slug or business name>
 
@@ -79,11 +85,17 @@ Do this:
    resolved in the old site's favor.
 3. Spawn 'planner': plan FROM the client's answers. Their answers are the
    TOP authority — above the dossier, above the old site, above design instinct.
+   It writes TWO files: build-sheet.md (the Builder's entire spec, self-contained
+   and lint-clean) and website-plan.md (the reasoning, for me and the critic).
    The plan must include a "Client answers → decisions" section mapping every
    answer to what the plan does about it, and flag any answer that is unclear or
    conflicts with another so I can ask them.
-4. Spawn ONE 'builder' for this prospect. It implements the plan and treats the
-   client's answers as binding.
+3b. SHEET REVIEW — no build starts without it. The critic reviews build-sheet.md
+   BEFORE any code exists and returns SHEET GO or a numbered fix list back to the
+   planner (max 2 rounds, then bring it to me). Relay the GO to the builder.
+4. Spawn ONE 'builder' for this prospect, on SHEET GO. It implements the
+   BUILD SHEET — it does not read website-plan.md — and treats the client's
+   answers as binding.
 5. Spawn 'critic': enforce client-answer fidelity (an ignored answer is a fail),
    content parity, the $10K Checklist (8/8), the web-design-ultra rubric (no
    dimension below 7, boldness >= 8), the imagery two-way realism test,
@@ -106,14 +118,18 @@ Continue — not all tasks are complete.
 open ~/Projects/essex-web-crew/prospects/
 ```
 A prospected business has `dossier.md` and `site-content.md`. Once it's been through a
-build run it also has `client-answers.md`, `website-plan.md`, `mockup/` (incl. `assets/`),
-`screenshots/`, and `audit.md`.
+build run it also has `client-answers.md`, `build-sheet.md` (the Builder's spec),
+`website-plan.md` (the reasoning), `voice-spec.md`, `mockup/` (incl. `assets/`),
+`screenshots/`, `STATE.md`, `release-form.pdf`, and `audit.md`.
 
 **10. Shut down** when done: `Ask all teammates to shut down.` — or just `/exit`.
 
-**11. Delivery to Corey — automatic.** When the critic signs a prospect off, the lead
-packages the site and drafts the Gmail to Corey (cbrapkin@gmail.com) for you. Check your
-Gmail drafts, glance at it, hit send. Nothing is ever sent without you.
+**11. Delivery to Corey — gated, then drafted.** Sign-off does not ship anything by itself.
+The lead runs the delivery procedure in CLAUDE.md: **a signed release form gates everything**
+(none on file → it stops), then the gated packager builds the zip, then `/design-push`
+publishes the design-system copy, then the live URL is registered with the site-caretaker.
+Only then does it draft the Gmail to Corey (crapkin@foradigital.com). Check your Gmail
+drafts, glance at it, hit send. Nothing is ever sent without you.
 
 Zips over 200 KB can't be attached automatically — those drafts open with an
 `ATTACH BEFORE SENDING:` line naming the file, so drag it in before you send.
@@ -124,7 +140,8 @@ pipeline/package-site.sh <prospect-slug>
 ```
 Writes `prospects/<slug>/<slug>-site.zip` from the best available version (`deploy-ready/`,
 else `deliverable/`, else `mockup/`), with all assets included and dev scratch files stripped.
-Or just say `deliver <slug>` and the lead does both steps. See `COREY-DEPLOY.md` for Corey's side.
+Or just say `deliver <slug>` and the lead runs the **full gated procedure** (signed
+release form → gated packager → `/design-push` → Gmail draft), not just these two steps. See `COREY-DEPLOY.md` for Corey's side.
 
 Always the zip, never a bare `index.html`: re-downloading an emailed HTML file makes the browser
 rename it (`index-4.html`), and hosts only serve an exactly-named `index.html` as the homepage.
@@ -150,5 +167,6 @@ rename it (`index-4.html`), and hosts only serve an exactly-named `index.html` a
 - **Nothing is sent to any business** — everything lands on disk for you to review.
 - All client contact is you, personally: reach out to the shortlist in your own words, and
   send `templates/Website-Questionnaire.docx` to anyone who says yes.
-- After review: generate the real images from the `AI-IMAGE:` prompts before the site goes
-  to the client.
+- After review: any placeholder slot that genuinely needs a generated image rather than one
+  of the client's own photos can be filled from its `AI-IMAGE:` prompt before the site goes
+  to the client — through `/generate`, inside the site's all-in budget.

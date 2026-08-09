@@ -1,0 +1,786 @@
+/* ==========================================================================
+   DaSilva & Associates, LLC — "The Quiet Verdict"
+
+   An empty counsel table before anyone sits down: the gravity of a courtroom
+   at 8am, not the navy-and-gold template Paul called "too vanilla." The ground
+   is his own logo blue driven dark, the light surfaces are a cool paper, and
+   the one warm note is gold — used only where the ground is dark, which is
+   what lets an accent live on a CTA band at all. Oversized serif headlines and
+   giant real numerals (May 2002, 90%, 4 practice areas) do the talking in his
+   own plain language: bold in structure, type, and color, never in the
+   writing, which is exactly the tension his questionnaire answers set up.
+
+   Layout archetype: civic poster-stack — full-width dark/light bands,
+   oversized numerals, zero hairline rule-work.
+   Built from prospects/dasilva-associates/website-plan.md.
+
+   COLOUR DISCIPLINE — the accent flips with the ground, structurally.
+   `--accent` is redeclared inside every dark scope, so no element can carry
+   the wrong accent onto the wrong ground by accident:
+     · on paper  the accent is AZUL  #00588A (7.01:1) — his logo's own blue
+     · on dark   the accent is GOLD  #C8A24A (6.07:1 on azul-deep)
+   Azul never touches a dark ground (1.78:1) and gold never touches paper
+   (2.17:1). Where gold is genuinely needed as text on light, `--gold-deep`.
+   ========================================================================== */
+
+/* --- Self-hosted variable fonts (offline; no CDN, no network required) ---- */
+@font-face {
+  font-family: 'Frank Ruhl Libre';
+  font-style: normal;
+  font-weight: 300 900;
+  font-display: swap;
+  src: url('assets/fonts/frank-ruhl-libre.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Red Hat Text';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url('assets/fonts/red-hat-text.woff2') format('woff2');
+}
+
+/* --- Tokens ------------------------------------------------------------- */
+:root {
+  /* grounds — dark-first */
+  --azul-950:  #041E30;   /* darkest: footer base                           */
+  --azul-deep: #062B44;   /* primary dark ground: hero, dark bands          */
+  --azul-900:  #0A3A58;   /* elevated panels on dark                        */
+  --azul-lift: #0A3D5E;   /* lightest point of the dark-band gradient;
+                             capped here so gold stays >=4.5:1 over it      */
+
+  /* the firm's own mark blue — accent on LIGHT grounds only */
+  --azul:      #00588A;
+  --azul-hov:  #00426B;
+
+  /* gold — accent on DARK grounds only */
+  --gold:      #C8A24A;
+  --gold-hov:  #D9B75F;
+  --gold-deep: #7E5F16;   /* gold-as-text on light, used sparingly          */
+
+  /* light grounds — cool near-white, deliberately not beige */
+  --paper:     #F4F6F7;
+  --paper-2:   #E4EAEE;   /* cards on light                                 */
+  --paper-2h:  #D6DFE6;   /* card hover on light                            */
+  --paper-dim: #AFC0CC;   /* muted text on dark                             */
+  --ink:       #0D1B24;
+  --ink-dim:   #44586A;   /* muted text on light                            */
+
+  /* hairlines and field chrome, derived from --ink / --paper */
+  --rule-light: rgba(13, 27, 36, .16);
+  --rule-dark:  rgba(244, 246, 247, .20);
+  --field-edge: #6B7F8E;  /* 3.83:1 on paper — component boundary           */
+  --field-hint: #4F6373;  /* 5.76:1 on paper — placeholder text             */
+
+  /* THE ACCENT SWITCH — light ground is the default */
+  --accent:     var(--azul);
+  --accent-hov: var(--azul-hov);
+  --on-accent:  var(--paper);
+  --focus:      var(--azul);
+
+  --font-display: 'Frank Ruhl Libre', Georgia, 'Times New Roman', serif;
+  --font-body: 'Red Hat Text', 'Segoe UI', system-ui, sans-serif;
+
+  --ease: cubic-bezier(.16, 1, .3, 1);
+  --tempo: 600ms;
+  --stagger: 70ms;
+
+  --radius: 2px;
+}
+
+/* Every dark scope flips the accent to gold. Add a dark surface here and it
+   inherits the correct accent automatically — this is the guardrail. */
+.band-dark,
+.hero,
+.site-footer,
+.topstrip {
+  --accent:     var(--gold);
+  --accent-hov: var(--gold-hov);
+  --on-accent:  var(--ink);
+  --focus:      var(--gold);
+}
+
+/* --- Reset -------------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;   /* 17px */
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.12;
+  margin: 0;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+/* Floor for the page title. Without this a bare <h1> falls to the 2em UA
+   default (34px) and is outranked by its own 44px .h-sec headings — which is
+   what happened on attorney-bio and contact, whose h1 sits in a split rather
+   than in .pagehead. .hero h1 and .pagehead h1 both override this. */
+h1 { font-size: 3.5rem; font-weight: 900; letter-spacing: -0.025em; }
+p { margin: 0 0 1.1em; max-width: 68ch; }
+ul, ol { margin: 0; padding: 0; }
+
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+
+.skip {
+  position: absolute; left: 0; top: 0; z-index: 200;
+  background: var(--azul); color: var(--paper);
+  padding: 0.7rem 1.2rem; transform: translateY(-140%);
+}
+.skip:focus { transform: none; }
+
+.wrap { width: 100%; max-width: 1220px; margin-inline: auto; }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* --- Bands: the composition engine -------------------------------------- */
+/* One theme (paper), dark azul bands as punctuation. Never a mid-page flip. */
+.band { position: relative; padding: 6.5rem 1.6rem; }
+.band-light { background: var(--paper); color: var(--ink); }
+.band-dark {
+  background-color: var(--azul-deep);
+  background-image:
+    radial-gradient(80% 120% at 50% 40%, #0A3D5E 0%, transparent 62%),
+    radial-gradient(70% 90% at 12% 8%,  #041E30 0%, transparent 58%),
+    radial-gradient(80% 100% at 92% 96%, #03192A 0%, transparent 60%);
+  color: var(--paper);
+}
+.band-dark h1, .band-dark h2, .band-dark h3 { color: var(--paper); }
+.band-dark .dim { color: var(--paper-dim); }
+.dim { color: var(--ink-dim); }
+
+/* Grain — above the ground, below content */
+.band::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  opacity: .035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.band > * { position: relative; z-index: 1; }
+
+/* --- Header ------------------------------------------------------------- */
+.topstrip {
+  background: var(--azul-deep);
+  color: var(--paper);
+  font-size: 0.8125rem;   /* 13px */
+  letter-spacing: 0.04em;
+  padding: 0.55rem 1.6rem;
+}
+.topstrip .wrap { display: flex; justify-content: space-between; gap: 1rem; align-items: center; }
+.topstrip .lang { font-weight: 500; }
+.topstrip .place { color: var(--paper-dim); }
+
+.site-header {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--paper);
+  border-bottom: 1px solid var(--rule-light);
+  padding: 0 1.6rem;
+}
+.site-header .wrap {
+  min-height: 78px;
+  display: flex; align-items: center; gap: 1.5rem;
+}
+.brand { display: flex; align-items: center; flex: 0 0 auto; padding: 0.6rem 0; }
+.brand img { height: 48px; width: auto; }
+
+.nav { margin-left: auto; display: flex; align-items: center; gap: 1.75rem; }
+.nav-links {
+  display: flex; align-items: center; gap: 1.75rem;
+  list-style: none; white-space: nowrap;
+}
+.nav-links a {
+  text-decoration: none;
+  font-size: 0.95rem;   /* 15.2px */
+  font-weight: 500;
+  padding: 0.35rem 0;
+  display: inline-block;
+  border-bottom: 2px solid transparent;
+  transition: border-color .2s var(--ease), color .2s var(--ease);
+}
+.nav-links a:hover { color: var(--azul); border-bottom-color: var(--azul); }
+.nav-links a[aria-current="page"] { border-bottom-color: var(--azul); }
+
+/* --- Buttons ------------------------------------------------------------ */
+/* Fill and label both come from the scope, so a button is always legible on
+   whatever ground it lands on: azul+paper on light, gold+ink on dark. */
+.btn {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  font-family: var(--font-body); font-size: 1rem; font-weight: 700;
+  text-decoration: none; border: 0; cursor: pointer;
+  padding: 0.95rem 1.5rem;
+  border-radius: var(--radius);
+  background: var(--accent); color: var(--on-accent);
+  transition: background .2s var(--ease), transform .12s var(--ease);
+}
+.btn .glyph { transition: transform .2s var(--ease); }
+.btn:hover { background: var(--accent-hov); }
+.btn:active { transform: scale(.97); }
+.btn-sm { padding: 0.62rem 1.05rem; font-size: 0.92rem; }
+/* The header CTA's two flex children are the two halves of one phrase, so the
+   space between them is a word space, not the button's icon gap. */
+.site-header .btn-sm { gap: 0.25rem; }
+
+/* icon-nudge — the site's single hover personality */
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover .glyph { transform: translateX(5px); }
+}
+
+.link-nudge {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-weight: 700; font-size: 1rem; text-decoration: none; color: var(--accent);
+  border-bottom: 2px solid currentColor; padding-bottom: 2px;
+}
+.link-nudge .glyph { transition: transform .2s var(--ease); }
+@media (hover: hover) and (pointer: fine) {
+  .link-nudge:hover .glyph { transform: translateX(5px); }
+}
+.link-nudge:active { transform: scale(.97); }
+
+/* --- Mobile nav --------------------------------------------------------- */
+.burger {
+  display: none;
+  background: none; border: 1px solid rgba(13, 27, 36, .3);
+  border-radius: var(--radius);
+  width: 46px; height: 42px; cursor: pointer;
+  padding: 0; align-items: center; justify-content: center;
+}
+.burger span { display: block; width: 20px; height: 2px; background: var(--ink); position: relative; }
+.burger span::before, .burger span::after {
+  content: ""; position: absolute; left: 0; width: 20px; height: 2px;
+  background: var(--ink); transition: transform .2s var(--ease);
+}
+.burger span::before { top: -6px; }
+.burger span::after { top: 6px; }
+.burger[aria-expanded="true"] span { background: transparent; }
+.burger[aria-expanded="true"] span::before { transform: translateY(6px) rotate(45deg); }
+.burger[aria-expanded="true"] span::after { transform: translateY(-6px) rotate(-45deg); }
+
+/* --- Hero --------------------------------------------------------------- */
+.hero {
+  position: relative;
+  min-height: 640px;
+  display: flex; align-items: center;
+  padding: 6rem 1.6rem;
+  overflow: hidden;
+  background-color: var(--azul-deep);
+  color: var(--paper);
+}
+.hero-media { position: absolute; inset: 0; z-index: 0; }
+.hero-media img { width: 100%; height: 100%; object-fit: cover; }
+/* The scrim is azul-deep, which also cools the photograph's warm wood and its
+   green leather chair so neither reads as a stray hue against the palette. */
+.hero-scrim {
+  position: absolute; inset: 0; z-index: 1;
+  background:
+    linear-gradient(90deg, rgba(6,43,68,.97) 0%, rgba(6,43,68,.93) 34%, rgba(6,43,68,.68) 62%, rgba(6,43,68,.50) 100%),
+    linear-gradient(180deg, rgba(4,30,48,.60) 0%, rgba(4,30,48,.20) 45%, rgba(4,30,48,.68) 100%);
+}
+.hero .wrap { position: relative; z-index: 3; }
+.hero-copy { max-width: 41rem; }
+.hero h1 {
+  font-size: 4rem;   /* 64px — 3.8x body: the composition device */
+  font-weight: 900;
+  letter-spacing: -0.025em;
+  color: var(--paper);
+  margin-bottom: 1.4rem;
+}
+.hero-sub {
+  font-size: 1.2rem;
+  color: var(--paper-dim);
+  max-width: 46ch;
+  margin-bottom: 2.1rem;
+}
+.hero .btn { font-size: 1.08rem; padding: 1.05rem 1.7rem; }
+
+/* god rays — the one ambient system, home hero only.
+   Anchored to the windows in the photograph (upper right). Warm, which now
+   reads as the same light the gold accent is drawn from. */
+.rays { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 2; }
+.ray {
+  position: absolute; top: -25%; height: 165%;
+  will-change: opacity;
+  background: linear-gradient(rgba(255, 240, 205, .18), rgba(255, 240, 205, 0) 76%);
+  filter: blur(14px);
+  transform-origin: top center;
+  animation: ray-breathe 30s ease-in-out infinite;
+}
+.ray:nth-child(1) { left: 62%; width: 120px; transform: rotate(-15deg); }
+.ray:nth-child(2) { left: 71%; width: 66px;  transform: rotate(-21deg); animation-delay: -10s; opacity: .8; }
+.ray:nth-child(3) { left: 78%; width: 92px;  transform: rotate(-9deg);  animation-delay: -19s; opacity: .65; }
+@keyframes ray-breathe { 0%, 100% { opacity: .40 } 50% { opacity: .85 } }
+@media (prefers-reduced-motion: reduce) { .ray { animation: none; opacity: .55; } }
+
+/* --- Page head (interior pages) ----------------------------------------- */
+.pagehead { padding-top: 5rem; padding-bottom: 4rem; }
+.pagehead h1 { font-size: 3.5rem; font-weight: 900; letter-spacing: -0.025em; margin-bottom: 1.2rem; }
+.pagehead .lede { font-size: 1.15rem; max-width: 58ch; color: var(--ink-dim); }
+
+/* --- Section headings --------------------------------------------------- */
+.h-sec { font-size: 2.75rem; font-weight: 700; margin-bottom: 1.9rem; }
+.h-sub { font-size: 1.6rem; font-weight: 700; margin-bottom: 0.9rem; }
+
+/* --- stat-strip: the >=3x scale jump ------------------------------------ */
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3rem 2.6rem; align-items: stretch; }
+.stat { display: grid; grid-template-rows: 1fr auto; }
+.stat .fig {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 5.25rem;   /* 84px */
+  line-height: 0.92;
+  letter-spacing: -0.035em;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 0.85rem;
+}
+.stat p { font-size: 1rem; margin: 0; max-width: 24ch; color: var(--ink-dim); }
+
+/* --- card-grid: practice areas (his numbered four) ---------------------- */
+.practice-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; list-style: none; }
+.pcard {
+  display: block; text-decoration: none;
+  background: var(--paper-2);
+  padding: 2.4rem;
+  border-radius: var(--radius);
+  transition: background .22s var(--ease);
+}
+.pcard:hover { background: var(--paper-2h); }
+.pcard .idx {
+  font-family: var(--font-display); font-weight: 900;
+  font-size: 3.5rem; line-height: 1;
+  color: var(--accent);
+  display: block; margin-bottom: 0.55rem;
+}
+.pcard h3 { font-size: 1.75rem; margin-bottom: 0.65rem; }
+.pcard p { font-size: 1rem; margin: 0 0 1.1rem; color: var(--ink-dim); max-width: 40ch; }
+.pcard .go {
+  font-weight: 700; font-size: 0.95rem; color: var(--accent);
+  display: inline-flex; align-items: center; gap: 0.45rem;
+}
+.pcard .go .glyph { transition: transform .2s var(--ease); }
+@media (hover: hover) and (pointer: fine) {
+  .pcard:hover .go .glyph { transform: translateX(5px); }
+}
+
+/* --- quote-monolith: the owner block ------------------------------------ */
+.monolith .wrap-inner { max-width: 46rem; margin: 0; }
+.monolith blockquote {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 2.5rem;   /* 40px */
+  line-height: 1.32;
+  letter-spacing: -0.018em;
+}
+.monolith blockquote p { max-width: 24ch; margin: 0 0 0.6em; }
+.monolith figcaption {
+  margin-top: 1.7rem;
+  font-family: var(--font-body);
+  font-size: 1rem; font-weight: 700; letter-spacing: 0.02em;
+  color: var(--accent);
+}
+
+/* --- split -------------------------------------------------------------- */
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+.split.split-wide { grid-template-columns: 1.05fr 0.95fr; }
+.split.split-narrow { grid-template-columns: 0.78fr 1.22fr; align-items: start; }
+.split.split-top { align-items: start; }
+.split-media { margin: 0; }
+.split-media img { width: 100%; height: auto; border-radius: var(--radius); }
+/* Labels the photograph so a visitor knows whose building it is. Quiet — it is a
+   caption, not a second heading competing with the service-area tiers. */
+.split-media figcaption {
+  margin-top: 0.7rem;
+  font-size: 0.88rem; line-height: 1.5;
+  color: var(--ink-dim);
+}
+.band-dark .split-media figcaption { color: var(--paper-dim); }
+
+.area-list { list-style: none; display: grid; gap: 1.7rem; margin-bottom: 1.9rem; }
+.area-list .tier-label {
+  display: block;
+  font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 0.35rem;
+}
+.area-list .tier-value { font-family: var(--font-display); font-size: 2rem; font-weight: 700; }
+
+/* --- editorial-column with side-label ----------------------------------- */
+.editorial { position: relative; }
+.editorial .side-label {
+  position: absolute; left: 1.6rem; top: 7.1rem;
+  writing-mode: vertical-rl;
+  font-size: 0.8rem; font-weight: 700; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--accent);
+  margin: 0;
+}
+.editorial .col { margin-left: 5.5rem; max-width: 62ch; }
+.editorial .col p { font-size: 1.08rem; }
+.side-inset { margin-left: 5.5rem; }
+
+/* small spacing utilities (keeps inline styles out of the markup) */
+.mt-s { margin-top: 1.5rem; }
+.mt-m { margin-top: 2.1rem; }
+.mb-s { margin-bottom: 0.6rem; }
+.mb-m { margin-bottom: 1.1rem; }
+.mb-l { margin-bottom: 2.4rem; }
+.mb-0 { margin-bottom: 0; }
+.measure { max-width: 60ch; }
+
+/* --- steps -------------------------------------------------------------- */
+/* The head numeral hangs in its own track. 6.5rem keeps a single glyph flush
+   with the numeral column of the list below; a four-digit year (1996) is wider
+   than that, so the track grows to the glyphs instead of letting them run into
+   the heading. */
+.steps-head { display: grid; grid-template-columns: minmax(6.5rem, max-content) 1fr; gap: 1.6rem; align-items: baseline; margin-bottom: 2.4rem; }
+.steps-head .big-num {
+  font-family: var(--font-display); font-weight: 900;
+  font-size: 5rem; line-height: 0.85;
+  color: var(--accent); letter-spacing: -0.04em;
+}
+.steps { list-style: none; display: grid; gap: 0; }
+.steps li {
+  display: grid; grid-template-columns: 6.5rem 1fr; gap: 1.6rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--rule-light);
+  align-items: baseline;
+}
+.band-dark .steps li { border-top-color: var(--rule-dark); }
+.steps li:last-child { border-bottom: 1px solid var(--rule-light); }
+.band-dark .steps li:last-child { border-bottom-color: var(--rule-dark); }
+.steps .num {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 1.5rem; color: var(--accent); line-height: 1;
+}
+.steps .what { font-family: var(--font-display); font-weight: 700; font-size: 1.25rem; margin: 0 0 0.25rem; }
+.steps .detail { font-size: 1rem; color: var(--ink-dim); margin: 0; }
+.band-dark .steps .detail { color: var(--paper-dim); }
+
+/* --- generic card grids (cells always == item count) -------------------- */
+.grid-4 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.8rem; list-style: none; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.8rem; list-style: none; }
+.gcard { background: var(--paper-2); padding: 2rem; border-radius: var(--radius); }
+.gcard h3 { font-size: 1.35rem; margin-bottom: 0.55rem; }
+.gcard p { font-size: 1rem; margin: 0; color: var(--ink-dim); max-width: 38ch; }
+
+/* --- service lists ------------------------------------------------------ */
+.svc-list { list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.55rem 1.6rem; }
+.svc-list li { padding-left: 1.5rem; position: relative; font-size: 1.02rem; }
+.svc-list li::before {
+  content: "\2022"; position: absolute; left: 0; top: -0.05em;
+  color: var(--accent); font-size: 1.25rem; line-height: 1.4;
+}
+
+/* --- penalty list ------------------------------------------------------- */
+/* Statutory penalties under the Municipal Court split. Full width beneath the
+   two columns, so the section gets a second beat instead of one long left
+   column. Two columns of term-over-definition on desktop; the term carries the
+   display face so the violation is scannable before the fine is read. */
+.penalties { margin-top: 3.4rem; }
+.penalty-list {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem 2.8rem; margin: 0;
+}
+.penalty-list > div { padding-top: 1.1rem; border-top: 1px solid var(--rule-dark); }
+.penalty-list dt {
+  font-family: var(--font-display); font-size: 1.22rem; font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+.penalty-list dd { margin: 0; font-size: 1rem; line-height: 1.6; color: var(--paper-dim); max-width: 46ch; }
+.penalty-note { margin-top: 1.8rem; font-size: 0.98rem; max-width: 62ch; }
+
+/* --- cta-band ----------------------------------------------------------- */
+.callband .band-lead { font-size: 1.05rem; color: var(--paper-dim); margin-bottom: 1rem; max-width: 44ch; }
+.callband .phone {
+  font-family: var(--font-display); font-weight: 900;
+  font-size: 4.75rem;   /* 76px */
+  line-height: 1; letter-spacing: -0.035em;
+  color: var(--accent); text-decoration: none;
+  display: inline-flex; align-items: baseline; gap: 1rem;
+  transition: color .2s var(--ease);
+}
+.callband .phone .glyph { font-size: 0.42em; transition: transform .2s var(--ease); }
+@media (hover: hover) and (pointer: fine) {
+  .callband .phone:hover .glyph { transform: translateX(5px); }
+}
+.callband .phone:hover { color: var(--accent-hov); }
+.callband .under { margin-top: 1.5rem; color: var(--paper-dim); font-size: 1rem; }
+
+/* --- labeled image placeholders (in the art direction) ------------------ */
+.img-placeholder {
+  background: repeating-linear-gradient(-45deg, #D9E2E8 0 14px, var(--paper-2) 14px 28px);
+  border: 1px solid rgba(13, 27, 36, .2);
+  border-radius: var(--radius);
+  display: flex; align-items: center; justify-content: center;
+  padding: 1.6rem; text-align: center;
+}
+.img-placeholder span {
+  font-size: 0.9rem; font-weight: 500; color: var(--ink-dim);
+  max-width: 30ch; line-height: 1.55;
+}
+.band-dark .img-placeholder {
+  background: repeating-linear-gradient(-45deg, #073250 0 14px, var(--azul-900) 14px 28px);
+  border-color: rgba(244, 246, 247, .24);
+}
+.band-dark .img-placeholder span { color: var(--paper-dim); }
+.ratio-43 { aspect-ratio: 4 / 3; }
+.ratio-34 { aspect-ratio: 3 / 4; }
+.ratio-map { aspect-ratio: 21 / 7; }
+
+/* --- contact ------------------------------------------------------------ */
+.contact-phone {
+  font-family: var(--font-display); font-weight: 900;
+  font-size: 3.5rem; line-height: 1; letter-spacing: -0.03em;
+  color: var(--accent); text-decoration: none;
+  display: inline-flex; align-items: baseline; gap: 0.8rem;
+  transition: color .2s var(--ease);
+}
+.contact-phone:hover { color: var(--accent-hov); }
+.contact-phone .glyph { font-size: 0.38em; transition: transform .2s var(--ease); }
+@media (hover: hover) and (pointer: fine) { .contact-phone:hover .glyph { transform: translateX(5px); } }
+
+.nap { display: grid; gap: 1.2rem; margin: 2.3rem 0 0; }
+.nap dd { margin: 0; }
+.nap .label {
+  font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--ink-dim); margin-bottom: 0.2rem;
+}
+.nap .value { font-size: 1.1rem; }
+
+.form-intro { font-size: 1.02rem; color: var(--ink-dim); margin: 0 0 1.4rem; max-width: 44ch; }
+.form { background: var(--paper-2); padding: 2.4rem; border-radius: var(--radius); }
+.form .field { margin-bottom: 1.15rem; }
+.form label { display: block; font-size: 0.9rem; font-weight: 700; margin-bottom: 0.4rem; }
+.form input, .form textarea {
+  width: 100%; font-family: var(--font-body); font-size: 1rem;
+  padding: 0.85rem 0.95rem;
+  border: 1px solid var(--field-edge);
+  border-radius: var(--radius);
+  background: var(--paper); color: var(--ink);
+}
+.form input::placeholder, .form textarea::placeholder { color: var(--field-hint); }
+.form input:focus, .form textarea:focus {
+  border-color: var(--azul); outline: 3px solid var(--focus); outline-offset: 2px;
+}
+.form textarea { min-height: 118px; resize: vertical; }
+.form-result {
+  margin: 1.2rem 0 0; padding: 1rem 1.1rem;
+  background: var(--azul-deep); color: var(--paper);
+  border-radius: var(--radius); font-size: 1rem; max-width: none;
+}
+.form-result[hidden] { display: none; }
+
+/* --- table -------------------------------------------------------------- */
+.areatable { width: 100%; border-collapse: collapse; text-align: left; }
+.areatable th, .areatable td { padding: 1.2rem 1.1rem 1.2rem 0; vertical-align: top; }
+.areatable thead th {
+  font-family: var(--font-body); font-size: 0.8rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--paper-dim);
+  border-bottom: 1px solid rgba(244, 246, 247, .28);
+}
+.areatable tbody th { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; width: 46%; }
+.areatable tbody td { font-size: 1.1rem; }
+.areatable tbody tr { border-bottom: 1px solid rgba(244, 246, 247, .18); }
+
+/* --- Footer ------------------------------------------------------------- */
+.site-footer {
+  background: var(--azul-950); color: var(--paper);
+  padding: 5rem 1.6rem 2.4rem;
+}
+.footer-top { display: grid; grid-template-columns: 1.1fr 1fr 1fr; gap: 2.6rem; }
+/* The real logo ships unaltered, on its own paper chip — never recoloured. */
+.flogo-chip {
+  display: inline-block; background: var(--paper);
+  padding: 0.9rem 1.1rem; border-radius: var(--radius);
+  margin-bottom: 1.3rem;
+}
+.site-footer img.flogo { height: 54px; width: auto; }
+.site-footer h2 {
+  font-family: var(--font-body); font-size: 0.8rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--paper-dim);
+  margin-bottom: 1rem;
+}
+.site-footer a { color: var(--paper); }
+.site-footer ul { list-style: none; display: grid; gap: 0.55rem; }
+.site-footer .nap-line { font-size: 1rem; line-height: 1.75; }
+.footer-bottom {
+  margin-top: 3rem; padding-top: 1.6rem;
+  border-top: 1px solid var(--rule-dark);
+  font-size: 0.9rem; color: var(--paper-dim);
+  display: flex; flex-wrap: wrap; gap: 0.8rem 1.6rem; justify-content: space-between;
+}
+/* Reads as an unfilled slot on purpose — a dashed outline so nobody mistakes
+   the bracketed text for shipped legal copy. */
+.legal-placeholder {
+  flex: 1 1 26ch; max-width: 62ch;
+  border: 1px dashed rgba(244, 246, 247, .34);
+  border-radius: var(--radius);
+  padding: 0.5rem 0.75rem;
+  font-size: 0.82rem; line-height: 1.5;
+}
+
+/* --- Motion: blur-focus entrance (runtime-gated, motion.md rule 0) ------ */
+@media (prefers-reduced-motion: no-preference) {
+  .js .reveal {
+    opacity: 0;
+    filter: blur(11px);
+    transition: opacity var(--tempo) var(--ease), filter 900ms var(--ease);
+  }
+  .js .reveal.in { opacity: 1; filter: blur(0); }
+  .js .stagger > .reveal { transition-delay: calc(var(--i, 0) * var(--stagger)); }
+}
+
+/* --- Responsive --------------------------------------------------------- */
+@media (max-width: 1080px) {
+  .band { padding: 5rem 1.6rem; }
+  .hero { min-height: 0; padding: 5rem 1.6rem; }
+  .hero h1 { font-size: 3.2rem; }
+  h1, .pagehead h1 { font-size: 2.9rem; }
+  .h-sec { font-size: 2.35rem; }
+  .stat .fig { font-size: 4rem; }
+  .callband .phone { font-size: 3.6rem; }
+  .contact-phone { font-size: 2.9rem; }
+  .monolith blockquote { font-size: 2.05rem; }
+  .steps-head .big-num { font-size: 4rem; }
+  .split, .split.split-wide, .split.split-narrow { grid-template-columns: 1fr; gap: 2.4rem; }
+  /* Stacked, a media-first split opens the page with an image instead of its
+     own title. On the bio that meant a full phone screen of empty portrait
+     frame before "Paul Da Silva". The name leads; the frame follows. */
+  .split-media-first > :first-child { order: 2; }
+  .split-media-first > :nth-child(2) { order: 1; }
+  .grid-3 { grid-template-columns: 1fr; gap: 1.4rem; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+  .stats { grid-template-columns: repeat(2, 1fr); gap: 2.6rem 2rem; }
+}
+
+/* Phone: a designed layout, not a shrunk desktop. */
+@media (max-width: 860px) {
+  .band { padding: 3.6rem 1.3rem; }
+  .topstrip { padding: 0.5rem 1.3rem; font-size: 0.8rem; letter-spacing: 0.02em; }
+  .topstrip .place { display: none; }
+  .site-header { padding: 0 1.3rem; }
+  .site-header .wrap { min-height: 68px; gap: 0.8rem; }
+  .site-footer { padding: 3.4rem 1.3rem 2rem; }
+
+  .burger { display: inline-flex; }
+  .nav { gap: 0.7rem; }
+  .nav-links {
+    position: absolute; left: 0; right: 0; top: 100%;
+    background: var(--paper);
+    border-bottom: 1px solid var(--rule-light);
+    box-shadow: 0 18px 30px -22px rgba(13, 27, 36, .55);
+    flex-direction: column; align-items: stretch; gap: 0;
+    padding: 0.4rem 1.3rem 1.1rem;
+    display: none;
+  }
+  .nav-links.open { display: flex; }
+  .nav-links li { border-top: 1px solid rgba(13, 27, 36, .12); }
+  .nav-links a { display: block; padding: 0.95rem 0; font-size: 1.06rem; border-bottom: 0; }
+  .nav-links a[aria-current="page"] { color: var(--azul); }
+
+  .brand img { height: 38px; }
+
+  .hero { padding: 3rem 1.3rem 3.6rem; }
+  .hero h1 { font-size: 2.35rem; }
+  .hero-sub { font-size: 1.06rem; }
+  .hero-copy { max-width: none; }
+  .hero .btn { width: 100%; justify-content: center; }
+  .hero-scrim {
+    background: linear-gradient(180deg, rgba(6,43,68,.93) 0%, rgba(6,43,68,.90) 55%, rgba(4,30,48,.95) 100%);
+  }
+
+  .pagehead { padding-top: 2.8rem; padding-bottom: 2.4rem; }
+  h1, .pagehead h1 { font-size: 2.3rem; }
+  .pagehead .lede { font-size: 1.06rem; }
+  .h-sec { font-size: 1.95rem; margin-bottom: 1.4rem; }
+
+  .practice-grid, .grid-4, .grid-3 { grid-template-columns: 1fr; gap: 1.1rem; }
+  .pcard { padding: 1.7rem; }
+  .pcard .idx { font-size: 2.6rem; }
+  .pcard h3 { font-size: 1.45rem; }
+  .gcard { padding: 1.5rem; }
+  .svc-list { grid-template-columns: 1fr; }
+  /* One penalty per screen-width row on a phone: these are dollar figures and
+     day counts, and a 2-up grid squeezes them into ragged 3-line blocks. */
+  .penalties { margin-top: 2.6rem; }
+  .penalty-list { grid-template-columns: 1fr; gap: 1.2rem; }
+  .penalty-list dd { max-width: none; }
+
+  .monolith blockquote { font-size: 1.6rem; }
+  .monolith blockquote p { max-width: none; }
+  .area-list .tier-value { font-size: 1.6rem; }
+
+  .editorial .side-label {
+    position: static; writing-mode: horizontal-tb; display: block; margin-bottom: 0.8rem;
+  }
+  .editorial .col, .side-inset { margin-left: 0; }
+
+  .steps li { grid-template-columns: 3.4rem 1fr; gap: 1rem; padding: 1.2rem 0; }
+  .steps .num { font-size: 1.2rem; }
+  .steps-head { grid-template-columns: 1fr; gap: 0.4rem; align-items: start; margin-bottom: 1.8rem; }
+  .steps-head .big-num { font-size: 3.2rem; }
+
+  .areatable, .areatable tbody, .areatable tr, .areatable th, .areatable td { display: block; width: auto; }
+  .areatable thead { display: none; }
+  .areatable tbody tr { padding: 1.1rem 0; }
+  .areatable tbody th { padding: 0 0 0.3rem; font-size: 1.3rem; }
+  .areatable tbody td { padding: 0 0 0.2rem; }
+
+  .callband .phone { font-size: 2.5rem; gap: 0.6rem; }
+  .contact-phone { font-size: 2.3rem; }
+  .form { padding: 1.6rem; }
+  .nap { margin-top: 1.8rem; }
+  .footer-top { grid-template-columns: 1fr; gap: 2.1rem; }
+  .ratio-map { aspect-ratio: 4 / 3; }
+}
+
+@media (max-width: 420px) {
+  .stats { grid-template-columns: 1fr; gap: 2rem; }
+  .stat .fig { font-size: 3.6rem; }
+  /* The header CTA reads "Call the office". It used to carry the full number,
+     which needed the verb dropped to fit; the short label fits whole, and
+     "the office" on its own is not a button. */
+  .btn-sm { padding: 0.6rem 0.8rem; font-size: 0.9rem; }
+  .brand img { height: 33px; }
+}
+
+/* --- Touch targets ------------------------------------------------------
+   A finger is not a cursor. On any coarse pointer every interactive element
+   gets a >=44px hit area, without moving a pixel of the desktop layout. Placed
+   after the width queries so it wins where the two overlap. */
+@media (pointer: coarse) {
+  .btn, .btn-sm { min-height: 44px; }
+  .burger { width: 48px; height: 48px; }
+  .nav-links a { display: flex; align-items: center; min-height: 44px; }
+  .link-nudge { min-height: 44px; }
+  .pcard .go { min-height: 44px; }
+  /* The big phone numbers look enormous but sit in a line-height:1 box, so the
+     hit area is only as tall as the type. */
+  .callband .phone, .contact-phone { min-height: 44px; }
+
+  /* Footer: the rows are read as a list, so every row gets the same height
+     whether or not it happens to be a link. */
+  .site-footer ul { gap: 0; }
+  .site-footer li { display: flex; align-items: center; min-height: 44px; }
+  .site-footer li a { display: flex; align-items: center; width: 100%; min-height: 44px; }
+
+  .skip { display: flex; align-items: center; min-height: 44px; }
+  .form input, .form textarea { min-height: 44px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+}

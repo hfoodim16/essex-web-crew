@@ -201,12 +201,23 @@ const ANTIPATTERNS = [
     id: 'repeated-section-kickers',
     category: 'slop',
     scopes: ['type'],
-    severity: 'advisory',
+    severity: 'blocking',
     name: 'Repeated section kicker labels',
     description:
-      'Repeating tiny uppercase tracked labels above section headings turns a brand page into AI editorial scaffolding. Replace them with stronger structure, artifacts, imagery, or a deliberate brand system.',
+      'Repeating labels above section headings turns a brand page into AI editorial scaffolding — whether they are tracked uppercase or sentence-case accent text. The budget is ceil(sections / 3), counting the hero. Replace the surplus with stronger structure, artifacts, or imagery; section-formats.md carries the opener vocabulary.',
     skillSection: 'Typography',
     skillGuideline: 'repeated eyebrow or kicker labels as section scaffolding',
+  },
+  {
+    id: 'section-shape-repetition',
+    category: 'slop',
+    scopes: ['layout'],
+    severity: 'blocking',
+    name: 'Every section opens with the same shape',
+    description:
+      'Eyetracking shows 79% of visitors scan via the layer-cake pattern, riding section openers for landmarks. When more than half the sections open with an identical structure — or three do so back to back — the page offers one landmark stamped repeatedly and the eye stops sampling. Vary the section formats; section-formats.md carries the families and their quotas.',
+    skillSection: 'Layout & Space',
+    skillGuideline: 'section format variety across the page',
   },
   {
     id: 'numbered-section-labels',

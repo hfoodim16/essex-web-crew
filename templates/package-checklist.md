@@ -10,13 +10,13 @@ scoreboards below.
 2. [ ] **Typography** — paired display + body Google Fonts; NEVER Inter, Roboto, Arial, or Helvetica; hierarchy via scale/weight.
 3. [ ] **Restrained color** — 3–5 colors as tokens, used consistently.
 4. [ ] **Hierarchy breathes** — clear primary/secondary/tertiary; whitespace does work.
-5. [ ] **Imagery with intent** — the **2 Planner-marked `GENERATE` slots (hero + one priority slot) hold REAL generated images** stored locally as WebP in `mockup/assets/` and passing the two-way realism test below; **every other slot is a labeled `AI-IMAGE` placeholder** in the art direction's style. More than 2 generated images = budget fail. NO stock/hotlinked/copyrighted images.
+5. [ ] **Imagery with intent** — **every Planner-marked `GENERATE` slot holds a REAL generated image** stored locally as WebP in `mockup/assets/` and passing the two-way realism test below; **every `PLACEHOLDER` slot is a labeled `AI-IMAGE` box** in the art direction's style. No image count cap — but a spend ledger over the site budget ($1.00 no video / $1.50 with one) = budget fail. NO stock/hotlinked/copyrighted images.
 6. [ ] **Motion whispers** — the plan's **named** signature move (entrance family + hover personality, distinct from the last 3 rows of `design-memory.md`); ALL gated behind `prefers-reduced-motion`.
 7. [ ] **Mobile designed, not shrunk** — distinct phone layout decisions, PROVEN by mobile screenshots.
 8. [ ] **Invisible expensive stuff** — sub-2s load (no huge assets), WCAG AA contrast, keyboard nav / focus ring, semantic HTML, real meta+OG+favicon, **JS-off test passes** (rename `main.js` + `vendor/*.js`, reload — page still readable).
 
 **Pass = 8/8**, or a documented, defensible exception written into `audit.md`.
-**Never exceptable:** a placeholder sitting in either of the 2 priority image slots.
+**Never exceptable:** a placeholder sitting in a slot the plan marked `GENERATE` — the hero above all.
 
 ## Mockup, scoreboard 2 — the web-design-ultra 10-dimension rubric
 
@@ -50,11 +50,11 @@ they took it themselves?* Both halves must hold. Open each generated image full 
 - [ ] Trust strip — years / license / insured / rating (real values or clearly labeled placeholders).
 - [ ] Project or before/after gallery present.
 - [ ] Estimate form ≤ 4 fields, phone-first.
-- [ ] Consistent NAP footer matching the dossier.
+- [ ] Consistent NAP footer matching **`client-answers.md`** — the dossier only where the answers are silent. A client who moved and told us so must not be "corrected" back to the dossier's old address.
 
 ## Hard rules (any failure blocks sign-off)
 
-- [ ] **Images** — exactly 2 locally-stored generated images; every other slot a labeled placeholder; the client's real logo served as a LOCAL file. No stock, hotlinked, or copyrighted images anywhere.
+- [ ] **Images** — every `GENERATE` slot is a locally-stored generated image and every `PLACEHOLDER` slot a labeled box; the spend ledger fits the site budget ($1.00 no video / $1.50 with one); the client's real logo served as a LOCAL file. No stock, hotlinked, or copyrighted images anywhere.
 - [ ] **Real logo present** — if the dossier has a `**Logo:**` URL, the actual file is in `mockup/assets/` and renders in the header (local `src`, not hotlinked, not a substituted text wordmark).
 - [ ] **Real reviews only** — every testimonial traces to a real review in the dossier's "Real reviews" section (same quote, reviewer, platform). No dossier reviews → no testimonial section, or a clearly labeled placeholder. Invented praise = automatic fail.
 - [ ] **Current facts, not stale** — the mockup reflects business-announced changes (owner, name, address); no outdated version presented as current.
@@ -91,7 +91,8 @@ they took it themselves?* Both halves must hold. Open each generated image full 
 
 > **These gates bind at sign-off time, and they are not retroactive.** Prospects signed off
 > before a gate existed are grandfathered — as of 2026-07-28 that's everything except
-> `paul-da-silva-law`, which is the only complete package (seven predate `voice-spec.md`,
+> `dasilva-associates` (built as `paul-da-silva-law`, since renamed), which is the only
+> complete package (seven predate `voice-spec.md`,
 > six predate `release-form.pdf`). Do **not** manufacture the missing artifacts for a frozen
 > prospect: a voice spec written now from no client answers, or a release form filled with a
 > contact we never spoke to, is invented content — the thing this checklist exists to stop.
@@ -107,11 +108,16 @@ they took it themselves?* Both halves must hold. Open each generated image full 
 
 **The build itself:**
 - [ ] `client-answers.md` (saved verbatim by the lead)
-- [ ] `website-plan.md` (the Planner's design contract, incl. the **"Client answers →
-      decisions"** section and the content map)
+- [ ] `build-sheet.md` (**the Builder's entire spec** — self-contained, lint-clean; it
+      outranks the plan, and a sheet that forces the Builder into the plan is a defect)
+- [ ] `STATE.md` (the run's ledger, incl. the Builder's evidence block; also the handoff
+      on any pause — never an improvised RESUME note)
+- [ ] `website-plan.md` (the Planner's **reasoning record for Harry and the Critic** —
+      the Builder never reads it — incl. the **"Client answers → decisions"** section
+      and the content map)
 - [ ] `voice-spec.md` (the Planner's copy contract — register, word budgets, the client's
       own phrases, thin-fact sections)
-- [ ] `mockup/` (pages per the **plan's** page map, opens cleanly) incl. `assets/` (logo + 2 generated images)
+- [ ] `mockup/` (pages per the **plan's** page map, opens cleanly) incl. `assets/` (logo + every generated image)
 - [ ] `screenshots/` (desktop + mobile)
 - [ ] `release-form.pdf` — valid one-page PDF; no `{{` tokens left in its `.html`
       source; Client/Business, Contact Name and Pages Included filled; **Pages Included
@@ -127,7 +133,9 @@ they took it themselves?* Both halves must hold. Open each generated image full 
       **last 3 `design-memory.md` rows** (and the most recent signed prospect's hero
       screenshot if it's on disk). Hunting the softer sameness the ban list misses:
       section rhythm, imagery register, motion vocabulary, a hero that's the same shot in
-      different colors. Reads like a sibling of a recent build → back to the builder while
+      different colors. Reads like a sibling of a recent build → **back to the PLANNER**, not
+      the builder — rhythm, hero framing, page order and imagery register are
+      `website-plan.md` decisions the builder is barred from re-deciding — while
       it's still unsigned. Reading a frozen prospect's files is research, not a reopening.
 - [ ] **`design-memory.md` row appended** on sign-off (date · slug · font pairing ·
       palette family · layout archetype · background system · signature motion).

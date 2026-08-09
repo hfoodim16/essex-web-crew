@@ -34,11 +34,12 @@ sites" — the launchd job already does that every hour, for free, forever.
 
 ### 1. Registry keeper
 
-`sites.json` is the crew's **system of record for published sites** — nothing else
-in the project tracks live client URLs (`FULL-PROCESS.md` references a
-`pipeline/outreach-log.md` that was never created).
+`sites.json` is the crew's **system of record for published sites** — nothing else in the
+project tracks live client URLs. (`pipeline/outreach-log.md` tracks Harry's *outreach*, not
+deployments, and it's his file to write, not yours.)
 
-When Harry says a site has gone live:
+When Harry says a site has gone live — or when the lead reports back a live URL after
+delivery, which is the last step of the delivery procedure (`docs/delivery.md`):
 
 1. `WebFetch` the live URL and read what's actually on the page.
 2. Append an entry to the `sites` array with `key`, `label`, `url`,
@@ -79,5 +80,11 @@ If everything is green, say that in one line. A quiet caretaker is the normal st
 - Never mark an incident resolved off a single successful page load. The gate is
   `check.py`'s exit code.
 - Two diagnosis passes without a confident root cause → escalate, don't try a third.
-- Don't touch the mockups, plans, or audits in `prospects/` — that's the build
-  team's territory, and a published site's source is no longer the thing to edit.
+- Don't touch the mockups, plans, or audits in `prospects/` — that's the build team's
+  territory. **This means YOU don't edit them; it does not mean they're frozen.** A live
+  site's source stays the source: when the client asks for a change, Harry reopens the
+  mockup, the builder revises it, the critic re-reviews, and it's re-delivered and
+  redeployed through the normal path. Your job at that point is to **refresh the `expect`
+  strings** for that site in `sites.json` — after a content revision your old ones may be
+  checking for wording that's no longer on the page, which reads as a false content
+  failure. Ask the lead what changed rather than guessing from the diff.

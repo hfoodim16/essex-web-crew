@@ -19,7 +19,7 @@
 <link rel="preconnect" href="https://api.fontshare.com">
 <link rel="preconnect" href="//cdn.fontshare.com" crossorigin>
 <link href="https://api.fontshare.com/v2/css?f[]=general-sans@300,400,500,600,700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=4">
+<link rel="stylesheet" href="style.css?v=5">
 </head>
 <body>
 
@@ -32,7 +32,7 @@
     <nav class="nav-links" aria-label="Primary">
       <a href="#work">Work</a>
       <a href="#process">Process</a>
-      <a href="#pricing">Pricing</a>
+      <a href="#builds">Builds</a>
       <a href="#founders">Founders</a>
       <a href="#contact">Contact</a>
       <a href="#reviews">Reviews</a>
@@ -45,7 +45,7 @@
   <nav id="mobile-nav" class="mobile-nav" aria-label="Mobile" hidden>
     <a href="#work">Work</a>
     <a href="#process">Process</a>
-    <a href="#pricing">Pricing</a>
+    <a href="#builds">Builds</a>
     <a href="#founders">Founders</a>
     <a href="#contact">Contact</a>
     <a href="#reviews">Reviews</a>
@@ -161,36 +161,60 @@
           </div>
         </a>
         <div class="plate-caption reveal" style="--i:1">
-          <span class="badge badge-real">Real client work</span>
+          <span class="badge badge-classic">Classic</span>
           <h3><span class="u">Cecere Brothers Landscaping</span></h3>
-          <p>We built this for a family landscaping crew in Essex County &mdash; a dark,
-             evening-garden look with the estimate front and center, so a homeowner can see
-             what to do next without hunting for it. This one's a real client.</p>
+          <p>The team built a striking website for a local landscaping business. Through the
+             use of our detailed design templates, quality images, and a descriptive
+             questionnaire response, the team was able to put together a site that will certainly capture the eye of a client.
+             All the information a customer would need is clearly portrayed, and the result is
+             exactly what our client asked for.</p>
         </div>
       </article>
 
-      <!-- Plate 2 — CONCEPT -->
+      <!-- Plate 2 — REAL CLIENT -->
       <article class="plate-row plate-right">
         <a class="plate plate-link reveal" style="--i:0"
-           href="work/corey-blakes-steakhouse/index.html" target="_blank" rel="noopener"
-           aria-label="Open the Corey Blake's Steakhouse concept site in a new tab">
+           href="https://pauldasilvalaw.netlify.app" target="_blank" rel="noopener"
+           aria-label="Open the DaSilva &amp; Associates site in a new tab">
           <div class="shot">
-            <img src="assets/corey-blakes-steakhouse.webp" width="1440" height="900" loading="lazy"
-                 alt="Screenshot of the Corey Blake's Steakhouse concept website, a dark hero with a seared steak and the headline 'Where Fire Meets Craft'">
+            <img src="assets/dasilva-2026.webp" width="1440" height="900" loading="lazy"
+                 alt="Screenshot of the DaSilva &amp; Associates website, a dark navy hero over an empty courtroom reading 'Big-firm advocacy, from a Newark neighborhood office'">
           </div>
         </a>
         <div class="plate-caption reveal" style="--i:1">
-          <span class="badge badge-concept">Concept build</span>
-          <h3><span class="u">Corey Blake's Steakhouse</span></h3>
-          <p>This one's made up. We invented a steakhouse to show what we'd do with a
-             restaurant: dark, high-end, reservation-first, with the menu and hours exactly
-             where a guest would look for them. Not a client.</p>
-          <p class="plate-note reveal" style="--i:2">We generated that cover photo with AI,
-             and we're telling you that up front.</p>
+          <span class="badge badge-classic">Classic</span>
+          <h3><span class="u">DaSilva &amp; Associates, LLC</span></h3>
+          <p>A Newark law firm, rebuilt off a dated template. Four pages carry all four
+             practice areas, the attorney's background, and the office's Portuguese and
+             Spanish service, with the phone number one tap away on every screen. Serif
+             headlines, one gold accent, and the register a law office actually uses.</p>
         </div>
       </article>
 
-      <!-- Plate 3 — our own site, on a phone -->
+      <!-- Plate 3 — CINEMATIC DEMO. Sunday Lawn Co. is a demo business we invented to
+           show the cinematic build, not a client. The caption says "demo" out loud so it
+           can never be read as real client work. -->
+      <article class="plate-row plate-left">
+        <a class="plate plate-link reveal" style="--i:0"
+           href="https://cinematicsite.netlify.app/#top" target="_blank" rel="noopener"
+           aria-label="Open the Sunday Lawn Co. cinematic demo site in a new tab">
+          <div class="shot">
+            <img src="assets/sunday-lawn.webp" width="1440" height="900" loading="lazy"
+                 alt="Screenshot of the Sunday Lawn Co. cinematic demo site, a filmed lawn at golden hour with the headline 'Every inch, earned.'">
+          </div>
+        </a>
+        <div class="plate-caption reveal" style="--i:1">
+          <span class="badge badge-cinematic"><span class="chrome-text">Cinematic</span></span>
+          <h3><span class="u">Sunday Lawn Co.</span></h3>
+          <p class="chrome-text">The team built a cinematic website using a made up landscaping
+             business. The homepage is a continuous film being shown as the viewer scrolls.
+             The film tells the story of the business and the services they provide. Behind
+             the film is an organized, descriptive site that makes it simple for the client
+             to understand.</p>
+        </div>
+      </article>
+
+      <!-- Plate 4 — our own site, on a phone -->
       <article class="plate-row plate-device">
         <figure class="plate device-plate reveal" style="--i:0">
           <video class="device-video" width="660" height="720" autoplay muted loop playsinline
@@ -201,10 +225,11 @@
           </video>
         </figure>
         <div class="plate-caption reveal" style="--i:1">
+          <span class="badge badge-classic">Classic</span>
           <span class="badge badge-concept">This site</span>
           <h3>Fora Digital LLC</h3>
-          <p>This clip started as a plain photo of an iPhone home screen. We turned it into
-             video ourselves. Same tools, same process we'd use on your site.</p>
+          <p>A video our team built, starting from a still of a plain iPhone home screen and
+             ending at what you see on the left.</p>
         </div>
       </article>
 
@@ -247,72 +272,133 @@
     </div>
   </section>
 
-  <!-- ============ PRICING ============ -->
-  <!-- One number on the page, and it appears once — the big figure IS the headline, so the
-       h2 must not repeat it. The domain is NOT in the $2,750 and the page says so out loud,
-       right next to the free-hosting line, so "free hosting" can never be read as a free
-       domain. Do NOT add a monthly fee, a revision count, a domain cost, or a second tier
-       here without Harry confirming the real terms. -->
-  <section id="pricing" class="section pricing">
+  <!-- ============ SERVICES ============ -->
+  <!-- Two-tier catalog, confirmed by Harry 2026-08-09: Classic from $2,750, Cinematic
+       from $4,000. This section replaced the old standalone #pricing section (Harry,
+       2026-08-09) — both prices now live here and ONLY here. Premium-ladder layout
+       (Harry, 2026-08-09): the classic card lists the full base package including the
+       old #pricing guarantees; the cinematic card says "Everything in the Classic,
+       plus:" and lists only the film extras. The cinematic card is
+       deliberately the dark plate — the portfolio's ink-on-paper move — with film-strip
+       ornament. Do not add a third tier, a monthly fee, a revision count, or a domain
+       cost without Harry confirming the real terms. The domain is still NOT included in
+       either price. -->
+  <section id="builds" class="section builds">
     <div class="wrap">
       <div class="section-head">
-        <p class="kicker reveal" style="--i:0">Pricing</p>
-        <h2 class="reveal" style="--i:1">What a site costs.</h2>
+        <p class="kicker reveal" style="--i:0">What we build</p>
+        <h2 class="reveal" style="--i:1">Two ways to build it.</h2>
       </div>
 
-      <div class="price-row">
-        <div class="price-figure reveal" style="--i:0">
-          <span class="price-from">Starting at</span>
-          <p class="price-number"><span class="price-cur">$</span>2,750</p>
-          <p class="price-terms">One flat price, agreed before we touch a line of code. No
-             hourly clock, no surprise invoice.</p>
-        </div>
-        <div class="price-detail">
-          <p class="kicker reveal" style="--i:1">What that includes</p>
-          <ul class="price-list reveal" style="--i:2" role="list">
-            <li>Design and build, done in 48 to 72 hours</li>
-            <li>Both owners on the build, start to launch</li>
-            <li>A 60 day warranty after launch</li>
-            <li>You talk to the two owners directly, nobody in between</li>
-          </ul>
-          <a href="#contact" class="btn btn-primary reveal" style="--i:3">
-            <span>Get a quote</span></a>
-        </div>
+      <div class="compare-wrap reveal" style="--i:0">
+        <table class="compare">
+          <thead>
+            <tr>
+              <td class="c-corner" aria-hidden="true"></td>
+              <th scope="col" class="th-classic">
+                <div class="plate-strip" aria-hidden="true"></div>
+                <p class="frame-count" aria-hidden="true">Page 01&thinsp;/&thinsp;05</p>
+                <p class="kicker tier-kicker">Classic</p>
+                <p class="th-title">A site built by hand.</p>
+                <p class="th-lead">A standard, straightforward site that tells people what
+                   you do, shows your work, and where customers can easily contact you.</p>
+              </th>
+              <th scope="col" class="th-cine">
+                <div class="film-strip" aria-hidden="true"></div>
+                <p class="frame-count" aria-hidden="true">Frame 001&thinsp;/&thinsp;600</p>
+                <p class="kicker tier-kicker">Cinematic <span class="premium-badge">Premium</span></p>
+                <p class="th-title">A homepage that is a <em>film</em>.</p>
+                <p class="th-lead gradient-text">A fancy site where your homepage opens on
+                   a film that plays as the visitor scrolls &mdash; the kind of site people
+                   remember.</p>
+              </th>
+            </tr>
+            <tr>
+              <td aria-hidden="true"></td>
+              <td class="price-row-cell pc">
+                <p class="th-price">Starting at <strong>$2,750</strong></p>
+              </td>
+              <td class="price-row-cell pn">
+                <p class="th-price">Starting at <strong>$4,000</strong></p>
+              </td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">3 to 5 pages</th>
+              <td class="cell cl"><span class="sr">Included</span><span class="tick" aria-hidden="true"></span></td>
+              <td class="cell cine"><span class="sr">Included</span><span class="tick" aria-hidden="true"></span></td>
+            </tr>
+            <tr>
+              <th scope="row">Modern, clean design</th>
+              <td class="cell cl"><span class="sr">Included</span><span class="tick" aria-hidden="true"></span></td>
+              <td class="cell cine"><span class="sr">Included</span><span class="tick" aria-hidden="true"></span></td>
+            </tr>
+            <tr>
+              <th scope="row">Realistic photos of your work</th>
+              <td class="cell cl"><span class="sr">Included</span><span class="tick" aria-hidden="true"></span></td>
+              <td class="cell cine"><span class="sr">Included</span><span class="tick" aria-hidden="true"></span></td>
+            </tr>
+            <tr>
+              <th scope="row">Built in 48 to 72 hours</th>
+              <td class="cell cl"><span class="sr">Included</span><span class="tick" aria-hidden="true"></span></td>
+              <td class="cell cine"><span class="sr">Included</span><span class="tick" aria-hidden="true"></span></td>
+            </tr>
+            <tr>
+              <th scope="row">Copy written in your voice</th>
+              <td class="cell cl"><span class="sr">Included</span><span class="tick" aria-hidden="true"></span></td>
+              <td class="cell cine"><span class="sr">Included</span><span class="tick" aria-hidden="true"></span></td>
+            </tr>
+            <tr>
+              <th scope="row">Fast loading on any phone</th>
+              <td class="cell cl"><span class="sr">Included</span><span class="tick" aria-hidden="true"></span></td>
+              <td class="cell cine"><span class="sr">Included</span><span class="tick" aria-hidden="true"></span></td>
+            </tr>
+            <tr>
+              <th scope="row">Both owners on the build</th>
+              <td class="cell cl"><span class="sr">Included</span><span class="tick" aria-hidden="true"></span></td>
+              <td class="cell cine"><span class="sr">Included</span><span class="tick" aria-hidden="true"></span></td>
+            </tr>
+            <tr>
+              <th scope="row">60 day warranty</th>
+              <td class="cell cl"><span class="sr">Included</span><span class="tick" aria-hidden="true"></span></td>
+              <td class="cell cine"><span class="sr">Included</span><span class="tick" aria-hidden="true"></span></td>
+            </tr>
+            <tr>
+              <th scope="row">Direct line to the owners</th>
+              <td class="cell cl"><span class="sr">Included</span><span class="tick" aria-hidden="true"></span></td>
+              <td class="cell cine"><span class="sr">Included</span><span class="tick" aria-hidden="true"></span></td>
+            </tr>
+            <tr>
+              <th scope="row">Realistic scroll video design</th>
+              <td class="cell cl dash"><span class="sr">Not included</span><span aria-hidden="true">&mdash;</span></td>
+              <td class="cell cine"><span class="sr">Included</span><span class="tick" aria-hidden="true"></span></td>
+            </tr>
+            <tr>
+              <th scope="row">Custom film scenes of your business</th>
+              <td class="cell cl dash"><span class="sr">Not included</span><span aria-hidden="true">&mdash;</span></td>
+              <td class="cell cine"><span class="sr">Included</span><span class="tick" aria-hidden="true"></span></td>
+            </tr>
+            <tr>
+              <th scope="row">Custom motion and scroll effects throughout</th>
+              <td class="cell cl dash"><span class="sr">Not included</span><span aria-hidden="true">&mdash;</span></td>
+              <td class="cell cine"><span class="sr">Included</span><span class="tick" aria-hidden="true"></span></td>
+            </tr>
+            <tr>
+              <th scope="row">A homepage built to stand out and be remembered</th>
+              <td class="cell cl dash"><span class="sr">Not included</span><span aria-hidden="true">&mdash;</span></td>
+              <td class="cell cine"><span class="sr">Included</span><span class="tick" aria-hidden="true"></span></td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td aria-hidden="true"></td>
+              <td class="foot-cl"><a class="tier-link" href="#contact">Get a quote <span aria-hidden="true">&rarr;</span></a></td>
+              <td class="foot-cine"><a href="#contact" class="btn btn-primary compare-cta"><span>Ask what yours would cost</span></a></td>
+            </tr>
+          </tfoot>
+        </table>
       </div>
-    </div>
-  </section>
-
-  <!-- ============ FAQ ============ -->
-  <!-- Every answer here is an already-decided process fact from FULL-PROCESS.md (Steps 13,
-       14, 15). FULL-PROCESS deliberately leaves the per-change price for Harry to set, so
-       this section quotes NO number for later changes. Do not add one without him. -->
-  <section id="faq" class="section faq">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="kicker reveal" style="--i:0">Questions</p>
-        <h2 class="reveal" style="--i:1">What people ask first.</h2>
-      </div>
-      <dl class="faq-list">
-        <div class="faq-item reveal" style="--i:0">
-          <dt>Who owns the site and the domain?</dt>
-          <dd>You do. If you already have a domain, we point it at the new site. If you need
-            one, we buy it in your account and your name, so the login is yours from the
-            start. At launch you get a one-page handoff listing what you own and where it
-            all lives.</dd>
-        </div>
-        <div class="faq-item reveal" style="--i:1">
-          <dt>What happens after the 60 day warranty?</dt>
-          <dd>The site keeps running. There's no database and no plugins to update, so
-            there's very little that can break on its own. We're still the two people you
-            email after day 60.</dd>
-        </div>
-        <div class="faq-item reveal" style="--i:2">
-          <dt>What does a change cost later?</dt>
-          <dd>Depends what it is, and you get the number before we start. Swapping photos or
-            updating a price is a small job. Something bigger, like adding online booking,
-            we scope and quote as its own project.</dd>
-        </div>
-      </dl>
     </div>
   </section>
 
@@ -413,6 +499,15 @@
           <label for="f-trade">What does the business do?</label>
           <input id="f-trade" name="trade" type="text" required>
         </div>
+        <fieldset class="field field-wide type-field">
+          <legend>Which kind of site?</legend>
+          <div class="type-toggle">
+            <input type="radio" id="f-type-classic" name="site_type" value="Classic" checked>
+            <label for="f-type-classic">Classic</label>
+            <input type="radio" id="f-type-cinematic" name="site_type" value="Cinematic">
+            <label for="f-type-cinematic">Cinematic</label>
+          </div>
+        </fieldset>
         <div class="field field-wide form-actions">
           <button type="submit" class="btn btn-primary"><span>Send it to us</span></button>
           <p class="form-note">We'll get back to you as soon as possible.</p>
@@ -532,7 +627,7 @@
         <p class="kicker foot-kicker">Pages</p>
         <a class="link-draw" href="#work">Work</a>
         <a class="link-draw" href="#process">Process</a>
-        <a class="link-draw" href="#pricing">Pricing</a>
+        <a class="link-draw" href="#builds">Builds</a>
         <a class="link-draw" href="#founders">Founders</a>
         <a class="link-draw" href="#contact">Contact</a>
         <a class="link-draw" href="#reviews">Reviews</a>

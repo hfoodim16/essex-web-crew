@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hero-Video-Cover — lab test (Ridgeline Grounds, demo brand)</title>
+<meta name="description" content="Lab test page for the hero-video-cover recipe: full-bleed looping background video, poster-first paint, lazy hydrate, scrim, outline headline, marquee ticker.">
+<meta name="robots" content="noindex, nofollow">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2306120C'/%3E%3Ctext x='16' y='24' font-family='Georgia,serif' font-size='23' font-weight='700' fill='%23B8D94A' text-anchor='middle'%3ER%3C/text%3E%3C/svg%3E">
+
+<!-- Motion rule 0: opt the page into its hidden entrance states at runtime.
+     Every failure path un-hides: a 404'd script, an uncaught throw, a caught
+     throw (main.js calls motionOff), and the 2s dead-man's timer behind all
+     three. JS off never hides anything in the first place. -->
+<script>var d=document.documentElement,t;d.className+=' js';
+function undo(){clearTimeout(t);d.classList.remove('js')}
+addEventListener('error',function(e){var g=e.target;if(!g||g===window||g.tagName==='SCRIPT')undo()},true);
+t=setTimeout(undo,2000);window.motionOK=function(){clearTimeout(t)};window.motionOff=undo;</script>
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <a class="wordmark" href="#">Ridgeline<span>Grounds</span></a>
+  <nav class="topnav">
+    <a href="#variant-b">Variant B</a>
+    <a href="#notes">Notes</a>
+    <a class="btn btn-sm" href="#variant-b">Get an estimate</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ====================================================================
+       VARIANT A — hero-video-cover (the recipe)
+       Poster paints first, clip hydrates on intersect, scrim carries type.
+       ==================================================================== -->
+  <section class="hero" aria-labelledby="hero-h">
+    <div class="vid">
+      <video data-lazy autoplay muted loop playsinline preload="none"
+             poster="assets/hero-poster.webp" aria-hidden="true">
+        <source data-src="assets/hero-loop.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="hero-type">
+      <div class="hero-copy">
+        <p class="hero-kick">Essex County, NJ · Since 1998</p>
+        <h1 class="hero-h1" id="hero-h">
+          <span class="row1">We keep</span>
+          <span class="row1x">the whole</span>
+          <span class="row2">property.</span>
+        </h1>
+        <div class="row3">
+          <p>Weekly maintenance, spring and fall cleanups, and the beds and
+             borders in between — one crew, same trucks, every visit.</p>
+        </div>
+        <div class="hero-cta">
+          <a class="btn" href="#variant-b">Get an estimate</a>
+          <a class="link-quiet" href="tel:9735550142">or call (973) 555-0142</a>
+        </div>
+      </div>
+
+      <div class="hero-side">
+        <ul class="proof">
+          <li><b>27</b><span>years on these streets</span></li>
+          <li><b>410</b><span>properties every week</span></li>
+          <li><b>4.9★</b><span>from 186 reviews</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mq" aria-hidden="true">
+      <div class="mq-row">
+        <span>Weekly mowing <i>✦</i> Spring cleanup <i>✦</i> Mulch &amp; beds <i>✦</i> Hedge shaping <i>✦</i> Leaf removal <i>✦</i> Snow contracts <i>✦</i></span>
+        <span>Weekly mowing <i>✦</i> Spring cleanup <i>✦</i> Mulch &amp; beds <i>✦</i> Hedge shaping <i>✦</i> Leaf removal <i>✦</i> Snow contracts <i>✦</i></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Band under the hero — proves the scrim bottom meets the next ground. -->
+  <section class="band">
+    <p class="eyebrow">What the recipe ships</p>
+    <h2>Six seconds, 650&nbsp;KB, no library.</h2>
+    <div class="cards">
+      <article><b>Poster first</b><p>A 110&nbsp;KB webp still paints instantly. The clip is <code>preload="none"</code> and never touches the network until the hero is on screen.</p></article>
+      <article><b>Seamless by construction</b><p>Forward 3.2s + reversed tail, duplicate junction frame trimmed. Boomerang loops cannot show a seam.</p></article>
+      <article><b>Type stays legible</b><p><code>brightness(.72)</code> on the video plus a three-stop scrim. Headline contrast is a design decision, not luck.</p></article>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       VARIANT B — the $0 fallback: ken-burns on the poster still
+       Same scrim, same type stack, zero video bytes.
+       ==================================================================== -->
+  <section class="hero hero-b" id="variant-b" aria-labelledby="hero-b-h">
+    <div class="vid">
+      <img src="assets/hero-poster.webp" alt="" aria-hidden="true" class="kb">
+    </div>
+
+    <div class="hero-type">
+      <div class="hero-copy">
+        <p class="hero-kick">Variant B · zero video bytes</p>
+        <h1 class="hero-h1" id="hero-b-h">
+          <span class="row1">Same look.</span>
+          <span class="row2">No clip.</span>
+        </h1>
+        <div class="row3">
+          <p>A 20-second CSS ken-burns drift on the still. Roughly 80% of the
+             effect for 110&nbsp;KB and no video pipeline — the rung to reach
+             for when a clip is not worth the cost.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band-quiet" id="notes">
+    <p class="eyebrow">Lab notes</p>
+    <h2>Reduced motion</h2>
+    <p class="prose">With <code>prefers-reduced-motion: reduce</code> the video is
+      hidden and its poster stands in, the ken-burns drift stops at its rest
+      frame, and the ticker parks. Nothing on the page moves and nothing
+      disappears. Source clip: Pexels #17380737, free licence.</p>
+  </section>
+
+</main>
+
+<script src="main.js"></script>
+</body>
+</html>

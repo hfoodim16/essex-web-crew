@@ -1,0 +1,92 @@
+/* Smoke Test Plumbing — synthetic fixture. Written to pass detect.mjs cleanly.
+   Contrast pairs are all >= 4.5:1. No banned fonts. No cream page background.
+   See ../README.md before editing. */
+
+:root{
+  --ink:#1b1f23;        /* on --paper: 15.3:1 */
+  --paper:#ffffff;
+  --steel:#41505c;      /* on --paper: 8.4:1 */
+  --signal:#0b5c3f;     /* on --paper: 7.4:1 ; --paper on it: 7.4:1 */
+  --signal-dark:#084430;
+  --hair:#d5dade;
+  --display:"Zilla Slab",Georgia,serif;
+  --body:"Public Sans",system-ui,sans-serif;
+  --gap:clamp(2.5rem,6vw,5rem);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--body);font-size:17px;line-height:1.6;
+}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+h1,h2{font-family:var(--display);line-height:1.15;margin:0 0 .5em}
+h1{font-size:clamp(2.4rem,5.4vw,3.9rem)}
+h2{font-size:clamp(1.55rem,2.9vw,2.2rem)}
+p{margin:0 0 1rem}
+a{color:var(--signal)}
+
+/* ── top bar ─────────────────────────────────────────────── */
+.topbar{
+  display:flex;justify-content:space-between;align-items:center;gap:16px;
+  padding:18px 24px;border-bottom:1px solid var(--hair);
+}
+.mark{font-family:var(--display);font-size:1.15rem}
+.call{font-weight:700;text-decoration:none;font-size:1rem}
+
+/* ── hero (opener: none) ─────────────────────────────────── */
+.hero{padding:var(--gap) 0}
+.lede{font-size:1.2rem;color:var(--steel);max-width:52ch}
+.btn{
+  display:inline-block;margin-top:1.4rem;padding:16px 28px;
+  background:var(--signal);color:var(--paper);text-decoration:none;
+  font-weight:700;border-radius:4px;
+}
+.btn:hover{background:var(--signal-dark)}
+.btn-light{background:var(--paper);color:var(--signal-dark)}
+.btn-light:hover{background:var(--hair);color:var(--signal-dark)}
+
+/* ── stat strip (opener: bare-h2) ────────────────────────── */
+.facts{padding:var(--gap) 0}
+.factrow{display:flex;flex-wrap:wrap;gap:2.5rem;margin:1.5rem 0 0}
+.fact{padding:18px 22px;background:#f2f4f6;border-radius:4px;min-width:190px}
+.fact dt{font-size:.95rem;color:var(--steel);margin-bottom:.25rem}
+.fact dd{margin:0;font-family:var(--display);font-size:1.5rem}
+
+/* ── services: split, dominant column (7/5) ──────────────── */
+.services{padding:var(--gap) 0}
+.split{display:grid;grid-template-columns:7fr 5fr;gap:3.5rem;align-items:start}
+.kick{font-size:1rem;font-weight:700;color:var(--signal);margin-bottom:.4rem}
+.plainlist{margin:.4rem 0 0;padding-left:1.1rem}
+.plainlist li{margin-bottom:.7rem}
+
+/* ── process: steps (opener: bare-h2) ────────────────────── */
+.process{padding:var(--gap) 0}
+.steps{list-style:none;margin:1.6rem 0 0;padding:0;display:grid;gap:1.4rem}
+.steps li{display:flex;gap:1.1rem;align-items:baseline}
+.num{
+  font-family:var(--display);font-size:2rem;color:var(--signal);
+  min-width:2.2rem;
+}
+.stepbody{max-width:56ch}
+
+/* ── service area: editorial column (opener: numeral/side) ─ */
+.area{padding:var(--gap) 0}
+.sidelabel{font-size:1rem;font-weight:700;color:var(--steel);margin-bottom:.6rem}
+.areabody{max-width:62ch}
+.towns{color:var(--steel)}
+
+/* ── cta band ────────────────────────────────────────────── */
+.cta{padding:var(--gap) 0;background:var(--signal);color:var(--paper)}
+.cta h2{color:var(--paper)}
+.cta .sidelabel{color:var(--paper)}
+.cta .wrap{padding-top:8px;padding-bottom:8px}
+
+/* ── footer ──────────────────────────────────────────────── */
+.foot{padding:2.5rem 0;background:#f2f4f6}
+.foot .wrap{padding-top:6px;padding-bottom:6px}
+.fineprint{color:var(--steel);font-size:.95rem;margin:0}
+
+@media (max-width:760px){
+  .split{grid-template-columns:1fr;gap:2rem}
+}

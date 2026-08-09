@@ -33,6 +33,21 @@ together:
 **We never contact a business.** All client contact is Harry personally; the teams only
 produce research and websites.
 
+**Outside both teams — the caretaker and the FORA pair.** These are never spawned in a
+Prospecting or Build run:
+
+- **`caretaker`** — post-launch only, for sites already live on a real domain. Registry
+  keeping + incident diagnosis. Its beat starts where the two teams' ends.
+- **`fora-benchmark` + `fora-site-auditor`** — FORA-internal tooling for auditing **our own
+  agency site** (foradigital.com), not client work. `fora-benchmark` researches
+  well-executed sites and produces a "copy bar"; `fora-site-auditor` grades FORA's site
+  against it plus its own seven categories. Neither writes files — the benchmark's output
+  is pasted into the auditor's task context by hand. The boundary is **whose site it is**,
+  not which folder: FORA's own site sits at `prospects/fora-digital/` for historical
+  reasons and is theirs to read, but **every other `prospects/<slug>/` is a client build
+  belonging to the `critic`** — two auditors grading one build by different rubrics is how
+  a crew ships contradictions.
+
 ## Territory & target
 
 - **Where:** Essex County, NJ (Newark, Montclair, Bloomfield, Nutley, Belleville,
@@ -93,9 +108,11 @@ Build run.
 | Stage | Owner | Model | Output |
 |---|---|---|---|
 | B0. Save the client's answers | lead | — | `prospects/<slug>/client-answers.md` |
+| B0a. *(only if a prior build for this prospect was speculative)* log the delta | `planner` | Fable | rows appended to `pipeline/speculation-log.md` |
 | B0b. *(only if no dossier exists)* capture-only research | `analyst` | Opus | `dossier.md` + `site-content.md` for this ONE business |
-| B1. Plan FROM the answers | `planner` | Fable | `prospects/<slug>/website-plan.md` incl. "Client answers → decisions" |
-| B2. Build | `builder` ×1 | Opus | `prospects/<slug>/mockup/` + `screenshots/` |
+| B1. Plan FROM the answers | `planner` | Fable | **`build-sheet.md`** (the Builder's only input — self-contained, lint-clean) + `website-plan.md` (the reasoning, for Harry + Critic) |
+| B1b. **Sheet review** — judgment pass BEFORE any build | `critic` | Opus | **SHEET GO** message, or a numbered fix list back to the planner (≤2 rounds, then lead) |
+| B2. Build (starts only on SHEET GO) | `builder` ×1 | Opus | `prospects/<slug>/mockup/` + `screenshots/` + the **evidence block** in STATE.md |
 | B3. Critique loop | `critic` | Opus | `prospects/<slug>/audit.md` (every round) + fix messages, sign-off |
 | B3b. **Publish to Claude Design** | lead | — | A card-per-section design-system project at claude.ai/design (`/design-push`) |
 | B3c. *(only if the site was edited in the Design pane)* **Pull those edits back** | lead | — | `/design-pull` → the edits land in `mockup/`, round-trip verified |
@@ -119,9 +136,14 @@ what they want kept, changed, or dropped).
 `<slug>` = kebab-case business name, e.g. `montclair-stone-masonry`.
 
 **Division of design labor:** the `planner` (Fable) makes ALL the design decisions —
-art direction, fonts, palette, page map, per-section layout — and writes them to
-`website-plan.md`. The `builder` (Opus) IMPLEMENTS that plan and does not re-decide the
-design.
+art direction, fonts, palette, page map, per-section layout — and writes the executable
+result into **`build-sheet.md`** (template: `templates/build-sheet-template.md`), a
+self-contained contract the `builder` (Opus) executes top to bottom without re-deciding
+anything. **The sheet outranks `website-plan.md`** — the plan carries the Planner's
+reasoning for Harry and the Critic, and the Builder never reads it; a sheet that forces
+the Builder into the plan is a Planner defect. (A real 588-line plan was half rationale,
+and building one hero from it took ~14 lookups across 11 headings — that's the failure
+the split prevents.)
 
 ## Speed rules — overlap the work, never lower the bar
 
@@ -133,7 +155,8 @@ teammate follows these; none of them touch a quality gate.
    candidates rather than delivering all 10–12 at the end; the planner hands its finished
    plan to the builder the moment it's done instead of polishing it further.
 2. **Parallelize independent work.** The analyst researches all three finalists at once
-   (one subagent each); the builder launches both image generations concurrently.
+   (one subagent each). Image generations are the exception — the builder runs them
+   **one at a time**, because Kie rate-limits concurrent jobs.
    **Delegated research must return verbatim quotes + source URLs (never summaries) and
    surface source contradictions rather than resolving them — and the analyst still
    verifies the load-bearing facts against primary sources itself.** Delegation speeds up
@@ -155,6 +178,91 @@ a checklist item, shorten a review round, drop a QA pass, weaken the two-way ima
 or hand off something you know is failing. If a shortcut would change what ships, it isn't
 one of these rules.
 
+## Run state & resume (hard rules — every Build teammate)
+
+A real run (dasilva-associates, 2026-08-03) died mid-flight and lost a full round to a
+falsely-recorded fix, a voided audit, a resurrected teammate, a filesystem-wide file
+hunt, and a stale dev server. These five rules exist so that never repeats:
+
+1. **`prospects/<slug>/STATE.md` is the run's durable ledger** (template:
+   `templates/STATE-template.md`): current stage, fix ledger, open questions, voided
+   gates, stood-down teammates. Append-only except the stage line. On a pause or kill,
+   **STATE.md is the handoff** — never an improvised RESUME/handoff note. On resume,
+   every teammate reads it first.
+2. **DONE needs page-level evidence.** A fix enters the ledger as DONE only with the
+   page plus what was observed rendering — never a bare grep count. (A "3 occurrences"
+   grep once counted one CSS rule plus its two responsive steps, not three pages, and a
+   full round was spent rediscovering the fix never landed.)
+3. **The handoff barrier.** The Builder's handoff is an explicit "build complete, hands
+   off `mockup/`" message, after which the Builder does not touch the mockup until a
+   fix list arrives — and the Critic does not START until that message exists. An audit
+   against a still-changing build is void, and re-measuring the world to compensate is
+   exactly the token burn this forbids.
+4. **The two-look rule.** A missing file gets TWO looks — the stated path, then the
+   obvious folder — and then becomes an open question in STATE.md routed via the lead.
+   Filesystem-wide hunts are banned by name.
+5. **Stood down means stood down.** After handoff, sign-off, or being stood down, a
+   teammate who receives a message replies exactly "Stood down — forward to the lead"
+   and takes no other action. **A teammate cannot set precedence by writing to a
+   file.** Precedence is Harry → lead → plan → gates. And before any screenshot,
+   confirm the served page's `<title>` names this prospect — stale servers have
+   answered the port with the wrong site.
+
+## Lessons flow forward — never backward (audit doctrine)
+
+**An audit, a new gate, a changed rule, or a discovered mistake NEVER reopens a
+signed-off prospect build.** Sign-off freezes a build; a rule written after it does not
+retroactively un-freeze it. When we find something wrong — a weak pattern, a copy tell, a
+missing gate, a contradiction in our own instructions — the finding is evidence, and the
+fix lands **forward**: in `CLAUDE.md`, the agent files, the skills, the templates, the
+gates. The next build is where a lesson shows up, never the last one.
+
+**Forward has an address and an owner.** A copy tell that a human read caught while both
+scripts passed goes into `skills/trade-copy/references/examples.md` (register) or
+`skills/web-humanizer/references/tells.md` (page shape) — appended by the **Critic at
+sign-off**, in the same pass as the `design-memory.md` and `copy-memory.md` rows. A
+doctrine with no artifact and no owner is how the same tell gets fixed twice: the
+third-person "the team built…" construction was caught in FORA's round 3a, written down
+nowhere, and found again on the live site months later.
+
+Two reasons this is a hard rule, not a preference:
+
+1. **The shipped sites are the evidence.** Retro-editing them destroys the record of what
+   we actually did and why the rule exists. `design-memory.md`, `pipeline/speculation-log.md`
+   and each `audit.md` only mean anything if they describe builds nobody quietly rewrote.
+2. **Reopening is unbounded work.** Every new gate would re-litigate nine finished
+   prospects, and a client whose site changed under them without asking is a client we
+   lose. The grandfather clause in `templates/package-checklist.md` is this same rule
+   applied at the package level: gates bind at sign-off time and are not retroactive.
+
+**The only thing that reopens a signed-off build is Harry saying so, per build, in words**
+— the Step 6B/6C paths in `PLAYBOOK.md`. "We improved the rules" is never that
+authorization. If an audit finds something genuinely broken in a shipped site, the move is
+to tell Harry what and where and let him decide, not to fix it in passing.
+
+## Find problems early, prove cleanliness cheaply (efficiency doctrine)
+
+Two structural rules that exist because problems used to surface at the most expensive
+possible moment — after a full Opus build, in an Opus critique round:
+
+- **The sheet review (B1b).** The Critic judges `build-sheet.md` + `voice-spec.md`
+  against `client-answers.md` BEFORE the Builder starts: direction sanity, copy
+  quality, content routing, format choices. plan-lint must already be exit 0 — the
+  review is judgment, not mechanics. Verdict is one message: **"SHEET GO"** or a
+  numbered fix list to the Planner (two rounds max, then the lead). **No build starts
+  without SHEET GO.** A ten-minute review that kills a bad sheet saves an entire build
+  round — the best token trade in the pipeline.
+- **The evidence block.** The Builder's handoff must carry proof in STATE.md: detector
+  exit codes per page, copycheck + aitells exit codes, composition counts, screenshot
+  list. The Critic spot-checks ONE claim at random and — if it holds — **re-runs no
+  mechanical checks at all**, spending its round purely on judgment (realism, taste,
+  client fidelity). A handoff without the evidence block is bounced unreviewed.
+
+**Model policy — Opus only where judgment lives.** Fable plans. Opus builds, critiques,
+and writes dossiers. **Sonnet scouts and runs cold reads** (fresh eyes matter; depth
+doesn't). Scripts do everything mechanical for free. Never spend Opus tokens re-deriving
+what a script or an attached exit code already proves.
+
 ## Per-prospect output contract
 
 Each approved prospect gets a folder `prospects/<slug>/` containing:
@@ -171,12 +279,21 @@ Each approved prospect gets a folder `prospects/<slug>/` containing:
 **From the Build run (only after the client's answers are in):**
 - `client-answers.md` — the client's answers, saved verbatim by the lead from Harry's
   paste. The top authority for everything downstream.
-- `website-plan.md` — the Planner's design brief the Builder implements, including the
+- `build-sheet.md` — **the Builder's entire spec**: self-contained, lint-clean, and it
+  outranks the plan. This is the contract.
+- `STATE.md` — the run's durable ledger and the handoff on any pause (never a RESUME note).
+- `website-plan.md` — the Planner's **reasoning record, for Harry and the Critic — the
+  Builder never reads it**, including the
   **"Client answers → decisions"** section and the **content map** that places every
   site-content.md block (or lists it as deliberately dropped, with a reason).
-- `mockup/` — `index.html`, `style.css`, `main.js` (+ extra `.html` pages if the
-  page map calls for them, + `vendor/` if the plan's signature move needs the GSAP
-  tier). Static only. Opens by double-click, no build step, **works offline** —
+- `voice-spec.md` — the Planner's copy-voice contract for this client, written via
+  `trade-copy` Stage A from their answers, before any hero direction. It governs every
+  visible string the Builder writes and is what the Critic's copy gate scores against; a
+  missing one is a fail on the Planner.
+- `mockup/` — **one `.html` per page in the plan's page map** (multi-page is the default;
+  a single-file SPA is the exception for a page map small enough that separate files
+  would be ceremony), plus one shared `style.css` and one `main.js` (+ `vendor/` if the
+  plan's signature move needs the GSAP tier). Static only. Opens by double-click, no build step, **works offline** —
   libraries are vendored from the skill's `assets/gsap/`, never loaded from a CDN.
 - `screenshots/` — desktop + mobile captures proving the QA passes ran.
 - `release-form.pdf` (+ `release-form.html` source) — the Fora Digital **Website Release
@@ -186,8 +303,8 @@ Each approved prospect gets a folder `prospects/<slug>/` containing:
   and checkbox fields stay blank, and unknown fields (domain, preview link) ship as clean
   blank lines rather than invented values.
 - `audit.md` — the Critic's scored result for BOTH scoreboards ($10K Checklist 8/8 or
-  documented exceptions, plus the 10-dimension rubric), rewritten every review round with
-  a `Review round: N` line.
+  documented exceptions, plus the 10-dimension rubric), appended to every review round (a new `## Round N` block; earlier rounds are never rewritten) with
+  a `Review round: N` line and a `Paid calls this prospect:` ledger line.
 
 **Not a file in the folder, but part of the contract:** every signed-off prospect also has
 a **Claude Design project** — its own card-per-section design system at claude.ai/design,
@@ -196,325 +313,121 @@ edited before going live, so a signed-off prospect without one is incomplete.
 
 ## Delivery to Corey
 
-The moment the Critic signs a prospect off (`audit.md` PASS on both scoreboards), that
-site is ready to go live. Corey Rapkin (**cbrapkin@gmail.com**) is the one who puts it
-live via Netlify Drop — he needs the packaged zip, not loose files.
+Lead-only procedure, run after sign-off: **signed release form gates everything** (none
+on file → stop), then the **gated packager** (`pipeline/package-site.sh <slug>` — refuses
+on detector failures, placeholder leakage, or a missing design-memory row), then
+`/design-push` to Claude Design. **Caretaker registration is NOT part of delivery** — the
+caretaker only watches sites already live on a real domain, and at delivery the site is
+still a zip. Note it for **go-live** (`FULL-PROCESS.md` Step 14), where the domain exists
+and there is a URL to register.
+**Full procedure with every step and check: `docs/delivery.md` — the lead reads it at
+each delivery; teammates never need it.**
+## The Mockup Recipe (the "DaSilva workflow")
 
-**Only the lead session does this.** Teammates have no Gmail tools; the Critic signals
-sign-off, the lead performs delivery. Harry can also trigger it any time with
-"deliver `<slug>`".
+Our house method — reference build `prospects/dasilva-associates/`. The `web-design-ultra`
+skill is PRIMARY: the Planner runs its Stages 1–5 (Design Read, inspiration, three
+divergent directions, per-section `format:`/`opener:` tokens, plan-lint clean), the
+Builder executes Stages 6–7 (the sheet's `GENERATE` images, budget-capped, + free CSS
+craft; implements the build sheet, never re-decides it), the Critic owns Stage 8 (Step-0 detector scan, both scoreboards,
+composition counts, content honesty, sign-off freezes the build). Precedence: client
+brief + voice-spec → web-design-ultra direction + local-trade → the gates.
+**The full recipe — stage-by-stage duties, token-block patterns, craft rules, gate
+wiring — is `docs/mockup-recipe.md`. The Planner and Builder read it at the start of
+every Build run; the Critic reads its Stage 8 half.** This summary is binding but not
+sufficient to build from.
+## The anti-slop standard (all three Build agents)
 
-Delivery sends a **zip for deploying**. That's separate from keeping the two Macs in sync
-— for that, invoke **`github-push`** after a run finishes and **`github-pull`** before
-starting one. A signed-off prospect should go up to GitHub as well as out as a zip, so
-whoever picks it up next has the source.
+AI slop = the statistical mean: hero, three feature cards, testimonials, CTA, one
+section shape repeated, vague copy. It's a **direction failure, not a creativity
+failure** — absent constraint, output regresses to the default. Seven levers kill it;
+each has an owner and most are mechanically enforced:
 
-**The procedure:**
+| # | Lever | Owner | Enforced by |
+|---|-------|-------|-------------|
+| 1 | Named art direction before building | Planner | direction brief (Stage 5) + taste §0 **Design Read** |
+| 2 | Banned defaults (fonts, purple-gradient, card-wall) | Builder | detector blocking rules |
+| 3 | Section-format variety | Planner assigns, Builder obeys | `section-shape-repetition` + `repeated-section-kickers` (blocking) + critic counts |
+| 4 | Deliberate symmetry break | Planner names device, Builder lands it | critic composition check (screenshot) |
+| 5 | Scale contrast as hierarchy | Builder | `flat-type-hierarchy` (blocking, ≥1.25 step ratio) |
+| 6 | Copy specificity — ≥1 falsifiable fact, no abstract-pair labels | Builder (trade-copy + web-humanizer) | `copycheck.py` + `aitells.py` exit 0 |
+| 7 | Real assets — real logo, real photos or labeled placeholders, never stock | Builder | critic imagery gate |
+| 8 | Plan lint — quotas and required fields checked before a line is built | Planner | `plan-lint.mjs` exit 0 before handoff |
 
-1. Package the site:
-   ```bash
-   pipeline/package-site.sh <slug>
-   ```
-   This writes `prospects/<slug>/<slug>-site.zip` — the whole site, correctly named
-   `index.html` at the top level, assets included, dev scratch stripped.
+**After changing any gate, rule, threshold, or agent instruction, run the fire drill:**
 
-   **Then publish it to Claude Design** — invoke the `design-push` skill on
-   `prospects/<slug>/mockup/` with the client's name. The finished site lands at
-   claude.ai/design as a card-per-section design system you can refine visually.
-   One DesignSync permission prompt per push; that's inherent to the tool and can't
-   be automated away. **After a revision round, run `/design-push` again** — it writes
-   the same paths, so the same project updates in place rather than duplicating.
+```bash
+pipeline/fire-drill.sh
+```
 
-   **It's a round trip, not a one-way publish.** The repo stays the source of truth and a
-   re-push overwrites, so edits made *inside* Claude Design have to come back to the site
-   first — that's **`/design-pull`**, which finds them on its own (it re-bundles the source
-   and diffs, so nobody has to remember what they changed) and verifies every write-back by
-   round-trip. `/design-push` refuses to run while unpulled edits exist, so refining a site
-   in the Design pane can't silently cost you the work.
+It costs nothing and takes seconds. Against the synthetic fixtures in
+`pipeline/fixtures/` it checks that every gate both **accepts a known-good build**
+and **rejects a known-bad one** — the second half being the one that matters, since a
+gate that quietly stopped firing is indistinguishable from a clean codebase. If it goes
+red, find the change that caused it; never loosen the fixtures to make it green.
 
-2. Create a Gmail draft with the Gmail MCP `create_draft` tool:
-   - **to:** `cbrapkin@gmail.com`
-   - **subject:** `<Business Name> website — ready to put live on Netlify`
-   - **body:** four lines, no fluff — which business this is, drag the attached zip onto
-     https://app.netlify.com/drop, claim the site and rename the subdomain to
-     `<slug>.netlify.app`, reply with the live URL.
-   - **attachment:** if the zip is **≤ 200 KB**, attach it (`base64 -i <zip>`, mimeType
-     `application/zip`). If it's larger, create the draft *without* the attachment and
-     open the body with a line Harry can't miss:
-     `ATTACH BEFORE SENDING: <absolute path to zip>`. Base64-ing a multi-MB file through
-     a tool call is not workable — image-heavy sites will always take this path, and a
-     mockup carrying a vendored GSAP tier (~45 KB zipped) may tip a borderline one over.
+Process levers that keep builds from converging on each other: evidence before design
+(Stage 3), three forced-divergent directions (Stage 5), the anti-repetition log
+(`design-memory.md`, Stage 4/8), **the voice anti-repetition log (`copy-memory.md`) —
+every hero this crew has shipped and the constructions now spent, because two clients
+already got the same three-fragment-plus-founding-year hero** — deterministic detection
+(Step 0 scan), and the screenshot rubric (Stage 8). **A build that ships with any lever unaddressed is not
+done** — the critic's audit records where each one landed.
 
-3. **Draft only — never send.** Report the draft ID and the zip path back to Harry, and
-   say plainly whether the zip was attached or he has to attach it himself.
+## The `Inspiration/` library
 
-## The Mockup Recipe (the "Corey Blake workflow")
+`~/Projects/essex-web-crew/Inspiration/` is Harry's curated reference folder. The Planner
+**checks it first at Stage 3**, before opening the browser — but it supplements live-site
+research, it never replaces it. Filenames are content hashes, so identify images by
+looking at them. Two kinds, two uses:
 
-This is our house method, distilled from a real build
-(`~/Claude Code/corey-blakes-steakhouse/`). Builders MUST follow it.
+- **Site mockups / screenshots** → design references. Dissect them like any live site and
+  fill an evidence sheet. Extract patterns, never clone.
+- **Photography** (trade work, machinery, landscape) → art-direction reference for the
+  register of a shot (lighting, camera height, grit level), and a permitted
+  **image-to-video seed frame**.
 
-### PRIMARY design skill: `web-design-ultra`
-
-The **`web-design-ultra`** skill (`~/.claude/skills/web-design-ultra/SKILL.md`) is the
-team's primary design skill — every mockup runs through its 8-stage art-direction
-pipeline. The recipe steps below execute *inside* that pipeline. How the stages map to
-the team:
-
-> **The mechanical gates are inside the skill now** — the crew gets them by running the
-> pipeline, not from a separate tool. `references/critique.md` carries all three: the Step 0
-> detector scan (60 deterministic rules, zero tokens, ~1s — Builder before handoff, Critic
-> before any screenshot), the fail-visible measurement, and the countable composition checks.
-> `references/craft-floor.md` is the build-time quality floor. `design-gates.md` (repo root)
-> is now just a one-page map of where each gate lives and what stays crew-specific.
->
-> **Don't add an "impeccable" or "taste" skill — both are already in here.** Impeccable is
-> the source of the detector, the nine craft references and the `impeccable-disable` waiver
-> syntax, forked in and stripped of its native-platform material. The countable checks worth
-> having from `design-taste-frontend` were folded into `critique.md`'s composition block.
-> Installing either as a standalone skill would give the crew a second rulebook that
-> disagrees with this one on fonts and em-dashes — and the two copies would drift.
->
-> Precedence is strict and runs one way:
->
-> **client brief + `voice-spec.md` → `web-design-ultra` direction + `local-trade.md` → the gates.**
->
-> A gate never overrules a direction the Planner locked for a real reason. This is not
-> theoretical: the detector flags `cream-palette` and the skill's own premium-consumer palette
-> ban points the same way, but a landscaper in earth tones or a mason in warm stone is
-> *correctly* there, because our trades carry their own colour conventions. What's banned is
-> *defaulting* there without deciding. Exceptions get stated in `website-plan.md` and waived
-> in-file with a reason.
-
-- **Stages 1–5 → Planner.** Brief (from the dossier) → design intelligence
-  (`ui-ux-pro-max` search engine + the industry's conventional palette) → real-site
-  inspiration (3–5 references, extract patterns never copy) → anti-repetition check
-  (read this project's own `~/Projects/essex-web-crew/design-memory.md`, NOT the skill's global
-  `data/design-memory.md` — the crew keeps its own ban list so prospects diverge from each
-  other) → **three genuinely divergent directions**, pick the boldest. All recorded in
-  `website-plan.md`.
-- **Stage 6 → runs, capped.** Builders generate **up to 2 real AI images per mockup**
-  (hero + the one highest-impact slot the Planner marked `GENERATE`) via `ai-multimodal`
-  + the skill's `references/imagery.md` photorealism kit; every slot beyond 2 stays a
-  labeled AI-IMAGE placeholder (see Image policy). ALSO layer the skill's free CSS craft:
-  `references/backgrounds.md` (background/texture/depth) and `references/atmosphere.md`
-  (animated fog, god rays, shimmer, motes — reduced-motion gated). Real imagery + real
-  depth.
-- **Stage 7 → Builder.** Implement the chosen direction with the skill's craft
-  discipline: distinctive type (never the generic four), whole palette as CSS
-  variables, deliberate spatial composition (asymmetry, overlap, scale contrast),
-  and the plan's named signature move from the skill's `references/motion.md`
-  (GSAP 3.15 vendored to `mockup/vendor/` when the move needs it — `references/gsap.md`).
-- **Stage 8 → Builder self-check, then Critic (Critic OWNS this stage).** Run it in the order
-  the skill's `references/critique.md` gives. **First, Step 0 — the mechanical scan, before
-  anything is served or screenshotted:**
-  `node skills/web-design-ultra/scripts/detect.mjs prospects/<slug>/mockup/index.html`
-  (60 deterministic rules, no LLM, no install, ~1s). **The gate is the exit code — `exit 2`
-  bounces** the build with the findings as the fix list; no review tokens are spent on a
-  mockup that fails mechanically. Waivers only as in-file
-  `<!-- impeccable-disable <rule> -- reason -->`.
-  Then the **fail-visible measurement** in the pane the Critic already opens, **before**
-  force-revealing anything for screenshots: above ~15% of page text hidden at rest is a fail.
-  Then the countable **composition checks**. **Then** the visual review:
-  screenshot desktop + mobile, score the 10-dimension rubric in the skill's
-  `references/critique.md`. Gate: **no dimension below 7, boldness ≥ 8** — enforced by the
-  Critic alongside the $10K Checklist. **On pass there are two duties, not one:** the Critic appends the
-  design-choices row to `design-memory.md`, and the **lead publishes the site to Claude
-  Design** with `/design-push` (the Critic can't — the DesignSync auth lives in the lead
-  session, so it names it in the sign-off instead).
-- **Local-service conversion patterns are house standard.** Our clients are local service
-  businesses, so every plan and build applies the skill's `references/local-trade.md`:
-  tap-to-call `tel:` link visible in the mobile header (CTA repeated top/mid/footer), one
-  plain primary action, a service-area block with real town names, a trust strip
-  (years / license / rating — real or clearly labeled placeholder), a project or
-  before/after gallery, an estimate form of ≤ 4 fields, and a consistent NAP footer.
-  A beautiful hero with no visible phone number is a failed build.
-- **Imagery realism is judged, not assumed.** Generated images must pass the two-way test
-  in the skill's `references/imagery.md`: *would the business proudly post this — and
-  would a visitor believe they took it themselves?* Both the stock-ad "too perfect" look
-  and the shabby/messy look FAIL. **No readable business names, lettering, or signage
-  inside a generated image** (the model invents fake ones) — the client's real logo is
-  composited into the markup instead. One imagery register per site.
-- **Distinctiveness check (Critic, before sign-off).** A build run produces ONE site, so
-  the risk is that it looks like the last few sites we built. With the mockup still
-  unsigned, the Critic compares it against the **last 3 `design-memory.md` rows** (and the
-  most recent signed prospect's hero screenshot when it's on disk), hunting the softer
-  sameness the ban list misses — section rhythm, imagery register, motion vocabulary, a
-  hero that's the same shot in different colors. Reads like a sibling → it goes back.
-  Reading a frozen prospect's screenshots or log row is research, never a reopening.
-- **Anti-repetition:** consecutive builds must not share a font pairing, palette
-  family, or layout archetype. After a prospect's sign-off, **the Critic** appends the
-  choices (font pairing, palette, layout archetype, background system) to this project's
-  `~/Projects/essex-web-crew/design-memory.md` (the crew's own log, not the skill's global file) so the
-  next client's site diverges.
-
-### Step 1 — Design brief before any code (**the PLANNER's step**)
-> The Planner makes these calls in `website-plan.md` (web-design-ultra Stages 1–5). The
-> Builder implements them and does **not** re-decide them — see "Division of design
-> labor" above.
-
-The plan commits to a **named art direction** that fits the business (e.g. "earthy
-editorial" for a landscaper, "dark-luxury stone" for a high-end mason, "clean industrial"
-for concrete/fencing). The Builder writes those 2–3 sentences of rationale at the top of
-`style.css`. The plan locks:
-- **Font pairing** — a display face + a body face from Google Fonts.
-  **Never Inter, Roboto, Arial, or Helvetica** — and the skill's banned set (`SKILL.md`
-  non-negotiable 6) extends that to **Fraunces, Instrument Serif, Geist, Plus Jakarta Sans and
-  Space Grotesk**, which are the same saturated-AI-default problem one generation later (we
-  shipped Fraunces twice and Instrument Serif once before this was mechanical). The Step 0 scan
-  flags all of them. A client's real brand font is a waiver with a reason, never a silent pass.
-  (Corey Blake used Cormorant + Montserrat.)
-- **Palette** — 3 to 5 colors as CSS custom properties in `:root`. Restraint signals
-  premium. (See the token block pattern below.)
-
-### Step 2 — Build
-- **Structure:** single-file SPA. `index.html` holds all "pages" as
-  `<main class="page" id="page-home">` sections; nav uses `data-page="…"` links and
-  `main.js` toggles the `.active` page. (Multi-file only if the page map is large.)
-- **Design tokens** in `:root` — colors, fonts, easing curves, `--nav-h`, `--radius`,
-  `--container`. Everything references the tokens; no hardcoded hex in components.
-- **Semantic HTML** — real `<header> <nav> <main> <section> <footer>`, `aria-label`s,
-  `role="list"`, a visible focus ring (`:focus-visible` outline).
-- **Meta:** full `<title>`, meta description, Open Graph tags, Twitter card, and an
-  inline SVG favicon. (Use the business's real name + town.)
-- **Motion (whisper, don't shout):** build the **signature move the plan named** —
-  one entrance family + one hover personality + at most one scroll set-piece + one
-  tempo, from the skill's `references/motion.md`. Do not default to the old house
-  recipe (IO reveal + custom cursor + magnetic + tilt); shipping the same four moves
-  on every prospect is the sameness this checklist exists to kill, and it fails
-  item 6. **Every motion effect must be gated behind**
-  `window.matchMedia('(prefers-reduced-motion: reduce)')` and disabled on
-  `(pointer: coarse)` where relevant. **Content is never hidden by JS** — the hidden
-  state is applied at runtime, so a missing or broken script leaves a readable page
-  (rename `main.js`, reload, read it: that's the test, and it has failed before).
-- **Embeds as placeholders** — contact form, Google Map, booking widget: leave a
-  clearly styled placeholder block + an HTML comment saying what goes there. Do not
-  wire up real third-party services.
-
-### Step 3 — Desktop QA loop
-Open in the browser pane. Go section by section: `read_page` / screenshot, fix what
-looks wrong, re-check. Don't move on from a broken section.
-
-**Then click every interactive element** (hamburger open+close, every nav/card/CTA/
-footer link on every page, every `#fragment`, the form submit). A **dead click** or a
-**misleading affordance** — anything that looks clickable where only a small inner link
-works — is a QA failure, and placeholder forms must show an inline demo confirmation
-rather than a silent click or a disabled button. See "Interactive QA" in
-`.claude/agents/builder.md`; the Critic click-tests this independently.
-
-### Step 4 — Mobile pass (this is where cheap sites die)
-Resize to iPhone (375×812). Audit **every** section. Make real phone-layout
-DECISIONS, not a shrunk desktop: stacked full-width CTAs, tightened hero that fits
-one screen, horizontally-scrollable tab rows, reduced section padding, adjusted image
-aspect ratios, hamburger menu. Save proof screenshots.
-
-### Step 5 — The $10K Checklist audit (Critic runs this; Builder self-checks first)
-Score all 8, fix gaps, re-verify. Source: Metics Media Field Guide No. 01.
-
-The critic writes `prospects/<slug>/audit.md` after **every** review round (NEEDS-WORK
-versions included, with a `Review round: N` line), not only at sign-off, recording BOTH
-scoreboards — headed by the one-line scan result (`Detector: N errors, M advisory`, plus
-any waived rule and its reason). **The gate is both:** below 8/8 on the $10K Checklist
-(barring a documented exception) OR any rubric dimension below 7 / boldness below 8 sends it
-back to the builder and the loop repeats. A non-zero Step 0 exit short-circuits all of it —
-the build goes back before it is ever screenshotted. After
-the first full audit, re-reviews are **incremental** — the critic re-checks only the
-failed items and the sections the builder's change report says changed (plus a spot-check
-if a fix could ripple), not the whole site again.
-
-**Sign-off freezes a prospect.** The moment a mockup clears BOTH gates (8/8 $10K **and**
-no rubric dimension below 7 with boldness ≥ 8), it is FINAL: its builder
-stops and its files never change again, and the critic never reopens it or sends more
-fixes. Only prospects that have NOT yet passed stay in the loop. The lead engages a
-builder only for a prospect with an open critic fix list; a signed-off mockup is reopened
-only if Harry explicitly asks. This keeps already-approved sites from being disturbed
-while the others are still being fixed.
-
-1. **Point of view, not a template** — commits to a specific direction with taste.
-2. **Typography that does work** — paired display + body, not defaulted, not Inter/Roboto.
-3. **Restrained color system** — 3–5 colors, used consistently.
-4. **Hierarchy that breathes** — whitespace, scale, contrast guide the eye.
-5. **Imagery with intent** — the 2 Planner-marked `GENERATE` slots (hero + one priority
-   slot) hold REAL generated images passing the two-way realism test; every other slot is
-   a deliberate, labeled AI-IMAGE placeholder matching the art direction (see the Image
-   policy below). A placeholder in either priority slot is never an acceptable exception.
-   No stock defaults.
-6. **Motion that whispers** — art-directed micro-interactions, reduced-motion-safe.
-   **Signature move required:** one entrance family + one hover personality picked from
-   the skill's `references/motion.md`, and **distinct from the last 3 prospects** in
-   `./design-memory.md`. The default trio (fade-up everywhere + staggered text delay +
-   number count-up) fails this item unless explicitly justified. GSAP (vendored, per
-   `references/gsap.md`) is sanctioned when the move needs it — what's judged here is
-   whether the motion was *chosen*, not whether it was typed by hand.
-7. **Mobile that's designed, not shrunk** — distinct phone layout decisions.
-8. **The invisible expensive stuff** — sub-2s load (compress/omit heavy assets),
-   WCAG AA contrast, keyboard navigation, semantic HTML, real meta tags.
-   **JS-off test:** rename `main.js` (and `vendor/*.js`), reload — every word readable,
-   every CTA tappable. Content hidden by default and revealed only by JS is an
-   automatic fail: the site ships as a zip someone else unpacks, so one missing
-   script is a blank homepage. (This has happened; see `fora-digital/audit.md`.)
-   **Local SEO:** `LocalBusiness` JSON-LD present (correct schema subtype), meta
-   title/description naming the service + towns, OG image, canonical, favicon. The
-   footer NAP must match the JSON-LD exactly. Unknown values stay as visible
-   `PLACEHOLDER_…` tokens — **fabricated NAP/license/hours is an automatic fail.**
-
-### Step 6 — Proof
-Save desktop + mobile screenshots to `prospects/<slug>/screenshots/`.
+**Transformation rule (hard).** These are collected references, not licensed stock.
+Describing their style in a prompt is always fine. Seeding an image-to-video shot from one
+is allowed **only if the plan named the file**, and the output must be a *new shot the
+reference informed* — not that photograph with motion added. An image from this folder is
+**never shipped as a still**, and never used for a logo or a real person's likeness. The
+Critic compares any clip against its named source.
 
 ## Image policy (hard rule)
 
-**Tiered: 2 real AI images per mockup, placeholders beyond.**
+**No count cap — the site budget is the only limit.** Generate as many images as the design
+genuinely needs through the `/generate` skill on **`nano-banana-2`** (the shipping tier,
+never `-lite`; ~$0.04 at 1K / ~$0.06 at 2K), keeping the **projected total inside the
+site's all-in budget** ($1.00 no video / $1.50 with one — see Video policy below). At those
+rates $1.00 is ~16 images at 2K or ~25 at 1K, so on a still-only site money is not the
+binding constraint — **design judgment is.** Generate what makes the page look finished and
+specific; don't pad to spend the budget, don't starve a page that needs six plates.
+The Planner marks every generated slot `GENERATE` (hero first, then by visibility, each
+with register + aspect + resolution) and carries a running cost total. **Slots whose real
+answer is the client's own job photography stay labeled AI-IMAGE placeholders** — that is a
+content-honesty call, not a cost one. The client's real logo never counts against the
+budget and is never regenerated. Anything that would break the budget needs the lead to ask
+Harry. **Full policy (registers, sizing, realism QA, spend ledger): `docs/media-policy.md`
+— read it before any generation.**
+## Video policy (hard rule)
 
-- **Builders generate up to 2 AI images per mockup — HARD CAP.** Use the
-  `ai-multimodal` skill (Gemini `gemini-3-pro-image` / Nano Banana Pro). Priced by
-  resolution: **~$0.04 at 1K, ~$0.13 at 2K.** Per-prospect ≈ $0.08 (both 1K) to $0.27
-  (both 2K); typical one-2K-hero-plus-one-1K ≈ $0.17. Pre-approved by Harry at the
-  2-image cap; NEVER exceed 2 without the lead asking Harry first.
-- **Priority order: the hero first**, then the one next most visible slot — the
-  Planner marks these two as `GENERATE` in the plan's image list.
-- **The Planner sizes each GENERATE slot** (see the plan-spec below): aspect ratio +
-  resolution tier + where it renders. Rule of thumb: **full-bleed / background hero → `2K`;
-  contained cards, plates, split-hero, OG → `1K`** (see the "Fit the slot" section of
-  `imagery.md`). The Builder passes `--aspect-ratio` and `--image-size` accordingly.
-- **Quality bar — "proud contractor" register is the DEFAULT for trades.** Follow the
-  photorealism kit in `~/.claude/skills/web-design-ultra/references/imagery.md`. The bar is
-  the **best photo on the business's Google Business profile**: **flawless finished work**
-  (crisp stripes, clean edges, spotless install — nothing sloppy, no clippings/tools left
-  out) at an **attractive property** (good curb appeal, nice home), shot **casually but
-  flatteringly** in pleasant natural light. Two-way test: *would they proudly post it, AND
-  would a visitor believe they took it?* **Both fail modes are rejects** — "too perfect /
-  stock-ad" (reads fake) AND "too shabby / mediocre" (believable but not worth showing).
-  **One register across the whole mockup** (hero + all slots), set by the Planner — never
-  mix. Editorial (pro-shoot look) is opt-in with the Planner's justification.
-  **No fabricated branding:** generated images must show no readable business name/logo —
-  the model invents fake or competitor names (a truck lettered with the wrong brand). Keep
-  vehicles/signs unbranded, angled, or out of frame; composite the prospect's REAL name/logo
-  in the build if a branded truck or sign is wanted. Optimize to
-  WebP, **downscaling to the real display width** (never ship a 2K file into a small slot),
-  store in `prospects/<slug>/mockup/assets/`, reference locally (never hotlink).
-- **Every slot beyond the 2 stays a labeled AI-IMAGE placeholder** (this is the norm — most image slots ship as marked placeholders for the client to fill with real job photos)**:**
+**Default is zero video, and video is NEVER pre-approved** — the Planner may mark ONE
+`VIDEO` slot as a REQUEST (register `filmed-action` or `designed-loop`, ≤8s, never both),
+the lead takes it to Harry, and **the Builder generates nothing until Harry
+says yes to that specific clip.** One approval = one run, no retries without a fresh ask.
 
-```html
-<!-- AI-IMAGE: wide drone shot of a finished bluestone paver patio at golden hour -->
-<div class="img-placeholder" role="img" aria-label="Finished bluestone paver patio">
-  <span>AI-IMAGE — paver patio, golden hour</span>
-</div>
-```
-
-Style `.img-placeholder` as a labeled block in the art direction's colors so the
-mockup still reads well. Harry generates the remaining images from these prompts before
-anything goes to a client (PLAYBOOK Part 3 Reference A). Still banned always: stock
-photos, Unsplash/Google image URLs, hotlinked or copyrighted images.
-
-**The ONE exception — the client's own logo.** If the business's existing site (or
-Facebook / Google Business profile) shows a logo, the mockup must use **that exact
-logo** — it's their brand, and the whole pitch is "your site, done right." The Analyst
-records the logo's direct image URL in the dossier; the Builder downloads the actual
-file into `prospects/<slug>/mockup/assets/` and places it in the header/nav (top-left,
-where a logo belongs) with proper alt text (`alt="<Business Name> logo"`). Serve it as a
-**local file — never hotlink it**, never redraw or "improve" it, and never substitute a
-styled text wordmark when a real logo exists. Only if no logo exists anywhere is a
-tasteful text wordmark in the display font the right call.
-
+**THE SITE BUDGET (hard rule, 2026-08-04): one all-in number per site covering ALL paid
+generation — images, video, everything. $1.00 if the site ships no video; $1.50 if it
+ships one.** Images spend against it first, so budget the clip before the stills — a
+handful of images (~$0.20–0.30) still leaves over $1.10 for it. This replaced the old per-register ceilings (filmed ≤$1, designed ≤$2.50);
+register choice no longer buys extra money. A failed clip has already spent the budget —
+exhaust the free `ffmpeg` fixes, then ship the poster still. The budget is a **ceiling on
+an approved ask, never an authorization to spend.**
+Work the free ladder first (backgrounds → atmosphere → reactive field); a clip-free build
+is never a deduction. Shipping needs `poster` + `prefers-reduced-motion` + <5MB + checked
+loop seam. **Full policy (registers, gates, ladder, occupational fit): `docs/media-policy.md`
+— the Planner reads it before marking a slot; the Builder before generating; the Critic
+before gating a clip.**
 ## Content honesty (hard rule)
 
 Do not fabricate facts about a real business — no invented awards, fake years in
@@ -621,7 +534,7 @@ opening with a verb any industry could use, card titles built from two abstracti
 to identical lengths. Their word lists are deliberately disjoint so no single word gets two
 different fixes; both push the same direction, which is more concrete.
 
-Real review quotes, Q14 keep-word-for-word content, legal text, and NAP are exempt from
+Real review quotes, **Q7** keep-word-for-word content, legal text, and NAP are exempt from
 every check and are never edited. Nothing is ever *added* to a page to satisfy a check —
 terseness passes, invented facts never do. Full rules: the **`trade-copy`** and
 **`web-humanizer`** skills.
@@ -632,13 +545,23 @@ Skills are NOT auto-loaded for teammates (the agent-teams runtime doesn't apply 
 `skills` frontmatter field) — each agent must invoke them itself via the Skill tool, and
 each agent's `tools` list includes `Skill`.
 
+**A required skill that won't load is a stop-and-report, never a proceed-without.** If a
+skill marked PRIMARY (or a `references/*.md` file it depends on) is missing or fails to
+invoke, say so to the lead and stop that step. Do not improvise the skill's contents from
+memory — the whole point of the skill is that it is more current and more specific than
+what you'd reconstruct, and a build done from a half-remembered version of the design
+pipeline is exactly the generic output the pipeline exists to prevent.
+
 | Agent | Skills to invoke | Why |
 |---|---|---|
 | `scout` | `research`, `docs-seeker` | Deeper competitor/reputation research when a web search isn't enough; finding directories/docs on unfamiliar trades. |
 | `analyst` | `research` | Comprehensive dossier research beyond a plain web search. |
-| `planner` | **`web-design-ultra` (PRIMARY)**, **`trade-copy`**, `ui-ux-pro-max`, `frontend-design`, `design-system`, `aesthetic`, `sequential-thinking` | Run the 8-stage art-direction pipeline (Stages 1–5): design intelligence, real-site inspiration, anti-repetition, three divergent directions. `trade-copy` Stage A produces `voice-spec.md` from the client's answers before the hero direction is written. Names each reference site's patterns using the skill's `inspiration.md` vocabulary, and doesn't lock a direction the Stage 8 composition checks will fail — any deliberate exception is stated in `website-plan.md`. |
-| `builder` | **`web-design-ultra` (PRIMARY)**, **`trade-copy`**, **`web-humanizer`**, `ai-multimodal`, `ui-ux-pro-max`, `frontend-design`, `frontend-development`, `web-frameworks` | Execute the chosen direction (Stage 7): generate the 2 real hero/priority images (`ai-multimodal`), craft discipline + backgrounds/atmosphere recipes; self-score the Stage 8 rubric. `trade-copy` governs every visible string — invoke before writing any text; `web-humanizer` is the sweep after it, catching the page shapes that still read machine-written (interchangeable hero verbs, abstract-pair card titles, no checkable fact, cards stamped to identical lengths) and gating on `aitells.py` exit 0 alongside `copycheck.py`. Reads the skill's `craft-floor.md` before editing UI, works `motion-thesis.md` / `layout-craft.md` / `type-craft.md` / `color-craft.md` when a build needs more than a first pass, and runs the Step 0 scan to `exit 0` before handoff. |
-| `critic` | **`web-design-ultra`**, **`trade-copy`**, **`web-humanizer`**, `ui-ux-pro-max`, `code-review`, `design-system` | Audit each mockup against the Stage 8 10-dimension rubric AND the $10K Checklist; enforce real-reviews-only and the COPY VOICE gate (`copycheck.py` + `aitells.py` + a say-aloud read + the cold read); code-quality + design-system rigor. Runs the skill's Step 0 scan as the **first** gate, before any screenshot, then the fail-visible measurement and the composition checks; drives fix rounds with `bolder.md` / `quieter.md` rather than freehand nudges. |
+| `planner` | **`web-design-ultra` (PRIMARY)**, **`trade-copy`**, `ui-ux-pro-max` · *on demand:* `frontend-design`, `design-system`, `aesthetic`, `sequential-thinking` | Run the 8-stage art-direction pipeline (Stages 1–5): design intelligence, real-site inspiration, anti-repetition, three divergent directions. Taste's four planning sections (§0 Design Read, §0.D Anti-Default, §9 AI-Tells, §11 Redesign) live in `web-design-ultra`'s `references/taste-planning.md` — a 1.2K-word fork. The 12.8K-word `taste-skill` itself is NOT invoked: it is build-time material and its content rules collide with our real-facts-only rule. `trade-copy` Stage A produces `voice-spec.md` from the client's answers before the hero direction is written. Names each reference site's patterns using the skill's `inspiration.md` vocabulary, and doesn't lock a direction the Stage 8 composition checks will fail — any deliberate exception is stated in `website-plan.md`. |
+| `builder` | **`web-design-ultra` (PRIMARY)**, **`trade-copy`**, **`web-humanizer`**, `generate` · *on demand:* `ui-ux-pro-max`, `frontend-design` | Execute the chosen direction (Stage 7): generate every image the plan marked `GENERATE` (`/generate` on `nano-banana-2`; no count cap — stop at the site budget), plus an approved video clip if there is one, craft discipline + backgrounds/atmosphere recipes; self-score the Stage 8 rubric. `trade-copy` governs every visible string — invoke before writing any text; `web-humanizer` is the sweep after it, catching the page shapes that still read machine-written (interchangeable hero verbs, abstract-pair card titles, no checkable fact, cards stamped to identical lengths) and gating on `aitells.py` exit 0 alongside `copycheck.py`. Reads the skill's `craft-floor.md` before editing UI, works `motion-thesis.md` / `layout-craft.md` / `type-craft.md` / `color-craft.md` when a build needs more than a first pass, and runs the Step 0 scan to `exit 0` before handoff. |
+| `critic` | **`web-design-ultra`**, **`trade-copy`**, **`web-humanizer`** · *on demand:* `ui-ux-pro-max`, `code-review`, `design-system` | Audit each mockup against the Stage 8 10-dimension rubric AND the $10K Checklist; enforce real-reviews-only and the COPY VOICE gate (`copycheck.py` + `aitells.py` + a say-aloud read + the cold read); code-quality and token-consistency rigor when a finding needs that depth. Runs the skill's Step 0 scan as the **first** gate, before any screenshot, then the fail-visible measurement and the composition checks; drives fix rounds with `bolder.md` / `quieter.md` rather than freehand nudges. |
+| `caretaker` | `site-caretaker-cycle` (from `~/Projects/site-caretaker/.claude/skills/`) | Post-launch only, and only for sites already live on a real domain. Keeps `~/Projects/site-caretaker/sites.json` — the system of record for published sites — current, and diagnoses the uptime/DNS/TLS/content failures the hourly `com.sitecaretaker.monitor` job flags. Never edits a live site on its own, and never polls in a loop: Layer 1 already watches, for free, every hour. Its standing spec is `~/Projects/site-caretaker/VISION.md`, which lives outside this repo — so the role only works on a machine that has it. |
+| `fora-benchmark` | — | **FORA-internal, never a client run.** Researches well-executed sites (Fortune 500, small agencies, local trades) and returns a pattern table plus a "copy bar". Writes no files: its output is pasted by hand into `fora-site-auditor`'s task context. |
+| `fora-site-auditor` | `trade-copy`, `web-humanizer` | **FORA-internal, never a client run.** Audits foradigital.com — repo source plus the live site in the browser pane — across seven categories, and grades copy against `fora-benchmark`'s bar plus `copycheck.py` / `aitells.py`. Read-only. Client mockups under `prospects/` are the `critic`'s, never its own. |
 | **lead** (this session) | **`design-push`**, **`design-pull`**, **`github-push`**, **`github-pull`** | Publish each signed-off site to Claude Design (Stage 8 on-pass step B3b), and re-publish after every revision round. `design-pull` brings edits made in the Design pane back into `mockup/` before a push can overwrite them — and `design-push` refuses to run while any exist. Only the lead can: `DesignSync` is authorized in this session, not in any subagent. `github-pull` / `github-push` move the whole repo between Harry's Mac and Corey's — **pull at the start of a session, push when a run finishes.** Details in `github/README.md`. |
 
 Optional, invoke only if the situation calls for it: `media-processing` (Builder — if
@@ -651,12 +574,26 @@ processing real images pulled from an existing client site) and `ai-multimodal`
   all research and scraping. **Do NOT call Firecrawl or Perplexity** (they cost Harry
   money) — if a page genuinely can't be reached any other way, stop and ask the lead,
   who asks Harry.
-- **The one sanctioned paid operation: the builder's 2 AI images per mockup.** Image
-  generation costs real money (~$0.04 at 1K / ~$0.13 at 2K ≈ $0.17 per prospect) and is
-  **pre-approved at that cap** — a builder generating its 2 `GENERATE`-marked images is
-  following the rules, not breaking them. Everything beyond 2 images, and every other
-  paid call, needs the lead to ask Harry first. "Free tools only" elsewhere in these docs
-  means *no Firecrawl/Perplexity*; it never meant skipping the sanctioned images.
+- **The only pre-approved paid operation is image generation, and it is pre-approved up to
+  the site budget — not to a count.** Generated through the `/generate` skill on
+  **`nano-banana-2`** — the shipping tier, never the `-lite` draft model. It costs real
+  money (~$0.04 at 1K / ~$0.06 at 2K), and the builder may spend up to the site's all-in
+  budget on it: **$1.00 with no video, $1.50 if a video is approved.** A builder generating
+  eight images that total $0.40 is following the rules, not breaking them. Track the
+  running total; the moment a plan would break the budget, the lead asks Harry.
+- **Video is NOT pre-approved — it is a request.** The Planner may mark ONE justified
+  `VIDEO` slot in its declared register (`filmed-action` or `designed-loop`, ≤8s, never
+  both — see the Video policy above), priced to fit the site's **$1.50 all-in budget
+  alongside its images**, but marking it only *asks*. **The lead
+  takes that request to Harry, and the Builder generates nothing until Harry has said yes
+  to that specific clip.** No answer yet → the poster still ships in the slot and the site
+  is otherwise complete. A clip with no recorded approval is unauthorized spend and the
+  Critic hard-fails it.
+- Everything beyond — any spend that breaks the site budget, any video without a confirmed
+  yes, a 2nd clip, 4K, a longer clip, or any other paid call — needs the lead to ask Harry
+  first.
+  "Free tools only" elsewhere in these docs means *no Firecrawl/Perplexity*; it never meant
+  skipping the sanctioned assets.
 - **Never contact a business.** No emails, no form submissions, no DMs, no calls.
   Drafts only.
 
@@ -664,3 +601,12 @@ processing real images pulled from an existing client site) and `ai-multimodal`
 
 Every teammate is a full Claude instance (~7× cost of a solo session). Keep scope
 tight, mark tasks complete promptly, and shut down when your work is signed off.
+
+**Read on demand, not by default.** Your prompt names a small set of required reads; the
+rest of the reference shelf is there for when you are stuck on that specific subject.
+Loading a skill you will not use costs the same as loading one you will.
+
+**Use `rtk` for output-heavy shell.** `rtk read`, `rtk ls`, `rtk wc`, `rtk grep` are
+pre-approved in `.claude/settings.json` and compress command output 60–90%. Reach for them
+on anything that prints a lot — directory walks, greps across `prospects/`, long file
+reads. Plain `cat` of a 40 KB audit is the expensive way to answer a one-line question.

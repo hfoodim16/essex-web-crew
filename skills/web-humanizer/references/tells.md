@@ -187,6 +187,59 @@ real one: "Fall cleanup books out by mid-October."
 
 ---
 
+## Round 2 — the tells added 2026-08-05 `[script hard]`
+
+Sourced from the Wikipedia "Signs of AI writing" categories the general `humanizer` skill
+carries. An audit found 28 of its 33 categories with no mechanical check anywhere in this
+crew, while `aitells.py`'s original six gates had gone quiet — **zero hits across all 30
+built pages**. A gate that never fires is not proof of a clean corpus; it is a gate that
+stopped measuring what the crew still does. Each one below swept to zero across those 30
+pages before it was made hard, so none of them fires on work already signed off.
+
+| # | Tell | Before → After | Why it is a tell |
+|---|---|---|---|
+| 21 | **Chat-register opener** | "Here's the thing: your lawn is your first impression." → "A mown, edged lawn is the first thing anyone sees." | An assistant's voice, not a business's. Nobody writes this on their own site. |
+| 22 | **Signposting** | "Let's break down what we do." → "What we do" | Essay scaffolding on a page that is not an essay. The heading was already the signpost. |
+| 23 | **Filler phrase** | "At the end of the day, when it comes to drainage, grading matters." → "Grading is what fixes drainage." | Cut the phrase and the sentence survives — which is the test. Here two phrases hid one fact. |
+| 24 | **Authority trope** | "The real question is whether your contractor shows up." → "We show up when we say we will." | Asserts weight instead of earning it. The after makes the claim in the crew's own name, where it can be held against them. |
+| 25 | **Negative parallelism** | "It's not just a lawn, it's a first impression." → "Weekly mowing and edging, spring through fall." | Builds a strawman version of the service to knock it down. The after says what you actually get. |
+| 26 | **Negation run** | "No guessing. No surprises. No hidden fees." → "You get the price before we start, and it doesn't change." | Two is a plain trade site being direct. Three is the rule of three in a costume — and the after is the only one of the four that states the actual promise. |
+| 27 | **`-ing` trailer clause** | "We mow twice a month, keeping the property looking its best." → "We mow twice a month." | The tail restates instead of adding. `banlist.md` banned this shape by name and nothing read it until now. Exempt when the tail carries a number or a name — then it is the fact, not a restatement. |
+| 28 | **Punchline cadence** | "A sample build… Not a client; a demonstration." → "This one isn't a client. Corey Blake's is a steakhouse we made up so you can see what we'd do with a restaurant." | From the FORA round-3a audit: *"Every lead landed like a quotable closer. That cadence is the tell, more than any single word."* Full case: `trade-copy/references/examples.md` §10. |
+| 29 | **Copula avoidance** | "Our shop serves as a partner, not a parts counter." → "We explain the repair before we do it." | Reaching around the word "is". The shorter verb is almost always right, and here the honest version is a different sentence entirely. |
+| 30 | **Weasel attribution** | "Experts agree that annual service extends transmission life." → "A fluid change every 30,000 miles is what the manufacturer calls for." | An authority nobody names. On a client site this is also an honesty problem — the after names one that can be checked. |
+| 31 | **Emoji** | "Work smarter this summer ☀️" → "Book spring cleanups now — the calendar fills by mid-April." | Never on a contractor's site. Note `★` and `✓` are typography, not emoji, and are not flagged. |
+| 32 | **Hyphen-compound pileup** | "A design-led, estimate-first, mobile-down, reservation-first approach." → "We design it, price it before you commit, and build it to work on a phone." | Four coined compounds in two sentences, caught by a human read on FORA's own site and by nothing mechanical. Dictionary hyphenates (family-owned, year-round) are exempt. |
+
+Advisory in the same pass: **false ranges** ("from patios to retaining walls"), **Title
+Case Headings**, **`Label: sentence` card stacks**, **boldface density**, and the overall
+hyphen-compound rate.
+
+---
+
+## Signs of HUMAN writing — preserve these
+
+Every other section here is about what to remove. This one is about what a rewrite must
+not sand off, and it is the reason a humanizing pass can make a page worse. If an edit
+deletes one of these, the edit is wrong:
+
+- **A specific number nobody would invent** — "47 years on Pompton Avenue", "$95, and it
+  comes off the bill".
+- **An admission** — "we don't do irrigation", "that repair isn't worth it on this car".
+  A model does not volunteer limits; a business does.
+- **A named, checkable particular** — a street, a brand of equipment, a town, a person.
+- **Uneven rhythm.** A three-word sentence next to a thirty-word one is a human writing.
+  Evening it out is the single most common way a "cleanup" pass adds slop.
+- **Mild, unpolished phrasing** — "we'll tell you straight", "give us a call". Plain is
+  the target, not a symptom.
+- **The owner's own words** from the questionnaire, even when they are clumsy. Especially
+  when they are clumsy. `voice-spec.md`'s "Sounds like them" block outranks every rule
+  in this file.
+- **Repetition that carries information** — a landscaper's page should say "patio" six
+  times.
+
+---
+
 ## What NOT to flag
 
 The false-positive list matters as much as the tells. Do not flag:

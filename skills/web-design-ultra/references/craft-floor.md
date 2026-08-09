@@ -31,7 +31,7 @@ Page scaffolds:
 
 - Same-size cards of icon plus heading plus text as the page structure. Cards are the lazy container; nested cards are always wrong.
 - The hero-metric template: big number, small label, supporting stats, accent.
-- A tracked uppercase eyebrow over every section. One named kicker is a system; an eyebrow everywhere is grammar you did not choose.
+- An eyebrow over every section — **any** styling, tracked caps or sentence-case accent or a bare decorative rule-bar. One named kicker is a system; an eyebrow everywhere is grammar you did not choose. This one is not a soft default: the budget is counted (`≤ ceil(sections÷3)`, hero included) and enforced. Replacement openers and the section-format vocabulary live in `section-formats.md`.
 - Section numbers (01 / 02 / 03) unless the sequence itself carries information the reader needs.
 - A modal for a task that needs neither interruption nor protected focus.
 

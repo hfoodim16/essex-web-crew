@@ -1,3 +1,8 @@
+> **SUPERSEDED — old business model.** This draft offers a finished mockup, which the
+> ask-first model replaced: we ask what the client wants and build from their answers.
+> Rewrite to the shape in `skills/trade-copy/references/outreach-voice.md` before sending,
+> and run `copycheck.py <this file> --outreach`.
+
 # Outreach -- Cedar Grove Transmission & Auto Repair Inc
 
 To: cgtrans316@verizon.net  

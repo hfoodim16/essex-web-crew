@@ -116,9 +116,19 @@ Note the trap inside the trap: spinning `gsap.ticker.tick()` in a synchronous lo
 | 9 | Motion polish | Purposeful, smooth, reduced-motion respected — **and it has a signature move you could name from the screenshots alone**. One ease, one stagger, at most one set-piece. Deduct hard for the default trio (fade-up everywhere + staggered text delay + number count-up) used without justification, or motion matching the last 3 design-memory entries. See `motion.md` and `gsap.md`. |
 | 10 | Cohesion | Every choice feels from one art director. Nothing off-brand. |
 
-## Composition checks (countable, not scored)
+## Composition checks (countable — and the section-format block is BLOCKING)
 
 The rubric above is judgment. These are arithmetic — you count them off the screenshots and they're either true or they aren't. They fold into the existing gate; they are **not** a second scoreboard. A dimension can score 8 while the page still has three zigzag sections in a row.
+
+**The five section-format quotas below are a blocking gate, not advice.** They must be **counted and written into `audit.md`** as a composition-counts block with a pass/fail each. An audit missing those numbers is incomplete and cannot be signed off — "I looked and it seemed varied" is not a count. Rationale: 79% of visitors scan via the layer-cake pattern, riding section openers for landmarks; a page whose sections all share one shape offers exactly one landmark and the eye stops sampling. Full vocabulary and replacement openers: `section-formats.md`.
+
+| # | Quota | Fails when |
+|---|-------|-----------|
+| 1 | ≥ 4 distinct families per 8 sections (≥ ceil(n÷2) on shorter pages) | too few families |
+| 2 | No family twice consecutively (serial `gallery` exempt) | back-to-back repeat |
+| 3 | Kicker budget ≤ ceil(sections ÷ 3), hero counts | over budget |
+| 4 | No two adjacent sections share an opener type | adjacent match |
+| 5 | No opener signature on > 50% of sections | one shape dominates |
 
 **Hero**
 - Fits the first viewport: headline ≤ 2 lines, subtext ≤ 20 words, CTA visible without scrolling.
@@ -135,15 +145,23 @@ The rubric above is judgment. These are arithmetic — you count them off the sc
 **Navigation** — one line at desktop, height ≤ 80px.
 
 **Section composition**
-- **Zigzag cap:** at most **2 consecutive** image-left/text-right ↔ text-left/image-right splits. The third in a row fails — break it with a full-bleed section, a vertical stack, a grid, or another family.
+- **Zigzag cap — superseded by quota 2, kept for redesigns of sites we didn't plan.** Quota 2 already forbids **any** family twice in a row, so two consecutive `split` sections fail before this rule is reached. Where no format tokens exist (an inherited build, a third-party site being audited), fall back to the old bar: at most **2 consecutive** image-left/text-right ↔ text-left/image-right splits, the third fails. Break it with a full-bleed section, a vertical stack, a grid, or another family.
 - **Split-header ban:** big headline left + small explainer paragraph floating right, used as a *section header*. Stack them instead. Allowed only when that right column carries a real visual or control, not filler prose.
-- **Layout variety:** each layout family is used once. Eight sections need ≥ 4 distinct families.
+- **Layout variety (quota 1–2, blocking):** each layout family is used once. Eight sections need ≥ 4 distinct families, and no family appears twice in a row. Families are named in `section-formats.md`; the plan assigns one per section.
 - **One marquee per page**, maximum.
 - **Grid cell count == item count.** Three items, three cells. An empty tile at the end means the grid was planned wrong.
 - **A multi-cell grid carries real visual weight in ≥ 2 cells** — a photo, a brand-appropriate gradient, a pattern, a tinted ground. Every cell being text-on-flat is the icon-heading-paragraph card wall wearing a different name (see `craft-floor.md`).
 
+**Copy specificity (blocking)**
+- **≥ 1 falsifiable fact visible on the page** — a number, a place name, or a claim a customer could check ("since 1998", "Bloomfield and the Oranges", "24-hour storm response"). A page with zero checkable facts is slop regardless of layout: vague copy invites skepticism, specific claims carry their own proof ("33% more light" beat "brighter" a century ago and still does). Phone numbers and zips don't count — they prove reachability, not the offer. Crew builds: `aitells.py` counts this mechanically (`min_falsifiable`); non-crew builds count it by hand off the screenshot.
+- **No benefit-triad headline, no two-abstract-noun labels** ("Seamless Integration", "Professional Service") — an abstract pair carries no information scent, so a scanner can't predict the payoff and won't commit.
+
+**Composition (counted off the desktop screenshot)**
+- **At least ONE deliberate symmetry break above the fold or in the first two sections** — a dominant column (not 50/50), an overlapping element, an off-grid offset, or a scale jump ≥ 3× between adjacent elements. Name which device and where in the audit. Equal columns everywhere are for spreadsheets, not stories; a page of centered, evenly-split sections is the template look wearing good fonts. (The zigzag cap above limits alternating splits; this check requires the *positive* move.)
+- Type scale contrast is enforced mechanically by the detector's `flat-type-hierarchy` rule (≥1.25 ratio between steps) — don't re-judge it, just confirm the scan ran.
+
 **Labels and dressing**
-- **Eyebrow arithmetic: count ≤ ceil(sections ÷ 3)**, and the hero's counts as one. A tracked kicker over *every* section is grammar you didn't choose; one or two make it a system.
+- **Eyebrow arithmetic (quota 3–5, blocking): count ≤ ceil(sections ÷ 3)**, and the hero's counts as one. **Any** opener label counts regardless of styling — tracked caps, sentence-case accent text, or a bare decorative rule-bar/dash above the heading. Also check no two adjacent sections share an opener type, and that no single opener signature covers more than half the sections. A kicker over *every* section is grammar you didn't choose; one or two make it a system.
 - **No decorative page furniture.** Each of these is a tell, not a flourish: scroll cues ("↓ scroll", animated mouse wheels), locale/time/weather strips (`LIS 14:23 · 18°C`), version stamps on a marketing page (`v1.4.2`, `Build 0048`), photo-credit captions used as decoration (`Field study no. 12 · Ines Caetano`), a word strip pinned under the hero (`BRAND. MOTION. SPATIAL.`), tile pagination (`01 / 4`), and floating sub-text in the top-right of a section heading.
 - **A logo wall carries logos only** — no category label under each one ("Vercel · hosting"). If the logos need explaining, they're the wrong logos.
 
