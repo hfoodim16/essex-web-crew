@@ -19,7 +19,7 @@
 <link rel="preconnect" href="https://api.fontshare.com">
 <link rel="preconnect" href="//cdn.fontshare.com" crossorigin>
 <link href="https://api.fontshare.com/v2/css?f[]=general-sans@300,400,500,600,700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=5">
+<link rel="stylesheet" href="style.css?v=6">
 </head>
 <body>
 
@@ -33,9 +33,9 @@
       <a href="#work">Work</a>
       <a href="#process">Process</a>
       <a href="#builds">Builds</a>
+      <a href="#faq">FAQ</a>
       <a href="#founders">Founders</a>
       <a href="#contact">Contact</a>
-      <a href="#reviews">Reviews</a>
     </nav>
     <a href="#contact" class="btn btn-primary nav-cta"><span>Start a project</span></a>
     <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
@@ -46,9 +46,9 @@
     <a href="#work">Work</a>
     <a href="#process">Process</a>
     <a href="#builds">Builds</a>
+    <a href="#faq">FAQ</a>
     <a href="#founders">Founders</a>
     <a href="#contact">Contact</a>
-    <a href="#reviews">Reviews</a>
     <a href="#contact" class="btn btn-primary mobile-cta"><span>Start a project</span></a>
   </nav>
 </header>
@@ -163,11 +163,11 @@
         <div class="plate-caption reveal" style="--i:1">
           <span class="badge badge-classic">Classic</span>
           <h3><span class="u">Cecere Brothers Landscaping</span></h3>
-          <p>The team built a striking website for a local landscaping business. Through the
-             use of our detailed design templates, quality images, and a descriptive
-             questionnaire response, the team was able to put together a site that will certainly capture the eye of a client.
-             All the information a customer would need is clearly portrayed, and the result is
-             exactly what our client asked for.</p>
+          <p>A family landscaping outfit in West Essex County, New Jersey. One page carries
+             all four services: design and planting, lawn care, hardscape, and storm cleanup.
+             Then a gallery of finished jobs, a customer's own words, and a free-estimate
+             button that stays in the header the whole way down a phone. Dark forest green
+             and cream, their own photos throughout.</p>
         </div>
       </article>
 
@@ -228,8 +228,8 @@
           <span class="badge badge-classic">Classic</span>
           <span class="badge badge-concept">This site</span>
           <h3>Fora Digital LLC</h3>
-          <p>A video our team built, starting from a still of a plain iPhone home screen and
-             ending at what you see on the left.</p>
+          <p>This site, on a phone. We started from a still of a blank iPhone home screen
+             and animated it out to the page you're reading now.</p>
         </div>
       </article>
 
@@ -247,7 +247,7 @@
         <li class="step reveal" style="--i:0">
           <span class="step-num" aria-hidden="true">01</span>
           <h3>Tell us about your business</h3>
-          <p>Fill out the form at the bottom of this page, or get on the phone with us. We
+          <p>Fill out the form at the bottom of this page, or email either of us. We
              build the site from your answers, so the words on it are yours.</p>
         </li>
         <li class="step reveal" style="--i:1">
@@ -402,6 +402,42 @@
     </div>
   </section>
 
+  <!-- ============ FAQ ============ -->
+  <!-- Deliberately NOT the .section-head > kicker > h2 opener the rest of the page uses:
+       that shape already runs five times and the Step 0 detector counts it. Answers are
+       plain text, never an accordion, so nothing here is hidden at rest.
+       The domain answer states plainly that the domain is not in either price and stops
+       there — the real cost is not confirmed anywhere in the repo, so no figure is quoted.
+       Do not add a number here without Harry confirming it. -->
+  <section id="faq" class="section faq">
+    <div class="wrap faq-wrap">
+      <h2 class="faq-title reveal" style="--i:0">Questions we get<span class="faq-period">.</span></h2>
+      <dl class="faq-list">
+        <div class="faq-item reveal" style="--i:1">
+          <dt>What do I actually get?</dt>
+          <dd>Three to five pages, built by hand, with your own photos and copy written the
+            way you talk. The table above lists what sits in each build.</dd>
+        </div>
+        <div class="faq-item reveal" style="--i:2">
+          <dt>How long does it take?</dt>
+          <dd>You get a working site to click through 48 to 72 hours after you send your
+            answers. Then you tell us what to change and we change it, until you sign off.</dd>
+        </div>
+        <div class="faq-item reveal" style="--i:3">
+          <dt>How does it work, start to finish?</dt>
+          <dd>You fill out the form. We build. You review it and we revise it. Then we
+            connect your domain, host the site on Netlify, and push it live. The four steps
+            are written out under How it works.</dd>
+        </div>
+        <div class="faq-item reveal" style="--i:4">
+          <dt>Is the domain included?</dt>
+          <dd>No. Neither price covers the domain. If you already own one, we connect it. If
+            you don't, we can buy it for you. Email us and we'll tell you what it runs.</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
   <!-- ============ FOUNDERS ============ -->
   <section id="founders" class="section founders">
     <div class="wrap">
@@ -417,13 +453,15 @@
           </div>
           <h3>Harry Foodim</h3>
           <p class="kicker role">Co-Owner</p>
+          <!-- The clause "which has skyrocketed him to become one of the premier AI
+               architects" was removed 2026-08-10 (audit A2/A3): an unverifiable superlative
+               with no source in client-answers.md, and the subject-verb error lived inside
+               it. Every other claim in this bio is left exactly as Harry wrote it. -->
           <p class="founder-bio">Harry is an Accounting student at The Ohio State University's
-            Fisher College of Business. He has several certifications in artificial
-            intelligence, which has skyrocketed him to become one of the premier AI architects.
-            He also interns at a CPA practice, where he supports and works directly with
-            clients, performs tax preparation, as well as financial planning. At Fora Digital,
-            he is heavily involved in the AI-driven production side. On top of that, he
-            contributes to the Accounting and Operations functions of the business.</p>
+            Fisher College of Business, with several certifications in artificial
+            intelligence. He also interns at a CPA practice, working directly with clients on
+            tax preparation and financial planning. At Fora Digital, he is heavily involved in
+            the AI-driven production side, and contributes to Accounting and Operations.</p>
           <p class="founder-contact">Email:
             <a class="founder-email" href="mailto:hfoodim@foradigital.com">hfoodim@foradigital.com</a></p>
         </article>
@@ -488,30 +526,20 @@
           <input id="f-email" name="email" type="email" required autocomplete="email">
         </div>
         <div class="field">
-          <label for="f-phone">Phone <span class="opt">optional</span></label>
-          <input id="f-phone" name="phone" type="tel" autocomplete="tel">
-        </div>
-        <div class="field">
-          <label for="f-site">Current website <span class="opt">optional</span></label>
-          <input id="f-site" name="current_site" type="text" autocomplete="url">
-        </div>
-        <div class="field">
           <label for="f-trade">What does the business do?</label>
           <input id="f-trade" name="trade" type="text" required>
         </div>
-        <fieldset class="field field-wide type-field">
-          <legend>Which kind of site?</legend>
-          <div class="type-toggle">
-            <input type="radio" id="f-type-classic" name="site_type" value="Classic" checked>
-            <label for="f-type-classic">Classic</label>
-            <input type="radio" id="f-type-cinematic" name="site_type" value="Cinematic">
-            <label for="f-type-cinematic">Cinematic</label>
-          </div>
-        </fieldset>
+        <!-- Four fields, per the crew's local-trade standard (audit A19). Phone, current
+             website, and the Classic/Cinematic choice were removed 2026-08-10 — all three
+             are faster to settle in the reply than to ask for before a stranger will hit
+             send. Do not add a fifth field without a reason. -->
         <div class="field field-wide form-actions">
           <button type="submit" class="btn btn-primary"><span>Send it to us</span></button>
-          <p class="form-note">We'll get back to you as soon as possible.</p>
+          <p class="form-note">Both of us get this. You'll usually hear back the same day,
+            with what we'd build and what it costs.</p>
         </div>
+        <p class="form-fineprint">We use what you send here only to write back to you. We
+          don't sell it or share it. <a href="privacy-policy.html">Privacy Policy</a>.</p>
         <p class="form-status" role="status" aria-live="polite" hidden></p>
       </form>
 
@@ -521,7 +549,27 @@
     </div>
   </section>
 
-  <!-- ============ REVIEWS ============ -->
+  <!-- ============ REVIEWS — PARKED, NOT DELETED ============ -->
+  <!-- Parked 2026-08-10 (audit A20). We have no real review yet, and CLAUDE.md's rule is
+       to cut a social-proof section you can't fill rather than run it empty: the section's
+       first visible line was "Nobody has sent one in yet," which is the emptiest possible
+       reading, sitting last on the page before the footer.
+
+       It is wrapped in <template> rather than an HTML comment because the block contains
+       its own comments, which cannot nest. Inside a template the markup is inert: nothing
+       renders, nothing submits, and main.js's querySelector finds no .review-form or
+       .reviews-grid, so both handlers return early. The consent line added for A7 is
+       already in the form below and ships with it.
+
+       TO BRING IT BACK when a real review exists: delete this comment and the <template>
+       open/close tags below, paste the client's exact words into a .review-card in place
+       of the .reviews-empty block, and put the "Reviews" link back in the header nav, the
+       mobile nav, and the footer Pages column.
+
+       NOTE FOR THE LEAD: while this is parked there is no way for a client to submit a
+       review at all, so the section can't fill itself. If Harry wants to keep collecting,
+       the alternative is to unpark the section and delete only the .reviews-empty block. -->
+  <template id="reviews-parked">
   <section id="reviews" class="section reviews">
     <div class="wrap">
       <div class="section-head">
@@ -581,6 +629,9 @@
           <textarea id="r-text" name="review" rows="4" required maxlength="600"
                     placeholder="What we built, how long it took, how it went."></textarea>
         </div>
+        <p class="form-consent">If we publish your review, your first name and your business
+          name go on this page with it, in your words. Send it only if that's fine with
+          you.</p>
         <div class="field field-wide form-actions">
           <button type="submit" class="btn btn-primary"><span>Post my review</span></button>
         </div>
@@ -606,6 +657,7 @@
       </div>
     </div>
   </section>
+  </template>
 
   <!-- linen grain overlay -->
   <div class="grain" aria-hidden="true" style="position:absolute;left:-30px;top:-55px"></div>
@@ -615,7 +667,7 @@
   <div class="wrap foot">
     <div class="foot-brand">
       <p class="wordmark foot-wordmark">Fora Digital LLC<span class="dot">.</span></p>
-      <p class="foot-line">Modern sites for local businesses</p>
+      <p class="foot-line">Modern sites for local businesses in Essex County, New Jersey</p>
     </div>
     <div class="foot-cols">
       <div>
@@ -628,9 +680,9 @@
         <a class="link-draw" href="#work">Work</a>
         <a class="link-draw" href="#process">Process</a>
         <a class="link-draw" href="#builds">Builds</a>
+        <a class="link-draw" href="#faq">FAQ</a>
         <a class="link-draw" href="#founders">Founders</a>
         <a class="link-draw" href="#contact">Contact</a>
-        <a class="link-draw" href="#reviews">Reviews</a>
       </div>
     </div>
   </div>
@@ -652,6 +704,12 @@
   "slogan": "Modern sites for local businesses",
   "email": "hfoodim@foradigital.com",
   "priceRange": "From $2750",
+  "logo": "https://foradigital.com/assets/fora-logo.svg",
+  "image": "https://foradigital.com/assets/phone-loop.jpg",
+  "areaServed": {
+    "@type": "AdministrativeArea",
+    "name": "Essex County, New Jersey"
+  },
   "founder": [
     { "@type": "Person", "name": "Harry Foodim", "jobTitle": "Co-Owner",
       "email": "hfoodim@foradigital.com" },
@@ -661,6 +719,6 @@
 }
 </script>
 
-<script src="main.js?v=4"></script>
+<script src="main.js?v=6"></script>
 </body>
 </html>

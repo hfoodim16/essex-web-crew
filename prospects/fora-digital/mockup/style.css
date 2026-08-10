@@ -35,9 +35,14 @@
   --ease-out:cubic-bezier(.22,.9,.24,1);
   --ease-curtain:cubic-bezier(.77,0,.18,1);
 
-  --serif:'General Sans',Georgia,'Times New Roman',serif;
+  /* One family does display, body and wordmark here. The three tokens name the ROLE, not a
+     classification — an earlier --serif/--sans pair both resolved to General Sans but fell
+     back to Georgia and Segoe UI respectively, so a Fontshare outage rendered a mixed-font
+     page nobody designed. All three stacks now fall back the same way. Whether one family
+     should do all three jobs is a separate direction call (audit A13), still open. */
+  --display:'General Sans','Segoe UI',system-ui,sans-serif;
   --wordmark-font:'General Sans','Segoe UI',system-ui,sans-serif;
-  --sans:'General Sans','Segoe UI',system-ui,sans-serif;
+  --body:'General Sans','Segoe UI',system-ui,sans-serif;
 
   /* derived tints, not new palette colors — used only where light text sits on the dark footer */
   --footer-text:color-mix(in srgb,var(--paper) 70%,var(--ink) 30%);
@@ -49,7 +54,7 @@
 html{scroll-behavior:smooth}
 body{
   background:var(--paper);color:var(--ink);
-  font-family:var(--sans);font-size:var(--fs-body);line-height:var(--lh-body);
+  font-family:var(--body);font-size:var(--fs-body);line-height:var(--lh-body);
   -webkit-font-smoothing:antialiased;overflow-x:hidden;
 }
 img{max-width:100%;display:block}
@@ -68,9 +73,9 @@ a{color:inherit;text-decoration:none}
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:var(--lh-display);letter-spacing:-.01em}
+h1,h2,h3{font-family:var(--display);font-weight:600;line-height:var(--lh-display);letter-spacing:-.01em}
 .kicker{
-  font-family:var(--sans);font-weight:700;font-size:var(--fs-kicker);
+  font-family:var(--body);font-weight:700;font-size:var(--fs-kicker);
   text-transform:none;letter-spacing:.01em;color:var(--cobalt);
 }
 .lead{font-size:var(--fs-lead);font-weight:400;line-height:1.55;letter-spacing:-.005em;color:color-mix(in srgb,var(--ink) 62%,var(--stone) 38%);max-width:52ch}
@@ -91,7 +96,7 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:var(--lh-display);
 /* ---------- buttons / links (ink-sweep hover family) ---------- */
 .btn{
   position:relative;overflow:hidden;display:inline-block;border-radius:var(--radius);
-  font-family:var(--sans);font-weight:600;font-size:var(--fs-small);
+  font-family:var(--body);font-weight:600;font-size:var(--fs-small);
   padding:14px 26px;border:1px solid transparent;
 }
 .btn span{position:relative;z-index:2}
@@ -281,7 +286,7 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:var(--lh-display);
 }
 .marquee-track{
   display:flex;width:max-content;
-  font-family:var(--serif);font-size:1.15rem;color:var(--stone);
+  font-family:var(--display);font-size:1.15rem;color:var(--stone);
   animation:marquee 60s linear infinite;
 }
 /* each set carries the spacing (incl. a trailing gap) so the seam between the two sets
@@ -318,7 +323,7 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:var(--lh-display);
 .shot img{width:100%;height:auto}
 
 .plate-caption .badge{
-  display:inline-block;font-family:var(--sans);font-weight:600;font-size:.75rem;
+  display:inline-block;font-family:var(--body);font-weight:600;font-size:.75rem;
   text-transform:uppercase;letter-spacing:.08em;padding:6px 12px;border-radius:100px;
   margin-bottom:var(--space-2);
 }
@@ -398,11 +403,11 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:var(--lh-display);
 }
 .price-figure{border-top:1px solid var(--line);padding-top:var(--space-3)}
 .price-from{
-  font-family:var(--sans);font-weight:600;font-size:var(--fs-kicker);
+  font-family:var(--body);font-weight:600;font-size:var(--fs-kicker);
   text-transform:uppercase;letter-spacing:.14em;color:var(--stone);
 }
 .price-number{
-  font-family:var(--serif);font-size:clamp(4rem,10vw,7.5rem);line-height:.92;
+  font-family:var(--display);font-size:clamp(4rem,10vw,7.5rem);line-height:.92;
   letter-spacing:-.02em;color:var(--ink);margin-top:var(--space-1);
 }
 .price-cur{font-size:.45em;vertical-align:.62em;margin-right:.06em;color:var(--stone)}
@@ -459,7 +464,7 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:var(--lh-display);
 .compare thead .price-row-cell.pc{background:var(--surface)}
 .compare thead .price-row-cell.pn{background:var(--ink)}
 .th-title{
-  font-family:var(--serif);font-weight:600;font-size:1.35rem;letter-spacing:-.01em;
+  font-family:var(--display);font-weight:600;font-size:1.35rem;letter-spacing:-.01em;
   line-height:var(--lh-display);margin:2px 0 8px;
 }
 .th-cine .th-title{color:var(--paper)}
@@ -496,7 +501,7 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:var(--lh-display);
   }
 }
 .th-price{
-  font-family:var(--serif);font-size:1.35rem;font-weight:600;letter-spacing:-.01em;
+  font-family:var(--display);font-size:1.35rem;font-weight:600;letter-spacing:-.01em;
 }
 .pn .th-price{font-size:1.55rem;color:var(--paper)}
 .compare tbody th{
@@ -546,17 +551,19 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:var(--lh-display);
     transparent 0 10px,var(--line) 10px 16px,transparent 16px 26px);
 }
 .frame-count{
-  font-family:var(--sans);font-weight:600;font-size:var(--fs-kicker);
+  font-family:var(--body);font-weight:600;font-size:var(--fs-kicker);
   text-transform:uppercase;letter-spacing:.16em;color:var(--footer-kicker);
   margin-bottom:var(--space-2);
 }
 .th-classic .frame-count{color:var(--stone)}
 @media(max-width:760px){
   .compare{min-width:560px}
-  /* the leads are hidden here, so the columns no longer balance — pin to the top
-     instead, otherwise the edge ornaments float down into the middle of the column */
+  /* pin the header cells to the top: the columns run to different lengths here, and
+     otherwise the edge ornaments float down into the middle of the column */
   .compare thead th{padding:var(--space-2);width:28%;vertical-align:top}
-  .th-lead{display:none}
+  /* The leads used to be display:none here (audit A11). A phone visitor then saw two tier
+     names and two prices with nothing saying what either one is. Shrink, never hide. */
+  .th-lead{font-size:.82rem;line-height:1.45}
   .compare tbody th{padding-right:var(--space-2)}
   .compare tfoot td{padding:var(--space-2)}
   .compare-cta{white-space:normal}
@@ -567,6 +574,7 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:var(--lh-display);
   .compare{min-width:0}
   .compare thead th{width:29%;padding:12px 10px}
   .th-title{font-size:1.05rem}
+  .th-lead{font-size:.75rem;line-height:1.4}
   /* both figures break the same way on a phone: label on one line, number under it.
      Same size in both columns here — the narrow cinematic column can't fit a larger
      "Starting at" on one line, and the dark plate already carries the premium signal. */
@@ -580,6 +588,27 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:var(--lh-display);
   .compare tfoot td{padding:12px 8px}
   .compare-cta{padding:12px 10px;font-size:.82rem}
   .film-strip,.plate-strip{margin:-12px -10px 10px}
+}
+
+/* ---------- FAQ ----------
+   Deliberately not the kicker/section-head opener the rest of the page uses: the title
+   sits in a left rail and the answers run in a ruled column beside it, so the section
+   reads as a different landmark on the scroll. Plain text, no accordion — nothing here
+   is hidden at rest. */
+.faq{background:var(--surface);border-top:1px solid var(--line)}
+.faq-wrap{display:grid;grid-template-columns:minmax(0,22ch) minmax(0,1fr);gap:var(--space-5)}
+.faq-title{font-size:var(--fs-h2);align-self:start}
+.faq-title .faq-period{color:var(--cobalt)}
+.faq-list{display:grid;gap:var(--space-4);max-width:62ch}
+.faq-item{border-top:1px solid var(--line);padding-top:var(--space-3)}
+.faq-item dt{
+  font-family:var(--display);font-weight:600;font-size:var(--fs-h3);
+  letter-spacing:-.01em;line-height:1.2;margin-bottom:var(--space-1);
+}
+.faq-item dd{margin:0;color:var(--stone);line-height:var(--lh-body);}
+@media(max-width:860px){
+  .faq-wrap{grid-template-columns:1fr;gap:var(--space-4)}
+  .faq-list{gap:var(--space-3)}
 }
 
 /* ---------- founders ---------- */
@@ -596,7 +625,7 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:var(--lh-display);
   border-radius:999px 999px var(--radius) var(--radius);
   display:grid;place-items:center;margin-bottom:var(--space-3);
 }
-.monogram span{font-family:var(--serif);font-size:3.5rem;color:var(--ink)}
+.monogram span{font-family:var(--display);font-size:3.5rem;color:var(--ink)}
 /* real founder photo drops into the same arched frame, filling it */
 .monogram-photo{overflow:hidden;padding:0}
 .monogram-photo img{width:100%;height:100%;object-fit:cover;object-position:center top}
@@ -611,7 +640,7 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:var(--lh-display);
   font-size:var(--fs-small);line-height:1.55;max-width:42ch;
 }
 .founder-email{
-  display:inline-block;font-family:var(--serif);font-size:1.15rem;color:var(--cobalt);
+  display:inline-block;font-family:var(--display);font-size:1.15rem;color:var(--cobalt);
   background:linear-gradient(var(--cobalt),var(--cobalt)) no-repeat 0 100%/0% 1.5px;
   transition:background-size .34s var(--ease-out);padding-bottom:2px;word-break:break-word;
 }
@@ -630,9 +659,9 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:var(--lh-display);
   background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
   transition:border-color .35s var(--ease-out);
 }
-.contact-card .c-name{font-family:var(--serif);font-size:var(--fs-h3)}
+.contact-card .c-name{font-family:var(--display);font-size:var(--fs-h3)}
 .contact-card .c-email{
-  font-family:var(--serif);font-size:1.35rem;color:var(--cobalt);margin-top:var(--space-2);
+  font-family:var(--display);font-size:1.35rem;color:var(--cobalt);margin-top:var(--space-2);
   background:linear-gradient(var(--cobalt),var(--cobalt)) no-repeat 0 100%/0% 1.5px;
   transition:background-size .34s var(--ease-out);padding-bottom:2px;word-break:break-word;
 }
@@ -653,11 +682,11 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:var(--lh-display);
 .field{display:flex;flex-direction:column;gap:6px;min-width:0}
 .field-wide{grid-column:1/-1}
 .field label{
-  font-family:var(--sans);font-weight:600;font-size:var(--fs-small);color:var(--ink);
+  font-family:var(--body);font-weight:600;font-size:var(--fs-small);color:var(--ink);
 }
 .field .opt{font-weight:400;color:var(--stone);text-transform:none;letter-spacing:0}
 .field input{
-  font-family:var(--sans);font-size:var(--fs-body);color:var(--ink);
+  font-family:var(--body);font-size:var(--fs-body);color:var(--ink);
   background:transparent;border:0;border-bottom:1px solid var(--line);
   border-radius:0;padding:9px 2px;width:100%;
   transition:border-color .3s var(--ease-out);
@@ -667,38 +696,20 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:var(--lh-display);
 .field input:focus-visible{outline:2px solid var(--cobalt);outline-offset:3px}
 /* invalid styling only after a submit attempt, so nothing is red while still typing */
 .inquiry-form.submitted :invalid{border-color:var(--clay)}
-/* classic/cinematic segmented toggle — plain radios under the hood, so the choice posts
-   with the form even with JavaScript off */
-.type-field{border:0;padding:0;margin:0;min-width:0}
-.type-field legend{
-  font-family:var(--sans);font-weight:600;font-size:var(--fs-small);color:var(--ink);
-  padding:0;margin-bottom:6px;
-}
-.type-toggle{
-  display:inline-flex;align-self:flex-start;border:1px solid var(--line);
-  border-radius:var(--radius);overflow:hidden;background:var(--paper);
-}
-.type-toggle input{
-  position:absolute;width:1px;height:1px;overflow:hidden;
-  clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;
-}
-.type-toggle label{
-  font-family:var(--sans);font-weight:600;font-size:var(--fs-small);color:var(--stone);
-  padding:10px 26px;cursor:pointer;
-  transition:background-color .25s var(--ease-out),color .25s var(--ease-out);
-}
-.type-toggle label + input + label{border-left:1px solid var(--line)}
-.type-toggle input:checked + label{background:var(--cobalt);color:#fff}
-.type-toggle input:focus-visible + label{outline:2px solid var(--cobalt);outline-offset:-2px}
-@media(max-width:560px){
-  .type-toggle{display:flex;align-self:stretch}
-  .type-toggle label{flex:1;text-align:center}
-}
 .form-actions{
   flex-direction:row;align-items:center;gap:var(--space-3);flex-wrap:wrap;
   margin-top:var(--space-2);
 }
 .form-note{color:var(--stone);font-size:var(--fs-small);max-width:34ch}
+/* Grid rows of the form, NOT flex children of .form-actions. Inside that flex row a
+   max-width clamps the hypothetical main size, so flex-basis:100% never forced a wrap and
+   the notice sat beside the button instead of under it. */
+.form-fineprint,.form-consent{
+  grid-column:1/-1;max-width:56ch;color:var(--stone);
+  font-size:var(--fs-kicker);line-height:1.5;
+}
+.form-fineprint a{color:var(--cobalt);text-decoration:underline;text-underline-offset:2px}
+.form-fineprint a:hover{color:var(--cobalt-deep)}
 .form-status{
   grid-column:1/-1;margin:0;padding:12px 14px;border-radius:var(--radius);
   background:rgba(31,78,255,.07);border:1px solid var(--line);
@@ -715,7 +726,7 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:var(--lh-display);
 .legal-head h1{font-size:var(--fs-h2);margin-bottom:var(--space-2)}
 .legal-body{max-width:68ch}
 .legal-body h2{
-  font-family:var(--serif);font-weight:600;font-size:var(--fs-h3);
+  font-family:var(--display);font-weight:600;font-size:var(--fs-h3);
   margin-top:var(--space-5);margin-bottom:var(--space-2);
 }
 .legal-body p{
@@ -754,7 +765,7 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:var(--lh-display);
 }
 .step{padding-top:var(--space-3);border-top:1px solid var(--line)}
 .step-num{
-  display:block;font-family:var(--serif);font-size:2.75rem;line-height:1;
+  display:block;font-family:var(--display);font-size:2.75rem;line-height:1;
   color:var(--stone);margin-bottom:var(--space-2);
 }
 .step h3{font-size:var(--fs-h3);margin-bottom:var(--space-1)}
@@ -767,7 +778,7 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:var(--lh-display);
 .reviews{background:var(--surface);border-top:1px solid var(--line)}
 .reviews .section-head .btn{margin-top:var(--space-3)}
 .quote-glyph{
-  display:block;font-family:var(--serif);font-size:4rem;line-height:.6;
+  display:block;font-family:var(--display);font-size:4rem;line-height:.6;
   color:var(--cobalt);margin-bottom:var(--space-2);
 }
 /* Review form — same hairline-field language as the inquiry form, one column narrower so
@@ -779,7 +790,7 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:var(--lh-display);
   border:1px solid var(--line);border-radius:var(--radius);
 }
 .review-form textarea{
-  font-family:var(--sans);font-size:var(--fs-body);color:var(--ink);
+  font-family:var(--body);font-size:var(--fs-body);color:var(--ink);
   background:transparent;border:1px solid var(--line);border-radius:var(--radius);
   padding:10px 12px;width:100%;resize:vertical;min-height:110px;
   transition:border-color .3s var(--ease-out);
@@ -790,7 +801,7 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:var(--lh-display);
 .review-form.submitted :invalid{border-color:var(--clay)}
 .stars-field{border:0;padding:0;margin:0;min-width:0}
 .stars-field legend{
-  font-family:var(--sans);font-weight:600;font-size:var(--fs-small);color:var(--ink);
+  font-family:var(--body);font-weight:600;font-size:var(--fs-small);color:var(--ink);
   padding:0;margin-bottom:6px;
 }
 /* Radios sit in DOM order 5→1 so a checked star can style the lower ones with ~ ;
@@ -841,7 +852,7 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:var(--lh-display);
   padding:var(--space-4);display:flex;flex-direction:column;gap:var(--space-2);
 }
 .review-stars{color:var(--clay);letter-spacing:2px;font-size:1.05rem}
-.review-quote{font-family:var(--serif);font-size:1.35rem;line-height:1.35;color:var(--ink)}
+.review-quote{font-family:var(--display);font-size:1.35rem;line-height:1.35;color:var(--ink)}
 .review-author{font-size:var(--fs-small);color:var(--stone);font-weight:600}
 
 /* ---------- footer ---------- */
