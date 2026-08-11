@@ -1,4 +1,4 @@
-/* DaSilva & Associates, LLC — "The Quiet Verdict"
+/* Paul DaSilva Law — "The Quiet Verdict"
    Signature move: blur-focus entrance + icon-nudge hover. No scroll set-piece.
 
    Content is never hidden by this file failing. The hidden entrance states

@@ -307,6 +307,11 @@ h1,h2,h3{font-family:var(--display);font-weight:600;line-height:var(--lh-display
   display:grid;grid-template-columns:repeat(12,1fr);gap:var(--space-4);
   align-items:start;margin-bottom:var(--space-6);
 }
+/* The last plate-row's own margin-bottom stacked on top of the section's bottom
+   padding plus the next section's top padding, making the gap to "How it works"
+   roughly double every other section-to-section gap on the page. Zero it here so
+   this boundary matches the rest of the site. */
+.work .plate-row:last-child{margin-bottom:0}
 .plate-left .plate{grid-column:1/span 8}
 .plate-left .plate-caption{grid-column:9/span 4}
 .plate-right .plate{grid-column:5/span 8;order:2}
@@ -596,7 +601,7 @@ h1,h2,h3{font-family:var(--display);font-weight:600;line-height:var(--lh-display
    reads as a different landmark on the scroll. Plain text, no accordion — nothing here
    is hidden at rest. */
 .faq{background:var(--surface);border-top:1px solid var(--line)}
-.faq-wrap{display:grid;grid-template-columns:minmax(0,22ch) minmax(0,1fr);gap:var(--space-5)}
+.faq-wrap{display:grid;grid-template-columns:minmax(0,20ch) minmax(0,1fr);gap:var(--space-6)}
 .faq-title{font-size:var(--fs-h2);align-self:start}
 .faq-title .faq-period{color:var(--cobalt)}
 .faq-list{display:grid;gap:var(--space-4);max-width:62ch}
@@ -607,7 +612,7 @@ h1,h2,h3{font-family:var(--display);font-weight:600;line-height:var(--lh-display
 }
 .faq-item dd{margin:0;color:var(--stone);line-height:var(--lh-body);}
 @media(max-width:860px){
-  .faq-wrap{grid-template-columns:1fr;gap:var(--space-4)}
+  .faq-wrap{grid-template-columns:1fr;gap:var(--space-5)}
   .faq-list{gap:var(--space-3)}
 }
 
