@@ -36,6 +36,7 @@
       <a href="#faq">FAQ</a>
       <a href="#founders">Founders</a>
       <a href="#contact">Contact</a>
+      <a href="#reviews">Reviews</a>
     </nav>
     <a href="#contact" class="btn btn-primary nav-cta"><span>Start a project</span></a>
     <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
@@ -49,6 +50,7 @@
     <a href="#faq">FAQ</a>
     <a href="#founders">Founders</a>
     <a href="#contact">Contact</a>
+    <a href="#reviews">Reviews</a>
     <a href="#contact" class="btn btn-primary mobile-cta"><span>Start a project</span></a>
   </nav>
 </header>
@@ -174,7 +176,7 @@
       <!-- Plate 2 — REAL CLIENT -->
       <article class="plate-row plate-right">
         <a class="plate plate-link reveal" style="--i:0"
-           href="https://pauldasilvalaw.netlify.app" target="_blank" rel="noopener"
+           href="work/dasilva-associates/index.html" target="_blank" rel="noopener"
            aria-label="Open the Paul DaSilva Law site in a new tab">
           <div class="shot">
             <img src="assets/dasilva-2026.webp" width="1440" height="900" loading="lazy"
@@ -497,10 +499,12 @@
            level, so the form works with JavaScript off — main.js only intercepts it when
            the page is opened locally (file:// or localhost), where there is no endpoint
            to post to, and shows an inline confirmation instead.
-           ONE MANUAL STEP after the first deploy: Netlify dashboard → Forms →
-           project-inquiry → Add notification → Email notification, once for
-           hfoodim@foradigital.com and once for crapkin@foradigital.com. Netlify takes one
-           address per notification, so both addresses = two notifications. -->
+           MANUAL STEP after every deploy this form's name/fields change: Netlify dashboard →
+           Forms → project-inquiry → Add notification → Email notification, once each for
+           hfoodim@foradigital.com, crapkin@foradigital.com, and forateam@foradigital.com.
+           Netlify takes one address per notification, so three addresses = three separate
+           notification rules on THIS form (and three more on the reviews form below —
+           six total, not shared). -->
       <form class="inquiry-form reveal" style="--i:0"
             name="project-inquiry" method="POST" action="thanks.html"
             data-netlify="true" netlify-honeypot="bot-field">
@@ -526,10 +530,15 @@
           <label for="f-trade">What does the business do?</label>
           <input id="f-trade" name="trade" type="text" required>
         </div>
-        <!-- Four fields, per the crew's local-trade standard (audit A19). Phone, current
-             website, and the Classic/Cinematic choice were removed 2026-08-10 — all three
-             are faster to settle in the reply than to ask for before a stranger will hit
-             send. Do not add a fifth field without a reason. -->
+        <fieldset class="field field-wide type-field">
+          <legend>Which kind of site?</legend>
+          <div class="type-toggle">
+            <input type="radio" id="f-type-classic" name="site_type" value="Classic" checked>
+            <label for="f-type-classic">Classic</label>
+            <input type="radio" id="f-type-cinematic" name="site_type" value="Cinematic">
+            <label for="f-type-cinematic">Cinematic</label>
+          </div>
+        </fieldset>
         <div class="field field-wide form-actions">
           <button type="submit" class="btn btn-primary"><span>Send it to us</span></button>
           <p class="form-note">Both of us get this. You'll usually hear back the same day,
@@ -546,27 +555,7 @@
     </div>
   </section>
 
-  <!-- ============ REVIEWS — PARKED, NOT DELETED ============ -->
-  <!-- Parked 2026-08-10 (audit A20). We have no real review yet, and CLAUDE.md's rule is
-       to cut a social-proof section you can't fill rather than run it empty: the section's
-       first visible line was "Nobody has sent one in yet," which is the emptiest possible
-       reading, sitting last on the page before the footer.
-
-       It is wrapped in <template> rather than an HTML comment because the block contains
-       its own comments, which cannot nest. Inside a template the markup is inert: nothing
-       renders, nothing submits, and main.js's querySelector finds no .review-form or
-       .reviews-grid, so both handlers return early. The consent line added for A7 is
-       already in the form below and ships with it.
-
-       TO BRING IT BACK when a real review exists: delete this comment and the <template>
-       open/close tags below, paste the client's exact words into a .review-card in place
-       of the .reviews-empty block, and put the "Reviews" link back in the header nav, the
-       mobile nav, and the footer Pages column.
-
-       NOTE FOR THE LEAD: while this is parked there is no way for a client to submit a
-       review at all, so the section can't fill itself. If Harry wants to keep collecting,
-       the alternative is to unpark the section and delete only the .reviews-empty block. -->
-  <template id="reviews-parked">
+  <!-- ============ REVIEWS ============ -->
   <section id="reviews" class="section reviews">
     <div class="wrap">
       <div class="section-head">
@@ -582,10 +571,12 @@
            TO PUBLISH ONE: Netlify dashboard → Forms → reviews → read the submission, then
            paste the client's EXACT words into a .review-card below. Never invent a quote,
            never tidy one up.
-           ONE MANUAL STEP after the first deploy: Netlify dashboard → Forms → reviews →
-           Add notification → Email notification, once for hfoodim@foradigital.com and once
-           for crapkin@foradigital.com. Netlify takes one address per notification, so both
-           addresses = two notifications. -->
+           MANUAL STEP after every deploy this form's name/fields change: Netlify dashboard →
+           Forms → reviews → Add notification → Email notification, once each for
+           hfoodim@foradigital.com, crapkin@foradigital.com, and forateam@foradigital.com.
+           Netlify takes one address per notification, so three addresses = three separate
+           notification rules on THIS form (three more live on the inquiry form above —
+           six total, not shared). -->
       <form class="review-form reveal" style="--i:2"
             name="reviews" method="POST" action="thanks.html"
             data-netlify="true" netlify-honeypot="bot-field">
@@ -654,7 +645,6 @@
       </div>
     </div>
   </section>
-  </template>
 
   <!-- linen grain overlay -->
   <div class="grain" aria-hidden="true" style="position:absolute;left:-30px;top:-55px"></div>
@@ -680,6 +670,7 @@
         <a class="link-draw" href="#faq">FAQ</a>
         <a class="link-draw" href="#founders">Founders</a>
         <a class="link-draw" href="#contact">Contact</a>
+        <a class="link-draw" href="#reviews">Reviews</a>
       </div>
     </div>
   </div>
