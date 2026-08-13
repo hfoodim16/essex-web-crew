@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Lawn Care &amp; Maintenance — Cecere Brothers Landscaping, West Essex NJ</title>
-<meta name="description" content="Lawn care and property maintenance in West Essex County, NJ. Mowing, fertilization, aeration, and cleanups on a set weekly schedule." />
+<title>Fertilizer Programs — Cecere Brothers Landscaping, West Essex NJ</title>
+<meta name="description" content="Lawn and shrub fertilizer programs in Essex Fells, the Caldwells, Fairfield, Roseland, Verona, Cedar Grove, and Montclair, NJ. NJ Pesticide License #98049A. Call (973) 226-3002." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
@@ -32,24 +32,26 @@
   .brand-logo{background:var(--bone);padding:8px 14px;border-radius:6px}
   .brand-logo img{display:block;height:34px;width:auto}
   @media(max-width:480px){.brand-logo img{height:26px}}
-  .nav-links{display:flex;gap:24px;font-size:14px;color:var(--bone-dim);letter-spacing:.02em;align-items:center}
-  .nav-links a{transition:color .25s}.nav-links a:hover{color:var(--bone)}
+  .nav-links{display:flex;gap:22px;font-size:14px;color:var(--bone-dim);letter-spacing:.02em;align-items:center}
+  .nav-links a{transition:color .25s;white-space:nowrap}.nav-links a:hover{color:var(--bone)}
   .nav-links a.current{color:var(--sage)}
   .est{border:1px solid var(--line);padding:12px 22px;border-radius:2px;font-weight:600;font-size:13px;
-    letter-spacing:.06em;text-transform:uppercase;transition:.3s}
+    letter-spacing:.06em;text-transform:uppercase;transition:.3s;white-space:nowrap}
   .est:hover{background:var(--red);border-color:var(--red);color:#fff}
-  @media(max-width:1040px){.nav-links{display:none}}
+  @media(max-width:1180px){.nav-links{display:none}}
 
   .contours{position:absolute;inset:0;z-index:0;opacity:.5;pointer-events:none}
 
   /* page hero */
   .phero{position:relative;min-height:66vh;display:flex;align-items:flex-end;overflow:hidden;padding-bottom:clamp(40px,7vh,80px)}
-  .phero-photo{position:absolute;inset:0;z-index:0;background:url('public/lawn.webp') center/cover no-repeat}
+  .phero-photo{position:absolute;inset:0;z-index:0;background:url('public/lawn-editorial-backup.webp') center/cover no-repeat}
   .phero-scrim{position:absolute;inset:0;z-index:1;background:
     linear-gradient(90deg,rgba(10,18,13,.95) 0%,rgba(10,18,13,.76) 44%,rgba(10,18,13,.36) 100%),
     linear-gradient(0deg,rgba(10,18,13,.92) 0%,transparent 55%)}
   .phero .contours{z-index:1;opacity:.3}
   .phero .wrap{position:relative;z-index:2;width:100%;padding-top:120px}
+  .phero .chip{display:inline-block;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--bone-dim);
+    background:rgba(7,13,9,.72);border:1px solid var(--line);border-radius:2px;padding:5px 9px;margin-bottom:18px}
   .crumb{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--sage);margin-bottom:24px;transition:.25s}
   .crumb:hover{color:var(--bone)}
   .phero h1{font-family:var(--serif);font-weight:500;line-height:1.02;letter-spacing:-.02em;
@@ -76,14 +78,20 @@
   .cta .wrap{position:relative;z-index:2;text-align:center}
   .cta h2{font-family:var(--serif);font-weight:500;font-size:clamp(34px,5.4vw,72px);line-height:1;letter-spacing:-.02em}
   .cta h2 em{font-style:italic;color:var(--sage)}
-  .cta p{color:#d7d2c2;max-width:42ch;margin:22px auto 36px;font-size:17px}
+  .cta p{color:#d7d2c2;max-width:44ch;margin:22px auto 36px;font-size:17px}
+  .cta .mail{margin-top:26px;font-size:14px;color:var(--bone-dim)}
+  .cta .mail a{color:var(--sage)}
   .btn{display:inline-block;background:var(--red);color:#fff;font-weight:600;padding:17px 34px;border-radius:2px;
     letter-spacing:.05em;text-transform:uppercase;font-size:13px;transition:.3s}
   .btn:hover{background:var(--red-lt);transform:translateY(-2px);box-shadow:0 14px 40px rgba(192,57,43,.35)}
 
   footer{border-top:1px solid var(--line);padding:56px 0 44px}
+  .foot-nav{display:flex;flex-wrap:wrap;gap:12px 26px;font-size:14px;color:var(--bone-dim);margin-bottom:34px}
+  .foot-nav a:hover{color:var(--bone)}
   .foot{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;color:var(--bone-dim);font-size:13px}
-  .foot .brand{color:var(--bone);font-size:17px}
+  .foot .brand{color:var(--bone);font-size:17px;line-height:1.35;display:block}
+  .lic{margin-top:30px;padding-top:22px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:8px 30px;
+    color:var(--bone-dim);font-size:12.5px}
 
   .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
   .reveal.in{opacity:1;transform:none}
@@ -108,12 +116,13 @@
     </a>
     <nav class="nav-links">
       <a href="index.html">Home</a>
-      <a href="service-landscape-design.html">Landscape Design</a>
-      <a href="service-lawn-care.html" class="current">Lawn Care</a>
-      <a href="service-hardscape-masonry.html">Hardscape &amp; Masonry</a>
-      <a href="service-seasonal-cleanup.html">Seasonal Cleanup</a>
+      <a href="service-property-maintenance.html">Maintenance</a>
+      <a href="service-landscape-design.html">Design</a>
+      <a href="service-hardscape-masonry.html">Masonry</a>
+      <a href="service-fertilizer-programs.html" class="current">Fertilizer</a>
+      <a href="service-irrigation.html">Irrigation</a>
     </nav>
-    <a href="index.html#estimate" class="est">Get an estimate</a>
+    <a href="tel:+19732263002" class="est">(973) 226-3002</a>
   </div>
 </header>
 
@@ -123,23 +132,24 @@
   <svg class="contours" viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid slice"><use href="#contour"/></svg>
   <div class="wrap">
     <a href="index.html" class="crumb">← All services</a>
-    <h1>Lawn care &amp; <em>maintenance.</em></h1>
-    <p class="lede">Mowing, fertilization, aeration, and cleanups — same crew, same day every week.</p>
+    <span class="chip">Placeholder image · client job photos to come</span>
+    <h1>Fertilizer <em>programs.</em></h1>
+    <p class="lede">Lawn and shrub feeding on a season-long schedule, applied under New Jersey Pesticide License #98049A. Joe Collura has managed the program since 1993.</p>
   </div>
 </section>
 
 <section class="pad wrap">
   <div class="sec-head reveal">
     <p class="kicker">What's included</p>
-    <h2>What's in the maintenance plan.</h2>
+    <h2>Fed on a schedule, not when it looks bad.</h2>
   </div>
   <div class="incl">
-    <div class="item reveal"><span class="tick">✓</span><div><h4>Weekly mowing</h4><p>Cut, trimmed, and blown clean on a set day, with the clippings taken off your pavement.</p></div></div>
-    <div class="item reveal"><span class="tick">✓</span><div><h4>Fertilization program</h4><p>Seasonal feedings timed to North Jersey's growing calendar.</p></div></div>
-    <div class="item reveal"><span class="tick">✓</span><div><h4>Aeration &amp; overseeding</h4><p>Fall core aeration and seed to thicken thin turf and break up compacted soil.</p></div></div>
-    <div class="item reveal"><span class="tick">✓</span><div><h4>Weed &amp; crabgrass control</h4><p>Pre-emergent in spring and spot treatment through the season.</p></div></div>
-    <div class="item reveal"><span class="tick">✓</span><div><h4>Edging &amp; bed maintenance</h4><p>Edging along walks and beds, plus weeding.</p></div></div>
-    <div class="item reveal"><span class="tick">✓</span><div><h4>Spring &amp; fall cleanups</h4><p>Included in the maintenance plan.</p></div></div>
+    <div class="item reveal"><span class="tick">✓</span><div><h4>Season-long lawn program</h4><p>Feedings spaced across the growing season, applied by our own licensed crew.</p></div></div>
+    <div class="item reveal"><span class="tick">✓</span><div><h4>Shrub &amp; tree feeding</h4><p>Beds and foundation plantings fed along with the lawn.</p></div></div>
+    <div class="item reveal"><span class="tick">✓</span><div><h4>Licensed applications</h4><p>Cecere Brothers Landscaping, LLC holds NJ Pesticide License #98049A.</p></div></div>
+    <div class="item reveal"><span class="tick">✓</span><div><h4>Weed control</h4><p>Applied as part of the program rather than as a separate visit.</p></div></div>
+    <div class="item reveal"><span class="tick">✓</span><div><h4>Works with your irrigation</h4><p>If Green Lawns Sprinkler runs the system, feeding and watering are scheduled together.</p></div></div>
+    <div class="item reveal"><span class="tick">✓</span><div><h4>Same crew each visit</h4><p>Joe Collura's crew, on the property since 1993.</p></div></div>
   </div>
 </section>
 
@@ -147,16 +157,35 @@
   <svg class="contours" viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid slice"><use href="#contour"/></svg>
   <div class="wrap">
     <h2 class="reveal">Let's walk your <em>property.</em></h2>
-    <p class="reveal">Free on-site estimate, usually within 48 hours.</p>
-    <a href="index.html#estimate" class="btn reveal">Get a free estimate</a>
+    <p class="reveal">Call and we'll come out, look at the job, and give you a price.</p>
+    <a href="tel:+19732263002" class="btn reveal">Call (973) 226-3002</a>
+    <p class="mail reveal">
+      Cecere Brothers Landscaping, LLC<br><a href="mailto:contact@cecerebrotherslandscaping.com">contact@cecerebrotherslandscaping.com</a><br><br>
+      Green Lawns Sprinkler, LLC<br><a href="mailto:contact@greenlawnsprinkler.com">contact@greenlawnsprinkler.com</a>
+    </p>
   </div>
 </section>
 
 <footer>
-  <div class="wrap foot">
-    <div class="brand">Cecere Brothers Landscaping, LLC</div>
-    <div>Serving West Essex County, New Jersey · Mon–Sat</div>
-    <div>© 2026 · A design concept</div>
+  <div class="wrap">
+    <nav class="foot-nav">
+      <a href="index.html">Home</a>
+      <a href="service-property-maintenance.html">Property maintenance</a>
+      <a href="service-landscape-design.html">Landscape design &amp; plantings</a>
+      <a href="service-hardscape-masonry.html">Hardscapes &amp; custom masonry</a>
+      <a href="service-fertilizer-programs.html">Fertilizer programs</a>
+      <a href="service-irrigation.html">Lawn &amp; shrub irrigation</a>
+    </nav>
+    <div class="foot">
+      <div class="brand">Cecere Brothers Landscaping, LLC<br>Green Lawns Sprinkler, LLC</div>
+      <div>Essex Fells · The Caldwells · Fairfield · Roseland<br>Verona · Cedar Grove · Montclair</div>
+      <div><a href="tel:+19732263002">(973) 226-3002</a><br>© 2026 · Design concept, not yet live</div>
+    </div>
+    <div class="lic">
+      <span>NJ Contractor Lic. #13VH00426800</span>
+      <span>NJ Pesticide License #98049A</span>
+      <span>Green Lawns Sprinkler, LLC · NJ Irrigation License #0021960</span>
+    </div>
   </div>
 </footer>
 

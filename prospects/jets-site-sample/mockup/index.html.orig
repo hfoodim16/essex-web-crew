@@ -60,11 +60,6 @@
   }, 1200);
 })();
 </script>
-<style data-cos-fx="cos-fx-gradient-text-eyio9wx">
-.cos-fx-gradient-text-eyio9wx{background-image:linear-gradient(to right,#2f6f3e,#ffffff,#2f6f3e,#2f6f3e);background-size:300% 100%;background-repeat:repeat;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:cos-fx-gradient-text-eyio9wx-pan 8s linear infinite;}
-@keyframes cos-fx-gradient-text-eyio9wx-pan{0%{background-position:0% 50%}100%{background-position:300% 50%}}
-@media (prefers-reduced-motion:reduce){.cos-fx-gradient-text-eyio9wx{animation:none;background-position:0% 50%}}
-</style>
 </head>
 
 <body>
@@ -112,7 +107,7 @@
 
       <div class="beat beat-hero" data-in="-0.1" data-peak="0" data-out="0.2">
         <div class="container">
-          <h1 class="hero-title rise cos-fx-gradient-text-eyio9wx" id="hero-title">Green and white,<br>wherever the fans are.</h1>
+          <h1 class="hero-title rise" id="hero-title">Green and white,<br>wherever the fans are.</h1>
           <a class="btn btn-primary btn-lg rise" style="--i:1" href="PLACEHOLDER_TICKET_URL">
             <span>Get Tickets</span><span class="btn-arrow" aria-hidden="true">&#8594;</span>
           </a>

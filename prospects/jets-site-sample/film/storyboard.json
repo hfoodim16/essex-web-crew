@@ -1,0 +1,60 @@
+{
+  "name": "jets-lights-on",
+  "aspect": "16:9",
+  "vector": "The camera only ever pushes in, one slow steady advance at knee height along the chalk yard line, closer toward the painted midfield emblem.",
+  "vector_direction": "in",
+  "style": "Cinematic night american-football-stadium photography, deep green-black palette, stadium-night green #0A1F14 ground, chalk-white line paint, photorealistic, anamorphic 35mm, subtle film grain, completely empty stadium, no people, no crowds, no text, no lettering, no logos.",
+  "keyframes": [
+    {
+      "id": "kf1-dark",
+      "prompt": "Empty american football stadium at night, all floodlights off, near-black frame. Camera at knee height on the field looking along a single freshly painted chalk-white yard line that runs from the bottom of the frame to the far end of the field, dark green turf almost black, silhouetted empty stands, faint cold city glow in the sky above the rim of the stadium. Quiet, ominous, pre-game stillness."
+    },
+    {
+      "id": "kf2-first-bank",
+      "prompt": "Same empty stadium, same knee-height view along the same chalk-white yard line, slightly further along the line. One floodlight bank on the upper right stand has just switched on: hard raking light cuts across the dark green turf from the right, long shadows, thin mist drifting over the grass, the rest of the bowl still dark."
+    },
+    {
+      "id": "kf3-half-lit",
+      "prompt": "Same empty stadium, same knee-height view along the same chalk-white yard line, further down the field. Two floodlight banks lit now, half the bowl visible in cold white light, chalk dust drifting through the light beams, and in the distance ahead the near edge of an enormous chalk-white painted abstract emblem on the turf at midfield just entering the top of the frame."
+    },
+    {
+      "id": "kf4-full-power",
+      "prompt": "Same empty stadium, every floodlight bank blazing at full power, broadcast-bright saturated green turf, shadows gone. Same knee-height view along the chalk-white yard line; the enormous chalk-white painted abstract emblem at midfield now dominates the field directly ahead, an open dark tunnel gate visible at the far side of the field."
+    },
+    {
+      "id": "kf5-paint-edge",
+      "prompt": "Very low over the turf at the near edge of the enormous chalk-white painted midfield emblem, thick white paint texture on individual grass blades filling the lower half of the frame, brilliant floodlight glare blooming at the top of the frame, saturated green and white."
+    },
+    {
+      "id": "kf6-resolve",
+      "prompt": "Near-macro of chalk-white paint on dark green turf filling the frame, grass blade texture visible through the paint, heavy soft floodlight bloom washing the top of the frame, gentle glare, abstract, calm."
+    }
+  ],
+  "clips": [
+    {
+      "id": "c1-ignition",
+      "duration": 5,
+      "prompt": "Continuing one slow steady push at knee height along the chalk-white yard line, advancing deeper into the dark empty stadium; partway through, a floodlight bank on the right stand slams on with a hard flare of light, the flare settling into long raking beams across the turf and drifting mist as the camera keeps advancing toward the far end of the line. One single unbroken shot, no cuts, constant forward speed, photorealistic, no people, no text."
+    },
+    {
+      "id": "c2-second-bank",
+      "duration": 5,
+      "prompt": "The same slow push continues along the chalk-white yard line, advancing deeper down the field; a second floodlight bank ignites with a bright flare, cold white light spreading until half the bowl glows, chalk dust drifting through the beams, and the distant near edge of an enormous chalk-white painted emblem at midfield enters the top of the frame ahead. One single unbroken shot, no cuts, constant forward speed, photorealistic, no people, no text."
+    },
+    {
+      "id": "c3-full-power",
+      "duration": 5,
+      "prompt": "The push continues toward midfield as the remaining floodlight banks slam on in quick succession, flare after flare, the whole stadium blooming to full broadcast brightness, the turf saturating to vivid gameday green, shadows dissolving, the enormous chalk-white painted emblem growing closer and larger directly ahead, a dark open tunnel gate appearing at the far side of the field. One single unbroken shot, no cuts, constant forward speed, photorealistic, no people, no text."
+    },
+    {
+      "id": "c4-approach",
+      "duration": 5,
+      "prompt": "Continuing the same push, the camera sinks lower toward the turf while advancing into the near edge of the enormous chalk-white painted emblem, thick white paint texture on the grass growing until it fills the lower half of the frame, floodlight glare intensifying and blooming at the top of the frame. One single unbroken shot, no cuts, photorealistic, no people, no text."
+    },
+    {
+      "id": "c5-resolve",
+      "duration": 5,
+      "prompt": "The push presses closer into the paint until the chalk-white texture on the dark green turf fills the entire frame, individual grass blades visible through the paint, the floodlight bloom washing softly across the top of the frame, motion easing gently toward a near stillness. One single unbroken shot, no cuts, photorealistic, no people, no text."
+    }
+  ]
+}

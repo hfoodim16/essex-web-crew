@@ -249,41 +249,152 @@ a { color: inherit; }
 .hamburger[aria-expanded="true"] .hamburger-bar:first-child { transform: translateY(4px) rotate(45deg); }
 .hamburger[aria-expanded="true"] .hamburger-bar:last-child  { transform: translateY(-4px) rotate(-45deg); }
 
-/* ------------------------------------------------------------------ hero -- */
-.hero {
+/* ------------------------------------------------------- hero: the film -- */
+/* "Lights On" — one continuous shot scrubbed by scroll. Two states:
+
+   Static (default; scripting dead or reduced motion): the stage is a normal
+   poster hero and every beat sits in flow, fully readable. Nothing is hidden.
+
+   Film (html.film-on, applied by film.js): the section grows into a 560vh
+   scroll driver, the stage pins below the header, the canvas scrubs the
+   601-frame shot, and the beats become progress-driven overlays.            */
+
+.film { position: relative; }
+
+.film-stage {
   position: relative;
   min-height: calc(100svh - var(--nav-h));
   display: flex;
-  align-items: flex-end;
-  padding-block: clamp(4rem, 12vh, 6rem) clamp(3rem, 8vh, 5rem);
+  flex-direction: column;
+  justify-content: flex-end;
   overflow: hidden;
 }
 
-.hero-media { position: absolute; inset: 0; }
-.hero-media img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 42%; }
-
-.hero-scrim {
+.film-poster {
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(105deg, rgba(10, 31, 20, .93) 0%, rgba(10, 31, 20, .72) 44%, rgba(10, 31, 20, .28) 100%),
-    linear-gradient(0deg, rgba(10, 31, 20, .92) 0%, rgba(10, 31, 20, 0) 55%);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity var(--dur) var(--ease);
 }
+.film-poster-off { opacity: 0; }
 
-.hero-inner { position: relative; }
+.film-canvas { display: none; }
+
+/* Beats — static flow first. Each carries its own scrim so type never sits
+   on raw footage (the film swings near-black to floodlight white). */
+.beat { position: relative; padding: clamp(2rem, 6vh, 4rem) var(--gutter); }
+
+.beat::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -12% -8%;
+  background: radial-gradient(62% 70% at 50% 55%,
+    rgba(6, 16, 11, .78), rgba(6, 16, 11, .48) 52%, rgba(6, 16, 11, 0) 80%);
+}
 
 .hero-title {
   font-size: var(--fs-display);
   max-width: 16ch;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
+  text-shadow: 0 1px 26px rgba(4, 12, 8, .6);
 }
 
-.hero-sub {
-  font-size: var(--fs-lead);
-  color: var(--chalk-dim);
-  max-width: 52ch;
-  margin-bottom: 2.25rem;
+.beat-hero .container { position: relative; }
+
+.beat-mid { text-align: center; }
+
+.beat-line {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--fs-h2);
+  text-transform: uppercase;
+  line-height: .95;
+  letter-spacing: -.01em;
+  max-width: 18ch;
+  margin-inline: auto;
+  text-shadow: 0 1px 26px rgba(4, 12, 8, .6);
 }
+
+.beat-finale {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.75rem;
+  text-align: center;
+}
+
+.finale-mark {
+  height: clamp(90px, 16vh, 150px);
+  width: auto;
+  filter: drop-shadow(0 2px 18px rgba(4, 12, 8, .55));
+}
+
+.finale-sub {
+  font-size: var(--fs-lead);
+  color: var(--chalk);
+  max-width: 44ch;
+  text-shadow: 0 1px 18px rgba(4, 12, 8, .65);
+}
+
+.film-fade {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 38%;
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(180deg, rgba(10, 31, 20, 0), rgba(10, 31, 20, .96) 82%, var(--night));
+}
+
+/* --- film state (progressive upgrade, applied by film.js) ---------------- */
+.film-on .film { height: 560vh; }
+
+.film-on .film-stage {
+  position: sticky;
+  top: var(--nav-h);
+  height: calc(100svh - var(--nav-h));
+  min-height: 0;
+  display: block;
+}
+
+.film-on .film-canvas {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.film-on .film-poster { z-index: 1; }
+
+.film-on .beat {
+  position: absolute;
+  z-index: 2;
+  opacity: 0;
+  pointer-events: none;
+  padding: 0;
+}
+
+.film-on .beat-hero {
+  inset: auto 0 clamp(3rem, 9vh, 5.5rem) 0;
+}
+
+/* translateY is owned by film.js — position with insets only */
+.film-on .beat-mid { left: 0; right: 0; top: 42%; }
+
+.film-on .beat-finale {
+  inset: 0;
+  justify-content: center;
+  padding-inline: var(--gutter);
+}
+
+.film-on .film-fade { z-index: 3; }
+
+/* With the film running, entrances inside beats answer to film progress,
+   not the IntersectionObserver — neutralise the .rise pre-state there. */
+.film-on .beat .rise { opacity: 1; transform: none; }
 
 /* ------------------------------------------------------------ trust strip -- */
 .strip {
@@ -867,13 +978,13 @@ html.js .rise.in {
   .header-cta { padding: .6rem .9rem; font-size: .9375rem; }
   .header-cta .btn-arrow { display: none; }
 
-  .hero {
-    min-height: calc(100svh - var(--nav-h));
-    align-items: flex-end;
-  }
   .hero-title { max-width: 14ch; }
-  .hero-sub { margin-bottom: 1.75rem; max-width: 40ch; }
-  .hero .btn-lg { width: 100%; justify-content: center; }
+  .beat-hero .btn-lg { width: 100%; justify-content: center; }
+  .beat-line { font-size: clamp(1.9rem, 8.5vw, 2.75rem); }
+  .finale-mark { height: clamp(72px, 12vh, 110px); }
+  .beat-finale .btn-lg { width: min(100%, 340px); justify-content: center; }
+  /* On a phone the driver still scrubs, just shorter — less thumb travel. */
+  .film-on .film { height: 420vh; }
 
   .strip-inner { flex-direction: column; align-items: flex-start; gap: .75rem; }
   .strip-item + .strip-item::before { display: none; }

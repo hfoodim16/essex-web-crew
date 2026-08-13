@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Cecere Brothers Landscaping — West Essex, NJ</title>
-<meta name="description" content="Landscaping, lawn care, and hardscape in West Essex County, New Jersey. Family-run since 2004. Free estimates, usually within 48 hours." />
+<title>Cecere Brothers Landscaping, LLC &amp; Green Lawns Sprinkler, LLC — West Essex, NJ</title>
+<meta name="description" content="Property maintenance, landscape design, custom masonry, fertilizer programs, and irrigation in Essex Fells, the Caldwells, Fairfield, Roseland, Verona, Cedar Grove, and Montclair. Owner-operated since 1985. Call (973) 226-3002." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
@@ -37,24 +37,20 @@
   header.scrolled{background:rgba(12,22,16,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
   .nav{display:flex;align-items:center;justify-content:space-between;height:80px}
   .brand{font-family:var(--serif);font-weight:600;font-size:20px;letter-spacing:.01em;display:flex;align-items:center;gap:12px}
-  .brand .leaf{width:26px;height:26px;flex:none}
   /* real client logo is dark-on-transparent; back it with a light plate so it reads on the dark header */
   .brand-logo{background:var(--bone);padding:8px 14px;border-radius:6px}
   .brand-logo img{display:block;height:34px;width:auto}
   @media(max-width:480px){.brand-logo img{height:26px}}
-  .nav-links{display:flex;gap:24px;font-size:14px;color:var(--bone-dim);letter-spacing:.02em;align-items:center}
-  .nav-links a{transition:color .25s}.nav-links a:hover{color:var(--bone)}
+  .nav-links{display:flex;gap:22px;font-size:14px;color:var(--bone-dim);letter-spacing:.02em;align-items:center}
+  .nav-links a{transition:color .25s;white-space:nowrap}.nav-links a:hover{color:var(--bone)}
   .nav-links a.current{color:var(--sage)}
   .est{border:1px solid var(--line);padding:12px 22px;border-radius:2px;font-weight:600;font-size:13px;
-    letter-spacing:.06em;text-transform:uppercase;transition:.3s}
+    letter-spacing:.06em;text-transform:uppercase;transition:.3s;white-space:nowrap}
   .est:hover{background:var(--red);border-color:var(--red);color:#fff}
-  @media(max-width:1040px){.nav-links{display:none}}
+  @media(max-width:1180px){.nav-links{display:none}}
 
   /* contour background */
   .contours{position:absolute;inset:0;z-index:0;opacity:.5;pointer-events:none}
-  .glow{position:absolute;border-radius:50%;filter:blur(120px);z-index:0;pointer-events:none}
-  .glow.g1{width:560px;height:560px;background:rgba(26,53,38,.85);top:-120px;right:-120px}
-  .glow.g2{width:420px;height:420px;background:rgba(127,186,148,.14);bottom:-120px;left:-80px}
 
   /* hero */
   .hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden}
@@ -87,10 +83,10 @@
   .eyebrow::before{content:"";width:40px;height:1px;background:var(--sage)}
   h1{font-family:var(--serif);font-weight:500;line-height:.98;letter-spacing:-.02em;font-size:clamp(46px,8.5vw,128px)}
   h1 em{font-style:italic;font-weight:400;color:var(--sage)}
-  .lede{max-width:500px;margin:36px 0 44px;font-size:clamp(17px,1.6vw,20px);color:#d7d2c2}
+  .lede{max-width:540px;margin:36px 0 44px;font-size:clamp(17px,1.6vw,20px);color:#d7d2c2}
   .cta-row{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
   .btn{background:var(--red);color:#fff;font-weight:600;padding:17px 34px;border-radius:2px;letter-spacing:.05em;
-    text-transform:uppercase;font-size:13px;transition:.3s}
+    text-transform:uppercase;font-size:13px;transition:.3s;display:inline-block}
   .btn:hover{background:var(--red-lt);transform:translateY(-2px);box-shadow:0 14px 40px rgba(192,57,43,.35)}
   .btn-ghost{font-weight:600;font-size:14px;display:flex;align-items:center;gap:10px;color:var(--bone)}
   .btn-ghost .a{transition:transform .3s}.btn-ghost:hover .a{transform:translateX(6px)}
@@ -110,6 +106,21 @@
   .sec-head h2{font-family:var(--serif);font-weight:500;font-size:clamp(32px,5vw,60px);line-height:1.02;letter-spacing:-.02em;max-width:16ch}
   .sec-head p{color:var(--bone-dim);max-width:34ch}
 
+  /* services — numbered editorial rows */
+  .svc-list{border-top:1px solid var(--line)}
+  .svc{display:grid;grid-template-columns:64px minmax(0,1fr) minmax(0,1.05fr) 40px;align-items:baseline;gap:24px;
+    padding:30px 0;border-bottom:1px solid var(--line);transition:padding-left .35s,background .35s}
+  .svc:hover{padding-left:14px;background:linear-gradient(90deg,rgba(127,186,148,.09),transparent 60%)}
+  .svc .num{font-family:var(--serif);font-size:14px;color:var(--sage)}
+  .svc h3{font-family:var(--serif);font-weight:500;font-size:clamp(23px,2.6vw,34px);line-height:1.1;letter-spacing:-.01em}
+  .svc p{color:var(--bone-dim);font-size:15px}
+  .svc .a{justify-self:end;color:var(--sage);transition:transform .35s}
+  .svc:hover .a{transform:translateX(6px)}
+  @media(max-width:880px){
+    .svc{grid-template-columns:44px 1fr;gap:6px 16px;padding:24px 0}
+    .svc p{grid-column:2}.svc .a{display:none}
+  }
+
   /* work grid */
   .work-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:18px}
   .plate{position:relative;border-radius:4px;overflow:hidden;border:1px solid var(--line);min-height:300px;
@@ -121,8 +132,13 @@
   .plate:hover::before{opacity:.82}
   .plate .tag{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--bone);z-index:2;position:relative}
   .plate .place{color:var(--bone-dim);font-size:13px;z-index:2;position:relative}
+  .plate .chip{position:absolute;top:14px;left:14px;z-index:3;font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--bone-dim);background:rgba(7,13,9,.72);border:1px solid var(--line);border-radius:2px;padding:5px 9px}
   .p1{grid-column:span 4}.p2{grid-column:span 2}.p3{grid-column:span 2}.p4{grid-column:span 4}
-  @media(max-width:820px){.work-grid{grid-template-columns:1fr}.p1,.p2,.p3,.p4{grid-column:span 1}}
+  .p5{grid-column:span 3}.p6{grid-column:span 3}.p7{grid-column:span 2}.p8{grid-column:span 4}
+  @media(max-width:820px){.work-grid{grid-template-columns:1fr}
+    .p1,.p2,.p3,.p4,.p5,.p6,.p7,.p8{grid-column:span 1}}
+  .photo-note{margin-top:26px;font-size:13.5px;color:var(--bone-dim);border-left:2px solid var(--sage);padding-left:16px;max-width:62ch}
 
   /* how it works */
   .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
@@ -132,13 +148,32 @@
   .step h4{font-family:var(--serif);font-weight:500;font-size:22px;margin-bottom:9px}
   .step p{color:var(--bone-dim);font-size:14.5px}
 
+  /* about + roster */
+  .about{border-top:1px solid var(--line);background:rgba(26,53,38,.14)}
+  .about-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(40px,6vw,90px);align-items:start}
+  @media(max-width:940px){.about-grid{grid-template-columns:1fr;gap:52px}}
+  .story h2{font-family:var(--serif);font-weight:500;font-size:clamp(30px,4.4vw,52px);line-height:1.04;
+    letter-spacing:-.02em;margin-bottom:28px;max-width:15ch}
+  .story h2 em{font-style:italic;color:var(--sage)}
+  .story p{color:#d3cfc0;margin-bottom:18px;max-width:52ch}
+  .story .values{margin-top:26px;padding-top:22px;border-top:1px solid var(--line);color:var(--bone);font-family:var(--serif);
+    font-size:19px;line-height:1.4;max-width:34ch}
+  .roster h3{font-family:var(--serif);font-weight:500;font-size:24px;margin-bottom:6px}
+  .roster .sub{color:var(--bone-dim);font-size:14.5px;margin-bottom:26px;max-width:44ch}
+  .person{display:grid;grid-template-columns:auto 1fr;gap:4px 18px;padding:20px 0;border-top:1px solid var(--line)}
+  .person .yr{font-family:var(--serif);color:var(--sage);font-size:14px;padding-top:3px}
+  .person .nm{font-weight:600;font-size:16.5px}
+  .person p{grid-column:2;color:var(--bone-dim);font-size:14.5px}
+
   /* quote */
   .quote{border-top:1px solid var(--line)}
   .quote blockquote{font-family:var(--serif);font-weight:400;font-size:clamp(26px,3.6vw,46px);line-height:1.22;
-    letter-spacing:-.01em;max-width:20ch}
-  .quote blockquote em{font-style:italic;color:var(--sage)}
+    letter-spacing:-.01em;max-width:22ch}
   .quote .by{margin-top:34px;color:var(--bone-dim);font-size:15px}
   .quote .by b{color:var(--bone);font-weight:600}
+  .placeholder{border:1px dashed var(--line);border-radius:6px;padding:34px;max-width:62ch}
+  .placeholder .lbl{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--red-lt);margin-bottom:14px}
+  .placeholder p{color:var(--bone-dim);font-size:15.5px}
 
   /* cta */
   .cta{position:relative;overflow:hidden;background:var(--forest-2)}
@@ -146,11 +181,17 @@
   .cta .wrap{position:relative;z-index:2;text-align:center}
   .cta h2{font-family:var(--serif);font-weight:500;font-size:clamp(38px,6.5vw,90px);line-height:1;letter-spacing:-.02em}
   .cta h2 em{font-style:italic;color:var(--sage)}
-  .cta p{color:#d7d2c2;max-width:42ch;margin:24px auto 40px;font-size:18px}
+  .cta p{color:#d7d2c2;max-width:44ch;margin:24px auto 40px;font-size:18px}
+  .cta .mail{margin-top:28px;font-size:14px;color:var(--bone-dim)}
+  .cta .mail a{color:var(--sage)}
 
   footer{border-top:1px solid var(--line);padding:56px 0 44px}
+  .foot-nav{display:flex;flex-wrap:wrap;gap:12px 26px;font-size:14px;color:var(--bone-dim);margin-bottom:34px}
+  .foot-nav a:hover{color:var(--bone)}
   .foot{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;color:var(--bone-dim);font-size:13px}
-  .foot .brand{color:var(--bone);font-size:17px}
+  .foot .brand{color:var(--bone);font-size:17px;line-height:1.35;display:block}
+  .lic{margin-top:30px;padding-top:22px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:8px 30px;
+    color:var(--bone-dim);font-size:12.5px;letter-spacing:.01em}
 
   .reveal{opacity:0;transform:translateY(30px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
   .reveal.in{opacity:1;transform:none}
@@ -177,12 +218,13 @@
     </div>
     <nav class="nav-links">
       <a href="index.html" class="current">Home</a>
-      <a href="service-landscape-design.html">Landscape Design</a>
-      <a href="service-lawn-care.html">Lawn Care</a>
-      <a href="service-hardscape-masonry.html">Hardscape &amp; Masonry</a>
-      <a href="service-seasonal-cleanup.html">Seasonal Cleanup</a>
+      <a href="service-property-maintenance.html">Maintenance</a>
+      <a href="service-landscape-design.html">Design</a>
+      <a href="service-hardscape-masonry.html">Masonry</a>
+      <a href="service-fertilizer-programs.html">Fertilizer</a>
+      <a href="service-irrigation.html">Irrigation</a>
     </nav>
-    <a href="#estimate" class="est">Get an estimate</a>
+    <a href="tel:+19732263002" class="est">(973) 226-3002</a>
   </div>
 </header>
 
@@ -193,34 +235,78 @@
   <div class="rays" aria-hidden="true"><span class="ray"></span><span class="ray"></span><span class="ray"></span></div>
   <div class="fog" aria-hidden="true"></div>
   <div class="wrap">
-    <span class="eyebrow">West Essex County, NJ · Family-run since 2004</span>
+    <span class="eyebrow">West Essex, NJ · Owner-operated since 1985</span>
     <h1>Yards worth<br>coming <em class="glint">home</em> to.</h1>
-    <p class="lede">Landscaping, lawn care, and stonework in Caldwell, Cedar Grove, and West Orange.</p>
+    <p class="lede">Landscaping, custom masonry, and irrigation in Essex Fells, the Caldwells, Fairfield, Roseland, Verona, Cedar Grove, and Montclair.</p>
     <div class="cta-row">
-      <a href="#estimate" class="btn">Get a free estimate</a>
+      <a href="tel:+19732263002" class="btn">Call (973) 226-3002</a>
       <a href="#work" class="btn-ghost">See our work <span class="a">→</span></a>
     </div>
   </div>
 </section>
 
 <div class="trust"><div class="wrap">
-  <div class="stat reveal"><div class="n"><em>22</em> yrs</div><div class="l">In West Essex County</div></div>
-  <div class="stat reveal"><div class="n">7 towns</div><div class="l">Served across the county</div></div>
-  <div class="stat reveal"><div class="n">400+</div><div class="l">Properties maintained</div></div>
-  <div class="stat reveal"><div class="n">48 hrs</div><div class="l">Typical estimate turnaround</div></div>
+  <div class="stat reveal"><div class="n"><em>1985</em></div><div class="l">Cecere Brothers Landscaping founded</div></div>
+  <div class="stat reveal"><div class="n">1989</div><div class="l">Green Lawns Sprinkler founded</div></div>
+  <div class="stat reveal"><div class="n">15</div><div class="l">In-house crew, no subcontractors</div></div>
+  <div class="stat reveal"><div class="n">7</div><div class="l">West Essex towns served</div></div>
 </div></div>
+
+<section class="pad wrap" id="services">
+  <div class="sec-head reveal">
+    <h2>What we do.</h2>
+    <p>Two companies, one crew: Cecere Brothers Landscaping handles the property, Green Lawns Sprinkler handles the water.</p>
+  </div>
+  <div class="svc-list">
+    <a class="svc reveal" href="service-property-maintenance.html">
+      <span class="num">01</span>
+      <h3>Property maintenance</h3>
+      <p>Mowing, pruning, mulching, bed work, and spring and fall cleanups on a set schedule.</p>
+      <span class="a">→</span>
+    </a>
+    <a class="svc reveal" href="service-landscape-design.html">
+      <span class="num">02</span>
+      <h3>Landscape design &amp; plantings</h3>
+      <p>Designed, planted, and installed by our own crew. Cesar Sanchez has run this work since 2005.</p>
+      <span class="a">→</span>
+    </a>
+    <a class="svc reveal" href="service-hardscape-masonry.html">
+      <span class="num">03</span>
+      <h3>Hardscapes &amp; custom masonry</h3>
+      <p>Steps, walkways, patios, walls, fireplaces, fire pits, and outdoor kitchens. Drainage systems too.</p>
+      <span class="a">→</span>
+    </a>
+    <a class="svc reveal" href="service-fertilizer-programs.html">
+      <span class="num">04</span>
+      <h3>Fertilizer programs</h3>
+      <p>Lawn and shrub feeding under NJ Pesticide License #98049A, run by Joe Collura since 1993.</p>
+      <span class="a">→</span>
+    </a>
+    <a class="svc reveal" href="service-irrigation.html">
+      <span class="num">05</span>
+      <h3>Lawn &amp; shrub irrigation</h3>
+      <p>Underground sprinkler systems from Green Lawns Sprinkler, LLC, licensed in New Jersey as #0021960.</p>
+      <span class="a">→</span>
+    </a>
+  </div>
+</section>
 
 <section class="pad wrap" id="work">
   <div class="sec-head reveal">
-    <h2>Recent work.</h2>
-    <p>Design, stonework, and lawn care across West Essex.</p>
+    <h2>Our work.</h2>
+    <p>Property maintenance, plantings, walks, patios, walls, fire pits, outdoor kitchens, and irrigation across West Essex.</p>
   </div>
   <div class="work-grid">
-    <div class="plate p1 reveal" style="background-image:url('public/patio.webp')"><span class="tag">Paver patio &amp; plantings</span><span class="place">Caldwell, NJ</span></div>
-    <div class="plate p2 reveal" style="background-image:url('public/design.webp')"><span class="tag">Landscape design</span><span class="place">Cedar Grove, NJ</span></div>
-    <div class="plate p3 reveal" style="background-image:url('public/masonry.webp')"><span class="tag">Stone steps &amp; masonry</span><span class="place">West Orange, NJ</span></div>
-    <div class="plate p4 reveal" style="background-image:url('public/lawn.webp')"><span class="tag">Lawn care</span><span class="place">Roseland, NJ</span></div>
+    <div class="plate p1 reveal" style="background-image:url('public/patio.webp')"><span class="chip">Placeholder image</span><span class="tag">Paver patio</span><span class="place">Hardscapes &amp; custom masonry</span></div>
+    <div class="plate p2 reveal" style="background-image:url('public/design.webp')"><span class="chip">Placeholder image</span><span class="tag">Landscape design</span><span class="place">Beds, borders, and plantings</span></div>
+    <div class="plate p3 reveal" style="background-image:url('public/masonry.webp')"><span class="chip">Placeholder image</span><span class="tag">Stone steps</span><span class="place">Custom masonry</span></div>
+    <div class="plate p4 reveal" style="background-image:url('public/lawn.webp')"><span class="chip">Placeholder image</span><span class="tag">Property maintenance</span><span class="place">Weekly mowing and bed work</span></div>
+    <div class="plate p5 reveal" style="background-image:url('public/patio-editorial-backup.webp')"><span class="chip">Placeholder image</span><span class="tag">Flagstone patio</span><span class="place">Set on a compacted base</span></div>
+    <div class="plate p6 reveal" style="background-image:url('public/design-editorial-backup.webp')"><span class="chip">Placeholder image</span><span class="tag">Foundation plantings</span><span class="place">Bed shaping, edging, and mulch</span></div>
+    <div class="plate p7 reveal" style="background-image:url('public/masonry-editorial-backup.webp')"><span class="chip">Placeholder image</span><span class="tag">Stone walkway</span><span class="place">Walks and steps</span></div>
+    <div class="plate p8 reveal" style="background-image:url('public/lawn-editorial-backup.webp')"><span class="chip">Placeholder image</span><span class="tag">Fertilizer program</span><span class="place">Fed, irrigated, and cut weekly</span></div>
   </div>
+  <p class="photo-note reveal">Every image above is a placeholder. Michael hasn't sent his own photos over yet. He has hundreds of them: property maintenance, landscape design, walks, patios, walls, fire pits and fireplaces, outdoor kitchens, custom masonry, and irrigation. This gallery is built to hold them.</p>
 </section>
 
 <section class="pad wrap">
@@ -229,34 +315,87 @@
     <h2>Three steps.</h2>
   </div>
   <div class="steps">
-    <div class="step reveal"><div class="n">01</div><h4>We walk the property</h4><p>We come out, walk the property with you, and go over what you want done.</p></div>
-    <div class="step reveal"><div class="n">02</div><h4>You get a plan and a price</h4><p>A written estimate with the plan attached, showing full scope and a fixed price.</p></div>
-    <div class="step reveal"><div class="n">03</div><h4>Our crew does the work</h4><p>We schedule the work, show up when we said we would, and clean the site before we leave.</p></div>
+    <div class="step reveal"><div class="n">01</div><h4>Call us</h4><p>Call (973) 226-3002 and tell us what you want done. Phone is how we prefer to start.</p></div>
+    <div class="step reveal"><div class="n">02</div><h4>We walk the property</h4><p>We come out, walk the property with you, and put the scope and the price in writing.</p></div>
+    <div class="step reveal"><div class="n">03</div><h4>Our own crew does the work</h4><p>Every project is handled in-house, without subcontractors, and we don't leave until the site is clean.</p></div>
   </div>
 </section>
 
-<section class="quote pad wrap" id="about">
+<section class="about pad" id="about">
+  <div class="wrap about-grid">
+    <div class="story reveal">
+      <h2>A tradition built to <em>last.</em></h2>
+      <p>Michael Cecere started mowing lawns in his neighborhood in 1976, at 14. He studied engineering at the University of Delaware, transferred to Montclair State University, and graduated in 1985 with a degree in Business Administration and a concentration in Finance. That year he turned the lawn route into Cecere Brothers Landscaping.</p>
+      <p>In 1989, Michael and his childhood friend and neighbor Thomas Verrone founded Green Lawns Sprinkler, LLC. Green Lawns builds underground irrigation systems that give lawns, plants, and landscapes the water they need while promoting efficient water use.</p>
+      <p>Today the two companies run as one team of 15: landscape design and installation, lawn maintenance, fertilization, pruning, masonry, and irrigation. Every project is handled in-house, without subcontractors. A local company with a local owner, and thousands of jobs completed in the West Essex area.</p>
+      <p class="values">Workmanship, personal service, reliability, and pride in what we do.</p>
+    </div>
+    <div class="roster reveal">
+      <h3>Local, experienced professionals you can trust</h3>
+      <p class="sub">Many of our employees have been with us 20 years or more.</p>
+      <div class="person">
+        <span class="yr">1993</span><span class="nm">Joe Collura</span>
+        <p>Manages our lawn fertilization programs, the shrub pruning crew, and the small-jobs crew.</p>
+      </div>
+      <div class="person">
+        <span class="yr">2005</span><span class="nm">Cesar Sanchez</span>
+        <p>Property maintenance, landscape design, plantings, mulching, and a range of other landscape services.</p>
+      </div>
+      <div class="person">
+        <span class="yr">2010</span><span class="nm">Jose Pulido</span>
+        <p>Leads our masonry crews: steps, walkways, patios, walls, fireplaces, fire pits, and outdoor kitchens.</p>
+      </div>
+      <div class="person">
+        <span class="yr">2015</span><span class="nm">Marcos Castro</span>
+        <p>Leads sprinkler installation and service at Green Lawns Sprinkler. His son, Jeremy Castro, joined in 2022.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="quote pad wrap" id="reviews">
   <div class="reveal">
-    <p class="kicker">Customer review</p>
-    <blockquote>“They rebuilt our whole backyard in a week and it still looks <em>immaculate</em> three summers later.”</blockquote>
-    <p class="by"><b>Sarah M.</b> — Caldwell, NJ · Paver patio &amp; full replant</p>
+    <p class="kicker">Customer reviews</p>
+    <div class="placeholder">
+      <p class="lbl">Real review goes here</p>
+      <p>Michael has many reviews he's proud of, but none have been sent over yet, so nothing is printed here. This block is waiting on the real quotes, with the customer's first name and the town.</p>
+    </div>
   </div>
 </section>
 
-<section class="cta pad" id="estimate">
+<section class="cta pad" id="contact">
   <svg class="contours" viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid slice"><use href="#contour"/></svg>
   <div class="wrap">
     <h2 class="reveal">Let's walk your <em>property.</em></h2>
-    <p class="reveal">Free on-site estimate, usually within 48 hours.</p>
-    <a href="tel:+10000000000" class="btn reveal">Get a free estimate</a>
+    <p class="reveal">Call and we'll come out, look at the job, and give you a price.</p>
+    <a href="tel:+19732263002" class="btn reveal">Call (973) 226-3002</a>
+    <p class="mail reveal">
+      Cecere Brothers Landscaping, LLC<br><a href="mailto:contact@cecerebrotherslandscaping.com">contact@cecerebrotherslandscaping.com</a><br><br>
+      Green Lawns Sprinkler, LLC<br><a href="mailto:contact@greenlawnsprinkler.com">contact@greenlawnsprinkler.com</a>
+    </p>
   </div>
 </section>
 
 <footer>
-  <div class="wrap foot">
-    <div class="brand">Cecere Brothers Landscaping, LLC</div>
-    <div>Serving West Essex County, New Jersey · Mon–Sat</div>
-    <div>© 2026 · A design concept</div>
+  <div class="wrap">
+    <nav class="foot-nav">
+      <a href="index.html">Home</a>
+      <a href="service-property-maintenance.html">Property maintenance</a>
+      <a href="service-landscape-design.html">Landscape design &amp; plantings</a>
+      <a href="service-hardscape-masonry.html">Hardscapes &amp; custom masonry</a>
+      <a href="service-fertilizer-programs.html">Fertilizer programs</a>
+      <a href="service-irrigation.html">Lawn &amp; shrub irrigation</a>
+    </nav>
+    <div class="foot">
+      <div class="brand">Cecere Brothers Landscaping, LLC<br>Green Lawns Sprinkler, LLC</div>
+      <div>Essex Fells · The Caldwells · Fairfield · Roseland<br>Verona · Cedar Grove · Montclair</div>
+      <div><a href="tel:+19732263002">(973) 226-3002</a><br>© 2026 · Design concept, not yet live</div>
+    </div>
+    <div class="lic">
+      <span>NJ Contractor Lic. #13VH00426800</span>
+      <span>NJ Pesticide License #98049A</span>
+      <span>Green Lawns Sprinkler, LLC · NJ Irrigation License #0021960</span>
+    </div>
   </div>
 </footer>
 

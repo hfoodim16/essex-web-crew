@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "jets-mockup",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8741", "--directory", "/Users/harryfoodim/Projects/essex-web-crew/prospects/jets-site-sample/mockup"],
+      "port": 8741
+    }
+  ]
+}

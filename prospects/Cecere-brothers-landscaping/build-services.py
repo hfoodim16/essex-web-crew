@@ -1,0 +1,353 @@
+#!/usr/bin/env python3
+"""Generate the five Cecere service pages from one template.
+
+Chrome (head, CSS, nav, CTA, footer) is identical across pages; only the page
+title, hero, and the "what's included" list change. Keeping them in one place
+stops the five copies from drifting apart the way they did last round.
+"""
+import io
+import os
+
+PAGES = [
+    {
+        "file": "service-property-maintenance.html",
+        "nav": "Maintenance",
+        "photo": "lawn.webp",
+        "title": "Property Maintenance — Cecere Brothers Landscaping, West Essex NJ",
+        "desc": "Property maintenance in Essex Fells, the Caldwells, Fairfield, Roseland, "
+                "Verona, Cedar Grove, and Montclair, NJ. Mowing, pruning, mulching, bed work, "
+                "and spring and fall cleanups. Call (973) 226-3002.",
+        "h1": "Property <em>maintenance.</em>",
+        "lede": "Mowing, pruning, mulching, bed work, and cleanups, handled by the same crew every week. "
+                "Cesar Sanchez has run this side of the business since 2005.",
+        "kicker": "What's included",
+        "h2": "What the crew handles.",
+        "items": [
+            ("Weekly mowing", "Cut, trimmed, and blown clean on a set day, with the clippings taken off your pavement."),
+            ("Shrub &amp; hedge pruning", "Joe Collura has run the pruning crew since 1993."),
+            ("Bed maintenance &amp; weeding", "Beds kept clean and edged along walks and driveways through the season."),
+            ("Mulching", "Beds re-edged and mulched, usually in spring."),
+            ("Spring &amp; fall cleanups", "Winter debris cleared in spring; beds and lawn cleared after the last leaf drop."),
+            ("Drainage systems", "Grading and drainage work when water sits where it shouldn't."),
+        ],
+    },
+    {
+        "file": "service-landscape-design.html",
+        "nav": "Design",
+        "photo": "design.webp",
+        "title": "Landscape Design &amp; Plantings — Cecere Brothers Landscaping, West Essex NJ",
+        "desc": "Landscape design and plantings in Essex Fells, the Caldwells, Fairfield, Roseland, "
+                "Verona, Cedar Grove, and Montclair, NJ. Designed and installed in-house, no "
+                "subcontractors. Call (973) 226-3002.",
+        "h1": "Landscape design &amp; <em>plantings.</em>",
+        "lede": "Beds, borders, and plantings drawn for your lot, then installed by the same crew that drew them.",
+        "kicker": "What's included",
+        "h2": "Designed and installed by our own crew.",
+        "items": [
+            ("Site walk-through", "We walk the property with you and look at sun, drainage, and soil before any plant is picked."),
+            ("Planting plan", "A layout of beds and borders, with plant names and sizes."),
+            ("Trees, shrubs &amp; perennials", "Plant material sourced and set by Cesar Sanchez's crew."),
+            ("Bed shaping, edging &amp; mulch", "Cut edges and a fresh mulch layer, redone each spring."),
+            ("Landscape installation", "Grading, soil prep, and planting, all in-house."),
+            ("No subcontractors", "Every project is handled by our own 15-person team."),
+        ],
+    },
+    {
+        "file": "service-hardscape-masonry.html",
+        "nav": "Masonry",
+        "photo": "masonry.webp",
+        "title": "Hardscapes &amp; Custom Masonry — Cecere Brothers Landscaping, West Essex NJ",
+        "desc": "Hardscapes and custom masonry in Essex Fells, the Caldwells, Fairfield, Roseland, "
+                "Verona, Cedar Grove, and Montclair, NJ. Steps, walkways, patios, walls, fireplaces, "
+                "fire pits, and outdoor kitchens. NJ Contractor Lic. #13VH00426800.",
+        "h1": "Hardscapes &amp; custom <em>masonry.</em>",
+        "lede": "Steps, walkways, patios, walls, fireplaces, fire pits, and outdoor kitchens. "
+                "Jose Pulido has led our masonry crews since 2010.",
+        "kicker": "What's included",
+        "h2": "Built on a compacted base.",
+        "items": [
+            ("Steps &amp; walkways", "Bluestone treads and stone walks, set level tread to tread so the rise stays even underfoot."),
+            ("Paver &amp; flagstone patios", "Laid on compacted gravel and screed sand, with the joints locked so they don't shift."),
+            ("Retaining &amp; seat walls", "Built for the slope and drained behind, so water pressure doesn't push them out."),
+            ("Fireplaces &amp; fire pits", "Laid in the same stone as the patio, so the seating doesn't look added on later."),
+            ("Outdoor kitchens", "Counters, grill surrounds, and stonework built to match the rest of the hardscape."),
+            ("Drainage &amp; grading", "Done before any stone is set, so water runs away from the house."),
+        ],
+    },
+    {
+        "file": "service-fertilizer-programs.html",
+        "nav": "Fertilizer",
+        "photo": "lawn-editorial-backup.webp",
+        "title": "Fertilizer Programs — Cecere Brothers Landscaping, West Essex NJ",
+        "desc": "Lawn and shrub fertilizer programs in Essex Fells, the Caldwells, Fairfield, "
+                "Roseland, Verona, Cedar Grove, and Montclair, NJ. NJ Pesticide License #98049A. "
+                "Call (973) 226-3002.",
+        "h1": "Fertilizer <em>programs.</em>",
+        "lede": "Lawn and shrub feeding on a season-long schedule, applied under New Jersey Pesticide "
+                "License #98049A. Joe Collura has managed the program since 1993.",
+        "kicker": "What's included",
+        "h2": "Fed on a schedule, not when it looks bad.",
+        "items": [
+            ("Season-long lawn program", "Feedings spaced across the growing season, applied by our own licensed crew."),
+            ("Shrub &amp; tree feeding", "Beds and foundation plantings fed along with the lawn."),
+            ("Licensed applications", "Cecere Brothers Landscaping, LLC holds NJ Pesticide License #98049A."),
+            ("Weed control", "Applied as part of the program rather than as a separate visit."),
+            ("Works with your irrigation", "If Green Lawns Sprinkler runs the system, feeding and watering are scheduled together."),
+            ("Same crew each visit", "Joe Collura's crew, on the property since 1993."),
+        ],
+    },
+    {
+        "file": "service-irrigation.html",
+        "nav": "Irrigation",
+        "photo": "design-editorial-backup.webp",
+        "title": "Lawn &amp; Shrub Irrigation — Green Lawns Sprinkler, LLC, West Essex NJ",
+        "desc": "Underground lawn and shrub irrigation systems in Essex Fells, the Caldwells, "
+                "Fairfield, Roseland, Verona, Cedar Grove, and Montclair, NJ. Green Lawns Sprinkler, "
+                "LLC — NJ Irrigation License #0021960. Call (973) 226-3002.",
+        "h1": "Lawn &amp; shrub <em>irrigation.</em>",
+        "lede": "Underground sprinkler systems from Green Lawns Sprinkler, LLC. Michael Cecere and "
+                "Thomas Verrone founded it in 1989. New Jersey Irrigation License #0021960.",
+        "kicker": "What's included",
+        "h2": "Water where the landscape needs it.",
+        "items": [
+            ("System design", "Zones laid out for your lawn, beds, and shrubs, so each gets the water it needs."),
+            ("Underground installation", "Installed by Marcos Castro's crew, who has led sprinkler work here since 2015."),
+            ("Efficient watering", "Systems built to give plants what they need while promoting efficient water usage."),
+            ("Service &amp; repair", "Heads, valves, and controllers serviced by the same crew that installed them."),
+            ("Spring start-up &amp; winterizing", "Systems opened in spring and blown out before the first freeze."),
+            ("Licensed irrigation contractor", "Green Lawns Sprinkler, LLC holds NJ Irrigation License #0021960."),
+        ],
+    },
+]
+
+CONTOUR = """<svg width="0" height="0" style="position:absolute"><defs>
+  <g id="contour">
+    <path d="M-50 120 C 200 60, 400 180, 700 100 S 1200 40, 1500 140" fill="none" stroke="#7fba94" stroke-width="1"/>
+    <path d="M-50 200 C 220 140, 420 260, 720 190 S 1220 130, 1500 220" fill="none" stroke="#7fba94" stroke-width="1"/>
+    <path d="M-50 300 C 240 250, 440 350, 740 290 S 1240 240, 1500 320" fill="none" stroke="#7fba94" stroke-width="1"/>
+    <path d="M-50 400 C 260 350, 460 450, 760 390 S 1260 350, 1500 420" fill="none" stroke="#7fba94" stroke-width="1"/>
+    <path d="M-50 500 C 260 460, 460 540, 760 500 S 1260 470, 1500 520" fill="none" stroke="#7fba94" stroke-width="1"/>
+  </g>
+</defs></svg>"""
+
+NAV_ORDER = [
+    ("service-property-maintenance.html", "Maintenance"),
+    ("service-landscape-design.html", "Design"),
+    ("service-hardscape-masonry.html", "Masonry"),
+    ("service-fertilizer-programs.html", "Fertilizer"),
+    ("service-irrigation.html", "Irrigation"),
+]
+
+FOOT_NAV = [
+    ("index.html", "Home"),
+    ("service-property-maintenance.html", "Property maintenance"),
+    ("service-landscape-design.html", "Landscape design &amp; plantings"),
+    ("service-hardscape-masonry.html", "Hardscapes &amp; custom masonry"),
+    ("service-fertilizer-programs.html", "Fertilizer programs"),
+    ("service-irrigation.html", "Lawn &amp; shrub irrigation"),
+]
+
+TEMPLATE = """<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{title}</title>
+<meta name="description" content="{desc}" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{{
+    --ink:#0c1610; --forest:#1a3526; --forest-2:#132a1e; --sage:#7fba94;
+    --bone:#f0ebdd; --bone-dim:#b9b6a5; --red:#c0392b; --red-lt:#e04637;
+    --line:rgba(240,235,221,.14);
+    --sans:'Figtree',system-ui,sans-serif; --serif:'Fraunces',Georgia,serif;
+  }}
+  *{{margin:0;padding:0;box-sizing:border-box}}
+  html{{scroll-behavior:smooth}}
+  body{{background:var(--ink);color:var(--bone);font-family:var(--sans);line-height:1.6;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden}}
+  body::after{{content:"";position:fixed;inset:0;pointer-events:none;z-index:80;opacity:.05;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}}
+  .wrap{{max-width:1280px;margin:0 auto;padding:0 clamp(20px,5vw,68px)}}
+  a{{color:inherit;text-decoration:none}}
+  ::selection{{background:var(--red);color:#fff}}
+
+  header{{position:fixed;inset:0 0 auto;z-index:50;transition:.4s}}
+  header.scrolled{{background:rgba(12,22,16,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}}
+  .nav{{display:flex;align-items:center;justify-content:space-between;height:80px}}
+  .brand{{font-family:var(--serif);font-weight:600;font-size:20px;display:flex;align-items:center;gap:12px}}
+  .brand-logo{{background:var(--bone);padding:8px 14px;border-radius:6px}}
+  .brand-logo img{{display:block;height:34px;width:auto}}
+  @media(max-width:480px){{.brand-logo img{{height:26px}}}}
+  .nav-links{{display:flex;gap:22px;font-size:14px;color:var(--bone-dim);letter-spacing:.02em;align-items:center}}
+  .nav-links a{{transition:color .25s;white-space:nowrap}}.nav-links a:hover{{color:var(--bone)}}
+  .nav-links a.current{{color:var(--sage)}}
+  .est{{border:1px solid var(--line);padding:12px 22px;border-radius:2px;font-weight:600;font-size:13px;
+    letter-spacing:.06em;text-transform:uppercase;transition:.3s;white-space:nowrap}}
+  .est:hover{{background:var(--red);border-color:var(--red);color:#fff}}
+  @media(max-width:1180px){{.nav-links{{display:none}}}}
+
+  .contours{{position:absolute;inset:0;z-index:0;opacity:.5;pointer-events:none}}
+
+  /* page hero */
+  .phero{{position:relative;min-height:66vh;display:flex;align-items:flex-end;overflow:hidden;padding-bottom:clamp(40px,7vh,80px)}}
+  .phero-photo{{position:absolute;inset:0;z-index:0;background:url('public/{photo}') center/cover no-repeat}}
+  .phero-scrim{{position:absolute;inset:0;z-index:1;background:
+    linear-gradient(90deg,rgba(10,18,13,.95) 0%,rgba(10,18,13,.76) 44%,rgba(10,18,13,.36) 100%),
+    linear-gradient(0deg,rgba(10,18,13,.92) 0%,transparent 55%)}}
+  .phero .contours{{z-index:1;opacity:.3}}
+  .phero .wrap{{position:relative;z-index:2;width:100%;padding-top:120px}}
+  .phero .chip{{display:inline-block;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--bone-dim);
+    background:rgba(7,13,9,.72);border:1px solid var(--line);border-radius:2px;padding:5px 9px;margin-bottom:18px}}
+  .crumb{{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--sage);margin-bottom:24px;transition:.25s}}
+  .crumb:hover{{color:var(--bone)}}
+  .phero h1{{font-family:var(--serif);font-weight:500;line-height:1.02;letter-spacing:-.02em;
+    font-size:clamp(38px,6.4vw,86px);max-width:16ch}}
+  .phero h1 em{{font-style:italic;color:var(--sage)}}
+  .phero .lede{{max-width:56ch;margin-top:24px;font-size:clamp(16px,1.5vw,19px);color:#d7d2c2}}
+
+  section{{position:relative;z-index:2}}
+  .pad{{padding:clamp(72px,11vh,120px) 0}}
+  .kicker{{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--sage);margin-bottom:18px}}
+  .sec-head h2{{font-family:var(--serif);font-weight:500;font-size:clamp(30px,4.4vw,52px);line-height:1.04;
+    letter-spacing:-.02em;max-width:18ch;margin-bottom:48px}}
+
+  /* included list */
+  .incl{{display:grid;grid-template-columns:1fr 1fr;gap:2px 40px}}
+  @media(max-width:760px){{.incl{{grid-template-columns:1fr}}}}
+  .incl .item{{display:flex;gap:16px;padding:22px 0;border-top:1px solid var(--line)}}
+  .incl .item .tick{{flex:none;color:var(--sage);font-size:15px;margin-top:2px}}
+  .incl .item h4{{font-family:var(--serif);font-weight:500;font-size:20px;margin-bottom:5px}}
+  .incl .item p{{color:var(--bone-dim);font-size:14.5px}}
+
+  .cta{{position:relative;overflow:hidden;background:var(--forest-2)}}
+  .cta .contours{{opacity:.35}}
+  .cta .wrap{{position:relative;z-index:2;text-align:center}}
+  .cta h2{{font-family:var(--serif);font-weight:500;font-size:clamp(34px,5.4vw,72px);line-height:1;letter-spacing:-.02em}}
+  .cta h2 em{{font-style:italic;color:var(--sage)}}
+  .cta p{{color:#d7d2c2;max-width:44ch;margin:22px auto 36px;font-size:17px}}
+  .cta .mail{{margin-top:26px;font-size:14px;color:var(--bone-dim)}}
+  .cta .mail a{{color:var(--sage)}}
+  .btn{{display:inline-block;background:var(--red);color:#fff;font-weight:600;padding:17px 34px;border-radius:2px;
+    letter-spacing:.05em;text-transform:uppercase;font-size:13px;transition:.3s}}
+  .btn:hover{{background:var(--red-lt);transform:translateY(-2px);box-shadow:0 14px 40px rgba(192,57,43,.35)}}
+
+  footer{{border-top:1px solid var(--line);padding:56px 0 44px}}
+  .foot-nav{{display:flex;flex-wrap:wrap;gap:12px 26px;font-size:14px;color:var(--bone-dim);margin-bottom:34px}}
+  .foot-nav a:hover{{color:var(--bone)}}
+  .foot{{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;color:var(--bone-dim);font-size:13px}}
+  .foot .brand{{color:var(--bone);font-size:17px;line-height:1.35;display:block}}
+  .lic{{margin-top:30px;padding-top:22px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:8px 30px;
+    color:var(--bone-dim);font-size:12.5px}}
+
+  .reveal{{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}}
+  .reveal.in{{opacity:1;transform:none}}
+  @media(prefers-reduced-motion:reduce){{*{{animation:none!important;transition:none!important}}.reveal{{opacity:1;transform:none}}}}
+</style>
+</head>
+<body>
+{contour}
+
+<header id="hdr">
+  <div class="wrap nav">
+    <a href="index.html" class="brand brand-logo">
+      <img src="public/logo-real.png" alt="Cecere Brothers Landscaping, LLC" width="544" height="150">
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+{navlinks}
+    </nav>
+    <a href="tel:+19732263002" class="est">(973) 226-3002</a>
+  </div>
+</header>
+
+<section class="phero">
+  <div class="phero-photo"></div>
+  <div class="phero-scrim"></div>
+  <svg class="contours" viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid slice"><use href="#contour"/></svg>
+  <div class="wrap">
+    <a href="index.html" class="crumb">← All services</a>
+    <span class="chip">Placeholder image · client job photos to come</span>
+    <h1>{h1}</h1>
+    <p class="lede">{lede}</p>
+  </div>
+</section>
+
+<section class="pad wrap">
+  <div class="sec-head reveal">
+    <p class="kicker">{kicker}</p>
+    <h2>{h2}</h2>
+  </div>
+  <div class="incl">
+{items}
+  </div>
+</section>
+
+<section class="cta pad">
+  <svg class="contours" viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid slice"><use href="#contour"/></svg>
+  <div class="wrap">
+    <h2 class="reveal">Let's walk your <em>property.</em></h2>
+    <p class="reveal">Call and we'll come out, look at the job, and give you a price.</p>
+    <a href="tel:+19732263002" class="btn reveal">Call (973) 226-3002</a>
+    <p class="mail reveal">
+      Cecere Brothers Landscaping, LLC<br><a href="mailto:contact@cecerebrotherslandscaping.com">contact@cecerebrotherslandscaping.com</a><br><br>
+      Green Lawns Sprinkler, LLC<br><a href="mailto:contact@greenlawnsprinkler.com">contact@greenlawnsprinkler.com</a>
+    </p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <nav class="foot-nav">
+{footnav}
+    </nav>
+    <div class="foot">
+      <div class="brand">Cecere Brothers Landscaping, LLC<br>Green Lawns Sprinkler, LLC</div>
+      <div>Essex Fells · The Caldwells · Fairfield · Roseland<br>Verona · Cedar Grove · Montclair</div>
+      <div><a href="tel:+19732263002">(973) 226-3002</a><br>© 2026 · Design concept, not yet live</div>
+    </div>
+    <div class="lic">
+      <span>NJ Contractor Lic. #13VH00426800</span>
+      <span>NJ Pesticide License #98049A</span>
+      <span>Green Lawns Sprinkler, LLC · NJ Irrigation License #0021960</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const hdr=document.getElementById('hdr');
+  addEventListener('scroll',()=>hdr.classList.toggle('scrolled',scrollY>40));
+  const io=new IntersectionObserver(es=>es.forEach(e=>{{if(e.isIntersecting){{e.target.classList.add('in');io.unobserve(e.target)}}}}),{{threshold:.12}});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
+"""
+
+here = os.path.dirname(os.path.abspath(__file__))
+
+for page in PAGES:
+    navlinks = "\n".join(
+        '      <a href="{}"{}>{}</a>'.format(
+            href, ' class="current"' if href == page["file"] else "", label
+        )
+        for href, label in NAV_ORDER
+    )
+    footnav = "\n".join(
+        '      <a href="{}">{}</a>'.format(href, label) for href, label in FOOT_NAV
+    )
+    items = "\n".join(
+        '    <div class="item reveal"><span class="tick">✓</span><div><h4>{}</h4>'
+        "<p>{}</p></div></div>".format(head, body)
+        for head, body in page["items"]
+    )
+    html = TEMPLATE.format(
+        title=page["title"], desc=page["desc"], photo=page["photo"],
+        h1=page["h1"], lede=page["lede"], kicker=page["kicker"], h2=page["h2"],
+        contour=CONTOUR, navlinks=navlinks, footnav=footnav, items=items,
+    )
+    with io.open(os.path.join(here, page["file"]), "w", encoding="utf-8") as fh:
+        fh.write(html)
+    print("wrote", page["file"])
