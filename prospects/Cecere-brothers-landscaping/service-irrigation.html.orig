@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Property Maintenance — Cecere Brothers Landscaping, West Essex NJ</title>
-<meta name="description" content="Property maintenance in Essex Fells, the Caldwells, Fairfield, Roseland, Verona, Cedar Grove, and Montclair, NJ. Mowing, pruning, mulching, bed work, and spring and fall cleanups. Call (973) 226-3002." />
+<title>Lawn &amp; Shrub Irrigation — Green Lawns Sprinkler, LLC, West Essex NJ</title>
+<meta name="description" content="Underground lawn and shrub irrigation systems in Essex Fells, the Caldwells, Fairfield, Roseland, Verona, Cedar Grove, and Montclair, NJ. Green Lawns Sprinkler, LLC — NJ Irrigation License #0021960. Call (973) 226-3002." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
@@ -40,46 +40,11 @@
   .est:hover{background:var(--red);border-color:var(--red);color:#fff}
   @media(max-width:1180px){.nav-links{display:none}}
 
-  /* mobile nav — .nav-links is hidden below 1180px, this is what replaces it */
-  .nav-toggle{display:none;width:46px;height:46px;align-items:center;justify-content:center;
-    background:none;border:1px solid var(--line);border-radius:2px;cursor:pointer;flex-shrink:0}
-  .nav-toggle span{display:block;width:20px;height:2px;background:var(--bone);position:relative;transition:.25s}
-  .nav-toggle span::before,.nav-toggle span::after{content:"";position:absolute;left:0;width:20px;height:2px;
-    background:var(--bone);transition:.25s}
-  .nav-toggle span::before{top:-6px}
-  .nav-toggle span::after{top:6px}
-  .nav-toggle[aria-expanded="true"] span{background:transparent}
-  .nav-toggle[aria-expanded="true"] span::before{top:0;transform:rotate(45deg)}
-  .nav-toggle[aria-expanded="true"] span::after{top:0;transform:rotate(-45deg)}
-  header.menu-open{background:rgba(12,22,16,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-  .nav-drawer{display:none;background:transparent;border-top:1px solid var(--line)}
-  .nav-scrim{position:fixed;inset:0;background:rgba(6,10,8,.72);display:none;z-index:40}
-  .nav-scrim.on{display:block}
-  .nav-drawer.open{display:block}
-  .nav-drawer .wrap{display:flex;flex-direction:column;padding-top:6px;padding-bottom:14px}
-  .nav-drawer a{padding:15px 2px;font-size:15px;color:var(--bone-dim);border-bottom:1px solid var(--line);
-    letter-spacing:.02em}
-  .nav-drawer a:last-child{border-bottom:0}
-  .nav-drawer a.current{color:var(--sage)}
-  @media(max-width:1180px){.nav-toggle{display:inline-flex}}
-
-  @media(max-width:560px){
-    .nav{height:68px;gap:8px}
-    .brand-logo{padding:6px 9px}
-    .brand-logo img{height:24px}
-    .est{padding:10px 12px;font-size:11px;letter-spacing:.03em}
-  }
-  @media(max-width:400px){
-    .est{padding:9px 10px;font-size:0}
-    .est::after{content:"Call";font-size:11px;letter-spacing:.06em}
-  }
-  @media(min-width:1181px){.nav-drawer{display:none!important}}
-
   .contours{position:absolute;inset:0;z-index:0;opacity:.5;pointer-events:none}
 
   /* page hero */
   .phero{position:relative;min-height:66vh;display:flex;align-items:flex-end;overflow:hidden;padding-bottom:clamp(40px,7vh,80px)}
-  .phero-photo{position:absolute;inset:0;z-index:0;background:url('public/lawn.webp') center/cover no-repeat}
+  .phero-photo{position:absolute;inset:0;z-index:0;background:url('public/design-editorial-backup.webp') center/cover no-repeat}
   .phero-scrim{position:absolute;inset:0;z-index:1;background:
     linear-gradient(90deg,rgba(10,18,13,.95) 0%,rgba(10,18,13,.76) 44%,rgba(10,18,13,.36) 100%),
     linear-gradient(0deg,rgba(10,18,13,.92) 0%,transparent 55%)}
@@ -95,7 +60,7 @@
   .phero .lede{max-width:56ch;margin-top:24px;font-size:clamp(16px,1.5vw,19px);color:#d7d2c2}
 
   section{position:relative;z-index:2}
-  .pad{padding-top:clamp(72px,11vh,120px);padding-bottom:clamp(72px,11vh,120px)}
+  .pad{padding:clamp(72px,11vh,120px) 0}
   .kicker{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--sage);margin-bottom:18px}
   .sec-head h2{font-family:var(--serif);font-weight:500;font-size:clamp(30px,4.4vw,52px);line-height:1.04;
     letter-spacing:-.02em;max-width:18ch;margin-bottom:48px}
@@ -151,29 +116,15 @@
     </a>
     <nav class="nav-links">
       <a href="index.html">Home</a>
-      <a href="service-property-maintenance.html" class="current">Maintenance</a>
+      <a href="service-property-maintenance.html">Maintenance</a>
       <a href="service-landscape-design.html">Design</a>
       <a href="service-hardscape-masonry.html">Masonry</a>
       <a href="service-fertilizer-programs.html">Fertilizer</a>
-      <a href="service-irrigation.html">Irrigation</a>
+      <a href="service-irrigation.html" class="current">Irrigation</a>
     </nav>
-    <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navDrawer">
-      <span></span>
-    </button>
     <a href="tel:+19732263002" class="est">(973) 226-3002</a>
   </div>
-<nav class="nav-drawer" id="navDrawer">
-  <div class="wrap">
-      <a href="index.html">Home</a>
-      <a href="service-property-maintenance.html" class="current">Maintenance</a>
-      <a href="service-landscape-design.html">Design</a>
-      <a href="service-hardscape-masonry.html">Masonry</a>
-      <a href="service-fertilizer-programs.html">Fertilizer</a>
-      <a href="service-irrigation.html">Irrigation</a>
-  </div>
-</nav>
 </header>
-<div class="nav-scrim" id="navScrim"></div>
 
 <section class="phero">
   <div class="phero-photo"></div>
@@ -182,23 +133,23 @@
   <div class="wrap">
     <a href="index.html" class="crumb">← All services</a>
     <span class="chip">Placeholder image · client job photos to come</span>
-    <h1>Property <em>maintenance.</em></h1>
-    <p class="lede">Mowing, pruning, mulching, bed work, and cleanups, handled by the same crew every week. Cesar Sanchez has run this side of the business since 2005.</p>
+    <h1>Lawn &amp; shrub <em>irrigation.</em></h1>
+    <p class="lede">Underground sprinkler systems from Green Lawns Sprinkler, LLC. Michael Cecere and Thomas Verrone founded it in 1989. New Jersey Irrigation License #0021960.</p>
   </div>
 </section>
 
 <section class="pad wrap">
   <div class="sec-head reveal">
     <p class="kicker">What's included</p>
-    <h2>What the crew handles.</h2>
+    <h2>Water where the landscape needs it.</h2>
   </div>
   <div class="incl">
-    <div class="item reveal"><span class="tick">✓</span><div><h4>Weekly mowing</h4><p>Cut, trimmed, and blown clean on a set day, with the clippings taken off your pavement.</p></div></div>
-    <div class="item reveal"><span class="tick">✓</span><div><h4>Shrub &amp; hedge pruning</h4><p>Joe Collura has run the pruning crew since 1993.</p></div></div>
-    <div class="item reveal"><span class="tick">✓</span><div><h4>Bed maintenance &amp; weeding</h4><p>Beds kept clean and edged along walks and driveways through the season.</p></div></div>
-    <div class="item reveal"><span class="tick">✓</span><div><h4>Mulching</h4><p>Beds re-edged and mulched, usually in spring.</p></div></div>
-    <div class="item reveal"><span class="tick">✓</span><div><h4>Spring &amp; fall cleanups</h4><p>Winter debris cleared in spring; beds and lawn cleared after the last leaf drop.</p></div></div>
-    <div class="item reveal"><span class="tick">✓</span><div><h4>Drainage systems</h4><p>Grading and drainage work when water sits where it shouldn't.</p></div></div>
+    <div class="item reveal"><span class="tick">✓</span><div><h4>System design</h4><p>Zones laid out for your lawn, beds, and shrubs, so each gets the water it needs.</p></div></div>
+    <div class="item reveal"><span class="tick">✓</span><div><h4>Underground installation</h4><p>Installed by Marcos Castro's crew, who has led sprinkler work here since 2015.</p></div></div>
+    <div class="item reveal"><span class="tick">✓</span><div><h4>Efficient watering</h4><p>Systems built to give plants what they need while promoting efficient water usage.</p></div></div>
+    <div class="item reveal"><span class="tick">✓</span><div><h4>Service &amp; repair</h4><p>Heads, valves, and controllers serviced by the same crew that installed them.</p></div></div>
+    <div class="item reveal"><span class="tick">✓</span><div><h4>Spring start-up &amp; winterizing</h4><p>Systems opened in spring and blown out before the first freeze.</p></div></div>
+    <div class="item reveal"><span class="tick">✓</span><div><h4>Licensed irrigation contractor</h4><p>Green Lawns Sprinkler, LLC holds NJ Irrigation License #0021960.</p></div></div>
   </div>
 </section>
 
@@ -243,25 +194,6 @@
   addEventListener('scroll',()=>hdr.classList.toggle('scrolled',scrollY>40));
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-</script>
-<script>
-(function(){
-  var t=document.querySelector('.nav-toggle'),d=document.getElementById('navDrawer');
-  if(!t||!d)return;
-  var h=t.closest('header'),sc=document.getElementById('navScrim');
-  function shut(){d.classList.remove('open');h.classList.remove('menu-open');if(sc)sc.classList.remove('on');t.setAttribute('aria-expanded','false');}
-  t.addEventListener('click',function(){
-    var open=d.classList.toggle('open');
-    h.classList.toggle('menu-open',open);
-    if(sc)sc.classList.toggle('on',open);
-    t.setAttribute('aria-expanded',open?'true':'false');
-  });
-  d.addEventListener('click',function(e){if(e.target.closest('a'))shut();});
-  if(sc)sc.addEventListener('click',shut);
-  // Following a link on desktop leaves the drawer open behind the layout swap.
-  window.addEventListener('resize',function(){if(window.innerWidth>1180)shut();});
-  document.addEventListener('keydown',function(e){if(e.key==='Escape')shut();});
-})();
 </script>
 </body>
 </html>

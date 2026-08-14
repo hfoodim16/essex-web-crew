@@ -480,3 +480,290 @@ scouting data above. Where verification changed a score, the reason is in the no
 1. **Law Office of Anthony DiSalvo, Esq.** (Bloomfield) — `law-office-anthony-disalvo`
 2. **Orange Valley Tree Experts** (Verona) — `orange-valley-tree-experts`
 3. **Stetz, Belgiovine, Manwarren & Wallis, P.C.** (Verona) — `stetz-belgiovine-cpas`
+
+## Candidates — 2026-08-13
+
+This run was pushed into the professional-office and service verticals per the lead's
+direction — three prior runs already worked tree service/lawn/landscaping hard. No
+masonry, paving, or fencing pursued (per the playbook default). Restaurants, e-commerce,
+gyms/venues, and news/blog-driven businesses were excluded by design.
+
+| # | Business | Town | Niche | Web presence | Established signal | Contact | Qualifies? |
+|---|----------|------|-------|--------------|--------------------|---------|-----------|
+| 1 | All Essex Chiropractic (Dr. Charles Collins) | Cedar Grove | chiropractor | site returns HTTP 520 server error — unreachable | solo practice since 1988 (own site's bio, via search) | (973) 239-0262 | yes |
+| 2 | Angelo's Auto Body, Inc. | Irvington | auto body / collision repair | SSL certificate served for the wrong domain entirely (belongs to an unrelated .org) — browsers block it | founded 1950, 2nd-generation, owners George & Nick Kostakis | (973) 371-8700, 243 Coit St | yes |
+| 3 | Bloomfield Pest Control | Bloomfield | pest control | live site but riddled with unrendered "Yext Knowledge Tags" placeholder text where hours/contact/service-area should be | "Since 2001" (own site) | (973) 259-1133, 36 Broughton Ave | yes |
+| 4 | Advantage Termite & Pest Control Inc | West Orange | pest control | dated WordPress-era build, no viewport meta tag (confirmed non-mobile) | founded 1990 by Richard Brill (own site's About page) | (973) 736-1007, 414 Main St | yes |
+| 5 | Church Street Guitar Studio (Ivan Max) | Montclair | music lessons / guitar instruction | dated GoDaddy-builder template, broken/placeholder images, heavy stock photography | "20+ years at this location" (site copy); instructor cites 30+ yrs teaching (sources conflict on exact founding year — flag) | (973) 650-9974, 50 Church St Suite L-5 | yes |
+| 6 | Triple C Pro Window Cleaning | Montclair | window cleaning / power washing | no viewport meta tag (confirmed non-mobile), PNG button graphics for CTAs, primary contact is a Gmail address | "Since 2010" (own site) | (973) 619-9996, triplecnj@gmail.com, 85 Bay St 3A | yes |
+| 7 | Brantley Bros. Moving & Storage Co., Inc. | Newark | moving & storage | broken/placeholder logo images on fetch, repeated non-responsive nav, dated template | founded 1/1/1967 by Malachia Brantley; BBB lists 59 yrs, file opened 2003 | (973) 824-9500, 168 Elizabeth Ave; owner Isaac "Ike" King | yes |
+| 8 | Certified Home Inspections (Michael J. Rosa) | Nutley | home inspection | dated minimal-template site; primary contact is an **AOL address** | "over 20 years" full-time inspecting (own site), 6,000+ inspections, NJ Lic #24GI00032900 | (973) 667-3747, certhomeinsp@aol.com | yes |
+| 9 | Meyers Home Inspections (Daniel Meyers) | South Orange | home inspection | dated, non-responsive layout; "Contact Us" nav misroutes to the commercial page — structural sign of an unmaintained site | founded 1984 (40+ yrs); NJ Lic #24GI00060400 (Note: at least one negative independent review found — flag, doesn't disqualify) | (973) 464-4449, 35 Glenside Rd | yes |
+| 10 | Clarence B. Wright Funeral Home, Inc. | Irvington | funeral home | TLS handshake failure on both http and https (confirmed twice) — site is unreachable over a secure connection | founder licensed 1955 (own "Our Staff" page via cache); ~70 yrs continuous operation | (973) 374-7058, 579 Grove St | yes |
+| 11 | James E. Churchman, Jr. Funeral Home | Newark | funeral home | "moderately dated" build, not confirmed mobile-optimized, only a generic contact form (no email listed anywhere) | "Serving Your Family Since 1899" (own site); 1999–2000 NFDA national excellence award | (973) 242-8454, 345-13th Ave; contact Edith C. Churchman | yes |
+| 12 | Susie McKeown Photography | Verona | portrait / family / wedding photographer (static bio-portfolio-contact site, no e-commerce/booking on the main domain) | HTTPS is genuinely broken — TLS handshake fails with "Recv failure: Connection reset by peer" on both `www` and bare domain (confirmed twice via direct `curl`); plain HTTP loads an old fixed-canvas "BigBlackBag" portfolio platform with no viewport meta tag (grep-confirmed, not mobile-responsive) | active and covered locally since at least 2016 ("Baristanet Profile" feature); a 2020 post independently states "shooting for the last 9 years" (~since 2011, 15 yrs) | (973) 303-5518 (text preferred), smckeown01@comcast.net, 28 Sunset Ave | yes |
+
+### 1. All Essex Chiropractic (Dr. Charles Collins)
+- **Current site:** allessexchiropractic.com returned **HTTP 520 "Unknown Status"** on two separate fetch attempts (homepage and a subpage), on two different days within this run — the site is currently unreachable for a visitor, not just dated.
+- **Evidence of establishment:** Search-indexed bio material states Dr. Collins "has maintained his solo family practice in Cedar Grove since 1988" (38 years) — this is a secondary-source paraphrase of the (currently unreachable) site's own bio, not independently corroborated on an aggregator; confirm on first call. He is a Certified Chiropractic Sports Physician and active member of the Association of New Jersey Chiropractors.
+- **Services:** General chiropractic care; serves Cedar Grove, Verona, Montclair, West Orange, Little Falls, Roseland, the Caldwells.
+- **Contact:** (973) 239-0262; presumed address in Cedar Grove, NJ (site unreachable to confirm street address — Google/Facebook listing should have it).
+- **Source(s):** [allessexchiropractic.com](https://www.allessexchiropractic.com/) (520 error, confirmed twice), [Facebook](https://www.facebook.com/allessexchiropractic/), search-cached bio content
+
+### 2. Angelo's Auto Body, Inc.
+- **Current site:** angelosautobodyinc.com throws a **hard SSL certificate mismatch** — WebFetch returned `Hostname/IP does not match certificate's altnames`, with the served certificate belonging to an entirely unrelated domain (`sept11educationtrust.org` and variants). This is worse than an expired-cert warning: the hosting is serving someone else's certificate, meaning any browser will hard-block the connection.
+- **Evidence of establishment:** Started by "Angelo" in 1950 as a two-bay shop, moved to its current Irvington location in 1965; a 2nd-generation, family-owned operation now run by brothers George and Nick Kostakis, described in directory copy as "the premier full-service collision and mechanical repair facility in Essex County."
+- **Services:** Collision repair, mechanical repair, full-service auto body work.
+- **Contact:** (973) 371-8700; 243 Coit St, Irvington, NJ 07111. Owners: George and Nick Kostakis.
+- **Source(s):** [Yelp](https://www.yelp.com/biz/angelos-auto-body-irvington), [Carwise](https://www.carwise.com/auto-body-shops/angelos-auto-body-inc-irvington-nj-07111/466706), [angelosautobodyinc.com](http://www.angelosautobodyinc.com/about_us.html) (SSL mismatch, confirmed)
+
+### 3. Bloomfield Pest Control
+- **Current site:** bloomfieldpestcontrol.com is live but broken — fetched directly and found the literal, repeated text **"This is a placeholder for the Yext Knolwedge Tags. This message will not appear on the live site..."** standing in for hours, contact phone/email, and service-area details across the page (the same un-filled CMS pattern documented on Orange Valley Tree Experts in the 2026-07-29 run — a different business, same neglected Yext/Hibu template, independently confirmed by direct fetch this run).
+- **Evidence of establishment:** Site's own copy: "Since 2001, Bloomfield Pest Control has offered pest control, pest management..." (24+ years); holds EPA license #98323A; describes itself as "Local, Family-Owned."
+- **Services:** Pest control, termite extermination, bed bugs, roaches, ants, animal/wildlife removal, commercial pest management.
+- **Contact:** (973) 259-1133; 36 Broughton Ave, Bloomfield, NJ 07003. Owner referenced only as "John" in Yelp reviews — confirm full name on first call.
+- **Source(s):** [bloomfieldpestcontrol.com](https://www.bloomfieldpestcontrol.com/) (placeholder text confirmed by direct fetch), [Yelp](https://www.yelp.com/biz/bloomfield-pest-control-bloomfield), [YellowPages](https://www.yellowpages.com/bloomfield-nj/bloomfield-pest-control)
+
+### 4. Advantage Termite & Pest Control Inc
+- **Current site:** advantagepestcontrol.com is live but dated — basic WordPress-era styling, no contemporary typography or interactive elements, **no viewport meta tag detected in the markup** (a concrete non-mobile-friendly signal), images lack descriptive alt text.
+- **Evidence of establishment:** Founded 1990 by Richard Brill in West Orange, per the company's own About page; Brill has held an NJ pest-control applicator license since 1987 — 35+ years of operating history stated on their own site, not just an aggregator.
+- **Services:** Termite control, bed bugs, wildlife control, insect damage repair.
+- **Contact:** (973) 736-1007 / (800) 464-1207; 414 Main St, West Orange, NJ 07052. Owner: Richard Brill (with wife Megan).
+- **Source(s):** [Advantage Pest Control — About Us](https://www.advantagepestcontrol.com/about-us/), [Yelp](https://www.yelp.com/biz/advantage-termite-and-pest-control-inc-west-orange), [Angi](https://www.angi.com/companylist/us/nj/west-orange/advantage-termite-and-pest-control-inc-reviews-233316.htm)
+
+### 5. Church Street Guitar Studio (Ivan Max)
+- **Current site:** churchstguitar.com is live but built on a dated GoDaddy Website Builder template — multiple broken/placeholder images and heavy reliance on generic stock photography (wsimg.com CDN assets) rather than real studio photos; no meaningful visual update evident.
+- **Evidence of establishment:** Site copy states the studio is "celebrating 20+ years at this location," and instructor Ivan Max is described as teaching guitar in the Montclair area "for over 30 years." Sources disagree on the exact founding year — one 2011-era source references "15 years" at that point (implying ~1996), while current copy says "20+ years" — flag both figures and confirm the real founding date on the first call.
+- **Services:** Classical, flamenco, rock, pop, blues, and jazz guitar lessons; virtual lessons via Zoom/FaceTime/Skype.
+- **Contact:** (973) 650-9974; 50 Church St, Suite L-5, Montclair, NJ 07042. Owner/instructor: Ivan Max.
+- **Source(s):** [churchstguitar.com](https://churchstguitar.com/), [Yelp](https://www.yelp.com/biz/church-street-guitar-studio-montclair), [Alignable](https://www.alignable.com/montclair-nj/church-street-guitar-studio)
+
+### 6. Triple C Pro Window Cleaning
+- **Current site:** montclairwindowwashing.com is live but dated — **no viewport meta tag present in the markup** (confirmed non-mobile-optimized), image-heavy mid-2010s WordPress theme using PNG button graphics for CTAs ("Call-Now-2.png") instead of modern UI components, inline `javascript:void()` handlers. Primary business contact is a **Gmail address** (triplecnj@gmail.com) rather than a domain email.
+- **Evidence of establishment:** Site states "Since 2010" (16 years); claims 250+ five-star ratings and $1M liability coverage — business's own claims, not independently verified.
+- **Services:** Residential window cleaning and power washing; serves Montclair, Bloomfield, Verona, South Orange, Millburn, Caldwell.
+- **Contact:** (973) 619-9996; triplecnj@gmail.com; 85 Bay St 3A, Montclair, NJ 07042. Owner not named on-site; reviews describe an owner-operator who performs the work himself — confirm name on first call.
+- **Source(s):** [montclairwindowwashing.com](https://montclairwindowwashing.com/)
+
+### 7. Brantley Bros. Moving & Storage Co., Inc.
+- **Current site:** brantleybros.com is live but dated — fetched directly and found broken/placeholder (gray-box) images where the logo should load, excessively repeated navigation menus, and a non-responsive, template-style layout.
+- **Evidence of establishment:** Founded 1/1/1967 by Malachia Brantley with a single truck; described by Black Enterprise as "one of the largest Black-owned moving and storage companies in the country." BBB profile lists 59 years in business, file opened 2003 — an independently corroborated figure, not just the company's own claim.
+- **Services:** Residential and commercial moving and storage.
+- **Contact:** (973) 824-9500 / (800) 526-4128; 168 Elizabeth Ave, Newark, NJ 07108. Owner/President: Isaac "Ike" King (40+ years with the company). No public email found.
+- **Source(s):** [brantleybros.com/about](https://brantleybros.com/about/), [BBB profile](https://www.bbb.org/us/nj/newark/profile/moving-companies/brantley-bros-moving-storage-co-inc-0221-29005718), [LinkedIn](https://www.linkedin.com/in/ike-king-bb062211/)
+
+### 8. Certified Home Inspections (Michael J. Rosa)
+- **Current site:** homeinspectionservicenj.com is live but dated — minimal responsive design, plain navigation, simple text blocks, an older-template feel. Primary contact email is **certhomeinsp@aol.com** — an AOL address as the business's listed primary email, one of the direct weak-presence signals called out in the qualification rules.
+- **Evidence of establishment:** Owner Michael J. Rosa has been "inspecting homes full time in NJ for over 20 years" per the site's own copy, with 6,000+ inspections performed; holds NJ license #24GI00032900 and is InterNACHI certified.
+- **Services:** Residential home inspection; service area covers Nutley, Belleville, Bloomfield, Verona, Cedar Grove, Fairfield, Montclair and more.
+- **Contact:** (973) 667-3747 (toll-free 866-667-3747), fax (973) 667-3033; certhomeinsp@aol.com. Owner/Inspector: Michael J. Rosa.
+- **Source(s):** [homeinspectionservicenj.com](https://homeinspectionservicenj.com/), [InterNACHI directory](https://www.nachi.org/certified-inspectors/michael-rosa-nj-lic-24gi00032900-5036), [ActiveRain profile](https://activerain.com/profile/1homeinspector)
+
+### 9. Meyers Home Inspections (Daniel Meyers)
+- **Current site:** meyershome.com is dated and basic — lacking responsive features and polished navigation, static-feeling layout; the "Contact Us" nav item misroutes to the commercial-inspections page instead of a dedicated contact page, a structural sign of an old, unmaintained site.
+- **Evidence of establishment:** Founded 1984 per the site's own history (40+ years by 2026). Daniel Meyers is a Cooper Union College of Engineering & Architecture graduate and one of the first graduates of NJ's approved 300-hour home inspector course; holds NJ license #24GI00060400.
+- **Services:** Residential and commercial home inspection.
+- **Contact:** (973) 464-4449; 35 Glenside Rd, South Orange, NJ 07079. Owner/Inspector: Daniel Meyers. Email via site contact form only.
+- **Source(s):** [meyershome.com](https://www.meyershome.com/), [BBB profile](https://www.bbb.org/us/nj/south-orange/profile/home-inspection/meyers-home-inspection-services-0221-24004765), [Yelp](https://www.yelp.com/biz/meyers-home-inspections-south-orange) (Note: Yelp carries at least one sharply negative review alongside the positive site testimonials — a real signal to weigh on the call, not a disqualifier per the "good reviews are a bonus, not a requirement" rule.)
+
+### 10. Clarence B. Wright Funeral Home, Inc.
+- **Current site:** wrightfuneralhome.com is **unreachable over a secure connection** — WebFetch failed identically on both `https://www.wrightfuneralhome.com/` and `http://www.wrightfuneralhome.com/` with a `TLSV1_ALERT_INTERNAL_ERROR` handshake failure, confirmed on repeated attempts. A normal visitor's browser would block or fail on this site.
+- **Evidence of establishment:** Founder Clarence B. Wright graduated mortuary school in 1955 and opened the business after apprenticing under David D. Woody Funeral Home, per the (currently unreachable) site's own "Our Staff" page, retrieved via search cache — confirm directly once the site is reachable again. ~70 years in continuous operation.
+- **Services:** Full-service funeral and cremation services.
+- **Contact:** (973) 374-7058; 579 Grove St, Irvington, NJ 07111. Active Facebook page. Note: the business's Legacy.com listing is marked "Unclaimed" — another weak-presence signal.
+- **Source(s):** [Legacy.com listing](https://www.legacy.com/funeral-homes/new-jersey/irvington/clarence-b-wright-funeral-home-inc-irvington/fh-12406), [Facebook](https://www.facebook.com/cbwrightfuneralhome/), wrightfuneralhome.com (TLS failure, confirmed twice)
+
+### 11. James E. Churchman, Jr. Funeral Home
+- **Current site:** churchmanfuneralhome.com is live but assessed twice on fetch as "moderately dated," lacking a polished/contemporary aesthetic and not confirmed to be fully mobile-optimized; only a generic "Get in Touch" contact form is offered — no email address listed anywhere on the site.
+- **Evidence of establishment:** Site's own tagline: "Our Family Serving Your Family Since 1899" (125+ years), still Churchman-family-run under current manager Edith C. Churchman (NJ License #3241). Received a 1999–2000 NFDA "Pursuit of Excellence Eagle Award," one of 34 given nationally that year.
+- **Services:** Full-service funeral and cremation services.
+- **Contact:** (973) 242-8454; 345-13th Ave, Newark, NJ. Named contact: Edith C. Churchman.
+- **Source(s):** [churchmanfuneralhome.com](https://churchmanfuneralhome.com/), [About Us](https://churchmanfuneralhome.com/about-us/), [Contact Us](https://churchmanfuneralhome.com/contact-us/)
+
+### 12. Susie McKeown Photography
+- **Current site:** susiemckeownphotography.com has **no working HTTPS at all** — `curl -v` against the https URL fails every time with `Recv failure: Connection reset by peer` during the TLS handshake, confirmed twice on both the `www` and bare-domain hosts. Modern browsers default to HTTPS, so most visitors will simply fail to load the site. Plain HTTP does load: it's built on "BigBlackBag," an old fixed-canvas photography-portfolio platform using pixel-ratio JS positioning and jQuery 0.2.3-era plugins, with **no viewport meta tag** (grep-confirmed) — not mobile-responsive. It is a static bio/portfolio/contact site — no e-commerce cart or booking widget on the main domain, so it clears the "naturally static" filter despite being a photographer.
+- **Evidence of establishment:** A 2016 Montclair Local "Baristanet Profile" feature covers her as a known local photographer and Montclair native; a separate 2020 post independently states she'd been shooting "for the last 9 years" (i.e., since ~2011, ~15 years) — two independent secondary sources agreeing on a multi-year, ongoing practice, though neither is the business's own stated founding year. Active Nextdoor and Alignable business listings.
+- **Services:** Portrait, family, and wedding photography.
+- **Contact:** (973) 303-5518 (text preferred); smckeown01@comcast.net (a generic ISP consumer email as primary contact — itself a weak-presence signal); 28 Sunset Ave, Verona, NJ 07044. Owner: Susie McKeown.
+- **Source(s):** [susiemckeownphotography.com](http://www.susiemckeownphotography.com/) (TLS failure, confirmed twice via curl), [Montclair Local](https://montclairlocal.news/2016/03/baristanet-profile-susie-mckeown/), [Nextdoor](https://nextdoor.com/pages/susie-mckeown-photography-verona-nj/), [Alignable](https://www.alignable.com/verona-nj/susie-mckeown-photography)
+
+<!-- ALL-CANDIDATES-IN: 12 -->
+
+## Scoring — 2026-08-13
+
+Scored against `pipeline/rubric.md`. All 12 pass the hard qualification rules (weak/no
+site + established + reachable). Ties broken toward the most dramatic website gap on the
+most clearly established business.
+
+**Every gap claim in this table was re-verified by the Analyst on 2026-08-13**, by direct
+`curl`/`openssl` against the live host, before it was scored. That re-verification moved
+four rows materially — **three of them downward** — and those corrections are the main
+reason this ranking differs from the scouting order. Details in the notes; the corrections
+are listed first, because Harry must not repeat a claim on a call that is no longer true.
+
+| # | Business | Gap/30 | Est/25 | Fit/20 | Breadth/15 | Contact/10 | Bonus | Total | Rank |
+|---|----------|--------|--------|--------|------------|------------|-------|-------|------|
+| 2 | Angelo's Auto Body, Inc. | 30 | 23 | 20 | 11 | 8 | +2 | **94** | **1** |
+| 3 | Bloomfield Pest Control | 29 | 21 | 20 | 13 | 6 | +1 | **90** | **2** |
+| 10 | Clarence B. Wright Funeral Home, Inc. | 29 | 23 | 18 | 10 | 6 | +1 | **87** | **3** |
+| 4 | Advantage Termite & Pest Control Inc | 19 | 24 | 20 | 12 | 9 | +1 | 85 | 4 |
+| 9 | Meyers Home Inspections | 23 | 24 | 20 | 10 | 7 | +0 | 84 | 5 |
+| 8 | Certified Home Inspections (Michael J. Rosa) | 19 | 21 | 20 | 9 | 10 | +2 | 81 | 6 |
+| 7 | Brantley Bros. Moving & Storage Co., Inc. | 17 | 25 | 19 | 11 | 8 | +1 | 81 | 7 |
+| 12 | Susie McKeown Photography | 28 | 17 | 16 | 8 | 9 | +1 | 79 | 8 |
+| 11 | James E. Churchman, Jr. Funeral Home | 16 | 25 | 18 | 10 | 7 | +1 | 77 | 9 |
+| 1 | All Essex Chiropractic (Dr. Charles Collins) | 18 | 21 | 19 | 8 | 8 | +1 | 75 | 10 |
+| 6 | Triple C Pro Window Cleaning | 18 | 18 | 20 | 8 | 7 | +2 | 73 | 11 |
+| 5 | Church Street Guitar Studio (Ivan Max) | 21 | 17 | 17 | 7 | 9 | +1 | 72 | 12 |
+
+### Scoring notes
+
+#### Four scouting claims re-tested — three did not survive
+
+These are corrections to the candidate rows above, not to the scout's judgment: the scout
+recorded what it observed, and three of those observations were transient or measured
+wrong. **Do not say any of these on a call.**
+
+- **#1 All Essex Chiropractic — the HTTP 520 was transient, and the site is up.** I fetched
+  `https://www.allessexchiropractic.com/` **eight times** on 2026-08-13 (five homepage, three
+  on `/about-us`) and got **HTTP 200 every time**, 50 KB of real content, with
+  `<meta name="viewport" content="width=device-width, initial-scale=1">` present. It is a
+  dated vendor CMS (a "seanz"-skinned chiropractic template whose favicon path still points at
+  another practice, `baystonechiro`), not an unreachable site. Gap cut **28 → 18**; the row
+  drops from a plausible finalist to rank 10. A flaky host is a real, mentionable problem —
+  "your site went down twice last week" — but it is not the durable gap we sell against, and
+  I could not reproduce it.
+- **#4 Advantage Termite & Pest — the "no viewport meta tag" finding is wrong.** The tag is
+  present: `<meta name="viewport" content="width=device-width, initial-scale=1.0,
+  maximum-scale=1.0, user-scalable=0" />`. The site is responsive and functional. (The
+  `maximum-scale=1.0, user-scalable=0` pair is a genuine accessibility defect — it blocks
+  pinch-zoom, which matters to an older customer base — but that is a fix, not a rebuild.)
+  Gap cut **26 → 19**. This is the rubric's "meh but functional" case. Everything *else*
+  about this candidate is excellent (see rank 4 below).
+- **#6 Triple C Pro Window Cleaning — same correction.** `<meta name="viewport"
+  content="width=device-width, initial-scale=1">` is present. The PNG-graphic CTAs and the
+  Gmail-as-primary-contact are real weak-presence signals, but the site works on a phone.
+  Gap cut **26 → 18**.
+- **#7 Brantley Bros. — the broken images are not broken, and the site is three years old.**
+  This is the correction that resolves the prior analyst's coin-flip. `brantleybros.com` is a
+  **2023 WordPress build** (every asset path is `/wp-content/uploads/2023/…`), it carries
+  `<meta name='viewport' content='width=device-width, initial-scale=1.0' />`, and the three
+  images I sampled — including the header logo — all return **HTTP 200 with real image
+  bytes**, not placeholders. Gap cut **26 → 17**, the second-lowest in the pool. Two
+  consequences: the before→after we sell is thin, and someone was paid to build this in 2023,
+  so there is probably an incumbent vendor. **Brantley is off the shortlist**, and the
+  coin-flip is settled against it on evidence rather than on preference.
+
+#### The three that survived verification — and they are the finalists
+
+- **#1 Angelo's Auto Body (94) — the cleanest, most checkable gap on the board.** Verified
+  with `openssl s_client` on 2026-08-13: `www.angelosautobodyinc.com` serves a certificate
+  whose subject is **`CN=wtcufg.org`**, with SANs for `sept11educationtrust.org`,
+  `september11educationtrust.org` and `wtcufg.org` — **their own domain appears nowhere in
+  it**. `curl` fails with exit 60, *"no alternative certificate subject name matches target
+  host name."* Every modern browser shows a full-page security interstitial before any content
+  loads. The detail that makes this urgent: the certificate was **issued 2026-08-13**, the
+  same day I checked — so the host is actively auto-renewing a certificate for somebody else's
+  domain, meaning nobody is watching and this will not self-heal. Against that gap sits the
+  most substantial business in the pool: **founded 1950**, second-generation (**George and
+  Nick Kostakis**), an **18,000 sq ft facility with 15 technicians** — that is payroll, and
+  payroll means budget. 4.1★ with 13 Yelp reviews is modest volume, hence only +2. Contact 8:
+  two named owners and a direct line, but no published email found yet.
+- **#2 Bloomfield Pest Control (90) — the Yext pattern, confirmed by direct fetch.** I counted
+  **252 occurrences** of the string `Yext` in the live homepage HTML, including the literal
+  editor note *"This is a placeholder for the Yext Knolwedge Tags. This message will not
+  appear on the live site, but only within the editor."* — their own live misspelling of
+  "Knowledge" — standing where the hours, phone, email and service area should be. The
+  business is **"Since 2001"** by its own copy (25 years) and holds **EPA #98323A**. Breadth
+  13 is the second-highest in the pool: pest control, termites, bed bugs, roaches, ants,
+  wildlife removal, and commercial pest management is a genuine multi-page site. Contact held
+  to 6 — the owner is referenced publicly only as **"John"**, and no surname or email is
+  published anywhere I could reach.
+- **#3 Clarence B. Wright Funeral Home (87) — unreachable over HTTPS, and still trading.**
+  `curl` against `https://www.wrightfuneralhome.com/` fails with **exit 35,
+  `tlsv1 alert internal error`**, reproduced 2026-08-13 after the scout's two earlier
+  failures. The site is not merely dated — a visitor's browser cannot complete a secure
+  handshake with it. What makes this the third finalist rather than a curiosity is that
+  **real pages exist behind that broken lock**: Google has indexed `/our-staff` and
+  `/testimonials`, so there is written content stranded behind a handshake nobody can
+  complete. Establishment is top-tier — the founder graduated the American Academy in **1955**
+  and opened after apprenticing under David D. Woody Funeral Home, roughly **70 years** — and
+  the business is **currently active**, with services carried on Tribute Archive through
+  **2024–2025**. Fit held to 18, not 20: funeral homes publish obituaries, which is
+  changing content — but Wright's already live on Tribute Archive, Ever Loved and Legacy, so a
+  static brochure that links out to them is the honest architecture, not a compromise. Contact
+  6 and Bonus +1 are the weak spots: no email, no *current* director named publicly, an
+  **unclaimed** Legacy listing, BBB **Not Rated**, and reviews that are genuinely mixed —
+  one praising ("Professional, caring and works with your budget") against one criticizing
+  service management at a funeral.
+
+#### Passed over, and why — with the swap-ins named
+
+Per the 07-29 precedent, a pass-over gets its reason on the record.
+
+- **#4 Advantage Termite & Pest (85) is the highest scorer left out, and it is the
+  best-qualified business in the pool on every dimension except the one we sell.** Founded
+  **1990 by Richard Brill** — stated on *their own* About page, not an aggregator — with an
+  NJ applicator licence since 1987; a named owner, two phone numbers and a street address
+  (Contact 9, the second-best); and real service breadth. It loses the slot on Gap 19: after
+  correction, their site is dated but responsive and working, which is exactly the rubric's
+  low-scoring "meh but functional." **Advantage is the immediate swap-in if Harry wants a
+  fourth call or if one of the three goes cold** — and it is the single best candidate in
+  this run for a *redesign* pitch rather than a rescue pitch. Note the pest-control overlap
+  with Bloomfield (rank 2): they are direct competitors, so pitch one before the other, not
+  both in the same week.
+- **#5 Meyers Home Inspections (84) — strong, with one genuine winnability doubt.** The gap is
+  real and I verified the specific defect: the **"Contact Us" nav item links to
+  `/pages/commercial-building-inspections-south-orange-new-jersey`** — a home inspector's
+  contact link lands on the commercial page, and it is a Webware.ai vendor build. Founded
+  **1984** (42 years) with NJ licence **#24GI00060400**. Two things keep it off the list. It
+  is a **solo inspector who has been working since 1984** — the same wind-down risk that cost
+  Sbarra the slot on 07-29, and this time it is an inference rather than a sourced statement,
+  so it is stated as a doubt, not a fact. And contact is **form-only** — no email, and the
+  only form on the site routes through a page that misroutes. **Meyers is the swap-in if
+  Harry wants a professional-services pick instead of a trade.**
+- **#8 Susie McKeown Photography (79) — the gap is finalist-grade; nothing else is.** HTTPS is
+  genuinely dead: `Recv failure: Connection reset by peer` on **both** `www` and the bare
+  domain, reproduced 2026-08-13, and the HTTP fallback is a BigBlackBag portfolio with **no
+  `<meta viewport>` tag** (I checked — the word "viewport" appears once in the page, inside
+  JavaScript, never as a meta tag). But a solo photographer is the smallest budget in the
+  pool, breadth is thin, and no source states her founding year in her own words. Gap alone
+  does not make a client.
+- **#9 Churchman (77) and #7 Brantley (81) are the pool's two most established businesses —
+  1899 and 1967 — and both have the two weakest gaps (16 and 17).** That is the pattern worth
+  remembering from this run: in the professional/service verticals, the oldest businesses have
+  mostly already bought a working site.
+
+#### Two scout judgment calls, checked rather than inherited
+
+- **S.W. Brown & Son (Nutley, est. 1950), dropped as inconclusive — I think that was right,
+  and would not revisit it.** With Churchman (1899) and Wright (1955) both in the pool and
+  scored, a third funeral home would have had to beat them, and the two we did assess split
+  hard on gap — Churchman's site works, Wright's does not. Nothing suggests Brown would have
+  landed above Wright, and an inconclusive row is the correct output for a candidate the
+  scout could not verify. No change.
+- **Codey Funeral Home (Caldwell, est. 1911), excluded because owner Richard J. Codey is the
+  sitting NJ Senate President and a former Governor — keep the exclusion.** The lead endorses
+  it and I agree on fit: a sitting statewide officeholder's family business is a
+  public-scrutiny and press-attention profile we are not equipped to serve, and it is not the
+  owner-operator relationship this crew is built around. Recording it here so the call stays
+  auditable rather than invisible.
+
+#### One pattern worth naming — the Yext/Hibu neglected template
+
+Bloomfield Pest Control's live site renders the literal string *"This is a placeholder for the
+Yext Knolwedge Tags"* where its hours, phone and service area belong — **the same failure, with
+the same misspelling of "Knowledge", independently found on Orange Valley Tree Experts in the
+2026-07-29 run.** Two unrelated businesses, two different trades, two different towns, the
+identical un-filled Yext/Hibu template. That makes it a recognizable species rather than a
+coincidence, and it is now cheap to hunt: **grep a candidate's homepage HTML for `Yext`** —
+a live site with dozens of hits is a business paying a vendor monthly for a page that is
+publishing editor scaffolding to its customers. It is the highest-gap, most-embarrassing,
+easiest-to-demonstrate defect we have found twice, and it should be a standing check in the
+scout's qualification pass, not a lucky catch.
+
+### Finalists — 2026-08-13
+
+1. **Angelo's Auto Body, Inc.** (Irvington) — `angelos-auto-body`
+2. **Bloomfield Pest Control** (Bloomfield) — `bloomfield-pest-control`
+3. **Clarence B. Wright Funeral Home, Inc.** (Irvington) — `clarence-b-wright-funeral-home`
