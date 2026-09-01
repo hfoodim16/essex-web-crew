@@ -33,23 +33,32 @@
   ::selection{background:var(--red);color:#fff}
 
   /* nav */
-  header{position:fixed;inset:0 0 auto;z-index:50;transition:.4s}
-  header.scrolled{background:rgba(12,22,16,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-  .nav{display:flex;align-items:center;justify-content:space-between;height:80px}
+  header{position:relative;z-index:50;background:var(--ink);border-bottom:1px solid var(--line)}
+  .nav{position:relative;display:flex;flex-direction:column;align-items:center;gap:15px;padding-top:20px;padding-bottom:16px}
+  .nav-top{position:relative;width:100%;display:flex;align-items:center;justify-content:center}
+  .nav-bottom{display:flex;align-items:center;justify-content:center;gap:26px;flex-wrap:wrap}
+  /* contact button: pinned top-right on desktop, centered under the logo on narrow screens */
+  .nav-contact{display:flex;flex-direction:column;align-items:center;gap:8px}
+  @media(min-width:721px){
+    .nav-contact{position:absolute;top:20px;right:clamp(20px,5vw,68px);align-items:flex-end}
+    .nav-bottom{padding-bottom:2px}
+  }
+  @media(max-width:720px){.nav-bottom{display:none}}
   .brand{font-family:var(--serif);font-weight:600;font-size:20px;letter-spacing:.01em;display:flex;align-items:center;gap:12px}
   /* real client logo is dark-on-transparent; back it with a light plate so it reads on the dark header */
   .brand-logo{background:var(--bone);padding:8px 14px;border-radius:6px}
-  .brand-logo img{display:block;height:34px;width:auto}
-  @media(max-width:480px){.brand-logo img{height:26px}}
+  .brand-logo img{display:block;height:clamp(56px,7vw,86px);width:auto}
+  @media(max-width:480px){.brand-logo img{height:50px}}
   .nav-links{display:flex;gap:22px;font-size:14px;color:var(--bone-dim);letter-spacing:.02em;align-items:center}
   .nav-links a{transition:color .25s;white-space:nowrap}.nav-links a:hover{color:var(--bone)}
   .nav-links a.current{color:var(--sage)}
-  .est{border:1px solid var(--line);padding:12px 22px;border-radius:2px;font-weight:600;font-size:13px;
+  .est{background:var(--red);border:1px solid var(--red);color:#fff;padding:12px 22px;border-radius:2px;
+    font-weight:600;font-size:13px;
     letter-spacing:.06em;text-transform:uppercase;transition:.3s;white-space:nowrap}
-  .est:hover{background:var(--red);border-color:var(--red);color:#fff}
-  @media(max-width:1180px){.nav-links{display:none}}
+  .est:hover{background:var(--red-lt);border-color:var(--red-lt);color:#fff}
+  @media(max-width:720px){.nav-links{display:none}}
 
-  /* mobile nav — .nav-links is hidden below 1180px, this is what replaces it */
+  /* mobile nav — .nav-links is hidden below 720px, this is what replaces it */
   .nav-toggle{display:none;width:46px;height:46px;align-items:center;justify-content:center;
     background:none;border:1px solid var(--line);border-radius:2px;cursor:pointer;flex-shrink:0}
   .nav-toggle span{display:block;width:20px;height:2px;background:var(--bone);position:relative;transition:.25s}
@@ -70,25 +79,25 @@
     letter-spacing:.02em}
   .nav-drawer a:last-child{border-bottom:0}
   .nav-drawer a.current{color:var(--sage)}
-  @media(max-width:1180px){.nav-toggle{display:inline-flex}}
+  @media(max-width:720px){.nav-toggle{display:inline-flex;position:absolute;right:0;top:50%;transform:translateY(-50%)}}
 
   @media(max-width:560px){
-    .nav{height:68px;gap:8px}
+    .nav{gap:11px;padding-top:14px;padding-bottom:12px}
     .brand-logo{padding:6px 9px}
-    .brand-logo img{height:24px}
+    .brand-logo img{height:46px}
     .est{padding:10px 12px;font-size:11px;letter-spacing:.03em}
   }
   @media(max-width:400px){
     .est{padding:9px 10px;font-size:0}
-    .est::after{content:"Call";font-size:11px;letter-spacing:.06em}
+    .est::after{content:"Contact";font-size:11px;letter-spacing:.06em}
   }
-  @media(min-width:1181px){.nav-drawer{display:none!important}}
+  @media(min-width:721px){.nav-drawer{display:none!important}}
 
   /* contour background */
   .contours{position:absolute;inset:0;z-index:0;opacity:.5;pointer-events:none}
 
   /* hero */
-  .hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden}
+  .hero{position:relative;min-height:86vh;display:flex;align-items:center;overflow:hidden}
   .hero-photo{position:absolute;inset:0;z-index:0;background:url('public/hero.webp') center/cover no-repeat}
   .hero-scrim{position:absolute;inset:0;z-index:1;background:
     linear-gradient(90deg,rgba(10,18,13,.95) 0%,rgba(10,18,13,.78) 40%,rgba(10,18,13,.34) 100%),
@@ -248,25 +257,33 @@
 
 <header id="hdr">
   <div class="wrap nav">
-    <div class="brand brand-logo">
-      <img src="public/logo-real.png" alt="Cecere Brothers Landscaping, LLC" width="544" height="150">
+    <div class="nav-top">
+      <div class="brand brand-logo">
+        <img src="public/logo-real.png" alt="Cecere Brothers Landscaping, LLC" width="544" height="150">
+      </div>
+      <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navDrawer">
+        <span></span>
+      </button>
     </div>
-    <nav class="nav-links">
-      <a href="index.html" class="current">Home</a>
-      <a href="service-property-maintenance.html">Maintenance</a>
-      <a href="service-landscape-design.html">Design</a>
-      <a href="service-hardscape-masonry.html">Masonry</a>
-      <a href="service-fertilizer-programs.html">Fertilizer</a>
-      <a href="service-irrigation.html">Irrigation</a>
-    </nav>
-    <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navDrawer">
-      <span></span>
-    </button>
-    <a href="tel:+19732263002" class="est">(973) 226-3002</a>
+    <div class="nav-bottom">
+      <nav class="nav-links">
+        <a href="index.html" class="current">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="service-property-maintenance.html">Maintenance</a>
+        <a href="service-landscape-design.html">Design</a>
+        <a href="service-hardscape-masonry.html">Masonry</a>
+        <a href="service-fertilizer-programs.html">Fertilizer</a>
+        <a href="service-irrigation.html">Irrigation</a>
+      </nav>
+    </div>
+    <div class="nav-contact">
+      <a href="#contact" class="est">Contact us</a>
+    </div>
   </div>
 <nav class="nav-drawer" id="navDrawer">
   <div class="wrap">
       <a href="index.html" class="current">Home</a>
+      <a href="about.html">About Us</a>
       <a href="service-property-maintenance.html">Maintenance</a>
       <a href="service-landscape-design.html">Design</a>
       <a href="service-hardscape-masonry.html">Masonry</a>
@@ -304,37 +321,37 @@
 <section class="pad wrap" id="services">
   <div class="sec-head reveal">
     <h2>What we do.</h2>
-    <p>Cecere Brothers Landscaping handles the property, Green Lawns Sprinkler handles the water.</p>
+    <p>Cecere Brothers Landscaping services your property maintenance and landscaping needs. Green Lawns Sprinkler installs and services all of your irrigation needs.</p>
   </div>
   <div class="svc-list">
     <a class="svc reveal" href="service-property-maintenance.html">
       <span class="num">01</span>
       <h3>Property maintenance</h3>
-      <p>Mowing, pruning, mulching, bed work, and spring and fall cleanups on a set schedule.</p>
+      <p>Weekly lawn maintenance service, spring and fall cleanups, mulching, and bed work.</p>
       <span class="a">→</span>
     </a>
     <a class="svc reveal" href="service-landscape-design.html">
       <span class="num">02</span>
       <h3>Landscape design &amp; plantings</h3>
-      <p>Designed, planted, and installed by our own crew. Cesar Sanchez has run this work since 2005.</p>
+      <p>Designed, planted, and installed.</p>
       <span class="a">→</span>
     </a>
     <a class="svc reveal" href="service-hardscape-masonry.html">
       <span class="num">03</span>
-      <h3>Hardscapes &amp; custom masonry</h3>
-      <p>Steps, walkways, patios, walls, fireplaces, fire pits, and outdoor kitchens. Drainage systems too.</p>
+      <h3>Hardscapes, custom masonry, and drainage systems</h3>
+      <p>Steps, walkways, patios, walls, fireplaces, fire pits, and outdoor kitchens.</p>
       <span class="a">→</span>
     </a>
     <a class="svc reveal" href="service-fertilizer-programs.html">
       <span class="num">04</span>
       <h3>Fertilizer programs</h3>
-      <p>Lawn and shrub feeding under NJ Pesticide License #98049A, run by Joe Collura since 1993.</p>
+      <p>Lawn fertilizer programs run by Joe Collura since 1993 under NJ Pesticide License #98049A.</p>
       <span class="a">→</span>
     </a>
     <a class="svc reveal" href="service-irrigation.html">
       <span class="num">05</span>
       <h3>Lawn &amp; shrub irrigation</h3>
-      <p>Underground sprinkler systems from Green Lawns Sprinkler, LLC, licensed in New Jersey as #0021960.</p>
+      <p>Owned and operated by Thomas Verrone, with job foreman Marcos Castro and his son Jeremy.</p>
       <span class="a">→</span>
     </a>
   </div>
@@ -346,7 +363,7 @@
     <p>Property maintenance, plantings, walks, patios, walls, fire pits, outdoor kitchens, and irrigation across West Essex.</p>
   </div>
   <div class="work-grid">
-    <div class="plate p1 reveal" style="background-image:url('public/patio.webp')"><span class="chip">Placeholder image</span><span class="tag">Paver patio</span><span class="place">Hardscapes &amp; custom masonry</span></div>
+    <div class="plate p1 reveal" style="background-image:url('public/patio.webp')"><span class="chip">Placeholder image</span><span class="tag">Patios, walks, and walls</span><span class="place">Hardscapes &amp; custom masonry</span></div>
     <div class="plate p2 reveal" style="background-image:url('public/design.webp')"><span class="chip">Placeholder image</span><span class="tag">Landscape design</span><span class="place">Beds, borders, and plantings</span></div>
     <div class="plate p3 reveal" style="background-image:url('public/masonry.webp')"><span class="chip">Placeholder image</span><span class="tag">Stone steps</span><span class="place">Custom masonry</span></div>
     <div class="plate p4 reveal" style="background-image:url('public/lawn.webp')"><span class="chip">Placeholder image</span><span class="tag">Property maintenance</span><span class="place">Weekly mowing and bed work</span></div>
@@ -355,7 +372,7 @@
     <div class="plate p7 reveal" style="background-image:url('public/masonry-editorial-backup.webp')"><span class="chip">Placeholder image</span><span class="tag">Stone walkway</span><span class="place">Walks and steps</span></div>
     <div class="plate p8 reveal" style="background-image:url('public/lawn-editorial-backup.webp')"><span class="chip">Placeholder image</span><span class="tag">Fertilizer program</span><span class="place">Fed, irrigated, and cut weekly</span></div>
   </div>
-  <p class="photo-note reveal"></p>
+  <p class="photo-note reveal">These are stand-in images. Michael has hundreds of photos of real jobs &mdash; property maintenance, plantings, walks, patios, walls, fire pits, outdoor kitchens, and irrigation &mdash; and they drop straight into this grid as soon as they come over.</p>
 </section>
 
 <section class="pad wrap">
@@ -367,38 +384,6 @@
     <div class="step reveal"><div class="n">01</div><h4>Call us</h4><p>Call (973) 226-3002 and tell us what you want done. Phone is how we prefer to start.</p></div>
     <div class="step reveal"><div class="n">02</div><h4>We walk the property</h4><p>We come out, walk the property with you, and put the scope and the price in writing.</p></div>
     <div class="step reveal"><div class="n">03</div><h4>Our own crew does the work</h4><p>Every project is handled in-house, without subcontractors, and we don't leave until the site is clean.</p></div>
-  </div>
-</section>
-
-<section class="about pad" id="about">
-  <div class="wrap about-grid">
-    <div class="story reveal">
-      <h2>A tradition built to <em>last.</em></h2>
-      <p>Michael Cecere started mowing lawns in his neighborhood in 1976, at 14. He studied engineering at the University of Delaware, transferred to Montclair State University, and graduated in 1985 with a degree in Business Administration and a concentration in Finance. That year he turned the lawn route into Cecere Brothers Landscaping.</p>
-      <p>In 1989, Michael and his childhood friend and neighbor Thomas Verrone founded Green Lawns Sprinkler, LLC. Green Lawns builds underground irrigation systems that give lawns, plants, and landscapes the water they need while promoting efficient water use.</p>
-      <p>Today the two companies run as one team of 15: landscape design and installation, lawn maintenance, fertilization, pruning, masonry, and irrigation. Every project is handled in-house, without subcontractors. A local company with a local owner, and thousands of jobs completed in the West Essex area.</p>
-      <p class="values">Workmanship, personal service, reliability, and pride in what we do.</p>
-    </div>
-    <div class="roster reveal">
-      <h3>Local, experienced professionals you can trust</h3>
-      <p class="sub">Many of our employees have been with us 20 years or more.</p>
-      <div class="person">
-        <span class="yr">1993</span><span class="nm">Joe Collura</span>
-        <p>Manages our lawn fertilization programs, the shrub pruning crew, and the small-jobs crew.</p>
-      </div>
-      <div class="person">
-        <span class="yr">2005</span><span class="nm">Cesar Sanchez</span>
-        <p>Property maintenance, landscape design, plantings, mulching, and a range of other landscape services.</p>
-      </div>
-      <div class="person">
-        <span class="yr">2010</span><span class="nm">Jose Pulido</span>
-        <p>Leads our masonry crews: steps, walkways, patios, walls, fireplaces, fire pits, and outdoor kitchens.</p>
-      </div>
-      <div class="person">
-        <span class="yr">2015</span><span class="nm">Marcos Castro</span>
-        <p>Leads sprinkler installation and service at Green Lawns Sprinkler. His son, Jeremy Castro, joined in 2022.</p>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -419,8 +404,8 @@
     <p class="reveal">Call and we'll come out, look at the job, and give you a price.</p>
     <a href="tel:+19732263002" class="btn reveal">Call (973) 226-3002</a>
     <p class="mail reveal">
-      Cecere Brothers Landscaping, LLC<br><a href="mailto:contact@cecerebrotherslandscaping.com">contact@cecerebrotherslandscaping.com</a><br><br>
-      Green Lawns Sprinkler, LLC<br><a href="mailto:contact@greenlawnsprinkler.com">contact@greenlawnsprinkler.com</a>
+      Cecere Brothers Landscaping, LLC<br><a href="mailto:mwcecere@verizon.net">mwcecere@verizon.net</a><br><br>
+      Green Lawns Sprinkler, LLC<br><a href="mailto:contact@greenlawnssprinkler.com">contact@greenlawnssprinkler.com</a>
     </p>
   </div>
 </section>
@@ -429,6 +414,7 @@
   <div class="wrap">
     <nav class="foot-nav">
       <a href="index.html">Home</a>
+      <a href="about.html">About us</a>
       <a href="service-property-maintenance.html">Property maintenance</a>
       <a href="service-landscape-design.html">Landscape design &amp; plantings</a>
       <a href="service-hardscape-masonry.html">Hardscapes &amp; custom masonry</a>
@@ -436,21 +422,19 @@
       <a href="service-irrigation.html">Lawn &amp; shrub irrigation</a>
     </nav>
     <div class="foot">
-      <div class="brand">Cecere Brothers Landscaping, LLC<br>Green Lawns Sprinkler, LLC</div>
-      <div>Essex Fells · The Caldwells · Fairfield · Roseland<br>Verona · Cedar Grove · Montclair</div>
-      <div>(973) 226-3002© 2026 </div>
+      <div class="brand">Cecere Brothers Landscaping, LLC · Green Lawns Sprinkler, LLC</div>
+      <div>Essex Fells · The Caldwells · Fairfield · Roseland · Verona · Cedar Grove · Montclair</div>
+      <div>(973) 226-3002 · © 2026</div>
     </div>
     <div class="lic">
       <span>NJ Contractor Lic. #13VH00426800</span>
       <span>NJ Pesticide License #98049A</span>
-      <span>Green Lawns Sprinkler, LLC · NJ Irrigation License #0021960</span>
+      <span>NJ Irrigation License #0021960</span>
     </div>
   </div>
 </footer>
 
 <script>
-  const hdr=document.getElementById('hdr');
-  addEventListener('scroll',()=>hdr.classList.toggle('scrolled',scrollY>40));
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 </script>
@@ -469,7 +453,7 @@
   d.addEventListener('click',function(e){if(e.target.closest('a'))shut();});
   if(sc)sc.addEventListener('click',shut);
   // Following a link on desktop leaves the drawer open behind the layout swap.
-  window.addEventListener('resize',function(){if(window.innerWidth>1180)shut();});
+  window.addEventListener('resize',function(){if(window.innerWidth>720)shut();});
   document.addEventListener('keydown',function(e){if(e.key==='Escape')shut();});
 })();
 </script>

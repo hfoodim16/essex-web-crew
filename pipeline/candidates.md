@@ -767,3 +767,528 @@ scout's qualification pass, not a lucky catch.
 1. **Angelo's Auto Body, Inc.** (Irvington) — `angelos-auto-body`
 2. **Bloomfield Pest Control** (Bloomfield) — `bloomfield-pest-control`
 3. **Clarence B. Wright Funeral Home, Inc.** (Irvington) — `clarence-b-wright-funeral-home`
+
+## Candidates — 2026-08-17
+
+Four prior runs worked landscaping/tree hard across Montclair, Bloomfield, Nutley, Belleville,
+Livingston, West Orange, Glen Ridge, Cedar Grove, Verona, Caldwell, South Orange, Newark, and
+Irvington. This run deliberately pushed into **under-worked towns** — East Orange, Orange,
+Maplewood, Millburn, Short Hills, Fairfield, and Newark's Ironbound — and leaned on
+**professional-office and owner-operator-trade niches** (CPAs, law, locksmiths, auto repair,
+upholstery, insurance, photography) rather than another landscaping sweep. Four parallel
+research helpers surfaced ~23 leads across those towns; every candidate below was independently
+re-verified by the scout (direct `WebFetch` of the business's own site, or a fresh `WebSearch`
+against a primary/BBB/D&B source) before being written in — subagent claims are leads, not
+verified candidates. One lead (Laurence M. Simon, CPA — East Orange) was found and dropped after
+verification surfaced a 2003 SEC administrative proceeding and related securities-fraud/wire-fraud
+charges tied to a prior CFO role; that is a reputational risk, not a client we should pitch, and it
+is excluded rather than listed with a caveat. AWG Major Appliance Repair (Newark) was verified as
+its replacement.
+
+| # | Business | Town | Niche | Web presence | Established signal | Contact | Qualifies? |
+|---|----------|------|-------|--------------|--------------------|---------|-----------|
+| 1 | Biltwell Upholstering Shop | East Orange | Upholstery/furniture repair | none (directory listings only: BBB, Yelp, YellowPages, Manta, Groupon, Nextdoor) | Incorporated 1974 (~50 yrs), A+ BBB | (973) 676-2378, 396 Main St; owner "Rocco" (first name only) | yes |
+| 2 | Kayode Agunbiade & Co., CPAs | East Orange | Accountant/CPA | none (directory listings only: D&B, Yelp, CPAdirectory, ptindirectory) | Founded 1988 (D&B) — ~38 yrs; CPA license #46507 | (973) 676-9851, 134 Evergreen Pl Ste 8-6; owner Kayode Agunbiade, CPA | yes |
+| 3 | Essex Security Locksmiths (Essex Locksmiths, LLC) | Orange | Locksmith | two conflicting live domains, both broken — `essexlocksmithnj.com` (early-2000s layout, broken/missing images, not mobile-friendly) and `essexsecuritysecuritylocksmiths.com`-style second domain that fails to load | "Started over 20 years ago" (own copy); BBB shows 19 yrs in business | (973) 736-0008, 562 Main St; 20 Yelp reviews | yes |
+| 4 | Jerome H. Leifer, CPA | Maplewood | Accountant/CPA | none (directory listings only: TaxBuzz, Yelp, Manta, YellowPages, LinkedIn) | "36 years in business" / accountant since 1997 (TaxBuzz) | (973) 762-1022, 111 Dunnell Rd Ste 201; owner Jerry (Jerome) Leifer, LinkedIn confirmed | yes |
+| 5 | Law Office of Bart J. Klein | Maplewood | Law (business/construction/litigation) | live but dated: blog stalls at Aug 2018, an unremoved COVID-19 "reviewing guidelines" banner still displays, 2026 copyright looks like an auto-templated error, no visible email on page | Firm founded 1991, Klein 30+ yrs experience (Martindale) | (973) 763-6060, 2066 Millburn Ave Ste 101; owner Bart J. Klein | yes |
+| 6 | Bernie's Tire & Auto | Millburn | Auto repair | SSL certificate **expired** — confirmed directly: scout's own `WebFetch` of berniestireandauto.com returned "certificate has expired," so the site is unreachable over HTTPS for a normal visitor | Established 1962 (Yelp); 159–839 reviews across CARFAX/SureCritic/Yelp | Owner referenced as "BJ" only; phone not yet confirmed — pull from Yelp listing before outreach | yes |
+| 7 | NJ Camera / Livingston Camera (Millburn Camera ASAP Photo) | Short Hills/Millburn | Photography/camera store & photo services | live but broken — unrendered template code visible on page (`<%= isLogged %>` conditionals, cart-item tags), placeholder carousel text ("Slide title," "Write your caption here") | "Specialty photo store since 1954" (Yelp) — ~70 yrs | (973) 379-1313, millburnasap@gmail.com, 506 Millburn Ave; also (973) 992-8383 / info@livingstoncamera.com | yes |
+| 8 | Karis Lock Company, Inc. | Fairfield | Locksmith | live but stale — copyright footer frozen at "© 2021," entire homepage sections (tagline, company background, testimonials, nav) are duplicated/repeated down the page | BBB: business started 7/30/1986 (~40 yrs), A+ rating; own tagline "40 Years and More" | (973) 882-0350, 73 US Hwy 46; owner Peter Karis (President) | yes |
+| 9 | Fisher Auto Transmission Inc. | Fairfield | Auto repair / transmission | live but generic — built on the "Repair Shop Websites" template platform (visible in footer credit), no copyright/update year anywhere on the page | Customer review + directory listings: "in business for over 60 years" (lead signal, not yet independently sourced to the business's own statement) | (973) 227-3452, 81 Rt 46; contact form only, no direct email found | yes |
+| 10 | Steve Izzo Custom Furniture Repair | Fairfield | Upholstery/furniture restoration | live but dated — early-2010s WordPress-era template, standard documentation-quality photos (not portfolio-grade), no copyright year shown | Site's own header/copy states "Furniture Repair in North Jersey Since 1948" — ~78 yrs, a first-party claim, not just an aggregator | Shop (973) 226-5737, Cell (973) 729-4788, 1275 Bloomfield Ave Bldg 2 Unit 11R; owner Steven (Steve) Izzo | yes |
+| 11 | Ironbound Insurance Agency, Inc. | Newark (Ironbound) | Insurance agency | live but frozen on a free Wix subdomain — copyright reads "©2020," an "Upcoming Events" widget still promotes an April 15, 2020 tax-deadline event (stale 6 yrs) | Founded 1989 (Chamber of Commerce directory + city-data.com business-entity record) — ~37 yrs | (973) 589-6350, ironboundagency@yahoo.com, 376 Chestnut St | yes |
+| 12 | AWG Major Appliance Repair, LLC | Newark (Weequahic) | Appliance repair | live but is a bare SEO doorway page — scout's own `WebFetch` confirmed ~100+ hyperlinked city/state combos and zero service descriptions, zero contact info, zero imagery on the page itself | BBB file opened 12/21/2017; YellowPages/Nextdoor list 15–21 yrs in business (range noted — treat as a lead signal to confirm on the call) | (973) 699-8152, 72 Huntington Ter | yes |
+
+### 1. Biltwell Upholstering Shop
+- **Current site:** none — presence is directory-only (BBB, Yelp, YellowPages, Manta, Groupon, Nextdoor, siccode.com). No independent domain found under any variant of the name.
+- **Evidence of establishment:** Incorporated in NJ in 1974 per business-registry aggregation (siccode.com/uscompanies.net); BBB profile with A+ rating. ~50 years of continuous operation is a strong, if aggregator-sourced, signal — confirm exact founding year and current owner on the first call.
+- **Services:** Reupholstery, furniture repair, custom upholstery work (per BBB/Groupon category listing).
+- **Contact:** (973) 676-2378; 396 Main St, East Orange, NJ 07018; owner referenced only as "Rocco" in a customer review — full name unconfirmed.
+- **Source(s):** https://www.bbb.org/us/nj/east-orange/profile/furniture-repair/biltwell-upholstering-shop-0221-90204651 ; https://www.yelp.com/biz/builtwell-upholstering-shop-east-orange ; https://siccode.com/business/biltwell-upholstering ; https://www.groupon.com/biz/east-orange-nj/biltwell-upholstering-shop
+
+### 2. Kayode Agunbiade & Co., CPAs
+- **Current site:** none — every result is a directory listing (D&B, Yelp, CPAdirectory, ptindirectory, CMac.ws, Chamber of Commerce of the Oranges membership page). No firm-owned domain found.
+- **Evidence of establishment:** D&B business profile states firm founded 1988 (~38 yrs). CPAdirectory lists Kayode Agunbiade as a verified, licensed CPA (license #46507). Current Chamber of Commerce of the Oranges member (2025 roster) — an active, dues-paying local business today, not a defunct listing.
+- **Services:** Accounting, tax preparation, bookkeeping, payroll services.
+- **Contact:** (973) 676-9851 (fax 973-676-6739); 134 Evergreen Pl Ste 8-6, East Orange, NJ 07018; owner Kayode Agunbiade, CPA.
+- **Source(s):** https://www.dnb.com/business-directory/company-profiles.agunbiade_kayode__co_cpas_pc.2e5cdcd60377b51536d75d3414d221e2.html ; https://cpadirectory.com/certified-public-accountants/new-jersey/east-orange-nj/kayode-agunbiade/1210526 ; https://chamberoftheoranges.com/cco-membership-2025/
+
+### 3. Essex Security Locksmiths (Essex Locksmiths, LLC)
+- **Current site:** `essexlocksmithnj.com` — scout re-verified via search: an early-2000s-style page (a testimonials sub-page indexed at `essexlocksmithnj.com/TESTIMONIALS_Locksmith_NJ.html` shows the dated site structure directly). A second, differently-branded domain surfaces in directories and fails to load on repeated attempts. Two conflicting web identities for one business is itself a weak-presence signal.
+- **Evidence of establishment:** Own marketing copy: "started over 20 years ago." BBB profile independently states 19 years in business. 20 reviews on Yelp is a real, sustained review history, not a new listing.
+- **Services:** Full-service locksmith, access systems, safes, all lock types, automotive locks, master key systems, 24/7 emergency service, door & glass division.
+- **Contact:** (973) 736-0008; 562 Main St, Orange, NJ 07050. No owner name confirmed publicly — flag for the first call.
+- **Source(s):** https://www.yelp.com/biz/essex-security-locksmiths-orange-2 ; https://www.bbb.org/us/nj/orange/profile/locksmith/essex-locksmiths-llc-0221-24001140 ; http://essexlocksmithnj.com/TESTIMONIALS_Locksmith_NJ.html
+
+### 4. Jerome H. Leifer, CPA
+- **Current site:** none — TaxBuzz, Yelp, Manta, YellowPages, ptindirectory and a LinkedIn profile are the only public presence; no firm domain found.
+- **Evidence of establishment:** TaxBuzz/Manta list "36 years in business"; a client review independently states he has "been serving as an accountant since 1997" (~29 yrs on that specific claim — the two figures aren't identical, so confirm the actual founding year on the call rather than presenting either as fact).
+- **Services:** Tax preparation, planning, bookkeeping, and general accounting.
+- **Contact:** (973) 762-1022; 111 Dunnell Rd Ste 201, Maplewood, NJ 07040; owner Jerry (Jerome) Leifer — LinkedIn: linkedin.com/in/jerry-leifer-2533ab18.
+- **Source(s):** https://www.taxbuzz.com/new-jersey/maplewood/jerome-h-leifer-cpa ; https://www.manta.com/c/mmyvh2x/jerome-h-leifer-cpa ; https://www.linkedin.com/in/jerry-leifer-2533ab18/
+
+### 5. Law Office of Bart J. Klein
+- **Current site:** `bartjkleinlaw.com` — scout re-verified by direct `WebFetch`: blog posts stop at August 24, 2018; a COVID-19 banner ("we are reviewing the best guidelines for our city and state...") is still live on the page, five-plus years after it stopped being relevant; copyright shows "2026" (looks like an auto-templated `{{currentYear}}` rather than a maintained date); no email address is displayed anywhere on the page.
+- **Evidence of establishment:** Martindale profile states the firm was founded in 1991 and Klein has 30+ years of experience — a third-party professional directory, not a bare aggregator.
+- **Services:** Business law, construction law, litigation (per Martindale practice areas).
+- **Contact:** (973) 763-6060 (fax 973-763-6090); 2066 Millburn Ave Ste 101, Maplewood, NJ 07040 (also a by-appointment Shrewsbury, NJ office); owner Bart J. Klein.
+- **Source(s):** https://bartjkleinlaw.com ; https://www.martindale.com/organization/law-office-of-bart-j-klein-1980084/maplewood-new-jersey-2956113-f/
+
+### 6. Bernie's Tire & Auto
+- **Current site:** `berniestireandauto.com` — SSL certificate **expired**, confirmed directly: the scout's own `WebFetch` attempt against the live URL returned the raw error "certificate has expired," meaning any visitor's browser will block or hard-warn on the site before it renders. This is the same class of instant-qualifier signal ("SSL certificate warning / error") called out by name in the scouting playbook.
+- **Evidence of establishment:** Yelp lists the business as established 1962 (~64 yrs); a genuinely large review footprint (159–839 reviews cited across CARFAX, SureCritic, and Yelp) is a strong secondary signal of sustained operation, not a new shop.
+- **Services:** Tire sales/service, general auto repair (per Yelp category + business name).
+- **Contact:** 73 Millburn Ave, Millburn, NJ 07041; owner referenced only as "BJ" in reviews — direct phone number not yet pulled, confirm via the Yelp listing before Harry calls.
+- **Source(s):** https://www.yelp.com/biz/bernies-tire-and-auto-millburn ; https://berniestireandauto.com (direct fetch, cert-expired error reproduced 2026-08-17)
+
+### 7. NJ Camera / Livingston Camera (Millburn Camera ASAP Photo)
+- **Current site:** `njcamera.com` — scout re-verified by direct `WebFetch`: the page renders raw, unexecuted template syntax (`<% if (isLogged) %>` conditionals and cart-item tags visible as literal text), and its promotional carousel shows placeholder copy — "Slide title," "Write your caption here," an unlabeled "Button." A newsletter link points at `/shop-catalog` instead of a signup page. This is a site mid-broken-migration, not merely dated.
+- **Evidence of establishment:** Yelp: "specialty photo store since 1954" — over 70 years, a strong lead signal (unconfirmed against the business's own words since their site is non-functional).
+- **Services:** Camera/photo equipment sales, photo processing/services (two related storefronts: Millburn Camera ASAP Photo and Livingston Camera).
+- **Contact:** (973) 379-1313, millburnasap@gmail.com, 506 Millburn Ave, Short Hills, NJ 07078; sister location (973) 992-8383, info@livingstoncamera.com. Hours posted: Mon–Fri 10–6, Sat 10–4, Sun closed.
+- **Source(s):** https://www.yelp.com/biz/livingston-camera-short-hills ; https://njcamera.com (direct fetch)
+
+### 8. Karis Lock Company, Inc.
+- **Current site:** `karislock.com` — scout re-verified by direct `WebFetch`: copyright footer frozen at "© 2021 Karis Lock Co," and the homepage repeats entire content blocks multiple times down the page (tagline, company-background section, testimonials carousel, nav, footer) — evidence of a template/CMS problem nobody has looked at in years.
+- **Evidence of establishment:** BBB profile states the business started 7/30/1986 (~40 yrs); the company's own tagline, "Keeping You Safe & Secure For 40 Years And More," matches that figure — a first-party claim, not just an aggregator guess. BBB rating A+.
+- **Services:** Commercial, residential, institutional and automotive locksmith hardware installation/repair; emergency locksmith; chip keys; safes; access control; touchless entry; electronic locking. Service area: Essex, Passaic, Morris counties.
+- **Contact:** (973) 882-0350; 73 US Highway 46, Fairfield, NJ 07004; owner Peter Karis (President).
+- **Source(s):** https://www.bbb.org/us/nj/fairfield/profile/locksmith/karis-lock-company-inc ; https://karislock.com (direct fetch)
+
+### 9. Fisher Auto Transmission Inc.
+- **Current site:** `fisherautotrans.com` — scout re-verified by direct `WebFetch`: footer credit reads "Copyright @ Repair Shop Websites. All Rights Reserved" (a generic vendor-template platform, not custom-built), no copyright/update year anywhere on the page, repetitive boilerplate content.
+- **Evidence of establishment:** A customer testimonial displayed on the site itself states "Fisher Auto has been in business for over 60 years" — this is a third party's words placed on the business's own page, not the business's own statement, so treat "60 years" as a lead signal to confirm directly, not a verified fact. ASE/ATRA/ATSG certifications are independently listed.
+- **Services:** Brake repair, transmission repair/rebuild, engine repair, suspension, fleet maintenance, AC repair, electrical, 4x4 services, Asian vehicle repair.
+- **Contact:** (973) 227-3452; 81 Rt 46, Fairfield, NJ 07004; contact form only on-site, no direct email found; owner name not yet confirmed.
+- **Source(s):** https://fisherautotrans.com (direct fetch) ; Yelp auto-repair Fairfield search results
+
+### 10. Steve Izzo Custom Furniture Repair
+- **Current site:** `furniturerestoring.com` — scout re-verified by direct `WebFetch`: early-2010s WordPress-template aesthetic, standard documentation-quality (not portfolio-grade) photography, no copyright year displayed anywhere.
+- **Evidence of establishment:** The site's own header and body copy state "Furniture Repair in North Jersey Since 1948" and "a family owned business since 1948" — a first-party claim printed on their own page, the strongest kind of establishment evidence in this batch (~78 yrs). Chamber of Commerce directory listing independently corroborates "family owned business for over 60 years."
+- **Services:** Furniture repair, refinishing, reupholstery, chair caning/rushing, glass tops and mirrors, piano services, corporate/executive office furniture services.
+- **Contact:** Shop (973) 226-5737, Cell (973) 729-4788; 1275 Bloomfield Ave, Building 2 Unit 11R, Fairfield, NJ 07004; owner Steven (Steve) Izzo.
+- **Source(s):** https://furniturerestoring.com (direct fetch) ; https://www.chamberofcommerce.com business-directory listing ; https://www.yelp.com/biz/steven-p-izzo-inc-fairfield-2
+
+### 11. Ironbound Insurance Agency, Inc.
+- **Current site:** `ironboundagency.wixsite.com/website` — scout re-verified by direct `WebFetch`: a customized-but-frozen Wix build; copyright footer reads "©2020 by Ironbound Insurance Agency Inc," and an on-page "events" promo still references "The Deadline is on April 15, 2020" for income-tax filing — six-year-stale content actively displayed to visitors today. Social links on the page appear to be unedited default Wix template links.
+- **Evidence of establishment:** Chamber of Commerce directory + a city-data.com business-entity registry record both independently state the agency was founded in 1989 (~37 yrs).
+- **Services:** Insurance agency (personal + likely commercial lines — page does not itemize).
+- **Contact:** (973) 589-6350; ironboundagency@yahoo.com; 376 Chestnut St, Newark (Ironbound), NJ 07105.
+- **Source(s):** https://www.chamberofcommerce.com/business-directory/new-jersey/newark/insurance-agency/2000440833-ironbound-insurance-agency-inc ; https://www.city-data.com/business-entities/NJ/IRONBOUND-INSURANCE-AGENCY-INC-0100391506-NJ.html ; https://ironboundagency.wixsite.com/website (direct fetch)
+
+### 12. AWG Major Appliance Repair, LLC
+- **Current site:** `awgappliancerepairs.com` — scout re-verified by direct `WebFetch`: the page is a bare SEO doorway — ~100+ hyperlinked city/state combinations (e.g. "Superior, WI," "Duncan Falls, OH") following a `city-state.awgappliancerepairs.com` pattern, and literally nothing else: no service descriptions, no contact info, no imagery, no about/testimonials content. A real local appliance-repair business is paying for or maintaining a page that shows customers zero actual information about the business.
+- **Evidence of establishment:** BBB file opened 12/21/2017 (A+ rating, not accredited). YellowPages states 21 years in business; Nextdoor states "over 15 years of experience" — the range itself (15 vs 21 yrs) should be confirmed on the call rather than quoted as a single fact, but both sources independently agree on "well over a decade."
+- **Services:** Major appliance repair (per BBB category).
+- **Contact:** (973) 699-8152; 72 Huntington Ter, Newark (Weequahic), NJ 07112; owner name not yet confirmed.
+- **Source(s):** https://www.bbb.org/us/nj/newark/profile/major-appliance-services/awg-major-appliance-repair-llc-0221-90183694 ; https://awgappliancerepairs.com (direct fetch) ; YellowPages/Nextdoor listings
+
+**Dropped after verification (not listed above):** Laurence M. Simon, CPA (East Orange) — no website (would have qualified on rules 1/2/3), but a 2003 SEC administrative proceeding (Release 34-48580) plus related federal securities-fraud/wire-fraud charges tied to his role as CFO of Medi-Hut Company, Inc. (2001–2003) is a reputational liability we should not hand Harry without flagging it, so the candidate is excluded rather than footnoted with a caveat.
+
+---
+
+## Scoring — 2026-08-17
+
+Scored against `pipeline/rubric.md`. All 12 pass the hard qualification rules (weak/no site
++ established + reachable). Ties broken toward the most dramatic website gap on the most
+clearly established business.
+
+**Every gap claim in this table was independently re-verified by the Analyst on 2026-08-17**
+— direct `curl` / `openssl s_client` against the live host, plus fetches of the actual page
+HTML — before it was scored. As in the 2026-08-13 run, that re-verification moved several
+rows materially, **three of them downward**. Those corrections are listed first, because
+Harry must not repeat a claim on a call that turns out not to be true.
+
+| # | Business | Gap/30 | Est/25 | Fit/20 | Breadth/15 | Contact/10 | Bonus | Total | Rank |
+|---|----------|--------|--------|--------|------------|------------|-------|-------|------|
+| 6 | Bernie's Tire & Auto | 30 | 24 | 20 | 10 | 8 | +10 | **102** | **1** |
+| 2 | Kayode Agunbiade & Co., CPAs | 30 | 22 | 20 | 13 | 8 | +0 | **93** | **2** |
+| 5 | Law Office of Bart J. Klein | 24 | 24 | 20 | 11 | 8 | +1 | **88** | **3** |
+| 8 | Karis Lock Company, Inc. | 20 | 24 | 20 | 14 | 8 | +2 | 88 | 4 |
+| 4 | Jerome H. Leifer, CPA | 30 | 20 | 20 | 10 | 8 | +0 | 88 | 5 |
+| 1 | Biltwell Upholstering Shop | 30 | 21 | 20 | 9 | 6 | +1 | 87 | 6 |
+| 10 | Steve Izzo Custom Furniture Repair | 17 | 25 | 20 | 14 | 8 | +1 | 85 | 7 |
+| 11 | Ironbound Insurance Agency, Inc. | 27 | 22 | 20 | 9 | 7 | +0 | 85 | 8 |
+| 7 | NJ Camera / Livingston Camera | 28 | 21 | 12 | 12 | 8 | +1 | 82 | 9 |
+| 9 | Fisher Auto Transmission Inc. | 18 | 21 | 20 | 14 | 5 | +1 | 79 | 10 |
+| 12 | AWG Major Appliance Repair, LLC | 29 | 17 | 20 | 7 | 5 | +1 | 79 | 11 |
+| 3 | Essex Security Locksmiths | 18 | 20 | 20 | 12 | 5 | +1 | 76 | 12 |
+
+### Scoring notes
+
+#### Corrections to scouting claims — re-tested, and three did not survive
+
+**Do not say any of these on a call.**
+
+- **#3 Essex Security Locksmiths — "early-2000s layout, broken/missing images, not
+  mobile-friendly" is wrong on all three counts.** The live page at
+  `https://www.essexlocksmithnj.com/new/` is a **2016 WordPress build on a custom theme**
+  (asset paths are `/wp-content/uploads/2016/07/`), it carries
+  `<meta name="viewport" content="width=device-width, initial-scale=1">`, it uses no table
+  layout, and the two banner images I pulled both return **HTTP 200 with real image bytes**
+  (328 KB and 235 KB JPEGs). The genuine defects are narrower: the footer reads
+  **"© Essex Locksmith 2017"** (frozen nine years) and **one image is referenced over
+  `http://` on an `https://` page**, a mixed-content warning. That is dated-but-functional —
+  the rubric's low-scoring case. Gap **28 → 18**, dropping it from mid-pack to last.
+- **#8 Karis Lock — the "entire homepage sections duplicated" claim is overstated.** I
+  counted the repeats: `"Keeping You Safe"` appears **2×**, `"Karis Lock Company"` **4×**,
+  `"40 Years"` **7×** across a 102 KB page. That is ordinary heading/nav/footer recurrence
+  in a one-page-scroller theme, not the section-level duplication described. The site is
+  responsive (viewport present) and runs **WordPress 6.5.3**. The real, checkable defect is
+  the frozen **"© 2021 Karis Lock Co"** footer. Gap **26 → 20**. Everything *else* about
+  this candidate is genuinely strong — see rank 4.
+- **#6 Bernie's Tire & Auto — the cert is broken, but not for the stated reason, and the
+  real reason is worse.** The scout recorded "certificate has expired." It is **both
+  self-signed AND expired**: `subject=CN=berniestireandauto.com` and
+  `issuer=CN=berniestireandauto.com` are identical (self-signed), and it expired
+  **notAfter=Mar 5 07:11:19 2025 GMT** — over **17 months ago**. `curl` fails closed with
+  `SSL certificate problem: self signed certificate`. A merely expired cert from a real CA
+  is a lapsed bill; a self-signed one that also expired means **no valid certificate has
+  ever been installed**. Gap stays at the maximum **30** — the correction makes the pitch
+  stronger, not weaker, and Harry should describe it as a security warning, not a lapsed
+  renewal.
+- **#10 Steve Izzo — "early-2010s WordPress-era template" undersells how maintained this
+  site is.** It runs **WordPress 7.0.4** (current), has a well-written title tag
+  (*"Furniture Repair in North Jersey Since 1948 | Steve Izzo"*) and a real hand-written meta
+  description. Somebody looks after this site. It is plain and dated-looking, not broken or
+  abandoned. Gap **24 → 17**, the lowest in the pool — which is why a business with the
+  single best establishment story on the board (rank 7) is not a finalist.
+
+#### Claims that were re-tested and HELD
+
+- **#12 AWG Major Appliance Repair — confirmed, and it is worse in the specifics.** The page
+  carries **101 links, zero images, zero service descriptions, and the business's own phone
+  number appears literally 0 times**. The links are `city-pill` anchors to subdomains for
+  *Mortons Gap, KY*, *Iola, TX*, *Dwight, NE*, *Cornucopia, WI*, *West Enfield, ME* — random
+  nationwide towns with no connection to a Newark appliance shop. It is a pure SEO doorway
+  page. Gap **29** stands. What sinks the row is everything else: establishment evidence is
+  the weakest in the pool (BBB file only 12/21/2017, against YellowPages' "21 years" and
+  Nextdoor's "over 15" — a conflict nobody has resolved), the trade is single-service, and
+  there is no owner name and no email.
+- **#5 Bart J. Klein — the COVID banner is real and still live today.** Captured verbatim
+  from the homepage: a **"COVID-19 ALERT"** heading over **"COVID-19 Quarantine Update — In
+  regards to Covid-19, We are reviewing the best guidelines for our city and state for how…"**
+  The year `2018` appears **9×** in the page source (the stalled blog) against `2026` just
+  **2×** (the auto-generated copyright). **No email address appears anywhere on the page.**
+  One correction to note: the site itself is not technically broken — it runs **WordPress
+  7.0.2** and is responsive — so the gap is scored **24**, not higher. Its viewport does
+  carry `maximum-scale=1.0, user-scalable=no`, which disables pinch-zoom; a real
+  accessibility defect, but a fix rather than a rebuild.
+- **#7 NJ Camera — confirmed, including a defect the scout did not catch.** Raw
+  `isLogged` template syntax appears **4×** as literal text, `"Slide title"` **3×**, and
+  `"Write your caption here"` **3×**. Beyond that: **the page's `<title>` tag is empty** — a
+  ~70-year-old business is publishing an untitled homepage, which is about as bad as
+  on-page SEO gets. Gap **28**.
+- **#1 / #2 / #4 — the three "no website" findings all hold.** Independent searches for
+  Biltwell, Kayode Agunbiade & Co., and Jerome H. Leifer surfaced only directory listings
+  (BBB, Yelp, Manta, YellowPages, D&B, CPAdirectory, TaxBuzz, ptindirectory, Nextdoor,
+  Chamber rosters). No firm-owned domain exists for any of the three. Each scores the
+  maximum **30** on gap.
+
+#### Why the top 3 are the top 3
+
+- **#1 Bernie's Tire & Auto (102) — the highest score this pipeline has produced, and it
+  earns it on evidence rather than enthusiasm.** It is the only candidate that maxes gap
+  (30) *and* takes the full reputation bonus (+10). The gap is the most demonstrable kind
+  there is: **every visitor who types the domain gets a full-page browser security
+  interstitial**, and has for 17 months. The reputation is extraordinary and independently
+  verified across three separate platforms — **5.0/5 across 159 CARFAX reviews** and **839
+  reviews on SureCritic**. A shop that has collected 839 reviews is a shop that cares
+  intensely what customers think, which is exactly the buyer profile. **Established 1962**
+  (~64 years). It also has a **published email**, which decides Harry's first move.
+- **#2 Kayode Agunbiade & Co., CPAs (93) — maximum gap on a genuinely institutional
+  business.** No website at all after **38 years** (D&B: founded 1988). A licensed CPA
+  (#46507) running a firm that does tax, bookkeeping, payroll, consulting, business planning
+  **and nonprofit audit work** — six service lines, which is a natural five-page site and a
+  bigger sale than a single-trade prospect. Critically, it is **currently active**: a
+  dues-paying member of the 2025 Chamber of Commerce of the Oranges roster, not a fossil
+  listing. The +0 review bonus is the one soft spot — no meaningful public review volume
+  was found, which is itself a symptom of having no web presence to collect them.
+- **#3 Law Office of Bart J. Klein (88) — the tiebreak, and it was a genuine three-way at
+  88.** Klein, Karis Lock, and Jerome Leifer all landed on 88. The rubric breaks ties
+  "toward the most dramatic website gap on the most clearly established business," and that
+  clause splits: **Leifer has the bigger gap** (no site at all, 30) but is the *least*
+  established of the three (a solo practitioner whose own sources disagree — "36 years in
+  business" vs a review saying he has practiced "since 1997," and only 2 reviews on
+  Birdeye). **Karis is equally established** (24) but has the *weakest* gap (20) now that
+  the duplication claim has been corrected. Klein is the only one of the three that is
+  strong on both axes at once — gap 24, established 24.
+  Three further reasons, stated plainly because the tie was close enough that the reasoning
+  should be auditable:
+  1. **A live COVID-19 quarantine banner on a law firm's homepage in August 2026 is a
+     credibility problem, not a cosmetic one.** Klein sells judgment and attention to
+     detail. The gap attacks the exact thing he sells, which makes it far easier to raise
+     without insulting him.
+  2. **He already pays for web presence and simply abandoned it** — a current WordPress
+     install and a maintained Martindale profile. A business that already budgets for a
+     website is a materially easier sell than one that has never wanted one, which is the
+     honest risk with both Leifer and Biltwell.
+  3. **Shortlist diversity.** With Kayode already at #2, promoting Leifer would hand Harry
+     two solo CPAs with near-identical pitches. Auto / CPA / law gives him three distinct
+     conversations.
+- **Ranks 4–6 are strong and should not be discarded.** **Karis Lock** (named owner Peter
+  Karis, 40 years, A+ BBB, and the **broadest service list in the pool at 14/15**) is the
+  best fallback if Klein passes. **Biltwell** (87) has maximum gap and ~50 years but its
+  founding year is genuinely unresolved — siccode/uscompanies say **incorporated 1974**
+  while BBB says **started locally 9/1/1989** — and its owner is publicly known only as
+  **"Rocco"**, with no surname and no email, which is what holds contact to 6/10.
+
+#### A note on #7 NJ Camera and the static-fit rule
+
+NJ Camera scores a dramatic **28** on gap and would otherwise be finalist material. It is
+held out by **static fit, scored 12/20 — the lowest in the pool.** Their site runs a
+`/shop-catalog` with cart items and a login state (that is what the leaked `isLogged`
+conditional *is*), which means the business wants **retail e-commerce with changing
+inventory** — explicitly on CLAUDE.md's skip list, and the opposite of the
+build-once-barely-touch-it product we sell. Their photo *services* half (passport photos,
+printing, film developing) is a perfect static brochure. **Worth revisiting only if Harry
+wants to pitch a services-only brochure site and leave the store catalog alone** — that is a
+real conversation, but it is a different product, so it should be a deliberate choice rather
+than a default.
+
+## Candidates — Columbus, OH — 2026-08-31
+
+**Territory override for this run: Columbus, Ohio metro** (Dublin, Westerville, Worthington, Hilliard, Grove City, Gahanna, Reynoldsburg, Upper Arlington, Bexley, Pickerington, New Albany, Powell, Delaware, Grandview Heights, Whitehall, Canal Winchester, Groveport). NJ sections above are unrelated/unaffected.
+
+| # | Business | Town | Niche | Web presence | Established signal | Contact | Qualifies? |
+|---|----------|------|-------|--------------|--------------------|---------|-----------|
+| 1 | M & E Tree Service ("The Ohio Tree Man") | Westerville | tree service | none working — primary domain (theohiotreeman.com) fails to resolve (DNS error); secondary domain (trustedtreeman.com) is a bare "Copy of M+E Tree Service" placeholder stub | servicing Westerville "since 1984" (41+ yrs, per multiple directories) | (614) 898-7592, 56 E College Ave, Westerville OH 43081; owner Mike (Michael Etheridge) | yes |
+| 2 | Hilliard Lawn & Garden | Hilliard | lawn/garden equipment sales & service | hilliardlawnequipment.com throws an SSL certificate error ("unable to verify the first certificate") — browsers block it | family-owned "since 1971" (55 yrs) — confirmed via local TV feature (Fox 28) plus BBB | (614) 876-4054, 5300 Cemetery Rd, Hilliard OH 43026 | yes |
+| 3 | Evans Funeral Home, Inc. | Columbus (serves Whitehall/E. Columbus area) | funeral home | evansfuneralhome.net returns HTTP 403 Forbidden — site is blocked/broken for visitors | Richard A. Evans opened the home in 1939 (87 yrs); now run by Richard R. Evans, daughter Melanie Evans and son-in-law Dwight Secrest | (614) 237-2553, 4171 E Livingston Ave, Columbus OH 43227 | yes |
+| 4 | Timberland Tree Company | Delaware | tree service | timberlandtreeco.wixsite.com — bare unmodified Wix template, Wix branding banner still visible, stale copyright (2017) | "more than a decade" of tree removal/trimming/cabling experience per site copy | (740) 369-0480; owner Tony Fisher | yes |
+| 5 | A&C Landscaping Services | Hilliard | landscaping / hardscape / lawn care | acohiolandscaping.com fails to resolve (DNS error) — no working site despite being listed as their URL on directories | site/directories claim "20 years of experience" in the trade, though the LLC itself appears to date to ~2018 (flag: confirm business tenure vs. owner experience on first call) | (614) 820-5200 | yes |
+| 6 | Black's Furniture Restoration | Columbus (Reynoldsburg/Whitehall-adjacent, 43232) | furniture restoration/upholstery | blacksfurniture.net — dated mid-2010s Wix build, stale copyright (©2021), "by appointment only" | "serving the Columbus, Ohio area since 1972" (54 yrs) | (614) 870-6165, 3544 Watkins Rd, Columbus OH 43232 | yes |
+| 7 | Buckeye Unlimited Upholstery | Columbus | upholstery / furniture repair | buckeyeunlimitedllc.com — old WordPress theme, no mobile-responsive layout, template copyright error | "more than 55 years of business," family-owned (per site copy — confirm founding year on first call) | 614-846-5811, 5424 Byers Circle W, Columbus OH 43229 | yes |
+| 8 | Winfree & Associates, Inc. (CPA) | Pickerington | accounting / tax prep | wincpas.com — early-2010s WordPress theme, stale copyright (2017), clunky non-optimized mobile layout, plain HTTP (no working modern styling) | "a part of the Pickerington community for over 30 years"; team cites "78 years of tax service experience combined" | (614) 837-8291, 692 Hill Rd N, Pickerington OH 43147 | yes |
+| 9 | Economic Appliance Service | Columbus (west side) | appliance repair | economicappliancerepair.com returns HTTP 403 Forbidden (confirmed twice) — site is inaccessible | "serving the greater Columbus area since 1985" (41 yrs); owner has 35+ yrs experience | (614) 279-2501 (alt (614) 482-2797), 4156 W Broad St, Columbus OH 43228 | yes |
+| 10 | The Frame Station | Columbus / Grandview Heights | custom picture framing | theframestation.com fails to load — SSL handshake error, site unreachable | BBB: started 9/3/1975 (51 yrs), owner Steve Barnes | (614) 488-5251, 1761 W 5th Ave, Columbus OH | yes |
+| 11 | Mount Water Well Drilling | Groveport / New Albany area (based Lancaster/Delaware side) | well drilling & water treatment | mountdrilling.com is live but moderately dated — mid-2010s layout, no contemporary responsive polish | founded 1963 by Richard L. Mount (63 yrs); current owner Todd Mount since 1991 | 740-323-0228 (toll-free 800-881-8612) | yes |
+
+### 1. M & E Tree Service ("The Ohio Tree Man")
+- **Current site:** theohiotreeman.com fails to resolve (DNS lookup error, `ENOTFOUND`) — effectively no live website. A secondary domain, trustedtreeman.com, loads but shows only a bare placeholder ("Copy of M+E Tree Service") with no real content, navigation, or contact info.
+- **Evidence of establishment:** Multiple sources (BBB, Yelp, Manta, Buzzfile) describe the business as "servicing the Westerville area since 1984," now operating locally as "The Ohio Tree Man by M&E." (Aggregator claim — confirm founding year and current ownership on first call.)
+- **Services:** Tree removal, lot clearing, shaping/trimming/pruning, stump grinding.
+- **Contact:** (614) 898-7592; 56 E College Ave, Westerville, OH 43081; team led by Mike (Michael Etheridge per Buzzfile).
+- **Source(s):** [BBB](https://www.bbb.org/us/oh/westerville/profile/tree-service/m-e-tree-service-0302-19001813), [Yelp](https://www.yelp.com/biz/m-and-e-tree-service-westerville), [Buzzfile](https://www.buzzfile.com/business/M.And.E-Tree-Service-614-898-7592), [Facebook](https://www.facebook.com/yourwestervilletreeservice/), [trustedtreeman.com](https://trustedtreeman.com/)
+
+### 2. Hilliard Lawn & Garden
+- **Current site:** hilliardlawnequipment.com throws "unable to verify the first certificate" — a broken/expired SSL chain that blocks most browsers from loading the site at all.
+- **Evidence of establishment:** Local TV feature (Fox 28 Columbus, "Good Day Extra") profiled it as "family-owned Hilliard Lawn & Garden remains a community cornerstone since 1971" (55 yrs); confirmed on their own About page and BBB listing.
+- **Services:** Lawn and garden equipment sales & service — Stihl, Exmark, Toro, Honda brands.
+- **Contact:** (614) 876-4054; 5300 Cemetery Rd, Hilliard, OH 43026.
+- **Source(s):** [Fox 28 feature](https://myfox28columbus.com/features/good-day-extra/family-owned-hilliard-lawn-garden-remains-a-community-cornerstone-since-1971), [BBB](https://www.bbb.org/us/oh/hilliard/profile/lawn-and-garden/hilliard-lawn-garden-llc-0302-9000041), [Yelp](https://www.yelp.com/biz/hilliard-lawn-and-garden-hilliard), [hilliardlawnequipment.com](https://www.hilliardlawnequipment.com/)
+
+### 3. Evans Funeral Home, Inc.
+- **Current site:** evansfuneralhome.net returns HTTP 403 Forbidden on direct fetch — the site is inaccessible/broken for visitors trying to reach it directly.
+- **Evidence of establishment:** Richard A. Evans opened the funeral home in 1939 (87 yrs); BBB profile and Legacy.com corroborate continuous operation; now run by Richard R. Evans with daughter Melanie Evans and son-in-law Dwight Secrest.
+- **Services:** Funeral and cremation services for Central Ohio families.
+- **Contact:** (614) 237-2553; 4171 E Livingston Ave, Columbus, OH 43227 (serves the Whitehall/East Columbus corridor).
+- **Source(s):** [BBB](https://www.bbb.org/us/oh/columbus/profile/funeral-homes/evans-funeral-home-inc-0302-9000006), [Yelp](https://www.yelp.com/biz/evans-funeral-home-columbus), [Legacy.com](https://www.legacy.com/funeral-homes/ohio/columbus/evans-funeral-home-columbus/fh-6019), [evansfuneralhome.net](http://www.evansfuneralhome.net/)
+
+### 4. Timberland Tree Company
+- **Current site:** timberlandtreeco.wixsite.com/mysite — an unmodified free Wix template (Wix branding banner still visible at top), stale copyright footer reading "2017," minimal imagery, no testimonials or certifications beyond a bare "Licensed, Bonded, Insured" line.
+- **Evidence of establishment:** Site copy claims "more than a decade" specializing in tree removal, trimming, pruning, cabling, deadwooding, stump removal and storm cleanup. (Site claim — confirm exact founding year on first call.)
+- **Services:** Tree removal, trimming, pruning, cabling, deadwooding, stump removal, storm damage cleanup.
+- **Contact:** (740) 369-0480; owner Tony Fisher.
+- **Source(s):** [timberlandtreeco.wixsite.com](https://timberlandtreeco.wixsite.com/mysite), [YellowPages Delaware OH arborists listing](https://www.yellowpages.com/delaware-oh/arborists)
+
+### 5. A&C Landscaping Services
+- **Current site:** acohiolandscaping.com fails to resolve (DNS lookup error, `ENOTFOUND`) despite being listed as the company's URL across Yelp, HomeAdvisor and other directories — no working site today.
+- **Evidence of establishment:** Directory listings describe the company as "family-owned and operated in Hilliard, OH" with "20 years of experience providing professional landscaping and lawn care services," though other sources place the LLC's founding around 2018. **Flag for first call:** confirm whether "20 years" refers to the owner's trade experience or the business's actual tenure — the two don't reconcile from public sources.
+- **Services:** Landscaping, lawn care/maintenance, tree services (removal, trimming, planting, root removal), paver installation, driveways, concrete work, artificial turf, fencing, hardscaping, mulching, irrigation, bush trimming, yard cleanup, patio installation.
+- **Contact:** (614) 820-5200.
+- **Source(s):** [Yelp](https://www.yelp.com/biz/a-and-c-landscaping-services-hilliard), [HomeAdvisor](https://www.homeadvisor.com/rated.ACLandscaping.124898519.html), [acohiolandscaping.com](https://acohiolandscaping.com/)
+
+### 6. Black's Furniture Restoration
+- **Current site:** blacksfurniture.net — a dated, legacy-Wix-template build with wood-themed imagery, basic sections, stale copyright ("©2021") despite a "By Appointment Only" note suggesting the business is still active; feels mid-2010s in execution and is not actively refreshed.
+- **Evidence of establishment:** Site states "serving the Columbus, Ohio area since 1972" (54 yrs). A memorial notice on the site ("In Memory: Of Tony Maiberger 12/28/2023") suggests a recent change in personnel worth asking about directly.
+- **Services:** Custom furniture restoration and repair, residential and commercial.
+- **Contact:** (614) 870-6165; 3544 Watkins Rd, Columbus, OH 43232.
+- **Source(s):** [blacksfurniture.net](https://www.blacksfurniture.net/)
+
+### 7. Buckeye Unlimited Upholstery
+- **Current site:** buckeyeunlimitedllc.com — old WordPress theme with no mobile-responsive layout, plain banner imagery, and a template copyright error reading "2026" (never customized), suggesting minimal upkeep.
+- **Evidence of establishment:** Site claims "more than 55 years of business" as a family-owned upholstery shop. (Site claim — confirm founding year and ownership history on first call.)
+- **Services:** Upholstery and furniture reupholstery/repair.
+- **Contact:** 614-846-5811; 5424 Byers Circle W, Columbus, OH 43229.
+- **Source(s):** [buckeyeunlimitedllc.com](https://buckeyeunlimitedllc.com/), [Houzz listing](https://www.houzz.com/professionals/furniture-refinishing-and-upholstery/columbus-oh-us-probr0-bo~t_11840~r_4509177)
+
+### 8. Winfree & Associates, Inc. (CPA)
+- **Current site:** wincpas.com — early-2010s WordPress theme, basic/unrefined form elements, redundant duplicate social-icon rows, stale copyright ("2017"), clunky rather than optimized mobile execution.
+- **Evidence of establishment:** BBB and the firm's own materials describe it as "a part of the Pickerington community for over 30 years," with the team citing "78 years of tax service experience combined." Principal is Nicholas (Woody) Winfree.
+- **Services:** Accounting and bookkeeping, tax planning and preparation, business advisory, QuickBooks training.
+- **Contact:** (614) 837-8291; 692 Hill Rd N, Pickerington, OH 43147.
+- **Source(s):** [wincpas.com](http://wincpas.com/), [BBB](https://www.bbb.org/us/oh/pickerington/profile/cpa/winfree-associates-inc-0302-51001473), [Pickerington Chamber](https://www.pickeringtonchamber.com/list/member/winfree-associates-inc-3640)
+
+### 9. Economic Appliance Service
+- **Current site:** economicappliancerepair.com returns HTTP 403 Forbidden on direct fetch (confirmed on two separate attempts) — the site is inaccessible to visitors trying to reach it directly, despite being listed as their URL on Yelp/YellowPages/BBB.
+- **Evidence of establishment:** BBB and directory listings state the business has "been serving the greater Columbus area since 1985" (41 yrs); owner has "over 35 years of experience" in appliance repair.
+- **Services:** Repair of major home appliances (residential), refrigerators, washers/dryers, ranges, dishwashers.
+- **Contact:** (614) 279-2501 (primary, per BBB); alternate number (614) 482-2797 also listed across directories — confirm which is current on first call. Address: 4156 W Broad St, Columbus, OH 43228. Email: economicappliance@sbcglobal.net.
+- **Source(s):** [BBB](https://www.bbb.org/us/oh/columbus/profile/major-appliance-parts/economic-appliance-service-0302-1656), [Yelp](https://www.yelp.com/biz/economic-appliance-service-columbus-3), [economicappliancerepair.com](https://www.economicappliancerepair.com/)
+
+### 10. The Frame Station
+- **Current site:** theframestation.com fails to load — browser returns an SSL handshake error ("TLSV1_ALERT_UNRECOGNIZED_NAME"), meaning the site is effectively unreachable/broken for visitors despite being listed as their URL on BBB and directories.
+- **Evidence of establishment:** BBB records the business as started 9/3/1975 (51 yrs), owned by Steve Barnes; described as "a family-owned custom framing shop serving the Grandview area since 1975."
+- **Services:** Custom picture framing.
+- **Contact:** (614) 488-5251; 1761 W 5th Ave, Columbus, OH (Grandview Heights area); email framestation@sbcglobal.net.
+- **Source(s):** [BBB](https://www.bbb.org/us/oh/columbus/profile/picture-frame-dealers/the-frame-station-0302-1323), [Destination Grandview directory](https://www.destinationgrandview.org/news-blog/shop-dine-directory/the-frame-station/), [Facebook](https://www.facebook.com/framestationcolumbus)
+
+### 11. Mount Water Well Drilling
+- **Current site:** mountdrilling.com loads but is moderately dated — mid-2010s-era layout, basic navigation and testimonial sections, no contemporary responsive polish despite an updated copyright year.
+- **Evidence of establishment:** Founded by Richard L. Mount in 1963 (63 yrs); current owner Todd Mount purchased the business from his father in January 1991. BBB member, industry association credentials displayed.
+- **Services:** Water well drilling, well repair, water softener and water treatment services; serves Groveport, New Albany and surrounding Central/Southeast Ohio (also operates under lancasterdrilling.com for the Lancaster, OH side of the service area).
+- **Contact:** 740-323-0228 (local) / 800-881-8612 (toll-free).
+- **Source(s):** [mountdrilling.com](https://mountdrilling.com/), [lancasterdrilling.com](https://lancasterdrilling.com/)
+
+## Scoring — Columbus, OH — 2026-08-31
+
+Scored against `pipeline/rubric.md`. **Territory override: Columbus, Ohio metro.**
+
+**Every gap claim below was independently re-verified by the Analyst on 2026-08-31** —
+direct `curl` / `dig` / `openssl s_client` against the live hosts, plus fetches of the
+actual page HTML — before it was scored. As in the 2026-08-13 and 2026-08-17 runs, that
+re-verification moved several rows materially, **five of them downward**, and one candidate
+effectively out of qualification. Those corrections are listed first, because Harry must
+not repeat a claim on a call that turns out not to be true.
+
+| # | Business | Gap/30 | Est/25 | Fit/20 | Breadth/15 | Contact/10 | Bonus | Total | Rank |
+|---|----------|--------|--------|--------|------------|------------|-------|-------|------|
+| 1 | M & E Tree Service ("The Ohio Tree Man") | 30 | 24 | 20 | 11 | 9 | +1 | **95** | **1** |
+| 10 | The Frame Station | 30 | 24 | 19 | 7 | 9 | +0 | **89** | **2** |
+| 8 | Winfree & Associates, Inc. (CPA) | 21 | 23 | 20 | 14 | 9 | +0 | **87** | **3** |
+| 5 | A&C Landscaping Services | 30 | 15 | 20 | 15 | 5 | +0 | 85 | 4 |
+| 3 | Evans Funeral Home, Inc. | 20 | 25 | 17 | 12 | 9 | +0 | 83 | 5 |
+| 4 | Timberland Tree Company | 25 | 15 | 20 | 12 | 8 | +0 | 80 | 6 |
+| 6 | Black's Furniture Restoration | 20 | 23 | 20 | 8 | 7 | +0 | 78 | 7 |
+| 11 | Mount Water Well Drilling | 12 | 25 | 20 | 12 | 7 | +2 | 78 | 8 |
+| 7 | Buckeye Unlimited Upholstery | 20 | 20 | 20 | 8 | 7 | +0 | 75 | 9 |
+| 2 | Hilliard Lawn & Garden | 8 | 25 | 5 | 13 | 7 | +8 | 66 | 10 |
+| 9 | Economic Appliance Service | 5 | 22 | 20 | 8 | 9 | +0 | 64 | 11 |
+
+**Table revised 2026-08-31 after further verification — Hilliard Lawn & Garden was scored
+1st (98) in my first pass and is now 10th (66). The reasoning is in the Hilliard entry of
+the corrections list below; the original score is stated there so the change is auditable.**
+
+### Corrections to scouting claims — re-tested, and five did not survive
+
+**Do not say any of these on a call.**
+
+- **#9 Economic Appliance Service — the "HTTP 403 Forbidden / site is inaccessible" claim
+  is WRONG, and this candidate should be treated as disqualified.** With a normal browser
+  User-Agent the site returns **HTTP 200 and 689,543 bytes** of real HTML. It carries
+  `<meta name="viewport" content="width=device-width, initial-scale=1">` (responsive), runs
+  **WP Rocket 3.21.3** (a current premium caching plugin), sits on a custom
+  `rainmakerfx-theme-5` theme, and serves media from **`wp-content/uploads/2025`**. This is
+  an actively managed, modern marketing site. The 403 the scout hit twice was a Cloudflare
+  bot-block against the *fetcher*, not a broken site. Gap **29 → 5**. It fails
+  qualification rule #1 (weak web presence) outright.
+
+- **#10 The Frame Station — the "SSL handshake error" claim is right about the symptom and
+  badly understates the cause. The truth is far better for us.** The apex does throw
+  `TLSV1_ALERT_UNRECOGNIZED_NAME`, but `https://www.theframestation.com/` returns **HTTP
+  200 — and 114 bytes**: `<script>window.onload=function(){window.location.href="/lander"}</script>`.
+  `/lander` **307-redirects to `https://forsale.godaddy.com/forsale/www.theframestation.com`**,
+  and the domain's nameservers are **`ns1.afternic.com` / `ns2.afternic.com`**.
+  **Their domain has lapsed and is listed for sale on the GoDaddy/Afternic aftermarket.**
+  This is not a broken site — the business no longer owns its web address. Gap stays at the
+  maximum **30**, and the correction makes the pitch dramatically stronger.
+
+- **#2 Hilliard Lawn & Garden — DISQUALIFIED on further verification. I initially scored
+  this 98/100 and ranked it 1st; that was wrong, and here is why.** The scout's SSL finding
+  is real and even worse than described — but it describes an *abandoned* domain, not their
+  website. On `hilliardlawnequipment.com` (the URL listed on BBB, Yelp and YellowPages) the
+  certificate served is a **CloudFlare Origin CA certificate** — a type browsers never trust
+  — and its Subject Alternative Name is **`*.ari-test.net`, not their domain at all**: a
+  leftover *test* cert from their old dealer-website vendor (nameservers `ns1.arinetdns.com`
+  = ARI Network Services). Behind it, **both HTTP and HTTPS return HTTP 422 /
+  "An Error Occurred."**
+  **However, the scout missed a second domain, and it changes everything.**
+  `hilliardlawnandgarden.com` is their real, current site: it sits on Cloudflare
+  (`dell/lakas.ns.cloudflare.com`) behind a valid **Google Trust Services certificate issued
+  2026-07-21** — renewed six weeks ago, i.e. actively maintained. Its `robots.txt` disallows
+  `/inventory/`, `/Compare/`, `/sso/`, `/ajaxcontent/`, and Google has indexed **thousands of
+  machine-generated inventory listings** off it (Toro 906 items, STIHL 865, Cub Cadet 329,
+  Ferris 287, Exmark 284), with dealer-CRM parameters (`dscompanyid=134114`,
+  `settingscrmid=22449379`) in the URLs.
+  So Hilliard **fails both hard filters**: they do *not* have a weak web presence (their site
+  is live, modern-hosted and vendor-maintained), and they are *not* a static-site fit — a
+  searchable equipment inventory is exactly the constantly-changing content CLAUDE.md tells
+  us to skip. Gap **27 → 8**, Fit **18 → 5**, total **98 → 66**. Their genuine problem is
+  listings hygiene (a dead legacy URL on their BBB/Yelp profiles), which is not a website
+  sale. **Do not pitch them a brochure site.**
+
+- **#8 Winfree & Associates — "early-2010s WordPress theme… plain HTTP (no working modern
+  styling)" is wrong on the platform and wrong on HTTPS.** The site runs **WordPress 6.9.7
+  (current)**, serves fine over **HTTPS (200)**, and carries
+  `<meta name="viewport" content="width=device-width, initial-scale=1">` — it is responsive.
+  The genuine defects are narrower but real: it sits on the **free stock "HashOne" theme**,
+  every media asset comes from **`wp-content/uploads/2017`** and nothing newer, the footer
+  reads **"Copyright 2017 Wincpas.com"** (frozen nine years), and **every internal nav link
+  is hardcoded `http://wincpas.com/...`** on a site that also answers HTTPS — a
+  mixed-content/insecure-link problem. Dated and neglected, not broken. Gap **24 → 21**,
+  which drops it out of the top 3.
+
+- **#7 Buckeye Unlimited Upholstery — "no mobile-responsive layout" is wrong.** The page
+  carries a viewport meta tag and runs a custom theme (`buckeyeunlimitedllcMain`) with
+  All in One SEO 5.0.1.1. The real, checkable defect is that **every uploaded asset dates to
+  `wp-content/uploads/2016`** — the content has not been touched in ten years. Gap
+  **25 → 20**.
+
+- **#11 Mount Water Well Drilling — "mid-2010s-era layout… no contemporary responsive
+  polish" undersells how maintained this site is.** It runs **WordPress 7.1** on the
+  **Divi** theme, is responsive, and its footer reads **"Copyright © 2025 Mount Water Well
+  Drilling"**. Somebody looks after this site. Gap **15 → 12** — the lowest genuine gap in
+  the qualifying pool, which is why the single best establishment story on the board
+  (founded 1963, 63 years) is not a finalist.
+
+- **#6 Black's Furniture Restoration and #4 Timberland Tree Company — both are Wix builds,
+  and Wix output is responsive by default.** Neither is "broken"; both are stale. Black's
+  footer reads **"©2021 by Black's Furniture Restoration"** (gap 22 → 20). Timberland's real
+  defect is not the template but the **address**: it has no custom domain at all, living at
+  `timberlandtreeco.wixsite.com/mysite` (gap 27 → 25).
+
+### Claims that were re-tested and HELD
+
+- **#1 M & E Tree Service — confirmed, and it is the cleanest gap on the board.**
+  `theohiotreeman.com` has **no A record and no NS records whatsoever** — the domain is
+  fully dead, not merely unhosted. The fallback `trustedtreeman.com` returns HTTP 200 but
+  its `<title>` is literally **"Copy of M+E Tree Service"** — an abandoned duplicate. BBB
+  independently records the business start date as **6/1/1984**, A+ rated, accredited since
+  6/1/2023. A 41-year-old business with no working website.
+- **#5 A&C Landscaping — confirmed.** `acohiolandscaping.com` has **no A record and no NS
+  records**; the domain is dead. Scored down only on establishment (the "20 years" vs
+  ~2018-LLC conflict is unresolved in public sources) and contactability (phone only — no
+  owner name, no address, no email).
+- **#3 Evans Funeral Home — the 403 holds but its meaning is UNCERTAIN, so it is scored
+  conservatively.** `evansfuneralhome.net` returns 403 to both `curl` and WebFetch even with
+  a full browser User-Agent, and the body is Cloudflare's **"Attention Required!"** block
+  page. That is a WAF *firewall block*, which real residential browsers often pass. I could
+  not confirm from outside whether ordinary visitors are affected. Gap scored **20**, not 30,
+  and **Harry must not tell them their site is down** without checking it on his own phone
+  first.
+
+### Notes on the top 3
+
+1. **M & E Tree Service (95)** — maximum gap on a 41-year-old business in our proven lead
+   niche (tree service). `theohiotreeman.com` has no A record *and no NS records* — the
+   domain is fully dead, not merely unhosted — and the fallback `trustedtreeman.com` is
+   titled "Copy of M+E Tree Service." Bonus held to **+1**: BBB rates them A+, but Angi sits
+   at ~3.4/5 with at least one missed-appointment complaint. Reputation is a mild negative
+   here, not a selling point.
+2. **The Frame Station (89)** — maximum gap, and the most vivid one on the board: the
+   business **no longer owns its domain**, which now 307-redirects to
+   `forsale.godaddy.com`. 51 years at one address, named owner, published email. Held out of
+   1st only by thin service breadth (7/15 — custom framing is close to a single line) and no
+   usable review volume (**+0**).
+3. **Winfree & Associates (87)** — promoted into the top 3 when Hilliard was disqualified.
+   The best *service breadth* on the board (14/15: business accounting, business tax,
+   personal tax, advisory, exit planning, personal financial services) and a real
+   professional-firm budget. Lowest gap of the three (21) — the site is nine years stale,
+   not broken — but it is the most straightforwardly winnable *sale*.
+
+**Next in line if a finalist doesn't bite: #5 A&C Landscaping (85)** — dead domain and the
+widest service list in the pool, but weak on establishment (the "20 years" vs ~2018-LLC
+conflict is unresolved) and weakest on contactability (phone only; no owner name, no
+address, no email).

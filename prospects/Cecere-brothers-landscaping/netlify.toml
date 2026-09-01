@@ -1,0 +1,18 @@
+[build]
+  command = "sh build-dist.sh"
+  publish = "_dist"
+
+[build.processing]
+  skip_processing = false
+
+# Images and the logo are content-addressed by filename and never change in place.
+[[headers]]
+  for = "/public/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"

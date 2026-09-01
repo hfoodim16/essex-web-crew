@@ -25,22 +25,31 @@
   a{color:inherit;text-decoration:none}
   ::selection{background:var(--red);color:#fff}
 
-  header{position:fixed;inset:0 0 auto;z-index:50;transition:.4s}
-  header.scrolled{background:rgba(12,22,16,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-  .nav{display:flex;align-items:center;justify-content:space-between;height:80px}
+  header{position:relative;z-index:50;background:var(--ink);border-bottom:1px solid var(--line)}
+  .nav{position:relative;display:flex;flex-direction:column;align-items:center;gap:15px;padding-top:20px;padding-bottom:16px}
+  .nav-top{position:relative;width:100%;display:flex;align-items:center;justify-content:center}
+  .nav-bottom{display:flex;align-items:center;justify-content:center;gap:26px;flex-wrap:wrap}
+  /* contact button: pinned top-right on desktop, centered under the logo on narrow screens */
+  .nav-contact{display:flex;flex-direction:column;align-items:center;gap:8px}
+  @media(min-width:721px){
+    .nav-contact{position:absolute;top:20px;right:clamp(20px,5vw,68px);align-items:flex-end}
+    .nav-bottom{padding-bottom:2px}
+  }
+  @media(max-width:720px){.nav-bottom{display:none}}
   .brand{font-family:var(--serif);font-weight:600;font-size:20px;display:flex;align-items:center;gap:12px}
   .brand-logo{background:var(--bone);padding:8px 14px;border-radius:6px}
-  .brand-logo img{display:block;height:34px;width:auto}
-  @media(max-width:480px){.brand-logo img{height:26px}}
+  .brand-logo img{display:block;height:clamp(56px,7vw,86px);width:auto}
+  @media(max-width:480px){.brand-logo img{height:50px}}
   .nav-links{display:flex;gap:22px;font-size:14px;color:var(--bone-dim);letter-spacing:.02em;align-items:center}
   .nav-links a{transition:color .25s;white-space:nowrap}.nav-links a:hover{color:var(--bone)}
   .nav-links a.current{color:var(--sage)}
-  .est{border:1px solid var(--line);padding:12px 22px;border-radius:2px;font-weight:600;font-size:13px;
+  .est{background:var(--red);border:1px solid var(--red);color:#fff;padding:12px 22px;border-radius:2px;
+    font-weight:600;font-size:13px;
     letter-spacing:.06em;text-transform:uppercase;transition:.3s;white-space:nowrap}
-  .est:hover{background:var(--red);border-color:var(--red);color:#fff}
-  @media(max-width:1180px){.nav-links{display:none}}
+  .est:hover{background:var(--red-lt);border-color:var(--red-lt);color:#fff}
+  @media(max-width:720px){.nav-links{display:none}}
 
-  /* mobile nav — .nav-links is hidden below 1180px, this is what replaces it */
+  /* mobile nav — .nav-links is hidden below 720px, this is what replaces it */
   .nav-toggle{display:none;width:46px;height:46px;align-items:center;justify-content:center;
     background:none;border:1px solid var(--line);border-radius:2px;cursor:pointer;flex-shrink:0}
   .nav-toggle span{display:block;width:20px;height:2px;background:var(--bone);position:relative;transition:.25s}
@@ -61,19 +70,8 @@
     letter-spacing:.02em}
   .nav-drawer a:last-child{border-bottom:0}
   .nav-drawer a.current{color:var(--sage)}
-  @media(max-width:1180px){.nav-toggle{display:inline-flex}}
-
-  @media(max-width:560px){
-    .nav{height:68px;gap:8px}
-    .brand-logo{padding:6px 9px}
-    .brand-logo img{height:24px}
-    .est{padding:10px 12px;font-size:11px;letter-spacing:.03em}
-  }
-  @media(max-width:400px){
-    .est{padding:9px 10px;font-size:0}
-    .est::after{content:"Call";font-size:11px;letter-spacing:.06em}
-  }
-  @media(min-width:1181px){.nav-drawer{display:none!important}}
+  @media(max-width:720px){.nav-toggle{display:inline-flex;position:absolute;right:0;top:50%;transform:translateY(-50%)}}
+  @media(min-width:721px){.nav-drawer{display:none!important}}
 
   .contours{position:absolute;inset:0;z-index:0;opacity:.5;pointer-events:none}
 
@@ -95,7 +93,7 @@
   .phero .lede{max-width:56ch;margin-top:24px;font-size:clamp(16px,1.5vw,19px);color:#d7d2c2}
 
   section{position:relative;z-index:2}
-  .pad{padding-top:clamp(72px,11vh,120px);padding-bottom:clamp(72px,11vh,120px)}
+  .pad{padding:clamp(72px,11vh,120px) 0}
   .kicker{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--sage);margin-bottom:18px}
   .sec-head h2{font-family:var(--serif);font-weight:500;font-size:clamp(30px,4.4vw,52px);line-height:1.04;
     letter-spacing:-.02em;max-width:18ch;margin-bottom:48px}
@@ -146,25 +144,33 @@
 
 <header id="hdr">
   <div class="wrap nav">
-    <a href="index.html" class="brand brand-logo">
-      <img src="public/logo-real.png" alt="Cecere Brothers Landscaping, LLC" width="544" height="150">
-    </a>
-    <nav class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="service-property-maintenance.html" class="current">Maintenance</a>
-      <a href="service-landscape-design.html">Design</a>
-      <a href="service-hardscape-masonry.html">Masonry</a>
-      <a href="service-fertilizer-programs.html">Fertilizer</a>
-      <a href="service-irrigation.html">Irrigation</a>
-    </nav>
-    <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navDrawer">
-      <span></span>
-    </button>
-    <a href="tel:+19732263002" class="est">(973) 226-3002</a>
+    <div class="nav-top">
+      <a href="index.html" class="brand brand-logo">
+        <img src="public/logo-real.png" alt="Cecere Brothers Landscaping, LLC" width="544" height="150">
+      </a>
+      <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navDrawer">
+        <span></span>
+      </button>
+    </div>
+    <div class="nav-bottom">
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="service-property-maintenance.html" class="current">Maintenance</a>
+        <a href="service-landscape-design.html">Design</a>
+        <a href="service-hardscape-masonry.html">Masonry</a>
+        <a href="service-fertilizer-programs.html">Fertilizer</a>
+        <a href="service-irrigation.html">Irrigation</a>
+      </nav>
+    </div>
+    <div class="nav-contact">
+      <a href="#contact" class="est">Contact us</a>
+    </div>
   </div>
 <nav class="nav-drawer" id="navDrawer">
   <div class="wrap">
       <a href="index.html">Home</a>
+      <a href="about.html">About Us</a>
       <a href="service-property-maintenance.html" class="current">Maintenance</a>
       <a href="service-landscape-design.html">Design</a>
       <a href="service-hardscape-masonry.html">Masonry</a>
@@ -202,15 +208,15 @@
   </div>
 </section>
 
-<section class="cta pad">
+<section class="cta pad" id="contact">
   <svg class="contours" viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid slice"><use href="#contour"/></svg>
   <div class="wrap">
     <h2 class="reveal">Let's walk your <em>property.</em></h2>
     <p class="reveal">Call and we'll come out, look at the job, and give you a price.</p>
     <a href="tel:+19732263002" class="btn reveal">Call (973) 226-3002</a>
     <p class="mail reveal">
-      Cecere Brothers Landscaping, LLC<br><a href="mailto:contact@cecerebrotherslandscaping.com">contact@cecerebrotherslandscaping.com</a><br><br>
-      Green Lawns Sprinkler, LLC<br><a href="mailto:contact@greenlawnsprinkler.com">contact@greenlawnsprinkler.com</a>
+      Cecere Brothers Landscaping, LLC<br><a href="mailto:mwcecere@verizon.net">mwcecere@verizon.net</a><br><br>
+      Green Lawns Sprinkler, LLC<br><a href="mailto:contact@greenlawnssprinkler.com">contact@greenlawnssprinkler.com</a>
     </p>
   </div>
 </section>
@@ -219,6 +225,7 @@
   <div class="wrap">
     <nav class="foot-nav">
       <a href="index.html">Home</a>
+      <a href="about.html">About us</a>
       <a href="service-property-maintenance.html">Property maintenance</a>
       <a href="service-landscape-design.html">Landscape design &amp; plantings</a>
       <a href="service-hardscape-masonry.html">Hardscapes &amp; custom masonry</a>
@@ -239,8 +246,6 @@
 </footer>
 
 <script>
-  const hdr=document.getElementById('hdr');
-  addEventListener('scroll',()=>hdr.classList.toggle('scrolled',scrollY>40));
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 </script>
@@ -259,7 +264,7 @@
   d.addEventListener('click',function(e){if(e.target.closest('a'))shut();});
   if(sc)sc.addEventListener('click',shut);
   // Following a link on desktop leaves the drawer open behind the layout swap.
-  window.addEventListener('resize',function(){if(window.innerWidth>1180)shut();});
+  window.addEventListener('resize',function(){if(window.innerWidth>720)shut();});
   document.addEventListener('keydown',function(e){if(e.key==='Escape')shut();});
 })();
 </script>

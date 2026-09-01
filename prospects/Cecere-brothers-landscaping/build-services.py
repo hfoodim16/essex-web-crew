@@ -131,6 +131,7 @@ CONTOUR = """<svg width="0" height="0" style="position:absolute"><defs>
 </defs></svg>"""
 
 NAV_ORDER = [
+    ("about.html", "About Us"),
     ("service-property-maintenance.html", "Maintenance"),
     ("service-landscape-design.html", "Design"),
     ("service-hardscape-masonry.html", "Masonry"),
@@ -140,6 +141,7 @@ NAV_ORDER = [
 
 FOOT_NAV = [
     ("index.html", "Home"),
+    ("about.html", "About us"),
     ("service-property-maintenance.html", "Property maintenance"),
     ("service-landscape-design.html", "Landscape design &amp; plantings"),
     ("service-hardscape-masonry.html", "Hardscapes &amp; custom masonry"),
@@ -174,20 +176,53 @@ TEMPLATE = """<!doctype html>
   a{{color:inherit;text-decoration:none}}
   ::selection{{background:var(--red);color:#fff}}
 
-  header{{position:fixed;inset:0 0 auto;z-index:50;transition:.4s}}
-  header.scrolled{{background:rgba(12,22,16,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}}
-  .nav{{display:flex;align-items:center;justify-content:space-between;height:80px}}
+  header{{position:relative;z-index:50;background:var(--ink);border-bottom:1px solid var(--line)}}
+  .nav{{position:relative;display:flex;flex-direction:column;align-items:center;gap:15px;padding-top:20px;padding-bottom:16px}}
+  .nav-top{{position:relative;width:100%;display:flex;align-items:center;justify-content:center}}
+  .nav-bottom{{display:flex;align-items:center;justify-content:center;gap:26px;flex-wrap:wrap}}
+  /* contact button: pinned top-right on desktop, centered under the logo on narrow screens */
+  .nav-contact{{display:flex;flex-direction:column;align-items:center;gap:8px}}
+  @media(min-width:721px){{
+    .nav-contact{{position:absolute;top:20px;right:clamp(20px,5vw,68px);align-items:flex-end}}
+    .nav-bottom{{padding-bottom:2px}}
+  }}
+  @media(max-width:720px){{.nav-bottom{{display:none}}}}
   .brand{{font-family:var(--serif);font-weight:600;font-size:20px;display:flex;align-items:center;gap:12px}}
   .brand-logo{{background:var(--bone);padding:8px 14px;border-radius:6px}}
-  .brand-logo img{{display:block;height:34px;width:auto}}
-  @media(max-width:480px){{.brand-logo img{{height:26px}}}}
+  .brand-logo img{{display:block;height:clamp(56px,7vw,86px);width:auto}}
+  @media(max-width:480px){{.brand-logo img{{height:50px}}}}
   .nav-links{{display:flex;gap:22px;font-size:14px;color:var(--bone-dim);letter-spacing:.02em;align-items:center}}
   .nav-links a{{transition:color .25s;white-space:nowrap}}.nav-links a:hover{{color:var(--bone)}}
   .nav-links a.current{{color:var(--sage)}}
-  .est{{border:1px solid var(--line);padding:12px 22px;border-radius:2px;font-weight:600;font-size:13px;
+  .est{{background:var(--red);border:1px solid var(--red);color:#fff;padding:12px 22px;border-radius:2px;
+    font-weight:600;font-size:13px;
     letter-spacing:.06em;text-transform:uppercase;transition:.3s;white-space:nowrap}}
-  .est:hover{{background:var(--red);border-color:var(--red);color:#fff}}
-  @media(max-width:1180px){{.nav-links{{display:none}}}}
+  .est:hover{{background:var(--red-lt);border-color:var(--red-lt);color:#fff}}
+  @media(max-width:720px){{.nav-links{{display:none}}}}
+
+  /* mobile nav — .nav-links is hidden below 720px, this is what replaces it */
+  .nav-toggle{{display:none;width:46px;height:46px;align-items:center;justify-content:center;
+    background:none;border:1px solid var(--line);border-radius:2px;cursor:pointer;flex-shrink:0}}
+  .nav-toggle span{{display:block;width:20px;height:2px;background:var(--bone);position:relative;transition:.25s}}
+  .nav-toggle span::before,.nav-toggle span::after{{content:"";position:absolute;left:0;width:20px;height:2px;
+    background:var(--bone);transition:.25s}}
+  .nav-toggle span::before{{top:-6px}}
+  .nav-toggle span::after{{top:6px}}
+  .nav-toggle[aria-expanded="true"] span{{background:transparent}}
+  .nav-toggle[aria-expanded="true"] span::before{{top:0;transform:rotate(45deg)}}
+  .nav-toggle[aria-expanded="true"] span::after{{top:0;transform:rotate(-45deg)}}
+  header.menu-open{{background:rgba(12,22,16,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}}
+  .nav-drawer{{display:none;background:transparent;border-top:1px solid var(--line)}}
+  .nav-scrim{{position:fixed;inset:0;background:rgba(6,10,8,.72);display:none;z-index:40}}
+  .nav-scrim.on{{display:block}}
+  .nav-drawer.open{{display:block}}
+  .nav-drawer .wrap{{display:flex;flex-direction:column;padding-top:6px;padding-bottom:14px}}
+  .nav-drawer a{{padding:15px 2px;font-size:15px;color:var(--bone-dim);border-bottom:1px solid var(--line);
+    letter-spacing:.02em}}
+  .nav-drawer a:last-child{{border-bottom:0}}
+  .nav-drawer a.current{{color:var(--sage)}}
+  @media(max-width:720px){{.nav-toggle{{display:inline-flex;position:absolute;right:0;top:50%;transform:translateY(-50%)}}}}
+  @media(min-width:721px){{.nav-drawer{{display:none!important}}}}
 
   .contours{{position:absolute;inset:0;z-index:0;opacity:.5;pointer-events:none}}
 
@@ -252,16 +287,31 @@ TEMPLATE = """<!doctype html>
 
 <header id="hdr">
   <div class="wrap nav">
-    <a href="index.html" class="brand brand-logo">
-      <img src="public/logo-real.png" alt="Cecere Brothers Landscaping, LLC" width="544" height="150">
-    </a>
-    <nav class="nav-links">
-      <a href="index.html">Home</a>
+    <div class="nav-top">
+      <a href="index.html" class="brand brand-logo">
+        <img src="public/logo-real.png" alt="Cecere Brothers Landscaping, LLC" width="544" height="150">
+      </a>
+      <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navDrawer">
+        <span></span>
+      </button>
+    </div>
+    <div class="nav-bottom">
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
 {navlinks}
-    </nav>
-    <a href="tel:+19732263002" class="est">(973) 226-3002</a>
+      </nav>
+    </div>
+    <div class="nav-contact">
+      <a href="#contact" class="est">Contact us</a>
+    </div>
   </div>
+<nav class="nav-drawer" id="navDrawer">
+  <div class="wrap">
+{drawerlinks}
+  </div>
+</nav>
 </header>
+<div class="nav-scrim" id="navScrim"></div>
 
 <section class="phero">
   <div class="phero-photo"></div>
@@ -285,15 +335,15 @@ TEMPLATE = """<!doctype html>
   </div>
 </section>
 
-<section class="cta pad">
+<section class="cta pad" id="contact">
   <svg class="contours" viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid slice"><use href="#contour"/></svg>
   <div class="wrap">
     <h2 class="reveal">Let's walk your <em>property.</em></h2>
     <p class="reveal">Call and we'll come out, look at the job, and give you a price.</p>
     <a href="tel:+19732263002" class="btn reveal">Call (973) 226-3002</a>
     <p class="mail reveal">
-      Cecere Brothers Landscaping, LLC<br><a href="mailto:contact@cecerebrotherslandscaping.com">contact@cecerebrotherslandscaping.com</a><br><br>
-      Green Lawns Sprinkler, LLC<br><a href="mailto:contact@greenlawnsprinkler.com">contact@greenlawnsprinkler.com</a>
+      Cecere Brothers Landscaping, LLC<br><a href="mailto:mwcecere@verizon.net">mwcecere@verizon.net</a><br><br>
+      Green Lawns Sprinkler, LLC<br><a href="mailto:contact@greenlawnssprinkler.com">contact@greenlawnssprinkler.com</a>
     </p>
   </div>
 </section>
@@ -317,10 +367,27 @@ TEMPLATE = """<!doctype html>
 </footer>
 
 <script>
-  const hdr=document.getElementById('hdr');
-  addEventListener('scroll',()=>hdr.classList.toggle('scrolled',scrollY>40));
   const io=new IntersectionObserver(es=>es.forEach(e=>{{if(e.isIntersecting){{e.target.classList.add('in');io.unobserve(e.target)}}}}),{{threshold:.12}});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+<script>
+(function(){{
+  var t=document.querySelector('.nav-toggle'),d=document.getElementById('navDrawer');
+  if(!t||!d)return;
+  var h=t.closest('header'),sc=document.getElementById('navScrim');
+  function shut(){{d.classList.remove('open');h.classList.remove('menu-open');if(sc)sc.classList.remove('on');t.setAttribute('aria-expanded','false');}}
+  t.addEventListener('click',function(){{
+    var open=d.classList.toggle('open');
+    h.classList.toggle('menu-open',open);
+    if(sc)sc.classList.toggle('on',open);
+    t.setAttribute('aria-expanded',open?'true':'false');
+  }});
+  d.addEventListener('click',function(e){{if(e.target.closest('a'))shut();}});
+  if(sc)sc.addEventListener('click',shut);
+  // Following a link on desktop leaves the drawer open behind the layout swap.
+  window.addEventListener('resize',function(){{if(window.innerWidth>720)shut();}});
+  document.addEventListener('keydown',function(e){{if(e.key==='Escape')shut();}});
+}})();
 </script>
 </body>
 </html>
@@ -330,6 +397,14 @@ here = os.path.dirname(os.path.abspath(__file__))
 
 for page in PAGES:
     navlinks = "\n".join(
+        '        <a href="{}"{}>{}</a>'.format(
+            href, ' class="current"' if href == page["file"] else "", label
+        )
+        for href, label in NAV_ORDER
+    )
+    # The drawer carries the same links as the bar. Home is hardcoded ahead of
+    # NAV_ORDER in the bar markup, so the drawer has to prepend it too.
+    drawerlinks = '      <a href="index.html">Home</a>\n' + "\n".join(
         '      <a href="{}"{}>{}</a>'.format(
             href, ' class="current"' if href == page["file"] else "", label
         )
@@ -346,7 +421,8 @@ for page in PAGES:
     html = TEMPLATE.format(
         title=page["title"], desc=page["desc"], photo=page["photo"],
         h1=page["h1"], lede=page["lede"], kicker=page["kicker"], h2=page["h2"],
-        contour=CONTOUR, navlinks=navlinks, footnav=footnav, items=items,
+        contour=CONTOUR, navlinks=navlinks, drawerlinks=drawerlinks,
+        footnav=footnav, items=items,
     )
     with io.open(os.path.join(here, page["file"]), "w", encoding="utf-8") as fh:
         fh.write(html)
