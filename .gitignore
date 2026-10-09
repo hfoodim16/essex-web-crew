@@ -64,3 +64,6 @@ prospects/cedar-grove-transmission/mockup/assets/team.jpg
 prospects/cedar-grove-transmission/mockup/assets/team-sm.webp
 prospects/anthonys-landscaping/mockup/assets/original-header-banner.jpg
 prospects/happy-trees-by-mgm/mockup/assets/logo-og.png
+
+# Scraped research pages: they embed third-party API keys (GitHub push protection blocks them)
+scratch-*.html
