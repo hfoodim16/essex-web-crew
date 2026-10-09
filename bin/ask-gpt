@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# ask-gpt — one read-only GPT turn through Harry's ChatGPT subscription (Codex CLI).
+# No API key, no per-call cost. The model can read files under the repo but never write.
+#
+#   bin/ask-gpt [--astra] [--effort low|medium|high|xhigh] [--image shot.png ...] < prompt.txt
+#   echo "prompt" | bin/ask-gpt
+#
+# Default model: gpt-6.1-sol (workhorse). --astra = gpt-6-astra (frontier, slower).
+# Prints only the model's final message on stdout. Exit 2 = Codex CLI not installed.
+set -euo pipefail
+
+model="gpt-6.1-sol"; effort="medium"; images=()
+while [ $# -gt 0 ]; do
+  case "$1" in
+    --astra)  model="gpt-6-astra" ;;
+    --model)  model="$2"; shift ;;
+    --effort) effort="$2"; shift ;;
+    --image)  images+=(-i "$2"); shift ;;
+    *) echo "ask-gpt: unknown flag $1" >&2; exit 64 ;;
+  esac
+  shift
+done
+
+codex_bin="$(command -v codex || true)"
+[ -z "$codex_bin" ] && [ -x /Applications/ChatGPT.app/Contents/Resources/codex-cli/bin/codex ] \
+  && codex_bin=/Applications/ChatGPT.app/Contents/Resources/codex-cli/bin/codex
+if [ -z "$codex_bin" ]; then
+  echo "ask-gpt: Codex CLI not found (install the ChatGPT app or \`npm i -g @openai/codex\`, then \`codex login\`)" >&2
+  exit 2
+fi
+
+repo="$(cd "$(dirname "$0")/.." && pwd)"
+out="$(mktemp -t ask-gpt)"; trap 'rm -f "$out"' EXIT
+prompt="$(cat)"
+[ -z "$prompt" ] && { echo "ask-gpt: empty prompt on stdin" >&2; exit 64; }
+
+"$codex_bin" exec -m "$model" -c model_reasoning_effort="$effort" \
+  -s read-only --skip-git-repo-check -C "$repo" -o "$out" ${images[@]+"${images[@]}"} -- "$prompt" >/dev/null 2>"$out.err" \
+  || { cat "$out.err" >&2; rm -f "$out.err"; exit 1; }
+rm -f "$out.err"
+cat "$out"; echo

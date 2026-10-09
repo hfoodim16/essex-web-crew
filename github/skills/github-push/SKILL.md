@@ -76,7 +76,7 @@ commit message; the other person reads these to know what they're getting.
 End every message with:
 
 ```
-Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 ```
 
 ## 4. Take their work first

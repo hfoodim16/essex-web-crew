@@ -21,6 +21,10 @@
 
 ## Global block (paste-ready)
 
+**Visual target:** `directions/<pick>.png` — the Planner's chosen ChatGPT Image comp. Match
+its mood, palette weight, type scale and composition. Its text is placeholder, never copy.
+Where it disagrees with this sheet, the sheet wins.
+
 ### Tokens
 
 ```css
@@ -45,11 +49,10 @@
 
 ### Media budget
 
-<!-- No image count cap — the site budget is the only limit: $1.00 all-in if the site
-     ships no video, $1.50 if it ships one (images + video + regenerations, everything).
-     List every GENERATE slot with its tier and total it here; the builder stops at the
-     ceiling. e.g.  1×2K hero ($0.06) + 5×1K ($0.20) = $0.26 of $1.00 — fits.
-     If a VIDEO slot is marked, price it here too and show the combined total. -->
+<!-- Images are free: bin/gen-image (ChatGPT Image on Harry's subscription), no count cap.
+     List every GENERATE slot with its aspect here, e.g.  hero 16:9 + 5 plates 4:3 = 6 slots, $0.
+     The site budget only meters video: $0 with none, $1.50 if a VIDEO slot is approved —
+     price it here if one is marked. -->
 
 ### Head / SEO
 

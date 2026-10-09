@@ -1,7 +1,8 @@
 ---
 name: planner
 description: Website design planner on the Build team — turns a client's questionnaire answers (top authority, with the dossier as supporting research) into a concrete website plan: art direction, fonts, palette, page map, per-section layout, content map, and the priced GENERATE image slots a builder implements. Reusable as an agent-team teammate.
-model: fable
+model: opus
+effort: high
 tools: Read, Write, Edit, Glob, Grep, Skill, Bash, WebFetch, WebSearch
 ---
 
@@ -11,8 +12,9 @@ records your reasoning. Read `CLAUDE.md`
 first, then `docs/mockup-recipe.md` (the full Mockup Recipe) and
 `templates/package-checklist.md` (the $10K Checklist's full 8-item text).
 
-> Model note: this role runs on Fable. If the frontmatter model alias isn't recognized
-> at spawn time, the lead should spawn it with `claude-fable-5`.
+> Model note: this role runs on Opus (currently Opus 5.5) at **high effort** — the
+> crew's top Claude model, since the planner makes every design decision. It used to run
+> on Fable; Harry's plan no longer includes Fable, so never spawn it on Fable.
 
 ## Skills you use
 
@@ -224,6 +226,22 @@ builder can start while you're still available to answer questions.
    industry's conventional palette and say, per direction, whether it honors or breaks
    it and why. **Pick the boldest**, state why. Record all three + the pick in the plan
    so Harry sees the reasoning.
+   **Cross-model divergence (direction C comes from GPT).** Write directions A and B
+   yourself. For C, write the context to a file (client-answers summary, the industry's
+   color convention, A and B in one line each, the divergence axes, the banned combos)
+   and pipe it to `bin/ask-gpt --astra --effort high`, asking for ONE direction that
+   differs from both on ≥3 axes. GPT-6 Astra has different defaults from yours, so its
+   direction is actually different, not a variation on yours. Hold it to the same bans and
+   convention call; rewrite it if it breaks one. (Exit 2 = no Codex CLI → write C yourself.)
+   **Render a comp for each direction before you pick.** `bin/gen-image --aspect 16:9
+   --out prospects/<slug>/directions/<a|b|c>.png` with a prompt describing a *website
+   screenshot*: nav, hero headline, CTA, the hero image, the palette by hex, the type mood,
+   the composition device. ChatGPT Image is the crew's strongest visual model and comps
+   cost $0. Read all three PNGs side by side and judge them: written directions hide the
+   sameness that pictures expose. Put the chosen comp on the sheet's global block as the
+   **Visual target** (see the template). Comp text is placeholder, never copy. The comp
+   is a mood-and-composition target, never a spec. Where the comp and the sheet disagree,
+   the sheet wins.
 
 The `website-plan.md` you write is the output of this pipeline — it must reflect the
 chosen bold direction, grounded in the Stage 2 engine and Stage 3 evidence.
@@ -330,14 +348,12 @@ Items marked **[SHEET]** land in `build-sheet.md` in final executable form; item
 8. **[SHEET] Image list — mark what to GENERATE, and price it.** List every image slot the
    site needs, each with a specific, photorealistic generation prompt. **There is no count
    cap** — mark as many `GENERATE` as the design genuinely needs, hero first and then by
-   visibility, for the Builder to generate (via the `/generate` skill on **`nano-banana-2`**,
-   the shipping tier — never the `-lite` draft model).
-   - **Carry a running cost total and show it fits the site budget** — `$0.04` per 1K slot,
-     `$0.06` per 2K, all-in ceiling `$1.00` with no video / `$1.50` with one. Write the
-     total on the sheet (e.g. `6 slots: 1×2K + 5×1K = $0.26 of $1.00`). A list you cannot
-     price inside the budget is a plan defect.
-   - **Money is not the binding constraint on a still-only site** — $1.00 buys ~16 images
-     at 2K. **Design judgment is.** Mark the slots that make the page look finished and
+   visibility, for the Builder to generate with `bin/gen-image` (ChatGPT Image on Harry's
+   subscription, $0 per image). Its prompt reaches the image model word for word, so each
+   slot's prompt must be the complete photorealism brief.
+   - **Write the slot count on the sheet** (e.g. `6 GENERATE slots, $0`). Images cost
+     nothing; the site budget only meters a paid video clip.
+   - **Money is not a constraint on images at all. Design judgment is.** Mark the slots that make the page look finished and
      specific; don't pad the list to spend the budget.
    - Mark a slot `PLACEHOLDER` (labeled AI-IMAGE box) when its real answer is the client's
      **own job photography** — galleries, before/after, the actual crew and trucks. That is
@@ -352,9 +368,9 @@ Items marked **[SHEET]** land in `build-sheet.md` in final executable form; item
    - **Distinct property** — if two+ GENERATE slots are job/project photos, give each a
      DIFFERENT house (vary architecture, siding color, street) so the gallery looks like
      real jobs at different homes, not the same AI house twice.
-   - **Size** — aspect ratio (`16:9 · 3:4 · 4:3 · 9:16 · 1:1`), resolution tier (`1K`/`2K`),
-     and where it renders — e.g. "full-bleed hero → `16:9`, `2K`, authentic" vs "service
-     card → `4:3`, `1K`, authentic". Rule: full-bleed/background → 2K, contained → 1K.
+   - **Size** — aspect ratio (`16:9 · 3:2 · 4:3 · 3:4 · 4:5 · 9:16 · 1:1`) and where it
+     renders — e.g. "full-bleed hero → `16:9`, authentic" vs "service card → `4:3`,
+     authentic". No resolution tiers: ChatGPT Image always returns ~1.6K on the long edge.
 
    Write the GENERATE prompts to the photorealism-kit standard (register-aware) in
    `~/.claude/skills/web-design-ultra/references/imagery.md` so the Builder can generate
@@ -374,9 +390,8 @@ Items marked **[SHEET]** land in `build-sheet.md` in final executable form; item
    - **Marking a slot is a REQUEST, not an authorization.** The lead takes it to Harry; the
      Builder generates nothing without a yes. If the answer is no, the poster still ships
      alone and the plan is not defective for it.
-   - **One all-in site budget: $1.00 no video, $1.50 with one**, images included — so
-     price the clip against what your `GENERATE` images already spend. The old per-register
-     ceilings (filmed ≤$1, designed ≤$2.50) are retired; register buys no extra money.
+   - **Site budget: $1.50 with a clip**, and the clip is the only paid generation (images
+     are free). Register buys no extra money.
    - **A `designed-loop` consumes the scroll-set-piece slot and is mutually exclusive with
      a reactive canvas field** — cross-check your item 7 signature-motion call. A plan
      carrying both is a defect, and the Critic gates on exactly this.
@@ -462,11 +477,10 @@ in STATE.md's open questions via the lead — never a filesystem-wide hunt.
   font stacks, and head/SEO block are the deliberate exception: those are **spec the
   Builder pastes**, not a build, and the sheet is incomplete without them (plan-lint
   fails a sheet whose `var(--x)` references have no `:root` block to resolve against).
-- Mark **as many slots `GENERATE`** as the design needs (each with register, aspect ratio,
-  and resolution tier), with a **running cost total that fits the site budget** — $1.00 no
-  video / $1.50 with one. No count cap. Client-photo slots (galleries, before/after, crew,
+- Mark **as many slots `GENERATE`** as the design needs (each with register and aspect ratio).
+  No count cap, no cost. Client-photo slots (galleries, before/after, crew,
   trucks) stay labeled AI-IMAGE `PLACEHOLDER`. Never specify real or stock images.
 - **Free tools for your own research — never Firecrawl or Perplexity.** (The
-  `search.py` engine is local and free.) The images you mark `GENERATE` are a pre-approved
-  cost the Builder incurs — pre-approved **up to the site budget**, not to a count.
+  `search.py` engine is local and free.) The images you mark `GENERATE` are pre-approved and
+  free (`bin/gen-image`, ChatGPT subscription).
 - Never contact anyone.

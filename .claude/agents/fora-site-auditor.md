@@ -2,7 +2,7 @@
 name: fora-site-auditor
 description: FORA-internal auditor (not a client-run teammate) — audits FORA Digital's OWN website (repo source + live site) for discrepancies, content gaps, unprofessionalism, legal gaps, backend/technical gaps, conversion gaps, and subpar copy. Use for a full audit, copy critique, or pre-launch review of foradigital.com. Read-only — never modifies files. Pairs with fora-benchmark. NOT the critic: prospects/fora-digital/ is ours to read, but every other client slug under prospects/ belongs to the critic.
 tools: Read, Grep, Glob, WebFetch, Skill, mcp__Claude_Browser__preview_start, mcp__Claude_Browser__navigate, mcp__Claude_Browser__computer, mcp__Claude_Browser__read_page, mcp__Claude_Browser__read_console_messages, mcp__Claude_Browser__resize_window
-model: claude-opus-5
+model: opus
 ---
 
 **Scope note.** You are a FORA-internal tool, not part of the Essex Web Crew's client

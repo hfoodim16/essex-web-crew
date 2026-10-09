@@ -88,7 +88,7 @@ Good reviews are a **bonus** (higher score), not a requirement.
 
 | Stage | Owner | Model | Output |
 |---|---|---|---|
-| P1. Scout candidates (10–12) | `scout` | Sonnet | `pipeline/candidates.md` |
+| P1. Scout candidates (10–12) | `scout` | Sonnet + Grok sweep | `pipeline/candidates.md` |
 | P2. Score, research the top 3, capture their sites | `analyst` | Opus | `prospects/<slug>/dossier.md` + `site-content.md` |
 | P3. **Deliver the shortlist** (final output) | `analyst` → lead | Opus | Top 3 with winnability pitches **and contact info** |
 
@@ -108,9 +108,9 @@ Build run.
 | Stage | Owner | Model | Output |
 |---|---|---|---|
 | B0. Save the client's answers | lead | — | `prospects/<slug>/client-answers.md` |
-| B0a. *(only if a prior build for this prospect was speculative)* log the delta | `planner` | Fable | rows appended to `pipeline/speculation-log.md` |
+| B0a. *(only if a prior build for this prospect was speculative)* log the delta | `planner` | Opus (high) | rows appended to `pipeline/speculation-log.md` |
 | B0b. *(only if no dossier exists)* capture-only research | `analyst` | Opus | `dossier.md` + `site-content.md` for this ONE business |
-| B1. Plan FROM the answers | `planner` | Fable | **`build-sheet.md`** (the Builder's only input — self-contained, lint-clean) + `website-plan.md` (the reasoning, for Harry + Critic) |
+| B1. Plan FROM the answers | `planner` | Opus (high) | **`build-sheet.md`** (the Builder's only input — self-contained, lint-clean) + `website-plan.md` (the reasoning, for Harry + Critic) |
 | B1b. **Sheet review** — judgment pass BEFORE any build | `critic` | Opus | **SHEET GO** message, or a numbered fix list back to the planner (≤2 rounds, then lead) |
 | B2. Build (starts only on SHEET GO) | `builder` ×1 | Opus | `prospects/<slug>/mockup/` + `screenshots/` + the **evidence block** in STATE.md |
 | B3. Critique loop | `critic` | Opus | `prospects/<slug>/audit.md` (every round) + fix messages, sign-off |
@@ -135,7 +135,7 @@ what they want kept, changed, or dropped).
 
 `<slug>` = kebab-case business name, e.g. `montclair-stone-masonry`.
 
-**Division of design labor:** the `planner` (Fable) makes ALL the design decisions —
+**Division of design labor:** the `planner` (Opus, high effort) makes ALL the design decisions —
 art direction, fonts, palette, page map, per-section layout — and writes the executable
 result into **`build-sheet.md`** (template: `templates/build-sheet-template.md`), a
 self-contained contract the `builder` (Opus) executes top to bottom without re-deciding
@@ -156,7 +156,7 @@ teammate follows these; none of them touch a quality gate.
    plan to the builder the moment it's done instead of polishing it further.
 2. **Parallelize independent work.** The analyst researches all three finalists at once
    (one subagent each). Image generations are the exception — the builder runs them
-   **one at a time**, because Kie rate-limits concurrent jobs.
+   **one at a time**, because the ChatGPT subscription has usage limits.
    **Delegated research must return verbatim quotes + source URLs (never summaries) and
    surface source contradictions rather than resolving them — and the analyst still
    verifies the load-bearing facts against primary sources itself.** Delegation speeds up
@@ -258,10 +258,29 @@ possible moment — after a full Opus build, in an Opus critique round:
   mechanical checks at all**, spending its round purely on judgment (realism, taste,
   client fidelity). A handoff without the evidence block is bounced unreviewed.
 
-**Model policy — Opus only where judgment lives.** Fable plans. Opus builds, critiques,
-and writes dossiers. **Sonnet scouts and runs cold reads** (fresh eyes matter; depth
-doesn't). Scripts do everything mechanical for free. Never spend Opus tokens re-deriving
-what a script or an attached exit code already proves.
+**Model policy — Opus only where judgment lives.** Opus 5.5 is the strongest model we have
+and the best at motion design: it plans (high effort — the design brain), builds (high
+effort — the builder implements every motion tier), critiques, and writes dossiers.
+**Each model does what it's best at** (Design Arena, Oct 2026: Opus 5.5 is top-3 for
+website design, GPT-6 Astra close behind with different defaults, ChatGPT Image the best
+visual generator we have):
+- **ChatGPT Image (`bin/gen-image`, $0)** — every still, plus the planner's three
+  direction comps, so directions are judged as pictures, not prose.
+- **GPT-6 Astra (`bin/ask-gpt --astra`)** — writes the planner's direction C (a different
+  model family gives real divergence) and gives the critic a blind second look at the
+  screenshots. Its gaps of ≥ 2 points get a written ruling. **Sonnet scouts, cares for
+live sites, and benchmarks.** Agent frontmatter uses the `opus` / `sonnet` aliases, so
+every role tracks the newest Claude model automatically (Opus 5.5 / Sonnet 5.5 as of
+2026-10); Fable is not on Harry's plan — never spawn on it. Two jobs go to other
+model families through Harry's subscriptions, at no per-call cost:
+- **Grok 4.7 (`bin/ask-grok`) opens every scout sweep** — live web + X search finds
+  Facebook-only businesses keyword search misses. Its output is leads, never facts:
+  the scout confirms each one with WebFetch before it is written down.
+- **GPT-6.1 Sol (`bin/ask-gpt`) runs the critic's cold read** — a different model
+  family hears Claude-written copy the way a stranger does, which a Claude reader can't.
+  Read-only; falls back to a Sonnet subagent if the Codex CLI is missing.
+Scripts do everything mechanical for free. Never spend Opus tokens re-deriving what a
+script or an attached exit code already proves.
 
 ## Per-prospect output contract
 
@@ -395,19 +414,16 @@ Critic compares any clip against its named source.
 
 ## Image policy (hard rule)
 
-**No count cap — the site budget is the only limit.** Generate as many images as the design
-genuinely needs through the `/generate` skill on **`nano-banana-2`** (the shipping tier,
-never `-lite`; ~$0.04 at 1K / ~$0.06 at 2K), keeping the **projected total inside the
-site's all-in budget** ($1.00 no video / $1.50 with one — see Video policy below). At those
-rates $1.00 is ~16 images at 2K or ~25 at 1K, so on a still-only site money is not the
-binding constraint — **design judgment is.** Generate what makes the page look finished and
+**No count cap, no cost.** Generate as many images as the design genuinely needs with
+**`bin/gen-image`** — ChatGPT Image through Harry's ChatGPT subscription (Codex
+`image_gen`, $0 per image, no API key). **Never generate images on Kie, `/generate`,
+`ai-multimodal`, or any paid image API.** Money is not a constraint on images at all —
+**design judgment is**, plus the subscription's usage limits (one at a time). Generate what makes the page look finished and
 specific; don't pad to spend the budget, don't starve a page that needs six plates.
 The Planner marks every generated slot `GENERATE` (hero first, then by visibility, each
-with register + aspect + resolution) and carries a running cost total. **Slots whose real
+with register + aspect). **Slots whose real
 answer is the client's own job photography stay labeled AI-IMAGE placeholders** — that is a
-content-honesty call, not a cost one. The client's real logo never counts against the
-budget and is never regenerated. Anything that would break the budget needs the lead to ask
-Harry. **Full policy (registers, sizing, realism QA, spend ledger): `docs/media-policy.md`
+content-honesty call, not a cost one. The client's real logo is never regenerated. **Full policy (registers, sizing, realism QA, spend ledger): `docs/media-policy.md`
 — read it before any generation.**
 ## Video policy (hard rule)
 
@@ -416,10 +432,9 @@ Harry. **Full policy (registers, sizing, realism QA, spend ledger): `docs/media-
 the lead takes it to Harry, and **the Builder generates nothing until Harry
 says yes to that specific clip.** One approval = one run, no retries without a fresh ask.
 
-**THE SITE BUDGET (hard rule, 2026-08-04): one all-in number per site covering ALL paid
-generation — images, video, everything. $1.00 if the site ships no video; $1.50 if it
-ships one.** Images spend against it first, so budget the clip before the stills — a
-handful of images (~$0.20–0.30) still leaves over $1.10 for it. This replaced the old per-register ceilings (filmed ≤$1, designed ≤$2.50);
+**THE SITE BUDGET (hard rule, updated 2026-10-09): one number per site covering ALL paid
+generation. Images are free (`bin/gen-image`, ChatGPT subscription), so video is the only
+paid spend: $0 if the site ships no video; $1.50 if it ships one.** This replaced the old per-register ceilings (filmed ≤$1, designed ≤$2.50);
 register choice no longer buys extra money. A failed clip has already spent the budget —
 exhaust the free `ffmpeg` fixes, then ship the poster still. The budget is a **ceiling on
 an approved ask, never an authorization to spend.**
@@ -556,9 +571,9 @@ pipeline is exactly the generic output the pipeline exists to prevent.
 |---|---|---|
 | `scout` | `research`, `docs-seeker` | Deeper competitor/reputation research when a web search isn't enough; finding directories/docs on unfamiliar trades. |
 | `analyst` | `research` | Comprehensive dossier research beyond a plain web search. |
-| `planner` | **`web-design-ultra` (PRIMARY)**, **`trade-copy`**, `ui-ux-pro-max` · *on demand:* `frontend-design`, `design-system`, `aesthetic`, `sequential-thinking` | Run the 8-stage art-direction pipeline (Stages 1–5): design intelligence, real-site inspiration, anti-repetition, three divergent directions. Taste's four planning sections (§0 Design Read, §0.D Anti-Default, §9 AI-Tells, §11 Redesign) live in `web-design-ultra`'s `references/taste-planning.md` — a 1.2K-word fork. The 12.8K-word `taste-skill` itself is NOT invoked: it is build-time material and its content rules collide with our real-facts-only rule. `trade-copy` Stage A produces `voice-spec.md` from the client's answers before the hero direction is written. Names each reference site's patterns using the skill's `inspiration.md` vocabulary, and doesn't lock a direction the Stage 8 composition checks will fail — any deliberate exception is stated in `website-plan.md`. |
-| `builder` | **`web-design-ultra` (PRIMARY)**, **`trade-copy`**, **`web-humanizer`**, `generate` · *on demand:* `ui-ux-pro-max`, `frontend-design` | Execute the chosen direction (Stage 7): generate every image the plan marked `GENERATE` (`/generate` on `nano-banana-2`; no count cap — stop at the site budget), plus an approved video clip if there is one, craft discipline + backgrounds/atmosphere recipes; self-score the Stage 8 rubric. `trade-copy` governs every visible string — invoke before writing any text; `web-humanizer` is the sweep after it, catching the page shapes that still read machine-written (interchangeable hero verbs, abstract-pair card titles, no checkable fact, cards stamped to identical lengths) and gating on `aitells.py` exit 0 alongside `copycheck.py`. Reads the skill's `craft-floor.md` before editing UI, works `motion-thesis.md` / `layout-craft.md` / `type-craft.md` / `color-craft.md` when a build needs more than a first pass, and runs the Step 0 scan to `exit 0` before handoff. |
-| `critic` | **`web-design-ultra`**, **`trade-copy`**, **`web-humanizer`** · *on demand:* `ui-ux-pro-max`, `code-review`, `design-system` | Audit each mockup against the Stage 8 10-dimension rubric AND the $10K Checklist; enforce real-reviews-only and the COPY VOICE gate (`copycheck.py` + `aitells.py` + a say-aloud read + the cold read); code-quality and token-consistency rigor when a finding needs that depth. Runs the skill's Step 0 scan as the **first** gate, before any screenshot, then the fail-visible measurement and the composition checks; drives fix rounds with `bolder.md` / `quieter.md` rather than freehand nudges. |
+| `planner` | **`web-design-ultra` (PRIMARY)**, **`trade-copy`**, `ui-ux-pro-max` · *tools:* `bin/ask-gpt --astra` (direction C), `bin/gen-image` (direction comps) · *on demand:* `frontend-design`, `design-system`, `aesthetic`, `sequential-thinking` | Run the 8-stage art-direction pipeline (Stages 1–5): design intelligence, real-site inspiration, anti-repetition, three divergent directions. Taste's four planning sections (§0 Design Read, §0.D Anti-Default, §9 AI-Tells, §11 Redesign) live in `web-design-ultra`'s `references/taste-planning.md` — a 1.2K-word fork. The 12.8K-word `taste-skill` itself is NOT invoked: it is build-time material and its content rules collide with our real-facts-only rule. `trade-copy` Stage A produces `voice-spec.md` from the client's answers before the hero direction is written. Names each reference site's patterns using the skill's `inspiration.md` vocabulary, and doesn't lock a direction the Stage 8 composition checks will fail — any deliberate exception is stated in `website-plan.md`. |
+| `builder` | **`web-design-ultra` (PRIMARY)**, **`trade-copy`**, **`web-humanizer`**, **`design-motion-principles`** (Create), `frontend-design`, `generate` (video only — stills are `bin/gen-image`) · *on demand:* `ui-ux-pro-max`, `frontend-design` | Execute the chosen direction (Stage 7): generate every image the plan marked `GENERATE` (`/generate` on `nano-banana-2`; no count cap — stop at the site budget), plus an approved video clip if there is one, craft discipline + backgrounds/atmosphere recipes; self-score the Stage 8 rubric. `trade-copy` governs every visible string — invoke before writing any text; `web-humanizer` is the sweep after it, catching the page shapes that still read machine-written (interchangeable hero verbs, abstract-pair card titles, no checkable fact, cards stamped to identical lengths) and gating on `aitells.py` exit 0 alongside `copycheck.py`. Reads the skill's `craft-floor.md` before editing UI, works `motion-thesis.md` / `layout-craft.md` / `type-craft.md` / `color-craft.md` when a build needs more than a first pass, and runs the Step 0 scan to `exit 0` before handoff. |
+| `critic` | **`web-design-ultra`**, **`trade-copy`**, **`web-humanizer`**, **`frontend-design`**, **`web-quality-audit`**, `design-motion-principles` (Audit) · *tools:* `bin/ask-gpt --astra --image` (cross-model look) · *on demand:* `ui-ux-pro-max`, `code-review`, `design-system` | Audit each mockup against the Stage 8 10-dimension rubric AND the $10K Checklist; enforce real-reviews-only and the COPY VOICE gate (`copycheck.py` + `aitells.py` + a say-aloud read + the cold read); code-quality and token-consistency rigor when a finding needs that depth. Runs the skill's Step 0 scan as the **first** gate, before any screenshot, then the fail-visible measurement and the composition checks; drives fix rounds with `bolder.md` / `quieter.md` rather than freehand nudges. |
 | `caretaker` | `site-caretaker-cycle` (from `~/Projects/site-caretaker/.claude/skills/`) | Post-launch only, and only for sites already live on a real domain. Keeps `~/Projects/site-caretaker/sites.json` — the system of record for published sites — current, and diagnoses the uptime/DNS/TLS/content failures the hourly `com.sitecaretaker.monitor` job flags. Never edits a live site on its own, and never polls in a loop: Layer 1 already watches, for free, every hour. Its standing spec is `~/Projects/site-caretaker/VISION.md`, which lives outside this repo — so the role only works on a machine that has it. |
 | `fora-benchmark` | — | **FORA-internal, never a client run.** Researches well-executed sites (Fortune 500, small agencies, local trades) and returns a pattern table plus a "copy bar". Writes no files: its output is pasted by hand into `fora-site-auditor`'s task context. |
 | `fora-site-auditor` | `trade-copy`, `web-humanizer` | **FORA-internal, never a client run.** Audits foradigital.com — repo source plus the live site in the browser pane — across seven categories, and grades copy against `fora-benchmark`'s bar plus `copycheck.py` / `aitells.py`. Read-only. Client mockups under `prospects/` are the `critic`'s, never its own. |
@@ -574,13 +589,10 @@ processing real images pulled from an existing client site) and `ai-multimodal`
   all research and scraping. **Do NOT call Firecrawl or Perplexity** (they cost Harry
   money) — if a page genuinely can't be reached any other way, stop and ask the lead,
   who asks Harry.
-- **The only pre-approved paid operation is image generation, and it is pre-approved up to
-  the site budget — not to a count.** Generated through the `/generate` skill on
-  **`nano-banana-2`** — the shipping tier, never the `-lite` draft model. It costs real
-  money (~$0.04 at 1K / ~$0.06 at 2K), and the builder may spend up to the site's all-in
-  budget on it: **$1.00 with no video, $1.50 if a video is approved.** A builder generating
-  eight images that total $0.40 is following the rules, not breaking them. Track the
-  running total; the moment a plan would break the budget, the lead asks Harry.
+- **Image generation is pre-approved and free** — `bin/gen-image` (ChatGPT Image on Harry's
+  subscription). A builder generating eight images is following the rules. A paid image
+  call (Kie, `/generate`, `ai-multimodal`, any API) is a rule violation. **The only paid
+  generation left is video**, and it is never pre-approved.
 - **Video is NOT pre-approved — it is a request.** The Planner may mark ONE justified
   `VIDEO` slot in its declared register (`filmed-action` or `designed-loop`, ≤8s, never
   both — see the Video policy above), priced to fit the site's **$1.50 all-in budget

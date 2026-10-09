@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# ask-grok — one Grok turn with live web + X search, through Harry's Grok subscription.
+# No API key, no per-call cost. Use for discovery sweeps; VERIFY every fact it returns
+# (phone, address, URL) with WebFetch before it goes in a file — it can be wrong.
+#
+#   bin/ask-grok [--fast] [--effort low|medium|high|xhigh] < prompt.txt
+#
+# Default model: grok-4.7. --fast = grok-4.7-build-fast (2x usage; use sparingly).
+# Exit 2 = Grok CLI not installed.
+set -euo pipefail
+
+model="grok-4.7"; effort="medium"
+while [ $# -gt 0 ]; do
+  case "$1" in
+    --fast)   model="grok-4.7-build-fast" ;;
+    --model)  model="$2"; shift ;;
+    --effort) effort="$2"; shift ;;
+    *) echo "ask-grok: unknown flag $1" >&2; exit 64 ;;
+  esac
+  shift
+done
+
+command -v grok >/dev/null || {
+  echo "ask-grok: Grok CLI not found (\`npm i -g @xai-official/grok\`, then run \`grok\` once to sign in)" >&2
+  exit 2
+}
+prompt="$(cat)"
+[ -z "$prompt" ] && { echo "ask-grok: empty prompt on stdin" >&2; exit 64; }
+
+repo="$(cd "$(dirname "$0")/.." && pwd)"
+grok -p "$prompt" -m "$model" --reasoning-effort "$effort" --output-format plain --cwd "$repo"

@@ -97,7 +97,7 @@ swaps it.)
 **Step 5 — The team builds (this happens after Step 8).**
 Once a client has answered the questionnaire, you paste the **Team 2 — Build run** prompt
 from `KICKOFF.md` with their answers in it. The lead saves the answers to
-`prospects/<slug>/client-answers.md`, the planner (Fable) designs the site **from those
+`prospects/<slug>/client-answers.md`, the planner (Opus) designs the site **from those
 answers**, one builder builds it, and the critic audits and keeps sending fixes back until
 it's genuinely good. This is the longest stage — often 30+ minutes. When it passes, the
 lead gives you a summary and the run is done.
@@ -112,8 +112,7 @@ Every slot the plan marked `GENERATE` already holds a **real AI-generated image*
 builder made (they're in `prospects/<slug>/mockup/assets/`). The remaining picture slots
 are labeled placeholder boxes with a ready-to-use prompt baked in — those are where the
 client's own job photos belong. If a slot really needs a generated image instead, you can
-make one (Part 3, Reference A) — the build budget closed at sign-off, so that's your own
-call and costs about $0.04–0.06 an image. Drop them in and check the site still looks
+make one (Part 3, Reference A) — it runs on your ChatGPT subscription and costs nothing. Drop them in and check the site still looks
 right. Then show it to the client (back at **Step 8C**).
 
 **Step 8 — Reach out yourself, then run the build (the hinge — comes right after Step 4).**
@@ -192,9 +191,9 @@ Nothing is built, so there's nothing to approve — you're just deciding who to 
 *(You arrive here from **Step 8B**, once a client has answered the questionnaire.)*
 
 You've pasted the **Team 2 — Build run** prompt from `KICKOFF.md` with their answers in
-it, so let the team run: planner (Fable) designs **from the client's answers**, ONE builder
+it, so let the team run: planner (Opus) designs **from the client's answers**, ONE builder
 (Opus) builds, critic (Opus) audits until it passes. You don't second-guess the design plan
-here — you listen to Fable. Just wait for the lead's "signed off" summary. → continue to
+here — you listen to the planner. Just wait for the lead's "signed off" summary. → continue to
 **Step 6**.
 
 ---
@@ -252,7 +251,7 @@ see **Part 3, Reference B**.)*
   you'd rather see, e.g. "too dark and moody for a friendly family lawn crew;
   should feel bright and trustworthy">. Harry is explicitly reopening this
   signed-off prospect — the freeze rule permits this only on his say-so.
-  Spawn the planner (Fable, claude-fable-5) to REVISE website-plan.md AND regenerate
+  Spawn the planner (Opus, high effort) to REVISE website-plan.md AND regenerate
   prospects/<slug>/build-sheet.md and voice-spec.md to match — the sheet is the
   builder's only spec, so a revised plan without a revised sheet is a defect.
   Run plan-lint on both, show me the new plan, and wait for my OK. After my OK:
@@ -275,7 +274,7 @@ List every image prompt in the mockup:
 grep -rn "AI-IMAGE" prospects/<slug>/mockup/
 ```
 
-Generate each image through `/generate` (Reference A), save them to
+Generate each image with `bin/gen-image` (Reference A), save them to
 `prospects/<slug>/mockup/assets/`, then paste this to swap them in:
 
 ```
@@ -432,8 +431,8 @@ Code session inside the project (`cd ~/Projects/essex-web-crew && claude`) and t
 ### Reference A — Adding the real pictures
 
 Every slot the plan marked `GENERATE` already contains a **real AI-generated image** (the
-builder made them — they live in `mockup/assets/`). The site's whole media spend is capped
-all-in at **$1.00, or $1.50 if it ships a video**, images included. Every `PLACEHOLDER`
+builder made them — they live in `mockup/assets/`). Images are free (ChatGPT Image on your
+subscription); the only paid media is an approved video, capped at **$1.50**. Every `PLACEHOLDER`
 slot is a labeled box with a written image prompt baked in (e.g. "wide drone shot of a
 finished bluestone paver patio at golden hour") — those are where the client's own job
 photos belong. List the remaining ones:
@@ -449,18 +448,15 @@ grep -rn "AI-IMAGE" prospects/<slug>/mockup/
    Read prospects/<slug>/website-plan.md and note the imagery REGISTER it set
    (usually "proud contractor" — casual phone photo, natural light, honest framing).
    Then read prospects/<slug>/mockup/index.html, pull out every AI-IMAGE prompt, and
-   use the /generate skill on nano-banana-2 (never the -lite draft tier) to generate
+   use bin/gen-image (ChatGPT Image on my subscription, one at a time) to generate
    each image in that SAME register so they match the ones already in assets/.
    Rules: no readable business name, lettering, signage, or logo in any image; a
-   different property in each project photo; sized for where it sits on the page.
-   Tell me the projected cost first (~$0.04 at 1K, ~$0.06 at 2K) and how much of this
-   site's budget is already spent — $1.00 all-in with no video, $1.50 with one. Copy
-   each result into prospects/<slug>/mockup/assets/ with clear filenames, then check
+   different property in each project photo; --aspect matched to where it sits on the
+   page. Save each into prospects/<slug>/mockup/assets/ with clear filenames, then check
    each for AI tells (warped lines, stock-ad staging, shabby setting) before placing.
    ```
-   **All generation goes through `/generate`** — it owns model choice, provider routing,
-   and the API keys, so nothing asks you for one. Do not route image generation through
-   `ai-multimodal`, and do not paste an API key anywhere.
+   **All image generation goes through `bin/gen-image`** — ChatGPT Image on your
+   subscription, $0, no API key. Never `/generate`, Kie, or `ai-multimodal` for stills.
 2. **Use your own photos.** Real job photography from the client always beats a generated
    image — that is exactly what the placeholder slots are for. Drop the files into
    `prospects/<slug>/mockup/assets/` and skip generation entirely.

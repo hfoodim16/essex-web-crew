@@ -21,7 +21,7 @@ In between, you do the talking. Both prompts also live in `KICKOFF.md`.
 **4. Run 1 — Prospecting. Paste this as your message:**
 ```
 Read CLAUDE.md, .claude/agents/scout.md and .claude/agents/analyst.md. Run the
-Essex Web Crew PROSPECTING pipeline. Lineup: scout=Sonnet, analyst=Opus — each
+Essex Web Crew PROSPECTING pipeline. Lineup: scout=Sonnet (+ Grok sweep via bin/ask-grok), analyst=Opus — each
 teammate uses the model in its own frontmatter. Free tools only — no
 Firecrawl/Perplexity, no paid image generation (nothing is built in this run).
 Teammates invoke their own skills via the Skill tool.
@@ -59,11 +59,10 @@ Collect their answers, then start a Build run.
 ```
 Read CLAUDE.md and all files in .claude/agents/. Run the Essex Web Crew
 BUILD pipeline for ONE client. Skip the prospecting team —
-we already have this client. Lineup: planner=Fable (claude-fable-5),
-builder=Opus, critic=Opus. Free tools only — no Firecrawl/Perplexity; the one
-pre-approved paid step is image generation, capped by the site's all-in budget:
-$1.00 total if the site ships no video, $1.50 if it ships one — images, video and
-any regeneration all come out of that one number. No image count cap. If the
+we already have this client. Lineup: planner=Opus (high effort),
+builder=Opus, critic=Opus. Free tools only — no Firecrawl/Perplexity; images are
+free via bin/gen-image (ChatGPT Image on my subscription) — never Kie/`/generate`
+for stills; no image count cap. Video is the only paid generation ($1.50 cap). If the
 planner marks a VIDEO slot, that is a REQUEST — bring it to me and wait for a yes
 before the builder generates anything. Teammates invoke their own skills via the Skill tool.
 
@@ -105,8 +104,8 @@ Do this:
 6. When signed off, summarize what was built and call out anything I should
    confirm with the client. Expect to iterate: I'll bring their feedback back.
 ```
-(If the planner won't spawn on Fable from its frontmatter, tell the lead to spawn it
-explicitly with the model id `claude-fable-5`.)
+(Every teammate takes its model from its own frontmatter — `opus` / `sonnet` aliases, which
+always mean the newest version. Never spawn anything on Fable; it isn't on this plan.)
 
 **8. Let it finish.** Planner → Builder → Critic loop. If it stops early:
 ```
@@ -153,7 +152,7 @@ rename it (`index-4.html`), and hosts only serve an exactly-named `index.html` a
 | Problem | Fix |
 |---|---|
 | No agent panel appears | Teams flag didn't load — quit, relaunch with the manual command in step 2. |
-| A teammate is on the wrong model | Tell the lead to respawn it (planner needs `claude-fable-5`). |
+| A teammate is on the wrong model | Tell the lead to respawn it from its frontmatter (planner = `opus`, effort high). |
 | A teammate skips its skill | Message it: `use the <skill> skill`. |
 | Lead stops too early | `Continue — not all tasks are complete.` |
 | Too many permission prompts | Approve them, or pre-approve common ops before running. |
@@ -169,4 +168,4 @@ rename it (`index-4.html`), and hosts only serve an exactly-named `index.html` a
   send `templates/Website-Questionnaire.docx` to anyone who says yes.
 - After review: any placeholder slot that genuinely needs a generated image rather than one
   of the client's own photos can be filled from its `AI-IMAGE:` prompt before the site goes
-  to the client — through `/generate`, inside the site's all-in budget.
+  to the client — with `bin/gen-image` (ChatGPT Image, free on your subscription).

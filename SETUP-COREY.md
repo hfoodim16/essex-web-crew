@@ -5,8 +5,8 @@ on one install.
 
 ## Before you start
 
-- **Claude Code** installed and logged in. The crew pins heavy models (the Planner runs
-  Fable, the Analyst/Builder/Critic run Opus), so you need a plan that can run them —
+- **Claude Code** installed and logged in. The crew pins heavy models (the Planner,
+  Analyst, Builder and Critic run Opus), so you need a plan that can run them —
   **Max is what this was built and tested on**. On a lighter plan the agents will still
   launch but the quality gates get much weaker.
 - **Terminal** (Terminal.app or iTerm). The agent-team panel doesn't render in the
@@ -52,27 +52,25 @@ either way).
 The big one is `web-design-ultra` — that's the design pipeline the Builder and Critic
 work from. `ui-ux-pro-max` ships a `search.py` the Planner calls directly.
 
-## 3. Set up image generation (`/generate`)
+## 3. Set up image generation (`bin/gen-image`) and video (`/generate`)
 
 Each site ships with real AI-generated images in the slots the plan marked `GENERATE`
-(hero first). That's the one thing that costs money, and it's billed to whoever's key is
-in the file. The crew's budget is **all-in per site: $1.00 if the site ships no video,
-$1.50 if it ships one** — images, video and any regeneration all come out of that number.
+(hero first). **Images run on your own ChatGPT subscription through `bin/gen-image`** —
+ChatGPT Image via the Codex CLI, $0 per image, no API key. Install the ChatGPT desktop
+app (it bundles Codex) or `npm i -g @openai/codex`, then run `codex login` once with
+your ChatGPT account. Never route stills through `/generate`, Kie, or `ai-multimodal`.
 
-**All generation runs through the `/generate` skill** — never `ai-multimodal`, never a
-browser tool, never your own ChatGPT/Midjourney account. `/generate` owns model choice,
-provider routing and the keys, so no agent ever handles one.
-
-`/generate` ships in this repo and `install.sh` (step 2) put it in place. It needs one key:
+**Video is the only paid generation** ($1.50 ceiling, and only when Harry approves a
+clip). It runs through the `/generate` skill, which ships in this repo and `install.sh`
+(step 2) put in place. It needs one key:
 
 1. Get a Kie AI key at https://kie.ai
 2. Create `~/.claude/skills/generate/.env`
 3. Set `KIE_API_KEY=<your key>`
 
-Kie is the route the crew's pricing assumes — roughly 4× cheaper than calling Google
-direct, which is what makes a whole site's imagery fit inside a dollar.
+You only need the Kie key if you'll ever make a video.
 
-Without the skill, a build **cannot sign off**: the critic automatically fails any slot the
+Without `bin/gen-image` working, a build **cannot sign off**: the critic automatically fails any slot the
 plan marked `GENERATE` that holds a placeholder, the hero above all. `CLAUDE.md` makes a
 missing required skill a **stop-and-report** — so the run stops and says so, rather than
 shipping placeholders and calling it done. What you must **not** do is substitute a
@@ -88,6 +86,12 @@ That sets `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` and launches Claude Code. The
 
 - Set your fallback teammate model to Sonnet (`/config` → Default teammate model). Each
   agent overrides this with its own; it's just a backup.
+- **Optional — ChatGPT + Grok helpers.** The scout opens each niche with a Grok sweep
+  (`bin/ask-grok`) and the critic's cold read runs on GPT (`bin/ask-gpt`), both through
+  your own subscriptions, no API keys. Install the ChatGPT desktop app (or
+  `npm i -g @openai/codex`, then `codex login`) and `npm i -g @xai-official/grok` (run
+  `grok` once to sign in). Without them the crew still runs: the scout searches inline
+  and the cold read falls back to Sonnet.
 - Paste a prompt from **`KICKOFF.md`**. Do the dry run first — it's a cheap scout-only
   pass (5 candidates) that proves the scout works before you spend a real Prospecting run.
 - `HOW-TO-RUN.md` walks through what happens at each stage. `PLAYBOOK.md` and

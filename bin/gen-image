@@ -1,0 +1,85 @@
+#!/usr/bin/env python3
+"""gen-image: one ChatGPT Image (gpt-image via Codex image_gen) through Harry's ChatGPT
+subscription. No API key, no per-call cost, never Kie or any paid image API.
+
+  bin/gen-image --out prospects/<slug>/mockup/assets/hero.png --aspect 16:9 < prompt.txt
+  bin/gen-image --out plate.png --aspect 4:5 --ref site-photo.jpg < prompt.txt
+
+The prompt (stdin) goes to the image model word for word. The Codex agent turn runs on
+gpt-6-luna at low effort with the user config ignored (the same lean recipe as
+claude-os Studio, ~45 s). Writes a PNG to --out; optimize it to WebP yourself.
+Exit 2 = Codex CLI missing, 3 = image refused/failed (stderr has the reason).
+"""
+import argparse, json, os, re, shutil, subprocess, sys, time
+
+CODEX_APP = "/Applications/ChatGPT.app/Contents/Resources/codex-cli/bin/codex"
+
+def codex_bin():
+    found = shutil.which("codex")
+    if found: return found
+    if os.access(CODEX_APP, os.X_OK): return CODEX_APP
+    print("gen-image: Codex CLI not found (install the ChatGPT app or `npm i -g @openai/codex`, then `codex login`)", file=sys.stderr)
+    sys.exit(2)
+
+def instruction(prompt, aspect, refs):
+    shape = f"Output shape: {aspect}." if aspect else "Output shape: whatever suits the request."
+    lines = [
+        "Your only action is one call to the built-in image_gen tool. Do not read any SKILL.md file, run shell commands, inspect files, or copy the result; the caller collects the image itself.",
+        "Call image_gen exactly once. If it fails or is rejected, stop and reply with the error text. Never retry. After it returns, reply with one word: done.",
+        "Do not call the OpenAI API, KIE, or any other paid external image service.",
+        f"referenced_image_paths: {json.dumps(refs)} (pass exactly these, in this order)." if refs
+        else "This is a new image; pass no reference images.",
+        "prompt: the text between <<< and >>>, copied word for word. Do not rewrite, expand, summarize, restructure, or translate it, and do not add style, quality, safety, logo, text, or watermark wording of your own.",
+        "<<<", shape,
+    ]
+    if refs:
+        lines.append("References are attached in order; use them only as the request describes.")
+    lines += [prompt, ">>>"]
+    return "\n".join(lines)
+
+def main():
+    ap = argparse.ArgumentParser(description="ChatGPT Image via Codex (subscription, $0)")
+    ap.add_argument("--out", required=True, help="destination .png path")
+    ap.add_argument("--aspect", default="", help="e.g. 16:9, 4:5, 1:1, 3:2")
+    ap.add_argument("--ref", action="append", default=[], help="reference image (repeatable)")
+    a = ap.parse_args()
+    prompt = sys.stdin.read().strip()
+    if not prompt:
+        print("gen-image: empty prompt on stdin", file=sys.stderr); sys.exit(64)
+    refs = [os.path.abspath(r) for r in a.ref]
+    for r in refs:
+        if not os.path.isfile(r):
+            print(f"gen-image: reference not found: {r}", file=sys.stderr); sys.exit(64)
+
+    args = [codex_bin(), "exec", "--json", "--skip-git-repo-check", "--ignore-user-config",
+            "--ignore-rules", "-m", "gpt-6-luna", "-c", 'model_reasoning_effort="low"',
+            "--sandbox", "read-only"]
+    for r in refs: args += ["-i", r]
+    args += ["--", "-"]   # -i is greedy: `--` must come before the positional
+
+    started = time.time()
+    p = subprocess.run(args, input=instruction(prompt, a.aspect, refs), capture_output=True, text=True)
+    out = p.stdout + p.stderr
+    m = re.search(r'"thread_id"\s*:\s*"([\w-]+)"', out)
+    if not m:
+        print(f"gen-image: no Codex thread started\n{out[-2000:]}", file=sys.stderr); sys.exit(3)
+    home = os.environ.get("CODEX_HOME") or os.path.expanduser("~/.codex")
+    folder = os.path.join(home, "generated_images", m.group(1))
+    files = []
+    if os.path.isdir(folder):
+        for n in os.listdir(folder):
+            f = os.path.join(folder, n)
+            if re.search(r"\.(png|jpe?g|webp)$", n, re.I) and os.path.getmtime(f) >= started - 1:
+                files.append(f)
+    if not files:
+        last = ""
+        for line in p.stdout.splitlines():
+            if '"agent_message"' in line or '"error"' in line: last = line
+        print(f"gen-image: no image produced (refused or failed). {last[-1500:]}", file=sys.stderr); sys.exit(3)
+    newest = max(files, key=os.path.getmtime)
+    os.makedirs(os.path.dirname(os.path.abspath(a.out)) or ".", exist_ok=True)
+    shutil.copyfile(newest, a.out)
+    print(a.out)
+
+if __name__ == "__main__":
+    main()

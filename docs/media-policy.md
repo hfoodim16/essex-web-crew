@@ -6,18 +6,16 @@
 
 ## Image policy (hard rule)
 
-**There is no image count cap. The site budget is the only limit.**
+**There is no image count cap and no image cost.** Stills come from `bin/gen-image`
+(ChatGPT Image, Harry's subscription); the site budget meters video only.
 
-- **Builders generate as many AI images as the design genuinely needs, priced to fit the
-  site's all-in budget** ($1.00 with no video, $1.50 with an approved one — see "The site
-  budget" below). Use the **`/generate` skill** on **`nano-banana-2`** (Google Gemini 3.1
-  Flash Image, via Kie AI) — say the model explicitly, because `/generate`'s default
-  `-lite` is a draft tier and is not acceptable for a client-facing image. Priced by
-  resolution: **~$0.04 at 1K, ~$0.06 at 2K.** At those rates $1.00 buys roughly **16 images
-  at 2K, or 25 at 1K** — the budget is not the binding constraint on a still-only site, and
-  it never was. **Count the projected total before generating and keep it inside the
-  budget**; the lead asks Harry before anything that would break it.
-- **The constraint that actually binds is design judgment, not money.** Generate the images
+- **Builders generate as many AI images as the design genuinely needs with
+  `bin/gen-image`** — ChatGPT Image through Harry's ChatGPT subscription (Codex
+  `image_gen` on a lean gpt-6-luna turn that forwards the prompt word for word). **$0 per
+  image, no API key.** Never Kie, `/generate`, `ai-multimodal`, or any paid image API for
+  stills (switched 2026-10-09). Output is a PNG ~1.6K on the long edge (16:9 → 1672×941),
+  ~30–45 s each, one at a time to stay inside the subscription's usage limits.
+- **The constraint that binds is design judgment, not money.** Generate the images
   the page needs to look finished and specific — hero, section plates, service cards,
   gallery, OG. Do not pad a page with generated filler to spend the budget, and do not
   starve a page that genuinely needs six images because two used to be the rule.
@@ -29,10 +27,9 @@
   team, the actual trucks) stay labeled `AI-IMAGE` placeholders for the client to fill.
   That call is about honesty and what the client will want to swap, and it survives the
   cap's removal untouched.
-- **The Planner sizes each GENERATE slot** (see the plan-spec below): aspect ratio +
-  resolution tier + where it renders. Rule of thumb: **full-bleed / background hero → `2K`;
-  contained cards, plates, split-hero, OG → `1K`** (see the "Fit the slot" section of
-  `imagery.md`). The Builder passes `aspect_ratio` and `resolution` accordingly.
+- **The Planner sizes each GENERATE slot**: aspect ratio + where it renders. There are no
+  resolution tiers — every ChatGPT Image output is ~1.6K on the long edge, enough for a
+  full-bleed hero. The Builder passes `--aspect` and downscales to the display width.
 - **Quality bar — "proud contractor" register is the DEFAULT for trades.** Follow the
   photorealism kit in `~/.claude/skills/web-design-ultra/references/imagery.md`. The bar is
   the **best photo on the business's Google Business profile**: **flawless finished work**
@@ -47,7 +44,7 @@
   the model invents fake or competitor names (a truck lettered with the wrong brand). Keep
   vehicles/signs unbranded, angled, or out of frame; composite the prospect's REAL name/logo
   in the build if a branded truck or sign is wanted. Optimize to
-  WebP, **downscaling to the real display width** (never ship a 2K file into a small slot),
+  WebP, **downscaling to the real display width** (never ship a full ~1.6K file into a small slot),
   store in `prospects/<slug>/mockup/assets/`, reference locally (never hotlink).
 - **Client-photo slots stay labeled AI-IMAGE placeholders** — the slots whose real answer
   is the business's own job photography, which the client fills after the pitch**:**
@@ -62,8 +59,7 @@
 Style `.img-placeholder` as a labeled block in the art direction's colors so the
 mockup still reads well. If one of those slots turns out to need a generated image rather
 than one of the client's own photos, Harry can fill it from its prompt before the site
-goes to the client (PLAYBOOK Part 3 Reference A) — through `/generate`, and only while the
-site's all-in budget still holds. Still banned always: stock
+goes to the client (PLAYBOOK Part 3 Reference A) — through `bin/gen-image`, at no cost. Still banned always: stock
 photos, Unsplash/Google image URLs, hotlinked or copyrighted images.
 
 
@@ -75,10 +71,10 @@ pre-approved** — the Planner may *request* a clip, but Harry approves each one
 individually before the Builder spends anything. Full framework:
 `~/.claude/skills/web-design-ultra/references/video.md`.
 
-All generation — images and video alike — runs through the **`/generate` skill**
-(`~/.claude/skills/generate/`): Nano Banana 2 for images, Veo 3.1 (`veo3_fast`, Kie AI)
-for video. It owns model choice, provider routing, keys, polling and logging; no agent
-touches an API key.
+**Video** runs through the **`/generate` skill** (`~/.claude/skills/generate/`): Veo 3.1
+(`veo3_fast`, Kie AI). It owns provider routing, keys, polling and logging; no agent
+touches an API key. (Stills never go through `/generate` — they are `bin/gen-image`,
+free. ChatGPT Image has no video model, so video stays on Kie.)
 
 **Work the cost-ascending ladder first, stop at the first rung that serves the brief:**
 static depth (`backgrounds.md`) → ambient atmosphere (`atmosphere.md`) → reactive canvas
@@ -103,31 +99,30 @@ same feeling, take it.
 
 ## The site budget (hard rule — everything included)
 
-**One number per site, and it covers ALL paid generation for that site — images, video,
-every retry, every tier.**
+**One number per site, and it covers ALL paid generation for that site.** Since
+2026-10-09 images are free (`bin/gen-image`, ChatGPT subscription), so the only thing
+that spends against it is video.
 
-| The site ships | All-in budget |
+| The site ships | Paid budget |
 |---|---|
-| **no video** | **$1.00** |
+| **no video** | **$0** |
 | **a video** (either register) | **$1.50** |
 
-This replaced the old per-register ceilings (filmed ≤$1, designed ≤$2.50) on 2026-08-04.
-There is no separate image budget and no separate video budget — there is one site number,
-and images spend against it first.
+(History: per-register ceilings until 2026-08-04, then $1.00/$1.50 all-in with images
+spending first, until images moved to the ChatGPT subscription.)
 
 What that means in practice:
 
 **The budget ends at sign-off.** It governs the build, and the Critic's spend ledger
 closes when the Critic signs off. Anything generated afterwards — during the client phase,
 when Harry is filling placeholder slots or acting on client feedback — is his own
-deliberate spend, priced per ask (~$0.04 at 1K, ~$0.06 at 2K) and not charged against a
-closed ledger. Everything else still binds there: `/generate` only, the plan's register,
+deliberate call (images are free; any video is priced per ask) and not charged against a
+closed ledger. Everything else still binds there: `bin/gen-image` for stills, the plan's register,
 no readable branding, no stock. There is no doc-enforced ceiling on the client phase
 because by then a real client is paying for the site.
 
-- **No-video build.** $1.00 buys ~16 images at 2K or ~25 at 1K. There is no count cap —
-  generate what the design needs and keep the running total inside the dollar. In practice
-  a strong mockup lands well under it.
+- **No-video build.** $0 paid. There is no image count cap — generate what the design
+  needs.
 - **Video build.** Images plus the clip must both fit in $1.50, and the clip is by far the
   expensive half. Budget the clip first, then spend what is left on stills — a handful of
   images (~$0.20–0.30) still leaves over $1.10 for the clip. Price the actual run before asking: if the model, resolution and

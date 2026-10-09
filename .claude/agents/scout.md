@@ -29,9 +29,18 @@ Invoke these via the Skill tool (they are NOT auto-loaded for teammates):
 
 ## How to work
 
-- Use **free tools only**: `WebSearch`, `WebFetch`, and (if the lead has enabled it)
-  the browser pane. Never call Firecrawl or Perplexity — if truly stuck on a page,
-  message the lead and ask.
+- Use **free tools only**: `WebSearch`, `WebFetch`, `bin/ask-grok`, and (if the lead
+  has enabled it) the browser pane. Never call Firecrawl or Perplexity — if truly stuck
+  on a page, message the lead and ask.
+- **Open each niche with a Grok sweep.** `bin/ask-grok` runs Grok 4.7 through Harry's
+  Grok subscription (no per-call cost) with live web **and X** search — it surfaces
+  Facebook-only and social-only businesses that keyword searches miss. Pipe it a prompt
+  like *"List 10 [trade] businesses in [towns], Essex County NJ, that have no website, a
+  Facebook-only presence, or a clearly outdated site. For each: name, town, phone, any
+  URL, and the source you found it on."* Treat its list as **leads, not facts**: every
+  name, phone, and URL must be confirmed with `WebFetch`/`WebSearch` before it goes into
+  `candidates.md`, and a candidate you couldn't confirm is dropped. If the script exits 2
+  (no Grok CLI on this machine), skip the sweep and search inline.
 - Search a few different angles per niche: e.g. "landscaping Montclair NJ",
   "tree service Belleville NJ", Google Business listings, Facebook business pages,
   Yelp. Vary the town and the trade.
@@ -92,7 +101,7 @@ spawn other *teammates*.
 
 **Every brief you write must carry both hard rules verbatim — subagents don't inherit
 them:**
-- **Free tools only: `WebSearch` and `WebFetch`. Never Firecrawl or Perplexity.** Both are
+- **Free tools only: `WebSearch`, `WebFetch`, and `bin/ask-grok`. Never Firecrawl or Perplexity.** Both are
   live MCP servers in this environment and both cost real money per call, so a subagent
   that doesn't know the rule will reach for them.
 - **Never contact a business.** Read public pages only — no form submissions, no emails, no

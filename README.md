@@ -104,11 +104,11 @@ prospects/
 
 | Role | Team | Model | Does |
 |------|------|-------|------|
-| **scout** | 1 — Prospecting | Sonnet | Finds 10–12 qualifying businesses — any industry with a naturally static site, leading with trades (free web tools; no Firecrawl/Perplexity). |
+| **scout** | 1 — Prospecting | Sonnet + Grok 4.7 sweep | Finds 10–12 qualifying businesses — any industry with a naturally static site, leading with trades (free web tools; no Firecrawl/Perplexity). |
 | **analyst** | 1 — Prospecting (capture-only in 2) | Opus | Scores them, captures each finalist's real site content + real reviews, writes dossiers, delivers the shortlist with contact info. In a build run it only runs if the client has no dossier yet — research this ONE business, nothing else. |
-| **planner** | 2 — Build | Fable | Runs the web-design-ultra pipeline (Stages 1–5) → **`build-sheet.md`** (the Builder's entire spec) + `website-plan.md` (the reasoning, for Harry and the critic): art direction, fonts, palette, page map, three divergent directions — planned FROM the client's answers. |
+| **planner** | 2 — Build | Opus (high effort) | Runs the web-design-ultra pipeline (Stages 1–5) → **`build-sheet.md`** (the Builder's entire spec) + `website-plan.md` (the reasoning, for Harry and the critic): art direction, fonts, palette, page map, three divergent directions — planned FROM the client's answers. |
 | **builder** | 2 — Build | Opus | One per build run, starting only on the critic's **SHEET GO**. *Implements* the **build sheet** (never the plan) into a mockup with real AI images in its `GENERATE` slots + labeled placeholders for the client's own photos. |
-| **critic** | 2 — Build | Opus | Audits the mockup against the Stage 8 rubric + the $10K Checklist; enforces client-answer fidelity, content parity, real-reviews-only. Loops with the builder, capped at 3 fix rounds, then escalates a stalemate to the lead. |
+| **critic** | 2 — Build | Opus (cold read on GPT-6.1 Sol) | Audits the mockup against the Stage 8 rubric + the $10K Checklist; enforces client-answer fidelity, content parity, real-reviews-only. Loops with the builder, capped at 3 fix rounds, then escalates a stalemate to the lead. |
 | **caretaker** | Post-launch | Sonnet | Watches sites already live on a real domain: keeps the site registry current and diagnoses uptime/DNS/TLS/content failures flagged by the hourly monitor. Never edits a live site on its own. |
 | **fora-benchmark** | FORA-internal | Sonnet | Researches well-executed sites and returns a pattern table + "copy bar" for **our own** agency site. Never spawned in a client run. |
 | **fora-site-auditor** | FORA-internal | Opus | Audits foradigital.com — repo source + the live site — across seven categories, grading copy against the benchmark bar and the crew's copy gates. Read-only. Client mockups belong to the **critic**, never to this. |
@@ -118,7 +118,7 @@ canonical.** Skills change often; keeping a second copy here is how the two drif
 
 The lead session orchestrates and assembles results — in a build run it also saves the
 client's answers to `client-answers.md` before spawning anyone. Design decisions live with
-the **planner** (Fable); the **builder** (Opus) implements them and doesn't re-decide the
+the **planner** (Opus); the **builder** (Opus) implements them and doesn't re-decide the
 design.
 
 ## Run it

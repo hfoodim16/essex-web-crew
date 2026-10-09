@@ -43,7 +43,7 @@ Paste this to the lead:
 
 ```
 Read CLAUDE.md, .claude/agents/scout.md and .claude/agents/analyst.md. Run the
-Essex Web Crew PROSPECTING pipeline. Lineup: scout=Sonnet, analyst=Opus — each
+Essex Web Crew PROSPECTING pipeline. Lineup: scout=Sonnet (+ Grok sweep via bin/ask-grok), analyst=Opus — each
 teammate uses the model in its own frontmatter. Free tools only — no
 Firecrawl/Perplexity, no paid image generation (nothing is built in this run).
 Teammates invoke their own skills via the Skill tool.
@@ -86,11 +86,10 @@ Paste this to the lead, filling in the two slots:
 ```
 Read CLAUDE.md and all files in .claude/agents/. Run the Essex Web Crew
 BUILD pipeline for ONE client. Skip the prospecting team —
-we already have this client. Lineup: planner=Fable (claude-fable-5),
-builder=Opus, critic=Opus. Free tools only — no Firecrawl/Perplexity; the one
-pre-approved paid step is image generation, capped by the site's all-in budget:
-$1.00 total if the site ships no video, $1.50 if it ships one — images, video and
-any regeneration all come out of that one number. No image count cap. If the
+we already have this client. Lineup: planner=Opus (high effort),
+builder=Opus, critic=Opus. Free tools only — no Firecrawl/Perplexity; images are
+free via bin/gen-image (ChatGPT Image on my subscription) — never Kie/`/generate`
+for stills; no image count cap. Video is the only paid generation ($1.50 cap). If the
 planner marks a VIDEO slot, that is a REQUEST — bring it to me and wait for a yes
 before the builder generates anything. Teammates invoke their own skills via the Skill tool.
 
@@ -133,8 +132,8 @@ Do this:
    confirm with the client. Expect to iterate: I'll bring their feedback back.
 ```
 
-If a teammate can't be spawned on Fable by the `planner` frontmatter alone, spawn it
-explicitly with the model id `claude-fable-5`.
+Every teammate takes its model from its frontmatter (`opus` / `sonnet` aliases = newest
+version). Never spawn on Fable — it isn't on this plan.
 
 ## After the run
 

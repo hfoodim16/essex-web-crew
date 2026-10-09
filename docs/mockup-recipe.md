@@ -68,15 +68,14 @@ the team:
   `data/design-memory.md` — the crew keeps its own ban list so prospects diverge from each
   other) → **three genuinely divergent directions**, pick the boldest. All recorded in
   `website-plan.md`.
-- **Stage 6 → runs, budget-bounded.** Builders generate **every slot the Planner marked
-  `GENERATE`**, hero first — **no count cap; stop at the site budget** ($1.00 no video /
-  $1.50 with one) via the `/generate` skill on `nano-banana-2` + the skill's
+- **Stage 6 → runs, free.** Builders generate **every slot the Planner marked
+  `GENERATE`**, hero first — **no count cap, $0** — via `bin/gen-image` (ChatGPT Image on
+  Harry's subscription) + the skill's
   `references/imagery.md` photorealism kit; client-photo slots stay labeled AI-IMAGE
   placeholders (see Image policy). **Optionally one
   video clip — only after Harry approves it** (a marked `VIDEO` slot is a request, not an
   authorization), in its declared register: `filmed-action` or `designed-loop`, ≤8s, never
-  both, inside the site's **all-in budget of $1.00 (no video) / $1.50 (with video), images
-  included**; zero video is the norm (see Video policy). ALSO layer the skill's free CSS craft:
+  both, inside the site budget (**$1.50 for the clip; images are free**); zero video is the norm (see Video policy). ALSO layer the skill's free CSS craft:
   `references/backgrounds.md` (background/texture/depth) and `references/atmosphere.md`
   (animated fog, god rays, shimmer, motes — reduced-motion gated). Real imagery + real
   depth.
@@ -237,7 +236,7 @@ while the others are still being fixed.
 3. **Restrained color system** — 3–5 colors, used consistently.
 4. **Hierarchy that breathes** — whitespace, scale, contrast guide the eye.
 5. **Imagery with intent** — every Planner-marked `GENERATE` slot holds a REAL generated
-   image passing the two-way realism test (no count cap — the site budget is the limit);
+   image passing the two-way realism test (no count cap, `bin/gen-image`, $0);
    every `PLACEHOLDER` slot is a deliberate, labeled AI-IMAGE box matching the art
    direction (see the Image policy below). A placeholder sitting in a `GENERATE` slot is
    never an acceptable exception. No stock defaults.
